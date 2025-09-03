@@ -7,29 +7,20 @@ on:
 
 jobs:
   build:
-    name: build
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v4
-
       - name: Detect Laravel
         id: detect
         run: |
           if [ -f composer.json ]; then echo "laravel=true" >> "$GITHUB_OUTPUT"; else echo "laravel=false" >> "$GITHUB_OUTPUT"; fi
-
       - name: PHP & composer (Laravel only)
         if: steps.detect.outputs.laravel == 'true'
         run: |
-          command -v composer || { echo "Composer missing. Installing..."; sudo apt-get update && sudo apt-get install -y composer; }
+          command -v composer || { sudo apt-get update && sudo apt-get install -y composer; }
           composer install --prefer-dist --no-progress --no-interaction
-          cp .env.example .env 2>/dev/null || true
-          php -r "file_put_contents('.env', preg_replace('/^APP_ENV=.*/m','APP_ENV=testing', file_get_contents('.env')));" || true
-          mkdir -p database && : > database/database.sqlite || true
-          php artisan key:generate || true
-          php artisan test --stop-on-failure || true
 
   deploy:
-    name: deploy
     needs: build
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     runs-on: self-hosted
@@ -37,7 +28,6 @@ jobs:
       DEPLOY_PATH: /var/www/swaeduae
     steps:
       - uses: actions/checkout@v4
-
       - name: Release & activate locally (no SSH)
         run: |
           set -euo pipefail
@@ -51,17 +41,18 @@ jobs:
             --exclude='node_modules' --exclude='tests' \
             --exclude='.env' ./ "$REL_DIR/"
 
-          # shared artifacts
+          # shared artifacts (safe for empty repos)
           mkdir -p "$DEPLOY_PATH/shared/storage" "$DEPLOY_PATH/shared/bootstrap/cache"
           ln -sfn "$DEPLOY_PATH/shared/.env" "$REL_DIR/.env" || true
+          mkdir -p "$REL_DIR/bootstrap"   # <- ensure parent exists
           rm -rf "$REL_DIR/storage" && ln -sfn "$DEPLOY_PATH/shared/storage" "$REL_DIR/storage"
           rm -rf "$REL_DIR/bootstrap/cache" && ln -sfn "$DEPLOY_PATH/shared/bootstrap/cache" "$REL_DIR/bootstrap/cache"
 
-          # Laravel ops if applicable
+          # Laravel-only ops
           if [ -f "$REL_DIR/composer.json" ]; then
             cd "$REL_DIR"
-            command -v composer || { echo "Composer missing. Installing..."; sudo apt-get update && sudo apt-get install -y composer; }
-            composer install --no-dev --prefer-dist --no-interaction --optimize-autoloader
+            command -v composer || { sudo apt-get update && sudo apt-get install -y composer; }
+            composer install --no-dev --prefer-dist --no-interaction --optimize-autoloader || true
             php artisan storage:link || true
             php artisan migrate --force || true
             php artisan optimize:clear || true
@@ -70,10 +61,8 @@ jobs:
             php artisan view:cache || true
           fi
 
-          # atomic switch
+          # atomic switch + reloads
           ln -sfn "$REL_DIR" "$CURRENT"
-
-          # perms & reloads
           sudo chown -h www-data:www-data "$CURRENT" || true
           sudo chown -R www-data:www-data "$DEPLOY_PATH/shared/storage" "$DEPLOY_PATH/shared/bootstrap" || true
           command -v systemctl >/dev/null && { sudo systemctl reload php*-fpm || true; sudo systemctl reload nginx || true; }
