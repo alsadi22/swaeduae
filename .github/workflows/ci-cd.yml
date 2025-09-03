@@ -78,7 +78,7 @@ jobs:
           fi
 
           # atomic switch
-          ln -sfn "$REL_DIR" "$CURRENT"
+          rm -rf "$CURRENT" && ln -sfnT "$REL_DIR" "$CURRENT"
 
           # perms & reloads
           sudo chown -h www-data:www-data "$CURRENT" || true
