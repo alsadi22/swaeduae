@@ -111,7 +111,6 @@ jobs:
 
           cd "$REL_DIR"
 
-          # Link shared artefacts
           ln -sfn "$APP_DIR/shared/.env" .env || true
           rm -rf storage
           ln -sfn "$APP_DIR/shared/storage" storage
@@ -119,14 +118,11 @@ jobs:
           mkdir -p "$APP_DIR/shared/bootstrap/cache"
           ln -sfn "$APP_DIR/shared/bootstrap/cache" bootstrap/cache
 
-          # If composer.json exists, do prod install + Laravel ops
           if [ -f composer.json ]; then
             $PHP $COMPOSER install --no-dev --prefer-dist --no-interaction --optimize-autoloader
-
             if [ ! -s "$APP_DIR/shared/.env" ] || ! grep -q '^APP_KEY=' "$APP_DIR/shared/.env"; then
               $PHP artisan key:generate --force || true
             fi
-
             $PHP artisan storage:link || true
             $PHP artisan migrate --force || true
             $PHP artisan optimize:clear || true
@@ -135,10 +131,8 @@ jobs:
             $PHP artisan view:cache  || true
           fi
 
-          # Atomically switch current
           ln -sfn "$REL_DIR" "$CURRENT"
 
-          # Permissions & reloads
           if command -v sudo >/dev/null; then
             sudo chown -h www-data:www-data "$CURRENT" || true
             sudo chown -R www-data:www-data "$APP_DIR/shared/storage" "$APP_DIR/shared/bootstrap" || true
