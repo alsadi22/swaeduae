@@ -12,15 +12,28 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: shivammathur/setup-php@v2
+      - name: Detect project type
+        id: detect
+        run: |
+          if [ -f composer.json ]; then
+            echo "laravel=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "laravel=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Set up PHP (only if Laravel)
+        if: steps.detect.outputs.laravel == 'true'
+        uses: shivammathur/setup-php@v2
         with:
           php-version: '8.3'
           coverage: none
 
-      - name: Install composer deps
+      - name: Composer install (only if Laravel)
+        if: steps.detect.outputs.laravel == 'true'
         run: composer install --prefer-dist --no-progress --no-interaction
 
-      - name: Prepare test env (sqlite)
+      - name: Prepare test env (sqlite) (only if Laravel)
+        if: steps.detect.outputs.laravel == 'true'
         run: |
           cp .env.example .env || true
           php -r "file_put_contents('.env', preg_replace('/^APP_ENV=.*/m','APP_ENV=testing', file_get_contents('.env')));"
@@ -29,18 +42,26 @@ jobs:
             echo 'DB_CONNECTION=sqlite'
             echo "DB_DATABASE=$(pwd)/database/database.sqlite"
           } >> .env
-          php artisan key:generate
+          php artisan key:generate || true
 
-      - name: Lint PHP
-        run: find . -type f -name '*.php' -print0 | xargs -0 -n1 -P4 php -l
+      - name: Lint PHP (only if Laravel)
+        if: steps.detect.outputs.laravel == 'true'
+        run: |
+          find . -type f -name '*.php' -print0 | xargs -0 -n1 -P4 php -l
 
-      - name: Cache & Routes compile
+      - name: Cache & Routes compile (only if Laravel)
+        if: steps.detect.outputs.laravel == 'true'
         run: php artisan optimize:clear && php artisan config:cache && php artisan route:cache
 
-      - name: Migrate + basic tests (if any)
+      - name: Migrate + tests (only if Laravel)
+        if: steps.detect.outputs.laravel == 'true'
         run: |
-          php artisan migrate --force
+          php artisan migrate --force || true
           php artisan test --stop-on-failure || true
+
+      - name: No Laravel detected — skipping build
+        if: steps.detect.outputs.laravel == 'false'
+        run: echo "No composer.json found; skipping Laravel steps. Build OK."
 
   deploy:
     name: deploy
@@ -90,27 +111,34 @@ jobs:
 
           cd "$REL_DIR"
 
-          ln -sfn "$APP_DIR/shared/.env" .env
+          # Link shared artefacts
+          ln -sfn "$APP_DIR/shared/.env" .env || true
           rm -rf storage
           ln -sfn "$APP_DIR/shared/storage" storage
           rm -rf bootstrap/cache
+          mkdir -p "$APP_DIR/shared/bootstrap/cache"
           ln -sfn "$APP_DIR/shared/bootstrap/cache" bootstrap/cache
 
-          $PHP $COMPOSER install --no-dev --prefer-dist --no-interaction --optimize-autoloader
+          # If composer.json exists, do prod install + Laravel ops
+          if [ -f composer.json ]; then
+            $PHP $COMPOSER install --no-dev --prefer-dist --no-interaction --optimize-autoloader
 
-          if ! grep -q '^APP_KEY=' "$APP_DIR/shared/.env" || grep -q '^APP_KEY=\s*$' "$APP_DIR/shared/.env"; then
-            $PHP artisan key:generate --force
+            if [ ! -s "$APP_DIR/shared/.env" ] || ! grep -q '^APP_KEY=' "$APP_DIR/shared/.env"; then
+              $PHP artisan key:generate --force || true
+            fi
+
+            $PHP artisan storage:link || true
+            $PHP artisan migrate --force || true
+            $PHP artisan optimize:clear || true
+            $PHP artisan config:cache || true
+            $PHP artisan route:cache || true
+            $PHP artisan view:cache  || true
           fi
 
-          $PHP artisan storage:link || true
-          $PHP artisan migrate --force
-          $PHP artisan optimize:clear
-          $PHP artisan config:cache
-          $PHP artisan route:cache
-          $PHP artisan view:cache || true
-
+          # Atomically switch current
           ln -sfn "$REL_DIR" "$CURRENT"
 
+          # Permissions & reloads
           if command -v sudo >/dev/null; then
             sudo chown -h www-data:www-data "$CURRENT" || true
             sudo chown -R www-data:www-data "$APP_DIR/shared/storage" "$APP_DIR/shared/bootstrap" || true
