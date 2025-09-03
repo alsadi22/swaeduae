@@ -59,7 +59,7 @@ jobs:
             --exclude='.env' ./ "$REL_DIR/"
 
           # shared artifacts
-          mkdir -p "$DEPLOY_PATH/shared/storage" "$DEPLOY_PATH/shared/bootstrap/cache" "$REL_DIR/bootstrap"
+          mkdir -p "$DEPLOY_PATH/shared/storage/framework"/{cache,sessions,testing,views} "$DEPLOY_PATH/shared/bootstrap/cache" "$REL_DIR/bootstrap"
           ln -sfn "$DEPLOY_PATH/shared/.env" "$REL_DIR/.env" || true
           rm -rf "$REL_DIR/storage" && ln -sfn "$DEPLOY_PATH/shared/storage" "$REL_DIR/storage"
           rm -rf "$REL_DIR/bootstrap/cache" && ln -sfn "$DEPLOY_PATH/shared/bootstrap/cache" "$REL_DIR/bootstrap/cache"
