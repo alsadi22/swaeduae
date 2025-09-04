@@ -1,5 +1,6 @@
 name: ci-cd
 on:
+  workflow_dispatch:
   pull_request:
     branches: [ main ]
   push:
@@ -8,30 +9,28 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
         with:
           php-version: '8.3'
           extensions: mbstring, intl, pdo_mysql, bcmath, gd, zip
           coverage: none
-
-      - name: Cache Composer
-        uses: actions/cache@v4
+      - uses: actions/cache@v4
         with:
           path: vendor
           key: composer-${{ hashFiles('**/composer.lock') }}
           restore-keys: |
             composer-
-
-      - name: Install dependencies
-        run: composer install --no-interaction --no-progress --prefer-dist
-
-      - name: Laravel sanity (non-blocking)
-        run: |
+      - run: composer install --no-interaction --no-progress --prefer-dist --no-dev
+      - run: |
+          if [ -f package.json ]; then
+            corepack enable || true
+            npm ci
+            npm run build
+          else
+            echo "No package.json; skipping frontend build."
+          fi
+      - run: |
           php -v
           php artisan -V || true
