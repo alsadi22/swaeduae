@@ -1,0 +1,11 @@
+@extends('layouts.admin_theme
+@section('t
+@section('content')
+<div class
+    <h1 class="mb-4">Anal
+    <div class="dashboard-card p-4">
+        {{-- Place for advanced 
+        <p>Analytics das
+    </div>
+</
+@endsection

@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+set -euo pipefail
+cd /var/www/swaeduae
+export AGENT_ENABLED="${AGENT_ENABLED:-true}"   # allow calls from here by default
+# If you call cx with no args, read from stdin; else treat args as the prompt
+if [ $# -eq 0 ]; then
+  /usr/local/bin/codex
+else
+  printf "%s\n" "$*" | /usr/local/bin/codex
+fi

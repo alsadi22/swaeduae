@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /__auto/
+Disallow: /_stub/
+Sitemap: https://swaeduae.ae/sitemap.xml

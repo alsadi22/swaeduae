@@ -1,0 +1,17 @@
+/vendor/
+/node_modules/
+/public/storage/
+/public/health/
+/public/sitemaps/
+/public/*.map
+/.env
+/.env.*
+/storage/*.key
+/storage/app/*
+/storage/framework/*
+/storage/logs/*
+/bootstrap/cache/*.php
+.idea/
+.vscode/
+*.bak
+*.log

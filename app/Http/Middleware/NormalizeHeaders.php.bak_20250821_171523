@@ -1,0 +1,41 @@
+<?php
+namespace App\Http\Middleware;
+use Closure;
+use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
+
+class NormalizeHeaders
+{
+    public function handle(Request $request, Closure $next): Response
+    {
+        /** @var \Symfony\Component\HttpFoundation\Response $response */
+        $response = $next($request);
+
+        // Ensure Content-Language + Vary: Accept-Language are present (idempotent)
+        $locale = app()->getLocale() ?: config('app.locale','en');
+        if (!$response->headers->has('Content-Language')) {
+            $response->headers->set('Content-Language', $locale);
+        }
+        $existingVary = $response->headers->get('Vary') ?? '';
+        $parts = array_filter(array_map('trim', explode(',', $existingVary)));
+        $lower = array_map('strtolower', $parts);
+        if (!in_array('accept-language', $lower, true)) { $parts[] = 'Accept-Language'; }
+        $response->headers->set('Vary', implode(', ', array_unique($parts)));
+
+        // Collapse duplicate Cache-Control into a single, canonical value
+        $response->headers->remove('Cache-Control');
+        $hasCookie = $response->headers->has('Set-Cookie');
+        if ($hasCookie || !$request->isMethodSafe()) {
+            $response->headers->set('Cache-Control', 'no-cache, no-store, must-revalidate');
+        } else {
+            $response->headers->set('Cache-Control', 'public, max-age=0, s-maxage=120, must-revalidate');
+        }
+
+        // Always expose an X-MicroCache diagnostic (if upstream middleware didn’t)
+        if (!$response->headers->has('X-MicroCache')) {
+            $response->headers->set('X-MicroCache', $hasCookie ? 'SKIP' : 'MISS');
+        }
+
+        return $response;
+    }
+}

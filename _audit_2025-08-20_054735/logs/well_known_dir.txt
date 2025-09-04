@@ -1,0 +1,4 @@
+total 12
+drwxr-xr-x  3 vminingc vminingc 4096 Aug  4 13:56 .
+drwxr-xr-x 14 vminingc vminingc 4096 Aug 18 09:30 ..
+drwxr-xr-x  2 vminingc vminingc 4096 Aug 20 03:20 acme-challenge

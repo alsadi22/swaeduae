@@ -1,0 +1,15 @@
+<?php
+use Illuminate\Support\Facades\Schema;
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
+class Opportunity extends Model
+{
+    use HasFactory;
+
+    // If your table uses guarded/primary keys differently, adjust here as needed.
+    protected $guarded = [];
+    /** Query scope: published rows if columns exist */
+    

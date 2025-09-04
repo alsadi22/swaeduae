@@ -1,0 +1,216 @@
+=== Phase 2: Static pages check ===
+No FAQ/Contact/HowItWorks routes found
+contact
+contact.blade.php
+faq
+faq.blade.php
+
+=== Phase 2: SEO/meta check ===
+/home3/vminingc/swaeduae.ae/laravel-app/resources/views/partials/seo.blade.php:18:<meta property="og:type" content="website">
+/home3/vminingc/swaeduae.ae/laravel-app/resources/views/partials/seo.blade.php:19:<meta property="og:title" content="{{ $title }}">
+/home3/vminingc/swaeduae.ae/laravel-app/resources/views/partials/seo.blade.php:20:<meta property="og:description" content="{{ $desc }}">
+/home3/vminingc/swaeduae.ae/laravel-app/resources/views/partials/seo.blade.php:21:<meta property="og:url" content="{{ $url }}">
+/home3/vminingc/swaeduae.ae/laravel-app/resources/views/partials/seo.blade.php:22:<meta property="og:image" content="{{ $image }}">
+/home3/vminingc/swaeduae.ae/laravel-app/resources/views/partials/seo.blade.php:24:<meta name="twitter:card" content="summary_large_image">
+/home3/vminingc/swaeduae.ae/laravel-app/resources/views/partials/seo.blade.php:25:<meta name="twitter:title" content="{{ $title }}">
+/home3/vminingc/swaeduae.ae/laravel-app/resources/views/partials/seo.blade.php:26:<meta name="twitter:description" content="{{ $desc }}">
+/home3/vminingc/swaeduae.ae/laravel-app/resources/views/partials/seo.blade.php:27:<meta name="twitter:image" content="{{ $image }}">
+/home3/vminingc/swaeduae.ae/laravel-app/resources/views/partials/meta.blade.php:15:<meta property="og:title" content="{{ $seoTitle }}">
+/home3/vminingc/swaeduae.ae/laravel-app/resources/views/partials/meta.blade.php:16:<meta property="og:description" content="{{ $seoDesc }}">
+/home3/vminingc/swaeduae.ae/laravel-app/resources/views/partials/meta.blade.php:17:@if($logoUrl)<meta property="og:image" content="{{ $logoUrl }}">@endif
+/home3/vminingc/swaeduae.ae/laravel-app/resources/views/partials/meta.blade.php:18:<meta property="og:type" content="website">
+/home3/vminingc/swaeduae.ae/laravel-app/resources/views/partials/meta.blade.php:19:<meta property="og:url" content="{{ url()->current() }}">
+/home3/vminingc/swaeduae.ae/laravel-app/resources/views/partials/meta.blade.php:21:<meta name="twitter:card" content="summary_large_image">
+/home3/vminingc/swaeduae.ae/laravel-app/resources/views/partials/meta.blade.php:22:<meta name="twitter:title" content="{{ $seoTitle }}">
+/home3/vminingc/swaeduae.ae/laravel-app/resources/views/partials/meta.blade.php:23:<meta name="twitter:description" content="{{ $seoDesc }}">
+/home3/vminingc/swaeduae.ae/laravel-app/resources/views/partials/meta.blade.php:24:@if($logoUrl)<meta name="twitter:image" content="{{ $logoUrl }}">@endif
+/home3/vminingc/swaeduae.ae/laravel-app/resources/views/components/seo.blade.php:29:<meta property="og:title" content="{{ $title }}">
+/home3/vminingc/swaeduae.ae/laravel-app/resources/views/components/seo.blade.php:30:<meta property="og:description" content="{{ $desc }}">
+/home3/vminingc/swaeduae.ae/laravel-app/resources/views/components/seo.blade.php:31:<meta property="og:type" content="website">
+/home3/vminingc/swaeduae.ae/laravel-app/resources/views/components/seo.blade.php:32:<meta property="og:url" content="{{ $canonical }}">
+/home3/vminingc/swaeduae.ae/laravel-app/resources/views/components/seo.blade.php:33:<meta property="og:site_name" content="{{ $site }}">
+/home3/vminingc/swaeduae.ae/laravel-app/resources/views/components/seo.blade.php:34:<meta property="og:image" content="{{ $image }}">
+/home3/vminingc/swaeduae.ae/laravel-app/resources/views/components/seo.blade.php:35:<meta name="twitter:card" content="summary_large_image">
+/home3/vminingc/swaeduae.ae/laravel-app/resources/views/components/seo.blade.php:36:<meta name="twitter:title" content="{{ $title }}">
+/home3/vminingc/swaeduae.ae/laravel-app/resources/views/components/seo.blade.php:37:<meta name="twitter:description" content="{{ $desc }}">
+/home3/vminingc/swaeduae.ae/laravel-app/resources/views/components/seo.blade.php:38:<meta name="twitter:image" content="{{ $image }}">
+/home3/vminingc/swaeduae.ae/laravel-app/resources/views/_from_migrations_2025-08-16-151345/app.blade.php:8:    <meta property="og:title" content="@yield('title', config('app.name'))" />
+/home3/vminingc/swaeduae.ae/laravel-app/resources/views/_from_migrations_2025-08-16-151345/app.blade.php:9:    <meta property="og:description" content="Join Sawaed UAE and contribute your time to make a difference." />
+/home3/vminingc/swaeduae.ae/laravel-app/resources/views/_from_migrations_2025-08-16-151345/app.blade.php:10:    <meta property="og:type" content="website" />
+
+=== Phase 2: i18n/lang check ===
+/home3/vminingc/swaeduae.ae/laravel-app/resources/views/layouts/app.blade.php.bak_20250821-152748:2:  <html lang="{{ str_replace("_","-", app()->getLocale()) }}" dir="{{ in_array(app()->getLocale(), ['ar','he','fa','ur']) ? 'rtl' : 'ltr' }}">
+/home3/vminingc/swaeduae.ae/laravel-app/resources/views/layouts/app.blade.php:2:  <html lang="{{ str_replace("_","-", app()->getLocale()) }}" dir="{{ in_array(app()->getLocale(), ['ar','he','fa','ur']) ? 'rtl' : 'ltr' }}">
+ar.json
+en.json
+
+=== Phase 2: Sitemap/robots check ===
+HTTP/1.1 200 OK
+X-Content-Type-Options: nosniff
+Content-Type: application/xml
+HTTP/1.1 200 OK
+X-Content-Type-Options: nosniff
+Content-Type: text/plain
+
+=== Phase 3: Opportunities/Events check ===
+13:    public function scopePublished($q)
+No eager loading detected in EventController
+/home3/vminingc/swaeduae.ae/laravel-app/routes/_quarantine/2025-08-18-060934/web.php.add_signin_2025-08-17_085425:629:if (!Route::has('partners.apply.submit')) {
+/home3/vminingc/swaeduae.ae/laravel-app/routes/_quarantine/2025-08-18-060934/web.php.add_signin_2025-08-17_085425:630://     Route::match(['GET','POST'],'/__alias/partners.apply.submit', fn() => redirect('/profile'))->name('partners.apply.submit');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/_quarantine/2025-08-18-060934/web.php.BEFORE_STABILIZE_2025-08-17_0743:755:if (!Route::has('partners.apply.submit')) {
+/home3/vminingc/swaeduae.ae/laravel-app/routes/_quarantine/2025-08-18-060934/web.php.BEFORE_STABILIZE_2025-08-17_0743:756:    Route::match(['GET','POST'],'/__alias/partners.apply.submit', fn() => redirect('/profile'))->name('partners.apply.submit');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/_quarantine/2025-08-18-060934/web.php.fix_login_2025-08-17_085837:629:if (!Route::has('partners.apply.submit')) {
+/home3/vminingc/swaeduae.ae/laravel-app/routes/_quarantine/2025-08-18-060934/web.php.fix_login_2025-08-17_085837:630://     Route::match(['GET','POST'],'/__alias/partners.apply.submit', fn() => redirect('/profile'))->name('partners.apply.submit');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/_quarantine/2025-08-18-060934/web.php.preclose_2025-08-17_085219:629:if (!Route::has('partners.apply.submit')) {
+/home3/vminingc/swaeduae.ae/laravel-app/routes/_quarantine/2025-08-18-060934/web.php.preclose_2025-08-17_085219:630://     Route::match(['GET','POST'],'/__alias/partners.apply.submit', fn() => redirect('/profile'))->name('partners.apply.submit');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-151117:332:Route::get('/apply', [ApplyController::class, 'form'])->name('apply.form');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-151117:333:Route::post('/apply', [ApplyController::class, 'store'])->name('apply.store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-144616:332:Route::get('/apply', [ApplyController::class, 'form'])->name('apply.form');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-144616:333:Route::post('/apply', [ApplyController::class, 'store'])->name('apply.store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-144616.bak_20250821-150119.bak_20250821-151117:332:Route::get('/apply', [ApplyController::class, 'form'])->name('apply.form');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-144616.bak_20250821-150119.bak_20250821-151117:333:Route::post('/apply', [ApplyController::class, 'store'])->name('apply.store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-134435:332:Route::get('/apply', [ApplyController::class, 'form'])->name('apply.form');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-134435:333:Route::post('/apply', [ApplyController::class, 'store'])->name('apply.store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-145829.bak_20250821-150119.bak_20250821-151117:332:Route::get('/apply', [ApplyController::class, 'form'])->name('apply.form');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-145829.bak_20250821-150119.bak_20250821-151117:333:Route::post('/apply', [ApplyController::class, 'store'])->name('apply.store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-134019.bak_20250821-150119.bak_20250821-151117:332:Route::get('/apply', [ApplyController::class, 'form'])->name('apply.form');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-134019.bak_20250821-150119.bak_20250821-151117:333:Route::post('/apply', [ApplyController::class, 'store'])->name('apply.store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-145829.bak_20250821-151117:332:Route::get('/apply', [ApplyController::class, 'form'])->name('apply.form');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-145829.bak_20250821-151117:333:Route::post('/apply', [ApplyController::class, 'store'])->name('apply.store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-140337.bak_20250821-150119:332:Route::get('/apply', [ApplyController::class, 'form'])->name('apply.form');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-140337.bak_20250821-150119:333:Route::post('/apply', [ApplyController::class, 'store'])->name('apply.store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-134019:332:Route::get('/apply', [ApplyController::class, 'form'])->name('apply.form');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-134019:333:Route::post('/apply', [ApplyController::class, 'store'])->name('apply.store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821_174456:332:Route::get('/apply', [ApplyController::class, 'form'])->name('apply.form');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821_174456:333:Route::post('/apply', [ApplyController::class, 'store'])->name('apply.store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-145421.bak_20250821-150119:332:Route::get('/apply', [ApplyController::class, 'form'])->name('apply.form');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-145421.bak_20250821-150119:333:Route::post('/apply', [ApplyController::class, 'store'])->name('apply.store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-140730:332:Route::get('/apply', [ApplyController::class, 'form'])->name('apply.form');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-140730:333:Route::post('/apply', [ApplyController::class, 'store'])->name('apply.store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-145421.bak_20250821-151117:332:Route::get('/apply', [ApplyController::class, 'form'])->name('apply.form');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-145421.bak_20250821-151117:333:Route::post('/apply', [ApplyController::class, 'store'])->name('apply.store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-140523.bak_20250821-150119.bak_20250821-151117:332:Route::get('/apply', [ApplyController::class, 'form'])->name('apply.form');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-140523.bak_20250821-150119.bak_20250821-151117:333:Route::post('/apply', [ApplyController::class, 'store'])->name('apply.store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-140730.bak_20250821-150119:332:Route::get('/apply', [ApplyController::class, 'form'])->name('apply.form');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-140730.bak_20250821-150119:333:Route::post('/apply', [ApplyController::class, 'store'])->name('apply.store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-140523:332:Route::get('/apply', [ApplyController::class, 'form'])->name('apply.form');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-140523:333:Route::post('/apply', [ApplyController::class, 'store'])->name('apply.store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-140243.bak_20250821-150119:332:Route::get('/apply', [ApplyController::class, 'form'])->name('apply.form');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-140243.bak_20250821-150119:333:Route::post('/apply', [ApplyController::class, 'store'])->name('apply.store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-145829.bak_20250821-150119:332:Route::get('/apply', [ApplyController::class, 'form'])->name('apply.form');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-145829.bak_20250821-150119:333:Route::post('/apply', [ApplyController::class, 'store'])->name('apply.store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-140730.bak_20250821-150119.bak_20250821-151117:332:Route::get('/apply', [ApplyController::class, 'form'])->name('apply.form');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-140730.bak_20250821-150119.bak_20250821-151117:333:Route::post('/apply', [ApplyController::class, 'store'])->name('apply.store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-142737.bak_20250821-151117:332:Route::get('/apply', [ApplyController::class, 'form'])->name('apply.form');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-142737.bak_20250821-151117:333:Route::post('/apply', [ApplyController::class, 'store'])->name('apply.store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-145829:332:Route::get('/apply', [ApplyController::class, 'form'])->name('apply.form');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-145829:333:Route::post('/apply', [ApplyController::class, 'store'])->name('apply.store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-134019.bak_20250821-151117:332:Route::get('/apply', [ApplyController::class, 'form'])->name('apply.form');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-134019.bak_20250821-151117:333:Route::post('/apply', [ApplyController::class, 'store'])->name('apply.store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821_174647:332:Route::get('/apply', [ApplyController::class, 'form'])->name('apply.form');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821_174647:333:Route::post('/apply', [ApplyController::class, 'store'])->name('apply.store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-150119:332:Route::get('/apply', [ApplyController::class, 'form'])->name('apply.form');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-150119:333:Route::post('/apply', [ApplyController::class, 'store'])->name('apply.store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-142737.bak_20250821-150119:332:Route::get('/apply', [ApplyController::class, 'form'])->name('apply.form');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-142737.bak_20250821-150119:333:Route::post('/apply', [ApplyController::class, 'store'])->name('apply.store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-134435.bak_20250821-150119:332:Route::get('/apply', [ApplyController::class, 'form'])->name('apply.form');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-134435.bak_20250821-150119:333:Route::post('/apply', [ApplyController::class, 'store'])->name('apply.store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-143031.bak_20250821-151117:332:Route::get('/apply', [ApplyController::class, 'form'])->name('apply.form');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-143031.bak_20250821-151117:333:Route::post('/apply', [ApplyController::class, 'store'])->name('apply.store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-142737.bak_20250821-150119.bak_20250821-151117:332:Route::get('/apply', [ApplyController::class, 'form'])->name('apply.form');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-142737.bak_20250821-150119.bak_20250821-151117:333:Route::post('/apply', [ApplyController::class, 'store'])->name('apply.store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-140337:332:Route::get('/apply', [ApplyController::class, 'form'])->name('apply.form');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-140337:333:Route::post('/apply', [ApplyController::class, 'store'])->name('apply.store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-144616.bak_20250821-151117:332:Route::get('/apply', [ApplyController::class, 'form'])->name('apply.form');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-144616.bak_20250821-151117:333:Route::post('/apply', [ApplyController::class, 'store'])->name('apply.store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-144616.bak_20250821-150119:332:Route::get('/apply', [ApplyController::class, 'form'])->name('apply.form');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-144616.bak_20250821-150119:333:Route::post('/apply', [ApplyController::class, 'store'])->name('apply.store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-143031:332:Route::get('/apply', [ApplyController::class, 'form'])->name('apply.form');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-143031:333:Route::post('/apply', [ApplyController::class, 'store'])->name('apply.store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-140337.bak_20250821-151117:332:Route::get('/apply', [ApplyController::class, 'form'])->name('apply.form');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-140337.bak_20250821-151117:333:Route::post('/apply', [ApplyController::class, 'store'])->name('apply.store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-140243:332:Route::get('/apply', [ApplyController::class, 'form'])->name('apply.form');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-140243:333:Route::post('/apply', [ApplyController::class, 'store'])->name('apply.store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-140730.bak_20250821-151117:332:Route::get('/apply', [ApplyController::class, 'form'])->name('apply.form');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-140730.bak_20250821-151117:333:Route::post('/apply', [ApplyController::class, 'store'])->name('apply.store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-142737:332:Route::get('/apply', [ApplyController::class, 'form'])->name('apply.form');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-142737:333:Route::post('/apply', [ApplyController::class, 'store'])->name('apply.store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-140337.bak_20250821-150119.bak_20250821-151117:332:Route::get('/apply', [ApplyController::class, 'form'])->name('apply.form');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-140337.bak_20250821-150119.bak_20250821-151117:333:Route::post('/apply', [ApplyController::class, 'store'])->name('apply.store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-151312:332:Route::get('/apply', [ApplyController::class, 'form'])->name('apply.form');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-151312:333:Route::post('/apply', [ApplyController::class, 'store'])->name('apply.store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-134435.bak_20250821-151117:332:Route::get('/apply', [ApplyController::class, 'form'])->name('apply.form');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-134435.bak_20250821-151117:333:Route::post('/apply', [ApplyController::class, 'store'])->name('apply.store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-143031.bak_20250821-150119:332:Route::get('/apply', [ApplyController::class, 'form'])->name('apply.form');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-143031.bak_20250821-150119:333:Route::post('/apply', [ApplyController::class, 'store'])->name('apply.store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-145421.bak_20250821-150119.bak_20250821-151117:332:Route::get('/apply', [ApplyController::class, 'form'])->name('apply.form');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-145421.bak_20250821-150119.bak_20250821-151117:333:Route::post('/apply', [ApplyController::class, 'store'])->name('apply.store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-143031.bak_20250821-150119.bak_20250821-151117:332:Route::get('/apply', [ApplyController::class, 'form'])->name('apply.form');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-143031.bak_20250821-150119.bak_20250821-151117:333:Route::post('/apply', [ApplyController::class, 'store'])->name('apply.store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-140523.bak_20250821-151117:332:Route::get('/apply', [ApplyController::class, 'form'])->name('apply.form');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-140523.bak_20250821-151117:333:Route::post('/apply', [ApplyController::class, 'store'])->name('apply.store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-140243.bak_20250821-151117:332:Route::get('/apply', [ApplyController::class, 'form'])->name('apply.form');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-140243.bak_20250821-151117:333:Route::post('/apply', [ApplyController::class, 'store'])->name('apply.store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-150119.bak_20250821-151117:332:Route::get('/apply', [ApplyController::class, 'form'])->name('apply.form');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-150119.bak_20250821-151117:333:Route::post('/apply', [ApplyController::class, 'store'])->name('apply.store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php:332:Route::get('/apply', [ApplyController::class, 'form'])->name('apply.form');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php:333:Route::post('/apply', [ApplyController::class, 'store'])->name('apply.store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-134435.bak_20250821-150119.bak_20250821-151117:332:Route::get('/apply', [ApplyController::class, 'form'])->name('apply.form');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-134435.bak_20250821-150119.bak_20250821-151117:333:Route::post('/apply', [ApplyController::class, 'store'])->name('apply.store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-140243.bak_20250821-150119.bak_20250821-151117:332:Route::get('/apply', [ApplyController::class, 'form'])->name('apply.form');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-140243.bak_20250821-150119.bak_20250821-151117:333:Route::post('/apply', [ApplyController::class, 'store'])->name('apply.store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-140523.bak_20250821-150119:332:Route::get('/apply', [ApplyController::class, 'form'])->name('apply.form');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-140523.bak_20250821-150119:333:Route::post('/apply', [ApplyController::class, 'store'])->name('apply.store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-134019.bak_20250821-150119:332:Route::get('/apply', [ApplyController::class, 'form'])->name('apply.form');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-134019.bak_20250821-150119:333:Route::post('/apply', [ApplyController::class, 'store'])->name('apply.store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-145421:332:Route::get('/apply', [ApplyController::class, 'form'])->name('apply.form');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-145421:333:Route::post('/apply', [ApplyController::class, 'store'])->name('apply.store');
+p3_opportunities_check.sh
+p3_opportunities_check_to_file.sh
+
+=== Phase 4: Org portal CRUD check ===
+/home3/vminingc/swaeduae.ae/laravel-app/app/Http/Controllers/OrganizationController.php:9:class OrganizationController extends Controller
+/home3/vminingc/swaeduae.ae/laravel-app/app/Http/Controllers/Organization/PortalController.php:3:namespace App\Http\Controllers\Organization;
+/home3/vminingc/swaeduae.ae/laravel-app/app/Http/Controllers/Organization/HourApprovalController.php:3:namespace App\Http\Controllers\Organization;
+/home3/vminingc/swaeduae.ae/laravel-app/app/Http/Controllers/Organization/DashboardController.php:3:namespace App\Http\Controllers\Organization;
+/home3/vminingc/swaeduae.ae/laravel-app/app/Http/Controllers/AdminController.php:7:use App\Models\Organization;
+/home3/vminingc/swaeduae.ae/laravel-app/app/Http/Controllers/Public/OrganizationPublicController.php:11:class OrganizationPublicController extends Controller
+/home3/vminingc/swaeduae.ae/laravel-app/app/Http/Controllers/Public/OrganizationPublicController.php:60:        $name = $o->name ?? ($o->title ?? 'Organization');
+/home3/vminingc/swaeduae.ae/laravel-app/app/Http/Controllers/OrgRegistrationController.php:6:use App\Models\Organization;
+/home3/vminingc/swaeduae.ae/laravel-app/app/Http/Controllers/OrgRegistrationController.php:37:        Organization::create($data);
+/home3/vminingc/swaeduae.ae/laravel-app/app/Http/Controllers/OrgRegistrationController.php:44:        $pending = Organization::where('approved', false)->latest()->paginate(20);
+/home3/vminingc/swaeduae.ae/laravel-app/app/Http/Controllers/OrgRegistrationController.php:48:    public function approve(Organization $organization)
+/home3/vminingc/swaeduae.ae/laravel-app/app/Http/Controllers/OrgRegistrationController.php:51:        return back()->with('status', 'Organization approved.');
+/home3/vminingc/swaeduae.ae/laravel-app/app/Http/Controllers/OrgRegistrationController.php:54:    public function reject(Organization $organization)
+/home3/vminingc/swaeduae.ae/laravel-app/app/Http/Controllers/OrgRegistrationController.php:58:        return back()->with('status', 'Organization rejected and removed.');
+/home3/vminingc/swaeduae.ae/laravel-app/app/Http/Controllers/OrganizationOpportunityController.php:9:class OrganizationOpportunityController extends Controller
+/home3/vminingc/swaeduae.ae/laravel-app/app/Http/Controllers/Admin/OrganizationController.php:10:class OrganizationController extends Controller
+/home3/vminingc/swaeduae.ae/laravel-app/app/Http/Controllers/Admin/OrganizationController.php:40:        return redirect()->route('admin.organizations.index')->with('status', __('Organization created'));
+/home3/vminingc/swaeduae.ae/laravel-app/app/Http/Controllers/Admin/OrganizationController.php:62:        return redirect()->route('admin.organizations.index')->with('status', __('Organization updated'));
+/home3/vminingc/swaeduae.ae/laravel-app/app/Http/Controllers/Admin/OrganizationController.php:68:        return redirect()->route('admin.organizations.index')->with('status', __('Organization deleted'));
+/home3/vminingc/swaeduae.ae/laravel-app/app/Http/Controllers/Admin/OrganizationController.php.uninject.20250812-081225:9:class OrganizationController extends Controller
+/home3/vminingc/swaeduae.ae/laravel-app/routes/_quarantine/2025-08-18-060934/web.php.add_signin_2025-08-17_085425:575:if (!Route::has('org.opportunities.create')) {
+/home3/vminingc/swaeduae.ae/laravel-app/routes/_quarantine/2025-08-18-060934/web.php.add_signin_2025-08-17_085425:576://     Route::match(['GET','POST'],'/__alias/org.opportunities.create', fn() => redirect('/profile'))->name('org.opportunities.create');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/_quarantine/2025-08-18-060934/web.php.add_signin_2025-08-17_085425:617:if (!Route::has('organization.opportunities.create')) {
+/home3/vminingc/swaeduae.ae/laravel-app/routes/_quarantine/2025-08-18-060934/web.php.add_signin_2025-08-17_085425:618://     Route::match(['GET','POST'],'/__alias/organization.opportunities.create', fn() => redirect('/profile'))->name('organization.opportunities.create');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/_quarantine/2025-08-18-060934/web.php.BEFORE_STABILIZE_2025-08-17_0743:701:if (!Route::has('org.opportunities.create')) {
+/home3/vminingc/swaeduae.ae/laravel-app/routes/_quarantine/2025-08-18-060934/web.php.BEFORE_STABILIZE_2025-08-17_0743:702:    Route::match(['GET','POST'],'/__alias/org.opportunities.create', fn() => redirect('/profile'))->name('org.opportunities.create');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/_quarantine/2025-08-18-060934/web.php.BEFORE_STABILIZE_2025-08-17_0743:743:if (!Route::has('organization.opportunities.create')) {
+/home3/vminingc/swaeduae.ae/laravel-app/routes/_quarantine/2025-08-18-060934/web.php.BEFORE_STABILIZE_2025-08-17_0743:744:    Route::match(['GET','POST'],'/__alias/organization.opportunities.create', fn() => redirect('/profile'))->name('organization.opportunities.create');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/_quarantine/2025-08-18-060934/web.php.fix_login_2025-08-17_085837:575:if (!Route::has('org.opportunities.create')) {
+/home3/vminingc/swaeduae.ae/laravel-app/routes/_quarantine/2025-08-18-060934/web.php.fix_login_2025-08-17_085837:576://     Route::match(['GET','POST'],'/__alias/org.opportunities.create', fn() => redirect('/profile'))->name('org.opportunities.create');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/_quarantine/2025-08-18-060934/web.php.fix_login_2025-08-17_085837:617:if (!Route::has('organization.opportunities.create')) {
+/home3/vminingc/swaeduae.ae/laravel-app/routes/_quarantine/2025-08-18-060934/web.php.fix_login_2025-08-17_085837:618://     Route::match(['GET','POST'],'/__alias/organization.opportunities.create', fn() => redirect('/profile'))->name('organization.opportunities.create');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/_quarantine/2025-08-18-060934/web.php.preclose_2025-08-17_085219:575:if (!Route::has('org.opportunities.create')) {
+/home3/vminingc/swaeduae.ae/laravel-app/routes/_quarantine/2025-08-18-060934/web.php.preclose_2025-08-17_085219:576://     Route::match(['GET','POST'],'/__alias/org.opportunities.create', fn() => redirect('/profile'))->name('org.opportunities.create');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/_quarantine/2025-08-18-060934/web.php.preclose_2025-08-17_085219:617:if (!Route::has('organization.opportunities.create')) {
+/home3/vminingc/swaeduae.ae/laravel-app/routes/_quarantine/2025-08-18-060934/web.php.preclose_2025-08-17_085219:618://     Route::match(['GET','POST'],'/__alias/organization.opportunities.create', fn() => redirect('/profile'))->name('organization.opportunities.create');
+
+=== Phase 13: Perf/Security polish check ===
+/home3/vminingc/swaeduae.ae/laravel-app/app/Http/Middleware/FormRateLimit.php:10:class FormRateLimit
+/home3/vminingc/swaeduae.ae/laravel-app/app/Http/Middleware/SecurityHeaders.php:13:    if (!$h->has('Content-Security-Policy')) {
+/home3/vminingc/swaeduae.ae/laravel-app/app/Http/Middleware/SecurityHeaders.php:14:      $h->set('Content-Security-Policy',
+/home3/vminingc/swaeduae.ae/laravel-app/app/Http/Middleware/SecurityHeaders.php.bak_20250821_163350:13:    if (!$h->has('Content-Security-Policy')) {
+/home3/vminingc/swaeduae.ae/laravel-app/app/Http/Middleware/SecurityHeaders.php.bak_20250821_163350:14:      $h->set('Content-Security-Policy',
+/home3/vminingc/swaeduae.ae/laravel-app/app/Http/Middleware/SecurityHeaders.php.bak_20250821_164551:13:    if (!$h->has('Content-Security-Policy')) {
+/home3/vminingc/swaeduae.ae/laravel-app/app/Http/Middleware/SecurityHeaders.php.bak_20250821_164551:14:      $h->set('Content-Security-Policy',

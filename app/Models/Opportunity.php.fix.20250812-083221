@@ -1,0 +1,34 @@
+<?php
+
+namespace App\Models;
+use App\Models\Concerns\SearchSort;
+use App\Models\Concerns\SearchSort;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
+
+class Opportunity extends Model
+{
+    protected $fillable = [
+        'title','description','category','city','location',
+        'starts_at','ends_at','organizer_id','checkin_token',
+        'checkout_token','is_completed'
+    ];
+
+    protected $casts = [
+        'starts_at' => 'datetime',
+        'ends_at'   => 'datetime',
+        'is_completed' => 'boolean',
+    ];
+
+    public function organizer(){ return $this->belongsTo(\App\Models\User::class,'organizer_id'); }
+    public function attendances(){ return $this->hasMany(\App\Models\Attendance::class); }
+    public function certificates(){ return $this->hasMany(\App\Models\Certificate::class); }
+
+    protected static function booted(){
+        static::creating(function($m){
+            if(empty($m->checkin_token))  $m->checkin_token  = Str::random(32);
+            if(empty($m->checkout_token)) $m->checkout_token = Str::random(32);
+        });
+    }
+}

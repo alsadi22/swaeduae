@@ -1,0 +1,14 @@
+<?php
+
+use Illuminate\Support\Facades\Route;
+
+/*
+ |---------------------------------------------------------------
+ | Public: Events (list + detail)
+ |---------------------------------------------------------------
+*/
+Route::get('/events', [\App\Http\Controllers\EventController::class, 'index'])->name('events.index');
+
+Route::get('/events/{idOrSlug}', [\App\Http\Controllers\EventController::class, 'show'])
+    ->where('idOrSlug','[A-Za-z0-9\-]+')
+    ->name('events.show');

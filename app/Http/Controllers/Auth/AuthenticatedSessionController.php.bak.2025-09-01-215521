@@ -1,0 +1,53 @@
+<?php
+
+namespace App\Http\Controllers\Auth;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+
+class AuthenticatedSessionController extends Controller
+{
+    public function create()
+    {
+        return view('auth.login');
+    }
+
+    public function store(Request $request): RedirectResponse
+    {
+        $request->validate([
+            'email' => ['required','string','email'],
+            'password' => ['required','string'],
+        ]);
+
+        if (!Auth::attempt($request->only('email','password'), $request->boolean('remember'))) {
+            return back()->withErrors(['email' => 'Invalid credentials'])->onlyInput('email');
+        }
+
+        $request->session()->regenerate();
+
+        $user = $request->user();
+        // Hard rule: admins go to /admin (dashboard)
+        if ($user && (($user->role ?? null) === 'admin')) {
+            return redirect()->intended(Route::has('admin.dashboard') ? route('admin.dashboard') : '/admin');
+        }
+        // Orgs -> org dashboard if present, else /org
+        if ($user && (($user->role ?? null) === 'org')) {
+            if (Route::has('org.dashboard')) return redirect()->intended(route('org.dashboard'));
+            return redirect()->intended('/org');
+        }
+        // Volunteers -> profile if present, else /
+        if (Route::has('my.profile')) return redirect()->intended(route('my.profile'));
+        return redirect()->intended('/');
+    }
+
+    public function destroy(Request $request): RedirectResponse
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect('/');
+    }
+}

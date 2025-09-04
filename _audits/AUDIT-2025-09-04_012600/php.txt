@@ -1,0 +1,59 @@
+PHP 8.3.24 (cli) (built: Aug  3 2025 08:57:38) (NTS)
+Copyright (c) The PHP Group
+Zend Engine v4.3.24, Copyright (c) Zend Technologies
+    with Zend OPcache v8.3.24, Copyright (c), by Zend Technologies
+[PHP Modules]
+bcmath
+calendar
+Core
+ctype
+curl
+date
+dom
+exif
+FFI
+fileinfo
+filter
+ftp
+gd
+gettext
+hash
+iconv
+intl
+json
+libxml
+mbstring
+mysqli
+mysqlnd
+openssl
+pcntl
+pcre
+PDO
+pdo_mysql
+Phar
+posix
+random
+readline
+Reflection
+session
+shmop
+SimpleXML
+sockets
+sodium
+SPL
+standard
+sysvmsg
+sysvsem
+sysvshm
+tokenizer
+xml
+xmlreader
+xmlwriter
+xsl
+Zend OPcache
+zip
+zlib
+
+[Zend Modules]
+Zend OPcache
+

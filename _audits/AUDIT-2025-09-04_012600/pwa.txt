@@ -1,0 +1,4 @@
+manifest.json OK
+service-worker.js OK
+icon-192 OK
+icon-512 OK

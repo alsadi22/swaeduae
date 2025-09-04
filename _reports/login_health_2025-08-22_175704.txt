@@ -1,0 +1,77 @@
+Login & Health Report — 2025-08-22_175704
+Base URL: http://127.0.0.1:8000
+------------------------------------------------------------
+ROUTES SNAPSHOT
+------------------------------------------------------------
+
+  GET|HEAD   admin/login .................................................................... admin.login › Admin\Auth\AdminLoginController@show
+  POST       admin/login .............................................................. admin.login.post › Admin\Auth\AdminLoginController@login
+  GET|HEAD   login .................................................................................. login › Auth\LoginController@showLoginForm
+  POST       login .................................................................... generated::hSmvp5JzKwMfhTXV › Auth\LoginController@login
+  ANY        login/organization .......................................... generated::NAuCs0f0eKUHae3e › Illuminate\Routing › RedirectController
+  GET|HEAD   org/login ............................................................................................................... org.login
+  POST       org/login .......................................................................... org.login.perform › Auth\LoginController@login
+  GET|HEAD   volunteer/login ....................................................................................... generated::kV0iEtmyq8HL0pwQ
+
+                                                                                                                              Showing [8] routes
+
+
+  GET|HEAD        admin/organizations ........................................... admin.organizations.index › Admin\OrganizationController@index
+  POST            admin/organizations ........................................... admin.organizations.store › Admin\OrganizationController@store
+  GET|HEAD        admin/organizations/create .................................. admin.organizations.create › Admin\OrganizationController@create
+  PUT|PATCH       admin/organizations/{organization} .......................... admin.organizations.update › Admin\OrganizationController@update
+  DELETE          admin/organizations/{organization} ........................ admin.organizations.destroy › Admin\OrganizationController@destroy
+  GET|HEAD        admin/organizations/{organization}/edit ......................... admin.organizations.edit › Admin\OrganizationController@edit
+  ANY             login/organization ..................................... generated::NAuCs0f0eKUHae3e › Illuminate\Routing › RedirectController
+  ANY             org ....................................................................... org.home › Illuminate\Routing › RedirectController
+  GET|HEAD        org/dashboard .................................................................. org.dashboard › Org\DashboardController@index
+  GET|HEAD        org/login .......................................................................................................... org.login
+  POST            org/login ..................................................................... org.login.perform › Auth\LoginController@login
+  POST            org/logout ........................................................................................................ org.logout
+  POST            org/opportunities .................................................. org.opportunities.store › Org\OpportunityController@store
+  GET|HEAD        org/opportunities/create ......................................... org.opportunities.create › Org\OpportunityController@create
+  POST            org/opportunities/{event} ........................................ org.opportunities.update › Org\OpportunityController@update
+  GET|HEAD        org/opportunities/{event}/applicants ................................... org.applicants.index › Org\ApplicantsController@index
+  GET|HEAD        org/opportunities/{event}/applicants.csv .......................... org.applicants.export › Org\ApplicantsController@exportCsv
+  POST            org/opportunities/{event}/applicants/{app}/decision .............. org.applicants.decision › Org\ApplicantsController@decision
+  POST            org/opportunities/{event}/close .................................... org.opportunities.close › Org\OpportunityController@close
+  GET|HEAD        org/opportunities/{event}/edit ....................................... org.opportunities.edit › Org\OpportunityController@edit
+  GET|HEAD        org/opportunities/{opportunity}/shortlist ................................ org.shortlist.index › Org\ShortlistController@index
+  POST            org/opportunities/{opportunity}/shortlist/bulk ............................. org.shortlist.bulk › Org\ShortlistController@bulk
+  POST            org/opportunities/{opportunity}/shortlist/slot-cap ............ org.shortlist.slot_cap › Org\ShortlistController@updateSlotCap
+  GET|HEAD        org/register .................................................................................................... org.register
+  POST            org/register ............................................................................................. org.register.submit
+  GET|HEAD        org/settings ................................................................. org.settings.edit › Org\SettingsController@edit
+  POST            org/settings ............................................................. org.settings.update › Org\SettingsController@update
+  GET|HEAD        org/setup .......................................................................... org.setup.form › Org\SetupController@form
+  POST            org/setup ........................................................................ org.setup.store › Org\SetupController@store
+  ANY             organizations/register ................................. generated::OpKDZaTsa2v5iNo0 › Illuminate\Routing › RedirectController
+
+                                                                                                                             Showing [30] routes
+
+
+  GET|HEAD   profile .................................................................................... profile › Volunteer\ProfileIndexAction
+  POST       profile/avatar ............................................................ profile.avatar.store › Volunteer\AvatarController@store
+  DELETE     profile/avatar ........................................................ profile.avatar.destroy › Volunteer\AvatarController@destroy
+  GET|HEAD   volunteer/profile ......................................................................................... redir.volunteer.profile
+
+                                                                                                                              Showing [4] routes
+
+
+  GET|HEAD   apply ................................................................................ apply.form › PublicSite\ApplyController@form
+  POST       apply .............................................................................. apply.store › PublicSite\ApplyController@store
+
+                                                                                                                              Showing [2] routes
+
+PASS  GET / [200]
+PASS  GET /healthz [200]
+PASS  GET /health [200]
+PASS  GET /sitemap.xml [200]
+PASS  GET /login [200]
+PASS  GET /register [200]
+PASS  GET /contact [200]
+FAIL  GET /faq [500]
+INFO  Volunteer credentials not set (export VOL_EMAIL & VOL_PASS to test login).
+INFO  Org credentials not set (export ORG_EMAIL & ORG_PASS to test org login).
+PASS  GET /register [200]
+PASS  GET /org/register [200]

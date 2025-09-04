@@ -1,0 +1,31 @@
+resources/views/partials/account_menu.blade.php.2025-09-03_142606.bak:6:    <form method="POST" action="{{ route('logout.perform') }}" class="m-0 p-0" style="margin:0; padding:0;">
+resources/views/partials/auth_menu.blade.php.2025-09-03_030733.bak:18:        <form method="POST" action="{{ route('logout.perform') }}">
+resources/views/partials/account_menu.blade.php.2025-09-03_035226.bak:6:    <form method="POST" action="{{ route('logout.perform') }}" class="m-0 p-0">
+resources/views/partials/account_menu.blade.php.2025-09-03_031721.bak:6:      <form method="POST" action="{{ route('logout.perform') }}" class="m-0 p-0">
+resources/views/partials/auth_dropdown.blade.php.bak.2025-09-02_160649:3:  <form method="POST" action="{{ route('logout.perform') }}" class="dropdown-item p-0 m-0" style="display:block">
+resources/views/partials/auth_menu.blade.php.bak.2025-09-02_193957:18:        <form method="POST" action="{{ route('logout.perform') }}">
+resources/views/partials/auth_menu.blade.php.bak.2025-09-02_192903:4:    <form method="POST" action="{{ route('logout.perform') }}" class="d-inline">
+resources/views/partials/auth_menu.blade.php.2025-09-03_025414.bak:18:        <form method="POST" action="{{ route('logout.perform') }}">
+resources/views/partials/auth_menu.blade.php.bak.2025-09-02_193947:9:    <form method="POST" action="{{ route('logout.perform') }}" class="d-inline">
+resources/views/partials/auth_dropdown.blade.php.bak.2025-09-02_163533:3:  <form method="POST" action="{{ route('logout.perform') }}" class="dropdown-item p-0 m-0" style="display:block">
+resources/views/partials/account_menu.blade.php:6:      <form method="POST" action="{{ route('logout.perform') }}" class="m-0 p-0">
+resources/views/partials/auth_dropdown.blade.php.2025-09-03_031137.bak:3:  <form method="POST" action="{{ route('logout.perform') }}" class="dropdown-item p-0 m-0" style="display:block">
+resources/views/admin/_nav.blade.php:16:        <form method="POST" action="{{ route('logout.perform') }}">@csrf
+resources/views/admin/_topbar.blade.php.2025-09-04_010424.bak:11:      <form method="POST" action="{{ route('logout.perform') }}">@csrf
+resources/views/components/auth-nav.blade.php.2025-09-03_025414.bak:3:  <form method="POST" action="{{ route('logout.perform') }}" class="inline" style="display:inline;">
+resources/views/components/auth-nav.blade.php.2025-09-03_030733.bak:3:  <form method="POST" action="{{ route('logout.perform') }}" class="inline" style="display:inline;">
+routes/web.php.bak.2025-09-02_202150:284:    ->name('logout.perform');
+routes/web.php.bak.2025-09-02_223057:261:    ->name('logout.perform');
+routes/web.php.bak.2025-09-03_135133:53:Route::middleware(['web','auth'])->post('/logout', [\App\Http\Controllers\Auth\SimpleLoginController::class,'logout'])->name('logout.perform');
+routes/web.php.bak.2025-09-02_144444:286:    ->name('logout.perform');
+routes/web.php.bak.2025-09-02_013934:286:    ->name('logout.perform');
+routes/web.php.2025-09-03_231517.bak:53:Route::middleware(['web','auth'])->post('/logout', [\App\Http\Controllers\Auth\SimpleLoginController::class,'logout'])->name('logout.perform');
+routes/web.php.2025-09-03_224842.bak:53:Route::middleware(['web','auth'])->post('/logout', [\App\Http\Controllers\Auth\SimpleLoginController::class,'logout'])->name('logout.perform');
+routes/web.php.bak.2025-09-02_204156:261:    ->name('logout.perform');
+routes/web.php.fix.2025-09-02_150749:286:    ->name('logout.perform');
+routes/web.php.bak.2025-09-02_145358:286:    ->name('logout.perform');
+routes/web.php.home_2025-09-03_022305.bak:54:Route::middleware(['web','auth'])->post('/logout', [\App\Http\Controllers\Auth\SimpleLoginController::class,'logout'])->name('logout.perform');
+routes/web.php.contact.2025-09-03_021839:54:Route::middleware(['web','auth'])->post('/logout', [\App\Http\Controllers\Auth\SimpleLoginController::class,'logout'])->name('logout.perform');
+routes/web.php.aliases.2025-09-02_160649:286:    ->name('logout.perform');
+routes/web.php.bak.2025-09-02_014204:286:    ->name('logout.perform');
+routes/web.php.2025-09-03_234111.bak:61
