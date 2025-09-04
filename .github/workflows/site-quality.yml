@@ -1,0 +1,109 @@
+name: site-quality
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: [ main ]
+  schedule:
+    - cron: '30 22 * * *' # ~02:30 Asia/Dubai daily
+
+concurrency:
+  group: site-quality
+  cancel-in-progress: true
+
+jobs:
+  semgrep:
+    name: Semgrep static scan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: returntocorp/semgrep-action@v1
+        with:
+          config: p/ci
+          generateSarif: true
+        env:
+          SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: semgrep-results
+          path: semgrep.sarif
+          if-no-files-found: ignore
+
+  lighthouse:
+    name: Lighthouse performance/SEO
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Write Lighthouse config
+        run: |
+          cat > lighthouserc.json <<'JSON'
+          { "ci": {
+              "collect": {
+                "url": [
+                  "https://swaeduae.ae/",
+                  "https://swaeduae.ae/about",
+                  "https://swaeduae.ae/login",
+                  "https://swaeduae.ae/register"
+                ],
+                "numberOfRuns": 2
+              },
+              "upload": { "target": "temporary-public-storage" },
+              "assert": {
+                "assertions": {
+                  "categories:performance": ["warn", { "minScore": 0.80 }],
+                  "categories:accessibility": ["warn", { "minScore": 0.80 }],
+                  "categories:best-practices": ["warn", { "minScore": 0.90 }],
+                  "categories:seo": ["warn", { "minScore": 0.90 }]
+                }
+              }
+            } }
+          JSON
+      - uses: treosh/lighthouse-ci-action@v12
+        with:
+          configPath: ./lighthouserc.json
+          uploadArtifacts: true
+
+  dusk:
+    name: Laravel Dusk browser smoke (prod, read-only)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          tools: composer:v2
+          extensions: mbstring, curl, dom, json, pdo_sqlite
+
+      - uses: browser-actions/setup-chrome@v1
+      - uses: nanasess/setup-chromedriver@v2
+      - name: Browser versions
+        run: |
+          google-chrome --version || true
+          chromedriver --version || true
+
+      - name: Install dependencies
+        run: composer install --no-interaction --prefer-dist
+
+      - name: Detect ChromeDriver
+        run: php artisan dusk:chrome-driver --detect || true
+
+      - name: Run Dusk (read-only)
+        env:
+          APP_URL: https://swaeduae.ae
+          APP_ENV: testing
+          APP_KEY: base64:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa=
+          CACHE_DRIVER: array
+          SESSION_DRIVER: array
+          DB_CONNECTION: sqlite
+          DB_DATABASE: ':memory:'
+        run: php artisan dusk --colors --stop-on-failure
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: dusk-artifacts
+          path: |
+            tests/Browser/screenshots
+            tests/Browser/console
+          if-no-files-found: ignore
