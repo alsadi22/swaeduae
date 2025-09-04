@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charse
+    <title>Certificate</title>
+    <style>
+        body { t
+     
+
+    </style>
+</head>
+<body>
+   
+
+    <h2>{{ $certificate['nam
+
+    <p>at the event: <strong>{{ $certificate
+ 
+    <div class="qr">
+        
+     
+    </div>
+</body>
+</h

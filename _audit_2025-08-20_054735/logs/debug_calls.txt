@@ -1,0 +1,101 @@
+app/Console/Commands/GenerateSitemap.php:22:            ->add(Url::create('/')
+app/Console/Commands/GenerateSitemap.php:28:        $sitemap->add(Url::create('/events')->setLastModificationDate(now())->setChangeFrequency(Url::CHANGE_FREQUENCY_DAILY)->setPriority(0.8));
+app/Console/Commands/GenerateSitemap.php:29:        $sitemap->add(Url::create('/volunteer/profile')->setLastModificationDate(now())->setChangeFrequency(Url::CHANGE_FREQUENCY_DAILY)->setPriority(0.8));
+app/Console/Commands/BuildSitemaps.php:32:            $smap->add(
+app/Console/Commands/BuildSitemaps.php:36:            $smap->add(
+app/Console/Commands/BuildSitemaps.php:48:                    $smap->add(
+app/Console/Commands/BuildSitemaps.php:64:                    $smap->add(
+app/Console/Commands/BuildSitemaps.php:80:                    $smap->add(
+app/Console/Commands/BuildSitemaps.php:97:        foreach ($built as $b) { $index->add($b['loc'], $b['lastmod']); }
+app/Services/VolunteerHoursService.php:140:                $add($r->user_id, $r->opportunity_id, $r->total);
+app/Services/VolunteerHoursService.php:157:                $add($r->user_id, $r->opportunity_id, $r->total);
+resources/views/volunteer/profile.blade.php.bak-2025-08-14_1152:198:  dz.addEventListener('dragover', e => { e.preventDefault(); dz.classList.add('drag'); });
+resources/views/partials/header.blade.php.bak:44:    if(atTop){ nav.classList.add('transparent'); nav.classList.remove('scrolled'); }
+resources/views/partials/header.blade.php.bak:45:    else{ nav.classList.add('scrolled'); nav.classList.remove('transparent'); }
+resources/views/partials/header.blade.php.inplace:44:    if(atTop){ nav.classList.add('transparent'); nav.classList.remove('scrolled'); }
+resources/views/partials/header.blade.php.inplace:45:    else{ nav.classList.add('scrolled'); nav.classList.remove('transparent'); }
+resources/views/partials/header.blade.php:44:    if(atTop){ nav.classList.add('transparent'); nav.classList.remove('scrolled'); }
+resources/views/partials/header.blade.php:45:    else{ nav.classList.add('scrolled'); nav.classList.remove('transparent'); }
+resources/views/_legacy_layouts/_welcome_OLD.blade.php.inplace:294:        btns.forEach(x=>x.classList.add('btn-outline-light'));
+resources/views/_legacy_layouts/_welcome_OLD.blade.php.inplace:296:        b.classList.add('btn-light');
+resources/views/_legacy_layouts/_welcome_OLD.blade.php.inplace:458:        btns.forEach(x=>x.classList.add('btn-outline-light'));
+resources/views/_legacy_layouts/_welcome_OLD.blade.php.inplace:460:        b.classList.add('btn-light');
+resources/views/_legacy_layouts/_welcome_OLD.blade.php.inplace:619:        btns.forEach(x=>x.classList.add('btn-outline-light'));
+resources/views/_legacy_layouts/_welcome_OLD.blade.php.inplace:621:        b.classList.add('btn-light');
+resources/views/_legacy_layouts/_welcome_OLD.blade.php:294:        btns.forEach(x=>x.classList.add('btn-outline-light'));
+resources/views/_legacy_layouts/_welcome_OLD.blade.php:296:        b.classList.add('btn-light');
+resources/views/_legacy_layouts/_welcome_OLD.blade.php:458:        btns.forEach(x=>x.classList.add('btn-outline-light'));
+resources/views/_legacy_layouts/_welcome_OLD.blade.php:460:        b.classList.add('btn-light');
+resources/views/_legacy_layouts/_welcome_OLD.blade.php:619:        btns.forEach(x=>x.classList.add('btn-outline-light'));
+resources/views/_legacy_layouts/_welcome_OLD.blade.php:621:        b.classList.add('btn-light');
+resources/views/_legacy_layouts/_welcome_OLD.blade.php.bak:294:        btns.forEach(x=>x.classList.add('btn-outline-light'));
+resources/views/_legacy_layouts/_welcome_OLD.blade.php.bak:296:        b.classList.add('btn-light');
+resources/views/_legacy_layouts/_welcome_OLD.blade.php.bak:458:        btns.forEach(x=>x.classList.add('btn-outline-light'));
+resources/views/_legacy_layouts/_welcome_OLD.blade.php.bak:460:        b.classList.add('btn-light');
+resources/views/_legacy_layouts/_welcome_OLD.blade.php.bak:619:        btns.forEach(x=>x.classList.add('btn-outline-light'));
+resources/views/_legacy_layouts/_welcome_OLD.blade.php.bak:621:        b.classList.add('btn-light');
+resources/views/org/attendance/scan.blade.php.bak.20250816-130601:58:    setTimeout(() => elToast.classList.add('d-none'), 2500);
+resources/views/org/attendance/scan.blade.php:61:    setTimeout(() => elToast.classList.add('d-none'), 2500);
+resources/views/org/attendance/scan.blade.php.inplace:61:    setTimeout(() => elToast.classList.add('d-none'), 2500);
+resources/views/events/show.blade.php.bak.2025-08-19-073352:15:  <pre style="white-space:pre-wrap">{{ print_r($event->toArray(), true) }}</pre>
+resources/views/events/show.blade.php:17:  <pre style="white-space:pre-wrap">{{ print_r($event->toArray(), true) }}</pre>
+routes/_archived/2025-08-16-151345/sprint7.php:27:    $add(url('/'));
+routes/_archived/2025-08-16-151345/sprint7.php:28:    $add(route('about'));
+routes/_archived/2025-08-16-151345/sprint7.php:29:    $add(route('faq'));
+routes/_archived/2025-08-16-151345/sprint7.php:30:    $add(route('partners'));
+routes/_archived/2025-08-16-151345/sprint7.php:33:        foreach ($rows as $r) $add(url('/opportunities/'.$r->id), $r->updated_at ? date('c', strtotime($r->updated_at)) : null);
+routes/_archived/2025-08-16-151345/sprint7.php:37:        foreach ($rows as $r) $add(url('/events/'.$r->id), $r->updated_at ? date('c', strtotime($r->updated_at)) : null);
+routes/_archived/2025-08-16-151345/routes.fullbak.20250813_130930/sprint7.php:27:    $add(url('/'));
+routes/_archived/2025-08-16-151345/routes.fullbak.20250813_130930/sprint7.php:28:    $add(route('about'));
+routes/_archived/2025-08-16-151345/routes.fullbak.20250813_130930/sprint7.php:29:    $add(route('faq'));
+routes/_archived/2025-08-16-151345/routes.fullbak.20250813_130930/sprint7.php:30:    $add(route('partners'));
+routes/_archived/2025-08-16-151345/routes.fullbak.20250813_130930/sprint7.php:33:        foreach ($rows as $r) $add(url('/opportunities/'.$r->id), $r->updated_at ? date('c', strtotime($r->updated_at)) : null);
+routes/_archived/2025-08-16-151345/routes.fullbak.20250813_130930/sprint7.php:37:        foreach ($rows as $r) $add(url('/events/'.$r->id), $r->updated_at ? date('c', strtotime($r->updated_at)) : null);
+routes/_archived/2025-08-16-151345/routes.bak.20250813_130612/sprint7.php:27:    $add(url('/'));
+routes/_archived/2025-08-16-151345/routes.bak.20250813_130612/sprint7.php:28:    $add(route('about'));
+routes/_archived/2025-08-16-151345/routes.bak.20250813_130612/sprint7.php:29:    $add(route('faq'));
+routes/_archived/2025-08-16-151345/routes.bak.20250813_130612/sprint7.php:30:    $add(route('partners'));
+routes/_archived/2025-08-16-151345/routes.bak.20250813_130612/sprint7.php:33:        foreach ($rows as $r) $add(url('/opportunities/'.$r->id), $r->updated_at ? date('c', strtotime($r->updated_at)) : null);
+routes/_archived/2025-08-16-151345/routes.bak.20250813_130612/sprint7.php:37:        foreach ($rows as $r) $add(url('/events/'.$r->id), $r->updated_at ? date('c', strtotime($r->updated_at)) : null);
+routes/_archived/2025-08-16-151345/routes.bak.2025-08-16-085506/sprint7.php:27:    $add(url('/'));
+routes/_archived/2025-08-16-151345/routes.bak.2025-08-16-085506/sprint7.php:28:    $add(route('about'));
+routes/_archived/2025-08-16-151345/routes.bak.2025-08-16-085506/sprint7.php:29:    $add(route('faq'));
+routes/_archived/2025-08-16-151345/routes.bak.2025-08-16-085506/sprint7.php:30:    $add(route('partners'));
+routes/_archived/2025-08-16-151345/routes.bak.2025-08-16-085506/sprint7.php:33:        foreach ($rows as $r) $add(url('/opportunities/'.$r->id), $r->updated_at ? date('c', strtotime($r->updated_at)) : null);
+routes/_archived/2025-08-16-151345/routes.bak.2025-08-16-085506/sprint7.php:37:        foreach ($rows as $r) $add(url('/events/'.$r->id), $r->updated_at ? date('c', strtotime($r->updated_at)) : null);
+routes/_archived/2025-08-16-151345/routes.bak.2025-08-16-093549/sprint7.php:27:    $add(url('/'));
+routes/_archived/2025-08-16-151345/routes.bak.2025-08-16-093549/sprint7.php:28:    $add(route('about'));
+routes/_archived/2025-08-16-151345/routes.bak.2025-08-16-093549/sprint7.php:29:    $add(route('faq'));
+routes/_archived/2025-08-16-151345/routes.bak.2025-08-16-093549/sprint7.php:30:    $add(route('partners'));
+routes/_archived/2025-08-16-151345/routes.bak.2025-08-16-093549/sprint7.php:33:        foreach ($rows as $r) $add(url('/opportunities/'.$r->id), $r->updated_at ? date('c', strtotime($r->updated_at)) : null);
+routes/_archived/2025-08-16-151345/routes.bak.2025-08-16-093549/sprint7.php:37:        foreach ($rows as $r) $add(url('/events/'.$r->id), $r->updated_at ? date('c', strtotime($r->updated_at)) : null);
+routes/_archived/2025-08-18-043801/routes/_archived/2025-08-16-151345/sprint7.php:27:    $add(url('/'));
+routes/_archived/2025-08-18-043801/routes/_archived/2025-08-16-151345/sprint7.php:28:    $add(route('about'));
+routes/_archived/2025-08-18-043801/routes/_archived/2025-08-16-151345/sprint7.php:29:    $add(route('faq'));
+routes/_archived/2025-08-18-043801/routes/_archived/2025-08-16-151345/sprint7.php:30:    $add(route('partners'));
+routes/_archived/2025-08-18-043801/routes/_archived/2025-08-16-151345/sprint7.php:33:        foreach ($rows as $r) $add(url('/opportunities/'.$r->id), $r->updated_at ? date('c', strtotime($r->updated_at)) : null);
+routes/_archived/2025-08-18-043801/routes/_archived/2025-08-16-151345/sprint7.php:37:        foreach ($rows as $r) $add(url('/events/'.$r->id), $r->updated_at ? date('c', strtotime($r->updated_at)) : null);
+routes/_archived/2025-08-18-043801/routes/_archived/2025-08-16-151345/routes.fullbak.20250813_130930/sprint7.php:27:    $add(url('/'));
+routes/_archived/2025-08-18-043801/routes/_archived/2025-08-16-151345/routes.fullbak.20250813_130930/sprint7.php:28:    $add(route('about'));
+routes/_archived/2025-08-18-043801/routes/_archived/2025-08-16-151345/routes.fullbak.20250813_130930/sprint7.php:29:    $add(route('faq'));
+routes/_archived/2025-08-18-043801/routes/_archived/2025-08-16-151345/routes.fullbak.20250813_130930/sprint7.php:30:    $add(route('partners'));
+routes/_archived/2025-08-18-043801/routes/_archived/2025-08-16-151345/routes.fullbak.20250813_130930/sprint7.php:33:        foreach ($rows as $r) $add(url('/opportunities/'.$r->id), $r->updated_at ? date('c', strtotime($r->updated_at)) : null);
+routes/_archived/2025-08-18-043801/routes/_archived/2025-08-16-151345/routes.fullbak.20250813_130930/sprint7.php:37:        foreach ($rows as $r) $add(url('/events/'.$r->id), $r->updated_at ? date('c', strtotime($r->updated_at)) : null);
+routes/_archived/2025-08-18-043801/routes/_archived/2025-08-16-151345/routes.bak.20250813_130612/sprint7.php:27:    $add(url('/'));
+routes/_archived/2025-08-18-043801/routes/_archived/2025-08-16-151345/routes.bak.20250813_130612/sprint7.php:28:    $add(route('about'));
+routes/_archived/2025-08-18-043801/routes/_archived/2025-08-16-151345/routes.bak.20250813_130612/sprint7.php:29:    $add(route('faq'));
+routes/_archived/2025-08-18-043801/routes/_archived/2025-08-16-151345/routes.bak.20250813_130612/sprint7.php:30:    $add(route('partners'));
+routes/_archived/2025-08-18-043801/routes/_archived/2025-08-16-151345/routes.bak.20250813_130612/sprint7.php:33:        foreach ($rows as $r) $add(url('/opportunities/'.$r->id), $r->updated_at ? date('c', strtotime($r->updated_at)) : null);
+routes/_archived/2025-08-18-043801/routes/_archived/2025-08-16-151345/routes.bak.20250813_130612/sprint7.php:37:        foreach ($rows as $r) $add(url('/events/'.$r->id), $r->updated_at ? date('c', strtotime($r->updated_at)) : null);
+routes/_archived/2025-08-18-043801/routes/_archived/2025-08-16-151345/routes.bak.2025-08-16-085506/sprint7.php:27:    $add(url('/'));
+routes/_archived/2025-08-18-043801/routes/_archived/2025-08-16-151345/routes.bak.2025-08-16-085506/sprint7.php:28:    $add(route('about'));
+routes/_archived/2025-08-18-043801/routes/_archived/2025-08-16-151345/routes.bak.2025-08-16-085506/sprint7.php:29:    $add(route('faq'));
+routes/_archived/2025-08-18-043801/routes/_archived/2025-08-16-151345/routes.bak.2025-08-16-085506/sprint7.php:30:    $add(route('partners'));
+routes/_archived/2025-08-18-043801/routes/_archived/2025-08-16-151345/routes.bak.2025-08-16-085506/sprint7.php:33:        foreach ($rows as $r) $add(url('/opportunities/'.$r->id), $r->updated_at ? date('c', strtotime($r->updated_at)) : null);
+routes/_archived/2025-08-18-043801/routes/_archived/2025-08-16-151345/routes.bak.2025-08-16-085506/sprint7.php:37:        foreach ($rows as $r) $add(url('/events/'.$r->id), $r->updated_at ? date('c', strtotime($r->updated_at)) : null);
+routes/_archived/2025-08-18-043801/routes/_archived/2025-08-16-151345/routes.bak.2025-08-16-093549/sprint7.php:27:    $add(url('/'));
+routes/_archived/2025-08-18-043801/routes/_archived/2025-08-16-151345/routes.bak.2025-08-16-093549/sprint7.php:28:    $add(route('about'));
+routes/_archived/2025-08-18-043801/routes/_archived/2025-08-16-151345/routes.bak.2025-08-16-093549/sprint7.php:29:    $add(route('faq'));
+routes/_archived/2025-08-18-043801/routes/_archived/2025-08-16-151345/routes.bak.2025-08-16-093549/sprint7.php:30:    $add(route('partners'));
+routes/_archived/2025-08-18-043801/routes/_archived/2025-08-16-151345/routes.bak.2025-08-16-093549/sprint7.php:33:        foreach ($rows as $r) $add(url('/opportunities/'.$r->id), $r->updated_at ? date('c', strtotime($r->updated_at)) : null);
+routes/_archived/2025-08-18-043801/routes/_archived/2025-08-16-151345/routes.bak.2025-08-16-093549/sprint7.php:37:        foreach ($rows as $r) $add(url('/events/'.$r->id), $r->updated_at ? date('c', strtotime($r->updated_at)) : null);

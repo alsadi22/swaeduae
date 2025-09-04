@@ -1,0 +1,333 @@
+=== SwaedUAE Deep Diagnose 2025-08-31_013030 ===
+
+== ENV / ABOUT (short) ==
+
+  Environment ......................................................................................................................................  
+  Application Name ........................................................................................................................ SwaedUAE  
+  Laravel Version .......................................................................................................................... 11.45.2  
+  PHP Version ............................................................................................................................... 8.3.24  
+  Composer Version ........................................................................................................................... 2.2.6  
+  Environment ........................................................................................................................... production  
+  Debug Mode ................................................................................................................................... OFF  
+  URL .................................................................................................................................. swaeduae.ae  
+  Maintenance Mode ............................................................................................................................. OFF  
+  Timezone .............................................................................................................................. Asia/Dubai  
+  Locale ........................................................................................................................................ ar  
+
+  Cache ............................................................................................................................................  
+  Config .................................................................................................................................... CACHED  
+  Events ................................................................................................................................ NOT CACHED  
+  Routes ................................................................................................................................ NOT CACHED  
+  Views ..................................................................................................................................... CACHED  
+
+  Drivers ..........................................................................................................................................  
+  Broadcasting ................................................................................................................................ null  
+  Cache ....................................................................................................................................... file  
+  Database ................................................................................................................................... mysql  
+  Logs ............................................................................................................................... stack / daily  
+  Mail ........................................................................................................................................ smtp  
+  Queue ................................................................................................................................... database  
+  Session ..................................................................................................................................... file  
+
+  Sentry ...........................................................................................................................................  
+  Enabled ...................................................................................................................................... YES  
+  Environment ........................................................................................................................... production  
+  Laravel SDK Version ....................................................................................................................... 4.15.1  
+  PHP SDK Version ........................................................................................................................... 4.15.1  
+  Release .................................................................................................................................. 155d7f1  
+  Sample Rate Errors .......................................................................................................................... 100%  
+  Sample Rate Performance Monitoring ............................................................................................................ 0%  
+  Sample Rate Profiling ......................................................................................................................... 0%  
+  Send Default PII ........................................................................................................................ DISABLED  
+
+  Spatie Permissions ...............................................................................................................................  
+
+== CACHES STATUS (route/config/view) ==
+config:cache OK
+route:clear OK
+view:cache OK
+
+== PHP LINT: routes ==
+No syntax errors detected in routes/web.php
+No syntax errors detected in routes/_admin_attendance.php
+No syntax errors detected in routes/_admin_dashboard_compat.php
+No syntax errors detected in routes/_admin_diag.php
+No syntax errors detected in routes/_admin_hours.php
+No syntax errors detected in routes/admin.php
+No syntax errors detected in routes/_admin_route_aliases.php
+No syntax errors detected in routes/_admin_users_fix.php
+No syntax errors detected in routes/agent.php
+No syntax errors detected in routes/api.php
+No syntax errors detected in routes/_auth_aliases.php
+No syntax errors detected in routes/_auth_overrides.php
+No syntax errors detected in routes/auth.php
+No syntax errors detected in routes/console.php
+No syntax errors detected in routes/_deny_dev_routes.php
+No syntax errors detected in routes/_early_auth_overrides.php
+No syntax errors detected in routes/events.php
+No syntax errors detected in routes/_i18n.php
+No syntax errors detected in routes/_opportunities.php
+No syntax errors detected in routes/org.php
+No syntax errors detected in routes/_org_register_fix.php
+No syntax errors detected in routes/org_shortlist.php
+No syntax errors detected in routes/_phase0_helpers.php
+No syntax errors detected in routes/_public_pages.php
+No syntax errors detected in routes/_public.php
+No syntax errors detected in routes/_public_static.php
+No syntax errors detected in routes/_qr_public.php
+No syntax errors detected in routes/_qr_verify_entry.php
+No syntax errors detected in routes/_redirects.php
+No syntax errors detected in routes/_scan.php
+
+== ROUTE CACHE COMPILE TEST ==
+route:cache FAILED (see below)
+
+== If route:cache failed, show the error ==
+
+   LogicException 
+
+  Unable to prepare route [admin/users] for serialization. Another route has already been assigned name [admin.users.index].
+
+  at vendor/laravel/framework/src/Illuminate/Routing/AbstractRouteCollection.php:248
+    244▕             $route->name($this->generateRouteName());
+    245▕ 
+    246▕             $this->add($route);
+    247▕         } elseif (! is_null($symfonyRoutes->get($name))) {
+  ➜ 248▕             throw new LogicException("Unable to prepare route [{$route->uri}] for serialization. Another route has already been assigned name [{$name}].");
+    249▕         }
+    250▕ 
+    251▕         $symfonyRoutes->add($route->getName(), $route->toSymfonyRoute());
+    252▕
+
+      [2m+19 vendor frames [22m
+
+  20  artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+
+
+== QUICK GREPS (duplicates / problems) ==
+- opportunities.apply named routes:
+  none
+- public._schema stray literals:
+  none
+- Old static Route::view('/opportunities', 'opportunities.index'):
+  none
+- Home route name usage:
+  (no direct usage or none found)
+
+== CONTROLLER/VIEW PRESENCE ==
+- PublicOpportunityController:
+No syntax errors detected in app/Http/Controllers/PublicOpportunityController.php
+- opportunities index view:
+  present
+- opportunities show view:
+  present
+
+== DB SNAPSHOT (tables & domain columns) ==
+acl_model_has_permissions
+acl_model_has_roles
+acl_permissions
+acl_role_has_permissions
+acl_roles
+audits
+cache
+cache_locks
+certificates
+events
+failed_jobs
+hours
+job_batches
+jobs
+migrations
+news
+password_reset_tokens
+payments
+registrations
+sessions
+users
+volunteers
+— columns —
+audits	action
+audits	created_at
+audits	entity
+audits	entity_id
+audits	id
+audits	meta
+audits	user_id
+certificates	code
+certificates	created_at
+certificates	event_id
+certificates	hours
+certificates	id
+certificates	issued_at
+certificates	opportunity_id
+certificates	pdf_path
+certificates	revoked_at
+certificates	signature
+certificates	updated_at
+certificates	user_id
+certificates	uuid
+events	created_at
+events	description
+events	ends_at
+events	id
+events	location
+events	slug
+events	starts_at
+events	status
+events	title
+events	updated_at
+hours	event_id
+hours	hours
+hours	id
+hours	occurred_at
+hours	user_id
+payments	status
+registrations	created_at
+registrations	event_id
+registrations	id
+registrations	status
+registrations	updated_at
+registrations	volunteer_id
+volunteers	address
+volunteers	created_at
+volunteers	date_of_birth
+volunteers	id
+volunteers	interests
+volunteers	phone
+volunteers	skills
+volunteers	updated_at
+volunteers	user_id
+
+== ROUTE LIST (top) ==
+
+  GET|HEAD  / ....................................................................................................................................................................................... home
+  ANY       _agent{any?} ................................................................................................................................................................................. 
+  ANY       _alias/{any?} ................................................................................................................................................................................ 
+  ANY       _compat/{any?} ............................................................................................................................................................................... 
+  GET|HEAD  about ............................................................................................................................................................................ pages.about
+  ANY       about-us ............................................................................................................................................. Illuminate\Routing › RedirectController
+  GET|HEAD  admin ........................................................................................................................................... admin.root › Admin\DashboardController@index
+  GET|HEAD  admin/_diag ....................................................................................................................................................................... admin.diag
+  GET|HEAD  admin/attendance .............................................................................................................. admin.attendance.index › Admin\AttendanceAdminController@index
+  GET|HEAD  admin/attendance/qr/{opportunityId} ................................................................................................. admin.attendance.qr › Admin\AttendanceAdminController@qr
+  ANY       admin/dashboard ............................................................................................................. admin.dashboard.legacy › Illuminate\Routing › RedirectController
+  GET|HEAD  admin/hours ............................................................................................................................ admin.hours.all › Admin\HoursReportController@showAll
+  GET|HEAD  admin/login .......................................................................................................................................... admin.login › Admin\AuthController@show
+  POST      admin/login .................................................................................................................................... admin.login.post › Admin\AuthController@login
+  POST      admin/logout ...................................................................................................................................... admin.logout › Admin\AuthController@logout
+  GET|HEAD  admin/opportunities ................................................................................................................................................ admin.opportunities.index
+  POST      admin/opportunities/{opportunityId}/attendance/complete ................................................................. admin.attendance.complete › Admin\AttendanceAdminController@complete
+  POST      admin/opportunities/{opportunityId}/attendance/finalize ................................................................. admin.attendance.finalize › Admin\AttendanceAdminController@finalize
+  POST      admin/opportunities/{opportunityId}/attendance/manual ....................................................................... admin.attendance.manual › Admin\AttendanceAdminController@manual
+  GET|HEAD  admin/opportunities/{opportunityId}/hours ................................................................................................ admin.hours.show › Admin\HoursReportController@show
+  GET|HEAD  admin/users .............................................................................................................................. admin.users.index › Admin\UserAdminController@index
+  GET|HEAD  admin/users/index .......................................................................................................................................................... admin.users.index
+  POST      admin/users/toggle/{id} .......................................................................................................... admin.users.toggle › Admin\AdminController@toggleUserStatus
+  GET|HEAD  api/user ..................................................................................................................................................................................... 
+  GET|HEAD  api/v1/certificates/verify/{code} ............................................................................................................................................................ 
+  GET|HEAD  api/v1/health ................................................................................................................................................................................ 
+  GET|HEAD  confirm-password .................................................................................................................. password.confirm › Auth\ConfirmablePasswordController@show
+  POST      confirm-password .................................................................................................................................... Auth\ConfirmablePasswordController@store
+  GET|HEAD  contact ................................................................................................................................................ contact.show › ContactController@show
+  POST      contact ............................................................................................................................................ contact.submit › ContactController@submit
+  POST      email/verification-notification ....................................................................................... verification.send › Auth\EmailVerificationNotificationController@store
+  GET|HEAD  events .................................................................................................................................................. events.index › EventController@index
+  GET|HEAD  events/browse .................................................................................................................................................................. events.browse
+  GET|HEAD  events/{idOrSlug} ......................................................................................................................................... events.show › EventController@show
+  GET|HEAD  faq ................................................................................................................................................................................ pages.faq
+  GET|HEAD  forgot-password ................................................................................................................... password.request › Auth\PasswordResetLinkController@create
+  POST      forgot-password ...................................................................................................................... password.email › Auth\PasswordResetLinkController@store
+  GET|HEAD  lang/{locale} .................................................................................................................................................................. locale.switch
+  GET|HEAD  login ..................................................................................................................................... login › Auth\AuthenticatedSessionController@create
+  POST      login .............................................................................................................................................. Auth\AuthenticatedSessionController@store
+  ANY       login/organization ................................................................................................................................... Illuminate\Routing › RedirectController
+  POST      logout .................................................................................................................................. logout › Auth\AuthenticatedSessionController@destroy
+  GET|HEAD  opportunities ........................................................................................................................ opportunities.index › PublicOpportunityController@index
+  GET|HEAD  opportunities/{id} .......................................................................................................................................................... opps.public.show
+  GET|HEAD  opportunities/{slug} ................................................................................................................... opportunities.show › PublicOpportunityController@show
+  GET|HEAD  opportunities/{slug}.ics ................................................................................................................. opportunities.ics › PublicOpportunityController@ics
+  POST      opportunities/{slug}/apply ........................................................................................................... opportunities.apply › PublicOpportunityController@apply
+  GET|HEAD  org/dashboard .................................................................................................................................. org.dashboard › Org\DashboardController@index
+  GET|HEAD  org/login .......................................................................................................................................................................... org.login
+  POST      org/login ..................................................................................................................................... org.login.perform › Auth\LoginController@login
+  POST      org/opportunities .................................................................................................................. org.opportunities.store › Org\OpportunityController@store
+  GET|HEAD  org/opportunities/create ......................................................................................................... org.opportunities.create › Org\OpportunityController@create
+  POST      org/opportunities/{event} ........................................................................................................ org.opportunities.update › Org\OpportunityController@update
+  GET|HEAD  org/opportunities/{event}/applicants ................................................................................................... org.applicants.index › Org\ApplicantsController@index
+  GET|HEAD  org/opportunities/{event}/applicants.csv .......................................................................................... org.applicants.export › Org\ApplicantsController@exportCsv
+  POST      org/opportunities/{event}/applicants/{app}/decision .............................................................................. org.applicants.decision › Org\ApplicantsController@decision
+  POST      org/opportunities/{event}/close .................................................................................................... org.opportunities.close › Org\OpportunityController@close
+  GET|HEAD  org/opportunities/{event}/edit ....................................................................................................... org.opportunities.edit › Org\OpportunityController@edit
+  GET|HEAD  org/opportunities/{opportunity}/shortlist ................................................................................................ org.shortlist.index › Org\ShortlistController@index
+  POST      org/opportunities/{opportunity}/shortlist/bulk ............................................................................................. org.shortlist.bulk › Org\ShortlistController@bulk
+  POST      org/opportunities/{opportunity}/shortlist/slot-cap ............................................................................ org.shortlist.slot_cap › Org\ShortlistController@updateSlotCap
+  GET|HEAD  org/register .................................................................................................................................................................... org.register
+  POST      org/register ............................................................................................................................................................. org.register.submit
+  GET|HEAD  org/settings ................................................................................................................................. org.settings.edit › Org\SettingsController@edit
+  POST      org/settings ............................................................................................................................. org.settings.update › Org\SettingsController@update
+  GET|HEAD  org/setup .......................................................................................................................................... org.setup.form › Org\SetupController@form
+  POST      org/setup ........................................................................................................................................ org.setup.store › Org\SetupController@store
+  ANY       organizations/register ............................................................................................................................... Illuminate\Routing › RedirectController
+  GET|HEAD  partners ............................................................................................................................................................................ partners
+  PUT       password .................................................................................................................................... password.update › Auth\PasswordController@update
+  GET|HEAD  privacy ........................................................................................................................................................................ pages.privacy
+  ANY       privacy-policy ....................................................................................................................................... Illuminate\Routing › RedirectController
+  GET|HEAD  qr/verify .................................................................................................................................................................................... 
+  POST      register ................................................................................................................................. register.perform › Auth\RegisterController@register
+  GET|HEAD  register ..................................................................................................................................... register › Auth\RegisteredUserController@create
+  POST      reset-password ............................................................................................................................. password.store › Auth\NewPasswordController@store
+  GET|HEAD  reset-password/{token} .................................................................................................................... password.reset › Auth\NewPasswordController@create
+  GET|HEAD  sanctum/csrf-cookie ........................................................................................................ sanctum.csrf-cookie › Laravel\Sanctum › CsrfCookieController@show
+  GET|HEAD  scan .................................................................................................................................................................................... scan
+  POST      scan ............................................................................................................................................................................. scan.submit
+  POST      scan/checkin ............................................................................................................................ scan.checkin › Public\QrAttendanceController@checkin
+  GET|HEAD  scan/checkin ................................................................................................................................................................ scan.checkin.get
+  POST      scan/checkout ......................................................................................................................... scan.checkout › Public\QrAttendanceController@checkout
+  GET|HEAD  scan/checkout .............................................................................................................................................................. scan.checkout.get
+  GET|HEAD  storage/{path} ................................................................................................................................................................. storage.local
+  GET|HEAD  terms ............................................................................................................................................................................ pages.terms
+  ANY       terms-of-service ..................................................................................................................................... Illuminate\Routing › RedirectController
+  GET|HEAD  up ........................................................................................................................................................................................... 
+  GET|HEAD  verify-email .................................................................................................................... verification.notice › Auth\EmailVerificationPromptController
+  GET|HEAD  verify-email/{id}/{hash} .................................................................................................................... verification.verify › Auth\VerifyEmailController
+
+                                                                                                                                                                                       Showing [90] routes
+
+
+== HTTP PROBES (public) ==
+/ -> 500
+/opportunities -> 500
+/about -> 500
+/contact -> 500
+/privacy -> 200
+/terms -> 200
+/qr/verify -> 500
+HTTP/2 302 
+date: Sat, 30 Aug 2025 21:30:38 GMT
+content-type: text/html; charset=utf-8
+location: https://swaeduae.ae/admin/login
+
+== LOG TAIL (errors/warnings) ==
+latest=storage/logs/laravel-2025-08-31.log
+[previous exception] [object] (Symfony\\Component\\Routing\\Exception\\RouteNotFoundException(code: 0): Route [about] not defined. at /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/Routing/UrlGenerator.php:517)
+#33 /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(894): Illuminate\\Routing\\ResponseFactory->view()
+#34 /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(815): Illuminate\\Foundation\\Exceptions\\Handler->renderHttpException()
+#35 /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(706): Illuminate\\Foundation\\Exceptions\\Handler->prepareResponse()
+#36 /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(594): Illuminate\\Foundation\\Exceptions\\Handler->renderExceptionResponse()
+#37 /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php(51): Illuminate\\Foundation\\Exceptions\\Handler->render()
+#38 /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(172): Illuminate\\Routing\\Pipeline->handleException()
+#50 /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/View/Middleware/ShareErrorsFromSession.php(49): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#51 /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(209): Illuminate\\View\\Middleware\\ShareErrorsFromSession->handle()
+
+== PWA / Analytics presence ==
+-rw-rw-r--+ 1 swaeduae www-data  67 Aug 31 00:04 public/img/icon-192.png
+-rw-rw-r--+ 1 swaeduae www-data  67 Aug 31 00:04 public/img/icon-512.png
+-rw-rw-r--+ 1 swaeduae www-data 332 Aug 31 00:02 public/manifest.json
+-rw-rw-r--+ 1 swaeduae www-data 775 Aug 31 00:51 public/service-worker.js
+
+== SUMMARY HINTS ==
+- If you see route:cache FAILED: fix syntax in routes/web.php at the line reported.
+- If duplicates for opportunities.apply appear: keep only one Route::post('/opportunities/{slug}/apply')->name('opportunities.apply')
+- If 'Route [home] not defined' appears: either name your home route ->name('home') or update the header to use url('/') .
+- If /opportunities returns 500 and route:cache compiles: ensure PublicOpportunityController@index exists and returns the view with $q set.

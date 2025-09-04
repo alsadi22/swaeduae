@@ -1,0 +1,436 @@
+== PHP ==
+PHP 8.4.7 (cli) (built: May  8 2025 11:28:43) (NTS)
+Copyright (c) The PHP Group
+Zend Engine v4.4.7, Copyright (c) Zend Technologies
+Extensions: [PHP, Modules], bcmath, bz2, calendar, Core, ctype, curl, date, dom, exif, fileinfo, filter, ftp, gd, gettext, gmp, hash, i360, iconv, igbinary, intl, json, libxml, mbstring, monarxprotect, msgpack, mysqli, mysqlnd, openssl, pcntl, pcre, PDO, pdo_mysql, pdo_sqlite, Phar, posix, random, readline, redis, Reflection, session, shmop, SimpleXML, soap, sockets, SPL, sqlite3, standard, tidy, tokenizer, xml, xmlreader, xmlrpc, xmlwriter, xsl, zip, zlib, [Zend, Modules], 
+
+== Paths & permissions ==
+drwxrwxr-x 2 vminingc vminingc 4096 Aug 17 09:11 bootstrap/cache
+drwxrwxr-x 7 vminingc vminingc 4096 Aug 16 10:01 storage
+drwxrwxr-x vminingc:vminingc  storage
+drwxrwxr-x vminingc:vminingc  storage/logs
+drwxrwxr-x vminingc:vminingc  storage/framework
+drwxrwxr-x vminingc:vminingc  storage/kyc_docs
+drwxrwxr-x vminingc:vminingc  storage/certificates
+drwxrwxr-x vminingc:vminingc  storage/app
+drwxrwxr-x vminingc:vminingc  bootstrap/cache
+
+== Autoload present? ==
+OK: vendor/autoload.php exists
+
+== .env sanity (key envs) ==
+APP_ENV=production
+APP_KEY=base64:Yq5dJlxZfOW8pFNtRjY1mVFCTupLr46Hr7NiEIN3U6w=
+APP_DEBUG=false
+APP_URL=https://swaeduae.ae
+
+== Laravel log (last 150 lines) ==
+#10 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/View/View.php(209): Illuminate\\View\\Engines\\CompilerEngine->get()
+#11 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/View/View.php(192): Illuminate\\View\\View->getContents()
+#12 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/View/View.php(161): Illuminate\\View\\View->renderContents()
+#13 /home3/vminingc/swaeduae.ae/laravel-app/storage/framework/views/81473448608d5dcdb9cd820551f2c180.php(7): Illuminate\\View\\View->render()
+#14 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php(123): require('/home3/vminingc...')
+#15 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php(124): Illuminate\\Filesystem\\Filesystem::{closure:Illuminate\\Filesystem\\Filesystem::getRequire():120}()
+#16 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php(58): Illuminate\\Filesystem\\Filesystem->getRequire()
+#17 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/View/Engines/CompilerEngine.php(75): Illuminate\\View\\Engines\\PhpEngine->evaluatePath()
+#18 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/View/View.php(209): Illuminate\\View\\Engines\\CompilerEngine->get()
+#19 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/View/View.php(192): Illuminate\\View\\View->getContents()
+#20 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/View/View.php(161): Illuminate\\View\\View->renderContents()
+#21 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Http/Response.php(79): Illuminate\\View\\View->render()
+#22 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Http/Response.php(35): Illuminate\\Http\\Response->setContent()
+#23 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Routing/ResponseFactory.php(60): Illuminate\\Http\\Response->__construct()
+#24 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Routing/ResponseFactory.php(90): Illuminate\\Routing\\ResponseFactory->make()
+#25 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(894): Illuminate\\Routing\\ResponseFactory->view()
+#26 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(815): Illuminate\\Foundation\\Exceptions\\Handler->renderHttpException()
+#27 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(706): Illuminate\\Foundation\\Exceptions\\Handler->prepareResponse()
+#28 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(594): Illuminate\\Foundation\\Exceptions\\Handler->renderExceptionResponse()
+#29 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php(51): Illuminate\\Foundation\\Exceptions\\Handler->render()
+#30 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(172): Illuminate\\Routing\\Pipeline->handleException()
+#31 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Routing/Middleware/SubstituteBindings.php(51): Illuminate\\Pipeline\\Pipeline->{closure:Illuminate\\Pipeline\\Pipeline::prepareDestination():168}()
+#32 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(209): Illuminate\\Routing\\Middleware\\SubstituteBindings->handle()
+#33 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/VerifyCsrfToken.php(88): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():184}:185}()
+#34 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(209): Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken->handle()
+#35 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/View/Middleware/ShareErrorsFromSession.php(49): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():184}:185}()
+#36 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(209): Illuminate\\View\\Middleware\\ShareErrorsFromSession->handle()
+#37 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(121): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():184}:185}()
+#38 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(64): Illuminate\\Session\\Middleware\\StartSession->handleStatefulRequest()
+#39 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(209): Illuminate\\Session\\Middleware\\StartSession->handle()
+#40 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/AddQueuedCookiesToResponse.php(37): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():184}:185}()
+#41 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(209): Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse->handle()
+#42 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/EncryptCookies.php(75): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():184}:185}()
+#43 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(209): Illuminate\\Cookie\\Middleware\\EncryptCookies->handle()
+#44 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(127): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():184}:185}()
+#45 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Routing/Router.php(807): Illuminate\\Pipeline\\Pipeline->then()
+#46 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Routing/Router.php(786): Illuminate\\Routing\\Router->runRouteWithinStack()
+#47 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Routing/Router.php(750): Illuminate\\Routing\\Router->runRoute()
+#48 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Routing/Router.php(739): Illuminate\\Routing\\Router->dispatchToRoute()
+#49 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(201): Illuminate\\Routing\\Router->dispatch()
+#50 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(170): Illuminate\\Foundation\\Http\\Kernel->{closure:Illuminate\\Foundation\\Http\\Kernel::dispatchToRouter():198}()
+#51 /home3/vminingc/swaeduae.ae/laravel-app/app/Http/Middleware/SecurityHeaders.php(14): Illuminate\\Pipeline\\Pipeline->{closure:Illuminate\\Pipeline\\Pipeline::prepareDestination():168}()
+#52 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(209): App\\Http\\Middleware\\SecurityHeaders->handle()
+#53 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Http/Middleware/TrustProxies.php(58): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():184}:185}()
+#54 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(209): Illuminate\\Http\\Middleware\\TrustProxies->handle()
+#55 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():184}:185}()
+#56 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ConvertEmptyStringsToNull.php(31): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle()
+#57 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(209): Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull->handle()
+#58 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():184}:185}()
+#59 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TrimStrings.php(51): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle()
+#60 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(209): Illuminate\\Foundation\\Http\\Middleware\\TrimStrings->handle()
+#61 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Http/Middleware/ValidatePostSize.php(27): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():184}:185}()
+#62 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(209): Illuminate\\Http\\Middleware\\ValidatePostSize->handle()
+#63 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/PreventRequestsDuringMaintenance.php(110): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():184}:185}()
+#64 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(209): Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance->handle()
+#65 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Http/Middleware/HandleCors.php(49): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():184}:185}()
+#66 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(209): Illuminate\\Http\\Middleware\\HandleCors->handle()
+#67 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Http/Middleware/TrustProxies.php(58): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():184}:185}()
+#68 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(209): Illuminate\\Http\\Middleware\\TrustProxies->handle()
+#69 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/InvokeDeferredCallbacks.php(22): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():184}:185}()
+#70 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(209): Illuminate\\Foundation\\Http\\Middleware\\InvokeDeferredCallbacks->handle()
+#71 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(127): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():184}:185}()
+#72 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(176): Illuminate\\Pipeline\\Pipeline->then()
+#73 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(145): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter()
+#74 /home3/vminingc/swaeduae.ae/laravel-app/public/index.php(11): Illuminate\\Foundation\\Http\\Kernel->handle()
+#75 {main}
+
+[previous exception] [object] (Symfony\\Component\\Routing\\Exception\\RouteNotFoundException(code: 0): Route [logout] not defined. at /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Routing/UrlGenerator.php:517)
+[stacktrace]
+#0 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php(853): Illuminate\\Routing\\UrlGenerator->route()
+#1 /home3/vminingc/swaeduae.ae/laravel-app/storage/framework/views/6952f4e87233b6e170834ea706f8356e.php(25): route()
+#2 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php(123): require('/home3/vminingc...')
+#3 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php(124): Illuminate\\Filesystem\\Filesystem::{closure:Illuminate\\Filesystem\\Filesystem::getRequire():120}()
+#4 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php(58): Illuminate\\Filesystem\\Filesystem->getRequire()
+#5 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/View/Engines/CompilerEngine.php(75): Illuminate\\View\\Engines\\PhpEngine->evaluatePath()
+#6 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/View/View.php(209): Illuminate\\View\\Engines\\CompilerEngine->get()
+#7 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/View/View.php(192): Illuminate\\View\\View->getContents()
+#8 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/View/View.php(161): Illuminate\\View\\View->renderContents()
+#9 /home3/vminingc/swaeduae.ae/laravel-app/storage/framework/views/6779a9395495f8d544b0861cfb981204.php(17): Illuminate\\View\\View->render()
+#10 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php(123): require('/home3/vminingc...')
+#11 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php(124): Illuminate\\Filesystem\\Filesystem::{closure:Illuminate\\Filesystem\\Filesystem::getRequire():120}()
+#12 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php(58): Illuminate\\Filesystem\\Filesystem->getRequire()
+#13 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/View/Engines/CompilerEngine.php(75): Illuminate\\View\\Engines\\PhpEngine->evaluatePath()
+#14 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/View/View.php(209): Illuminate\\View\\Engines\\CompilerEngine->get()
+#15 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/View/View.php(192): Illuminate\\View\\View->getContents()
+#16 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/View/View.php(161): Illuminate\\View\\View->renderContents()
+#17 /home3/vminingc/swaeduae.ae/laravel-app/storage/framework/views/81473448608d5dcdb9cd820551f2c180.php(7): Illuminate\\View\\View->render()
+#18 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php(123): require('/home3/vminingc...')
+#19 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php(124): Illuminate\\Filesystem\\Filesystem::{closure:Illuminate\\Filesystem\\Filesystem::getRequire():120}()
+#20 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php(58): Illuminate\\Filesystem\\Filesystem->getRequire()
+#21 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/View/Engines/CompilerEngine.php(75): Illuminate\\View\\Engines\\PhpEngine->evaluatePath()
+#22 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/View/View.php(209): Illuminate\\View\\Engines\\CompilerEngine->get()
+#23 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/View/View.php(192): Illuminate\\View\\View->getContents()
+#24 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/View/View.php(161): Illuminate\\View\\View->renderContents()
+#25 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Http/Response.php(79): Illuminate\\View\\View->render()
+#26 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Http/Response.php(35): Illuminate\\Http\\Response->setContent()
+#27 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Routing/ResponseFactory.php(60): Illuminate\\Http\\Response->__construct()
+#28 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Routing/ResponseFactory.php(90): Illuminate\\Routing\\ResponseFactory->make()
+#29 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(894): Illuminate\\Routing\\ResponseFactory->view()
+#30 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(815): Illuminate\\Foundation\\Exceptions\\Handler->renderHttpException()
+#31 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(706): Illuminate\\Foundation\\Exceptions\\Handler->prepareResponse()
+#32 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(594): Illuminate\\Foundation\\Exceptions\\Handler->renderExceptionResponse()
+#33 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php(51): Illuminate\\Foundation\\Exceptions\\Handler->render()
+#34 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(172): Illuminate\\Routing\\Pipeline->handleException()
+#35 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Routing/Middleware/SubstituteBindings.php(51): Illuminate\\Pipeline\\Pipeline->{closure:Illuminate\\Pipeline\\Pipeline::prepareDestination():168}()
+#36 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(209): Illuminate\\Routing\\Middleware\\SubstituteBindings->handle()
+#37 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/VerifyCsrfToken.php(88): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():184}:185}()
+#38 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(209): Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken->handle()
+#39 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/View/Middleware/ShareErrorsFromSession.php(49): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():184}:185}()
+#40 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(209): Illuminate\\View\\Middleware\\ShareErrorsFromSession->handle()
+#41 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(121): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():184}:185}()
+#42 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(64): Illuminate\\Session\\Middleware\\StartSession->handleStatefulRequest()
+#43 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(209): Illuminate\\Session\\Middleware\\StartSession->handle()
+#44 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/AddQueuedCookiesToResponse.php(37): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():184}:185}()
+#45 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(209): Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse->handle()
+#46 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Cookie/Middleware/EncryptCookies.php(75): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():184}:185}()
+#47 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(209): Illuminate\\Cookie\\Middleware\\EncryptCookies->handle()
+#48 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(127): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():184}:185}()
+#49 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Routing/Router.php(807): Illuminate\\Pipeline\\Pipeline->then()
+#50 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Routing/Router.php(786): Illuminate\\Routing\\Router->runRouteWithinStack()
+#51 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Routing/Router.php(750): Illuminate\\Routing\\Router->runRoute()
+#52 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Routing/Router.php(739): Illuminate\\Routing\\Router->dispatchToRoute()
+#53 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(201): Illuminate\\Routing\\Router->dispatch()
+#54 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(170): Illuminate\\Foundation\\Http\\Kernel->{closure:Illuminate\\Foundation\\Http\\Kernel::dispatchToRouter():198}()
+#55 /home3/vminingc/swaeduae.ae/laravel-app/app/Http/Middleware/SecurityHeaders.php(14): Illuminate\\Pipeline\\Pipeline->{closure:Illuminate\\Pipeline\\Pipeline::prepareDestination():168}()
+#56 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(209): App\\Http\\Middleware\\SecurityHeaders->handle()
+#57 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Http/Middleware/TrustProxies.php(58): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():184}:185}()
+#58 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(209): Illuminate\\Http\\Middleware\\TrustProxies->handle()
+#59 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():184}:185}()
+#60 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ConvertEmptyStringsToNull.php(31): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle()
+#61 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(209): Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull->handle()
+#62 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():184}:185}()
+#63 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TrimStrings.php(51): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle()
+#64 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(209): Illuminate\\Foundation\\Http\\Middleware\\TrimStrings->handle()
+#65 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Http/Middleware/ValidatePostSize.php(27): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():184}:185}()
+#66 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(209): Illuminate\\Http\\Middleware\\ValidatePostSize->handle()
+#67 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/PreventRequestsDuringMaintenance.php(110): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():184}:185}()
+#68 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(209): Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance->handle()
+#69 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Http/Middleware/HandleCors.php(49): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():184}:185}()
+#70 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(209): Illuminate\\Http\\Middleware\\HandleCors->handle()
+#71 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Http/Middleware/TrustProxies.php(58): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():184}:185}()
+#72 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(209): Illuminate\\Http\\Middleware\\TrustProxies->handle()
+#73 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/InvokeDeferredCallbacks.php(22): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():184}:185}()
+#74 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(209): Illuminate\\Foundation\\Http\\Middleware\\InvokeDeferredCallbacks->handle()
+#75 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(127): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():184}:185}()
+#76 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(176): Illuminate\\Pipeline\\Pipeline->then()
+#77 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(145): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter()
+#78 /home3/vminingc/swaeduae.ae/laravel-app/public/index.php(11): Illuminate\\Foundation\\Http\\Kernel->handle()
+#79 {main}
+"} 
+
+== Web server error_log (last 100 lines if available) ==
+[16-Aug-2025 04:54:01 UTC] PHP Warning:  Undefined array key "login.organization" in Command line code on line 2
+[16-Aug-2025 04:54:01 UTC] PHP Warning:  Undefined array key "register.organization" in Command line code on line 2
+[16-Aug-2025 04:54:01 UTC] PHP Warning:  Undefined array key "register.organization.store" in Command line code on line 2
+[16-Aug-2025 04:54:01 UTC] PHP Warning:  Undefined array key "public.organizations.index" in Command line code on line 2
+[16-Aug-2025 04:54:01 UTC] PHP Warning:  Undefined array key "partners" in Command line code on line 2
+[16-Aug-2025 04:54:01 UTC] PHP Warning:  Undefined array key "profile" in Command line code on line 2
+[16-Aug-2025 04:54:01 UTC] PHP Warning:  Undefined array key "profile.update" in Command line code on line 2
+[16-Aug-2025 04:54:01 UTC] PHP Warning:  Undefined array key "documents.store" in Command line code on line 2
+[16-Aug-2025 04:54:01 UTC] PHP Warning:  Undefined array key "documents.destroy" in Command line code on line 2
+[16-Aug-2025 04:54:01 UTC] PHP Warning:  Undefined array key "profile.password.update" in Command line code on line 2
+[16-Aug-2025 04:54:01 UTC] PHP Warning:  Undefined array key "register" in Command line code on line 2
+[16-Aug-2025 04:54:01 UTC] PHP Warning:  Undefined array key "register.store" in Command line code on line 2
+[16-Aug-2025 04:54:01 UTC] PHP Warning:  Undefined array key "sanctum.csrf-cookie" in Command line code on line 2
+[16-Aug-2025 04:54:01 UTC] PHP Warning:  Undefined array key "scan" in Command line code on line 2
+[16-Aug-2025 04:54:01 UTC] PHP Warning:  Undefined array key "signin" in Command line code on line 2
+[16-Aug-2025 04:54:01 UTC] PHP Warning:  Undefined array key "storage.local" in Command line code on line 2
+[16-Aug-2025 04:54:01 UTC] PHP Warning:  Undefined array key "verify.show" in Command line code on line 2
+[16-Aug-2025 04:54:01 UTC] PHP Warning:  Undefined array key "volunteer.dashboard.alt" in Command line code on line 2
+[16-Aug-2025 04:54:01 UTC] PHP Warning:  Undefined array key "login.volunteer" in Command line code on line 2
+[16-Aug-2025 04:54:01 UTC] PHP Warning:  Undefined array key "volunteer.profile" in Command line code on line 2
+[16-Aug-2025 11:12:26 Asia/Dubai] PHP Fatal error:  Cannot use App\Http\Controllers\Org\AttendanceController as AttendanceController because the name is already in use in /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php on line 586
+[16-Aug-2025 11:12:27 Asia/Dubai] PHP Fatal error:  Cannot use App\Http\Controllers\Org\AttendanceController as AttendanceController because the name is already in use in /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php on line 586
+[16-Aug-2025 11:12:49 Asia/Dubai] PHP Fatal error:  Cannot use App\Http\Controllers\Org\AttendanceController as AttendanceController because the name is already in use in /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php on line 586
+[16-Aug-2025 11:12:50 Asia/Dubai] PHP Fatal error:  Cannot use App\Http\Controllers\Org\AttendanceController as AttendanceController because the name is already in use in /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php on line 586
+[16-Aug-2025 11:22:07 Asia/Dubai] PHP Fatal error:  Cannot use Carbon\Carbon as Carbon because the name is already in use in /home3/vminingc/swaeduae.ae/laravel-app/app/Http/Controllers/Org/AttendanceController.php on line 10
+[16-Aug-2025 11:31:00 Asia/Dubai] PHP Fatal error:  Cannot use Carbon\Carbon as Carbon because the name is already in use in /home3/vminingc/swaeduae.ae/laravel-app/app/Http/Controllers/Org/AttendanceController.php on line 10
+[16-Aug-2025 11:32:24 Asia/Dubai] PHP Fatal error:  Cannot use Carbon\Carbon as Carbon because the name is already in use in /home3/vminingc/swaeduae.ae/laravel-app/app/Http/Controllers/Org/AttendanceController.php on line 10
+[16-Aug-2025 11:35:54 Asia/Dubai] PHP Fatal error:  Cannot use Carbon\Carbon as Carbon because the name is already in use in /home3/vminingc/swaeduae.ae/laravel-app/app/Http/Controllers/Org/AttendanceController.php on line 10
+[16-Aug-2025 11:39:29 Asia/Dubai] PHP Fatal error:  Cannot use Carbon\Carbon as Carbon because the name is already in use in /home3/vminingc/swaeduae.ae/laravel-app/app/Http/Controllers/Org/AttendanceController.php on line 10
+[16-Aug-2025 11:40:02 Asia/Dubai] PHP Fatal error:  Cannot use Carbon\Carbon as Carbon because the name is already in use in /home3/vminingc/swaeduae.ae/laravel-app/app/Http/Controllers/Org/AttendanceController.php on line 10
+[16-Aug-2025 11:41:31 Asia/Dubai] PHP Fatal error:  Cannot use Carbon\Carbon as Carbon because the name is already in use in /home3/vminingc/swaeduae.ae/laravel-app/app/Http/Controllers/Org/AttendanceController.php on line 10
+[16-Aug-2025 11:44:15 Asia/Dubai] PHP Fatal error:  Cannot use Carbon\Carbon as Carbon because the name is already in use in /home3/vminingc/swaeduae.ae/laravel-app/app/Http/Controllers/Org/AttendanceController.php on line 10
+[16-Aug-2025 08:01:44 UTC] PHP Parse error:  syntax error, unexpected token "->" in routes/web.php on line 9
+[16-Aug-2025 08:03:20 UTC] PHP Parse error:  Unmatched '}' in routes/web.php on line 16
+[16-Aug-2025 08:04:35 UTC] PHP Parse error:  Unmatched '}' in routes/web.php on line 7
+[16-Aug-2025 08:21:06 UTC] PHP Parse error:  syntax error, unexpected token "->", expecting end of file in routes/opportunities.php on line 8
+[16-Aug-2025 08:21:06 UTC] PHP Parse error:  Unmatched '}' in routes/opportunities_public.php on line 14
+[16-Aug-2025 08:21:07 UTC] PHP Parse error:  Unmatched '}' in routes/public.php on line 23
+[16-Aug-2025 08:21:07 UTC] PHP Parse error:  Unmatched '}' in routes/public_opportunities.php on line 13
+[16-Aug-2025 08:21:08 UTC] PHP Fatal error:  Cannot use App\Http\Controllers\OpportunityController as OpportunityController because the name is already in use in routes/web.backup.1754896811.php on line 95
+[16-Aug-2025 08:23:24 UTC] PHP Parse error:  Unmatched '}' in routes/public.php on line 23
+[16-Aug-2025 08:23:24 UTC] PHP Parse error:  syntax error, unexpected token "->", expecting end of file in routes/opportunities.php on line 8
+[16-Aug-2025 08:23:24 UTC] PHP Parse error:  Unmatched '}' in routes/opportunities_public.php on line 14
+[16-Aug-2025 08:23:24 UTC] PHP Parse error:  Unmatched '}' in routes/public_opportunities.php on line 13
+[16-Aug-2025 08:23:40 UTC] PHP Parse error:  syntax error, unexpected token "<", expecting end of file in routes/public.php on line 2
+[16-Aug-2025 08:23:41 UTC] PHP Parse error:  syntax error, unexpected token "<", expecting end of file in routes/opportunities.php on line 2
+[16-Aug-2025 08:23:41 UTC] PHP Parse error:  syntax error, unexpected token "<", expecting end of file in routes/opportunities_public.php on line 2
+[16-Aug-2025 08:23:41 UTC] PHP Parse error:  syntax error, unexpected token "<", expecting end of file in routes/public_opportunities.php on line 2
+[16-Aug-2025 08:28:57 UTC] PHP Parse error:  syntax error, unexpected token "<", expecting end of file in routes/_disabled/public.php on line 2
+[16-Aug-2025 08:29:03 UTC] PHP Parse error:  syntax error, unexpected token "<", expecting end of file in routes/public.php on line 2
+[16-Aug-2025 09:35:55 UTC] PHP Parse error:  syntax error, unexpected token "=" in Command line code on line 1
+[16-Aug-2025 16:41:05 Asia/Dubai] PHP Fatal error:  Namespace declaration statement has to be the very first statement or after any declare call in the script in /home3/vminingc/swaeduae.ae/laravel-app/app/Providers/AuthServiceProvider.php on line 5
+[16-Aug-2025 16:41:06 Asia/Dubai] PHP Fatal error:  Namespace declaration statement has to be the very first statement or after any declare call in the script in /home3/vminingc/swaeduae.ae/laravel-app/app/Providers/AuthServiceProvider.php on line 5
+[16-Aug-2025 16:41:06 Asia/Dubai] PHP Fatal error:  Namespace declaration statement has to be the very first statement or after any declare call in the script in /home3/vminingc/swaeduae.ae/laravel-app/app/Providers/AuthServiceProvider.php on line 5
+[16-Aug-2025 16:41:06 Asia/Dubai] PHP Fatal error:  Namespace declaration statement has to be the very first statement or after any declare call in the script in /home3/vminingc/swaeduae.ae/laravel-app/app/Providers/AuthServiceProvider.php on line 5
+[16-Aug-2025 16:41:06 Asia/Dubai] PHP Fatal error:  Namespace declaration statement has to be the very first statement or after any declare call in the script in /home3/vminingc/swaeduae.ae/laravel-app/app/Providers/AuthServiceProvider.php on line 5
+[16-Aug-2025 16:41:12 Asia/Dubai] PHP Fatal error:  Namespace declaration statement has to be the very first statement or after any declare call in the script in /home3/vminingc/swaeduae.ae/laravel-app/app/Providers/AuthServiceProvider.php on line 5
+[16-Aug-2025 13:14:15 UTC] PHP Parse error:  syntax error, unexpected token "\" in Command line code on line 9
+[16-Aug-2025 17:30:04 Asia/Dubai] PHP Fatal error:  Cannot use App\Http\Controllers\Org\TeamController as TeamController because the name is already in use in /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php on line 115
+[16-Aug-2025 13:30:30 UTC] PHP Parse error:  syntax error, unexpected token "]", expecting "-" or identifier or variable or number in Command line code on line 5
+[16-Aug-2025 17:31:02 Asia/Dubai] PHP Fatal error:  Cannot use App\Http\Controllers\Org\TeamController as TeamController because the name is already in use in /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php on line 115
+[16-Aug-2025 17:31:02 Asia/Dubai] PHP Fatal error:  Cannot use App\Http\Controllers\Org\TeamController as TeamController because the name is already in use in /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php on line 115
+[16-Aug-2025 17:31:06 Asia/Dubai] PHP Fatal error:  Cannot use App\Http\Controllers\Org\TeamController as TeamController because the name is already in use in /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php on line 115
+[16-Aug-2025 17:31:11 Asia/Dubai] PHP Fatal error:  Cannot use App\Http\Controllers\Org\TeamController as TeamController because the name is already in use in /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php on line 115
+[16-Aug-2025 17:31:17 Asia/Dubai] PHP Fatal error:  Cannot use App\Http\Controllers\Org\TeamController as TeamController because the name is already in use in /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php on line 115
+[16-Aug-2025 17:31:17 Asia/Dubai] PHP Fatal error:  Cannot use App\Http\Controllers\Org\TeamController as TeamController because the name is already in use in /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php on line 115
+[16-Aug-2025 17:31:18 Asia/Dubai] PHP Fatal error:  Cannot use App\Http\Controllers\Org\TeamController as TeamController because the name is already in use in /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php on line 115
+[16-Aug-2025 17:31:18 Asia/Dubai] PHP Fatal error:  Cannot use App\Http\Controllers\Org\TeamController as TeamController because the name is already in use in /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php on line 115
+[16-Aug-2025 17:31:18 Asia/Dubai] PHP Fatal error:  Cannot use App\Http\Controllers\Org\TeamController as TeamController because the name is already in use in /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php on line 115
+[16-Aug-2025 18:15:48 Asia/Dubai] PHP Fatal error:  Cannot use Illuminate\Support\Facades\Route as Route because the name is already in use in /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php on line 152
+[16-Aug-2025 14:45:39 UTC] PHP Parse error:  syntax error, unexpected identifier "Route" in routes/web.php on line 56
+[16-Aug-2025 15:16:24 UTC] PHP Warning:  foreach() argument must be of type array|object, null given in Command line code on line 3
+[16-Aug-2025 15:20:40 UTC] PHP Warning:  file_get_contents(app/Providers/YourProvider.php): Failed to open stream: No such file or directory in Command line code on line 3
+[16-Aug-2025 15:20:40 UTC] PHP Warning:  Undefined variable $__r in Command line code on line 6
+[16-Aug-2025 15:20:40 UTC] PHP Warning:  Undefined variable $__r in Command line code on line 6
+[16-Aug-2025 19:34:30 Asia/Dubai] PHP Fatal error:  Cannot use Illuminate\Support\Facades\Route as Route because the name is already in use in /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php on line 4
+[16-Aug-2025 19:34:30 Asia/Dubai] PHP Fatal error:  Cannot use Illuminate\Support\Facades\Route as Route because the name is already in use in /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php on line 4
+[16-Aug-2025 19:34:30 Asia/Dubai] PHP Fatal error:  Cannot use Illuminate\Support\Facades\Route as Route because the name is already in use in /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php on line 4
+[16-Aug-2025 15:48:59 UTC] PHP Parse error:  Unclosed '(' on line 3 in Command line code on line 4
+[16-Aug-2025 20:07:40 Asia/Dubai] PHP Fatal error:  Cannot use Illuminate\Http\Request as Request because the name is already in use in /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php on line 73
+[16-Aug-2025 20:07:41 Asia/Dubai] PHP Fatal error:  Cannot use Illuminate\Http\Request as Request because the name is already in use in /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php on line 73
+[16-Aug-2025 20:20:12 Asia/Dubai] PHP Fatal error:  Cannot use Illuminate\Support\Facades\DB as DB because the name is already in use in /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php on line 114
+[16-Aug-2025 20:20:13 Asia/Dubai] PHP Fatal error:  Cannot use Illuminate\Support\Facades\DB as DB because the name is already in use in /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php on line 114
+[17-Aug-2025 06:24:24 UTC] PHP Warning:  Undefined variable $view in Command line code on line 10
+[17-Aug-2025 06:24:24 UTC] PHP Warning:  Undefined variable $view in Command line code on line 10
+[17-Aug-2025 06:24:24 UTC] PHP Warning:  Attempt to read property "with" on null in Command line code on line 10
+[17-Aug-2025 06:24:24 UTC] PHP Warning:  Undefined variable $view in Command line code on line 10
+[17-Aug-2025 06:24:24 UTC] PHP Warning:  Attempt to read property "with" on null in Command line code on line 10
+[17-Aug-2025 10:59:09 Asia/Dubai] PHP Fatal error:  Cannot use Illuminate\Support\Facades\Route as Route because the name is already in use in /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php on line 294
+[17-Aug-2025 10:59:09 Asia/Dubai] PHP Fatal error:  Cannot use Illuminate\Support\Facades\Route as Route because the name is already in use in /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php on line 294
+[17-Aug-2025 10:59:09 Asia/Dubai] PHP Fatal error:  Cannot use Illuminate\Support\Facades\Route as Route because the name is already in use in /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php on line 294
+[17-Aug-2025 10:59:15 Asia/Dubai] PHP Fatal error:  Cannot use Illuminate\Support\Facades\Route as Route because the name is already in use in /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php on line 294
+[17-Aug-2025 10:59:15 Asia/Dubai] PHP Fatal error:  Cannot use Illuminate\Support\Facades\Route as Route because the name is already in use in /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php on line 294
+[17-Aug-2025 12:18:31 Asia/Dubai] PHP Fatal error:  Cannot use Illuminate\Support\Facades\Auth as Auth because the name is already in use in /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php on line 936
+[17-Aug-2025 12:18:37 Asia/Dubai] PHP Fatal error:  Cannot use Illuminate\Support\Facades\Auth as Auth because the name is already in use in /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php on line 936
+[17-Aug-2025 12:18:55 Asia/Dubai] PHP Fatal error:  Cannot use Illuminate\Support\Facades\Auth as Auth because the name is already in use in /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php on line 936
+[17-Aug-2025 12:19:04 Asia/Dubai] PHP Fatal error:  Cannot use Illuminate\Support\Facades\Auth as Auth because the name is already in use in /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php on line 936
+[17-Aug-2025 08:44:20 UTC] PHP Parse error:  syntax error, unexpected token "->" in routes/web.php on line 296
+[17-Aug-2025 08:48:28 UTC] PHP Parse error:  Unclosed '{' on line 727 in routes/web.php on line 792
+[17-Aug-2025 08:50:05 UTC] PHP Parse error:  Unclosed '{' on line 724 in routes/web.php on line 789
+#15 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(198): Illuminate\Foundation\Bootstrap\HandleExceptions->renderHttpResponse()
+#16 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(258): Illuminate\Foundation\Bootstrap\HandleExceptions->handleException()
+#17 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->{closure:Illuminate\Foundation\Bootstrap\HandleExceptions::forwardsTo():257}()
+#18 {main}
+  thrown in /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Container/Container.php on line 961
+[15-Aug-2025 19:42:29 Asia/Dubai] PHP Fatal error:  Uncaught ReflectionException: Class "view" does not exist in /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Container/Container.php:959
+Stack trace:
+#0 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Container/Container.php(959): ReflectionClass->__construct()
+#1 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Container/Container.php(832): Illuminate\Container\Container->build()
+#2 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1078): Illuminate\Container\Container->resolve()
+#3 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Container/Container.php(763): Illuminate\Foundation\Application->resolve()
+#4 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1058): Illuminate\Container\Container->make()
+#5 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Container/Container.php(1580): Illuminate\Foundation\Application->make()
+#6 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(239): Illuminate\Container\Container->offsetGet()
+#7 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(210): Illuminate\Support\Facades\Facade::resolveFacadeInstance()
+#8 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(355): Illuminate\Support\Facades\Facade::getFacadeRoot()
+#9 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/RegisterErrorViewPaths.php(17): Illuminate\Support\Facades\Facade::__callStatic()
+#10 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(915): Illuminate\Foundation\Exceptions\RegisterErrorViewPaths->__invoke()
+#11 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(890): Illuminate\Foundation\Exceptions\Handler->registerErrorViewPaths()
+#12 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(815): Illuminate\Foundation\Exceptions\Handler->renderHttpException()
+#13 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(706): Illuminate\Foundation\Exceptions\Handler->prepareResponse()
+#14 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(594): Illuminate\Foundation\Exceptions\Handler->renderExceptionResponse()
+#15 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(221): Illuminate\Foundation\Exceptions\Handler->render()
+#16 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(198): Illuminate\Foundation\Bootstrap\HandleExceptions->renderHttpResponse()
+#17 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(258): Illuminate\Foundation\Bootstrap\HandleExceptions->handleException()
+#18 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->{closure:Illuminate\Foundation\Bootstrap\HandleExceptions::forwardsTo():257}()
+#19 {main}
+
+Next Illuminate\Contracts\Container\BindingResolutionException: Target class [view] does not exist. in /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Container/Container.php:961
+Stack trace:
+#0 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Container/Container.php(832): Illuminate\Container\Container->build()
+#1 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1078): Illuminate\Container\Container->resolve()
+#2 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Container/Container.php(763): Illuminate\Foundation\Application->resolve()
+#3 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1058): Illuminate\Container\Container->make()
+#4 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Container/Container.php(1580): Illuminate\Foundation\Application->make()
+#5 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(239): Illuminate\Container\Container->offsetGet()
+#6 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(210): Illuminate\Support\Facades\Facade::resolveFacadeInstance()
+#7 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(355): Illuminate\Support\Facades\Facade::getFacadeRoot()
+#8 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/RegisterErrorViewPaths.php(17): Illuminate\Support\Facades\Facade::__callStatic()
+#9 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(915): Illuminate\Foundation\Exceptions\RegisterErrorViewPaths->__invoke()
+#10 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(890): Illuminate\Foundation\Exceptions\Handler->registerErrorViewPaths()
+#11 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(815): Illuminate\Foundation\Exceptions\Handler->renderHttpException()
+#12 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(706): Illuminate\Foundation\Exceptions\Handler->prepareResponse()
+#13 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(594): Illuminate\Foundation\Exceptions\Handler->renderExceptionResponse()
+#14 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(221): Illuminate\Foundation\Exceptions\Handler->render()
+#15 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(198): Illuminate\Foundation\Bootstrap\HandleExceptions->renderHttpResponse()
+#16 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(258): Illuminate\Foundation\Bootstrap\HandleExceptions->handleException()
+#17 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->{closure:Illuminate\Foundation\Bootstrap\HandleExceptions::forwardsTo():257}()
+#18 {main}
+  thrown in /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Container/Container.php on line 961
+[16-Aug-2025 08:44:42 Asia/Dubai] PHP Fatal error:  Cannot use Illuminate\Support\Facades\Route as Route because the name is already in use in /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php on line 518
+[16-Aug-2025 16:42:16 Asia/Dubai] PHP Fatal error:  Namespace declaration statement has to be the very first statement or after any declare call in the script in /home3/vminingc/swaeduae.ae/laravel-app/app/Providers/AuthServiceProvider.php on line 5
+[16-Aug-2025 16:42:20 Asia/Dubai] PHP Fatal error:  Namespace declaration statement has to be the very first statement or after any declare call in the script in /home3/vminingc/swaeduae.ae/laravel-app/app/Providers/AuthServiceProvider.php on line 5
+[16-Aug-2025 17:30:35 Asia/Dubai] PHP Fatal error:  Cannot use App\Http\Controllers\Org\TeamController as TeamController because the name is already in use in /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php on line 115
+[16-Aug-2025 17:31:40 Asia/Dubai] PHP Fatal error:  Cannot use App\Http\Controllers\Org\TeamController as TeamController because the name is already in use in /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php on line 115
+[16-Aug-2025 18:15:55 Asia/Dubai] PHP Fatal error:  Cannot use Illuminate\Support\Facades\Route as Route because the name is already in use in /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php on line 152
+[16-Aug-2025 18:15:56 Asia/Dubai] PHP Fatal error:  Cannot use Illuminate\Support\Facades\Route as Route because the name is already in use in /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php on line 152
+[16-Aug-2025 18:15:56 Asia/Dubai] PHP Fatal error:  Cannot use Illuminate\Support\Facades\Route as Route because the name is already in use in /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php on line 152
+[16-Aug-2025 18:15:57 Asia/Dubai] PHP Fatal error:  Cannot use Illuminate\Support\Facades\Route as Route because the name is already in use in /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php on line 152
+[16-Aug-2025 18:15:57 Asia/Dubai] PHP Fatal error:  Cannot use Illuminate\Support\Facades\Route as Route because the name is already in use in /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php on line 152
+[16-Aug-2025 18:15:58 Asia/Dubai] PHP Fatal error:  Cannot use Illuminate\Support\Facades\Route as Route because the name is already in use in /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php on line 152
+[16-Aug-2025 18:15:58 Asia/Dubai] PHP Fatal error:  Cannot use Illuminate\Support\Facades\Route as Route because the name is already in use in /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php on line 152
+[16-Aug-2025 18:15:58 Asia/Dubai] PHP Fatal error:  Cannot use Illuminate\Support\Facades\Route as Route because the name is already in use in /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php on line 152
+[16-Aug-2025 18:15:59 Asia/Dubai] PHP Fatal error:  Cannot use Illuminate\Support\Facades\Route as Route because the name is already in use in /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php on line 152
+[16-Aug-2025 18:15:59 Asia/Dubai] PHP Fatal error:  Cannot use Illuminate\Support\Facades\Route as Route because the name is already in use in /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php on line 152
+[16-Aug-2025 18:16:00 Asia/Dubai] PHP Fatal error:  Cannot use Illuminate\Support\Facades\Route as Route because the name is already in use in /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php on line 152
+[16-Aug-2025 18:16:05 Asia/Dubai] PHP Fatal error:  Cannot use Illuminate\Support\Facades\Route as Route because the name is already in use in /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php on line 152
+[16-Aug-2025 18:17:07 Asia/Dubai] PHP Fatal error:  Cannot use Illuminate\Support\Facades\Route as Route because the name is already in use in /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php on line 152
+[16-Aug-2025 20:07:41 Asia/Dubai] PHP Fatal error:  Cannot use Illuminate\Http\Request as Request because the name is already in use in /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php on line 73
+[16-Aug-2025 20:10:56 Asia/Dubai] PHP Fatal error:  Cannot use Illuminate\Http\Request as Request because the name is already in use in /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php on line 73
+[16-Aug-2025 20:10:57 Asia/Dubai] PHP Fatal error:  Cannot use Illuminate\Http\Request as Request because the name is already in use in /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php on line 73
+[16-Aug-2025 20:10:57 Asia/Dubai] PHP Fatal error:  Cannot use Illuminate\Http\Request as Request because the name is already in use in /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php on line 73
+[16-Aug-2025 20:10:58 Asia/Dubai] PHP Fatal error:  Cannot use Illuminate\Http\Request as Request because the name is already in use in /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php on line 73
+[16-Aug-2025 20:11:00 Asia/Dubai] PHP Fatal error:  Cannot use Illuminate\Http\Request as Request because the name is already in use in /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php on line 73
+[16-Aug-2025 20:11:00 Asia/Dubai] PHP Fatal error:  Cannot use Illuminate\Http\Request as Request because the name is already in use in /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php on line 73
+[16-Aug-2025 20:11:01 Asia/Dubai] PHP Fatal error:  Cannot use Illuminate\Http\Request as Request because the name is already in use in /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php on line 73
+[16-Aug-2025 20:11:01 Asia/Dubai] PHP Fatal error:  Cannot use Illuminate\Http\Request as Request because the name is already in use in /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php on line 73
+[16-Aug-2025 20:11:10 Asia/Dubai] PHP Fatal error:  Cannot use Illuminate\Http\Request as Request because the name is already in use in /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php on line 73
+[16-Aug-2025 20:11:11 Asia/Dubai] PHP Fatal error:  Cannot use Illuminate\Http\Request as Request because the name is already in use in /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php on line 73
+[16-Aug-2025 20:11:15 Asia/Dubai] PHP Fatal error:  Cannot use Illuminate\Http\Request as Request because the name is already in use in /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php on line 73
+[16-Aug-2025 20:11:16 Asia/Dubai] PHP Fatal error:  Cannot use Illuminate\Http\Request as Request because the name is already in use in /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php on line 73
+[16-Aug-2025 20:11:16 Asia/Dubai] PHP Fatal error:  Cannot use Illuminate\Http\Request as Request because the name is already in use in /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php on line 73
+[16-Aug-2025 20:11:18 Asia/Dubai] PHP Fatal error:  Cannot use Illuminate\Http\Request as Request because the name is already in use in /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php on line 73
+[16-Aug-2025 20:11:20 Asia/Dubai] PHP Fatal error:  Cannot use Illuminate\Http\Request as Request because the name is already in use in /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php on line 73
+[16-Aug-2025 20:11:20 Asia/Dubai] PHP Fatal error:  Cannot use Illuminate\Http\Request as Request because the name is already in use in /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php on line 73
+[16-Aug-2025 20:20:13 Asia/Dubai] PHP Fatal error:  Cannot use Illuminate\Support\Facades\DB as DB because the name is already in use in /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php on line 114
+[16-Aug-2025 20:20:14 Asia/Dubai] PHP Fatal error:  Cannot use Illuminate\Support\Facades\DB as DB because the name is already in use in /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php on line 114
+[16-Aug-2025 20:20:14 Asia/Dubai] PHP Fatal error:  Cannot use Illuminate\Support\Facades\DB as DB because the name is already in use in /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php on line 114
+[16-Aug-2025 20:20:15 Asia/Dubai] PHP Fatal error:  Cannot use Illuminate\Support\Facades\DB as DB because the name is already in use in /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php on line 114
+[17-Aug-2025 12:18:59 Asia/Dubai] PHP Fatal error:  Cannot use Illuminate\Support\Facades\Auth as Auth because the name is already in use in /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php on line 936
+[17-Aug-2025 12:19:00 Asia/Dubai] PHP Fatal error:  Cannot use Illuminate\Support\Facades\Auth as Auth because the name is already in use in /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php on line 936
+[17-Aug-2025 12:19:00 Asia/Dubai] PHP Fatal error:  Cannot use Illuminate\Support\Facades\Auth as Auth because the name is already in use in /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php on line 936
+[17-Aug-2025 12:19:01 Asia/Dubai] PHP Fatal error:  Cannot use Illuminate\Support\Facades\Auth as Auth because the name is already in use in /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php on line 936
+[17-Aug-2025 12:19:01 Asia/Dubai] PHP Fatal error:  Cannot use Illuminate\Support\Facades\Auth as Auth because the name is already in use in /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php on line 936
+[17-Aug-2025 12:19:01 Asia/Dubai] PHP Fatal error:  Cannot use Illuminate\Support\Facades\Auth as Auth because the name is already in use in /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php on line 936
+[17-Aug-2025 12:19:02 Asia/Dubai] PHP Fatal error:  Cannot use Illuminate\Support\Facades\Auth as Auth because the name is already in use in /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php on line 936
+[17-Aug-2025 12:19:02 Asia/Dubai] PHP Fatal error:  Cannot use Illuminate\Support\Facades\Auth as Auth because the name is already in use in /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php on line 936
+[17-Aug-2025 12:19:03 Asia/Dubai] PHP Fatal error:  Cannot use Illuminate\Support\Facades\Auth as Auth because the name is already in use in /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php on line 936
+[17-Aug-2025 12:19:03 Asia/Dubai] PHP Fatal error:  Cannot use Illuminate\Support\Facades\Auth as Auth because the name is already in use in /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php on line 936
+[17-Aug-2025 12:19:04 Asia/Dubai] PHP Fatal error:  Cannot use Illuminate\Support\Facades\Auth as Auth because the name is already in use in /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php on line 936
+
+== Artisan about (may fail; failure is a clue) ==
+
+  Environment .................................................................................................................................  
+  Application Name ................................................................................................................... SwaedUAE  
+  Laravel Version ..................................................................................................................... 11.45.2  
+  PHP Version ........................................................................................................................... 8.4.7  
+  Composer Version ...................................................................................................................... 2.6.5  
+  Environment ...................................................................................................................... production  
+  Debug Mode .............................................................................................................................. OFF  
+  URL ............................................................................................................................. swaeduae.ae  
+  Maintenance Mode ........................................................................................................................ OFF  
+  Timezone ......................................................................................................................... Asia/Dubai  
+  Locale ................................................................................................................................... ar  
+
+  Cache .......................................................................................................................................  
+  Config ........................................................................................................................... NOT CACHED  
+  Events ........................................................................................................................... NOT CACHED  
+  Routes ........................................................................................................................... NOT CACHED  
+  Views ............................................................................................................................ NOT CACHED  
+
+  Drivers .....................................................................................................................................  
+  Broadcasting ........................................................................................................................... null  
+  Cache .............................................................................................................................. database  
+  Database .............................................................................................................................. mysql  
+  Logs ......................................................................................................................... stack / single  
+  Mail ............................................................................................................................... sendmail  
+  Queue .................................................................................................................................. sync  
+  Session ................................................................................................................................ file  
+
+  Spatie Permissions ..........................................................................................................................  
+  Features Enabled .................................................................................................................... Default  
+  Version .............................................................................................................................. 6.21.0  
+
+
+== Run app via CLI to reveal stacktrace (not public) ==
+
+   TypeError 
+
+  Symfony\Component\HttpFoundation\IpUtils::checkIp4(): Argument #2 ($ip) must be of type string, null given, called in /home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/http-foundation/IpUtils.php on line 59
+
+  at vendor/symfony/http-foundation/IpUtils.php:75
+     71▕      * @param string $ip IPv4 address or subnet in CIDR notation
+     72▕      *
+     73▕      * @return bool Whether the request IP matches the IP, or whether the request IP is within the CIDR subnet
+     74▕      */
+  ➜  75▕     public static function checkIp4(string $requestIp, string $ip): bool
+     76▕     {
+     77▕         $cacheKey = $requestIp.'-'.$ip.'-v4';
+     78▕         if (null !== $cacheValue = self::getCacheResult($cacheKey)) {
+     79▕             return $cacheValue;
+
+      [2m+10 vendor frames [22m
+
+  11  public/index.php:11
+      Illuminate\Foundation\Http\Kernel::handle()
+

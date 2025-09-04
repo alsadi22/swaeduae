@@ -1,0 +1,15 @@
+=== Phase 3: Opportunities/Events check (20250821_174807) ===
+
+-- Event model scopePublished --
+13:    public function scopePublished($q)
+
+-- EventController eager loading --
+❌ No eager loading in EventController
+
+-- Volunteer apply route --
+332:Route::get('/apply', [ApplyController::class, 'form'])->name('apply.form');
+333:Route::post('/apply', [ApplyController::class, 'store'])->name('apply.store');
+
+-- Tools check --
+p3_opportunities_check.sh
+p3_opportunities_check_to_file.sh

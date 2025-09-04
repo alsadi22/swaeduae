@@ -1,0 +1,44 @@
+SwaedUAE Full Health Report  2025-08-30-043703
+================================================
+
+[health.sh --fix]
+
+[1m== Environment ==(B[m
+PHP:     PHP 8.3.24 (cli) (built: Aug  3 2025 08:57:38) (NTS)
+Laravel: 
+   Symfony\Component\OptionsResolver\Exception\InvalidOptionsException 
+
+  The option "dsn" with value "<your_dsn_here>" is invalid.
+
+  at vendor/symfony/options-resolver/OptionsResolver.php:1106
+    1102▕                 if (isset($this->info[$option])) {
+    1103▕                     $message .= \sprintf(' Info: %s.', $this->info[$option]);
+    1104▕                 }
+    1105▕ 
+  ➜ 1106▕                 throw new InvalidOptionsException($message);
+    1107▕             }
+    1108▕         }
+    1109▕ 
+    1110▕         // Check whether the option is deprecated
+
+      [2m+23 vendor frames [22m
+
+  24  [internal]:0
+      Illuminate\Foundation\Application::Illuminate\Foundation\{closure}()
+      [2m+6 vendor frames [22m
+
+  31  artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+Node:    v22.19.0
+Composer:Composer 2.2.6 2022-02-04 17:00:38
+PHP memory_limit: 512M
+[32m✅(B[m Env read
+
+[1m== Permissions & ACL ==(B[m
+[32m✅(B[m Applied ACLs for www-data and swaeduae on storage/ & bootstrap/cache/
+[32m✅(B[m Current user can write storage/logs
+
+[1m== Caches ==(B[m
+
+[1m== Blade route() names vs. defined route names ==(B[m
+[31m❌(B[m Unable to fetch routes JSON via 'php artisan route:list --json'

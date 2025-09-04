@@ -1,0 +1,7 @@
+total 252
+drwxrwxr-x 2 vminingc vminingc   4096 Aug 20 05:40 .
+drwxr-xr-x 3 vminingc vminingc   4096 Aug 17 10:30 ..
+-rw-rw-r-- 1 vminingc vminingc     14 Aug  4 12:08 .gitignore
+-rwxrwxr-x 1 vminingc vminingc   2395 Aug 20 05:40 packages.php
+-rw-rw-r-- 1 vminingc vminingc 207515 Aug 20 05:40 routes-v7.php
+-rwxrwxr-x 1 vminingc vminingc  25360 Aug 20 05:40 services.php

@@ -1,0 +1,83 @@
+     1	<?php
+     2	namespace App\Http\Middleware;
+     3	
+     4	use Closure;
+     5	use Illuminate\Http\Request;
+     6	use Illuminate\Support\Facades\Cache;
+     7	use Symfony\Component\HttpFoundation\Response;
+     8	
+     9	class MicroCache
+    10	{
+    11	    public function handle(Request $request, Closure $next, $ttl = '120'): Response
+    12	    {
+    13	        // Only GET, allow bypass flag
+    14	        if (!$request->isMethod('GET') || $request->query('_nocache') !== null) {
+    15	            return $next($request);
+    16	        }
+    17	
+    18	        // Skip interactive/sensitive areas and authenticated users
+    19	        if ($request->user()
+    20	            || $request->is('admin/*')
+    21	            || $request->is('login')
+    22	            || $request->is('register')
+    23	            || $request->is('password/*')
+    24	            || $request->is('dashboard*')
+    25	            // NEW: skip public forms that render CSRF tokens
+    26	            || $request->is('org/register')
+    27	            || $request->is('contact')
+    28	            || $request->is('volunteer/*/register')) {
+    29	            return $next($request);
+    30	        }
+    31	
+    32	        $ttl = (int) $ttl;
+    33	        $key = 'microcache:'.$ttl.':'.$request->getHost().':'.$request->getRequestUri().':'.app()->getLocale();
+    34	
+    35	        if ($cached = Cache::get($key)) {
+    36	            $etag = $cached['etag'];
+    37	            $ifNone = $request->headers->get('If-None-Match');
+    38	            if ($ifNone && trim($ifNone, '"') === $etag) {
+    39	                return response('', 304)
+    40	                    ->header('ETag', '"'.$etag.'"')
+    41	                    ->header('Cache-Control', "public, max-age=$ttl, s-maxage=$ttl")
+    42	                    ->header('X-MicroCache', 'HIT-304');
+    43	            }
+    44	
+    45	            return response($cached['body'], 200, $cached['headers'])
+    46	                ->header('ETag', '"'.$etag.'"')
+    47	                ->header('Cache-Control', "public, max-age=$ttl, s-maxage=$ttl")
+    48	                ->header('X-MicroCache', 'HIT');
+    49	        }
+    50	
+    51	        /** @var \Symfony\Component\HttpFoundation\Response $resp */
+    52	        $resp = $next($request);
+    53	
+    54	        // Only cache successful HTML
+    55	        if (method_exists($resp, 'getStatusCode')
+    56	            && $resp->getStatusCode() === 200
+    57	            && str_contains(strtolower($resp->headers->get('Content-Type', '')), 'text/html')) {
+    58	
+    59	            $body = $resp->getContent();
+    60	
+    61	            // NEW: do NOT cache pages that embed CSRF tokens or forms
+    62	            if (preg_match('/name=["\']_token["\']|meta\s+name=["\']csrf-token["\']/i', $body)) {
+    63	                $resp->headers->set('X-MicroCache', 'SKIP-CSRF');
+    64	                return $resp;
+    65	            }
+    66	
+    67	            $etag = sha1($body);
+    68	            Cache::put($key, [
+    69	                'body' => $body,
+    70	                'headers' => [
+    71	                    'Content-Type' => $resp->headers->get('Content-Type', 'text/html; charset=UTF-8'),
+    72	                ],
+    73	                'etag' => $etag,
+    74	            ], $ttl);
+    75	
+    76	            $resp->headers->set('ETag', '"'.$etag.'"');
+    77	            $resp->headers->set('Cache-Control', "public, max-age=$ttl, s-maxage=$ttl");
+    78	            $resp->headers->set('X-MicroCache', 'MISS');
+    79	        }
+    80	
+    81	        return $resp;
+    82	    }
+    83	}

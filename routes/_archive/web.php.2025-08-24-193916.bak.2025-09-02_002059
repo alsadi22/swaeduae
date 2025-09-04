@@ -1,0 +1,44 @@
+<?php
+// === TOP-LEVEL SANITY (no prefix) ===
+if (env('SANITY_ROUTE', false)) {
+Route::get("/__sanity/{id}", function ($id) {
+    $opportunity = (object)["id"=>$id, "title"=>"Opportunity ".$id, "summary"=>"Details coming soon"];
+    return view("sanity.opportunity", compact("opportunity"));
+})->where("id","[0-9A-Za-z\\-]+")
+  ->withoutMiddleware([
+      \App\Http\Middleware\EnforceOrgRegistration::class,
+      \App\Http\Middleware\MicroCache::class,
+      \App\Http\Middleware\SetLocaleAndHeaders::class,
+      \App\Http\Middleware\SecurityHeaders::class,
+  ])
+  ->name("sanity.opportunity.show.top");
+}
+// === /TOP-LEVEL SANITY ===
+
+Route::get('/qr/verify', fn() => redirect()->route('verify'))->name('qr.verify');
+Route::get('/__sanity_txt/{id}', function($id) {
+    return response("OK __sanity_txt $id\n", 200)->header('Content-Type','text/plain');
+})->name('sanity.txt');
+Route::get('/login', fn() => response("Login placeholder\n", 200)
+)->name('login');
+Route::get('/register', fn()=>response("Register placeholder\n",200))->name('register');
+Route::get('/password/reset', fn()=>response("Password reset placeholder\n",200))->name('password.request');
+Route::get('/login', fn() => response("Login placeholder\n", 200))->name('login');
+Route::get('/register', fn() => response("Register placeholder\n",200))->name('register');
+Route::get('/password/reset', fn()=>response("Password reset placeholder\n",200))->name('password.request');
+Route::get('/', fn() => response("OK /\n",200))->name('home.placeholder');
+Route::prefix('admin')->name('admin.')->middleware(['web'])->group(function () {
+    Route::get('/sanity', fn () => view('admin.dashboard'))->name('sanity');
+    Route::get('/', fn () => view('admin.dashboard'))->name('root');
+});
+Route::prefix('org')->name('org.')->middleware(['web'])->group(function () {
+    Route::get('/sanity', fn () => view('org.dashboard'))->name('sanity');
+    Route::get('/', fn () => view('org.dashboard'))->name('root');
+});
+Route::get('/', fn () => view('public.home'))->name('home');
+Route::prefix('admin')->name('admin.')->middleware(['web'])->group(function () {
+    Route::get('/sanity-theme', fn () => view('admin.dashboard'))->name('sanity.theme');
+});
+Route::prefix('org')->name('org.')->middleware(['web'])->group(function () {
+    Route::get('/sanity-theme', fn () => view('org.dashboard'))->name('sanity.theme');
+});

@@ -1,0 +1,1 @@
+resources/views/categories/index.blade.php:11:      @php($cats = \App\Models\Opportunity::query()->whereNotNull('category')->select('category')->distinct()->pluck('category'))

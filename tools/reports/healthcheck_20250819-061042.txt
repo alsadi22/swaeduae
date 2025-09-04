@@ -1,0 +1,54 @@
+=== SwaedUAE Health Check (minimal) ===
+Started: Tue Aug 19 06:10:42 UTC 2025 UTC | Tue Aug 19 10:10:42 +04 2025 Asia/Dubai
+PHP 8.4.7 (cli) (built: May  8 2025 11:28:43) (NTS)
+Copyright (c) The PHP Group
+
+   ParseError 
+
+  syntax error, unexpected token "->", expecting end of file
+
+  at routes/events.php:10
+      6▕ Route::get('/events', [EventController::class, 'index'])->name('events.index');
+      7▕ 
+      8▕ Route::get('/events/{idOrSlug}', [EventController::class, 'show'])
+      9▕     ->where('idOrSlug', '[0-9]+|[A-Za-z0-9\-]+');// numbers or slug-like
+  ➜  10▕     ->name('public.events.show');
+     11▕
+
+      [2m+3 vendor frames [22m
+
+  4   app/Providers/LoadAllRoutesServiceProvider.php:19
+      Illuminate\Routing\RouteRegistrar::group()
+      [2m+7 vendor frames [22m
+
+  12  [internal]:0
+      Illuminate\Foundation\Application::{closure:Illuminate\Foundation\Application::boot():1131}()
+
+
+   ParseError 
+
+  syntax error, unexpected token "->", expecting end of file
+
+  at routes/events.php:10
+      6▕ Route::get('/events', [EventController::class, 'index'])->name('events.index');
+      7▕ 
+      8▕ Route::get('/events/{idOrSlug}', [EventController::class, 'show'])
+      9▕     ->where('idOrSlug', '[0-9]+|[A-Za-z0-9\-]+');// numbers or slug-like
+  ➜  10▕     ->name('public.events.show');
+     11▕
+
+      [2m+3 vendor frames [22m
+
+  4   app/Providers/LoadAllRoutesServiceProvider.php:19
+      Illuminate\Routing\RouteRegistrar::group()
+      [2m+7 vendor frames [22m
+
+  12  [internal]:0
+      Illuminate\Foundation\Application::{closure:Illuminate\Foundation\Application::boot():1131}()
+
+[Routes]
+[Env flags]
+2:APP_ENV=production
+4:APP_DEBUG=false
+5:APP_URL=https://swaeduae.ae
+91:APP_TIMEZONE=Asia/Dubai

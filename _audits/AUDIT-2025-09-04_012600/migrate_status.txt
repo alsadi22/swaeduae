@@ -1,0 +1,22 @@
+
+  Migration name .............................................. Batch / Status  
+  2025_08_29_000001_create_payments_table ............................ [4] Ran  
+  2025_08_29_025402_create_permission_tables ......................... [3] Ran  
+  2025_08_30_044614_create_jobs_table ................................ [5] Ran  
+  2025_08_30_214747_create_failed_jobs_table ......................... [5] Ran  
+  2025_08_30_235134_create_certificates_table ........................ [6] Ran  
+  2025_08_31_001702_create_audits_table .............................. [7] Ran  
+  2025_08_31_001702_create_events_table .............................. [7] Ran  
+  2025_08_31_001836_add_slug_to_events_table ......................... [8] Ran  
+  2025_09_01_002332_create_opportunities_table ....................... [9] Ran  
+  2025_09_01_002333_create_applications_table ........................ [9] Ran  
+  2025_09_02_000000_create_settings_if_missing ...................... [10] Ran  
+  2025_09_02_000000_create_volunteer_profiles_table ................. [11] Ran  
+  2025_09_02_193947_create_org_profiles_table ....................... [12] Ran  
+  2025_09_02_200531_extend_volunteer_profile_and_users .............. [13] Ran  
+  2025_09_02_223146_create_shifts_table ............................. [14] Ran  
+  2025_09_02_223156_create_attendances_table ........................ [14] Ran  
+  2025_09_02_223204_create_hours_table .............................. [15] Ran  
+  2025_09_02_223212_create_qr_tokens_scans .......................... [16] Ran  
+  2025_09_02_225229_add_sv_codes .................................... [17] Ran  
+

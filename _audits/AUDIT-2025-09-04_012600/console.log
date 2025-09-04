@@ -1,0 +1,8 @@
+=== SwaedUAE AUDIT @ 2025-09-04_012600 ===
+OUT -> /var/www/swaeduae/_audits/AUDIT-2025-09-04_012600
+
+Artifacts written to: /var/www/swaeduae/_audits/AUDIT-2025-09-04_012600
+Open summary:        cat /var/www/swaeduae/_audits/AUDIT-2025-09-04_012600/summary.txt
+Route list:          /var/www/swaeduae/_audits/AUDIT-2025-09-04_012600/route-list.txt
+HTTP probes:         /var/www/swaeduae/_audits/AUDIT-2025-09-04_012600/probes.txt
+Done.

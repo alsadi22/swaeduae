@@ -1,0 +1,152 @@
+=== QUICK HEALTH 2025-08-31_030501 ===
+== ABOUT ==
+
+  Environment ................................................................  
+  Application Name .................................................. SwaedUAE  
+  Laravel Version .................................................... 11.45.2  
+  PHP Version ......................................................... 8.3.24  
+  Composer Version ..................................................... 2.2.6  
+  Environment ..................................................... production  
+  Debug Mode ............................................................. OFF  
+  URL ............................................................ swaeduae.ae  
+  Maintenance Mode ....................................................... OFF  
+  Timezone ........................................................ Asia/Dubai  
+  Locale .................................................................. ar  
+
+  Cache ......................................................................  
+  Config .............................................................. CACHED  
+  Events .......................................................... NOT CACHED  
+  Routes .............................................................. CACHED  
+  Views ............................................................... CACHED  
+
+  Drivers ....................................................................  
+  Broadcasting .......................................................... null  
+  Cache ................................................................. file  
+  Database ............................................................. mysql  
+  Logs ......................................................... stack / daily  
+  Mail .................................................................. smtp  
+  Queue ............................................................. database  
+  Session ............................................................... file  
+
+  Sentry .....................................................................  
+  Enabled ................................................................ YES  
+  Environment ..................................................... production  
+  Laravel SDK Version ................................................. 4.15.1  
+  PHP SDK Version ..................................................... 4.15.1  
+  Release ............................................................ 155d7f1  
+  Sample Rate Errors .................................................... 100%  
+  Sample Rate Performance Monitoring ...................................... 0%  
+  Sample Rate Profiling ................................................... 0%  
+  Send Default PII .................................................. DISABLED  
+
+  Spatie Permissions .........................................................  
+  Features Enabled ................................................... Default  
+  Version ............................................................. 6.21.0  
+
+
+== HTTP PROBES ==
+GET / -> 500
+GET /about -> 500
+GET /privacy -> 500
+GET /terms -> 500
+GET /org/login -> 500
+HTTP/2 302 
+date: Sat, 30 Aug 2025 23:05:05 GMT
+content-type: text/html; charset=utf-8
+location: https://swaeduae.ae/admin/login
+
+== ROUTES TOP ==
+
+  GET|HEAD  / ........................................................... home
+  ANY       _agent{any?} ......................... generated::Bf0K74ymMvsJOuYZ
+  ANY       _alias/{any?} ........................ generated::ZoskbpIfNtbMJ9cB
+  ANY       _compat/{any?} ....................... generated::ZcwjLspOzx7iTy0I
+  GET|HEAD  about ................................................ pages.about
+  ANY       about-us generated::NYa4K6S8XxKkLrJU › Illuminate\Routing › Redir…
+  GET|HEAD  admin ............... admin.root › Admin\DashboardController@index
+  GET|HEAD  admin/_diag ........................................... admin.diag
+  GET|HEAD  admin/attendance admin.attendance.index › Admin\AttendanceAdminCo…
+  GET|HEAD  admin/attendance/qr/{opportunityId} admin.attendance.qr › Admin\A…
+  ANY       admin/dashboard admin.dashboard.legacy › Illuminate\Routing › Red…
+  GET|HEAD  admin/hours admin.hours.all › Admin\HoursReportController@showAll
+  GET|HEAD  admin/login .............. admin.login › Admin\AuthController@show
+  POST      admin/login ........ admin.login.post › Admin\AuthController@login
+  POST      admin/logout .......... admin.logout › Admin\AuthController@logout
+  GET|HEAD  admin/opportunities .................... admin.opportunities.index
+  POST      admin/opportunities/{opportunityId}/attendance/complete admin.att…
+  POST      admin/opportunities/{opportunityId}/attendance/finalize admin.att…
+  POST      admin/opportunities/{opportunityId}/attendance/manual admin.atten…
+  GET|HEAD  admin/opportunities/{opportunityId}/hours admin.hours.show › Admi…
+  GET|HEAD  admin/users .. admin.users.index › Admin\UserAdminController@index
+  GET|HEAD  admin/users/index .. admin.users › Admin\UserAdminController@index
+  POST      admin/users/toggle/{id} admin.users.toggle › Admin\AdminControlle…
+  GET|HEAD  api/user ............................. generated::zN9mPZqVUT6GDrUY
+  GET|HEAD  api/v1/certificates/verify/{code} .... generated::dA0t05mznyGPVldo
+  GET|HEAD  api/v1/health ........................ generated::lqjnqu4lB0xhr2UA
+  GET|HEAD  confirm-password password.confirm › Auth\ConfirmablePasswordContr…
+  POST      confirm-password generated::XR7ORvIxjh12Z5oG › Auth\ConfirmablePa…
+  GET|HEAD  contact .................................................. contact
+  POST      contact ................ contact.submit › ContactController@submit
+  POST      email/verification-notification verification.send › Auth\EmailVer…
+  GET|HEAD  events ...................... events.index › EventController@index
+  GET|HEAD  events/browse ...................................... events.browse
+  GET|HEAD  events/{idOrSlug} ............. events.show › EventController@show
+  GET|HEAD  faq .................................................... pages.faq
+  GET|HEAD  forgot-password password.request › Auth\PasswordResetLinkControll…
+  POST      forgot-password password.email › Auth\PasswordResetLinkController…
+  GET|HEAD  lang/{locale} ...................................... locale.switch
+  GET|HEAD  login ......... login › Auth\AuthenticatedSessionController@create
+  POST      login generated::hFI45SmBudLkbwlN › Auth\AuthenticatedSessionCont…
+  ANY       login/organization generated::EgIgs7Fm43QjxnYK › Illuminate\Routi…
+  POST      logout ...... logout › Auth\AuthenticatedSessionController@destroy
+  GET|HEAD  opportunities opportunities.index › PublicOpportunityController@i…
+  GET|HEAD  opportunities/{id} .............................. opps.public.show
+  GET|HEAD  opportunities/{slug} opportunities.show › PublicOpportunityContro…
+  GET|HEAD  opportunities/{slug}.ics opportunities.ics › PublicOpportunityCon…
+  POST      opportunities/{slug}/apply opportunities.apply › PublicOpportunit…
+  GET|HEAD  org/dashboard ...... org.dashboard › Org\DashboardController@index
+  GET|HEAD  org/login .............................................. org.login
+
+== MIGRATIONS ==
+
+  Migration name .............................................. Batch / Status  
+  2025_08_29_000001_create_payments_table ............................ [4] Ran  
+  2025_08_29_025402_create_permission_tables ......................... [3] Ran  
+  2025_08_30_044614_create_jobs_table ................................ [5] Ran  
+  2025_08_30_214747_create_failed_jobs_table ......................... [5] Ran  
+  2025_08_30_235134_create_certificates_table ........................ [6] Ran  
+  2025_08_31_001702_create_audits_table .............................. [7] Ran  
+  2025_08_31_001702_create_events_table .............................. [7] Ran  
+  2025_08_31_001836_add_slug_to_events_table ......................... [8] Ran  
+
+
+== QUEUE WORKER ==
+active
+● swaed-queue.service - Laravel Queue Worker (SwaedUAE)
+     Loaded: loaded (/etc/systemd/system/swaed-queue.service; enabled; vendor preset: enabled)
+     Active: active (running) since Sun 2025-08-31 02:05:10 +04; 59min ago
+   Main PID: 3903267 (php)
+      Tasks: 1 (limit: 38144)
+     Memory: 35.9M
+        CPU: 1.350s
+     CGroup: /system.slice/swaed-queue.service
+             └─3903267 /usr/bin/php artisan queue:work --queue=default --sleep=3 --tries=3 --max-time=3600
+
+Aug 31 02:05:10 swaeduae systemd[1]: Started Laravel Queue Worker (SwaedUAE).
+
+== PWA ==
+-rw-rw-r--+ 1 swaeduae www-data  67 Aug 31 00:04 public/img/icon-192.png
+-rw-rw-r--+ 1 swaeduae www-data  67 Aug 31 00:04 public/img/icon-512.png
+-rw-rw-r--+ 1 swaeduae www-data 332 Aug 31 00:02 public/manifest.json
+-rw-rw-r--+ 1 swaeduae www-data 775 Aug 31 00:51 public/service-worker.js
+
+== ANALYTICS TAG ==
+analytics MISSING
+
+== DEV ROUTE HTTP CHECK ==
+_agent -> 404
+_alias/test -> 404
+_compat -> 404
+
+== SITEMAP ==
+HTTP/2 200 

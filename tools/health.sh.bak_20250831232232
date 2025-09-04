@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+set -u
+TS=$(date +%F_%H%M%S)
+OUT="public/health/health-$TS.txt"; mkdir -p public/health
+{
+  echo "=== QUICK HEALTH $TS ==="
+  echo "== ABOUT =="; php artisan about
+
+  echo; echo "== HTTP PROBES ==";
+  for u in / /about /privacy /terms /org/login; do
+    code=$(curl -s -o /dev/null -w "%{http_code}" "https://swaeduae.ae$u"); echo "GET $u -> $code";
+  done
+  curl -s -I -L https://swaeduae.ae/admin | sed -n '1,4p'
+
+  echo; echo "== ROUTES TOP =="; php artisan route:list | sed -n '1,50p'
+  echo; echo "== MIGRATIONS =="; php artisan migrate:status
+
+  echo; echo "== QUEUE WORKER =="; systemctl is-active swaed-queue.service 2>/dev/null || true
+  sudo systemctl status swaed-queue.service --no-pager --lines 5 2>/dev/null || true
+
+  echo; echo "== PWA =="; ls -l public/manifest.json public/service-worker.js public/img/icon-192.png public/img/icon-512.png 2>/dev/null || true
+  echo; echo "== ANALYTICS TAG =="; curl -s https://swaeduae.ae/ | grep -iE 'analytics:\s*plausible|plausible\.io/js/script\.js' && echo "analytics OK" || echo "analytics MISSING"
+
+  echo; echo "== DEV ROUTE HTTP CHECK ==";
+  for u in _agent _alias/test _compat; do code=$(curl -s -o /dev/null -w "%{http_code}" "https://swaeduae.ae/$u"); echo "$u -> $code"; done
+
+  echo; echo "== SITEMAP =="; curl -s -I https://swaeduae.ae/sitemap.xml | head -n1
+
+} | tee "$OUT"
+echo "Quick health saved to: $OUT"

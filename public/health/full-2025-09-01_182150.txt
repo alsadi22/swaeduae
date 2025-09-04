@@ -1,0 +1,245 @@
+=== FULL HEALTH 2025-09-01_182150 ===
+
+== CACHES REFRESH ==
+caches: refreshed
+
+== ABOUT ==
+
+  Environment ......................................................................................................................................  
+  Application Name ........................................................................................................................ SwaedUAE  
+  Laravel Version .......................................................................................................................... 11.45.2  
+  PHP Version ............................................................................................................................... 8.3.24  
+  Composer Version ........................................................................................................................... 2.2.6  
+  Environment ........................................................................................................................... production  
+  Debug Mode ................................................................................................................................... OFF  
+  URL .................................................................................................................................. swaeduae.ae  
+  Maintenance Mode ............................................................................................................................. OFF  
+  Timezone .............................................................................................................................. Asia/Dubai  
+  Locale ........................................................................................................................................ ar  
+
+  Cache ............................................................................................................................................  
+  Config .................................................................................................................................... CACHED  
+  Events ................................................................................................................................ NOT CACHED  
+  Routes .................................................................................................................................... CACHED  
+  Views ..................................................................................................................................... CACHED  
+
+  Drivers ..........................................................................................................................................  
+  Broadcasting ................................................................................................................................ null  
+  Cache ....................................................................................................................................... file  
+  Database ................................................................................................................................... mysql  
+  Logs ............................................................................................................................... stack / daily  
+  Mail ........................................................................................................................................ smtp  
+  Queue ................................................................................................................................... database  
+  Session ..................................................................................................................................... file  
+
+  Sentry ...........................................................................................................................................  
+  Enabled ...................................................................................................................................... YES  
+  Environment ........................................................................................................................... production  
+  Laravel SDK Version ....................................................................................................................... 4.15.1  
+  PHP SDK Version ........................................................................................................................... 4.15.1  
+  Release .................................................................................................................................. 155d7f1  
+  Sample Rate Errors .......................................................................................................................... 100%  
+  Sample Rate Performance Monitoring ............................................................................................................ 0%  
+  Sample Rate Profiling ......................................................................................................................... 0%  
+  Send Default PII ........................................................................................................................ DISABLED  
+
+  Spatie Permissions ...............................................................................................................................  
+  Features Enabled ......................................................................................................................... Default  
+  Version ................................................................................................................................... 6.21.0  
+
+
+== ROUTES (top) ==
+
+  GET|HEAD  / ....................................................................................................................................................................................... home
+  ANY       _agent{any?} ..................................................................................................................................................... generated::vbin3htIMBR7DqbQ
+  ANY       _alias/{any?} .................................................................................................................................................... generated::jOvU5DmjtzoGjZtC
+  ANY       _compat/{any?} ................................................................................................................................................... generated::Lb3KNzlaKoMYr8uy
+  GET|HEAD  about .................................................................................................................................................................................. about
+  ANY       about-us ............................................................................................................... generated::UAGQHWe47Zlt5Vzg › Illuminate\Routing › RedirectController
+  GET|HEAD  account/applications .................................................................................................................................................... account.applications
+  GET|HEAD  account/certificates .................................................................................................................................................... account.certificates
+  GET|HEAD  account/profile .............................................................................................................................................................. account.profile
+  GET|HEAD  admin ........................................................................................................................................... admin.root › Admin\DashboardController@index
+  GET|HEAD  admin/_diag ....................................................................................................................................................................... admin.diag
+  GET|HEAD  admin/attendance .............................................................................................................. admin.attendance.index › Admin\AttendanceAdminController@index
+  GET|HEAD  admin/attendance/qr/{opportunityId} ................................................................................................. admin.attendance.qr › Admin\AttendanceAdminController@qr
+  ANY       admin/dashboard ............................................................................................................. admin.dashboard.legacy › Illuminate\Routing › RedirectController
+  GET|HEAD  admin/hours ............................................................................................................................ admin.hours.all › Admin\HoursReportController@showAll
+  GET|HEAD  admin/login .......................................................................................................................................... admin.login › Admin\AuthController@show
+  POST      admin/login .................................................................................................................................... admin.login.post › Admin\AuthController@login
+  POST      admin/logout ...................................................................................................................................... admin.logout › Admin\AuthController@logout
+  GET|HEAD  admin/opportunities ................................................................................................................................................ admin.opportunities.index
+  POST      admin/opportunities/{opportunityId}/attendance/complete ................................................................. admin.attendance.complete › Admin\AttendanceAdminController@complete
+  POST      admin/opportunities/{opportunityId}/attendance/finalize ................................................................. admin.attendance.finalize › Admin\AttendanceAdminController@finalize
+  POST      admin/opportunities/{opportunityId}/attendance/manual ....................................................................... admin.attendance.manual › Admin\AttendanceAdminController@manual
+  GET|HEAD  admin/opportunities/{opportunityId}/hours ................................................................................................ admin.hours.show › Admin\HoursReportController@show
+  GET|HEAD  admin/users .............................................................................................................................. admin.users.index › Admin\UserAdminController@index
+  GET|HEAD  admin/users/index .............................................................................................................................. admin.users › Admin\UserAdminController@index
+  POST      admin/users/toggle/{id} .......................................................................................................... admin.users.toggle › Admin\AdminController@toggleUserStatus
+  GET|HEAD  api/user ......................................................................................................................................................... generated::U01Vqr7R4T8S9ymJ
+  GET|HEAD  api/v1/certificates/verify/{code} ................................................................................................................................ generated::0zZThC6VPbRMRVwX
+  GET|HEAD  api/v1/health .................................................................................................................................................... generated::3p2XqwZqoRCj4Ptp
+  GET|HEAD  confirm-password .................................................................................................................. password.confirm › Auth\ConfirmablePasswordController@show
+  POST      confirm-password ...................................................................................................... generated::xqya2SKTbUCcWKVJ › Auth\ConfirmablePasswordController@store
+  GET|HEAD  contact .............................................................................................................................................................................. contact
+  POST      contact ....................................................................................................................................................................... contact.submit
+  POST      email/verification-notification ....................................................................................... verification.send › Auth\EmailVerificationNotificationController@store
+  GET|HEAD  events .................................................................................................................................................. events.index › EventController@index
+  GET|HEAD  events/browse .................................................................................................................................................................. events.browse
+  GET|HEAD  events/{idOrSlug} ......................................................................................................................................... events.show › EventController@show
+  GET|HEAD  faq ................................................................................................................................................................................ pages.faq
+  GET|HEAD  forgot-password ................................................................................................................... password.request › Auth\PasswordResetLinkController@create
+  POST      forgot-password ...................................................................................................................... password.email › Auth\PasswordResetLinkController@store
+  GET|HEAD  ics/{slug} .............................................................................................................................................. ics.show › Public\IcsController@show
+  GET|HEAD  lang/{locale} .................................................................................................................................................................... lang.switch
+  GET|HEAD  login ............................................................................................................................................ login › Auth\PublicAuthController@showLogin
+  POST      login ........................................................................................................................................ login.perform › Auth\PublicAuthController@login
+  ANY       login/organization ..................................................................................................... generated::vqObkR8yoW4gQ75H › Illuminate\Routing › RedirectController
+  POST      logout ............................................................................................................................................. logout › Auth\PublicAuthController@logout
+  GET|HEAD  my/profile ........................................................................................................................................................................ my.profile
+  GET|HEAD  my/profile/demo .............................................................................................................................................................. my.profile.demo
+  GET|HEAD  my/profile/rich .............................................................................................................................................................. my.profile.rich
+  GET|HEAD  opportunities ....................................................................................................................... opportunities.index › Public\OpportunityController@index
+  GET|HEAD  opportunities/{id} .......................................................................................................................................................... opps.public.show
+  GET|HEAD  opportunities/{slug} .................................................................................................................. opportunities.show › Public\OpportunityController@show
+  GET|HEAD  opportunities/{slug}.ics ................................................................................................................. opportunities.ics › PublicOpportunityController@ics
+  POST      opportunities/{slug}/apply ................................................................................................................ opportunities.apply › Public\ApplyController@store
+  POST      opportunities/{slug}/cancel ........................................................................................................ opportunities.cancel › PublicOpportunityController@cancel
+  GET|HEAD  org/dashboard .................................................................................................................................. org.dashboard › Org\DashboardController@index
+  GET|HEAD  org/login .......................................................................................................................................................................... org.login
+  POST      org/login ..................................................................................................................................... org.login.perform › Auth\LoginController@login
+  POST      org/opportunities .................................................................................................................. org.opportunities.store › Org\OpportunityController@store
+  GET|HEAD  org/opportunities .................................................................................................................. org.opportunities.index › Org\OpportunityController@index
+  GET|HEAD  org/opportunities/create ......................................................................................................... org.opportunities.create › Org\OpportunityController@create
+  POST      org/opportunities/{event} ........................................................................................................ org.opportunities.update › Org\OpportunityController@update
+  GET|HEAD  org/opportunities/{event}/applicants ................................................................................................... org.applicants.index › Org\ApplicantsController@index
+  GET|HEAD  org/opportunities/{event}/applicants.csv .......................................................................................... org.applicants.export › Org\ApplicantsController@exportCsv
+  POST      org/opportunities/{event}/applicants/{app}/decision .............................................................................. org.applicants.decision › Org\ApplicantsController@decision
+  POST      org/opportunities/{event}/close .................................................................................................... org.opportunities.close › Org\OpportunityController@close
+  GET|HEAD  org/opportunities/{event}/edit ....................................................................................................... org.opportunities.edit › Org\OpportunityController@edit
+  GET|HEAD  org/opportunities/{opportunity}/shortlist ................................................................................................ org.shortlist.index › Org\ShortlistController@index
+  POST      org/opportunities/{opportunity}/shortlist/bulk ............................................................................................. org.shortlist.bulk › Org\ShortlistController@bulk
+  POST      org/opportunities/{opportunity}/shortlist/slot-cap ............................................................................ org.shortlist.slot_cap › Org\ShortlistController@updateSlotCap
+  GET|HEAD  org/register .................................................................................................................................................................... org.register
+  POST      org/register ............................................................................................................................................................. org.register.submit
+  GET|HEAD  org/settings ................................................................................................................................. org.settings.edit › Org\SettingsController@edit
+  POST      org/settings ............................................................................................................................. org.settings.update › Org\SettingsController@update
+  GET|HEAD  org/setup .......................................................................................................................................... org.setup.form › Org\SetupController@form
+  POST      org/setup ........................................................................................................................................ org.setup.store › Org\SetupController@store
+  ANY       organizations/register ................................................................................................. generated::G0TKUgYbosqhOIrE › Illuminate\Routing › RedirectController
+  GET|HEAD  partners ............................................................................................................................................................................ partners
+  PUT       password .................................................................................................................................... password.update › Auth\PasswordController@update
+
+== MIGRATIONS STATUS ==
+
+  Migration name .................................................................................................................... Batch / Status  
+  2025_08_29_000001_create_payments_table .................................................................................................. [4] Ran  
+  2025_08_29_025402_create_permission_tables ............................................................................................... [3] Ran  
+  2025_08_30_044614_create_jobs_table ...................................................................................................... [5] Ran  
+  2025_08_30_214747_create_failed_jobs_table ............................................................................................... [5] Ran  
+  2025_08_30_235134_create_certificates_table .............................................................................................. [6] Ran  
+  2025_08_31_001702_create_audits_table .................................................................................................... [7] Ran  
+  2025_08_31_001702_create_events_table .................................................................................................... [7] Ran  
+  2025_08_31_001836_add_slug_to_events_table ............................................................................................... [8] Ran  
+  2025_09_01_002332_create_opportunities_table ............................................................................................. [9] Ran  
+  2025_09_01_002333_create_applications_table .............................................................................................. [9] Ran  
+
+
+== QUEUE & SCHEDULER ==
+active
+● swaed-queue.service - Laravel Queue Worker (SwaedUAE)
+     Loaded: loaded (/etc/systemd/system/swaed-queue.service; enabled; vendor preset: enabled)
+     Active: active (running) since Mon 2025-09-01 17:53:16 +04; 28min ago
+   Main PID: 186034 (php)
+      Tasks: 1 (limit: 38144)
+     Memory: 37.6M
+        CPU: 558ms
+     CGroup: /system.slice/swaed-queue.service
+             └─186034 /usr/bin/php artisan queue:work --queue=default --sleep=3 --tries=3 --max-time=3600
+
+Sep 01 17:53:16 swaeduae systemd[1]: Started Laravel Queue Worker (SwaedUAE).
+
+  2025-09-01 18:21:51 Running ['artisan' queue:work --stop-when-empty --queue=default --tries=3 --backoff=10 --timeout=120 --sleep=3] ...... 3s DONE
+  ⇂ queue.tick  
+
+
+== HTTP PROBES ==
+GET / -> 200
+GET /about -> 200
+GET /privacy -> 200
+GET /terms -> 200
+GET /org/login -> 200
+HTTP/2 302 
+date: Mon, 01 Sep 2025 14:21:59 GMT
+content-type: text/html; charset=utf-8
+location: https://swaeduae.ae/admin/login
+cache-control: no-cache, private
+server: cloudflare
+
+== QR VERIFY CHECKS ==
+/qr/verify -> 200
+/qr/verify?code=test -> HTTP/2 302  date: Mon, 01 Sep 2025 14:22:01 GMT content-type: text/html; charset=utf-8 
+throttle spray: 200 200 200 200 200 200 200 200 200 200 200 200 200 200 200 200 200 200 200 200 200 200 200 200 200 200 200 200 429 429 429
+
+== CERT PDF sanity ==
+total 4.0K
+-rw-rwxr--+ 1 swaeduae swaeduae 1.3K Aug 30 23:49 _test.pdf
+
+== PWA (manifest/SW/icons present & non-zero) ==
+OK -rw-rw-r--+ 1 swaeduae www-data 332 Aug 31 00:02 public/manifest.json
+OK -rw-rw-r--+ 1 swaeduae www-data 775 Aug 31 00:51 public/service-worker.js
+OK -rw-rw-r--+ 1 swaeduae www-data 67 Aug 31 00:04 public/img/icon-192.png
+OK -rw-rw-r--+ 1 swaeduae www-data 67 Aug 31 00:04 public/img/icon-512.png
+
+== ANALYTICS on homepage ==
+    <!-- analytics: plausible -->
+  <script defer data-domain="swaeduae.ae" src="https://plausible.io/js/script.js"></script>
+analytics OK
+
+== MAIL & SESSION SNAPSHOT ==
+MAIL_FROM_ADDRESS=admin@swaeduae.ae
+MAIL_MAILER=smtp
+MAIL_HOST=smtppro.zoho.com
+MAIL_PORT=587
+MAIL_ENCRYPTION=tls
+MAIL_USERNAME=admin@swaeduae.ae
+SESSION_DRIVER=file
+SESSION_LIFETIME=120
+SESSION_SECURE_COOKIE=true
+SESSION_SAME_SITE=Lax
+
+== NGINX & CLOUDFLARED ==
+nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /etc/nginx/nginx.conf test is successful
+● cloudflared.service - cloudflared
+     Loaded: loaded (/etc/systemd/system/cloudflared.service; enabled; vendor preset: enabled)
+     Active: active (running) since Mon 2025-09-01 13:04:23 +04; 5h 18min ago
+   Main PID: 2555 (cloudflared)
+      Tasks: 14 (limit: 38144)
+     Memory: 60.8M
+        CPU: 51.107s
+     CGroup: /system.slice/cloudflared.service
+             └─2555 /usr/local/bin/cloudflared --no-autoupdate --config /etc/cloudflared/config.yml tunnel run
+
+Sep 01 16:15:58 swaeduae cloudflared[2555]: 2025-09-01T12:15:58Z INF Tunnel connection curve preferences: [X25519MLKEM768 CurveP256] connIndex=2 event=0 ip=198.41.192.7
+Sep 01 16:15:58 swaeduae cloudflared[2555]: 2025-09-01T12:15:58Z INF Registered tunnel connection connIndex=2 connection=7bbb9816-9205-4e6e-b91e-85897747eb7b event=0 ip=198.41.192.7 location=dxb01 protocol=quic
+Sep 01 16:15:58 swaeduae cloudflared[2555]: 2025-09-01T12:15:58Z INF Registered tunnel connection connIndex=3 connection=7f9c5c91-78f2-4837-891a-5b09dd3152e0 event=0 ip=198.41.200.53 location=sin07 protocol=quic
+Sep 01 17:04:32 swaeduae cloudflared[2555]: 2025-09-01T13:04:32Z ERR Failed to refresh feature selector error="lookup cfd-features.argotunnel.com on 127.0.0.53:53: read udp 127.0.0.1:35113->127.0.0.53:53: i/o timeout"
+Sep 01 18:19:27 swaeduae cloudflared[2555]: 2025-09-01T14:19:27Z ERR Failed to refresh DNS local resolver error="lookup region1.v2.argotunnel.com: i/o timeout"
+
+== BACKUPS ==
+-rw-r--r-- 1 root root 305M Aug 30 21:23 swaeduae_2025-08-30_212254.tar.gz
+-rw-r--r-- 1 root root 305M Aug 30 22:10 swaeduae_2025-08-30_221017.tar.gz
+-rw-r--r-- 1 root root 306M Aug 30 23:59 swaeduae_2025-08-30_235911.tar.gz
+-rw-r--r-- 1 root root 306M Aug 31 00:27 swaeduae_2025-08-31_002730.tar.gz
+-rw-r--r-- 1 root root 2.8K Aug 30 21:22 swaeduae_2025-08-30_212254.sql.gz
+-rw-r--r-- 1 root root 2.8K Aug 30 22:10 swaeduae_2025-08-30_221017.sql.gz
+-rw-r--r-- 1 root root 3.2K Aug 30 23:59 swaeduae_2025-08-30_235911.sql.gz
+-rw-r--r-- 1 root root 3.8K Aug 31 00:27 swaeduae_2025-08-31_002730.sql.gz
+
+== RECENT LOG ERRORS (tail) ==
+latest_log=storage/logs/laravel-2025-09-01.log
+[previous exception] [object] (Symfony\\Component\\Routing\\Exception\\RouteNotFoundException(code: 0): Route [org.root] not defined. at /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/Routing/UrlGenerator.php:517)
+#39 /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/View/Middleware/ShareErrorsFromSession.php(49): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#40 /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(209): Illuminate\\View\\Middleware\\ShareErrorsFromSession->handle()
+[2025-09-01 18:20:46] production.ERROR: The "--columns" option does not exist. {"exception":"[object] (Symfony\\Component\\Console\\Exception\\RuntimeException(code: 0): The \"--columns\" option does not exist. at /var/www/swaeduae/vendor/symfony/console/Input/ArgvInput.php:226)

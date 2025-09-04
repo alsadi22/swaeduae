@@ -1,0 +1,265 @@
+=== SwaedUAE DEEP CHECK 2025-08-31_002020 ===
+== ABOUT ==
+
+  Environment ......................................................................................................................................  
+  Application Name ........................................................................................................................ SwaedUAE  
+  Laravel Version .......................................................................................................................... 11.45.2  
+  PHP Version ............................................................................................................................... 8.3.24  
+  Composer Version ........................................................................................................................... 2.2.6  
+  Environment ........................................................................................................................... production  
+  Debug Mode ................................................................................................................................... OFF  
+  URL .................................................................................................................................. swaeduae.ae  
+  Maintenance Mode ............................................................................................................................. OFF  
+  Timezone .............................................................................................................................. Asia/Dubai  
+  Locale ........................................................................................................................................ ar  
+
+  Cache ............................................................................................................................................  
+  Config .................................................................................................................................... CACHED  
+  Events ................................................................................................................................ NOT CACHED  
+  Routes .................................................................................................................................... CACHED  
+  Views ..................................................................................................................................... CACHED  
+
+  Drivers ..........................................................................................................................................  
+  Broadcasting ................................................................................................................................ null  
+  Cache ....................................................................................................................................... file  
+  Database ................................................................................................................................... mysql  
+  Logs ............................................................................................................................... stack / daily  
+  Mail ........................................................................................................................................ smtp  
+  Queue ................................................................................................................................... database  
+  Session ..................................................................................................................................... file  
+
+  Sentry ...........................................................................................................................................  
+  Enabled ...................................................................................................................................... YES  
+  Environment ........................................................................................................................... production  
+  Laravel SDK Version ....................................................................................................................... 4.15.1  
+  PHP SDK Version ........................................................................................................................... 4.15.1  
+  Release .................................................................................................................................. 155d7f1  
+  Sample Rate Errors .......................................................................................................................... 100%  
+  Sample Rate Performance Monitoring ............................................................................................................ 0%  
+  Sample Rate Profiling ......................................................................................................................... 0%  
+  Send Default PII ........................................................................................................................ DISABLED  
+
+  Spatie Permissions ...............................................................................................................................  
+  Features Enabled ......................................................................................................................... Default  
+  Version ................................................................................................................................... 6.21.0  
+
+
+== ROUTES (top) ==
+
+  GET|HEAD             / ............................................................................................................................................................................ home
+  ANY                  _agent{any?} .......................................................................................................................................... generated::6x6sgmoIw2lfEYqG
+  ANY                  _alias/{any?} ......................................................................................................................................... generated::Wm68akgH3c7KhKrh
+  ANY                  _compat/{any?} ........................................................................................................................................ generated::ZkINXhGG5eCwWfwq
+  GET|HEAD             about ....................................................................................................................................................................... about
+  ANY                  about-us .................................................................................................... generated::NjWhqkHU3YfQDUn8 › Illuminate\Routing › RedirectController
+  GET|HEAD             admin ................................................................................................................................ admin.root › Admin\DashboardController@index
+  GET|HEAD             admin/_diag ............................................................................................................................................................ admin.diag
+  GET|HEAD             admin/apps .............................................................................................................. admin.apps.index › Admin\ApplicationAdminController@index
+  GET|HEAD             admin/attendance ................................................................................................... admin.attendance.index › Admin\AttendanceAdminController@index
+  GET|HEAD             admin/attendance/qr/{opportunityId} ...................................................................................... admin.attendance.qr › Admin\AttendanceAdminController@qr
+  GET|HEAD             admin/attendance/qr/{opportunityId}/finalize ......................................................................................................... admin.attendance.qr.finalize
+  POST                 admin/attendance/qr/{opportunityId}/issue ............................................................................................................... admin.attendance.qr.issue
+  POST                 admin/attendance/qr/{opportunityId}/reset ............................................................................................................... admin.attendance.qr.reset
+  GET|HEAD             admin/audit/export.csv ................................................................................................... admin.audit.export.csv › Admin\AuditController@exportCsv
+  GET|HEAD             admin/categories .......................................................................................................... admin.categories.index › Admin\CategoryController@index
+  POST                 admin/categories .......................................................................................................... admin.categories.store › Admin\CategoryController@store
+  GET|HEAD             admin/categories/create ................................................................................................. admin.categories.create › Admin\CategoryController@create
+  GET|HEAD             admin/categories/{category} ................................................................................................. admin.categories.show › Admin\CategoryController@show
+  PUT|PATCH            admin/categories/{category} ............................................................................................. admin.categories.update › Admin\CategoryController@update
+  DELETE               admin/categories/{category} ........................................................................................... admin.categories.destroy › Admin\CategoryController@destroy
+  GET|HEAD             admin/categories/{category}/edit ............................................................................................ admin.categories.edit › Admin\CategoryController@edit
+  GET|HEAD             admin/certificates .............................................................................................. admin.certificates.index › Admin\CertificateAdminController@index
+  POST                 admin/certificates .............................................................................................. admin.certificates.store › Admin\CertificateAdminController@store
+  POST                 admin/certificates/{id}/resend ................................................................................ admin.certificates.resend › Admin\CertificateAdminController@resend
+  GET|HEAD             admin/dashboard ................................................................................................................. admin.dashboard › Admin\DashboardController@index
+  ANY                  admin/dashboard .................................................................................................. admin.dashboard.legacy › Illuminate\Routing › RedirectController
+  GET|HEAD             admin/events ..................................................................................................................... admin.events.index › Admin\EventController@index
+  POST                 admin/events ..................................................................................................................... admin.events.store › Admin\EventController@store
+  GET|HEAD             admin/events/create ............................................................................................................ admin.events.create › Admin\EventController@create
+  GET|HEAD             admin/events/{event} ............................................................................................................... admin.events.show › Admin\EventController@show
+  PUT|PATCH            admin/events/{event} ........................................................................................................... admin.events.update › Admin\EventController@update
+  DELETE               admin/events/{event} ......................................................................................................... admin.events.destroy › Admin\EventController@destroy
+  GET|HEAD             admin/events/{event}/edit .......................................................................................................... admin.events.edit › Admin\EventController@edit
+  GET|HEAD             admin/export/applications ............................................................................................................................... admin.export.applications
+  GET|HEAD             admin/export/certificates ............................................................................................................................... admin.export.certificates
+  GET|HEAD             admin/export/hours ............................................................................................................................................. admin.export.hours
+  GET|HEAD             admin/export/users ............................................................................................................................................. admin.export.users
+  GET|HEAD             admin/hours ................................................................................................................. admin.hours.all › Admin\HoursReportController@showAll
+  POST                 admin/kyc/{id}/approve ....................................................................................................... admin.kyc.approve › Admin\KycAdminController@approve
+  POST                 admin/kyc/{id}/decline ....................................................................................................... admin.kyc.decline › Admin\KycAdminController@decline
+  GET|HEAD             admin/kyc/{id}/download .................................................................................................... admin.kyc.download › Admin\KycAdminController@download
+  POST                 admin/kyc/{id}/reject .......................................................................................................... admin.kyc.reject › Admin\KycAdminController@reject
+  GET|HEAD             admin/learning ......................................................................................................... admin.learning.index › Admin\LearningAdminController@index
+  POST|PUT|PATCH       admin/learning ....................................................................................................... admin.learning.update › Admin\LearningAdminController@update
+  GET|HEAD             admin/login ............................................................................................................................... admin.login › Admin\AuthController@show
+  POST                 admin/login ......................................................................................................................... admin.login.post › Admin\AuthController@login
+  POST                 admin/logout ........................................................................................................................... admin.logout › Admin\AuthController@logout
+  POST                 admin/news .......................................................................................................................... admin.news.store › Admin\NewsController@store
+
+== MIGRATIONS STATUS ==
+
+  Migration name .................................................................................................................... Batch / Status  
+  2025_08_29_000001_create_payments_table .................................................................................................. [4] Ran  
+  2025_08_29_025402_create_permission_tables ............................................................................................... [3] Ran  
+  2025_08_30_044614_create_jobs_table ...................................................................................................... [5] Ran  
+  2025_08_30_214747_create_failed_jobs_table ............................................................................................... [5] Ran  
+  2025_08_30_235134_create_certificates_table .............................................................................................. [6] Ran  
+  2025_08_31_001702_create_audits_table .................................................................................................... [7] Ran  
+  2025_08_31_001702_create_events_table .................................................................................................... [7] Ran  
+  2025_08_31_001836_add_slug_to_events_table ............................................................................................... [8] Ran  
+
+
+== QUEUE WORKER ==
+active
+● swaed-queue.service - Laravel Queue Worker (SwaedUAE)
+     Loaded: loaded (/etc/systemd/system/swaed-queue.service; enabled; vendor preset: enabled)
+     Active: active (running) since Sun 2025-08-31 00:19:02 +04; 1min 18s ago
+   Main PID: 3836039 (php)
+      Tasks: 1 (limit: 38144)
+     Memory: 38.0M
+        CPU: 155ms
+     CGroup: /system.slice/swaed-queue.service
+             └─3836039 /usr/bin/php artisan queue:work --queue=default --sleep=3 --tries=3 --max-time=3600
+
+Aug 31 00:19:02 swaeduae systemd[1]: Started Laravel Queue Worker (SwaedUAE).
+
+== SCHEDULER DRY RUN ==
+
+  2025-08-31 00:20:21 Running ['artisan' queue:work --stop-when-empty --queue=default --tries=3 --backoff=10 --timeout=120 --sleep=3] ...... 3s DONE
+  ⇂ queue.tick  
+
+
+== HEALTH SCRIPTS ==
+
+[1m== Environment ==(B[m
+PHP:     PHP 8.3.24 (cli) (built: Aug  3 2025 08:57:38) (NTS)
+Laravel: Laravel Framework 11.45.2
+Node:    v22.19.0
+Composer:Composer 2.2.6 2022-02-04 17:00:38
+PHP memory_limit: 512M
+[32m✅(B[m Env read
+
+[1m== Permissions & ACL ==(B[m
+[32m✅(B[m Current user can write storage/logs
+
+[1m== Caches ==(B[m
+[32m✅(B[m optimize:clear (dry)
+[32m✅(B[m config:cache (dry)
+[32m✅(B[m route:cache (dry)
+[32m✅(B[m view:cache (dry)
+
+[1m== Blade route() names vs. defined route names ==(B[m
+[32m✅(B[m No missing route() names in Blade
+
+[1m== Blade layout cycle check (public/) ==(B[m
+[32m✅(B[m No @extends() 2-cycles in public/
+[32m✅(B[m public/layout.blade.php is a base (no @extends) ✔
+
+[1m== Theme usage (TravelPro for public, Argon for admin/org) ==(B[m
+tools/health.sh not found/executable
+SwaedUAE Full Health Report  2025-08-31-002026
+================================================
+
+[health.sh --fix]
+
+[1m== Environment ==(B[m
+PHP:     PHP 8.3.24 (cli) (built: Aug  3 2025 08:57:38) (NTS)
+Laravel: Laravel Framework 11.45.2
+Node:    v22.19.0
+Composer:Composer 2.2.6 2022-02-04 17:00:38
+PHP memory_limit: 512M
+[32m✅(B[m Env read
+
+[1m== Permissions & ACL ==(B[m
+[32m✅(B[m Applied ACLs for www-data and swaeduae on storage/ & bootstrap/cache/
+[32m✅(B[m Current user can write storage/logs
+
+[1m== Caches ==(B[m
+[32m✅(B[m optimize:clear
+[32m✅(B[m config:cache
+[32m✅(B[m route:cache
+[32m✅(B[m view:cache
+
+[1m== Blade route() names vs. defined route names ==(B[m
+[32m✅(B[m No missing route() names in Blade
+
+[1m== Blade layout cycle check (public/) ==(B[m
+[32m✅(B[m No @extends() 2-cycles in public/
+[32m✅(B[m public/layout.blade.php is a base (no @extends) ✔
+
+[1m== Theme usage (TravelPro for public, Argon for admin/org) ==(B[m
+tools/full_health.sh not found/executable
+
+== HTTP PROBES ==
+GET / -> 200
+GET /about -> 200
+GET /privacy -> 200
+GET /terms -> 200
+GET /org/login -> 200
+HTTP/2 302 
+date: Sat, 30 Aug 2025 20:20:30 GMT
+content-type: text/html; charset=utf-8
+location: https://swaeduae.ae/admin/login
+cache-control: no-cache, private
+server: cloudflare
+
+== DEV ROUTE HTTP CHECK ==
+_agent -> 404
+_alias/test -> 404
+_compat -> 404
+
+== MAIL ENV SNAPSHOT ==
+MAIL_FROM_ADDRESS=admin@swaeduae.ae
+MAIL_MAILER=smtp
+MAIL_HOST=smtppro.zoho.com
+MAIL_PORT=587
+MAIL_ENCRYPTION=tls
+MAIL_USERNAME=admin@swaeduae.ae
+
+== SESSION SETTINGS ==
+SESSION_DRIVER=file
+SESSION_LIFETIME=120
+SESSION_SECURE_COOKIE=true
+SESSION_SAME_SITE=Lax
+
+== QR ALIAS ROUTES ==
+  GET|HEAD             admin/attendance/qr/{opportunityId}/finalize ......................................................................................................... admin.attendance.qr.finalize
+  POST                 admin/attendance/qr/{opportunityId}/issue ............................................................................................................... admin.attendance.qr.issue
+  POST                 admin/attendance/qr/{opportunityId}/reset ............................................................................................................... admin.attendance.qr.reset
+
+== RECENT LOG TAIL ==
+latest_log=storage/logs/laravel-2025-08-31.log
+[2025-08-31 00:00:01] production.INFO: scheduler.heartbeat {"at":"2025-08-31T00:00:01+04:00"} 
+[2025-08-31 00:15:01] production.INFO: scheduler.heartbeat {"at":"2025-08-31T00:15:01+04:00"} 
+
+== NGINX & CLOUDFLARED ==
+nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /etc/nginx/nginx.conf test is successful
+● cloudflared.service - cloudflared
+     Loaded: loaded (/etc/systemd/system/cloudflared.service; enabled; vendor preset: enabled)
+     Active: active (running) since Sat 2025-08-30 21:17:12 +04; 3h 3min ago
+   Main PID: 3722456 (cloudflared)
+      Tasks: 16 (limit: 38144)
+     Memory: 17.3M
+        CPU: 32.743s
+     CGroup: /system.slice/cloudflared.service
+             └─3722456 /usr/local/bin/cloudflared --no-autoupdate --config /etc/cloudflared/config.yml tunnel run
+
+Aug 30 21:17:13 swaeduae cloudflared[3722456]: 2025-08-30T17:17:13Z INF Registered tunnel connection connIndex=1 connection=a28f9a3a-97a5-4705-9c6b-9bb12a19bf7b event=0 ip=198.41.192.67 location=dxb01 protocol=quic
+Aug 30 21:17:13 swaeduae cloudflared[3722456]: 2025-08-30T17:17:13Z INF Tunnel connection curve preferences: [X25519MLKEM768 CurveP256] connIndex=2 event=0 ip=198.41.200.13
+Aug 30 21:17:14 swaeduae cloudflared[3722456]: 2025-08-30T17:17:14Z INF Registered tunnel connection connIndex=2 connection=8095c5bc-8aef-4422-957a-1c45fcca88df event=0 ip=198.41.200.13 location=sin15 protocol=quic
+Aug 30 21:17:14 swaeduae cloudflared[3722456]: 2025-08-30T17:17:14Z INF Tunnel connection curve preferences: [X25519MLKEM768 CurveP256] connIndex=3 event=0 ip=198.41.192.7
+Aug 30 21:17:15 swaeduae cloudflared[3722456]: 2025-08-30T17:17:15Z INF Registered tunnel connection connIndex=3 connection=2a4d5ee0-a840-4f4d-8dc0-e497b6ace7da event=0 ip=198.41.192.7 location=dxb01 protocol=quic
+
+== BACKUPS ==
+total 1.2G
+-rw-r--r-- 1 root root 305M Aug 30 21:16 swaeduae_2025-08-30_211608.tar.gz
+-rw-r--r-- 1 root root 305M Aug 30 21:23 swaeduae_2025-08-30_212254.tar.gz
+-rw-r--r-- 1 root root 305M Aug 30 22:10 swaeduae_2025-08-30_221017.tar.gz
+-rw-r--r-- 1 root root 306M Aug 30 23:59 swaeduae_2025-08-30_235911.tar.gz
+total 12K
+-rw-r--r-- 1 root root 2.8K Aug 30 21:22 swaeduae_2025-08-30_212254.sql.gz
+-rw-r--r-- 1 root root 2.8K Aug 30 22:10 swaeduae_2025-08-30_221017.sql.gz
+-rw-r--r-- 1 root root 3.2K Aug 30 23:59 swaeduae_2025-08-30_235911.sql.gz
+
+Deep check saved to: public/health/deep-2025-08-31_002020.txt

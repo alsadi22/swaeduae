@@ -1,0 +1,324 @@
+<?phpnamespace Ap
+use 
+
+class Certificate extends Model{    protect
+    public function user() { return $thi
+    public function opportunity() { re
+
+EOF# Update Opportunity model with
+cat > app/Models/Opportunity.php
+<?phpnamespace App\Models;use Illuminate\Database\Eloquent\Model
+use Illuminate\Support\Str;class Opportunity extends Model{    protected $fillable = [        'title','description','category','cit
+        'organizer_id','checkin_token','checkout_token','is_completed'    ];    protected $dates = ['starts_at','end
+    public function organizer(){ return $this->belongsTo(\App\Models\User::class,'organizer_id'); }    public function attendances(){
+    public function certificates(){ return $this->hasMany(\App\Models\Certificate::class); }    protected static function booted(){        
+            if(empty($m->checkin_token))  $m->checkin_token  = Str::random(32);            if(empty($m->checkout_token)) $m->checkout_token 
+
+    }}EOF# --- Con
+# Volunteer Dashboardcat > app/Http/Contro
+<?phpname
+use 
+use App\Models\Certificate;use Il
+class VolunteerDashboardController extends Controller{    public 
+    public function index(Request $request)    {        $user = $request->user();        $hours =
+        $eventsCount = Attendance::where('user_id',$user->id)->count();        $certsCount = 
+        $attendances = Attendance::with('opportunity')            ->where('user_id',$user->id)       
+        $certificates = Certificate::with('opportunity')            ->where('user_id',$user->id)       
+        return view('volunteer.dashboard', compact('hours','eventsCount','certsCount','attendances','
+    }}EOF
+# At
+ca
+<?p
+
+namespace App\Http\Controllers;use App\Models\Att
+use App\Models\Opportunity;use Illuminate\Http\Request;use Illuminate\Su
+class AttendanceControll
+
+    public function qr(Opportunity $opportunity)    {        // Organizer-only protection (works if you use Spatie roles)        $user = auth()->user();        if (!$user || (!$user->hasRole('org') && !$user->hasRole('admin') && $user->id !== $opportunity->organizer_id)) {            abort(403);        }        return view('opportunities.qr', compact('opportunity'));    }    public function checkIn(Request $request)    {        $request->validate(['opp' => 'required|integer','token' => 'required|string']);        $opportunity = Opportunity::findOrFail($request->input('opp'));        if ($opportunity->checkin_token !== $request->input('token')) {            return redirect('/')->with('error', __('Invalid check-in token.'));        }        if (!auth()->check()) return redirect()->rou
+    
+  
+   
+
+        if (!$attendance->check_in_at) {           
+            $attendance->save();        }        return redirect()->route
+    }    public function checkOut(Request $request)    {        $request->validate(['opp' => 'required|integer','token' => 'required|string']);        $opportunity = Opportunity::findOrFail($request->input('opp'));        if ($opportunity->checkout_token !== $request->input('token')) {            return redirect('/')->with('error', __('Invalid check-out token.'));        }        if (!auth()->check()) return redirect()->route('login')->with('error', __('Please login to check out.'));        $attendance = Attendance::firstOrCreate(            ['user_id' => auth()->id(), 'opportunity_id' => $opportunity->id]        );        if (!$attendance->check_in_at) {            // If user never checked in, set in now to avoid negative hours            $attendance->check_in_at =
+        }      
+
+        $attendanc
+        $attendance->save();        r
+    }
+
+EOF# Certificates i
+
+<?phpnamespace App\Http\Controllers;
+
+use App\Models\Certificate;us
+u
+use Illuminate\Support\Str;use Illuminate\Support\Carbon;class CertificateController exte
+
+    // Organizer issues certificates for attendees with hours > 0    public fun
+    {        $user = auth()->user();        if (!$user || (!$user->hasRole('org') && !$user-
+ 
+   
+
+        $issued = 0
+        $ro
+        foreach ($rows as $row) {
+            $exists = Certificate::where('user_id',$row->user_id)->where('opportunity_id',$opportunity->id)->first();
+            if (!$exists) {
+                Certificate::create([
+                    'user_id' => $row->user_id,
+                    'opportunity_id' => $opportunity->id,
+                    'code' => strtoupper(Str::random(10)),
+                    'hours' => $row->hours,
+                    'issued_at' => Carbon::now(),
+                ]);
+                $issued++;
+            }
+        }
+
+        return back()->with('success', trans_choice(':n certificate issued|:n certificates issued', $issued, ['n' => $issued]));
+    }
+
+    // Public verification
+    public function verify($code)
+    {
+        $cert = Certificate::with(['user','opportunity'])->where('code',$code)->first();
+        return view('certificates.verify', ['cert'=>$cert, 'code'=>$code]);
+    }
+
+    // Printable certificate page
+    public function show($code)
+    {
+        $cert = Certificate::with(['user','opportunity'])->where('code',$code)->firstOrFail();
+        return view('certificates.show', compact('cert'));
+    }
+}
+EOF
+
+
+# --- Views ---
+
+# Volunteer dashboard
+mkdir -p resources/views/volunteer resources/views/certificates
+cat > resources/views/volunteer/dashboard.blade.php <<'EOF'
+@extends('layouts.app')
+@section('title', __('My Dashboard').' | '.config('app.name'))
+
+@section('page_header')
+  <x-page-header :title="__('My Volunteer Dashboard')" :subtitle="__('Track your hours, events, and certificates')" />
+@endsection
+
+@section('content')
+  <div class="row g-3">
+    <div class="col-md-4">
+      <div class="card shadow-sm"><div class="card-body">
+        <div class="text-muted small">{{ __('Total Hours') }}</div>
+        <div class="h3 fw-bold text-navy">{{ number_format($hours,2) }}</div>
+      </div></div>
+    </div>
+    <div class="col-md-4">
+      <div class="card shadow-sm"><div class="card-body">
+        <div class="text-muted small">{{ __('Events Attended') }}</div>
+        <div class="h3 fw-bold text-navy">{{ $eventsCount }}</div>
+      </div></div>
+    </div>
+    <div class="col-md-4">
+      <div class="card shadow-sm"><div class="card-body">
+        <div class="text-muted small">{{ __('Certificates') }}</div>
+        <div class="h3 fw-bold text-navy">{{ $certsCount }}</div>
+      </div></div>
+    </div>
+  </div>
+
+  <div class="row g-3 mt-1">
+    <div class="col-lg-6">
+      <div class="card shadow-sm h-100">
+        <div class="card-body">
+          <h6 class="fw-bold text-navy mb-2">{{ __('Recent Attendance') }}</h6>
+          @if($attendances->isEmpty())
+            <div class="empty-state">{{ __('No attendance records yet.') }}</div>
+          @else
+          <div class="table-responsive">
+            <table class="table align-middle">
+              <thead><tr><th>{{ __('Event') }}</th><th>{{ __('Check-in') }}</th><th>{{ __('Check-out') }}</th><th>{{ __('Hours') }}</th></tr></thead>
+              <tbody>
+                @foreach($attendances as $a)
+                  <tr>
+                    <td><a class="link-teal" href="{{ route('opportunities.show', $a->opportunity) }}">{{ $a->opportunity->title }}</a></td>
+                    <td>{{ optional($a->check_in_at)->format('d M Y H:i') }}</td>
+                    <td>{{ optional($a->check_out_at)->format('d M Y H:i') }}</td>
+                    <td>{{ number_format($a->hours,2) }}</td>
+                  </tr>
+                @endforeach
+              </tbody>
+            </table>
+          </div>
+          @endif
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="card shadow-sm h-100">
+        <div class="card-body">
+          <h6 class="fw-bold text-navy mb-2">{{ __('Recent Certificates') }}</h6>
+          @if($certificates->isEmpty())
+            <div class="empty-state">{{ __('No certificates yet.') }}</div>
+          @else
+            <ul class="list-group list-group-flush">
+              @foreach($certificates as $c)
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  <div>
+                    <div class="fw-semibold">{{ $c->opportunity->title }}</div>
+                    <div class="text-muted small">{{ __('Code') }}: {{ $c->code }} &middot; {{ __('Hours') }}: {{ number_format($c->hours,2) }}</div>
+                  </div>
+                  <a class="btn btn-outline-teal btn-sm" href="{{ route('certificates.show',$c->code) }}" target="_blank">{{ __('View/Print') }}</a>
+                </li>
+              @endforeach
+            </ul>
+          @endif
+        </div>
+      </div>
+    </div>
+  </div>
+@endsection
+EOF
+
+# Certificates verify page
+cat > resources/views/certificates/verify.blade.php <<'EOF'
+@extends('layouts.app')
+@section('title', __('Verify Certificate').' | '.config('app.name'))
+
+@section('page_header')
+  <x-page-header :title="__('Certificate Verification')" :subtitle="__('Enter or scan a certificate code to verify authenticity')" />
+@endsection
+
+@section('content')
+  @if(!$cert)
+    <div class="empty-state">
+      <div class="h5">{{ __('No certificate found for code:') }} <strong>{{ $code }}</strong></div>
+      <div class="text-muted">{{ __('Please check the code and try again.') }}</div>
+    </div>
+  @else
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h5 class="text-navy fw-bold mb-2">{{ __('Valid Certificate') }}</h5>
+        <p class="mb-1"><strong>{{ __('Volunteer') }}:</strong> {{ $cert->user->name }}</p>
+        <p class="mb-1"><strong>{{ __('Event') }}:</strong> {{ $cert->opportunity->title }}</p>
+        <p class="mb-1"><strong>{{ __('Hours') }}:</strong> {{ number_format($cert->hours,2) }}</p>
+        <p class="mb-3"><strong>{{ __('Issued') }}:</strong> {{ optional($cert->issued_at)->format('d M Y H:i') }}</p>
+        <a class="btn btn-teal" href="{{ route('certificates.show',$cert->code) }}" target="_blank">{{ __('View/Print Certificate') }}</a>
+      </div>
+    </div>
+  @endif
+@endsection
+EOF
+
+# Printable certificate page
+cat > resources/views/certificates/show.blade.php <<'EOF'
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Certificate {{ $cert->code }} | SawaedUAE</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{{ asset('vendor/bootstrap/bootstrap.min.css') }}">
+  <style>
+    body{background:#f5f7fa}
+    .cert{max-width:900px;margin:40px auto;background:#fff;border:8px solid #e4efe9;border-radius:16px;padding:40px;box-shadow:0 10px 30px rgba(0,0,0,.05)}
+    .brand{color:#0b3b5a;font-weight:800}
+    .accent{color:#0fb9b1}
+    .code{letter-spacing:2px}
+  </style>
+</head>
+<body>
+<div class="cert text-center">
+  <h1 class="brand">SawaedUAE</h1>
+  <h4 class="mb-4">{{ __('Certificate of Volunteer Service') }}</h4>
+  <p class="lead">{{ __('This is to certify that') }}</p>
+  <h2 class="mb-1">{{ $cert->user->name }}</h2>
+  <p class="mb-4">{{ __('has successfully completed volunteer service for the event') }}</p>
+  <h3 class="mb-1 accent">{{ $cert->opportunity->title }}</h3>
+  <p class="mb-4">{{ __('with total service hours of') }} <strong>{{ number_format($cert->hours,2) }}</strong></p>
+  <p class="mb-4">{{ __('Issued on') }} {{ optional($cert->issued_at)->format('d M Y') }}</p>
+  <div class="mb-3">{{ __('Verification Code') }}: <strong class="code">{{ $cert->code }}</strong></div>
+  <img alt="QR" src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data={{ urlencode(route('certificates.verify',$cert->code)) }}">
+  <div class="mt-4">
+    <a onclick="window.print()" class="btn btn-success">{{ __('Print') }}</a>
+    <a class="btn btn-outline-secondary" href="{{ route('certificates.verify',$cert->code) }}" target="_blank">{{ __('Verify Online') }}</a>
+  </div>
+</div>
+</body>
+</html>
+EOF
+
+# Organizer QR display page for an opportunity
+cat > resources/views/opportunities/qr.blade.php <<'EOF'
+@extends('layouts.app')
+@section('title', __('Event QR Check-in/Out').' | '.config('app.name'))
+
+@section('page_header')
+  <x-page-header :title="__('QR Codes for')" :subtitle="$opportunity->title" />
+@endsection
+
+@section('content')
+  <div class="row g-3">
+    <div class="col-md-6">
+      <div class="card shadow-sm h-100 text-center">
+        <div class="card-body">
+          <h5 class="fw-bold text-navy mb-3">{{ __('Check-in') }}</h5>
+          @php
+            $inUrl = route('attendance.checkin',['opp'=>$opportunity->id,'token'=>$opportunity->checkin_token]);
+          @endphp
+          <img alt="Check-in QR" class="img-fluid" src="https://api.qrserver.com/v1/create-qr-code/?size=240x240&data={{ urlencode($inUrl) }}">
+          <div class="mt-2 small"><a class="link-teal" href="{{ $inUrl }}" target="_blank">{{ $inUrl }}</a></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card shadow-sm h-100 text-center">
+        <div class="card-body">
+          <h5 class="fw-bold text-navy mb-3">{{ __('Check-out') }}</h5>
+          @php
+            $outUrl = route('attendance.checkout',['opp'=>$opportunity->id,'token'=>$opportunity->checkout_token]);
+          @endphp
+          <img alt="Check-out QR" class="img-fluid" src="https://api.qrserver.com/v1/create-qr-code/?size=240x240&data={{ urlencode($outUrl) }}">
+          <div class="mt-2 small"><a class="link-teal" href="{{ $outUrl }}" target="_blank">{{ $outUrl }}</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="alert alert-light border mt-3">
+    <i class="bi bi-info-circle me-1"></i>
+    {{ __('Ask volunteers to scan the QR and login. Check-in/out times are recorded and hours are calculated automatically on checkout.') }}
+  </div>
+@endsection
+EOF
+
+
+# --- ROUTES ---
+
+# Ensure controller imports exist once
+grep -q "use App\\Http\\Controllers\\VolunteerDashboardController;" routes/web.php || sed -i '1i use App\\Http\\Controllers\\VolunteerDashboardController;' routes/web.php
+grep -q "use App\\Http\\Controllers\\AttendanceController;" routes/web.php || sed -i '1i use App\\Http\\Controllers\\AttendanceController;' routes/web.php
+grep -q "use App\\Http\\Controllers\\CertificateController;" routes/web.php || sed -i '1i use App\\Http\\Controllers\\CertificateController;' routes/web.php
+grep -q "use App\\Http\\Controllers\\OpportunityController;" routes/web.php || sed -i '1i use App\\Http\\Controllers\\OpportunityController;' routes/web.php
+
+# Append new routes (idempotent)
+grep -q "Route::get('/dashboard'" routes/web.php || cat <<'EOF' >> routes/web.php
+
+// ===== Volunteer Dashboard =====
+Route::get('/dashboard', [VolunteerDashboardController::class, 'index'])->middleware('auth')->name('dashboard');
+
+// ===== Attendance (QR) =====
+Route::get('/opportunities/{opportunity}/qr', [AttendanceController::class, 'qr'])->name('opportunities.qr');
+Route::get('/attendance/check-in', [AttendanceController::class, 'checkIn'])->name('attendance.checkin');
+Route::get('/attendance/check-out', [AttendanceController::class, 'checkOut'])->name('attendance.checkout');
+
+// ===== Certificates =====
+Route::post('/opportunities/{opportunity}/certificates/issue', [CertificateController::class, 'issueForOpportunity'])
+    ->middleware('auth')->name('certificates.issue');
+Route::get('/verify/{code}', [CertificateController::class, 'verify'])->name('certificates.verify');
+Route::get('/certificates/{code}', [CertificateController::class, 'show'])->name('certificates.show');
+EOF

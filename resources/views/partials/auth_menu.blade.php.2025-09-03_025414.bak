@@ -1,0 +1,30 @@
+<li class="nav-item" style="list-style:none;position:relative;">
+  <style>
+    .auth-dd{position:relative;display:inline-block}
+    .auth-dd[open] .auth-menu{display:block}
+    .auth-toggle{cursor:pointer;display:inline-block;padding:.4rem .6rem}
+    .auth-menu{display:none;position:absolute;right:0;top:calc(100% + 6px);min-width:220px;background:#fff;border:1px solid #e6e6e6;border-radius:12px;box-shadow:0 10px 24px rgba(0,0,0,.08);padding:.4rem;}
+    .auth-menu a,.auth-menu form button{display:block;width:100%;text-align:left;padding:.5rem .6rem;border-radius:8px;background:none;border:0;color:#222;text-decoration:none}
+    .auth-menu a:hover,.auth-menu form button:hover{background:#f5f7fb}
+    @media (max-width: 768px){ .auth-menu{position:static;box-shadow:none;border:0;display:block} }
+  </style>
+
+  <details class="auth-dd">
+    <summary class="auth-toggle">Account ▾</summary>
+    <div class="auth-menu">
+      @auth
+        <a href="{{ route('my.profile') }}">My Profile</a>
+        @if (Auth::user()->hasRole('org')) <a href="{{ url('/org') }}">Org Dashboard</a> @endif
+        <form method="POST" action="{{ route('logout.perform') }}">
+          @csrf
+          <button type="submit">Logout</button>
+        </form>
+      @else
+        <a href="{{ route('login') }}">Volunteer Login</a>
+        <a href="{{ route('register') }}">Volunteer Register</a>
+        <a href="{{ route('org.login') }}">Organization Login</a>
+        <a href="{{ route('org.register') }}">Organization Register</a>
+      @endauth
+    </div>
+  </details>
+</li>

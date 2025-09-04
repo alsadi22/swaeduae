@@ -1,0 +1,13 @@
+/* TEMP: kill legacy jumbo arrows that appear on /opportunities */
+.opportunities-page .legacy-pager,
+.opportunities-page .legacy-pager *, 
+.opportunities-page .big-pager,
+.opportunities-page .big-pager *,
+.opportunities-page .arrow-left,
+.opportunities-page .arrow-right { display:none !important; }
+
+/* Very defensive: hide any freestanding chevron arrows built with rotated borders */
+.opportunities-page div[style*="rotate(45deg)"],
+.opportunities-page div[style*="rotate(-45deg)"],
+.opportunities-page button[style*="rotate(45deg)"],
+.opportunities-page button[style*="rotate(-45deg)"] { display:none !important; }

@@ -1,0 +1,12 @@
+@include@include@include<!DOCTYPE html>
+<html class="no-js" lang="{{ app()->getLocale() }}">
+  <x-head/>
+  <body>
+    <x-preloader/>
+    <x-header/>
+    <x-header_search/>
+    @yield("content")
+    <x-footer/>
+    <x-script/>
+  </body>
+</html>

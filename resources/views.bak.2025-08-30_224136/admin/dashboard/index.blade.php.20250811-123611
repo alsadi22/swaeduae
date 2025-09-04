@@ -1,0 +1,122 @@
+@extends('layouts.admin')
+@section('title','Dashboard')
+@section('page_title','Admin Dashboard')
+
+@section('content')
+<div class="row g-3">
+  <div class="col-6 col-md-3">
+    <div class="p-3 card-kpi bg-body">
+      <div class="label">Applications</div>
+      <div class="kpi" id="kpiApplications">{{ $metrics['totals']['applications'] ?? 0 }}</div>
+    </div>
+  </div>
+  <div class="col-6 col-md-3">
+    <div class="p-3 card-kpi bg-body">
+      <div class="label">Opportunities</div>
+      <div class="kpi" id="kpiOpportunities">{{ $metrics['totals']['opportunities'] ?? 0 }}</div>
+    </div>
+  </div>
+  <div class="col-6 col-md-3">
+    <div class="p-3 card-kpi bg-body">
+      <div class="label">Organizations</div>
+      <div class="kpi" id="kpiOrganizations">{{ $metrics['totals']['organizations'] ?? 0 }}</div>
+    </div>
+  </div>
+  <div class="col-6 col-md-3">
+    <div class="p-3 card-kpi bg-body">
+      <div class="label">Users</div>
+      <div class="kpi" id="kpiUsers">{{ $metrics['totals']['users'] ?? 0 }}</div>
+    </div>
+  </div>
+
+  <div class="col-12 col-xl-8">
+    <div class="card">
+      <div class="card-header fw-semibold">Activity (last 12 months)</div>
+      <div class="card-body canvas-wrap">
+        <canvas id="chartActivity" height="120"></canvas>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-xl-4">
+    <div class="card">
+      <div class="card-header fw-semibold">New users (last 12 months)</div>
+      <div class="card-body canvas-wrap">
+        <canvas id="chartUsers" height="120"></canvas>
+      </div>
+    </div>
+  </div>
+
+  @if (!empty($metrics['recent']['applications']))
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header fw-semibold">Recent Applications</div>
+      <div class="table-responsive">
+        <table class="table table-sm align-middle mb-0">
+          <thead class="table-light">
+            <tr><th>ID</th><th>Name</th><th>Opportunity</th><th>Submitted</th></tr>
+          </thead>
+          <tbody>
+            @foreach($metrics['recent']['applications'] as $a)
+              <tr>
+                <td>{{ $a['id'] }}</td>
+                <td>{{ $a['user_name'] ?? $a['name'] ?? '—' }}</td>
+                <td>{{ $a['opportunity'] ?? '—' }}</td>
+                <td>{{ $a['created_at'] ?? '' }}</td>
+              </tr>
+            @endforeach
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  @endif
+</div>
+@endsection
+
+@push('scripts')
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+<script>
+(async function(){
+  // hydrate from backend then refresh via metrics endpoint
+  const init = @json($metrics);
+
+  function render(data){
+    const labels = data.months.labels;
+    const c
+    const ctxU = document.getElementById('chartUsers');
+    if(window._chartA) window._chartA.destroy();
+    if(window._chartU) window._c
+
+    window._chartA =
+      type: 'line',
+      data: { labels,
+        datasets: [
+          {label:'Applications', data:data.months.applications, tension:.3}
+          {label:'O
+        ]
+      },
+      options: 
+    });
+
+    window._chartU = new Chart(ctxU, {
+      type: 'bar',
+      data:
+      options: { responsive:true, maintainAspectRatio:false }
+    });
+
+    // KPIs
+    for (const k 
+      const el = document.getElementByI
+      if(el) el.textContent =
+    }
+  }
+
+  render(init);
+
+  try {
+    const res = await fetch("{{ route('admin
+    if(res.ok){ render(await re
+ 
+})();
+</script>
+@endpush

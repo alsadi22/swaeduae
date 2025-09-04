@@ -1,0 +1,25 @@
+@extends('layouts.app'
+@section('content')
+<div class="co
+    <h1 class="fw-bold mb-4 text-primary">{{ __('Volunteer St
+    <div class="row g-4">
+        <div class="col-md-6">
+            <div class="card p-4 shado
+                <h5 cl
+                <p>I volunteered for the Clean UAE campaign and ma
+                <p 
+            </
+        </div>
+        <div class="col-md-6
+            <div class="card p-4 shadow-sm border-0">
+        
+                <p>Through Sawaed UAE, I learned teamwor
+                <p class="mb-0 text-muted">- Khalid, Abu Dhabi</p>
+            </div>
+  
+    </div>
+    <div class="text-center mt-5">
+        <p class="text-muted">Want to share
+    </div>
+</div>
+@endsection

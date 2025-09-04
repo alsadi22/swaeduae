@@ -1,0 +1,250 @@
+@extends('layouts.app')@section('title', __('messages.events'))@section('content
+
+  <input class="form-control me-2" name="search" valu
+  <button class="btn btn-outline-secondary">{{ __('
+</form><div c
+  @forelse($events as $e)    <div class="col-12 col-md-6 col-lg-4">      <div class="card p-
+      
+        <div class="text-m
+        <p class="text-muted small mb-0">{{ \Illuminate\Support\Str::limit($e->description, 120) }}</p>      </div>   
+  @empty    <div class="col-12 text-muted">{{ __('messages.no_events') }}</div>  @endforelse</div><di
+  {{ $event
+</div>@endsectionEOF# Event show
+@extends('layouts.app')@section('title', $event->title)@section('conten
+<div class="card p-4">  <h3 class="mb
+  <div class="text-muted mb-3">{{ $event->date
+  <div class="mb-4">{!! nl2br(e($event->description)) !!}</div>  @auth    <a href="{{ route('volunteer.profile') }}" class="btn btn-dark">{{ __('messages.join_event') }}</a>  @else    <a href="{{ route('login') }}" class="btn btn-primary">{{ __('messages.login_to_join') }}</a>  @endauth</div>@endsectionEOF# Volunteer profilecat > resources/views/volunteer/profile.blade.php <<'EOF'@extends('layouts.app')@section('title', __('messages.dashboard'))@section('content')<div class="row g-3">  <div class="col-lg-4">    <div class="card p-3">      <h5 class="mb-2">{{ auth()->user()->name }}</h5>      <div class="text-muted small mb-2">{{ auth()->user()->email }}</div>      <div class="fw-bold">{
+
+  </div>  <div class="col-lg-8">    <div cl
+      <h6 class="mb-3">{{ __('
+      @if(
+        <div class="text-muted small">
+
+        <div class="table-responsive
+          <table class="table ta
+            <thead><tr><th>{{ __('messages.date') }}</th><th>{
+            <tb
+              
+
+             
+                  <td>{{ $h->hours }}</td>                  <td>{{ $h->status 
+                  <td>{{ $h->notes }}</td>                </tr>              @endforeach            </tbody>
+          </table>        </div>      @endif    </div>    <div class="card p-3
+      <h6 class="mb-3">{{ __('messages.certificates') }}</h6>      @if($ce
+        <div clas
+      @else 
+          @foreach($certificates as $c)            <li class="list-group-item d-flex justify-content-b
+              <span>#{{ $c->id }} — {{ $c->status }} — {{ optional($c->issued_at)->toDateString()
+              <a
+            
+          
+        
+      
+
+  </div></div>@endsectionE
+# Certificate veri
+cat > r
+
+@section('title', __('messages.certificate_verification'))@section('content')<div class="card p-4 text-center">  @if(!$found)     <h4 class="text-danger mb-2">{{ __('messages.certificate_not_found') }}</h4>     <p class="text-mut
+  @else    
+     <p class="text-muted">{{ __('messages.c
+     <div class="mt-3">
+        <div class="fw-bold">ID: {{ $certificate
+
+        <div>{{ __(
+        <div>{{ __('mes
+     </div>  @endif</div>@endsectionEOF# Static pages
+@extends('layouts.app')@section('title', __('messages.ab
+@section('content')<div class="card p-4"><h3 c
+@endse
+
+cat > resources/views/pag
+@extends('layouts.app'
+@section('title', __('messages.contact'))@section('content')<div cl
+  <h3 class="mb-3">{{ __('mes
+  <p class="text-muted">{{ __('messages.contact_text') }}</p>  <ul class="mb-0">    <li>Email: info@swaeduae.ae</li>  </ul></div>@endsectionEOFcat > resources/views/pages/faq.bla
+@extends('layouts.a
+@section('title', __('messages.faq'))@section('content')<div class="card p-4">  <h3 class="m
+  <p class="text-muted">{{ __('messages.faq_text') }}</p></div>@endsectionEOFcat > resources/views
+@extends('layouts.
+@section('title'
+@section('content')
+<div class="
+  <h3 clas
+  <p cla
+</div>
+
+EOF
+cat > resources/views/admin/events/index.blade.php <<'EOF'
+@extends('layouts.app')
+@section('title','Admin —
+@section('content')<a class="btn btn-dark mb-3" href="{{ route('admin.events.create') }}">+ New Event</a><div class="table-responsive"><table class="table">  <thead><tr><th>ID</th><th>Titl
+  <tbody>    @foreach($events as $e
+      <tr>
+        <td>{{ $e->id }}</td>
+        <td>{{ $e->title }}</td>
+        <td>{{ $e->date->toDateString() }}</td>
+        <td>{{ $e->location }}</td>
+        <td class="text-nowrap">
+          <a class="btn btn-sm btn-outline-secondary" href="{{ route('admin.events.edit',$e) }}">Edit</a>
+          <form class="d-inline" method="POST" action="{{ route('admin.events.destroy',$e) }}">@csrf @method('DELETE')
+            <button class="btn btn-sm btn-outline-danger">Delete</button>
+          </form>
+        </td>
+      </tr>
+    @endforeach
+  </tbody>
+</table>
+</div>
+{{ $events->links() }}
+@endsection
+EOF
+
+cat > resources/views/admin/events/create.blade.php <<'EOF'
+@extends('layouts.app')
+@section('title','Admin — Create Event')
+
+@section('content')
+<form method="POST" action="{{ route('admin.events.store') }}" class="card p-4">
+  @csrf
+  @include('admin.events.form', ['button' => 'Create'])
+</form>
+@endsection
+EOF
+
+cat > resources/views/admin/events/edit.blade.php <<'EOF'
+@extends('layouts.app')
+@section('title','Admin — Edit Event')
+
+@section('content')
+<form method="POST" action="{{ route('admin.events.update',$event) }}" class="card p-4">
+  @csrf @method('PUT')
+  @include('admin.events.form', ['button' => 'Update'])
+</form>
+@endsection
+EOF
+
+cat > resources/views/admin/events/form.blade.php <<'EOF'
+<div class="row g-3">
+  <div class="col-md-6">
+    <label class="form-label">Title</label>
+    <input class="form-control" name="title" value="{{ old('title', $event->title ?? '') }}" required>
+  </div>
+  <div class="col-md-6">
+    <label class="form-label">Date</label>
+    <input type="date" class="form-control" name="date" value="{{ old('date', isset($event) ? $event->date->toDateString() : '') }}" required>
+  </div>
+  <div class="col-md-6">
+    <label class="form-label">Location</label>
+    <input class="form-control" name="location" value="{{ old('location', $event->location ?? '') }}">
+  </div>
+  <div class="col-12">
+    <label class="form-label">Description</label>
+    <textarea rows="6" class="form-control" name="description">{{ old('description', $event->description ?? '') }}</textarea>
+  </div>
+  <div class="col-md-4">
+    <label class="form-label">Hours</label>
+    <input type="number" step="0.25" class="form-control" name="hours" value="{{ old('hours', $event->hours ?? '') }}">
+  </div>
+  <div class="col-12">
+    <button class="btn btn-dark">{{ $button }}</button>
+  </div>
+</div>
+EOF
+
+########################################
+# 7) TRANSLATION KEYS (append if files exist)
+########################################
+mkdir -p resources/lang/ar resources/lang/en
+
+# We append arrays safely; adjust if your files already return arrays.
+cat > resources/lang/en/messages.php <<'EOF'
+<?php
+return [
+  'events' => 'Events',
+  'platform' => 'The Platform',
+  'faq' => 'FAQ',
+  'contact' => 'Contact',
+  'dashboard' => 'Dashboard',
+  'logout' => 'Logout',
+  'login' => 'Login',
+  'register' => 'Register',
+  'make_difference' => 'Make a Difference',
+  'join_thousands' => 'Join thousands of volunteers serving the community.',
+  'browse_events' => 'Browse Events',
+  'upcoming_opportunities' => 'Upcoming Opportunities',
+  'no_opportunities' => 'No opportunities available.',
+  'latest_events' => 'Latest Events',
+  'search_events' => 'Search events...',
+  'search' => 'Search',
+  'no_events' => 'No events found.',
+  'join_event' => 'Join this Event',
+  'login_to_join' => 'Login to Join',
+  'total_hours' => 'Total Hours',
+  'recent_hours' => 'Recent Hours',
+  'no_hours' => 'No hours yet.',
+  'hours' => 'Hours',
+  'date' => 'Date',
+  'status' => 'Status',
+  'notes' => 'Notes',
+  'certificates' => 'Certificates',
+  'no_certificates' => 'No certificates yet.',
+  'view' => 'View',
+  'certificate_verification' => 'Certificate Verification',
+  'certificate_not_found' => 'Certificate Not Found',
+  'certificate_not_found_desc' => 'We could not find a certificate with this code.',
+  'certificate_valid' => 'Certificate is Valid',
+  'certificate_valid_desc' => 'This certificate is valid in the SawaedUAE system.',
+  'issued_at' => 'Issued at',
+  'about' => 'About',
+  'about_text' => 'Sawaed UAE is a volunteer platform connecting people to community impact.',
+  'contact_text' => 'Reach us with any questions or partnership ideas.',
+  'platform_text' => 'Learn about how our platform works and how to participate.',
+];
+EOF
+
+cat > resources/lang/ar/messages.php <<'EOF'
+<?php
+return [
+  'events' => 'الفعاليات',
+  'platform' => 'عن المنصة',
+  'faq' => 'الأسئلة الشائعة',
+  'contact' => 'تواصل معنا',
+  'dashboard' => 'لوحة التحكم',
+  'logout' => 'تسجيل الخروج',
+  'login' => 'تسجيل الدخول',
+  'register' => 'إنشاء حساب',
+  'make_difference' => 'اصنع الفرق',
+  'join_thousands' => 'انضم إلى آلاف المتطوعين الذين يساهمون في خدمة المجتمع.',
+  'browse_events' => 'استكشف الفعاليات',
+  'upcoming_opportunities' => 'الفرص القادمة',
+  'no_opportunities' => 'لا توجد فرص متاحة.',
+  'latest_events' => 'أحدث الفعاليات',
+  'search_events' => 'ابحث في الفعاليات...',
+  'search' => 'بحث',
+  'no_events' => 'لا توجد فعاليات.',
+  'join_event' => 'انضم إلى هذه الفعالية',
+  'login_to_join' => 'سجّل الدخول للانضمام',
+  'total_hours' => 'إجمالي الساعات',
+  'recent_hours' => 'أحدث الساعات',
+  'no_hours' => 'لا توجد ساعات مسجلة.',
+  'hours' => 'الساعات',
+  'date' => 'التاريخ',
+  'status' => 'الحالة',
+  'notes' => 'ملاحظات',
+  'certificates' => 'الشهادات',
+  'no_certificates' => 'لا توجد شهادات بعد.',
+  'view' => 'عرض',
+  'certificate_verification' => 'التحقق من الشهادة',
+  'certificate_not_found' => 'لم يتم العثور على الشهادة',
+  'certificate_not_found_desc' => 'لم نتمكن من العثور على شهادة بهذا الرمز.',
+  'certificate_valid' => 'الشهادة صالحة',
+  'certificate_valid_desc' => 'هذه الشهادة صالحة في نظام سواعد الإمارات.',
+  'issued_at' => 'تاريخ الإصدار',
+  'about' => 'من نحن',
+  'about_text' => 'سواعد الإمارات منصة للتطوع تربط الأفراد بفرص خدمة المجتمع.',
+  'contact_text' => 'تواصل معنا لأي استفسارات أو شراكات.',
+  'platform_text' => 'تعرّف على كيفية عمل منصتنا وكيفية المشاركة.',
+];
+EOF
+

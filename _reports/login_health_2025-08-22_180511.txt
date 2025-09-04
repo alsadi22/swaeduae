@@ -1,0 +1,52 @@
+Login & Health Report — 2025-08-22_180511
+Base URL: http://127.0.0.1:8000
+------------------------------------------------------------
+ROUTES SNAPSHOT
+------------------------------------------------------------
+
+In web.php line 330:
+                 
+  Unmatched ')'  
+                 
+
+
+In web.php line 330:
+                 
+  Unmatched ')'  
+                 
+
+
+In web.php line 330:
+                 
+  Unmatched ')'  
+                 
+
+
+In web.php line 330:
+                 
+  Unmatched ')'  
+                 
+
+FAIL  GET / [500]
+FAIL  GET /healthz [500]
+FAIL  GET /health [500]
+PASS  GET /sitemap.xml [200]
+FAIL  GET /login [500]
+FAIL  GET /register [500]
+FAIL  GET /contact [500]
+FAIL  GET /faq [500]
+INFO  Volunteer credentials not set (export VOL_EMAIL & VOL_PASS to test login).
+INFO  Org credentials not set (export ORG_EMAIL & ORG_PASS to test org login).
+FAIL  GET /register [500]
+FAIL  GET /org/register [500]
+FAIL  GET /volunteer/profile [500]
+FAIL  GET /notifications [500]
+
+APP INTERNALS
+------------------------------------------------------------
+
+In web.php line 330:
+                 
+  Unmatched ')'  
+                 
+
