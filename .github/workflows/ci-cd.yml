@@ -1,36 +1,48 @@
 name: ci-cd
 on:
-  workflow_dispatch:
   pull_request:
     branches: [ main ]
   push:
     branches: [ main ]
 
 jobs:
-  build:
+  build:  # <- required check key is "ci-cd / build"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - uses: shivammathur/setup-php@v2
         with:
           php-version: '8.3'
           extensions: mbstring, intl, pdo_mysql, bcmath, gd, zip
           coverage: none
+
+      # Prevent package:discover from dying on missing dirs
+      - name: Prepare Laravel dirs
+        run: |
+          mkdir -p storage/framework/{cache,sessions,views} storage/logs bootstrap/cache
+
       - uses: actions/cache@v4
         with:
           path: vendor
           key: composer-${{ hashFiles('**/composer.lock') }}
-          restore-keys: |
-            composer-
-      - run: composer install --no-interaction --no-progress --prefer-dist --no-dev
-      - run: |
+          restore-keys: composer-
+
+      # Skip Composer scripts so nothing tries to boot the app during install
+      - name: Composer install (no-dev, no-scripts)
+        run: composer install --no-interaction --no-progress --prefer-dist --no-dev --no-scripts
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Frontend build (if package.json)
+        run: |
           if [ -f package.json ]; then
-            corepack enable || true
             npm ci
             npm run build
           else
             echo "No package.json; skipping frontend build."
           fi
-      - run: |
-          php -v
-          php artisan -V || true
