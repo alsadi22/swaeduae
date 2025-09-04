@@ -1,0 +1,8 @@
+Route::get("/ping", fn () => "pong")->name("ping");
+Route::view("/", "index")->name("home");
+Route::fallback(fn () => redirect()->route("home"));
+use App\Http\Controllers\ContactController;
+Route::view("/contact","contact")->name("contact");
+Route::post("/contact",[ContactController::class,"send"])
+  ->name("contact.send")
+  ->middleware("throttle:5,1");

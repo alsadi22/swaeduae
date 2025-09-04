@@ -1,0 +1,56 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Schema;
+
+class EventController extends Controller
+{
+    public function index(Request $request)
+    {
+        $events = collect(); // default empty
+        $error  = null;
+
+        if (class_exists(\App\Models\Event::class) && Schema::hasTable('events')) {
+            try {
+                $q = \App\Models\Event::query()->orderByDesc('date')->with([q{organization}]);
+                if ($term = trim((string)$request->query('q'))) {
+                    $q->where('title', 'like', '%'.$term.'%');
+                }
+                $events = $q->paginate(12);
+            } catch (\Throwable $e) {
+                $error = app()->hasDebugModeEnabled() ? $e->getMessage() : 'temporary_unavailable';
+            }
+        }
+
+        return view('events.index', [
+            'events' => $events,
+            'error'  => $error,
+        ]);
+    }
+
+    public function show(string $idOrSlug)
+    {
+        $event = null;
+
+        if (class_exists(\App\Models\Event::class) && Schema::hasTable('events')) {
+            try {
+                $event = \App\Models\Event::with([q{organization}])->where(function ($q) use ($idOrSlug) {
+                    if (is_numeric($idOrSlug)) {
+                        $q->orWhere('id', (int)$idOrSlug);
+                    }
+                    $q->orWhere('slug', $idOrSlug);
+                })->first();
+            } catch (\Throwable $e) {
+                // swallow and fall through to 404
+            }
+        }
+
+        if (!$event) {
+            abort(404);
+        }
+
+        return view('events.show', ['event' => $event]);
+    }
+}

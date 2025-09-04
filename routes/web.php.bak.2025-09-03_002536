@@ -1,0 +1,16 @@
+<?php
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use Illuminate\Support\Facades\Session;
+use App\Http\Controllers\Public\OpportunityController;
+use App\Http\Controllers\Public\ApplyController;
+use Illuminate\Support\Facades\Route;
+
+
+Route::get('/partners', function(){ return view('public.partners'); })->name('partners.index');
+use App\Http\Controllers\CertificatePdfController;
+
+Route::middleware(['web','auth','verified'])->group(function () {
+    Route::get('/certificates/{id}/download', [CertificatePdfController::class,'download'])->whereNumber('id')->name('certificates.download');
+    Route::post('/certificates/{id}/resend',   [CertificatePdfController::class,'resend'])->whereNumber('id')->name('certificates.resend');
+    Route::post('/certificates/{id}/revoke',   [CertificatePdfController::class,'revoke'])->whereNumber('id')->name('certificates.revoke'); // admin-only in controller
+});

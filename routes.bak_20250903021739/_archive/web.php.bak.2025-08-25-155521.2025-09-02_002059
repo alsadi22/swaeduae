@@ -1,0 +1,86 @@
+<?php
+require_once __DIR__ . '/_phase0_helpers.php';
+
+use App\Http\Controllers\ProfileController;
+use Illuminate\Support\Facades\Route;
+
+/* --- Public Home (named) --- */
+Route::get('/', function () { return view('public.tp-home'); })->name('home');
+
+/* --- Dashboard --- */
+Route::get('/dashboard', function () { return view('dashboard'); })
+    ->middleware(['auth', 'verified'])->name('dashboard');
+
+/* --- Profile --- */
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+/* --- Auth scaffolding --- */
+require __DIR__.'/auth.php';
+
+/* --- QR alias --- */
+Route::get('/qr/verify', fn() => redirect()->route('verify'))->name('qr.verify');
+
+/* --- Logout via POST + CSRF --- */
+Route::post('/logout', function () {
+    auth()->logout();
+    request()->session()->invalidate();
+    request()->session()->regenerateToken();
+    return redirect('/');
+})->middleware('auth')->name('logout');
+
+/* --- Phase-0 static pages --- */
+Route::view('/partners/', 'public.partners')->name('pages.partners.slash');
+Route::view('/about', 'public.about')->name('pages.about');
+Route::view('/contact', 'public.contact')->name('contact.show');
+Route::post('/contact', function (\Illuminate\Http\Request $r) {
+    return back()->with('success', __('Message sent'));
+})->name('contact.submit');
+Route::view('/faq', 'public.faq')->name('pages.faq');
+Route::view('/partners', 'public.partners')->name('pages.partners');
+Route::view('/verify', 'public.verify')->name('verify');
+Route::view('/admin/login', 'admin.login')->name('admin.login');
+
+/* ---------- ADMIN (guarded) ---------- */
+Route::prefix('admin')->middleware('auth:admin')->group(function () {
+    $admin = [
+        'admin.root','admin.users','admin.users.index','admin.users.edit','admin.users.update',
+        'admin.roles.perms','admin.roles.store','admin.perms.store',
+        'admin.categories.index','admin.categories.create','admin.categories.edit','admin.categories.store','admin.categories.update','admin.categories.destroy',
+        'admin.events.index','admin.events.create','admin.events.edit','admin.events.store','admin.events.update','admin.events.destroy',
+        'admin.opportunities.index','admin.opportunities.create','admin.opportunities.edit','admin.opportunities.store','admin.opportunities.update','admin.opportunities.destroy',
+        'admin.opportunities.complete','admin.opportunities.qr.issue','admin.opportunities.qr.reset','admin.opportunities.qr.finalize',
+        'admin.audit.export.csv','admin.export.applications','admin.export.certificates','admin.export.hours','admin.export.users',
+        'admin.certificates.index','admin.certificates.store','admin.certificates.resend',
+        'admin.learning.index','admin.learning.update',
+        'admin.organizations.index','admin.organizations.create','admin.organizations.edit','admin.organizations.update','admin.organizations.destroy',
+        'admin.organizations.approve','admin.organizations.reject',
+        'admin.kyc.approve','admin.kyc.decline','admin.kyc.download','admin.kyc.reject',
+        'admin.profile.update','admin.settings.index','admin.settings.update',
+        'admin.news.store','admin.tools.finalizeCerts.post','admin.login.post',
+    ];
+    foreach ($admin as $n) { phase0_stub($n, stub_path('_stub', $n), ['auth:admin']); }
+});
+
+/* ---------- ORG (guarded) ---------- */
+Route::prefix('org')->middleware('auth:org')->group(function () {
+    $org = [
+        'org.root','org.dashboard','org.reports','org.reports.hours.csv',
+        'org.events.index','org.events.export','org.events.finalize','org.events.attendance.index','org.events.volunteers','org.events.volunteers.csv',
+        'org.opps.index','org.opps.create','org.opps.edit','org.opps.store','org.opps.update','org.opps.destroy',
+        'org.opportunities.attendance.index','org.opportunities.attendance.settings.save','org.opportunities.slotcap.update',
+        'org.attendances.check','org.attendances.minutes','org.attendances.minutes.update','org.attendances.no_show',
+        'org.attendance.finalize','org.attendance.minutes.update','org.attendance.no_show.toggle',
+        'org.attendances.cert.resend',
+        'org.certificates.index','org.certificates.issue','org.certificates.resend','org.certificates.export.csv',
+        'org.profile.update','org.settings.edit','org.settings.update','org.team.invite','org.team.remove',
+        'org.kyc.update','org.license.request','org.register.store',
+        'org.applicants.decision.single','org.applicants.decision.bulk','org.shortlist.bulk','org.shortlist.slot_cap',
+    ];
+    foreach ($org as $n) { phase0_stub($n, stub_path('_stub', $n), ['auth:org']); }
+});
+
+Route::view('/opportunities','public.opportunities')->name('opportunities.index');

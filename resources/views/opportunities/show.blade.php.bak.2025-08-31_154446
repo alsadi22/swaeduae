@@ -1,0 +1,33 @@
+@extends('public.layout-travelpro')
+@section('title', $event->title)
+@section('content')
+<section class="section"><div class="container" style="max-width: 920px">
+  <nav class="small mb-2"><a href="{{ url('/opportunities') }}">← Back to Opportunities</a></nav>
+  <h1 class="h3 mb-2">{{ $event->title }}</h1>
+  <div class="text-muted mb-3">{{ $event->location ?? 'UAE' }} ·
+    @if($event->starts_at) {{ $event->starts_at->format('D, d M Y H:i') }} @endif
+    @if($event->ends_at) – {{ $event->ends_at->format('H:i') }} @endif
+  </div>
+  <p class="mb-4">{{ $event->description }}</p>
+
+  <div class="d-flex gap-2 mb-4 flex-wrap">
+    <a class="btn btn-outline-primary btn-sm" href="{{ url('/opportunities/'.$event->slug.'.ics') }}">Add to Calendar (.ics)</a>
+    <a class="btn btn-outline-secondary btn-sm" target="_blank"
+       href="https://wa.me/?text={{ urlencode($event->title.' — '.url('/opportunities/'.$event->slug)) }}">Share via WhatsApp</a>
+  </div>
+
+  <div class="card p-3">
+    @if(session('ok')) <div class="alert alert-success py-2 mb-3">{{ session('ok') }}</div> @endif
+    <form method="POST" action="{{ url('/opportunities/'.$event->slug.'/apply') }}">
+      @csrf
+      <div class="mb-2"><label class="form-label">Phone (required)</label>
+        <input name="phone" class="form-control" required placeholder="+971 5x xxx xxxx" value="{{ old('phone') }}">
+      </div>
+      <div class="mb-2"><label class="form-label">Name (optional)</label>
+        <input name="name" class="form-control" value="{{ old('name') }}">
+      </div>
+      <button class="btn btn-primary">Apply</button>
+    </form>
+  </div>
+</div></section>
+@endsection

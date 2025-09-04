@@ -1,0 +1,30 @@
+<?php
+namespace App\Http\Controllers\Admin;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
+
+class HoursReportController extends Controller
+{
+    public function showAll()
+    {
+        if (!Schema::hasTable('hours')) {
+            return view('admin.hours.index', ['rows'=>collect(), 'hasTable'=>false]);
+        }
+        $rows = DB::table('hours')->select('id','user_id','opportunity_id','hours','status','created_at')
+                 ->orderByDesc('created_at')->paginate(20);
+        return view('admin.hours.index', compact('rows'))->with('hasTable', true);
+    }
+
+    public function bulkApprove(Request $r)
+    {
+        $ids = array_filter((array) $r->input('ids', []), 'is_numeric');
+        if (Schema::hasTable('hours') && $ids) {
+            DB::table('hours')->whereIn('id',$ids)->update(['status'=>'approved']);
+            return back()->with('ok','Approved '.count($ids).' records');
+        }
+        return back()->with('err','No changes made');
+    }
+}

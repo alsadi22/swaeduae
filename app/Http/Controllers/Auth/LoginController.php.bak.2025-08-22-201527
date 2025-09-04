@@ -1,0 +1,78 @@
+<?php
+
+namespace App\Http\Controllers\Auth;
+
+use Illuminate\Http\Request;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Auth;
+
+class LoginController extends Controller
+{
+    use AuthenticatesUsers;
+
+    // Use org guard when posting from /org/* or ?type=organization
+    protected function guard()
+    {
+        $isOrgReq = request()->is("org/*") || request()->query("type") === "organization";
+        \Log::warning("GUARD select", ["path"=>request()->path(), "isOrgReq"=>$isOrgReq]);
+        return $isOrgReq ? \Illuminate\Support\Facades\Auth::guard()
+                          : \Illuminate\Support\Facades\Auth::guard();
+    }
+
+
+    protected function authenticated(\Illuminate\Http\Request $request, $user)
+    {
+        
+                session()->forget('url.intended');
+        \Log::warning('auth hook begin', ['email' => ->email ?? null, 'is_admin' => ->is_admin ?? null, 'role' => ->role ?? null, 'path' => request()->path()]);
+\Log::warning('authenticated hook', ['email' => ->email ?? null, 'is_admin' => ->is_admin ?? null, 'role' => ->role ?? null, 'path' => request()->path(), 'intended' => session()->get('url.intended') ?? null]);
+$isAdmin = (($user->is_admin ?? false) || (method_exists($user, "hasRole") && $user->hasRole("admin")));
+        $isOrg   = ((($user->role ?? null) === "organization") || (method_exists($user, "hasRole") && $user->hasRole("org")));
+
+        if ($isAdmin) {
+            return redirect()->to("/admin");
+        }
+        if ($isOrg) {
+            return redirect()->to(route("org.dashboard"));
+        }
+        return redirect()->to(route("profile"));
+    }
+
+
+    /**
+     * After successful login, route by role.
+     * Org => /org/dashboard, Admin => /admin, Everyone else => /profile
+     */
+    protected function redirectTo()
+    {
+        $user = Auth::user();
+
+        if ($user && method_exists($user, 'hasRole')) {
+            if ($user->hasRole('admin')) {
+                return '/admin';
+            }
+            if ($user->hasRole('org')) {
+                return '/org/dashboard';
+            }
+        }
+
+        if ($user) {
+            if (property_exists($user, 'is_admin') && $user->is_admin) {
+                return '/admin';
+            }
+            if (property_exists($user, 'role') && $user->role === 'organization') {
+                return '/org/dashboard';
+            }
+        }
+
+        return '/profile';
+    }
+
+    public function __construct()
+    {
+        $this->middleware([\App\Http\Middleware\Honeypot::class, 'throttle:login'])->only('login');
+        $this->middleware('guest')->except('logout');
+    }
+}

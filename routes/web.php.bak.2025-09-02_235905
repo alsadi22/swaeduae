@@ -1,0 +1,11 @@
+<?php
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use Illuminate\Support\Facades\Session;
+use App\Http\Controllers\Public\OpportunityController;
+use App\Http\Controllers\Public\ApplyController;
+use Illuminate\Support\Facades\Route;
+
+Route::middleware(['web','auth','verified'])->get('/certificates', [\App\Http\Controllers\CertificateController::class,'index'])->name('certificates.index');
+Route::get('/partners', function () {
+    return view('public.partners');
+})->name('partners.index');
