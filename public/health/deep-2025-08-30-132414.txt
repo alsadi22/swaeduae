@@ -1,0 +1,39 @@
+SwaedUAE Deep Check  2025-08-30-132414
+================================================
+
+== Environment ==
+PHP: PHP 8.3.24 (cli) (built: Aug  3 2025 08:57:38) (NTS)
+Laravel: 
+   ParseError 
+
+  syntax error, unexpected single-quoted string "/partials/disable_internal.php"
+
+  at routes/web.php:2
+      1▕ <?php
+  ➜   2▕ require __DIR__'/partials/disable_internal.php';
+      3▕ 
+      4▕ // === CLEAN HEADER (single open tag will be added below) ===
+      5▕ use App\Http\Controllers\ContactController;
+      6▕ use App\Http\Controllers\PublicController;
+      7▕ 
+      8▕ Route::get('/lang/{locale}', function ($locale) {
+      9▕     app()->setLocale($locale);
+
+      [2m+3 vendor frames [22m
+
+  4   app/Providers/RouteServiceProvider.php:16
+      Illuminate\Routing\RouteRegistrar::group()
+      [2m+7 vendor frames [22m
+
+  12  [internal]:0
+      Illuminate\Foundation\Application::Illuminate\Foundation\{closure}()
+Node: v22.19.0
+Composer: Composer 2.2.6 2022-02-04 17:00:38
+memory_limit: 512M
+
+== Routes JSON snapshot ==
+FAIL  - Unable to fetch routes JSON (artisan failed)
+
+== Public GET endpoints (200 expected; 302 resolved) ==
+
+== Admin/Org protections & logins ==

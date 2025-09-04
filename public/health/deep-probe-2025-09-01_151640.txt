@@ -1,0 +1,78 @@
+=== DEEP PROBE (2025-09-01 11:16:40 UTC) ===  BASE=https://swaeduae.ae
+PHP 8.3.24 (cli) (built: Aug  3 2025 08:57:38) (NTS)
+
+-- Lint routes before anything --
+No syntax errors detected in routes/web.php
+[32m[HIT][0m routes/web.php lints OK
+
+-- Key route presence & mappings --
+[ROUTE]   GET|HEAD  account/applications .................................................................................................................................................... account.applications
+[ROUTE]   GET|HEAD  admin/opportunities ................................................................................................................................................ admin.opportunities.index
+[ROUTE]   GET|HEAD  opportunities ....................................................................................................................... opportunities.index › Public\OpportunityController@index
+[ROUTE]   GET|HEAD  opportunities/{slug} .................................................................................................................. opportunities.show › Public\OpportunityController@show
+[ROUTE]   POST      opportunities/{slug}/apply ................................................................................................................ opportunities.apply › Public\ApplyController@store
+[ROUTE]   GET|HEAD  org/opportunities .................................................................................................................. org.opportunities.index › Org\OpportunityController@index
+[32m[HIT][0m Apply route uses Public\ApplyController@store
+[31m[MISS][0m ICS route missing
+[32m[HIT][0m QR verify route registered
+[33m[WARN][0m Certificates page route missing
+
+-- HTTP probes --
+/                            -> 200
+/opportunities               -> 200
+/opportunities/demo-event    -> 200
+/account/applications        -> 302
+/login                       -> 200
+/qr/verify                   -> 200
+/ics/demo-event              -> 404
+/account/certificates        -> 404
+
+-- Controllers: legacy table references (org) --
+app/Http/Controllers/Org/EventController.php.bak_20250822151313:86:        return view('org.events.index', compact('opps') + ['notice'=>$notice]);
+app/Http/Controllers/Org/EventController.php.bak_20250822151313:112:        if(request()->boolean('partial')){ return view('org.events._volunteers_table', ['rows' => ($rows ?? []), 'opportunityId' => ($opportunity ?? $opportunityId ?? request()->input('opportunity_id'))]); }
+app/Http/Controllers/Org/EventController.php.bak_20250822151313:113:        return view('org.events.volunteers', ['rows' => ($rows ?? []), 'opportunityId' => ($opportunity ?? $opportunityId ?? request()->input('opportunity_id'))]);
+app/Http/Controllers/Org/ApplicantsController.php:32:        if (Schema::hasTable('event_registrations')) {
+app/Http/Controllers/Org/ApplicantsController.php:33:            $cols = DB::getSchemaBuilder()->getColumnListing('event_registrations');
+app/Http/Controllers/Org/ApplicantsController.php:35:                'table' => 'event_registrations',
+app/Http/Controllers/Org/ApplicantsController.php:53:        $q = DB::table('events')->where('id',$eventId);
+app/Http/Controllers/Org/OrgAuthController.php:11:use Illuminate\Auth\Events\Registered;
+app/Http/Controllers/Org/EventController.php:86:        return view('org.events.index', compact('opps') + ['notice'=>$notice]);
+app/Http/Controllers/Org/EventController.php:112:        if(request()->boolean('partial')){ return view('org.events._volunteers_table', ['rows' => ($rows ?? []), 'opportunityId' => ($opportunity ?? $opportunityId ?? request()->input('opportunity_id'))]); }
+app/Http/Controllers/Org/EventController.php:113:        return view('org.events.volunteers', ['rows' => ($rows ?? []), 'opportunityId' => ($opportunity ?? $opportunityId ?? request()->input('opportunity_id'))]);
+app/Http/Controllers/Org/EventVolunteersController.php:26:            return view('org.events._volunteers_table', [
+app/Http/Controllers/Org/EventVolunteersController.php:32:        return view('org.events.volunteers', [
+
+-- DB tables present? --
+opportunities: yes
+applications: yes
+certificates: yes
+event_registrations: no
+events: yes
+
+-- Sample data for the known test user (read-only) --
+user_id=26
+demo-event | Demo Event | submitted
+
+-- Mail & queue (read-only) --
+MAIL_FROM_NAME='SwaedUAE'
+MAIL_FROM_ADDRESS=admin@swaeduae.ae
+MAIL_MAILER=smtp
+MAIL_HOST=smtppro.zoho.com
+MAIL_PORT=587
+● swaed-queue.service - Laravel Queue Worker (SwaedUAE)
+     Loaded: loaded (/etc/systemd/system/swaed-queue.service; enabled; vendor preset: enabled)
+     Active: active (running) since Mon 2025-09-01 14:52:54 +04; 23min ago
+   Main PID: 73744 (php)
+      Tasks: 1 (limit: 38144)
+     Memory: 37.9M
+        CPU: 482ms
+     CGroup: /system.slice/swaed-queue.service
+             └─73744 /usr/bin/php artisan queue:work --queue=default --sleep=3 --tries=3 --max-time=3600
+
+
+-- PWA & sitemap --
+/manifest.json       -> 200
+/service-worker.js   -> 200
+/sitemap.xml         -> 200
+
+Saved report: public/health/deep-probe-2025-09-01_151640.txt

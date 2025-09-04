@@ -1,0 +1,87 @@
+  GET|HEAD        admin ............................................................................................................. admin.home
+  GET|HEAD        admin/_diag ....................................................................................................... admin.diag
+  GET|HEAD        admin/applications ................................................. admin.apps.index › Admin\ApplicationAdminController@index
+  POST            admin/applications/{id} .......................................... admin.apps.update › Admin\ApplicationAdminController@update
+  GET|HEAD        admin/attendance .............................................. admin.attendance.index › Admin\AttendanceAdminController@index
+  GET|HEAD        admin/attendance/qr/{opportunityId} ................................. admin.attendance.qr › Admin\AttendanceAdminController@qr
+  POST            admin/backup ................................................................. admin.backup › Admin\UserAdminController@backup
+  GET|HEAD        admin/categories ..................................................... admin.categories.index › Admin\CategoryController@index
+  POST            admin/categories ..................................................... admin.categories.store › Admin\CategoryController@store
+  GET|HEAD        admin/categories/create ............................................ admin.categories.create › Admin\CategoryController@create
+  PUT|PATCH       admin/categories/{category} ........................................ admin.categories.update › Admin\CategoryController@update
+  DELETE          admin/categories/{category} ...................................... admin.categories.destroy › Admin\CategoryController@destroy
+  GET|HEAD        admin/categories/{category}/edit ....................................... admin.categories.edit › Admin\CategoryController@edit
+  GET|HEAD        admin/certificates ........................................... admin.certificates › Admin\UserAdminController@listCertificates
+  POST            admin/certificates .............................................. admin.certificates.store › Admin\CertificateController@store
+  GET|HEAD        admin/certificates/create ..................................... admin.certificates.create › Admin\CertificateController@create
+  POST            admin/certificates/{certificate}/resend ............. admin.certificates.resend › Admin\AttendanceController@resendCertificate
+  GET|HEAD        admin/certificates/{id}/pdf .................................... admin.certificates.show.pdf › Admin\CertificateController@pdf
+  GET|HEAD        admin/dashboard ...................................................... admin.dashboard › Admin\DashboardCompatController@index
+  GET|HEAD        admin/events ................................................................ admin.events.index › Admin\EventController@index
+  POST            admin/events ................................................................ admin.events.store › Admin\EventController@store
+  GET|HEAD        admin/events/create ....................................................... admin.events.create › Admin\EventController@create
+  PUT|PATCH       admin/events/{event} ...................................................... admin.events.update › Admin\EventController@update
+  DELETE          admin/events/{event} .................................................... admin.events.destroy › Admin\EventController@destroy
+  GET|HEAD        admin/events/{event}/edit ..................................................... admin.events.edit › Admin\EventController@edit
+  GET|HEAD        admin/hours ............................................................ admin.hours.all › Admin\HoursReportController@showAll
+  GET|HEAD        admin/learning-requests ........................................... admin.learning.index › Admin\LearningAdminController@index
+  POST            admin/learning-requests/{id} .................................... admin.learning.update › Admin\LearningAdminController@update
+  GET|HEAD        admin/login ............................................................... admin.login › Admin\Auth\AdminLoginController@show
+  POST            admin/login ......................................................... admin.login.post › Admin\Auth\AdminLoginController@login
+  POST            admin/logout ........................................................... admin.logout › Admin\Auth\AdminLoginController@logout
+  GET|HEAD        admin/opportunities ................................................................................ admin.opportunities.index
+  POST            admin/opportunities ............................................ admin.opportunities.store › Admin\OpportunityController@store
+  GET|HEAD        admin/opportunities/create ................................... admin.opportunities.create › Admin\OpportunityController@create
+  POST            admin/opportunities/{id}/complete .................... admin.opportunities.complete › Admin\AttendanceAdminController@complete
+  GET|HEAD        admin/opportunities/{id}/qr ...................................... admin.opportunities.qr › Admin\OpportunityQRController@show
+  GET|HEAD        admin/opportunities/{id}/qr/finalize ................ admin.opportunities.qr.finalize › Admin\OpportunityQRController@finalize
+  GET|HEAD        admin/opportunities/{id}/qr/issue ......................... admin.opportunities.qr.issue › Admin\OpportunityQRController@issue
+  POST            admin/opportunities/{id}/qr/reset ......................... admin.opportunities.qr.reset › Admin\OpportunityQRController@reset
+  POST            admin/opportunities/{opportunityId}/attendance/complete . admin.attendance.complete › Admin\AttendanceAdminController@complete
+  POST            admin/opportunities/{opportunityId}/attendance/finalize . admin.attendance.finalize › Admin\AttendanceAdminController@finalize
+  POST            admin/opportunities/{opportunityId}/attendance/manual ....... admin.attendance.manual › Admin\AttendanceAdminController@manual
+  GET|HEAD        admin/opportunities/{opportunityId}/hours ................................ admin.hours.show › Admin\HoursReportController@show
+  PUT|PATCH       admin/opportunities/{opportunity} ............................ admin.opportunities.update › Admin\OpportunityController@update
+  DELETE          admin/opportunities/{opportunity} .......................... admin.opportunities.destroy › Admin\OpportunityController@destroy
+  GET|HEAD        admin/opportunities/{opportunity}/attendance ............... admin.opportunities.attendance › Admin\AttendanceController@index
+  POST            admin/opportunities/{opportunity}/attendance/{attendance} admin.opportunities.attendance.update › Admin\AttendanceController@…
+  GET|HEAD        admin/opportunities/{opportunity}/edit ........................... admin.opportunities.edit › Admin\OpportunityController@edit
+  POST            admin/opportunities/{opportunity}/finalize-issue admin.opportunities.finalize.issue › Admin\AttendanceController@finalizeIssue
+  GET|HEAD        admin/organizations ........................................... admin.organizations.index › Admin\OrganizationController@index
+  POST            admin/organizations ........................................... admin.organizations.store › Admin\OrganizationController@store
+  GET|HEAD        admin/organizations/create .................................. admin.organizations.create › Admin\OrganizationController@create
+  PUT|PATCH       admin/organizations/{organization} .......................... admin.organizations.update › Admin\OrganizationController@update
+  DELETE          admin/organizations/{organization} ........................ admin.organizations.destroy › Admin\OrganizationController@destroy
+  GET|HEAD        admin/organizations/{organization}/edit ......................... admin.organizations.edit › Admin\OrganizationController@edit
+  GET|HEAD        admin/partners .......................................................... admin.partners.index › Admin\PartnerController@index
+  POST            admin/partners .......................................................... admin.partners.store › Admin\PartnerController@store
+  GET|HEAD        admin/partners/create ................................................. admin.partners.create › Admin\PartnerController@create
+  PUT|PATCH       admin/partners/{partner} .............................................. admin.partners.update › Admin\PartnerController@update
+  DELETE          admin/partners/{partner} ............................................ admin.partners.destroy › Admin\PartnerController@destroy
+  GET|HEAD        admin/partners/{partner}/edit ............................................. admin.partners.edit › Admin\PartnerController@edit
+  GET|HEAD        admin/settings .......................................................... admin.settings.index › Admin\SettingController@index
+  POST            admin/settings ........................................................ admin.settings.update › Admin\SettingController@update
+  GET|HEAD        admin/settings/edit ....................................................... admin.settings.edit › Admin\SettingController@edit
+  GET|HEAD        admin/users .............................................................. admin.users.index › Admin\UserAdminController@index
+  GET|HEAD        admin/users/index .............................................................. admin.users › Admin\UserAdminController@index
+  POST            admin/users/toggle/{id} .......................................... admin.users.toggle › Admin\AdminController@toggleUserStatus
+  GET|HEAD        org/dashboard .................................................................. org.dashboard › Org\DashboardController@index
+  GET|HEAD        org/login .......................................................................................................... org.login
+  POST            org/logout ........................................................................................................ org.logout
+  POST            org/opportunities .................................................. org.opportunities.store › Org\OpportunityController@store
+  GET|HEAD        org/opportunities/create ......................................... org.opportunities.create › Org\OpportunityController@create
+  POST            org/opportunities/{event} ........................................ org.opportunities.update › Org\OpportunityController@update
+  GET|HEAD        org/opportunities/{event}/applicants ................................... org.applicants.index › Org\ApplicantsController@index
+  GET|HEAD        org/opportunities/{event}/applicants.csv .......................... org.applicants.export › Org\ApplicantsController@exportCsv
+  POST            org/opportunities/{event}/applicants/{app}/decision .............. org.applicants.decision › Org\ApplicantsController@decision
+  POST            org/opportunities/{event}/close .................................... org.opportunities.close › Org\OpportunityController@close
+  GET|HEAD        org/opportunities/{event}/edit ....................................... org.opportunities.edit › Org\OpportunityController@edit
+  GET|HEAD        org/opportunities/{opportunity}/shortlist ................................ org.shortlist.index › Org\ShortlistController@index
+  POST            org/opportunities/{opportunity}/shortlist/bulk ............................. org.shortlist.bulk › Org\ShortlistController@bulk
+  POST            org/opportunities/{opportunity}/shortlist/slot-cap ............ org.shortlist.slot_cap › Org\ShortlistController@updateSlotCap
+  GET|HEAD        org/register .................................................................................................... org.register
+  POST            org/register ............................................................................................. org.register.submit
+  GET|HEAD        org/settings ................................................................. org.settings.edit › Org\SettingsController@edit
+  POST            org/settings ............................................................. org.settings.update › Org\SettingsController@update
+  GET|HEAD        org/setup .......................................................................... org.setup.form › Org\SetupController@form
+  POST            org/setup ........................................................................ org.setup.store › Org\SetupController@store

@@ -1,0 +1,266 @@
+=== ADMIN FULL CHECK 2025-09-01_182046 ===
+PWD: /var/www/swaeduae
+USER: swaeduae
+
+== PHP & APP ENV ==
+PHP 8.3.24 (cli) (built: Aug  3 2025 08:57:38) (NTS)
+Copyright (c) The PHP Group
+Zend Engine v4.3.24, Copyright (c) Zend Technologies
+    with Zend OPcache v8.3.24, Copyright (c), by Zend Technologies
+Deprecation Notice: Using ${var} in strings is deprecated, use {$var} instead in /usr/share/php/Symfony/Component/Console/Command/DumpCompletionCommand.php:48
+Deprecation Notice: Using ${var} in strings is deprecated, use {$var} instead in /usr/share/php/Symfony/Component/Console/Command/DumpCompletionCommand.php:56
+Composer 2.2.6 2022-02-04 17:00:38
+APP_ENV=production
+APP_URL=https://swaeduae.ae
+QUEUE_CONNECTION=database
+
+== LINT CRITICAL ROUTE FILES ==
+No syntax errors detected in routes/web.php
+No syntax errors detected in routes/admin.php
+[OK] routes/partials/disable_internal.php present
+
+== ADMIN CONTROLLERS EXIST & LINT ==
+No syntax errors detected in app/Http/Controllers/Admin/DashboardController.php
+[OK] app/Http/Controllers/Admin/DashboardController.php
+No syntax errors detected in app/Http/Controllers/Admin/UserController.php
+[OK] app/Http/Controllers/Admin/UserController.php
+No syntax errors detected in app/Http/Controllers/Admin/OpportunityController.php
+[OK] app/Http/Controllers/Admin/OpportunityController.php
+
+== ADMIN VIEWS EXIST & COMPILE ==
+[OK] view exists: resources/views/admin/layout.blade.php
+[OK] view exists: resources/views/admin/dashboard.blade.php
+[OK] view exists: resources/views/admin/users/index.blade.php
+[OK] view exists: resources/views/admin/opportunities/index.blade.php
+
+   INFO  Compiled views cleared successfully.  
+
+
+
+   INFO  Blade templates cached successfully.  
+
+
+== ROUTES OVERVIEW (saving to storage/admin-routes-2025-09-01_182046.txt) ==
+[WARN] no admin routes found
+
+== VERIFY ADMIN ROUTE MIDDLEWARE ==
+
+
+[WARN] no admin route lines to verify
+
+== GATE & EMAIL VERIFICATION CHECKS ==
+grep: Unmatched ( or \(
+[FAIL] admin gate not defined in AuthServiceProvider
+4:use Illuminate\Contracts\Auth\MustVerifyEmail;
+15:class User extends Authenticatable implements MustVerifyEmail
+[OK] User implements MustVerifyEmail
+
+== SCHEMA & ADMIN USER ROLE ==
+users.role column: YES
+admin@swaeduae.ae role: admin
+
+== NAMED ROUTES EXIST? ==
+admin.dashboard: NO
+admin.users.index: YES
+admin.opportunities.index: YES
+
+== HTTP ENDPOINT SMOKE (through CF->127.0.0.1) ==
+/admin                     -> curl: (60) SSL certificate problem: self-signed certificate
+More details here: https://curl.se/docs/sslcerts.html
+
+curl failed to verify the legitimacy of the server and therefore could not
+establish a secure connection to it. To learn more about this situation and
+how to fix it, please visit the web page mentioned above.
+000curl-error
+
+/admin/users               -> curl: (60) SSL certificate problem: self-signed certificate
+More details here: https://curl.se/docs/sslcerts.html
+
+curl failed to verify the legitimacy of the server and therefore could not
+establish a secure connection to it. To learn more about this situation and
+how to fix it, please visit the web page mentioned above.
+000curl-error
+
+/admin/opportunities       -> curl: (60) SSL certificate problem: self-signed certificate
+More details here: https://curl.se/docs/sslcerts.html
+
+curl failed to verify the legitimacy of the server and therefore could not
+establish a secure connection to it. To learn more about this situation and
+how to fix it, please visit the web page mentioned above.
+000curl-error
+
+
+== RECENT LOG LINES (admin-related) ==
+no 'admin' mentions in last 2000 lines
+
+== EXISTING HEALTH SCRIPTS ==
+>> tools/deep_check.sh (tail 80)
+Deprecation Notice: Using ${var} in strings is deprecated, use {$var} instead in /usr/share/php/Symfony/Component/Console/Command/DumpCompletionCommand.php:48
+Deprecation Notice: Using ${var} in strings is deprecated, use {$var} instead in /usr/share/php/Symfony/Component/Console/Command/DumpCompletionCommand.php:56
+#60 /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(209): Sentry\\Laravel\\Http\\SetRequestMiddleware->handle()
+#61 /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#62 /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/ConvertEmptyStringsToNull.php(31): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle()
+#63 /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(209): Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull->handle()
+#64 /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#65 /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/TrimStrings.php(51): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle()
+#66 /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(209): Illuminate\\Foundation\\Http\\Middleware\\TrimStrings->handle()
+#67 /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/Http/Middleware/ValidatePostSize.php(27): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#68 /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(209): Illuminate\\Http\\Middleware\\ValidatePostSize->handle()
+#69 /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/PreventRequestsDuringMaintenance.php(110): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#70 /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(209): Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance->handle()
+#71 /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/Http/Middleware/HandleCors.php(49): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#72 /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(209): Illuminate\\Http\\Middleware\\HandleCors->handle()
+#73 /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/Http/Middleware/TrustProxies.php(58): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#74 /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(209): Illuminate\\Http\\Middleware\\TrustProxies->handle()
+#75 /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/InvokeDeferredCallbacks.php(22): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#76 /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(209): Illuminate\\Foundation\\Http\\Middleware\\InvokeDeferredCallbacks->handle()
+#77 /var/www/swaeduae/vendor/sentry/sentry-laravel/src/Sentry/Laravel/Tracing/Middleware.php(79): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#78 /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(209): Sentry\\Laravel\\Tracing\\Middleware->handle()
+#79 /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(127): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#80 /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(176): Illuminate\\Pipeline\\Pipeline->then()
+#81 /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(145): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter()
+#82 /var/www/swaeduae/public/index.php(11): Illuminate\\Foundation\\Http\\Kernel->handle()
+#83 {main}
+"} 
+[2025-09-01 17:00:01] production.INFO: scheduler.heartbeat {"at":"2025-09-01T17:00:01+04:00"} 
+[2025-09-01 17:15:01] production.INFO: scheduler.heartbeat {"at":"2025-09-01T17:15:01+04:00"} 
+[2025-09-01 17:30:01] production.INFO: scheduler.heartbeat {"at":"2025-09-01T17:30:01+04:00"} 
+[2025-09-01 17:45:01] production.INFO: scheduler.heartbeat {"at":"2025-09-01T17:45:01+04:00"} 
+[2025-09-01 18:00:01] production.INFO: scheduler.heartbeat {"at":"2025-09-01T18:00:01+04:00"} 
+[2025-09-01 18:15:01] production.INFO: scheduler.heartbeat {"at":"2025-09-01T18:15:01+04:00"} 
+[2025-09-01 18:20:46] production.ERROR: The "--columns" option does not exist. {"exception":"[object] (Symfony\\Component\\Console\\Exception\\RuntimeException(code: 0): The \"--columns\" option does not exist. at /var/www/swaeduae/vendor/symfony/console/Input/ArgvInput.php:226)
+[stacktrace]
+#0 /var/www/swaeduae/vendor/symfony/console/Input/ArgvInput.php(153): Symfony\\Component\\Console\\Input\\ArgvInput->addLongOption()
+#1 /var/www/swaeduae/vendor/symfony/console/Input/ArgvInput.php(88): Symfony\\Component\\Console\\Input\\ArgvInput->parseLongOption()
+#2 /var/www/swaeduae/vendor/symfony/console/Input/ArgvInput.php(77): Symfony\\Component\\Console\\Input\\ArgvInput->parseToken()
+#3 /var/www/swaeduae/vendor/symfony/console/Input/Input.php(53): Symfony\\Component\\Console\\Input\\ArgvInput->parse()
+#4 /var/www/swaeduae/vendor/symfony/console/Command/Command.php(276): Symfony\\Component\\Console\\Input\\Input->bind()
+#5 /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/Console/Command.php(182): Symfony\\Component\\Console\\Command\\Command->run()
+#6 /var/www/swaeduae/vendor/symfony/console/Application.php(1092): Illuminate\\Console\\Command->run()
+#7 /var/www/swaeduae/vendor/symfony/console/Application.php(341): Symfony\\Component\\Console\\Application->doRunCommand()
+#8 /var/www/swaeduae/vendor/symfony/console/Application.php(192): Symfony\\Component\\Console\\Application->doRun()
+#9 /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(198): Symfony\\Component\\Console\\Application->run()
+#10 /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1235): Illuminate\\Foundation\\Console\\Kernel->handle()
+#11 /var/www/swaeduae/artisan(13): Illuminate\\Foundation\\Application->handleCommand()
+#12 {main}
+"} 
+
+== NGINX & CLOUDFLARED ==
+nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /etc/nginx/nginx.conf test is successful
+● cloudflared.service - cloudflared
+     Loaded: loaded (/etc/systemd/system/cloudflared.service; enabled; vendor preset: enabled)
+     Active: active (running) since Mon 2025-09-01 13:04:23 +04; 5h 17min ago
+   Main PID: 2555 (cloudflared)
+      Tasks: 14 (limit: 38144)
+     Memory: 58.2M
+        CPU: 50.890s
+     CGroup: /system.slice/cloudflared.service
+             └─2555 /usr/local/bin/cloudflared --no-autoupdate --config /etc/cloudflared/config.yml tunnel run
+
+Sep 01 16:15:58 swaeduae cloudflared[2555]: 2025-09-01T12:15:58Z INF Tunnel connection curve preferences: [X25519MLKEM768 CurveP256] connIndex=2 event=0 ip=198.41.192.7
+Sep 01 16:15:58 swaeduae cloudflared[2555]: 2025-09-01T12:15:58Z INF Registered tunnel connection connIndex=2 connection=7bbb9816-9205-4e6e-b91e-85897747eb7b event=0 ip=198.41.192.7 location=dxb01 protocol=quic
+Sep 01 16:15:58 swaeduae cloudflared[2555]: 2025-09-01T12:15:58Z INF Registered tunnel connection connIndex=3 connection=7f9c5c91-78f2-4837-891a-5b09dd3152e0 event=0 ip=198.41.200.53 location=sin07 protocol=quic
+Sep 01 17:04:32 swaeduae cloudflared[2555]: 2025-09-01T13:04:32Z ERR Failed to refresh feature selector error="lookup cfd-features.argotunnel.com on 127.0.0.53:53: read udp 127.0.0.1:35113->127.0.0.53:53: i/o timeout"
+Sep 01 18:19:27 swaeduae cloudflared[2555]: 2025-09-01T14:19:27Z ERR Failed to refresh DNS local resolver error="lookup region1.v2.argotunnel.com: i/o timeout"
+
+== BACKUPS ==
+-rw-r--r-- 1 root root 305M Aug 30 21:16 swaeduae_2025-08-30_211608.tar.gz
+-rw-r--r-- 1 root root 305M Aug 30 21:23 swaeduae_2025-08-30_212254.tar.gz
+-rw-r--r-- 1 root root 305M Aug 30 22:10 swaeduae_2025-08-30_221017.tar.gz
+-rw-r--r-- 1 root root 306M Aug 30 23:59 swaeduae_2025-08-30_235911.tar.gz
+-rw-r--r-- 1 root root 306M Aug 31 00:27 swaeduae_2025-08-31_002730.tar.gz
+total 16K
+-rw-r--r-- 1 root root 2.8K Aug 30 21:22 swaeduae_2025-08-30_212254.sql.gz
+-rw-r--r-- 1 root root 2.8K Aug 30 22:10 swaeduae_2025-08-30_221017.sql.gz
+-rw-r--r-- 1 root root 3.2K Aug 30 23:59 swaeduae_2025-08-30_235911.sql.gz
+-rw-r--r-- 1 root root 3.8K Aug 31 00:27 swaeduae_2025-08-31_002730.sql.gz
+
+Deep check saved to: public/health/deep-2025-09-01_182047.txt
+>> tools/full_health.sh (tail 80)
+GET / -> 200
+GET /about -> 200
+GET /privacy -> 200
+GET /terms -> 200
+GET /org/login -> 200
+HTTP/2 302 
+date: Mon, 01 Sep 2025 14:21:59 GMT
+content-type: text/html; charset=utf-8
+location: https://swaeduae.ae/admin/login
+cache-control: no-cache, private
+server: cloudflare
+
+== QR VERIFY CHECKS ==
+/qr/verify -> 200
+/qr/verify?code=test -> HTTP/2 302  date: Mon, 01 Sep 2025 14:22:01 GMT content-type: text/html; charset=utf-8 
+throttle spray: 200 200 200 200 200 200 200 200 200 200 200 200 200 200 200 200 200 200 200 200 200 200 200 200 200 200 200 200 429 429 429
+
+== CERT PDF sanity ==
+total 4.0K
+-rw-rwxr--+ 1 swaeduae swaeduae 1.3K Aug 30 23:49 _test.pdf
+
+== PWA (manifest/SW/icons present & non-zero) ==
+OK -rw-rw-r--+ 1 swaeduae www-data 332 Aug 31 00:02 public/manifest.json
+OK -rw-rw-r--+ 1 swaeduae www-data 775 Aug 31 00:51 public/service-worker.js
+OK -rw-rw-r--+ 1 swaeduae www-data 67 Aug 31 00:04 public/img/icon-192.png
+OK -rw-rw-r--+ 1 swaeduae www-data 67 Aug 31 00:04 public/img/icon-512.png
+
+== ANALYTICS on homepage ==
+    <!-- analytics: plausible -->
+  <script defer data-domain="swaeduae.ae" src="https://plausible.io/js/script.js"></script>
+analytics OK
+
+== MAIL & SESSION SNAPSHOT ==
+MAIL_FROM_ADDRESS=admin@swaeduae.ae
+MAIL_MAILER=smtp
+MAIL_HOST=smtppro.zoho.com
+MAIL_PORT=587
+MAIL_ENCRYPTION=tls
+MAIL_USERNAME=admin@swaeduae.ae
+SESSION_DRIVER=file
+SESSION_LIFETIME=120
+SESSION_SECURE_COOKIE=true
+SESSION_SAME_SITE=Lax
+
+== NGINX & CLOUDFLARED ==
+nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /etc/nginx/nginx.conf test is successful
+● cloudflared.service - cloudflared
+     Loaded: loaded (/etc/systemd/system/cloudflared.service; enabled; vendor preset: enabled)
+     Active: active (running) since Mon 2025-09-01 13:04:23 +04; 5h 18min ago
+   Main PID: 2555 (cloudflared)
+      Tasks: 14 (limit: 38144)
+     Memory: 60.8M
+        CPU: 51.107s
+     CGroup: /system.slice/cloudflared.service
+             └─2555 /usr/local/bin/cloudflared --no-autoupdate --config /etc/cloudflared/config.yml tunnel run
+
+Sep 01 16:15:58 swaeduae cloudflared[2555]: 2025-09-01T12:15:58Z INF Tunnel connection curve preferences: [X25519MLKEM768 CurveP256] connIndex=2 event=0 ip=198.41.192.7
+Sep 01 16:15:58 swaeduae cloudflared[2555]: 2025-09-01T12:15:58Z INF Registered tunnel connection connIndex=2 connection=7bbb9816-9205-4e6e-b91e-85897747eb7b event=0 ip=198.41.192.7 location=dxb01 protocol=quic
+Sep 01 16:15:58 swaeduae cloudflared[2555]: 2025-09-01T12:15:58Z INF Registered tunnel connection connIndex=3 connection=7f9c5c91-78f2-4837-891a-5b09dd3152e0 event=0 ip=198.41.200.53 location=sin07 protocol=quic
+Sep 01 17:04:32 swaeduae cloudflared[2555]: 2025-09-01T13:04:32Z ERR Failed to refresh feature selector error="lookup cfd-features.argotunnel.com on 127.0.0.53:53: read udp 127.0.0.1:35113->127.0.0.53:53: i/o timeout"
+Sep 01 18:19:27 swaeduae cloudflared[2555]: 2025-09-01T14:19:27Z ERR Failed to refresh DNS local resolver error="lookup region1.v2.argotunnel.com: i/o timeout"
+
+== BACKUPS ==
+-rw-r--r-- 1 root root 305M Aug 30 21:23 swaeduae_2025-08-30_212254.tar.gz
+-rw-r--r-- 1 root root 305M Aug 30 22:10 swaeduae_2025-08-30_221017.tar.gz
+-rw-r--r-- 1 root root 306M Aug 30 23:59 swaeduae_2025-08-30_235911.tar.gz
+-rw-r--r-- 1 root root 306M Aug 31 00:27 swaeduae_2025-08-31_002730.tar.gz
+-rw-r--r-- 1 root root 2.8K Aug 30 21:22 swaeduae_2025-08-30_212254.sql.gz
+-rw-r--r-- 1 root root 2.8K Aug 30 22:10 swaeduae_2025-08-30_221017.sql.gz
+-rw-r--r-- 1 root root 3.2K Aug 30 23:59 swaeduae_2025-08-30_235911.sql.gz
+-rw-r--r-- 1 root root 3.8K Aug 31 00:27 swaeduae_2025-08-31_002730.sql.gz
+
+== RECENT LOG ERRORS (tail) ==
+latest_log=storage/logs/laravel-2025-09-01.log
+[previous exception] [object] (Symfony\\Component\\Routing\\Exception\\RouteNotFoundException(code: 0): Route [org.root] not defined. at /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/Routing/UrlGenerator.php:517)
+#39 /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/View/Middleware/ShareErrorsFromSession.php(49): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#40 /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(209): Illuminate\\View\\Middleware\\ShareErrorsFromSession->handle()
+[2025-09-01 18:20:46] production.ERROR: The "--columns" option does not exist. {"exception":"[object] (Symfony\\Component\\Console\\Exception\\RuntimeException(code: 0): The \"--columns\" option does not exist. at /var/www/swaeduae/vendor/symfony/console/Input/ArgvInput.php:226)
+Full health saved to: public/health/full-2025-09-01_182150.txt
+
+== SUMMARY ==
+Routes file dump: storage/admin-routes-2025-09-01_182046.txt
+Report saved:     public/health/admin-check-2025-09-01_182046.txt
+Open in browser (if public): /health/admin-check-2025-09-01_182046.txt
+=== END ===
