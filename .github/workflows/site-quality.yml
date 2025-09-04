@@ -76,7 +76,11 @@ jobs:
           extensions: mbstring, curl, dom, json, pdo_sqlite
 
       - uses: browser-actions/setup-chrome@v1
-      - uses: browser-actions/setup-chromedriver@v1
+      - uses: nanasess/setup-chromedriver@v2
+      - name: Browser versions
+        run: |
+          google-chrome --version || true
+          chromedriver --version || true
 
       - name: Install dependencies
         run: composer install --no-interaction --prefer-dist
