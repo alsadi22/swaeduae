@@ -19,3 +19,11 @@
 # Ignore all env backups
 .env*
 
+
+# Secrets and backups
+.env*
+tools/snapshots/**/.env.bak
+scripts/smoke.env
+
+# Dependencies
+/vendor/
