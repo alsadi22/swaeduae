@@ -1,0 +1,25 @@
+@extends('public.layout-travelpro')
+@section('title','Opportunities')
+@section('content')
+<section class="section"><div class="container">
+  <h2 class="mb-3">Opportunities</h2>
+  <form class="op-search mb-3" role="search" method="GET">
+    <input class="form-control" name="q" value="{{ $q }}" placeholder="Search by keyword, city, skill…">
+    <button class="btn btn-primary">Search</button>
+  </form>
+  <div class="op-grid">
+    @forelse($events as $e)
+      <x-opportunity-card
+        :title="$e->title"
+        :org="''"
+        :city="$e->location"
+        :date="optional($e->starts_at)->format('D, d M')"
+        :hours="($e->starts_at && $e->ends_at) ? $e->starts_at->diffInHours($e->ends_at).'h' : ''"
+        :link="url('/opportunities/'.$e->slug)"
+      />
+    @empty
+      <p class="text-muted">No opportunities found.</p>
+    @endforelse
+  </div>
+</div></section>
+@endsection

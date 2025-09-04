@@ -1,0 +1,49 @@
+<?php
+
+namespace App\Http\Controllers\Auth;
+
+use Illuminate\Http\Request;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Auth;
+
+class LoginController extends Controller
+{
+    use AuthenticatesUsers;
+
+    /**
+     * After successful login, route by role.
+     * Org => /org/dashboard, Admin => /admin, Everyone else => /profile
+     */
+    protected function redirectTo()
+    {
+        $user = Auth::user();
+
+        if ($user && method_exists($user, 'hasRole')) {
+            if ($user->hasRole('admin')) {
+                return '/admin';
+            }
+            if ($user->hasRole('org')) {
+                return '/org/dashboard';
+            }
+        }
+
+        if ($user) {
+            if (property_exists($user, 'is_admin') && $user->is_admin) {
+                return '/admin';
+            }
+            if (property_exists($user, 'role') && $user->role === 'organization') {
+                return '/org/dashboard';
+            }
+        }
+
+        return '/profile';
+    }
+
+    public function __construct()
+    {
+        $this->middleware([\App\Http\Middleware\Honeypot::class, 'throttle:login'])->only('login');
+        $this->middleware('guest')->except('logout');
+    }
+}

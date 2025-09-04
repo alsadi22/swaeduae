@@ -1,0 +1,55 @@
+<?php
+
+namespace Tests\Feature;
+
+use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Facades\Mail;
+use Tests\TestCase;
+
+class ContactFormTest extends TestCase
+{
+    use WithFaker;
+
+    /** @test */
+    public function contact_page_loads_and_contains_csrf_field(): void
+    {
+        $response = $this->get(route('contact.show'));
+
+        $response->assertOk();
+        $response->assertSee('name="_token"', false);
+    }
+
+    /** @test */
+    public function contact_post_without_csrf_is_rejected(): void
+    {
+        $this->get(route('contact.show'))->assertOk();
+
+        $response = $this->from(route('contact.show'))->post(route('contact.send'), [
+            'name'    => 'No Token',
+            'email'   => 'notoken@example.com',
+            'message' => 'Hello',
+        ]);
+
+        $response->assertStatus(419);
+    }
+
+    /** @test */
+    public function contact_post_with_valid_csrf_redirects_back_ok(): void
+    {
+        config(['mail.default' => 'array']);
+        Mail::fake();
+
+        $this->get(route('contact.show'))->assertOk();
+        $token = session()->token();
+
+        $response = $this->from(route('contact.show'))->post(route('contact.send'), [
+            '_token'  => $token,
+            'name'    => 'Test User',
+            'email'   => 'test@example.com',
+            'message' => 'Hello from test',
+        ]);
+
+        $response->assertStatus(302)->assertRedirect(route('contact.show'));
+    }
+}
+

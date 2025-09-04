@@ -1,0 +1,39 @@
+<?php
+namespace App\Http\Controllers\Admin;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use App\Support\Integrations;
+use App\Models\Setting;
+
+class IntegrationsController extends Controller {
+  public function index(){
+    $providers=['google','apple','facebook','uaepass'];
+    $values=[];
+    foreach($providers as $p){
+      $values[$p]=[
+        'enabled'=>Integrations::enabled($p),
+        'client_id'=>Integrations::id($p),
+        'client_secret'=>Integrations::secret($p),
+        'redirect'=>Integrations::redirect($p),
+      ];
+    }
+    $values['stripe']=[
+      'enabled'=>Integrations::stripeEnabled(),
+      'key'=>Integrations::stripeKey(),
+      'secret'=>Integrations::stripeSecret(),
+    ];
+    return view('admin.integrations.index', compact('values'));
+  }
+  public function save(Request $r){
+    foreach(['google','apple','facebook','uaepass'] as $p){
+      Setting::put("oauth.$p.enabled", $r->boolean("{$p}_enabled")?'true':'false');
+      Setting::put("oauth.$p.client_id", (string)$r->input("{$p}_client_id"));
+      Setting::put("oauth.$p.client_secret", (string)$r->input("{$p}_client_secret"));
+      Setting::put("oauth.$p.redirect", (string)$r->input("{$p}_redirect"));
+    }
+    Setting::put("payments.stripe.enabled", $r->boolean("stripe_enabled")?'true':'false');
+    Setting::put("payments.stripe.key", (string)$r->input("stripe_key"));
+    Setting::put("payments.stripe.secret", (string)$r->input("stripe_secret"));
+    return back()->with('status','Integrations updated.');
+  }
+}
