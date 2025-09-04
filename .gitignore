@@ -15,3 +15,7 @@
 .vscode/
 *.bak
 *.log
+
+# Ignore all env backups
+.env*
+
