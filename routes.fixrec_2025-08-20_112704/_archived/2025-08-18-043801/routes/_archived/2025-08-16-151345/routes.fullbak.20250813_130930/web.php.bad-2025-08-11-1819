@@ -1,0 +1,39 @@
+<?php
+
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\AdminDashboardController;
+use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Ad
+
+/*
+|------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+| NOTE: Public routes stay as they are below; we’re only adding
+*/
+
+require __DIR__.'
+
+// ---- existing public routes (keep your previous definitions) ---
+if (file_exists(__DIR__.'/web.public.php')) {
+    require __DIR__.'/w
+}
+
+// ---- Admin routes (sidebar layout, no top header) ----
+Route:
+    Route::get('/dashboard', [AdminDashboardController::class, 'inde
+
+    // Settings
+    Route::get('/settings', [SettingController::cla
+    Route::post('/settings', [Set
+
+    // Media Library
+    Route::get('/media', [MediaController::class,
+    Route::post('/media/upload', [MediaController::class, 'upload'])->na
+    Route::delete('/media/{media}', [MediaController::class, 'destro
+});
+
+// (Optional) You can move your previous public routes into routes
+
+// Include admin routes (sidebar layout, no public header)
+require __DIR__.'/admin.php';

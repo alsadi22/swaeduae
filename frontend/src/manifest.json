@@ -1,0 +1,22 @@
+{
+  "short_name": "سواعد",
+  "name": "سواعد الإمارات للتطوع",
+  "icons": [
+    {
+      "src": "/logo192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/logo512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "scope": "/",
+  "theme_color": "#1e40af",
+  "description": "منصة رقمية متكاملة للتطوع في دولة الإمارات العربية المتحدة."
+}

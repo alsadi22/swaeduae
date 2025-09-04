@@ -1,0 +1,75 @@
+resources/views/volunteer/settings/_tabs.blade.php:14:            $certs = \Illuminate\Support\Facades\DB::table('certificates')->where('user_id', $user->id)->count();
+resources/views/volunteer/settings/_tabs.blade.php:17:            $hours = \Illuminate\Support\Facades\DB::table('volunteer_hours')->where('user_id', $user->id)->sum('hours');
+resources/views/volunteer/settings/_tabs.blade.php:20:            $upcoming = \Illuminate\Support\Facades\DB::table('opportunity_applications')
+resources/views/partials/hero-home.blade.php:2:  $hero = \Illuminate\Support\Facades\DB::table('settings')->where('key','home.hero')->value('value');
+resources/views/partials/nav.blade.php:6:      \App\Models\Opportunity::orderByDesc('id')->limit(5)->get(['id','title'])
+resources/views/opportunities/partials/similar.blade.php:2:  $similar = \App\Models\Opportunity::where('id','!=',$opportunity->id)
+resources/views/opportunities/partials/similar.blade.php:4:    ->latest()->take(3)->get();
+resources/views/admin/users/edit.blade.php:7:    @if($errors->any())<div class="alert alert-danger">{{ $errors->first() }}</div>@endif
+resources/views/admin/index.blade.php:22:  $users = class_exists(\App\Models\User::class) ? \App\Models\User::count() : ($has('users') ? DB::table('users')->count() : 0);
+resources/views/admin/index.blade.php:23:  $opps  = $has('opportunities') ? DB::table('opportunities')->count() : 0;
+resources/views/admin/index.blade.php:24:  $orgs  = $has('organizations') ? DB::table('organizations')->count() : 0;
+resources/views/admin/index.blade.php:30:    if ($hcol) $hours = (float) DB::table('volunteer_hours')->sum($hcol);
+resources/views/admin/index.blade.php:38:    $sum=0; if ($has('volunteer_hours')) { $dcol=$hasC('volunteer_hours','date')?'date':'created_at'; $hcol=$hasC('volunteer_hours','hours')?'hours':($hasC('volunteer_hours','duration')?'duration':null); if($hcol){$sum=(float)DB::table('volunteer_hours')->whereBetween($dcol,[$start,$end])->sum($hcol);} }
+resources/views/admin/index.blade.php:40:    $weeklyUsers[] = $has('users') ? (int) DB::table('users')->whereBetween('created_at',[$start,$end])->count() : 0;
+resources/views/admin/index.blade.php:43:  $recentUsers = $has('users') ? DB::table('users')->select('name','email','created_at')->orderByDesc('created_at')->limit(6)->get() : collect();
+resources/views/admin/index.blade.php:44:  $recentOpps  = $has('opportunities') ? DB::table('opportunities')->select('id','title','region','created_at')->orderByDesc('created_at')->limit(6)->get() : collect();
+resources/views/admin/auth/login.blade.php:29:        {{ $errors->first() }}
+resources/views/admin/attendance/index.blade.php:35:            $cert = \App\Models\Certificate::where('user_id', $a->user_id)->where('event_id', $opportunity->id)->first();
+resources/views/auth/register-fallback.blade.php:4:@if ($errors->any()) <div style="color:#c00">{{ $errors->first() }}</div> @endif
+resources/views/auth/login-fallback.blade.php:4:@if ($errors->any()) <div style="color:#c00">{{ $errors->first() }}</div> @endif
+resources/views/auth/login.blade.php:38:@if (request()->get('type') === 'volunteer')
+resources/views/auth/confirm-password.blade.php:19:            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+resources/views/org/partials/dashboard_v1.blade.php:11:    $orgId = DB::table('organizations')->where('owner_user_id', auth()->id())->value('id');
+resources/views/org/partials/dashboard_v1.blade.php:14:    $upcoming = DB::table('opportunities')->where('organization_id',$orgId)->where('start_at','>=',$now)->count();
+resources/views/org/partials/dashboard_v1.blade.php:15:    $appsTotal= DB::table('applications')->whereIn('opportunity_id', function($q) use($orgId){ $q->from('opportunities')->select('id')->where('organization_id',$orgId); })->count();
+resources/views/org/partials/dashboard_v1.blade.php:16:    $appsApproved = DB::table('applications')->where('status','approved')->whereIn('opportunity_id', function($q) use($orgId){ $q->from('opportunities')->select('id')->where('organization_id',$orgId); })->count();
+resources/views/org/partials/dashboard_v1.blade.php:17:    $appsPending  = DB::table('applications')->where('status','pending')->whereIn('opportunity_id', function($q) use($orgId){ $q->from('opportunities')->select('id')->where('organization_id',$orgId); })->count();
+resources/views/org/partials/dashboard_v1.blade.php:18:    $checkinsToday= DB::table('attendances')->whereDate('check_in_at', $now->toDateString())
+resources/views/org/partials/certs_quick.blade.php:3:$orgId = DB::table('organizations')->where('owner_user_id', auth()->id())->value('id');
+resources/views/org/partials/certs_quick.blade.php:6:  $recentOpps = DB::table('opportunities')
+resources/views/org/partials/certs_quick.blade.php:8:     ->orderByDesc('created_at')->limit(3)->get();
+resources/views/org/partials/recent_activity.blade.php:3:$orgId = DB::table('organizations')->where('owner_user_id', auth()->id())->value('id');
+resources/views/org/partials/recent_activity.blade.php:6:  ? DB::table('opportunities')->where('organization_id', $orgId)->pluck('id')->all()
+resources/views/org/partials/recent_activity.blade.php:13:  $a1 = DB::table('audit_logs')
+resources/views/org/partials/recent_activity.blade.php:18:        ->get()
+resources/views/org/partials/recent_activity.blade.php:22:  $appIds = DB::table('applications')->whereIn('opportunity_id',$oppIds)->pluck('id')->all();
+resources/views/org/partials/recent_activity.blade.php:25:    $a2 = DB::table('audit_logs')
+resources/views/org/partials/recent_activity.blade.php:30:          ->get()
+resources/views/org/partials/recent_activity.blade.php:35:  $attIds = DB::table('attendances')->whereIn('opportunity_id',$oppIds)->pluck('id')->all();
+resources/views/org/partials/recent_activity.blade.php:38:    $a3 = DB::table('audit_logs')
+resources/views/org/partials/recent_activity.blade.php:43:          ->get()
+resources/views/org/partials/branding_styles.blade.php:9:    $orgId = DB::table('organizations')->where('owner_user_id', Auth::id())->value('id');
+resources/views/org/partials/branding_styles.blade.php:12:      if (DB::getSchemaBuilder()->hasColumn('organizations','primary_color')) {
+resources/views/org/partials/branding_styles.blade.php:13:        $color = DB::table('organizations')->where('id',$orgId)->value('primary_color');
+resources/views/org/partials/branding_styles.blade.php:16:        $color = DB::table('settings')->where('key',"org:{$orgId}:primary_color")->value('value');
+resources/views/org/partials/today_checkins.blade.php:3:$orgId = DB::table('organizations')->where('owner_user_id', auth()->id())->value('id');
+resources/views/org/partials/today_checkins.blade.php:7:  $rows = DB::table('attendances as a')
+resources/views/org/partials/today_checkins.blade.php:14:     ->limit(15)->get();
+resources/views/org/partials/upcoming_7d.blade.php:3:$orgId = DB::table('organizations')->where('owner_user_id', auth()->id())->value('id');
+resources/views/org/partials/upcoming_7d.blade.php:8:  $list = DB::table('opportunities')
+resources/views/org/partials/upcoming_7d.blade.php:11:      ->orderBy('start_at')->limit(10)->get();
+resources/views/org/settings/_branding_form.blade.php:3:    $orgId = DB::table('organizations')->where('owner_user_id', auth()->id())->value('id');
+resources/views/org/settings/_branding_form.blade.php:6:        if (DB::getSchemaBuilder()->hasColumn('organizations','primary_color')) {
+resources/views/org/settings/_branding_form.blade.php:7:            $settings['primary_color'] = DB::table('organizations')->where('id',$orgId)->value('primary_color');
+resources/views/org/settings/_branding_form.blade.php:9:        if (DB::getSchemaBuilder()->hasColumn('organizations','logo_path')) {
+resources/views/org/settings/_branding_form.blade.php:10:            $settings['logo_path'] = DB::table('organizations')->where('id',$orgId)->value('logo_path');
+resources/views/org/settings/_branding_form.blade.php:13:            $settings['primary_color'] = DB::table('settings')->where('key',"org:{$orgId}:primary_color")->value('value');
+resources/views/org/settings/_branding_form.blade.php:16:            $settings['logo_path'] = DB::table('settings')->where('key',"org:{$orgId}:logo_path")->value('value');
+resources/views/org/shortlist/_slotcap_form.blade.php:7:  if (DB::getSchemaBuilder()->hasColumn('opportunities','slot_cap')) {
+resources/views/org/shortlist/_slotcap_form.blade.php:8:    $capValue = DB::table('opportunities')->where('id',$oppId)->value('slot_cap');
+resources/views/org/shortlist/_slotcap_form.blade.php:11:    $capValue = DB::table('settings')->where('key',"opp:{$oppId}:slot_cap")->value('value');
+resources/views/org/shortlist/_counters.blade.php:9:  if (DB::getSchemaBuilder()->hasColumn('opportunities','slot_cap')) {
+resources/views/org/shortlist/_counters.blade.php:10:    $cap = DB::table('opportunities')->where('id',$oppId)->value('slot_cap');
+resources/views/org/shortlist/_counters.blade.php:14:    $cap = DB::table('settings')->where('key',"opp:{$oppId}:slot_cap")->value('value');
+resources/views/org/shortlist/_counters.blade.php:17:  $shortlisted = DB::table('applications')->where('opportunity_id',$oppId)->where('status','shortlisted')->count();
+resources/views/org/shortlist/_counters.blade.php:18:  $pending     = DB::table('applications')->where('opportunity_id',$oppId)->where('status','pending')->count();
+resources/views/org/shortlist/_counters.blade.php:19:  $approved    = DB::table('applications')->where('opportunity_id',$oppId)->where('status','approved')->count();
+resources/views/org/applicants/_filters.blade.php:3:$orgId = DB::table('organizations')->where('owner_user_id', auth()->id())->value('id');
+resources/views/org/applicants/_filters.blade.php:4:$opps = $orgId ? DB::table('opportunities')->where('organization_id',$orgId)->orderByDesc('created_at')->get(['id','title']) : collect();
+resources/views/profile/partials/update-profile-information-form.blade.php:24:            <x-input-error class="mt-2" :messages="$errors->get('name')" />
+resources/views/profile/partials/update-profile-information-form.blade.php:30:            <x-input-error class="mt-2" :messages="$errors->get('email')" />
+resources/views/profile/partials/delete-user-form.blade.php:42:                <x-input-error :messages="$errors->userDeletion->get('password')" class="mt-2" />
+resources/views/profile/partials/update-password-form.blade.php:20:            <x-input-error :messages="$errors->updatePassword->get('current_password')" class="mt-2" />
+resources/views/profile/partials/update-password-form.blade.php:26:            <x-input-error :messages="$errors->updatePassword->get('password')" class="mt-2" />
+resources/views/profile/partials/update-password-form.blade.php:32:            <x-input-error :messages="$errors->updatePassword->get('password_confirmation')" class="mt-2" />

@@ -1,0 +1,11 @@
+#!/bin/bash
+URL="https://swaeduae.ae"
+
+echo "==> Dynamic page (/)"
+curl -sSI -H "Accept-Language: en" "$URL/" \
+  | egrep -i "^(HTTP/|cache-control|content-language|vary|x-microcache|expires)"
+
+echo
+echo "==> Static asset (/css/app.css)"
+curl -sSI "$URL/css/app.css" \
+  | egrep -i "^(HTTP/|cache-control|expires|last-modified|etag)"

@@ -1,0 +1,103 @@
+<?php
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
+
+class EventController extends Controller
+{
+    public function index(Request $request)
+    {
+        $q        = trim((string)$request->get('q', ''));
+        $category = $request->get('category');
+        $region   = $request->get('region');
+        $dateFrom = $request->get('date_from');
+        $dateTo   = $request->get('date_to');
+        $sort     = $request->get('sort', 'newest');
+
+        $table = 'events';
+        $has   = fn($col) => Schema::hasColumn($table, $col);
+
+        $builder = DB::table($table)->select("$table.*");
+
+        // Published filter (schema-aware)
+        if ($has('is_published')) {
+            $builder->where("$table.is_published", 1);
+        } elseif ($has('published_at')) {
+            $builder->whereNotNull("$table.published_at");
+        }
+
+        if ($q !== '') {
+            $builder->where(function ($w) use ($q, $table, $has) {
+                if ($has('title'))       { $w->orWhere("$table.title", 'LIKE', "%{$q}%"); }
+                if ($has('description')) { $w->orWhere("$table.description", 'LIKE', "%{$q}%"); }
+            });
+        }
+
+        if (!empty($category) && ($has('category') || $has('category_id'))) {
+            $col = $has('category') ? 'category' : 'category_id';
+            $builder->where("$table.$col", $category);
+        }
+        if (!empty($region) && $has('region')) {
+            $builder->where("$table.region", $region);
+        }
+        if (!empty($dateFrom) && ($has('start_date') || $has('start_at'))) {
+            $col = $has('start_at') ? 'start_at' : 'start_date';
+            $builder->whereDate("$table.$col", '>=', $dateFrom);
+        }
+        if (!empty($dateTo) && ($has('end_date') || $has('end_at'))) {
+            $col = $has('end_at') ? 'end_at' : 'end_date';
+            $builder->whereDate("$table.$col", '<=', $dateTo);
+        }
+
+        // Ordering
+        $closingExpr = DB::raw(
+            "COALESCE($table.deadline, $table.end_date, $table.start_date, $table.created_at)"
+        );
+        if ($sort === 'closing_soon') {
+            $builder->orderBy($closingExpr, 'asc');
+        } else {
+            $orderCol = $has('created_at') ? 'created_at' : 'id';
+            $builder->orderBy("$table.$orderCol", 'desc');
+        }
+
+        $events = $builder->paginate(12)->withQueryString();
+
+        return view('events.index', compact('events','q','category','region','dateFrom','dateTo','sort'));
+    }
+
+    public function show($idOrSlug)
+    {
+        $table = 'events';
+        $has   = fn($col) => Schema::hasColumn($table, $col);
+
+        $q = DB::table($table)->select("$table.*");
+
+        // Published filter on show as well
+        if ($has('is_published')) {
+            $q->where("$table.is_published", 1);
+        } elseif ($has('published_at')) {
+            $q->whereNotNull("$table.published_at");
+        }
+
+        if ($has('slug') && !is_numeric($idOrSlug)) {
+            $q->where("$table.slug", $idOrSlug);
+        } else {
+            $q->where("$table.id", (int)$idOrSlug);
+        }
+
+        $event = $q->first();
+        abort_if(!$event, 404);
+
+        return view('events.show', compact('event'));
+    }
+
+    // Optional helper used by routes: /region/sharjah
+    public function sharjah(Request $request)
+    {
+        // Reuse index() but pin the region param if the column exists
+        $request->merge(['region' => 'sharjah']);
+        return $this->index($request);
+    }
+}

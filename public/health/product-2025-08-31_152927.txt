@@ -1,0 +1,34 @@
+=== PRODUCT READINESS 2025-08-31_152927 ===
+
+== ENV SNAPSHOT ==
+APP_ENV=production
+APP_DEBUG=false
+APP_URL=https://swaeduae.ae
+HOURS_GEOFENCE_METERS=150
+
+== ROUTES (public + admin domains) ==
+
+== DB TABLES / COLUMNS (domain) ==
+acl_model_has_permissions
+acl_model_has_roles
+acl_permissions
+acl_role_has_permissions
+acl_roles
+audits
+cache
+cache_locks
+certificates
+events
+failed_jobs
+hours
+job_batches
+jobs
+migrations
+news
+password_reset_tokens
+payments
+registrations
+sessions
+users
+volunteers
+— columns —

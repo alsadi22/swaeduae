@@ -1,0 +1,102 @@
+<?php
+
+namespace App\Http\Controllers\Admin;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use App\Models\User;
+
+class UserAdminController extends Controller
+{
+    public function index(Request $r)
+    {
+        $q = trim((string) $r->get('q',''));
+        $users = User::query()
+            ->when($q !== '', function($w) use($q){
+                $w->where('name','like',"%{$q}%")
+                  ->orWhere('email','like',"%{$q}%")
+                  ->orWhere('mobile','like',"%{$q}%");
+            })
+            ->orderBy('id','desc')
+            ->paginate(20)->appends($r->query());
+
+        return view('admin.users.index', compact('users','q'));
+    }
+
+    public function edit($id)
+    {
+        $user = User::findOrFail($id);
+        return view('admin.users.edit', compact('user'));
+    }
+
+    public function update(Request $r, $id)
+    {
+        $user = User::findOrFail($id);
+        $data = $r->validate([
+            'name'  => 'required|string|max:120',
+            'email' => 'required|email',
+            'mobile'=> 'nullable|string|max:40',
+            'is_active' => 'nullable|boolean',
+        ]);
+        $user->fill($data);
+        $user->is_active = $r->boolean('is_active');
+        $user->save();
+
+        return back()->with('ok', __('User updated.'));
+    }
+
+    public function toggleActive($id)
+    {
+        $user = User::findOrFail($id);
+        $user->is_active = (int)!$user->is_active;
+        $user->save();
+        return back()->with('ok', $user->is_active?__('User activated'):__('User deactivated'));
+    }
+
+    public function makeAdmin($id)
+    {
+        $user = User::findOrFail($id);
+        if (method_exists($user,'assignRole')) { $user->assignRole('admin'); }
+        if (isset($user->is_admin)) { $user->is_admin = 1; $user->save(); }
+        return back()->with('ok', __('User is now admin.'));
+    }
+
+    public function removeAdmin($id)
+    {
+        $user = User::findOrFail($id);
+        if (method_exists($user,'removeRole')) { $user->removeRole('admin'); }
+        if (isset($user->is_admin)) { $user->is_admin = 0; $user->save(); }
+        return back()->with('ok', __('Admin removed.'));
+    }
+
+    public function exportCsv()
+    {
+        $filename = 'users_export_'.date('Ymd_His').'.csv';
+        $fh = fopen('php://temp','w+');
+        fputcsv($fh, ['ID','Name','Email','Mobile','Is Active','Is Admin','Created']);
+        User::orderBy('id')->chunk(1000, function($chunk) use($fh){
+            foreach ($chunk as $u) {
+                fputcsv($fh, [
+                    $u->id, $u->name, $u->email, $u->mobile,
+                    (int)$u->is_active, isset($u->is_admin)?(int)$u->is_admin:null,
+                    optional($u->created_at)->toDateTimeString()
+                ]);
+            }
+        });
+        rewind($fh);
+        return response(stream_get_contents($fh), 200, [
+            'Content-Type'        => 'text/csv',
+            'Content-Disposition' => "attachment; filename=\"{$filename}\"",
+        ]);
+    }
+
+    public function updateRoles(Request $r, $id)
+    {
+        $user = User::findOrFail($id);
+        $roles = array_values(array_filter((array)$r->input('roles', [])));
+        if (method_exists($user, 'syncRoles')) {
+            $user->syncRoles($roles);
+        }
+        return back()->with('ok', __('Roles updated.'));
+    }
+}

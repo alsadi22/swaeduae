@@ -1,0 +1,562 @@
+<?php
+require __DIR__.'/partials/profile_routes.php';
+// require __DIR__.'/partials/volunteer_profile.php'; // replaced by profile_routes.php
+require __DIR__.'/partials/verify.php';
+require __DIR__.'/partials/auth.php';
+require __DIR__.'/partials/profile_routes.php';
+
+require __DIR__.'/partials/org_mvp.php';
+use Illuminate\Support\Facades\DB;
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+*/
+
+// Home
+Route::get('/', function () {
+    return view()->exists('home') ? view('home') : view('welcome');
+})->name('home');
+
+// Gallery
+Route::get('/gallery', function () {
+    return view()->exists('pages.gallery')
+        ? view('pages.gallery')
+        : (view()->exists('public.gallery')
+            ? view('public.gallery')
+            : view('welcome')->with('message', __('Gallery page coming soon.')));
+})->name('public.gallery');
+
+// Events
+Route::get('/events', function () {
+    if (class_exists(\App\Http\Controllers\EventController::class)) {
+        return app(\App\Http\Controllers\EventController::class)->index(request());
+    }
+    return view()->exists('public.events.index')
+        ? view('public.events.index')
+        : view('welcome')->with('message', __('Events coming soon.'));
+})->name('public.events');
+
+Route::get('/events/{id}', function ($id) {
+    if (class_exists(\App\Http\Controllers\EventController::class)) {
+        return app(\App\Http\Controllers\EventController::class)->show($id);
+    }
+    return view()->exists('public.events.show')
+        ? view('public.events.show', ['id'=>$id])
+        : abort(404);
+})->name('public.events.show');
+
+// Opportunities
+Route::get('/opportunities', function () {
+    if (class_exists(\App\Http\Controllers\OpportunityController::class)) {
+        return app(\App\Http\Controllers\OpportunityController::class)->index(request());
+    }
+    $opportunities = DB::table('opportunities')->orderByDesc('created_at')->paginate(12);
+    return view()->exists('opportunities.index')
+        ? view('opportunities.index', compact('opportunities'))
+        : (view()->exists('public.opportunities.index')
+            ? view('public.opportunities.index', compact('opportunities'))
+            : view('partials._opps_fallback', compact('opportunities')));
+})->name('public.opportunities');
+
+Route::get('/opportunities/{id}', function ($id) {
+    if (class_exists(\App\Http\Controllers\OpportunityController::class)) {
+        return app(\App\Http\Controllers\OpportunityController::class)->show($id);
+    }
+    return view()->exists('opportunities.show')
+        ? view('opportunities.show', ['id'=>$id])
+        : abort(404);
+})->name('public.opportunities.show');
+
+// Organizations
+Route::get('/organizations', [\App\Http\Controllers\OrganizationController::class, 'index'])->name('public.organizations.index');
+
+/* --------------------------------------------------------------------------
+ | Admin area (protected)
+ |-------------------------------------------------------------------------- */
+
+Route::middleware(['web','auth','verified'])
+    ->prefix('admin')->as('admin.')
+    ->group(function () {
+        // Dashboard
+        Route::get('/', function () {
+            if (class_exists(\App\Http\Controllers\Admin\DashboardController::class)) {
+                return app(\App\Http\Controllers\Admin\DashboardController::class)->index();
+            }
+            return view()->exists('admin.index')
+                ? view('admin.index')
+                : abort(404);
+        })->name('dashboard');
+    });
+
+/* --------------------------------------------------------------------------
+ | Admin area (protected)
+ |-------------------------------------------------------------------------- */
+Route::middleware(['web','auth','verified'])
+    ->prefix('admin')->as('admin.')
+    ->group(function () {
+        Route::get('/', function () {
+            if (class_exists(\App\Http\Controllers\Admin\DashboardController::class)) {
+                return app(\App\Http\Controllers\Admin\DashboardController::class)->index();
+            }
+            return view()->exists('admin.index')
+                ? view('admin.index')
+                : abort(404);
+        })->name('dashboard');
+    });
+
+/* --------------------------------------------------------------------------
+ | Admin area (protected)
+ |-------------------------------------------------------------------------- */
+Route::middleware(['web','auth','verified'])
+    ->prefix('admin')->as('admin.')
+    ->group(function () {
+        // Force the dashboard to use resources/views/admin/index.blade.php
+        Route::get('/', fn() => view('admin.index'))->name('dashboard');
+
+        // Optional legacy alias
+        Route::get('/dashboard', fn() => redirect('/volunteer/profile', 301));
+    });
+
+/* Admin optional CRUD (only if controllers exist) */
+Route::middleware(['web','auth','verified'])->prefix('admin')->as('admin.')->group(function () {
+    if (class_exists(\App\Http\Controllers\Admin\OpportunityController::class)) {
+        Route::resource('opportunities', \App\Http\Controllers\Admin\OpportunityController::class)->except(['show']);
+    }
+    if (class_exists(\App\Http\Controllers\Admin\OrganizationController::class)) {
+        Route::resource('organizations', \App\Http\Controllers\Admin\OrganizationController::class)->except(['show']);
+    }
+    if (class_exists(\App\Http\Controllers\Admin\EventController::class)) {
+        Route::resource('events', \App\Http\Controllers\Admin\EventController::class)->except(['show']);
+    }
+});
+
+/* --------------------------------------------------------------------------
+ | Admin CRUD (optional – only registers if controllers exist)
+ |-------------------------------------------------------------------------- */
+Route::middleware(['web','auth','verified'])->prefix('admin')->as('admin.')->group(function () {
+    if (class_exists(\App\Http\Controllers\Admin\OpportunityController::class)) {
+        Route::resource('opportunities', \App\Http\Controllers\Admin\OpportunityController::class)->except(['show']);
+    }
+    if (class_exists(\App\Http\Controllers\Admin\OrganizationController::class)) {
+        Route::resource('organizations', \App\Http\Controllers\Admin\OrganizationController::class)->except(['show']);
+    }
+    if (class_exists(\App\Http\Controllers\Admin\EventController::class)) {
+        Route::resource('events', \App\Http\Controllers\Admin\EventController::class)->except(['show']);
+    }
+    if (class_exists(\App\Http\Controllers\Admin\UserController::class)) {
+        Route::resource('users', \App\Http\Controllers\Admin\UserController::class)->only(['index','edit','update','destroy']);
+    }
+});
+
+/* Admin: site settings */
+Route::middleware(['web','auth','verified'])
+    ->prefix('admin')->as('admin.')
+    ->group(function () {
+        Route::get('/settings', [\App\Http\Controllers\Admin\SiteSettingController::class,'index'])->name('settings.index');
+        Route::post('/settings',[\App\Http\Controllers\Admin\SiteSettingController::class,'update'])->name('settings.update');
+    });
+
+
+/* Social auth (Google, Microsoft, Facebook, UAE PASS) */
+Route::get('/auth/{provider}', [\App\Http\Controllers\SocialLoginController::class,'redirect'])
+    ->whereIn('provider', ['google','facebook','microsoft','uaepass']);
+Route::get('/auth/{provider}/callback', [\App\Http\Controllers\SocialLoginController::class,'callback'])
+    ->whereIn('provider', ['google','facebook','microsoft','uaepass']);
+
+/* Payments stub */
+if (env('PAYMENTS_ENABLED', false)) {
+    Route::post('/api/pay/checkout', [\App\Http\Controllers\PaymentController::class, 'createCheckout'])->middleware('throttle:20,1');
+}
+
+require __DIR__ . '/pages.php';
+
+// My Certificates (volunteer)
+Route::middleware(['web','auth'])->group(function () {
+    Route::get('/my/certificates', [\App\Http\Controllers\Volunteer\ProfileController::class, 'myCertificates'])
+        ->name('volunteer.my_certificates');
+});
+
+// Volunteer dashboard/profile (named: volunteer.profile)
+Route::middleware(['web','auth'])->group(function () {
+    Route::get('/volunteer/profile', [\App\Http\Controllers\Volunteer\ProfileController::class, 'index'])
+        ->name('volunteer.profile');
+});
+
+// ---- Auth alias: required by \Illuminate\Auth\Middleware\Authenticate ----
+Route::get('/login', function () {
+    // Prefer an existing named 'signin' route if you have one
+    if (\Illuminate\Support\Facades\Route::has('signin')) {
+        return redirect()->route('signin');
+    }
+    // Otherwise render auth.login view if it exists; fallback home
+    return view()->exists('auth.login') ? view('auth.login') : redirect('/');
+})->name('login');
+
+Route::view('/signin', 'auth.login')->name('signin');
+
+Route::view('/register', 'auth.register')->name('register');
+
+Route::middleware(["web"])/* auth posts */->group(function () {
+    // Accept form submissions to /login
+    Route::post("/login", [\App\Http\Controllers\Auth\AuthController::class, "login"])->middleware('throttle:login');
+    // Logout (if your UI uses route("logout"), this provides it)
+    Route::post("/logout", [\App\Http\Controllers\Auth\AuthController::class, "logout"])->name("logout");
+});
+
+// --- Volunteer Dashboard (auth only) ---
+use App\Http\Controllers\VolunteerDashboardController;
+Route::middleware('auth')->group(function () {
+    // Main volunteer landing
+//     Route::get('/dashboard', [VolunteerDashboardController::class, 'dashboard'])->name('volunteer.dashboard');
+    // Alternate path (explicit)
+//     Route::get('/volunteer/dashboard', [VolunteerDashboardController::class, 'dashboard'])->name('volunteer.dashboard.alt');
+});
+
+// --- Admin: finalize certificates for an opportunity ---
+use App\Http\Controllers\Admin\OpportunityFinalizeController;
+Route::middleware(['auth','admin'])->prefix('admin')->name('admin.')->group(function () {
+    Route::post('/opportunities/{id}/finalize-certs', [OpportunityFinalizeController::class, 'finalizeCertificates'])
+        ->name('opportunities.finalizeCerts');
+});
+
+// --- Admin Tools: finalize certificates by Opportunity ID ---
+use App\Http\Controllers\Admin\OpportunityFinalizeController as FinalizeCtl;
+Route::middleware(['auth','admin'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/tools/finalize-certs', [FinalizeCtl::class, 'form'])->name('tools.finalizeCerts.form');
+    Route::post('/tools/finalize-certs', [FinalizeCtl::class, 'finalizeByForm'])->name('tools.finalizeCerts.post');
+});
+
+// Quick link: open finalize form prefilled for a given opportunity
+Route::middleware(['auth','admin'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/tools/finalize-certs/opportunities/{id}', function ($id) {
+        return redirect()->route('admin.tools.finalizeCerts.form', ['opportunity_id' => (int)$id]);
+    })->name('tools.finalizeCerts.form.prefilled');
+});
+
+// Public certificate verification
+Route::get('/verify/{code}', [\App\Http\Controllers\VerifyController::class, 'show'])->name('verify.show');
+
+// --- Admin Certificates ---
+Route::middleware(['auth','admin'])->group(function () {
+    Route::get('/admin/certificates/bulk-issue', [\App\Http\Controllers\Admin\CertificateAdminController::class, 'bulkForm']);
+    Route::post('/admin/certificates/bulk-issue', [\App\Http\Controllers\Admin\CertificateAdminController::class, 'bulkIssue']);
+    Route::get('/admin/certificates/resend', [\App\Http\Controllers\Admin\CertificateAdminController::class, 'resendForm']);
+    Route::post('/admin/certificates/resend', [\App\Http\Controllers\Admin\CertificateAdminController::class, 'resend']);
+});
+
+// --- My Certificates (auth-only) ---
+Route::get('/my-certificates', [\App\Http\Controllers\Volunteer\MyCertificatesController::class, 'index'])
+    ->middleware('auth')
+    ->name('my.certificates');
+
+// Alias: legacy /my/certificates → canonical /my-certificates
+Route::get('/my/certificates', function () {
+    return redirect()->route('my.certificates');
+});
+
+/* Canonical Profile route (safety net if partial include is skipped) */
+use App\Http\Controllers\Volunteer\ProfileController;
+Route::middleware(['web','auth'])->group(function () {
+    Route::get('/profile',  [ProfileController::class, 'index'])->name('profile');
+});
+
+// Volunteer documents (within profile)
+Route::middleware('auth')->group(function () {
+    Route::post('/profile/documents', [\App\Http\Controllers\DocumentController::class, 'store'])->name('documents.store');
+    Route::delete('/profile/documents/{doc}', [\App\Http\Controllers\DocumentController::class, 'destroy'])->name('documents.destroy');
+});
+
+/* ---------- Auth UX (Volunteer / Organization) ---------- */
+use App\Http\Controllers\Auth\OrganizationRegisterController;
+use Illuminate\Support\Facades\Route;
+
+/* Volunteer login page (with social + UAE PASS) */
+Route::get('/volunteer/login', function () {
+    session(['url.intended' => '/profile']);
+    if (auth()->check()) { return redirect('/profile'); }
+    return view('auth.volunteer_login');
+})->middleware('guest')->name('login.volunteer');
+/* Organization login page (no social/uae pass) */
+    if (auth()->check()) {
+        return redirect('/admin');
+    }
+    return view('auth.organization_login');
+})->middleware('guest')->name('login.organization');
+/* Organization register page + store */
+if (!Route::has('register.organization')) {
+    Route::get('/organization/register', [OrganizationRegisterController::class, 'create'])->name('register.organization');
+    Route::post('/organization/register', [OrganizationRegisterController::class, 'store'])->name('register.organization.store');
+}
+
+/* Optional convenience redirect from /signin to volunteer login */
+
+/* UAE PASS + Social routes (only add if not present elsewhere in your routes) */
+use App\Http\Controllers\SocialLoginController;
+if (class_exists(\App\Http\Controllers\SocialLoginController::class)) {
+    Route::get('/auth/uaepass/redirect', [SocialLoginController::class, 'uaePassRedirect'])->name('uaepass.redirect');
+    Route::get('/auth/uaepass/callback', [SocialLoginController::class, 'uaePassCallback'])->name('uaepass.callback');
+    // Generic provider endpoints (Google/Facebook/Twitter/LinkedIn)
+    Route::get('/auth/{provider}/redirect', [SocialLoginController::class, 'redirect'])
+        ->whereIn('provider', ['google','facebook','twitter','linkedin']);
+    Route::get('/auth/{provider}/callback', [SocialLoginController::class, 'callback'])
+        ->whereIn('provider', ['google','facebook','twitter','linkedin']);
+}
+
+Route::get('/signin', function () {
+    return auth()->check() ? redirect('/profile') : redirect()->route('login.volunteer');
+})->name('signin');
+
+/* --- Email verification: GET helper to resend (avoids 419) --- */
+Route::get('/email/verification-notification', function (Request $request) {
+    if (!auth()->check()) {
+        return redirect()->route('login.volunteer');
+    }
+    $user = $request->user();
+    try {
+        $user->sendEmailVerificationNotification();
+        return back()->with('status', 'verification-link-sent');
+    } catch (\Throwable $e) {
+        return back()->with('error', 'Unable to send verification email.');
+    }
+})->name('verification.notice.get')->middleware('auth');
+
+/* --- Alias for legacy 'login' name used in views --- */
+Route::get('/login', function () {
+    return auth()->check()
+        ? redirect('/profile')
+        : redirect()->route('login.volunteer');
+})->name('login');
+
+/* --- Email verification: GET helper to resend (avoids 419) --- */
+Route::get('/email/verification-notification', function (Request $request) {
+    if (!auth()->check()) {
+        return redirect()->route('login.volunteer');
+    }
+    $user = $request->user();
+    try {
+        $user->sendEmailVerificationNotification();
+        return back()->with('status', 'verification-link-sent');
+    } catch (\Throwable $e) {
+        return back()->with('error', 'Unable to send verification email.');
+    }
+})->name('verification.notice.get')->middleware('auth');
+
+/* --- Alias for legacy 'login' name used in views --- */
+Route::get('/login', function () {
+    return auth()->check()
+        ? redirect('/profile')
+        : redirect()->route('login.volunteer');
+})->name('login');
+
+/* --- GET logout helper (avoids 419 when navbar uses a link) --- */
+Route::get('/logout', function (\Illuminate\Http\Request $request) {
+    \Illuminate\Support\Facades\Auth::logout();
+    $request->session()->invalidate();
+    $request->session()->regenerateToken();
+    return redirect('/');
+})->middleware('auth')->name('logout.get');
+
+/*
+|--------------------------------------------------------------------------
+| Organization Auth & Profile
+|--------------------------------------------------------------------------
+| Routes for organization registration, login, and profile management.
+| Keeps single-auth setup; users are created then assigned 'org' role.
+*/
+
+use App\Http\Controllers\Org\OrgAuthController;
+use App\Http\Controllers\Org\OrganizationProfileController;
+
+Route::prefix('org')->group(function () {
+    // Register & Login
+    Route::get('/register', [OrgAuthController::class, 'showRegisterForm'])->name('org.register');
+    Route::post('/register', [OrgAuthController::class, 'register'])->name('org.register.submit');
+
+    Route::get('/login', [OrgAuthController::class, 'showLoginForm'])->name('org.login');
+    Route::post('/login', [OrgAuthController::class, 'login'])->name('org.login.submit');
+
+    Route::post('/logout', [OrgAuthController::class, 'logout'])->name('org.logout');
+
+    // Profile (requires auth + role org/admin)
+    Route::middleware(['auth'])->group(function () {
+        Route::get('/profile', [OrganizationProfileController::class, 'show'])->name('org.profile');
+        Route::post('/profile', [OrganizationProfileController::class, 'update'])->name('org.profile.update');
+
+        Route::post('/license/request', [OrganizationProfileController::class, 'requestLicense'])->name('org.license.request');
+    });
+});
+
+// Minimal under-review page for organizations
+Route::middleware(['auth'])->prefix('org')->group(function () {
+    Route::view('/review', 'org.review')->name('org.review');
+});
+
+use App\Http\Controllers\Admin\OrganizationReviewController as OrgReview;
+
+Route::middleware(['web','auth','verified'])->prefix('admin')->as('admin.')->group(function () {
+    Route::post('/organizations/{organization}/approve', [OrgReview::class, 'approve'])->name('organizations.approve');
+    Route::post('/organizations/{organization}/reject',  [OrgReview::class, 'reject'])->name('organizations.reject');
+});
+
+// Organization registration & review
+Route::get('/org/register', [\App\Http\Controllers\Org\OrgAuthController::class, 'showRegisterForm'])->name('org.register');
+Route::post('/org/register', [\App\Http\Controllers\Org\OrgAuthController::class, 'register'])->name('org.register.submit');
+
+// Admin approval routes
+Route::middleware(['web','auth','verified'])->prefix('admin')->as('admin.')->group(function () {
+//     Route::post('/organizations/{organization}/approve', [\App\Http\Controllers\Admin\OrgReview::class, 'approve'])->name('organizations.approve');
+//     Route::post('/organizations/{organization}/reject', [\App\Http\Controllers\Admin\OrgReview::class, 'reject'])->name('organizations.reject');
+});
+
+// --- Added: simple Organization Login page (GET) ---
+Route::middleware(['web','guest'])->get('/org/login', function () {
+    return view('org.auth.login');
+})->name('org.login');
+
+
+// --- Org Attendance QR panel (protected)
+Route::middleware(['web','auth','verified', \App\Http\Middleware\EnsureRole::class . ':org'])->prefix('org')->group(function () {
+    Route::get('/attendance/{attendance}/qr', [\App\Http\Controllers\Org\AttendanceController::class, 'qr'])
+        ->name('org.attendance.qr');
+});
+
+// --- Volunteer scan endpoint (requires login)
+Route::middleware(['web','auth'])->match(['get','post'], '/scan', [\App\Http\Controllers\ScanController::class, 'scan'])
+    ->name('scan');
+
+Route::middleware(['auth','verified'])
+    ->prefix('org')->name('org.')
+    ->group(function () {
+    });
+
+
+
+
+
+// --- ORG PING TEST (TEMP) ---
+Route::get('/org/ping', function () {
+    return 'pong';
+})->name('org.ping');
+
+// ----------------------
+
+// ----------------------
+
+// ======================
+// Organization Area (Consolidated)
+// ======================
+use App\Http\Controllers\Org\DashboardController as OrgDashboardController;
+use App\Http\Controllers\Org\EventController as OrgEventController;
+use App\Http\Controllers\Org\EventVolunteersController;
+use App\Http\Controllers\Org\ReportsController;
+
+Route::middleware(['web','auth','role:org'])->prefix('org')->as('org.')->group(function () {
+    // Canonical dashboard
+    Route::get('/', [OrgDashboardController::class, 'index'])->name('dashboard');
+
+    // Preserve old URL: /org/dashboard -> redirect to /org
+    Route::redirect('/dashboard', '/org', 301)->name('dashboard.legacy');
+
+    // (Optional) keep events index if used in UI
+    Route::get('/events', [OrgEventController::class, 'index'])->name('events.index');
+
+    // Phase 1 completion: Reports + CSV
+    Route::get('/reports', [ReportsController::class, 'index'])->name('reports');
+    Route::get('/reports/hours.csv', [ReportsController::class, 'exportHoursCsv'])->name('reports.hours.csv');
+
+    // Phase 1 completion: Event-specific Volunteers + CSV
+    Route::get('/events/{opportunity}/volunteers', [EventVolunteersController::class, 'index'])->name('events.volunteers');
+    Route::get('/events/{opportunity}/volunteers.csv', [EventVolunteersController::class, 'exportCsv'])->name('events.volunteers.csv');
+});
+
+// ==== ORG ATTENDANCE & FINALIZE (Phase 1) ====
+// Guard with 'auth' and 'verified'; role check is done in controller to allow admin view too.
+use App\Http\Controllers\Org\AttendanceController;
+
+Route::middleware(['web','auth','verified'])
+    ->prefix('org')
+    ->as('org.')
+    ->group(function () {
+        // Roll-call page
+        Route::get('/events/{event}/attendance', [AttendanceController::class, 'index'])->name('events.attendance.index');
+
+        // Check-in/out
+        Route::post('/attendances/{attendance}/check', [AttendanceController::class, 'toggleCheck'])->name('attendances.check');
+
+        // No-show toggle
+        Route::post('/attendances/{attendance}/no-show', [AttendanceController::class, 'toggleNoShow'])->name('attendances.no_show');
+
+        // Minutes + reason
+        Route::post('/attendances/{attendance}/minutes', [AttendanceController::class, 'updateMinutes'])->name('attendances.minutes');
+
+        // Finalize event (issue certs)
+        Route::post('/events/{event}/finalize', [AttendanceController::class, 'finalizeEvent'])->name('events.finalize');
+
+        // Resend certificate
+        Route::post('/attendances/{attendance}/cert/resend', [AttendanceController::class, 'resendCert'])->name('attendances.cert.resend');
+    });
+
+// ==== ORG ATTENDANCE for OPPORTUNITIES (Phase 1) ====
+use App\Http\Controllers\Org\OpportunityAttendanceController;
+
+Route::middleware(['web','auth','verified'])
+    ->prefix('org')
+    ->as('org.')
+    ->group(function () {
+        // Roll-call for opportunity
+        Route::get('/opportunities/{opportunity}/attendance', [OpportunityAttendanceController::class, 'index'])->name('opportunities.attendance.index');
+
+        // Finalize opportunity (issue certs)
+        Route::post('/opportunities/{opportunity}/finalize', [OpportunityAttendanceController::class, 'finalize'])->name('opportunities.finalize');
+    });
+
+// ===== AUTH CANONICAL PAGES (Volunteer / Org / Admin) =====
+use Illuminate\Support\Facades\Route;
+
+// Volunteer login page (canonical /login)
+Route::middleware(['web','guest'])->get('/login', function () {
+    return view('auth.volunteer_login');
+})->name('login');
+
+// Org login page (business email only page; no social)
+Route::middleware(['web','guest'])->get('/org/login', function () {
+    return view('auth.organization_login'); // falls back to resources/views/auth/organization_login.blade.php if present
+})->name('org.login');
+
+// Admin login page (separate UI)
+Route::middleware(['web','guest'])->get('/admin/login', function () {
+    return view('auth.admin_login');
+})->name('admin.login');
+
+// Legacy alias -> redirect to /org/login
+
+// Volunteer alternate page (keep but point to same UI)
+Route::middleware(['web','guest'])->get('/volunteer/login', function () {
+    return view('auth.volunteer_login');
+})->name('login.volunteer');
+
+// ===== SOCIAL / UAE PASS endpoints (redirect + callback) =====
+use App\Http\Controllers\Auth\SocialLoginController as CanonicalSocial;
+use App\Http\Controllers\SocialLoginController as RootSocial; // top-level controller contains UAE PASS stubs
+
+// Standard providers
+Route::get('/auth/{provider}/redirect', [CanonicalSocial::class, 'redirect'])
+    ->whereIn('provider', ['google','facebook','microsoft'])
+    ->name('social.redirect');
+Route::get('/auth/{provider}/callback', [CanonicalSocial::class, 'callback'])
+    ->whereIn('provider', ['google','facebook','microsoft'])
+    ->name('social.callback');
+
+// UAE PASS (using top-level controller methods uaePassRedirect/Callback)
+Route::get('/auth/uaepass/redirect', [RootSocial::class, 'uaePassRedirect'])->name('uaepass.redirect');
+Route::get('/auth/uaepass/callback', [RootSocial::class, 'uaePassCallback'])->name('uaepass.callback');
+
+
+// Canonical: legacy -> new org login
+
+// Canonical: legacy -> new org login
+Route::get('/organization/login', function () {
+    return redirect('/org/login', 301);
+})->middleware(['web','guest'])->name('login.organization');

@@ -1,0 +1,145 @@
+<?php
+
+use Illuminate\Support\Facades\Route;
+
+/** ADMIN (Argon) **/
+Route::prefix('admin')->name('admin.')->middleware(['web','auth:admin'])->group(function () {
+    if (class_exists(\App\Http\Controllers\Admin\ApplicationAdminController::class)) {
+        Route::get('/apps', [\App\Http\Controllers\Admin\ApplicationAdminController::class, 'index'])->name('apps.index');
+    }
+
+    if (class_exists(\App\Http\Controllers\Admin\CertificateAdminController::class)) {
+        Route::get('/certificates', [\App\Http\Controllers\Admin\CertificateAdminController::class, 'index'])->name('certificates.index');
+        Route::post('/certificates', [\App\Http\Controllers\Admin\CertificateAdminController::class, 'store'])->name('certificates.store');
+        Route::post('/certificates/{id}/resend', [\App\Http\Controllers\Admin\CertificateAdminController::class, 'resend'])->whereNumber('id')->name('certificates.resend');
+    } else {
+        Route::get('/certificates', fn() => redirect()->route('verify.show', ['code'=>'']))->name('certificates.index');
+    }
+
+    if (class_exists(\App\Http\Controllers\Admin\OpportunityController::class)) {
+        Route::get   ('/opportunities/create',           [\App\Http\Controllers\Admin\OpportunityController::class,'create'])->name('opportunities.create');
+        Route::post  ('/opportunities',                  [\App\Http\Controllers\Admin\OpportunityController::class,'store'])->name('opportunities.store');
+        Route::get   ('/opportunities/{id}/edit',        [\App\Http\Controllers\Admin\OpportunityController::class,'edit'])->whereNumber('id')->name('opportunities.edit');
+        Route::put   ('/opportunities/{id}',             [\App\Http\Controllers\Admin\OpportunityController::class,'update'])->whereNumber('id')->name('opportunities.update');
+        Route::delete('/opportunities/{id}',             [\App\Http\Controllers\Admin\OpportunityController::class,'destroy'])->whereNumber('id')->name('opportunities.destroy');
+        Route::get   ('/opportunities',                  [\App\Http\Controllers\Admin\OpportunityController::class,'index'])->name('opportunities');
+    }
+
+    if (class_exists(\App\Http\Controllers\Admin\OpportunityFinalizeController::class)) {
+        Route::post('/opportunities/{id}/finalize/issue', [\App\Http\Controllers\Admin\OpportunityFinalizeController::class,'issue'])->whereNumber('id')->name('opportunities.finalize.issue');
+        Route::post('/opportunities/{id}/complete',       [\App\Http\Controllers\Admin\OpportunityFinalizeController::class,'complete'])->whereNumber('id')->name('opportunities.complete');
+    }
+    if (class_exists(\App\Http\Controllers\Admin\OpportunityQRController::class)) {
+        Route::post('/opportunities/{id}/qr/issue',    [\App\Http\Controllers\Admin\OpportunityQRController::class,'issue'])->whereNumber('id')->name('opportunities.qr.issue');
+        Route::post('/opportunities/{id}/qr/finalize', [\App\Http\Controllers\Admin\OpportunityQRController::class,'finalize'])->whereNumber('id')->name('opportunities.qr.finalize');
+        Route::post('/opportunities/{id}/qr/reset',    [\App\Http\Controllers\Admin\OpportunityQRController::class,'reset'])->whereNumber('id')->name('opportunities.qr.reset');
+        Route::patch('/opportunities/{id}/attendance', [\App\Http\Controllers\Admin\AttendanceAdminController::class,'manual'])->whereNumber('id')->name('opportunities.attendance.update');
+    }
+
+    if (class_exists(\App\Http\Controllers\Admin\OrgModerationController::class)) {
+        Route::post('/organizations/{org}/approve', [\App\Http\Controllers\Admin\OrgModerationController::class,'approve'])->name('organizations.approve');
+        Route::post('/organizations/{org}/reject',  [\App\Http\Controllers\Admin\OrgModerationController::class,'reject'])->name('organizations.reject');
+    }
+
+    if (class_exists(\App\Http\Controllers\Admin\KycAdminController::class)) {
+        Route::post('/kyc/{id}/approve',  [\App\Http\Controllers\Admin\KycAdminController::class,'approve'])->whereNumber('id')->name('kyc.approve');
+        Route::post('/kyc/{id}/decline',  [\App\Http\Controllers\Admin\KycAdminController::class,'decline'])->whereNumber('id')->name('kyc.decline');
+        Route::get ('/kyc/{id}/download', [\App\Http\Controllers\Admin\KycAdminController::class,'download'])->whereNumber('id')->name('kyc.download');
+        Route::post('/kyc/{id}/reject',   [\App\Http\Controllers\Admin\KycAdminController::class,'reject'])->whereNumber('id')->name('kyc.reject');
+    }
+
+    if (class_exists(\App\Http\Controllers\Admin\RoleAdminController::class)) {
+        Route::post('/roles',            [\App\Http\Controllers\Admin\RoleAdminController::class,'store'])->name('roles.store');
+        Route::post('/roles/perms',      [\App\Http\Controllers\Admin\RoleAdminController::class,'perms'])->name('roles.perms');
+        Route::post('/perms',            [\App\Http\Controllers\Admin\RoleAdminController::class,'storePerm'])->name('perms.store');
+    } else {
+        Route::post('/roles',       fn() => back()->with('status','Roles WIP'))->name('roles.store');
+        Route::post('/roles/perms', fn() => back()->with('status','Perms WIP'))->name('roles.perms');
+        Route::post('/perms',       fn() => back()->with('status','Perms WIP'))->name('perms.store');
+    }
+
+    if (class_exists(\App\Http\Controllers\Admin\SettingsController::class)) {
+        Route::get('/settings',  [\App\Http\Controllers\Admin\SettingsController::class,'index'])->name('settings.index');
+        Route::match(['PUT','PATCH','POST'],'/settings', [\App\Http\Controllers\Admin\SettingsController::class,'update'])->name('settings.update');
+    } else {
+        Route::get('/settings', fn() => redirect()->route('admin.settings.api'))->name('settings.index');
+        Route::match(['PUT','PATCH','POST'],'/settings', fn() => redirect()->route('admin.settings.api.save'))->name('settings.update');
+    }
+
+    if (class_exists(\App\Http\Controllers\Admin\ProfileController::class)) {
+        Route::match(['PUT','PATCH','POST'],'/profile', [\App\Http\Controllers\Admin\ProfileController::class,'update'])->name('profile.update');
+    }
+
+    if (class_exists(\App\Http\Controllers\Admin\CertificateManagementController::class)) {
+        Route::post('/tools/finalize-certs', [\App\Http\Controllers\Admin\CertificateManagementController::class,'finalize'])->name('tools.finalizeCerts.post');
+    } else {
+        Route::post('/tools/finalize-certs', fn() => back()->with('status','Finalize WIP'))->name('tools.finalizeCerts.post');
+    }
+
+    if (class_exists(\App\Http\Controllers\Admin\AuditController::class)) {
+        Route::get('/audit/export.csv', [\App\Http\Controllers\Admin\AuditController::class,'exportCsv'])->name('audit.export.csv');
+    } else {
+        Route::get('/audit/export.csv', fn() => response("timestamp,actor,action\n",200,['Content-Type'=>'text/csv']))->name('audit.export.csv');
+    }
+});
+
+/** ORG (Argon) **/
+Route::prefix('org')->name('org.')->middleware(['web','auth:org'])->group(function () {
+    if (class_exists(\App\Http\Controllers\Org\OpportunityController::class)) {
+        Route::get('/opportunities', [\App\Http\Controllers\Org\OpportunityController::class,'index'])->name('opportunities.index');
+        Route::delete('/opportunities/{id}', [\App\Http\Controllers\Org\OpportunityController::class,'destroy'])->whereNumber('id')->name('opportunities.destroy');
+        Route::patch('/opportunities/{id}/slotcap', [\App\Http\Controllers\Org\OpportunityCapController::class,'update'])->whereNumber('id')->name('opportunities.slotcap.update');
+        Route::post('/opportunities/{id}/attendance/settings', [\App\Http\Controllers\Org\OpportunityAttendanceController::class,'saveSettings'])->whereNumber('id')->name('opportunities.attendance.settings.save');
+    }
+
+    if (class_exists(\App\Http\Controllers\Org\AttendanceController::class)) {
+        Route::post ('/attendance/{id}/finalize', [\App\Http\Controllers\Org\AttendanceController::class,'finalize'])->whereNumber('id')->name('attendance.finalize');
+        Route::patch('/attendance/{id}/minutes',  [\App\Http\Controllers\Org\AttendanceController::class,'updateMinutes'])->whereNumber('id')->name('attendance.minutes.update');
+        Route::patch('/attendance/{id}/no-show',  [\App\Http\Controllers\Org\AttendanceController::class,'toggleNoShow'])->whereNumber('id')->name('attendance.no_show.toggle');
+    }
+    Route::post ('/attendances/check',  [\App\Http\Controllers\Org\AttendanceController::class,'check'])->name('attendances.check');
+    Route::get  ('/attendances/minutes', fn() => back())->name('attendances.minutes');
+    Route::patch('/attendances/{id}/minutes', [\App\Http\Controllers\Org\AttendanceController::class,'updateMinutes'])->whereNumber('id')->name('attendances.minutes.update');
+    Route::post ('/attendances/{id}/no-show',  [\App\Http\Controllers\Org\AttendanceController::class,'toggleNoShow'])->whereNumber('id')->name('attendances.no_show');
+
+    if (class_exists(\App\Http\Controllers\Org\CertificatesController::class)) {
+        Route::get ('/certificates',                [\App\Http\Controllers\Org\CertificatesController::class,'index'])->name('certificates.index');
+        Route::post('/certificates/issue',          [\App\Http\Controllers\Org\CertificatesController::class,'issue'])->name('certificates.issue');
+        Route::post('/certificates/{id}/resend',    [\App\Http\Controllers\Org\CertificatesController::class,'resend'])->whereNumber('id')->name('certificates.resend');
+        Route::get ('/certificates/export.csv',     [\App\Http\Controllers\Org\CertificatesController::class,'exportCsv'])->name('certificates.export.csv');
+    }
+
+    if (class_exists(\App\Http\Controllers\Org\EventVolunteersController::class)) {
+        Route::get('/events/{id}/volunteers',     [\App\Http\Controllers\Org\EventVolunteersController::class,'index'])->whereNumber('id')->name('events.volunteers');
+        Route::get('/events/{id}/volunteers.csv', [\App\Http\Controllers\Org\EventVolunteersController::class,'exportCsv'])->whereNumber('id')->name('events.volunteers.csv');
+    }
+    if (class_exists(\App\Http\Controllers\Org\EventController::class)) {
+        Route::post('/events/{id}/finalize', [\App\Http\Controllers\Org\EventController::class,'finalize'])->whereNumber('id')->name('events.finalize');
+    }
+
+    if (class_exists(\App\Http\Controllers\Org\OrganizationProfileController::class)) {
+        Route::match(['PUT','PATCH','POST'],'/profile', [\App\Http\Controllers\Org\OrganizationProfileController::class,'update'])->name('profile.update');
+    }
+    Route::post('/register/store', fn() => redirect()->route('org.register.submit'))->name('register.store');
+
+    if (class_exists(\App\Http\Controllers\Org\ReportsController::class)) {
+        Route::get('/reports', [\App\Http\Controllers\Org\ReportsController::class,'index'])->name('reports');
+        Route::get('/reports/hours.csv', [\App\Http\Controllers\Org\ReportsController::class,'hoursCsv'])->name('reports.hours.csv');
+    }
+
+    if (class_exists(\App\Http\Controllers\Org\TeamController::class)) {
+        Route::post('/team/invite', [\App\Http\Controllers\Org\TeamController::class,'invite'])->name('team.invite');
+        Route::delete('/team/{id}',  [\App\Http\Controllers\Org\TeamController::class,'remove'])->whereNumber('id')->name('team.remove');
+    }
+});
+
+/** VOLUNTEER / PUBLIC **/
+if (class_exists(\App\Http\Controllers\VolunteerHoursController::class)) {
+    Route::post('/volunteer/hours', [\App\Http\Controllers\VolunteerHoursController::class,'store'])->name('volunteer.hours.store');
+}
+Route::post('/events/{id}/apply', fn(int $id) => redirect()->route('opportunities.apply', ['id'=>$id]))->whereNumber('id')->name('events.apply');
+Route::get('/opportunities/attendances.csv', fn() => response("opportunity_id,volunteer_id,checkin,checkout,hours\n",200,['Content-Type'=>'text/csv']))->name('opportunities.attendances.csv');
+Route::post('/payments/stripe',  fn() => redirect()->route('donate.form'))->name('payments.processStripe');
+Route::post('/payments/paytabs', fn() => redirect()->route('donate.form'))->name('payments.processPayTabs');
+// Route::get('/_compat/id',    fn() => abort(404))->name('id');
+// Route::get('/_compat/token', fn() => abort(404))->name('token');

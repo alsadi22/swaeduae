@@ -1,0 +1,203 @@
+<?php
+namespace App\Http\Controllers\Admin;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Symfony\Component\HttpFoundation\StreamedResponse;
+
+class OpportunityController extends Controller
+{
+    /** Map UI values to DB enum tokens */
+    private function normalizeStatus($s)
+    {
+        if ($s === null || $s === '') return null;
+        $map = [
+            'published' => 'open',   // old UI value -> enum
+            'open'      => 'open',
+            'closed'    => 'closed',
+            'draft'     => 'draft',
+            'archived'  => 'archived',
+        ];
+        $k = strtolower(trim($s));
+        return $map[$k] ?? $k; // fallback to lowercase string
+    }
+
+    public function index(Request $r)
+    {
+        $q        = trim((string)$r->get('q',''));
+        $city     = $r->get('city');
+        $status   = $r->get('status');
+        $category = $r->get('category');
+        $featured = $r->get('featured');
+        $from     = $r->get('from');
+        $to       = $r->get('to');
+        $sort     = $r->get('sort','-date');
+
+        $items = DB::table('opportunities')
+            ->when($q !== '', fn($b)=>$b->where(fn($w)=>$w
+                ->where('title','like',"%$q%")
+                ->orWhere('description','like',"%$q%")
+                ->orWhere('summary','like',"%$q%")))
+            ->when($city,     fn($b)=>$b->where('city','like',"%$city%"))
+            ->when($status,   fn($b)=>$b->where('status',$this->normalizeStatus($status)))
+            ->when($category, fn($b)=>$b->where('category','like',"%$category%"))
+            ->when($featured==='1', fn($b)=>$b->where('featured',1))
+            ->when($from,     fn($b)=>$b->whereDate('date','>=',$from))
+            ->when($to,       fn($b)=>$b->whereDate('date','<=',$to));
+
+        $dir='desc'; $col='date';
+        if(in_array($sort,['date','title','city'])){ $dir='asc'; $col=$sort; }
+        if($sort==='-date'){ $dir='desc'; $col='date'; }
+
+        $items = $items->orderBy($col,$dir)->orderByDesc('id')
+            ->paginate(15)->withQueryString();
+
+        return view('admin.opportunities.index', compact('items','q','city','status','category','featured','from','to','sort'));
+    }
+
+    public function create()
+    {
+        $op = (object)[
+            'title'=>'','summary'=>'','description'=>'','city'=>'','location'=>'',
+            'date'=>null,'start_time'=>null,'end_time'=>null,'category'=>null,
+            'region'=>null,'status'=>null,'slots'=>null,'featured'=>0,
+            'owner_id'=>null,'organizer_id'=>null,'category_id'=>null,'badge'=>null
+        ];
+        $orgs = DB::table('organizations')->select('id','name')->orderBy('name')->get();
+        return view('admin.opportunities.create', compact('op','orgs'));
+    }
+
+    public function store(Request $r)
+    {
+        $v = $r->validate([
+            'title'       => 'required|string|max:180',
+            'summary'     => 'nullable|string|max:255',
+            'description' => 'nullable|string',
+            'city'        => 'nullable|string|max:120',
+            'location'    => 'nullable|string|max:180',
+            'date'        => 'nullable|date',
+            'start_time'  => 'nullable',
+            'end_time'    => 'nullable',
+            'category'    => 'nullable|string|max:120',
+            'region'      => 'nullable|string|max:120',
+            'status'      => 'nullable|string|max:40',
+            'slots'       => 'nullable|integer|min:0',
+            'featured'    => 'nullable|boolean',
+            'owner_id'    => 'nullable|integer|exists:users,id',
+            'organizer_id'=> 'nullable|integer|exists:organizations,id',
+            'category_id' => 'nullable|integer',
+            'badge'       => 'nullable|string|max:120',
+        ]);
+
+        $id = DB::table('opportunities')->insertGetId([
+            'title'        => $v['title'],
+            'summary'      => $v['summary'] ?? null,
+            'description'  => $v['description'] ?? null,
+            'city'         => $v['city'] ?? null,
+            'location'     => $v['location'] ?? null,
+            'date'         => $v['date'] ?? null,
+            'start_time'   => $v['start_time'] ?? null,
+            'end_time'     => $v['end_time'] ?? null,
+            'category'     => $v['category'] ?? null,
+            'region'       => $v['region'] ?? null,
+            'status'       => $this->normalizeStatus($v['status'] ?? null),
+            'slots'        => $v['slots'] ?? null,
+            'featured'     => !empty($v['featured']) ? 1 : 0,
+            'owner_id'     => $v['owner_id'] ?? null,
+            'organizer_id' => $v['organizer_id'] ?? null,
+            'category_id'  => $v['category_id'] ?? null,
+            'badge'        => $v['badge'] ?? null,
+            'created_at'   => now(),
+            'updated_at'   => now(),
+        ]);
+
+        return redirect()->route('admin.opportunities.edit',$id)->with('status','Opportunity created.');
+    }
+
+    public function edit($id)
+    {
+        $op = DB::table('opportunities')->where('id',$id)->first();
+        abort_unless($op,404);
+        $orgs = DB::table('organizations')->select('id','name')->orderBy('name')->get();
+        return view('admin.opportunities.edit', compact('op','orgs'));
+    }
+
+    public function update(Request $r, $id)
+    {
+        $op = DB::table('opportunities')->where('id',$id)->first();
+        abort_unless($op,404);
+
+        $v = $r->validate([
+            'title'       => 'required|string|max:180',
+            'summary'     => 'nullable|string|max:255',
+            'description' => 'nullable|string',
+            'city'        => 'nullable|string|max:120',
+            'location'    => 'nullable|string|max:180',
+            'date'        => 'nullable|date',
+            'start_time'  => 'nullable',
+            'end_time'    => 'nullable',
+            'category'    => 'nullable|string|max:120',
+            'region'      => 'nullable|string|max:120',
+            'status'      => 'nullable|string|max:40',
+            'slots'       => 'nullable|integer|min:0',
+            'featured'    => 'nullable|boolean',
+            'owner_id'    => 'nullable|integer|exists:users,id',
+            'organizer_id'=> 'nullable|integer|exists:organizations,id',
+            'category_id' => 'nullable|integer',
+            'badge'       => 'nullable|string|max:120',
+        ]);
+
+        DB::table('opportunities')->where('id',$id)->update([
+            'title'        => $v['title'],
+            'summary'      => $v['summary'] ?? null,
+            'description'  => $v['description'] ?? null,
+            'city'         => $v['city'] ?? null,
+            'location'     => $v['location'] ?? null,
+            'date'         => $v['date'] ?? null,
+            'start_time'   => $v['start_time'] ?? null,
+            'end_time'     => $v['end_time'] ?? null,
+            'category'     => $v['category'] ?? null,
+            'region'       => $v['region'] ?? null,
+            'status'       => $this->normalizeStatus($v['status'] ?? null),
+            'slots'        => $v['slots'] ?? null,
+            'featured'     => !empty($v['featured']) ? 1 : 0,
+            'owner_id'     => $v['owner_id'] ?? null,
+            'organizer_id' => $v['organizer_id'] ?? null,
+            'category_id'  => $v['category_id'] ?? null,
+            'badge'        => $v['badge'] ?? null,
+            'updated_at'   => now(),
+        ]);
+
+        return back()->with('status','Opportunity updated.');
+    }
+
+    public function destroy($id)
+    {
+        DB::table('opportunities')->where('id',$id)->delete();
+        return redirect()->route('admin.opportunities')->with('status','Opportunity deleted.');
+    }
+
+    public function exportCsv(Request $r): StreamedResponse
+    {
+        $q = trim((string)$r->get('q',''));
+        $file = 'opportunities-'.date('Ymd-His').'.csv';
+
+        return response()->streamDownload(function() use ($q){
+            $out = fopen('php://output','w');
+            fputcsv($out, ['ID','Title','Date','Start','End','City','Status','Slots','Featured','OrgID','Created']);
+            DB::table('opportunities')
+                ->when($q !== '', fn($b)=>$b->where(fn($w)=>$w
+                    ->where('title','like',"%%")->orWhere('summary','like',"%%")->orWhere('description','like',"%%")))
+                ->orderByDesc('date')->orderByDesc('id')
+                ->chunk(500, function($rows) use ($out){
+                    foreach($rows as $r){
+                        fputcsv($out, [$r->id,$r->title,$r->date,$r->start_time,$r->end_time,$r->city,$r->status,$r->slots,$r->featured,$r->organizer_id,$r->created_at]);
+                    }
+                });
+            fclose($out);
+        }, $file, ['Content-Type'=>'text/csv']);
+    }
+
+
+}

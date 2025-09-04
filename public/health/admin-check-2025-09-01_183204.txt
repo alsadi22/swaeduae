@@ -1,0 +1,72 @@
+=== ADMIN FULL CHECK 2025-09-01_183204 ===
+PWD: /var/www/swaeduae
+USER: swaeduae
+
+== PHP & APP ENV ==
+PHP 8.3.24 (cli) (built: Aug  3 2025 08:57:38) (NTS)
+Copyright (c) The PHP Group
+Zend Engine v4.3.24, Copyright (c) Zend Technologies
+    with Zend OPcache v8.3.24, Copyright (c), by Zend Technologies
+Deprecation Notice: Using ${var} in strings is deprecated, use {$var} instead in /usr/share/php/Symfony/Component/Console/Command/DumpCompletionCommand.php:48
+Deprecation Notice: Using ${var} in strings is deprecated, use {$var} instead in /usr/share/php/Symfony/Component/Console/Command/DumpCompletionCommand.php:56
+Composer 2.2.6 2022-02-04 17:00:38
+APP_ENV=production
+APP_URL=https://swaeduae.ae
+
+== LINT CRITICAL ROUTE FILES ==
+No syntax errors detected in routes/web.php
+No syntax errors detected in routes/admin.php
+[OK] routes/partials/disable_internal.php present
+
+== ADMIN CONTROLLERS EXIST & LINT ==
+No syntax errors detected in app/Http/Controllers/Admin/DashboardController.php
+[OK] app/Http/Controllers/Admin/DashboardController.php
+No syntax errors detected in app/Http/Controllers/Admin/UserController.php
+[OK] app/Http/Controllers/Admin/UserController.php
+No syntax errors detected in app/Http/Controllers/Admin/OpportunityController.php
+[OK] app/Http/Controllers/Admin/OpportunityController.php
+
+== ADMIN VIEWS EXIST & COMPILE ==
+[OK] view exists: resources/views/admin/layout.blade.php
+[OK] view exists: resources/views/admin/dashboard.blade.php
+[OK] view exists: resources/views/admin/users/index.blade.php
+[OK] view exists: resources/views/admin/opportunities/index.blade.php
+PHP Fatal error:  Cannot use Illuminate\Support\Facades\Gate as Gate because the name is already in use in /var/www/swaeduae/app/Providers/AuthServiceProvider.php on line 11
+
+In AuthServiceProvider.php line 11:
+                                                                                         
+  Cannot use Illuminate\Support\Facades\Gate as Gate because the name is already in use  
+                                                                                         
+
+[FAIL] blade compile error
+
+== ROUTES OVERVIEW (saving to storage/admin-routes-2025-09-01_183204.txt) ==
+PHP Fatal error:  Cannot use Illuminate\Support\Facades\Gate as Gate because the name is already in use in /var/www/swaeduae/app/Providers/AuthServiceProvider.php on line 11
+[WARN] could not find visible 'admin' rows (table output may vary)
+
+== VERIFY ADMIN ROUTE MIDDLEWARE (storage/admin-mw-2025-09-01_183204.txt) ==
+PHP Fatal error:  Cannot use Illuminate\Support\Facades\Gate as Gate because the name is already in use in /var/www/swaeduae/app/Providers/AuthServiceProvider.php on line 11
+
+In AuthServiceProvider.php line 11:
+                                                                                         
+  Cannot use Illuminate\Support\Facades\Gate as Gate because the name is already in use  
+                                                                                         
+
+[FAIL] some admin routes missing 'auth'
+[FAIL] some admin routes missing 'verified'
+[FAIL] some admin routes missing 'can:admin'
+
+== GATE & EMAIL VERIFICATION CHECKS ==
+[FAIL] admin gate not defined in AuthServiceProvider
+4:use Illuminate\Contracts\Auth\MustVerifyEmail;
+15:class User extends Authenticatable implements MustVerifyEmail
+[OK] User implements MustVerifyEmail
+
+== SCHEMA & ADMIN USER ROLE ==
+PHP Fatal error:  Cannot use Illuminate\Support\Facades\Gate as Gate because the name is already in use in /var/www/swaeduae/app/Providers/AuthServiceProvider.php on line 11
+
+In AuthServiceProvider.php line 11:
+                                                                                         
+  Cannot use Illuminate\Support\Facades\Gate as Gate because the name is already in use  
+                                                                                         
+

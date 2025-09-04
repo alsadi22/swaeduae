@@ -1,0 +1,10 @@
+@auth
+  <a href="{{ route('my.profile') }}" class="nav-link">My Profile</a>
+  <form method="POST" action="{{ route('logout.perform') }}" class="inline" style="display:inline;">
+    @csrf
+    
+  </form>
+@else
+  <a href="{{ route('login') }}" class="nav-link">Login</a>
+  <a href="{{ route('register') }}" class="nav-link">Register</a>
+@endauth

@@ -1,0 +1,291 @@
+=== SwaedUAE Health Check ===
+Started: Tue Aug 19 06:14:52 UTC 2025 UTC | Tue Aug 19 10:14:52 +04 2025 Asia/Dubai
+
+== PHP & Laravel ==
+PHP 8.4.7 (cli) (built: May  8 2025 11:28:43) (NTS)
+Copyright (c) The PHP Group
+Laravel Framework 11.45.2
+
+== Laravel about (env/cache/drivers) ==
+
+  Environment ..................................................................................................................................  
+  Application Name .................................................................................................................... SwaedUAE  
+  Laravel Version ...................................................................................................................... 11.45.2  
+  PHP Version ............................................................................................................................ 8.4.7  
+  Composer Version ....................................................................................................................... 2.6.5  
+  Environment ....................................................................................................................... production  
+  Debug Mode ............................................................................................................................... OFF  
+  URL .............................................................................................................................. swaeduae.ae  
+  Maintenance Mode ......................................................................................................................... OFF  
+  Timezone .......................................................................................................................... Asia/Dubai  
+  Locale .................................................................................................................................... ar  
+
+  Cache ........................................................................................................................................  
+  Config ................................................................................................................................ CACHED  
+  Events ............................................................................................................................ NOT CACHED  
+  Routes ................................................................................................................................ CACHED  
+  Views ................................................................................................................................. CACHED  
+
+  Drivers ......................................................................................................................................  
+  Broadcasting ............................................................................................................................ null  
+  Cache ............................................................................................................................... database  
+  Database ............................................................................................................................... mysql  
+  Logs ................................................................................................................................... daily  
+  Mail ................................................................................................................................ sendmail  
+  Queue ................................................................................................................................... sync  
+  Session ................................................................................................................................. file  
+
+
+== Key .env flags (safe subset) ==
+2:APP_ENV=production
+4:APP_DEBUG=false
+5:APP_URL=https://swaeduae.ae
+17:CACHE_DRIVER=file
+18:QUEUE_CONNECTION=sync
+19:SESSION_DRIVER=file
+91:APP_TIMEZONE=Asia/Dubai
+
+== Routes (auth/org/events) ==
+  GET|HEAD        admin/events .............................................................................................. admin.events.index
+  GET|HEAD        events .................................................................................. events.index › EventController@index
+  GET|HEAD        events/{idOrSlug} ......................................................................... events.show › EventController@show
+  GET|HEAD        org/dashboard .................................................................. org.dashboard › Org\DashboardController@index
+  GET|HEAD        org/login .......................................................................................................... org.login
+  POST            org/logout ........................................................................................................ org.logout
+  POST            org/opportunities .................................................. org.opportunities.store › Org\OpportunityController@store
+  GET|HEAD        org/opportunities/create ......................................... org.opportunities.create › Org\OpportunityController@create
+  POST            org/opportunities/{event} ........................................ org.opportunities.update › Org\OpportunityController@update
+  GET|HEAD        org/opportunities/{event}/applicants ................................... org.applicants.index › Org\ApplicantsController@index
+  GET|HEAD        org/opportunities/{event}/applicants.csv .......................... org.applicants.export › Org\ApplicantsController@exportCsv
+  POST            org/opportunities/{event}/applicants/{app}/decision .............. org.applicants.decision › Org\ApplicantsController@decision
+  POST            org/opportunities/{event}/close .................................... org.opportunities.close › Org\OpportunityController@close
+  GET|HEAD        org/opportunities/{event}/edit ....................................... org.opportunities.edit › Org\OpportunityController@edit
+  GET|HEAD        org/opportunities/{opportunity}/shortlist ................................ org.shortlist.index › Org\ShortlistController@index
+  POST            org/opportunities/{opportunity}/shortlist/bulk ............................. org.shortlist.bulk › Org\ShortlistController@bulk
+  POST            org/opportunities/{opportunity}/shortlist/slot-cap ............ org.shortlist.slot_cap › Org\ShortlistController@updateSlotCap
+  GET|HEAD        org/register .................................................................................................... org.register
+  POST            org/register ............................................................................................. org.register.submit
+  GET|HEAD        org/settings ................................................................. org.settings.edit › Org\SettingsController@edit
+  POST            org/settings ............................................................. org.settings.update › Org\SettingsController@update
+  GET|HEAD        org/setup .......................................................................... org.setup.form › Org\SetupController@form
+  POST            org/setup ........................................................................ org.setup.store › Org\SetupController@store
+
+== Guardrails ==
+[OK] No GET /logout route.
+
+== Migrations ==
+
+  Migration name ................................................................................................................ Batch / Status  
+  0001_01_01_000000_create_users_table ................................................................................................. [1] Ran  
+  0001_01_01_000001_create_cache_table ................................................................................................. [1] Ran  
+  0001_01_01_000002_create_jobs_table .................................................................................................. [1] Ran  
+  2024_01_01_100000_add_role_enabled_to_users .......................................................................................... [1] Ran  
+  2024_08_06_000002_create_news_table .................................................................................................. [1] Ran  
+  2025_08_02_235249_add_social_fields_to_users_table ................................................................................... [1] Ran  
+  2025_08_03_000002_create_registrations_table ......................................................................................... [1] Ran  
+  2025_08_03_000100_create_volunteer_profiles_table .................................................................................... [1] Ran  
+  2025_08_03_000400_create_event_registrations_table ................................................................................... [1] Ran  
+  2025_08_03_000553_create_kyc_table ................................................................................................... [1] Ran  
+  2025_08_03_000553_create_roles_table ................................................................................................. [1] Ran  
+  2025_08_03_020000_create_event_applications_table .................................................................................... [1] Ran  
+  2025_08_03_020100_create_event_info_requests_table ................................................................................... [1] Ran  
+  2025_08_03_020200_create_event_checkins_table ........................................................................................ [1] Ran  
+  2025_08_03_020300_create_event_evaluations_table ..................................................................................... [1] Ran  
+  2025_08_03_025713_create_personal_access_tokens_table ................................................................................ [1] Ran  
+  2025_08_04_200000_create_site_settings_table ......................................................................................... [1] Ran  
+  2025_08_04_210000_create_badges_table ................................................................................................ [1] Ran  
+  2025_08_05_000001_add_date_to_events_table ........................................................................................... [1] Ran  
+  2025_08_05_000003_add_city_and_description_to_events_table ........................................................................... [1] Ran  
+  2025_08_05_000010_add_city_description_to_events ..................................................................................... [1] Ran  
+  2025_08_05_000012_create_kycs_table .................................................................................................. [1] Ran  
+  2025_08_05_000013_create_payments_table .............................................................................................. [1] Ran  
+  2025_08_05_100000_add_status_enum_to_kyc_table ....................................................................................... [1] Ran  
+  2025_08_06_050137_add_fields_to_certificates_table ................................................................................... [1] Ran  
+  2025_08_08_114122_alter_opportunities_add_core_columns ............................................................................... [1] Ran  
+  2025_08_08_120150_alter_events_add_core_columns ...................................................................................... [1] Ran  
+  2025_08_08_160000_add_profile_fields_to_users_table .................................................................................. [1] Ran  
+  2025_08_08_170000_add_owner_user_id_to_organizations_table ........................................................................... [1] Ran  
+  2025_08_08_190000_add_is_admin_to_users_table ........................................................................................ [1] Ran  
+  2025_08_08_210000_add_is_active_to_users_table ....................................................................................... [1] Ran  
+  2025_08_08_211311_add_user_id_to_attendances_table ................................................................................... [1] Ran  
+  2025_08_08_211500_create_event_volunteer_table ....................................................................................... [1] Ran  
+  2025_08_08_235900_create_acl_permission_tables ....................................................................................... [1] Ran  
+  2025_08_08_240500_add_owner_and_status_to_opportunities .............................................................................. [1] Ran  
+  2025_08_09_000000_add_owner_user_id_to_organizations ................................................................................. [1] Ran  
+  2025_08_09_000100_add_role_to_users .................................................................................................. [1] Ran  
+  2025_08_09_000300_update_events_for_org_and_meta ..................................................................................... [1] Ran  
+  2025_08_09_061422_create_volunteer_applications_table ................................................................................ [1] Ran  
+  2025_08_09_145221_create_qr_scans_table .............................................................................................. [1] Ran  
+  2025_08_09_160921_create_applications_table_duplicate_guard ......................................................................... [71] Ran  
+  2025_08_09_182657_add_verification_code_to_certificates_table ........................................................................ [2] Ran  
+  2025_08_09_200000_add_checkout_token_to_attendances_table ............................................................................ [2] Ran  
+  2025_08_09_210000_create_certificates_and_volunteer_hours ............................................................................ [2] Ran  
+  2025_08_10_000000_add_category_to_opportunities_table ................................................................................ [4] Ran  
+  2025_08_10_000001_add_badge_to_users_table ........................................................................................... [4] Ran  
+  2025_08_10_082905_add_foreign_keys_to_events_table ................................................................................... [5] Ran  
+  2025_08_10_100000_create_volunteer_hours_table ....................................................................................... [6] Ran  
+  2025_08_10_100001_create_volunteer_hours_table_duplicate_guard ...................................................................... [71] Ran  
+  2025_08_10_200000_add_region_and_badge ............................................................................................... [7] Ran  
+  2025_08_10_210000_add_category_to_events_table ....................................................................................... [8] Ran  
+  2025_08_11_000001_create_categories_table ........................................................................................... [12] Ran  
+  2025_08_11_000001_create_locations_table ............................................................................................ [11] Ran  
+  2025_08_11_000002_create_organizations_table ........................................................................................ [11] Ran  
+  2025_08_11_000003_create_events_table ............................................................................................... [11] Ran  
+  2025_08_11_000003_create_organizations_table_duplicate_guard ........................................................................ [71] Ran  
+  2025_08_11_000004_create_opportunities_table ........................................................................................ [11] Ran  
+  2025_08_11_000004_create_opportunity_volunteer_table ................................................................................ [13] Ran  
+  2025_08_11_000005_create_event_user_table ........................................................................................... [11] Ran  
+  2025_08_11_000005_create_volunteers_table ........................................................................................... [14] Ran  
+  2025_08_11_000006_create_opportunity_user_table ..................................................................................... [11] Ran  
+  2025_08_11_000006_create_teams_table ................................................................................................ [15] Ran  
+  2025_08_11_000008_create_partners_table ............................................................................................. [11] Ran  
+  2025_08_11_000009_create_stories_table .............................................................................................. [11] Ran  
+  2025_08_11_000011_add_license_and_badges_tables ..................................................................................... [20] Ran  
+  2025_08_11_000012_add_optional_profile_columns_to_volunteers ........................................................................ [21] Ran  
+  2025_08_11_000100_create_kyc_requests_table ......................................................................................... [28] Ran  
+  2025_08_11_112158_add_category_and_city_to_opportunities_table ...................................................................... [22] Ran  
+  2025_08_11_115454_add_org_and_tokens_to_opportunities_table ......................................................................... [24] Ran  
+  2025_08_11_115458_create_attendances_table .......................................................................................... [24] Ran  
+  2025_08_11_115503_create_certificates_table ......................................................................................... [24] Ran  
+  2025_08_11_221412_create_media_table ................................................................................................ [32] Ran  
+  2025_08_11_999999_add_unique_user_opportunity_to_applications ....................................................................... [27] Ran  
+  2025_08_12_000001_add_featured_to_opportunities_table ............................................................................... [10] Ran  
+  2025_08_12_094900_alter_opportunities_status_to_varchar ............................................................................. [33] Ran  
+  2025_08_12_120000_create_password_reset_tokens_table ................................................................................ [25] Ran  
+  2025_08_12_150000_create_saved_opportunities_table .................................................................................. [26] Ran  
+  2025_08_13_000001_add_volunteer_code_and_ids_to_users ............................................................................... [34] Ran  
+  2025_08_13_000002_create_profiles_table ............................................................................................. [34] Ran  
+  2025_08_13_000003_create_learning_requests_table .................................................................................... [34] Ran  
+  2025_08_13_000005_add_attendance_hours_and_opportunity_status ....................................................................... [36] Ran  
+  2025_08_13_000006_upsert_certificates_schema ........................................................................................ [37] Ran  
+  2025_08_13_000007_patch_attendances_columns ......................................................................................... [38] Ran  
+  2025_08_13_000008_add_qr_tokens_to_opportunities .................................................................................... [39] Ran  
+  2025_08_13_000009_create_applications_table ......................................................................................... [40] Ran  
+  2025_08_13_000010_add_minutes_to_volunteer_hours .................................................................................... [41] Ran  
+  2025_08_13_085411_sprint1_safe_columns .............................................................................................. [42] Ran  
+  2025_08_13_090834_sprint2_certificates_and_deliveries ............................................................................... [43] Ran  
+  2025_08_13_094708_sprint2_fix_hours_column .......................................................................................... [44] Ran  
+  2025_08_13_095226_sprint2_event_id_nullable ......................................................................................... [45] Ran  
+  2025_08_13_110104_sprint3_contact_messages .......................................................................................... [46] Ran  
+  2025_08_13_111317_sprint4_optional_indexes .......................................................................................... [47] Ran  
+  2025_08_13_112549_sprint6_partner_intake_submissions ................................................................................ [49] Ran  
+  2025_08_13_113728_sprint8_audit_logs ................................................................................................ [50] Ran  
+  2025_08_13_113920_sprint8_patch_audit_logs_columns .................................................................................. [51] Ran  
+  2025_08_13_160816_add_social_columns_to_users_table ................................................................................. [53] Ran  
+  2025_08_13_165603_enhance_certificates_table_add_columns_issued_at_file_hours ....................................................... [52] Ran  
+  2025_08_13_165604_enhance_attendance_add_minutes_no_show_notes ...................................................................... [52] Ran  
+  2025_08_13_210201_add_primary_color_to_settings_table ............................................................................... [54] Ran  
+  2025_08_14_000000_create_user_documents_table ....................................................................................... [59] Ran  
+  2025_08_14_120100_create_audit_logs_table ........................................................................................... [55] Ran  
+  2025_08_14_120200_harden_certificates_schema ........................................................................................ [55] Ran  
+  2025_08_14_130000_add_certificate_code_uniques ...................................................................................... [56] Ran  
+  2025_08_14_130500_add_certificate_lookup_indexes .................................................................................... [57] Ran  
+  2025_08_14_190000_add_profile_fields_to_users ....................................................................................... [58] Ran  
+  2025_08_14_200000_create_organization_registrations_table ........................................................................... [60] Ran  
+  2025_08_14_205239_extend_organizations_for_org_portal ............................................................................... [61] Ran  
+  2025_08_14_210844_add_owner_id_to_organizations ..................................................................................... [62] Ran  
+  2025_08_14_215336_make_org_email_password_nullable .................................................................................. [64] Ran  
+  2025_08_14_220000_add_license_fields_to_organizations ............................................................................... [63] Ran  
+  2025_08_14_220309_tweak_org_columns_for_license_and_nullable ........................................................................ [65] Ran  
+  2025_08_14_220500_add_license_file_to_organizations ................................................................................. [66] Ran  
+  2025_08_15_053802_add_hours_engine_columns .......................................................................................... [67] Ran  
+  2025_08_15_072230_add_minutes_to_volunteer_hours_table .............................................................................. [68] Ran  
+  2025_08_15_115847_make_attendance_token_nullable .................................................................................... [70] Ran  
+  2025_08_15_123000_add_checkin_columns_if_missing .................................................................................... [71] Ran  
+  2025_08_15_130500_drop_attendance_user_opportunity_unique ........................................................................... [71] Ran  
+  2025_08_16_100000_augment_attendances_for_geo_and_status ............................................................................ [73] Ran  
+  2025_08_16_120000_add_org_attendance_fields ......................................................................................... [72] Ran  
+  2025_08_16_140000_org_shortlisting_cap_and_status ................................................................................... [74] Ran  
+  2025_08_16_172807_add_geo_to_attendances_table ...................................................................................... [75] Ran  
+  2025_08_16_172808_add_geofence_to_opportunities_table ............................................................................... [75] Ran  
+  2025_08_16_172929_create_organization_users_table ................................................................................... [75] Ran  
+  2025_08_16_173500_create_org_kyc_table .............................................................................................. [75] Ran  
+  2025_08_16_190500_add_organization_id_to_opportunities_table ........................................................................ [76] Ran  
+  2025_08_16_193900_add_start_end_at_to_opportunities ................................................................................. [77] Ran  
+  2025_08_17_000001_add_avatar_to_users_table ......................................................................................... [79] Ran  
+  2025_08_17_093149_create_organization_registrations_table ........................................................................... [78] Ran  
+  2025_08_17_120000_add_avatar_path_to_users_table .................................................................................... [80] Ran  
+  2025_08_17_150500_create_volunteer_hours_table ...................................................................................... [81] Ran  
+  2025_08_17_150510_create_opportunity_applications_table ............................................................................. [81] Ran  
+  2025_08_17_150520_create_qr_scans_table ............................................................................................. [81] Ran  
+  2025_08_17_150530_create_geo_logs_table ............................................................................................. [81] Ran  
+  2025_08_17_211500_patch_qr_scans_and_related ........................................................................................ [82] Ran  
+  2025_08_17_211900_make_attendance_nullable_in_qr_scans .............................................................................. [83] Ran  
+
+
+== Scheduler ==
+
+  0    3 * * *  php artisan ops:alive ................................................................................ Next Due: 16 ساعة من الآن
+  */15 * * * *  scheduler.heartbeat .................................................................................. Next Due: 5 ثواني من الآن
+  *    * * * *  php artisan queue:work --stop-when-empty --queue=default --tries=3 --backoff=10 --timeout=120 --sleep=3  Next Due: 5 ثواني من الآن
+  5    2 * * *  php artisan queue:restart ............................................................................ Next Due: 15 ساعة من الآن
+  30   3 * * *  /home3/vminingc/swaeduae.ae/laravel-app/tools/db_backup.sh ........................................... Next Due: 17 ساعة من الآن
+  30   2 * * *  php artisan sitemap:generate ......................................................................... Next Due: 16 ساعة من الآن
+  35   2 * * *  php artisan swaed:build-sitemaps ..................................................................... Next Due: 16 ساعة من الآن
+  10   2 * * *  php artisan hours:reconcile .......................................................................... Next Due: 15 ساعة من الآن
+  20   2 * * *  php artisan hours:audit .............................................................................. Next Due: 16 ساعة من الآن
+
+
+== Backups present? (storage/backups) ==
+  total 16M
+  -rw-rw-r-- 1 vminingc vminingc 16M Aug 18 09:19 backup-2025-08-18-091911.tar.gz
+  -rw-rw-r-- 1 vminingc vminingc 25K Aug 18 10:07 db-vminingc_swaeduae_db-2025-08-18-100733.sql.gz
+  -rw-rw-r-- 1 vminingc vminingc 28K Aug 18 12:01 db-vminingc_swaeduae_db-2025-08-18-120124.sql.gz
+
+== Recent errors (last 200 lines) ==
+[2025-08-18 23:52:01] production.ERROR: syntax error, unexpected token "->", expecting end of file {"exception":"[object] (ParseError(code: 0): syntax error, unexpected token \"->\", expecting end of file at /home3/vminingc/swaeduae.ae/laravel-app/routes/events.php:10)
+[2025-08-18 23:53:01] production.ERROR: syntax error, unexpected token "->", expecting end of file {"exception":"[object] (ParseError(code: 0): syntax error, unexpected token \"->\", expecting end of file at /home3/vminingc/swaeduae.ae/laravel-app/routes/events.php:10)
+[2025-08-18 23:54:01] production.ERROR: syntax error, unexpected token "->", expecting end of file {"exception":"[object] (ParseError(code: 0): syntax error, unexpected token \"->\", expecting end of file at /home3/vminingc/swaeduae.ae/laravel-app/routes/events.php:10)
+[2025-08-18 23:55:02] production.ERROR: syntax error, unexpected token "->", expecting end of file {"exception":"[object] (ParseError(code: 0): syntax error, unexpected token \"->\", expecting end of file at /home3/vminingc/swaeduae.ae/laravel-app/routes/events.php:10)
+[2025-08-18 23:56:02] production.ERROR: syntax error, unexpected token "->", expecting end of file {"exception":"[object] (ParseError(code: 0): syntax error, unexpected token \"->\", expecting end of file at /home3/vminingc/swaeduae.ae/laravel-app/routes/events.php:10)
+[2025-08-18 23:57:01] production.ERROR: syntax error, unexpected token "->", expecting end of file {"exception":"[object] (ParseError(code: 0): syntax error, unexpected token \"->\", expecting end of file at /home3/vminingc/swaeduae.ae/laravel-app/routes/events.php:10)
+[2025-08-18 23:58:02] production.ERROR: syntax error, unexpected token "->", expecting end of file {"exception":"[object] (ParseError(code: 0): syntax error, unexpected token \"->\", expecting end of file at /home3/vminingc/swaeduae.ae/laravel-app/routes/events.php:10)
+[2025-08-18 23:59:02] production.ERROR: syntax error, unexpected token "->", expecting end of file {"exception":"[object] (ParseError(code: 0): syntax error, unexpected token \"->\", expecting end of file at /home3/vminingc/swaeduae.ae/laravel-app/routes/events.php:10)
+[2025-08-19 10:11:01] production.ERROR: syntax error, unexpected token "->", expecting end of file {"exception":"[object] (ParseError(code: 0): syntax error, unexpected token \"->\", expecting end of file at /home3/vminingc/swaeduae.ae/laravel-app/routes/events.php:10)
+[2025-08-19 10:12:02] production.ERROR: syntax error, unexpected token "->", expecting end of file {"exception":"[object] (ParseError(code: 0): syntax error, unexpected token \"->\", expecting end of file at /home3/vminingc/swaeduae.ae/laravel-app/routes/events.php:10)
+[2025-08-19 10:13:01] production.ERROR: syntax error, unexpected token "->", expecting end of file {"exception":"[object] (ParseError(code: 0): syntax error, unexpected token \"->\", expecting end of file at /home3/vminingc/swaeduae.ae/laravel-app/routes/events.php:10)
+[2025-08-19 10:14:40] production.ERROR: Undefined variable $has {"exception":"[object] (ErrorException(code: 0): Undefined variable $has at /home3/vminingc/swaeduae.ae/laravel-app/app/Http/Controllers/EventController.php:25)
+#0 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(258): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError()
+#1 /home3/vminingc/swaeduae.ae/laravel-app/app/Http/Controllers/EventController.php(25): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->{closure:Illuminate\\Foundation\\Bootstrap\\HandleExceptions::forwardsTo():257}()
+#14 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/View/Middleware/ShareErrorsFromSession.php(49): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():184}:185}()
+#15 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(209): Illuminate\\View\\Middleware\\ShareErrorsFromSession->handle()
+[2025-08-19 10:14:41] production.ERROR: Undefined variable $has {"exception":"[object] (ErrorException(code: 0): Undefined variable $has at /home3/vminingc/swaeduae.ae/laravel-app/app/Http/Controllers/EventController.php:25)
+#0 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(258): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError()
+#1 /home3/vminingc/swaeduae.ae/laravel-app/app/Http/Controllers/EventController.php(25): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->{closure:Illuminate\\Foundation\\Bootstrap\\HandleExceptions::forwardsTo():257}()
+#14 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/View/Middleware/ShareErrorsFromSession.php(49): Illuminate\\Pipeline\\Pipeline->{closure:{closure:Illuminate\\Pipeline\\Pipeline::carry():184}:185}()
+#15 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(209): Illuminate\\View\\Middleware\\ShareErrorsFromSession->handle()
+[2025-08-18 12:24:02] production.ERROR: require(/home3/vminingc/swaeduae.ae/laravel-app/routes/_auth_overrides.php): Failed to open stream: No such file or directory {"exception":"[object] (ErrorException(code: 0): require(/home3/vminingc/swaeduae.ae/laravel-app/routes/_auth_overrides.php): Failed to open stream: No such file or directory at /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php:121)
+#0 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(258): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError()
+#1 /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php(121): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->{closure:Illuminate\\Foundation\\Bootstrap\\HandleExceptions::forwardsTo():257}()
+[2025-08-18 12:24:12] production.ERROR: require(/home3/vminingc/swaeduae.ae/laravel-app/routes/_auth_overrides.php): Failed to open stream: No such file or directory {"exception":"[object] (ErrorException(code: 0): require(/home3/vminingc/swaeduae.ae/laravel-app/routes/_auth_overrides.php): Failed to open stream: No such file or directory at /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php:121)
+#0 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(258): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError()
+#1 /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php(121): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->{closure:Illuminate\\Foundation\\Bootstrap\\HandleExceptions::forwardsTo():257}()
+[2025-08-18 12:24:12] production.ERROR: require(/home3/vminingc/swaeduae.ae/laravel-app/routes/_auth_overrides.php): Failed to open stream: No such file or directory {"exception":"[object] (ErrorException(code: 0): require(/home3/vminingc/swaeduae.ae/laravel-app/routes/_auth_overrides.php): Failed to open stream: No such file or directory at /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php:121)
+#0 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(258): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError()
+#1 /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php(121): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->{closure:Illuminate\\Foundation\\Bootstrap\\HandleExceptions::forwardsTo():257}()
+[2025-08-18 12:24:12] production.ERROR: require(/home3/vminingc/swaeduae.ae/laravel-app/routes/_auth_overrides.php): Failed to open stream: No such file or directory {"exception":"[object] (ErrorException(code: 0): require(/home3/vminingc/swaeduae.ae/laravel-app/routes/_auth_overrides.php): Failed to open stream: No such file or directory at /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php:121)
+#0 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(258): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError()
+#1 /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php(121): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->{closure:Illuminate\\Foundation\\Bootstrap\\HandleExceptions::forwardsTo():257}()
+[2025-08-18 12:25:02] production.ERROR: require(/home3/vminingc/swaeduae.ae/laravel-app/routes/_auth_overrides.php): Failed to open stream: No such file or directory {"exception":"[object] (ErrorException(code: 0): require(/home3/vminingc/swaeduae.ae/laravel-app/routes/_auth_overrides.php): Failed to open stream: No such file or directory at /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php:121)
+#0 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(258): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError()
+#1 /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php(121): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->{closure:Illuminate\\Foundation\\Bootstrap\\HandleExceptions::forwardsTo():257}()
+
+== HTTP exposure checks ==
+/.env -> HTTP 404
+[OK] .env not accessible.
+/vendor/ -> HTTP 404
+/storage/ -> HTTP 404
+
+== MicroCache / ETag (/events) ==
+  1st: HTTP/1.1 500 Internal Server Error
+  1st: Cache-Control: no-cache, private
+  2nd: HTTP/1.1 500 Internal Server Error
+  2nd: Cache-Control: no-cache, private
+
+== i18n presence ==
+[OK] en.json present
+[OK] ar.json present
+
+== Permissions ==
+[OK] storage/ writable
+[OK] bootstrap/cache writable

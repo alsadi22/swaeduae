@@ -1,0 +1,812 @@
+<?php
+require __DIR__.'/_early_auth_overrides.php';
+
+
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\EventController;
+use App\Http\Controllers\VolunteerController;
+use App\Http\Controllers\NewsController;
+use App\Http\Controllers\DownloadController;
+use App\Http\Controllers\PartnerController;
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\PaymentController;
+
+Route::get('/healthz', fn () => response('ok', 200))->name('health');
+
+/**
+ * Public site
+ */
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
+Route::get('/events', [EventController::class, 'index'])->name('events.index');
+Route::get('/events/{id}', [EventController::class, 'show'])->name('events.show');
+
+Route::get('/news', [NewsController::class, 'index'])->name('news.index');
+Route::get('/news/{id}', [NewsController::class, 'show'])->name('news.show');
+
+Route::get('/downloads', [DownloadController::class, 'index'])->name('downloads.index');
+Route::get('/region/sharjah', [EventController::class, 'sharjah'])->name('region.sharjah');
+Route::get('/partners', [PartnerController::class, 'index'])->name('partners.index');
+
+Route::post('/lang/switch', function (Request $request) {
+    $lang = $request->input('lang');
+    if (in_array($lang, ['en', 'ar'])) {
+        session(['locale' => $lang]);
+        app()->setLocale($lang);
+    }
+    return back();
+})->name('lang.switch');
+
+/**
+ * Authenticated user actions
+ */
+Route::middleware('auth')->group(function () {
+    Route::get("/volunteer/profile", \App\Http\Controllers\Volunteer\ProfileIndexAction::class)->name("volunteer.profile");
+    Route::post('/volunteer/events/{eventId}/register', [VolunteerController::class, 'registerEvent'])->name('volunteer.registerEvent');
+    Route::post('/volunteer/kyc/upload', [VolunteerController::class, 'uploadKyc'])->name('volunteer.uploadKyc');
+    Route::get('/volunteer/resume', [VolunteerController::class, 'resume'])->name('volunteer.resume');
+    Route::get('/volunteer/certificate/{certId}', [VolunteerController::class, 'generateCertificate'])->name('volunteer.generateCertificate');
+
+    Route::get('/payment', [PaymentController::class, 'paymentPage'])->name('payments.page');
+    Route::post('/payment/stripe', [PaymentController::class, 'processStripe'])->name('payments.processStripe');
+    Route::post('/payment/paytabs', [PaymentController::class, 'processPayTabs'])->name('payments.processPayTabs');
+    Route::get('/payment/success', [PaymentController::class, 'success'])->name('payments.success');
+});
+
+/**
+ * Admin
+ */
+Route::prefix('admin')->middleware(['auth', 'can:isAdmin'])->group(function () {
+    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+    Route::get('/users', [AdminController::class, 'listUsers'])->name('admin.users');
+    Route::post('/users/toggle/{id}', [AdminController::class, 'toggleUserStatus'])->name('admin.users.toggle');
+    Route::get('/events', [AdminController::class, 'listEvents'])->name('admin.events');
+    Route::get('/certificates', [AdminController::class, 'listCertificates'])->name('admin.certificates');
+    Route::post('/backup', [AdminController::class, 'backup'])->name('admin.backup');
+});
+
+Auth::routes();
+
+/* ======= PUBLIC: opportunities, verify, gallery ======= */
+
+/* Opportunities list (with simple filters) */
+
+/* Opportunity details (lightweight) */
+Route::get('/opportunities/{id}', function ($id) {
+    $row = \Illuminate\Support\Facades\DB::table('opportunities')->where('id',$id)->first();
+    abort_unless($row, 404);
+    return view('public.opportunities.show', compact('row'));
+})->name('opportunities.show');
+
+/* Verify certificate (GET form + POST lookup) */
+Route::match(['get','post'], '/verify', function (Request $r) {
+    $result = null; $code = '';
+    if ($r->isMethod('post')) {
+        $code = trim($r->input('code',''));
+        if ($code !== '') {
+            $result = \Illuminate\Support\Facades\DB::table('certificates')->where('verification_code',$code)->first();
+        }
+    }
+    return view('public.verify', compact('result','code'));
+})->name('verify');
+
+/* Simple gallery placeholder */
+Route::get('/gallery', fn()=>view('public.gallery'))->name('gallery');
+
+/* --- PUBLIC: Verify (safe override of any older /verify closure) --- */
+Route::match(['GET','POST'], '/verify', function (\Illuminate\Http\Request $r) {
+    $code = trim($r->input('code',''));
+    $result = null;
+    if ($code !== '') {
+        $result = \Illuminate\Support\Facades\DB::table('certificates')->where('verification_code',$code)->first();
+    }
+    return view('public.verify', compact('result','code'));
+})->name('verify');
+Route::get('/opportunities', function (\Illuminate\Http\Request $r) {
+    $q = trim($r->get('q',''));
+    $rows = \Illuminate\Support\Facades\DB::table('opportunities')
+        ->select('id','title','city','region','category','date','start_time','end_time','status','description')
+        ->when($q, fn($w)=>$w->where(function($x) use ($q){
+            $x->where('title','like',"%$q%")
+              ->orWhere('description','like',"%$q%");
+        }))
+        ->when($r->filled('category'), fn($w)=>$w->where('category',$r->category))
+        ->when($r->filled('region'), fn($w)=>$w->where('region',$r->region))
+        ->orderByDesc('date')->orderByDesc('id')->paginate(24);
+    $rows->appends($r->query());
+
+    $cats    = \Illuminate\Support\Facades\DB::table('opportunities')->whereNotNull('category')->distinct()->orderBy('category')->pluck('category');
+    $regions = \Illuminate\Support\Facades\DB::table('opportunities')->whereNotNull('region')->distinct()->orderBy('region')->pluck('region');
+
+    // Prefer your existing public blade if present
+    $view = collect([
+        'opportunities.public.index',
+        'opportunities.index',
+        'public.opportunities',
+    ])->first(fn($v) => view()->exists($v));
+
+    return view($view, [
+        'rows' => $rows,                // for minimal list templates
+        'opportunities' => $rows,       // for your public/opportunities index
+        'cats' => $cats,
+        'regions' => $regions,
+        'q' => $q,
+    ]);
+})->name('opportunities.index');
+Route::get('/opportunities/{id}', function ($id) {
+    $o = \Illuminate\Support\Facades\DB::table('opportunities')->where('id', $id)->first();
+    abort_unless($o, 404);
+
+    // Prefer your public show blade if present
+    $view = collect([
+        'opportunities.public.show',
+        'opportunities.show',
+    ])->first(fn($v) => view()->exists($v));
+
+    return view($view, [
+        'o' => $o,
+        'opportunity' => $o,
+    ]);
+})->whereNumber('id')->name('opps.public.show');
+/* ---- Public auth aliases (keep your existing auth intact) ---- */
+
+
+/* Volunteer shortcuts just point to the default Laravel auth */
+
+// ---- [Profile routes harden] ----------------------------------------------
+use App\Http\Controllers\Volunteer\ProfileIndexAction;
+
+Route::middleware(['web','auth'])->group(function () {
+    // Prefer these at the bottom so they override any earlier duplicates
+    Route::get('/profile', ProfileIndexAction::class)->name('profile');
+    Route::get('/volunteer/profile', ProfileIndexAction::class)->name('volunteer.profile');
+});
+// ---------------------------------------------------------------------------
+
+/*
+|---------------------------------------------------------------
+| Safe fallback routes for "My Certificates"
+|---------------------------------------------------------------
+| Some blades use route('certificates.my') and others use
+| route('my.certificates'). We define both so links resolve.
+*/
+
+Route::middleware('auth')->group(function () {
+    if (!Route::has('certificates.my')) {
+        Route::get('/my/certificates', function () {
+            $user = auth()->user();
+            // Minimal dataset for the existing blades
+            $rows = \Illuminate\Support\Facades\DB::table('certificates')
+                ->select('id','code','opportunity_id','hours','issued_at','user_id')
+                ->where('user_id', $user->id)
+                ->orderByDesc('issued_at')->orderByDesc('id')
+                ->get();
+
+            // Prefer an existing certificates view if present
+            $view = collect(['certificates.my','my.certificates','me.certificates'])
+                ->first(fn($v) => view()->exists($v));
+
+            // Pass both 'certificates' and 'rows' to satisfy different templates
+            return view($view ?? 'errors.inline-profile-fallback', [
+                'user'         => $user,
+                'certificates' => $rows,
+                'rows'         => $rows,
+            ]);
+        })->name('certificates.my');
+    }
+
+    // If some blades use 'my.certificates', define a redirect alias
+    if (!Route::has('my.certificates')) {
+        Route::get('/me/certificates', fn () => redirect()->route('certificates.my'))
+            ->name('my.certificates');
+    }
+});
+
+/* Safe fallback for "my.hours" used by some views */
+Route::middleware('auth')->group(function () {
+    if (!Route::has('my.hours')) {
+        Route::get('/my/hours', function () {
+            $rows = \Illuminate\Support\Facades\DB::table('volunteer_hours')
+                ->select('id','opportunity_id','hours','date','notes','user_id')
+                ->where('user_id', auth()->id())
+                ->orderByDesc('date')->orderByDesc('id')->get();
+            return response()->view('fallback.my-hours', compact('rows'), 200);
+        })->name('my.hours');
+    }
+});
+
+/* ---------- Safe aliases used by some older blades ---------- */
+Route::middleware('auth')->group(function () {
+    // If a blade calls route('transcript.pdf'), send them to the certificates page.
+    if (!Route::has('transcript.pdf')) {
+        Route::get('/my/transcript', fn() => redirect()->route('certificates.my'))
+            ->name('transcript.pdf');
+    }
+    // Some blades use a download name for certs; point to certificates list for now.
+    if (!Route::has('my.certificates.download')) {
+        Route::get('/my/certificates/download', fn() => redirect()->route('certificates.my'))
+            ->name('my.certificates.download');
+    }
+});
+
+/* ---------- Friendly auth aliases (org + volunteer) ---------- */
+if (!Route::has('organization.login')) {
+    Route::get('/organization/login', fn() => redirect()->route('login'))
+        ->name('organization.login');
+}
+if (!Route::has('organizations.register')) {
+    Route::get('/organizations/register', fn() => redirect()->route('register'))
+        ->name('organizations.register');
+}
+if (!Route::has('organizations.register.store')) {
+    Route::post('/organizations/register', [\App\Http\Controllers\Auth\RegisterController::class, 'register'])
+        ->name('organizations.register.store');
+}
+
+/* Older blades sometimes post to volunteer.* names */
+if (!Route::has('volunteer.login.submit')) {
+    Route::post('/volunteer/login', [\App\Http\Controllers\Auth\LoginController::class, 'login'])
+        ->name('volunteer.login.submit');
+}
+if (!Route::has('volunteer.profile.update')) {
+    Route::post('/volunteer/profile/update', fn() => redirect()->route('profile'))
+        ->name('volunteer.profile.update');
+}
+
+/* If any layout uses GET /logout, provide a safe alias without breaking POST logout */
+if (!Route::has('logout.get')) {
+    Route::get('/logout', function () {
+        auth()->logout();
+        request()->session()->invalidate();
+        request()->session()->regenerateToken();
+        return redirect('/');
+    })->name('logout.get');
+}
+
+/* ---------- Legacy route-name aliases (keeps old blades from 500-ing) ---------- */
+Route::middleware('auth')->group(function () {
+    // Map old names to a working destination (your new certificates page)
+    $aliasToUri = [
+//         'transcript.pdf'            => '/__alias/transcript',
+//         'my.certificates.download'  => '/__alias/certificates/download',
+//         'certificates.index'        => '/__alias/certificates/index',
+//         'certificates.verify'       => '/__alias/certificates/verify',
+//         'certificates.pdf'          => '/__alias/certificates/pdf',
+    ];
+
+    foreach ($aliasToUri as $name => $uri) {
+        if (!Route::has($name)) {
+            Route::get($uri, fn () => redirect()->route('certificates.my'))->name($name);
+        }
+    }
+});
+
+/* Friendly synonyms some views use */
+if (!Route::has('login.organization')) {
+    Route::get('/login/organization', fn () => redirect()->route('organization.login'))
+        ->name('login.organization');
+}
+if (!Route::has('login.volunteer')) {
+    Route::get('/login/volunteer', fn () => redirect()->route('login'))
+        ->name('login.volunteer');
+}
+
+if (!Route::has('login.perform')) {
+    // POST login -> use your LoginController@login
+    Route::post('/login', [\App\Http\Controllers\Auth\LoginController::class, 'login'])
+        ->middleware('guest')->name('login.perform');
+}
+if (!Route::has('register')) {
+    // GET register page
+    Route::get('/register', fn() => view()->exists('auth.register') ? view('auth.register') : view('auth.register-fallback'))
+        ->middleware('guest')->name('register');
+}
+if (!Route::has('register.perform')) {
+    // POST register -> your RegisterController@register
+    Route::post('/register', [\App\Http\Controllers\Auth\RegisterController::class, 'register'])
+        ->middleware('guest')->name('register.perform');
+}
+if (!Route::has('logout.perform')) {
+    // POST logout (safe alias if theme links GET /logout)
+    Route::post('/logout', [\App\Http\Controllers\Auth\LoginController::class, 'logout'])
+        ->middleware('auth')->name('logout.perform');
+    Route::get('/logout', function () {
+        auth()->logout();
+        request()->session()->invalidate();
+        request()->session()->regenerateToken();
+        return redirect('/');
+    })->name('logout.get');
+}
+if (!Route::has('admin.apps.index')) {
+//     Route::match(['GET','POST'],'/__alias/admin.apps.index', fn() => redirect('/profile'))->name('admin.apps.index');
+}
+if (!Route::has('admin.attendance.index')) {
+//     Route::match(['GET','POST'],'/__alias/admin.attendance.index', fn() => redirect('/profile'))->name('admin.attendance.index');
+}
+if (!Route::has('admin.categories.create')) {
+//     Route::match(['GET','POST'],'/__alias/admin.categories.create', fn() => redirect('/profile'))->name('admin.categories.create');
+}
+if (!Route::has('admin.categories.destroy')) {
+//     Route::match(['GET','POST'],'/__alias/admin.categories.destroy', fn() => redirect('/profile'))->name('admin.categories.destroy');
+}
+if (!Route::has('admin.categories.edit')) {
+//     Route::match(['GET','POST'],'/__alias/admin.categories.edit', fn() => redirect('/profile'))->name('admin.categories.edit');
+}
+if (!Route::has('admin.categories.index')) {
+//     Route::match(['GET','POST'],'/__alias/admin.categories.index', fn() => redirect('/profile'))->name('admin.categories.index');
+}
+if (!Route::has('admin.categories.store')) {
+//     Route::match(['GET','POST'],'/__alias/admin.categories.store', fn() => redirect('/profile'))->name('admin.categories.store');
+}
+if (!Route::has('admin.certificates.index')) {
+//     Route::match(['GET','POST'],'/__alias/admin.certificates.index', fn() => redirect('/profile'))->name('admin.certificates.index');
+}
+if (!Route::has('admin.certificates.resend')) {
+//     Route::match(['GET','POST'],'/__alias/admin.certificates.resend', fn() => redirect('/profile'))->name('admin.certificates.resend');
+}
+if (!Route::has('admin.certificates.store')) {
+//     Route::match(['GET','POST'],'/__alias/admin.certificates.store', fn() => redirect('/profile'))->name('admin.certificates.store');
+}
+if (!Route::has('admin.dashboard')) {
+//     Route::match(['GET','POST'],'/__alias/admin.dashboard', fn() => redirect('/profile'))->name('admin.dashboard');
+}
+if (!Route::has('admin.events.create')) {
+//     Route::match(['GET','POST'],'/__alias/admin.events.create', fn() => redirect('/profile'))->name('admin.events.create');
+}
+if (!Route::has('admin.events.destroy')) {
+//     Route::match(['GET','POST'],'/__alias/admin.events.destroy', fn() => redirect('/profile'))->name('admin.events.destroy');
+}
+if (!Route::has('admin.events.edit')) {
+//     Route::match(['GET','POST'],'/__alias/admin.events.edit', fn() => redirect('/profile'))->name('admin.events.edit');
+}
+if (!Route::has('admin.events.index')) {
+//     Route::match(['GET','POST'],'/__alias/admin.events.index', fn() => redirect('/profile'))->name('admin.events.index');
+}
+if (!Route::has('admin.events.store')) {
+//     Route::match(['GET','POST'],'/__alias/admin.events.store', fn() => redirect('/profile'))->name('admin.events.store');
+}
+if (!Route::has('admin.export.applications')) {
+//     Route::match(['GET','POST'],'/__alias/admin.export.applications', fn() => redirect('/profile'))->name('admin.export.applications');
+}
+if (!Route::has('admin.export.certificates')) {
+//     Route::match(['GET','POST'],'/__alias/admin.export.certificates', fn() => redirect('/profile'))->name('admin.export.certificates');
+}
+if (!Route::has('admin.export.hours')) {
+//     Route::match(['GET','POST'],'/__alias/admin.export.hours', fn() => redirect('/profile'))->name('admin.export.hours');
+}
+if (!Route::has('admin.export.users')) {
+//     Route::match(['GET','POST'],'/__alias/admin.export.users', fn() => redirect('/profile'))->name('admin.export.users');
+}
+if (!Route::has('admin.kyc.download')) {
+//     Route::match(['GET','POST'],'/__alias/admin.kyc.download', fn() => redirect('/profile'))->name('admin.kyc.download');
+}
+if (!Route::has('admin.learning.index')) {
+//     Route::match(['GET','POST'],'/__alias/admin.learning.index', fn() => redirect('/profile'))->name('admin.learning.index');
+}
+if (!Route::has('admin.news.store')) {
+//     Route::match(['GET','POST'],'/__alias/admin.news.store', fn() => redirect('/profile'))->name('admin.news.store');
+}
+if (!Route::has('admin.opportunities')) {
+//     Route::match(['GET','POST'],'/__alias/admin.opportunities', fn() => redirect('/profile'))->name('admin.opportunities');
+}
+if (!Route::has('admin.opportunities.complete')) {
+//     Route::match(['GET','POST'],'/__alias/admin.opportunities.complete', fn() => redirect('/profile'))->name('admin.opportunities.complete');
+}
+if (!Route::has('admin.opportunities.create')) {
+//     Route::match(['GET','POST'],'/__alias/admin.opportunities.create', fn() => redirect('/profile'))->name('admin.opportunities.create');
+}
+if (!Route::has('admin.opportunities.edit')) {
+//     Route::match(['GET','POST'],'/__alias/admin.opportunities.edit', fn() => redirect('/profile'))->name('admin.opportunities.edit');
+}
+if (!Route::has('admin.opportunities.finalize.issue')) {
+//     Route::match(['GET','POST'],'/__alias/admin.opportunities.finalize.issue', fn() => redirect('/profile'))->name('admin.opportunities.finalize.issue');
+}
+if (!Route::has('admin.opportunities.index')) {
+//     Route::match(['GET','POST'],'/__alias/admin.opportunities.index', fn() => redirect('/profile'))->name('admin.opportunities.index');
+}
+if (!Route::has('admin.opportunities.qr.finalize')) {
+//     Route::match(['GET','POST'],'/__alias/admin.opportunities.qr.finalize', fn() => redirect('/profile'))->name('admin.opportunities.qr.finalize');
+}
+if (!Route::has('admin.opportunities.qr.issue')) {
+//     Route::match(['GET','POST'],'/__alias/admin.opportunities.qr.issue', fn() => redirect('/profile'))->name('admin.opportunities.qr.issue');
+}
+if (!Route::has('admin.opportunities.qr.reset')) {
+//     Route::match(['GET','POST'],'/__alias/admin.opportunities.qr.reset', fn() => redirect('/profile'))->name('admin.opportunities.qr.reset');
+}
+if (!Route::has('admin.opportunities.store')) {
+//     Route::match(['GET','POST'],'/__alias/admin.opportunities.store', fn() => redirect('/profile'))->name('admin.opportunities.store');
+}
+if (!Route::has('admin.organizations.create')) {
+//     Route::match(['GET','POST'],'/__alias/admin.organizations.create', fn() => redirect('/profile'))->name('admin.organizations.create');
+}
+if (!Route::has('admin.organizations.destroy')) {
+//     Route::match(['GET','POST'],'/__alias/admin.organizations.destroy', fn() => redirect('/profile'))->name('admin.organizations.destroy');
+}
+if (!Route::has('admin.organizations.edit')) {
+//     Route::match(['GET','POST'],'/__alias/admin.organizations.edit', fn() => redirect('/profile'))->name('admin.organizations.edit');
+}
+if (!Route::has('admin.organizations.index')) {
+//     Route::match(['GET','POST'],'/__alias/admin.organizations.index', fn() => redirect('/profile'))->name('admin.organizations.index');
+}
+if (!Route::has('admin.organizations.reject')) {
+//     Route::match(['GET','POST'],'/__alias/admin.organizations.reject', fn() => redirect('/profile'))->name('admin.organizations.reject');
+}
+if (!Route::has('admin.organizations.store')) {
+//     Route::match(['GET','POST'],'/__alias/admin.organizations.store', fn() => redirect('/profile'))->name('admin.organizations.store');
+}
+if (!Route::has('admin.partners.create')) {
+//     Route::match(['GET','POST'],'/__alias/admin.partners.create', fn() => redirect('/profile'))->name('admin.partners.create');
+}
+if (!Route::has('admin.partners.destroy')) {
+//     Route::match(['GET','POST'],'/__alias/admin.partners.destroy', fn() => redirect('/profile'))->name('admin.partners.destroy');
+}
+if (!Route::has('admin.partners.edit')) {
+//     Route::match(['GET','POST'],'/__alias/admin.partners.edit', fn() => redirect('/profile'))->name('admin.partners.edit');
+}
+if (!Route::has('admin.partners.index')) {
+//     Route::match(['GET','POST'],'/__alias/admin.partners.index', fn() => redirect('/profile'))->name('admin.partners.index');
+}
+if (!Route::has('admin.partners.store')) {
+//     Route::match(['GET','POST'],'/__alias/admin.partners.store', fn() => redirect('/profile'))->name('admin.partners.store');
+}
+if (!Route::has('admin.perms.store')) {
+//     Route::match(['GET','POST'],'/__alias/admin.perms.store', fn() => redirect('/profile'))->name('admin.perms.store');
+}
+if (!Route::has('admin.profile.update')) {
+//     Route::match(['GET','POST'],'/__alias/admin.profile.update', fn() => redirect('/profile'))->name('admin.profile.update');
+}
+if (!Route::has('admin.roles.store')) {
+//     Route::match(['GET','POST'],'/__alias/admin.roles.store', fn() => redirect('/profile'))->name('admin.roles.store');
+}
+if (!Route::has('admin.settings')) {
+//     Route::match(['GET','POST'],'/__alias/admin.settings', fn() => redirect('/profile'))->name('admin.settings');
+}
+if (!Route::has('admin.settings.index')) {
+//     Route::match(['GET','POST'],'/__alias/admin.settings.index', fn() => redirect('/profile'))->name('admin.settings.index');
+}
+if (!Route::has('admin.settings.update')) {
+//     Route::match(['GET','POST'],'/__alias/admin.settings.update', fn() => redirect('/profile'))->name('admin.settings.update');
+}
+if (!Route::has('admin.tools.finalizeCerts.post')) {
+//     Route::match(['GET','POST'],'/__alias/admin.tools.finalizeCerts.post', fn() => redirect('/profile'))->name('admin.tools.finalizeCerts.post');
+}
+if (!Route::has('admin.users')) {
+//     Route::match(['GET','POST'],'/__alias/admin.users', fn() => redirect('/profile'))->name('admin.users');
+}
+if (!Route::has('admin.users.edit')) {
+//     Route::match(['GET','POST'],'/__alias/admin.users.edit', fn() => redirect('/profile'))->name('admin.users.edit');
+}
+if (!Route::has('admin.users.index')) {
+//     Route::match(['GET','POST'],'/__alias/admin.users.index', fn() => redirect('/profile'))->name('admin.users.index');
+}
+if (!Route::has('cert.verify')) {
+//     Route::match(['GET','POST'],'/__alias/cert.verify', fn() => redirect('/profile'))->name('cert.verify');
+}
+if (!Route::has('contact.send')) {
+//     Route::match(['GET','POST'],'/__alias/contact.send', fn() => redirect('/profile'))->name('contact.send');
+}
+if (!Route::has('contact.show')) {
+//     Route::match(['GET','POST'],'/__alias/contact.show', fn() => redirect('/profile'))->name('contact.show');
+}
+if (!Route::has('contact.submit')) {
+//     Route::match(['GET','POST'],'/__alias/contact.submit', fn() => redirect('/profile'))->name('contact.submit');
+}
+if (!Route::has('documents.destroy')) {
+//     Route::match(['GET','POST'],'/__alias/documents.destroy', fn() => redirect('/profile'))->name('documents.destroy');
+}
+if (!Route::has('documents.store')) {
+//     Route::match(['GET','POST'],'/__alias/documents.store', fn() => redirect('/profile'))->name('documents.store');
+}
+if (!Route::has('events.index')) {
+//     Route::match(['GET','POST'],'/__alias/events.index', fn() => redirect('/profile'))->name('events.index');
+}
+if (!Route::has('home')) {
+//     Route::match(['GET','POST'],'/__alias/home', fn() => redirect('/profile'))->name('home');
+}
+if (!Route::has('kyc.upload')) {
+//     Route::match(['GET','POST'],'/__alias/kyc.upload', fn() => redirect('/profile'))->name('kyc.upload');
+}
+if (!Route::has('learning.create')) {
+//     Route::match(['GET','POST'],'/__alias/learning.create', fn() => redirect('/profile'))->name('learning.create');
+}
+if (!Route::has('learning.store')) {
+//     Route::match(['GET','POST'],'/__alias/learning.store', fn() => redirect('/profile'))->name('learning.store');
+}
+if (!Route::has('logout')) {
+//     Route::match(['GET','POST'],'/__alias/logout', fn() => redirect('/profile'))->name('logout');
+}
+if (!Route::has('opportunities.attendances.csv')) {
+//     Route::match(['GET','POST'],'/__alias/opportunities.attendances.csv', fn() => redirect('/profile'))->name('opportunities.attendances.csv');
+}
+if (!Route::has('opportunities.index')) {
+//     Route::match(['GET','POST'],'/__alias/opportunities.index', fn() => redirect('/profile'))->name('opportunities.index');
+}
+if (!Route::has('opportunities.public.index')) {
+//     Route::match(['GET','POST'],'/__alias/opportunities.public.index', fn() => redirect('/profile'))->name('opportunities.public.index');
+}
+if (!Route::has('opportunities.qr')) {
+//     Route::match(['GET','POST'],'/__alias/opportunities.qr', fn() => redirect('/profile'))->name('opportunities.qr');
+}
+if (!Route::has('opportunities.show')) {
+//     Route::match(['GET','POST'],'/__alias/opportunities.show', fn() => redirect('/profile'))->name('opportunities.show');
+}
+if (!Route::has('opps.public.index')) {
+//     Route::match(['GET','POST'],'/__alias/opps.public.index', fn() => redirect('/profile'))->name('opps.public.index');
+}
+if (!Route::has('opps.public.show')) {
+//     Route::match(['GET','POST'],'/__alias/opps.public.show', fn() => redirect('/profile'))->name('opps.public.show');
+}
+if (!Route::has('org.applicants.decision.bulk')) {
+//     Route::match(['GET','POST'],'/__alias/org.applicants.decision.bulk', fn() => redirect('/profile'))->name('org.applicants.decision.bulk');
+}
+if (!Route::has('org.certificates.export.csv')) {
+//     Route::match(['GET','POST'],'/__alias/org.certificates.export.csv', fn() => redirect('/profile'))->name('org.certificates.export.csv');
+}
+if (!Route::has('org.certificates.index')) {
+//     Route::match(['GET','POST'],'/__alias/org.certificates.index', fn() => redirect('/profile'))->name('org.certificates.index');
+}
+if (!Route::has('org.dashboard')) {
+//     Route::match(['GET','POST'],'/__alias/org.dashboard', fn() => redirect('/profile'))->name('org.dashboard');
+}
+if (!Route::has('org.events.export')) {
+//     Route::match(['GET','POST'],'/__alias/org.events.export', fn() => redirect('/profile'))->name('org.events.export');
+}
+if (!Route::has('org.events.finalize')) {
+//     Route::match(['GET','POST'],'/__alias/org.events.finalize', fn() => redirect('/profile'))->name('org.events.finalize');
+}
+if (!Route::has('org.events.index')) {
+//     Route::match(['GET','POST'],'/__alias/org.events.index', fn() => redirect('/profile'))->name('org.events.index');
+}
+if (!Route::has('org.events.volunteers')) {
+//     Route::match(['GET','POST'],'/__alias/org.events.volunteers', fn() => redirect('/profile'))->name('org.events.volunteers');
+}
+if (!Route::has('org.events.volunteers.csv')) {
+//     Route::match(['GET','POST'],'/__alias/org.events.volunteers.csv', fn() => redirect('/profile'))->name('org.events.volunteers.csv');
+}
+if (!Route::has('org.kyc.update')) {
+//     Route::match(['GET','POST'],'/__alias/org.kyc.update', fn() => redirect('/profile'))->name('org.kyc.update');
+}
+if (!Route::has('org.license.request')) {
+//     Route::match(['GET','POST'],'/__alias/org.license.request', fn() => redirect('/profile'))->name('org.license.request');
+}
+if (!Route::has('org.login.submit')) {
+//     Route::match(['GET','POST'],'/__alias/org.login.submit', fn() => redirect('/profile'))->name('org.login.submit');
+}
+if (!Route::has('org.opportunities.create')) {
+//     Route::match(['GET','POST'],'/__alias/org.opportunities.create', fn() => redirect('/profile'))->name('org.opportunities.create');
+}
+if (!Route::has('org.opps.create')) {
+//     Route::match(['GET','POST'],'/__alias/org.opps.create', fn() => redirect('/profile'))->name('org.opps.create');
+}
+if (!Route::has('org.opps.destroy')) {
+//     Route::match(['GET','POST'],'/__alias/org.opps.destroy', fn() => redirect('/profile'))->name('org.opps.destroy');
+}
+if (!Route::has('org.opps.edit')) {
+//     Route::match(['GET','POST'],'/__alias/org.opps.edit', fn() => redirect('/profile'))->name('org.opps.edit');
+}
+if (!Route::has('org.opps.index')) {
+//     Route::match(['GET','POST'],'/__alias/org.opps.index', fn() => redirect('/profile'))->name('org.opps.index');
+}
+if (!Route::has('org.opps.store')) {
+//     Route::match(['GET','POST'],'/__alias/org.opps.store', fn() => redirect('/profile'))->name('org.opps.store');
+}
+if (!Route::has('org.profile.update')) {
+//     Route::match(['GET','POST'],'/__alias/org.profile.update', fn() => redirect('/profile'))->name('org.profile.update');
+}
+if (!Route::has('org.register.submit')) {
+//     Route::match(['GET','POST'],'/__alias/org.register.submit', fn() => redirect('/profile'))->name('org.register.submit');
+}
+if (!Route::has('org.reports')) {
+//     Route::match(['GET','POST'],'/__alias/org.reports', fn() => redirect('/profile'))->name('org.reports');
+}
+if (!Route::has('org.settings.edit')) {
+//     Route::match(['GET','POST'],'/__alias/org.settings.edit', fn() => redirect('/profile'))->name('org.settings.edit');
+}
+if (!Route::has('org.settings.update')) {
+//     Route::match(['GET','POST'],'/__alias/org.settings.update', fn() => redirect('/profile'))->name('org.settings.update');
+}
+if (!Route::has('org.setup.store')) {
+//     Route::match(['GET','POST'],'/__alias/org.setup.store', fn() => redirect('/profile'))->name('org.setup.store');
+}
+if (!Route::has('org.team.invite')) {
+//     Route::match(['GET','POST'],'/__alias/org.team.invite', fn() => redirect('/profile'))->name('org.team.invite');
+}
+if (!Route::has('org.team.remove')) {
+//     Route::match(['GET','POST'],'/__alias/org.team.remove', fn() => redirect('/profile'))->name('org.team.remove');
+}
+if (!Route::has('organization.opportunities.create')) {
+//     Route::match(['GET','POST'],'/__alias/organization.opportunities.create', fn() => redirect('/profile'))->name('organization.opportunities.create');
+}
+if (!Route::has('organization.register.store')) {
+//     Route::match(['GET','POST'],'/__alias/organization.register.store', fn() => redirect('/profile'))->name('organization.register.store');
+}
+if (!Route::has('organizations.register.store')) {
+//     Route::match(['GET','POST'],'/__alias/organizations.register.store', fn() => redirect('/profile'))->name('organizations.register.store');
+}
+if (!Route::has('orgs.public.index')) {
+//     Route::match(['GET','POST'],'/__alias/orgs.public.index', fn() => redirect('/profile'))->name('orgs.public.index');
+}
+if (!Route::has('partners.apply.submit')) {
+//     Route::match(['GET','POST'],'/__alias/partners.apply.submit', fn() => redirect('/profile'))->name('partners.apply.submit');
+}
+if (!Route::has('partners.index')) {
+//     Route::match(['GET','POST'],'/__alias/partners.index', fn() => redirect('/profile'))->name('partners.index');
+}
+if (!Route::has('password.confirm')) {
+//     Route::match(['GET','POST'],'/__alias/password.confirm', fn() => redirect('/profile'))->name('password.confirm');
+}
+if (!Route::has('password.email')) {
+//     Route::match(['GET','POST'],'/__alias/password.email', fn() => redirect('/profile'))->name('password.email');
+}
+if (!Route::has('password.request')) {
+//     Route::match(['GET','POST'],'/__alias/password.request', fn() => redirect('/profile'))->name('password.request');
+}
+if (!Route::has('password.update')) {
+//     Route::match(['GET','POST'],'/__alias/password.update', fn() => redirect('/profile'))->name('password.update');
+}
+if (!Route::has('payments.processPayTabs')) {
+//     Route::match(['GET','POST'],'/__alias/payments.processPayTabs', fn() => redirect('/profile'))->name('payments.processPayTabs');
+}
+if (!Route::has('payments.processStripe')) {
+//     Route::match(['GET','POST'],'/__alias/payments.processStripe', fn() => redirect('/profile'))->name('payments.processStripe');
+}
+if (!Route::has('profile')) {
+//     Route::match(['GET','POST'],'/__alias/profile', fn() => redirect('/profile'))->name('profile');
+}
+if (!Route::has('profile.destroy')) {
+//     Route::match(['GET','POST'],'/__alias/profile.destroy', fn() => redirect('/profile'))->name('profile.destroy');
+}
+if (!Route::has('profile.password.update')) {
+//     Route::match(['GET','POST'],'/__alias/profile.password.update', fn() => redirect('/profile'))->name('profile.password.update');
+}
+if (!Route::has('profile.update')) {
+//     Route::match(['GET','POST'],'/__alias/profile.update', fn() => redirect('/profile'))->name('profile.update');
+}
+if (!Route::has('public.events')) {
+//     Route::match(['GET','POST'],'/__alias/public.events', fn() => redirect('/profile'))->name('public.events');
+}
+if (!Route::has('public.gallery')) {
+//     Route::match(['GET','POST'],'/__alias/public.gallery', fn() => redirect('/profile'))->name('public.gallery');
+}
+if (!Route::has('public.opportunities')) {
+//     Route::match(['GET','POST'],'/__alias/public.opportunities', fn() => redirect('/profile'))->name('public.opportunities');
+}
+if (!Route::has('public.opportunities.index')) {
+//     Route::match(['GET','POST'],'/__alias/public.opportunities.index', fn() => redirect('/profile'))->name('public.opportunities.index');
+}
+if (!Route::has('public.opportunities.show')) {
+//     Route::match(['GET','POST'],'/__alias/public.opportunities.show', fn() => redirect('/profile'))->name('public.opportunities.show');
+}
+if (!Route::has('public.opportunity.show')) {
+//     Route::match(['GET','POST'],'/__alias/public.opportunity.show', fn() => redirect('/profile'))->name('public.opportunity.show');
+}
+if (!Route::has('public.organizations')) {
+//     Route::match(['GET','POST'],'/__alias/public.organizations', fn() => redirect('/profile'))->name('public.organizations');
+}
+if (!Route::has('register.organization.store')) {
+//     Route::match(['GET','POST'],'/__alias/register.organization.store', fn() => redirect('/profile'))->name('register.organization.store');
+}
+if (!Route::has('scan')) {
+//     Route::match(['GET','POST'],'/__alias/scan', fn() => redirect('/profile'))->name('scan');
+}
+if (!Route::has('signin.options')) {
+//     Route::match(['GET','POST'],'/__alias/signin.options', fn() => redirect('/profile'))->name('signin.options');
+}
+if (!Route::has('teams.create')) {
+//     Route::match(['GET','POST'],'/__alias/teams.create', fn() => redirect('/profile'))->name('teams.create');
+}
+if (!Route::has('teams.store')) {
+//     Route::match(['GET','POST'],'/__alias/teams.store', fn() => redirect('/profile'))->name('teams.store');
+}
+if (!Route::has('verification.notice')) {
+//     Route::match(['GET','POST'],'/__alias/verification.notice', fn() => redirect('/profile'))->name('verification.notice');
+}
+if (!Route::has('verification.send')) {
+//     Route::match(['GET','POST'],'/__alias/verification.send', fn() => redirect('/profile'))->name('verification.send');
+}
+if (!Route::has('vol.profile.update')) {
+//     Route::match(['GET','POST'],'/__alias/vol.profile.update', fn() => redirect('/profile'))->name('vol.profile.update');
+}
+if (!Route::has('volunteer.dashboard')) {
+//     Route::match(['GET','POST'],'/__alias/volunteer.dashboard', fn() => redirect('/profile'))->name('volunteer.dashboard');
+}
+if (!Route::has('volunteer.hours.store')) {
+//     Route::match(['GET','POST'],'/__alias/volunteer.hours.store', fn() => redirect('/profile'))->name('volunteer.hours.store');
+}
+if (!Route::has('volunteer.login.submit')) {
+//     Route::match(['GET','POST'],'/__alias/volunteer.login.submit', fn() => redirect('/profile'))->name('volunteer.login.submit');
+}
+if (!Route::has('volunteer.profile')) {
+//     Route::match(['GET','POST'],'/__alias/volunteer.profile', fn() => redirect('/profile'))->name('volunteer.profile');
+}
+
+
+Route::get('/login', function () {
+    if (request('type') === 'email' && view()->exists('auth.login')) {
+        return view('auth.login');
+    }
+    return view()->exists('auth.signin-options') ? view('auth.signin-options') : view('auth.login-fallback');
+
+/* === Social login (Google/Apple) === */
+Route::middleware('guest')->group(function () {
+    Route::get('/auth/{provider}/redirect',
+        [\App\Http\Controllers\Auth\SocialLoginController::class, 'redirect'])
+        ->where('provider','google|apple')->name('social.redirect');
+
+    Route::get('/auth/{provider}/callback',
+        [\App\Http\Controllers\Auth\SocialLoginController::class, 'callback'])
+        ->where('provider','google|apple')->name('social.callback');
+});
+
+/* === Auth wiring (guest only) === */
+Route::middleware('guest')->group(function () {
+    // Email login form (dedicated)
+    Route::get('/login/email', function () {
+        return view()->exists('auth.login') ? view('auth.login') : view('auth.login-fallback');
+    })->name('login.email');
+
+    // Social (Google / Apple)
+    Route::prefix('oauth')->group(function () {
+        Route::get('{provider}/redirect', [\App\Http\Controllers\Auth\SocialLoginController::class, 'redirect'])
+            ->whereIn('provider', ['google','apple'])
+            ->name('oauth.redirect');
+        Route::get('{provider}/callback', [\App\Http\Controllers\Auth\SocialLoginController::class, 'callback'])
+            ->whereIn('provider', ['google','apple'])
+            ->name('oauth.callback');
+    });
+});
+
+/* ==== FINAL: make route('logout') actually log out (GET or POST) ==== */
+Route::match(['GET','POST'], '/logout', function () {
+    auth()->logout();
+    request()->session()->invalidate();
+    request()->session()->regenerateToken();
+    return redirect('/'); // send to home (or change to route('login') if you prefer)
+})->name('logout');
+
+
+// Profile alias → your volunteer profile
+Route::middleware('auth')->get('/profile', fn() => redirect()->route('volunteer.profile'))->name('profile');
+
+// Email verification routes used by navbar
+Route::middleware(['auth','throttle:6,1'])->post('/email/verification-notification', function (\Illuminate\Http\Request $request) {
+    if (! $request->user()->hasVerifiedEmail()) {
+        $request->user()->sendEmailVerificationNotification();
+    }
+    return back();
+})->name('verification.send');
+
+Route::middleware('auth')->get('/email/verify', function () {
+    return view()->exists('auth.verify-email') ? view('auth.verify-email') : response('Please check your email for the verification link.', 200);
+})->name('verification.notice');
+/* ===== /AUTH_COMPAT_BLOCK (clean) ===== */
+/* === Sign-in hub (SSO + email) === */
+Route::middleware('guest')->get('/signin', function () {
+    if (view()->exists('auth.signin-options')) return view('auth.signin-options');
+    if (view()->exists('auth.login')) return view('auth.login');
+    return view('auth.login-fallback');
+})->name('signin.options');
+
+});
+/* === Sign-in hub (+SSO) — guest only === */
+Route::middleware('guest')->group(function () {
+    // /signin prefers the options page, then login, then fallback
+    Route::get('/signin', function () {
+        if (view()->exists('auth.signin-options')) return view('auth.signin-options');
+        if (view()->exists('auth.login')) return view('auth.login');
+        return view('auth.login-fallback');
+    })->name('signin.options');
+
+    // Define SSO routes so Blade links don't 500 even if creds are missing
+    Route::get('/auth/{provider}/redirect', [\App\Http\Controllers\Auth\SocialLoginController::class,'redirect'])
+        ->whereIn('provider', ['google','apple','uaepass'])->name('social.redirect');
+    Route::get('/auth/{provider}/callback', [\App\Http\Controllers\Auth\SocialLoginController::class,'callback'])
+        ->whereIn('provider', ['google','apple','uaepass'])->name('social.callback');
+
+    // Make sure /register exists
+    if (!Route::has('register')) {
+        Route::get('/register', function () {
+            return view()->exists('auth.register') ? view('auth.register') : view('auth.register-fallback');
+        })->name('register');
+    }
+});

@@ -1,0 +1,502 @@
+/home3/vminingc/swaeduae.ae/laravel-app/site-audit-output.txt:19104:Cache-Control: no-cache, private
+/home3/vminingc/swaeduae.ae/laravel-app/site-audit-output.txt:19111:Cache-Control: no-cache, private
+/home3/vminingc/swaeduae.ae/laravel-app/site-audit-output.txt:19118:Cache-Control: no-cache, private
+/home3/vminingc/swaeduae.ae/laravel-app/site-audit-output.txt:19125:Cache-Control: no-cache, private
+/home3/vminingc/swaeduae.ae/laravel-app/site-audit-output.txt:19132:Cache-Control: no-cache, private
+/home3/vminingc/swaeduae.ae/laravel-app/site-audit-output.txt:19139:Cache-Control: no-cache, private
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-151117:204:    ], 200, ['Cache-Control' => 'no-store']);
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-151117:240:    return response()->json($data)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-151117:327:    return response('ok', 200)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-144616:204:    ], 200, ['Cache-Control' => 'no-store']);
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-144616:240:    return response()->json($data)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-144616:327:    return response('ok', 200)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bisect_2025-08-20_114642.bak_20250821-150119:203:    ], 200, ['Cache-Control' => 'no-store']);
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bisect_2025-08-20_114642.bak_20250821-150119:239:    return response()->json($data)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-144616.bak_20250821-150119.bak_20250821-151117:204:    ], 200, ['Cache-Control' => 'no-store']);
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-144616.bak_20250821-150119.bak_20250821-151117:240:    return response()->json($data)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-144616.bak_20250821-150119.bak_20250821-151117:327:    return response('ok', 200)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-134435:204:    ], 200, ['Cache-Control' => 'no-store']);
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-134435:240:    return response()->json($data)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-134435:327:    return response('ok', 200)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-145829.bak_20250821-150119.bak_20250821-151117:204:    ], 200, ['Cache-Control' => 'no-store']);
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-145829.bak_20250821-150119.bak_20250821-151117:240:    return response()->json($data)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-145829.bak_20250821-150119.bak_20250821-151117:327:    return response('ok', 200)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-134019.bak_20250821-150119.bak_20250821-151117:204:    ], 200, ['Cache-Control' => 'no-store']);
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-134019.bak_20250821-150119.bak_20250821-151117:240:    return response()->json($data)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-134019.bak_20250821-150119.bak_20250821-151117:327:    return response('ok', 200)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-145829.bak_20250821-151117:204:    ], 200, ['Cache-Control' => 'no-store']);
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-145829.bak_20250821-151117:240:    return response()->json($data)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-145829.bak_20250821-151117:327:    return response('ok', 200)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-140337.bak_20250821-150119:204:    ], 200, ['Cache-Control' => 'no-store']);
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-140337.bak_20250821-150119:240:    return response()->json($data)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-140337.bak_20250821-150119:327:    return response('ok', 200)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-134019:204:    ], 200, ['Cache-Control' => 'no-store']);
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-134019:240:    return response()->json($data)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-134019:327:    return response('ok', 200)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-145421.bak_20250821-150119:204:    ], 200, ['Cache-Control' => 'no-store']);
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-145421.bak_20250821-150119:240:    return response()->json($data)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-145421.bak_20250821-150119:327:    return response('ok', 200)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-140730:204:    ], 200, ['Cache-Control' => 'no-store']);
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-140730:240:    return response()->json($data)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-140730:327:    return response('ok', 200)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-145421.bak_20250821-151117:204:    ], 200, ['Cache-Control' => 'no-store']);
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-145421.bak_20250821-151117:240:    return response()->json($data)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-145421.bak_20250821-151117:327:    return response('ok', 200)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-140523.bak_20250821-150119.bak_20250821-151117:204:    ], 200, ['Cache-Control' => 'no-store']);
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-140523.bak_20250821-150119.bak_20250821-151117:240:    return response()->json($data)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-140523.bak_20250821-150119.bak_20250821-151117:327:    return response('ok', 200)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-140730.bak_20250821-150119:204:    ], 200, ['Cache-Control' => 'no-store']);
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-140730.bak_20250821-150119:240:    return response()->json($data)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-140730.bak_20250821-150119:327:    return response('ok', 200)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-140523:204:    ], 200, ['Cache-Control' => 'no-store']);
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-140523:240:    return response()->json($data)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-140523:327:    return response('ok', 200)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-140243.bak_20250821-150119:204:    ], 200, ['Cache-Control' => 'no-store']);
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-140243.bak_20250821-150119:240:    return response()->json($data)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-140243.bak_20250821-150119:327:    return response('ok', 200)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-145829.bak_20250821-150119:204:    ], 200, ['Cache-Control' => 'no-store']);
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-145829.bak_20250821-150119:240:    return response()->json($data)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-145829.bak_20250821-150119:327:    return response('ok', 200)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-140730.bak_20250821-150119.bak_20250821-151117:204:    ], 200, ['Cache-Control' => 'no-store']);
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-140730.bak_20250821-150119.bak_20250821-151117:240:    return response()->json($data)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-140730.bak_20250821-150119.bak_20250821-151117:327:    return response('ok', 200)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-142737.bak_20250821-151117:204:    ], 200, ['Cache-Control' => 'no-store']);
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-142737.bak_20250821-151117:240:    return response()->json($data)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-142737.bak_20250821-151117:327:    return response('ok', 200)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-145829:204:    ], 200, ['Cache-Control' => 'no-store']);
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-145829:240:    return response()->json($data)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-145829:327:    return response('ok', 200)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-134019.bak_20250821-151117:204:    ], 200, ['Cache-Control' => 'no-store']);
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-134019.bak_20250821-151117:240:    return response()->json($data)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-134019.bak_20250821-151117:327:    return response('ok', 200)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-150119:204:    ], 200, ['Cache-Control' => 'no-store']);
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-150119:240:    return response()->json($data)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-150119:327:    return response('ok', 200)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-142737.bak_20250821-150119:204:    ], 200, ['Cache-Control' => 'no-store']);
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-142737.bak_20250821-150119:240:    return response()->json($data)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-142737.bak_20250821-150119:327:    return response('ok', 200)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-134435.bak_20250821-150119:204:    ], 200, ['Cache-Control' => 'no-store']);
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-134435.bak_20250821-150119:240:    return response()->json($data)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-134435.bak_20250821-150119:327:    return response('ok', 200)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-143031.bak_20250821-151117:204:    ], 200, ['Cache-Control' => 'no-store']);
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-143031.bak_20250821-151117:240:    return response()->json($data)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-143031.bak_20250821-151117:327:    return response('ok', 200)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-142737.bak_20250821-150119.bak_20250821-151117:204:    ], 200, ['Cache-Control' => 'no-store']);
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-142737.bak_20250821-150119.bak_20250821-151117:240:    return response()->json($data)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-142737.bak_20250821-150119.bak_20250821-151117:327:    return response('ok', 200)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-140337:204:    ], 200, ['Cache-Control' => 'no-store']);
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-140337:240:    return response()->json($data)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-140337:327:    return response('ok', 200)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-144616.bak_20250821-151117:204:    ], 200, ['Cache-Control' => 'no-store']);
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-144616.bak_20250821-151117:240:    return response()->json($data)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-144616.bak_20250821-151117:327:    return response('ok', 200)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-144616.bak_20250821-150119:204:    ], 200, ['Cache-Control' => 'no-store']);
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-144616.bak_20250821-150119:240:    return response()->json($data)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-144616.bak_20250821-150119:327:    return response('ok', 200)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bisect_2025-08-20_114642:203:    ], 200, ['Cache-Control' => 'no-store']);
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bisect_2025-08-20_114642:239:    return response()->json($data)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-143031:204:    ], 200, ['Cache-Control' => 'no-store']);
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-143031:240:    return response()->json($data)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-143031:327:    return response('ok', 200)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-140337.bak_20250821-151117:204:    ], 200, ['Cache-Control' => 'no-store']);
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-140337.bak_20250821-151117:240:    return response()->json($data)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-140337.bak_20250821-151117:327:    return response('ok', 200)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-140243:204:    ], 200, ['Cache-Control' => 'no-store']);
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-140243:240:    return response()->json($data)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-140243:327:    return response('ok', 200)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-140730.bak_20250821-151117:204:    ], 200, ['Cache-Control' => 'no-store']);
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-140730.bak_20250821-151117:240:    return response()->json($data)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-140730.bak_20250821-151117:327:    return response('ok', 200)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-142737:204:    ], 200, ['Cache-Control' => 'no-store']);
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-142737:240:    return response()->json($data)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-142737:327:    return response('ok', 200)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-140337.bak_20250821-150119.bak_20250821-151117:204:    ], 200, ['Cache-Control' => 'no-store']);
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-140337.bak_20250821-150119.bak_20250821-151117:240:    return response()->json($data)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-140337.bak_20250821-150119.bak_20250821-151117:327:    return response('ok', 200)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bisect_2025-08-20_114642.bak_20250821-150119.bak_20250821-151117:203:    ], 200, ['Cache-Control' => 'no-store']);
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bisect_2025-08-20_114642.bak_20250821-150119.bak_20250821-151117:239:    return response()->json($data)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bisect_2025-08-20_114642.bak_20250821-151117:203:    ], 200, ['Cache-Control' => 'no-store']);
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bisect_2025-08-20_114642.bak_20250821-151117:239:    return response()->json($data)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-151312:204:    ], 200, ['Cache-Control' => 'no-store']);
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-151312:240:    return response()->json($data)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-151312:327:    return response('ok', 200)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-134435.bak_20250821-151117:204:    ], 200, ['Cache-Control' => 'no-store']);
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-134435.bak_20250821-151117:240:    return response()->json($data)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-134435.bak_20250821-151117:327:    return response('ok', 200)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-143031.bak_20250821-150119:204:    ], 200, ['Cache-Control' => 'no-store']);
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-143031.bak_20250821-150119:240:    return response()->json($data)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-143031.bak_20250821-150119:327:    return response('ok', 200)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-145421.bak_20250821-150119.bak_20250821-151117:204:    ], 200, ['Cache-Control' => 'no-store']);
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-145421.bak_20250821-150119.bak_20250821-151117:240:    return response()->json($data)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-145421.bak_20250821-150119.bak_20250821-151117:327:    return response('ok', 200)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-143031.bak_20250821-150119.bak_20250821-151117:204:    ], 200, ['Cache-Control' => 'no-store']);
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-143031.bak_20250821-150119.bak_20250821-151117:240:    return response()->json($data)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-143031.bak_20250821-150119.bak_20250821-151117:327:    return response('ok', 200)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-140523.bak_20250821-151117:204:    ], 200, ['Cache-Control' => 'no-store']);
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-140523.bak_20250821-151117:240:    return response()->json($data)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-140523.bak_20250821-151117:327:    return response('ok', 200)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-140243.bak_20250821-151117:204:    ], 200, ['Cache-Control' => 'no-store']);
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-140243.bak_20250821-151117:240:    return response()->json($data)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-140243.bak_20250821-151117:327:    return response('ok', 200)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-150119.bak_20250821-151117:204:    ], 200, ['Cache-Control' => 'no-store']);
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-150119.bak_20250821-151117:240:    return response()->json($data)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-150119.bak_20250821-151117:327:    return response('ok', 200)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php:204:    ], 200, ['Cache-Control' => 'no-store']);
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php:240:    return response()->json($data)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php:327:    return response('ok', 200)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-134435.bak_20250821-150119.bak_20250821-151117:204:    ], 200, ['Cache-Control' => 'no-store']);
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-134435.bak_20250821-150119.bak_20250821-151117:240:    return response()->json($data)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-134435.bak_20250821-150119.bak_20250821-151117:327:    return response('ok', 200)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-140243.bak_20250821-150119.bak_20250821-151117:204:    ], 200, ['Cache-Control' => 'no-store']);
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-140243.bak_20250821-150119.bak_20250821-151117:240:    return response()->json($data)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-140243.bak_20250821-150119.bak_20250821-151117:327:    return response('ok', 200)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-140523.bak_20250821-150119:204:    ], 200, ['Cache-Control' => 'no-store']);
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-140523.bak_20250821-150119:240:    return response()->json($data)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-140523.bak_20250821-150119:327:    return response('ok', 200)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-134019.bak_20250821-150119:204:    ], 200, ['Cache-Control' => 'no-store']);
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-134019.bak_20250821-150119:240:    return response()->json($data)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-134019.bak_20250821-150119:327:    return response('ok', 200)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-145421:204:    ], 200, ['Cache-Control' => 'no-store']);
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-145421:240:    return response()->json($data)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/routes/web.php.bak_20250821-145421:327:    return response('ok', 200)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/backups/web.php.20250821-145647.bak:204:    ], 200, ['Cache-Control' => 'no-store']);
+/home3/vminingc/swaeduae.ae/laravel-app/backups/web.php.20250821-145647.bak:240:    return response()->json($data)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/backups/web.php.20250821-145647.bak:327:    return response('ok', 200)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/backups/web.php.20250821-145829.bak:204:    ], 200, ['Cache-Control' => 'no-store']);
+/home3/vminingc/swaeduae.ae/laravel-app/backups/web.php.20250821-145829.bak:240:    return response()->json($data)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/backups/web.php.20250821-145829.bak:327:    return response('ok', 200)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/bootstrap/cache/routes-v7.php:3654:    return \\response(\'ok\', 200)->header(\'Cache-Control\',\'no-store\');
+/home3/vminingc/swaeduae.ae/laravel-app/bootstrap/cache/routes-v7.php:6114:    return \\response()->json($data)->header(\'Cache-Control\',\'no-store\');
+/home3/vminingc/swaeduae.ae/laravel-app/routes.fixrec_2025-08-20_113259/web.php:199:    ], 200, ['Cache-Control' => 'no-store']);
+/home3/vminingc/swaeduae.ae/laravel-app/routes.fixrec_2025-08-20_113259/web.php:235:    return response()->json($data)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/tools/snapshots/20250821_162747/tools_reports_master_check_20250821_162116_99_summary_todo.txt.bak:4:- Headers (Content-Language, Vary, Cache-Control) sane? (10_/11_)
+/home3/vminingc/swaeduae.ae/laravel-app/tools/snapshots/20250821_162747/tools_reports_master_check_20250821_162116_10_headers_en_swaeduae.ae-.txt.bak:2:Cache-Control: max-age=0, must-revalidate, public, s-maxage=60
+/home3/vminingc/swaeduae.ae/laravel-app/tools/snapshots/20250821_162747/tools_reports_master_check_20250821_162116_10_headers_en_swaeduae.ae-.txt.bak:8:Cache-Control: no-cache, no-store, must-revalidate
+/home3/vminingc/swaeduae.ae/laravel-app/tools/snapshots/20250821_162747/tools_reports_master_check_20250821_162116_12_microcache_probe_3.txt.bak:2:Cache-Control: max-age=0, must-revalidate, public, s-maxage=60
+/home3/vminingc/swaeduae.ae/laravel-app/tools/snapshots/20250821_162747/tools_reports_master_check_20250821_162116_12_microcache_probe_3.txt.bak:6:Cache-Control: no-cache, no-store, must-revalidate
+/home3/vminingc/swaeduae.ae/laravel-app/tools/snapshots/20250821_162747/tools_reports_master_check_20250821_162116_11_headers_ar_swaeduae.ae-about.txt.bak:2:Cache-Control: max-age=0, must-revalidate, public, s-maxage=60
+/home3/vminingc/swaeduae.ae/laravel-app/tools/snapshots/20250821_162747/tools_reports_master_check_20250821_162116_11_headers_ar_swaeduae.ae-about.txt.bak:8:Cache-Control: no-cache, no-store, must-revalidate
+/home3/vminingc/swaeduae.ae/laravel-app/tools/snapshots/20250821_162747/tools_reports_master_check_20250821_162116_10_headers_en_swaeduae.ae-contact.txt.bak:2:Cache-Control: no-cache, private
+/home3/vminingc/swaeduae.ae/laravel-app/tools/snapshots/20250821_162747/tools_reports_master_check_20250821_162116_10_headers_en_swaeduae.ae-contact.txt.bak:7:Cache-Control: no-cache, no-store, must-revalidate
+/home3/vminingc/swaeduae.ae/laravel-app/tools/snapshots/20250821_162747/tools_reports_master_check_20250821_162116_12_microcache_probe_1.txt.bak:2:Cache-Control: max-age=0, must-revalidate, public, s-maxage=60
+/home3/vminingc/swaeduae.ae/laravel-app/tools/snapshots/20250821_162747/tools_reports_master_check_20250821_162116_12_microcache_probe_1.txt.bak:6:Cache-Control: no-cache, no-store, must-revalidate
+/home3/vminingc/swaeduae.ae/laravel-app/tools/snapshots/20250821_162747/tools_reports_master_check_20250821_162116_10_headers_en_swaeduae.ae-healthz.txt.bak:2:Cache-Control: max-age=0, must-revalidate, public, s-maxage=60
+/home3/vminingc/swaeduae.ae/laravel-app/tools/snapshots/20250821_162747/tools_reports_master_check_20250821_162116_10_headers_en_swaeduae.ae-healthz.txt.bak:8:Cache-Control: no-cache, no-store, must-revalidate
+/home3/vminingc/swaeduae.ae/laravel-app/tools/snapshots/20250821_162747/tools_reports_master_check_20250821_162116_11_headers_ar_swaeduae.ae-contact.txt.bak:2:Cache-Control: no-cache, private
+/home3/vminingc/swaeduae.ae/laravel-app/tools/snapshots/20250821_162747/tools_reports_master_check_20250821_162116_11_headers_ar_swaeduae.ae-contact.txt.bak:7:Cache-Control: no-cache, no-store, must-revalidate
+/home3/vminingc/swaeduae.ae/laravel-app/tools/snapshots/20250821_162747/tools_reports_master_check_20250821_162116_12_microcache_probe_2.txt.bak:2:Cache-Control: max-age=0, must-revalidate, public, s-maxage=60
+/home3/vminingc/swaeduae.ae/laravel-app/tools/snapshots/20250821_162747/tools_reports_master_check_20250821_162116_12_microcache_probe_2.txt.bak:6:Cache-Control: no-cache, no-store, must-revalidate
+/home3/vminingc/swaeduae.ae/laravel-app/tools/snapshots/20250821_162747/app_Http_Middleware_MicroCache.php.bak:32:            $resp->headers->set('Cache-Control', 'public, max-age=0, s-maxage=60, must-revalidate');
+/home3/vminingc/swaeduae.ae/laravel-app/tools/snapshots/20250821_162747/app_Http_Middleware_MicroCache.php.bak:44:            $resp->headers->set('Cache-Control','public, max-age=0, s-maxage=60, must-revalidate');
+/home3/vminingc/swaeduae.ae/laravel-app/tools/snapshots/20250821_162747/tools_reports_master_check_20250821_162116_11_headers_ar_swaeduae.ae-healthz.txt.bak:2:Cache-Control: max-age=0, must-revalidate, public, s-maxage=60
+/home3/vminingc/swaeduae.ae/laravel-app/tools/snapshots/20250821_162747/tools_reports_master_check_20250821_162116_11_headers_ar_swaeduae.ae-healthz.txt.bak:8:Cache-Control: no-cache, no-store, must-revalidate
+/home3/vminingc/swaeduae.ae/laravel-app/tools/snapshots/20250821_162747/tools_reports_master_check_20250821_162116_11_headers_ar_swaeduae.ae-.txt.bak:2:Cache-Control: max-age=0, must-revalidate, public, s-maxage=60
+/home3/vminingc/swaeduae.ae/laravel-app/tools/snapshots/20250821_162747/tools_reports_master_check_20250821_162116_11_headers_ar_swaeduae.ae-.txt.bak:8:Cache-Control: no-cache, no-store, must-revalidate
+/home3/vminingc/swaeduae.ae/laravel-app/tools/snapshots/20250821_162747/tools_reports_master_check_20250821_162116_10_headers_en_swaeduae.ae-about.txt.bak:2:Cache-Control: max-age=0, must-revalidate, public, s-maxage=60
+/home3/vminingc/swaeduae.ae/laravel-app/tools/snapshots/20250821_162747/tools_reports_master_check_20250821_162116_10_headers_en_swaeduae.ae-about.txt.bak:8:Cache-Control: no-cache, no-store, must-revalidate
+/home3/vminingc/swaeduae.ae/laravel-app/tools/snapshots/20250821_164551/routes_web.php.bak:204:    ], 200, ['Cache-Control' => 'no-store']);
+/home3/vminingc/swaeduae.ae/laravel-app/tools/snapshots/20250821_164551/routes_web.php.bak:240:    return response()->json($data)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/tools/snapshots/20250821_164551/routes_web.php.bak:327:    return response('ok', 200)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/tools/snapshots/20250821_164551/public_.htaccess.bak:62:# Cache-Control as a backstop
+/home3/vminingc/swaeduae.ae/laravel-app/tools/snapshots/20250821_164551/public_.htaccess.bak:65:    Header set Cache-Control "public, max-age=2592000, immutable"
+/home3/vminingc/swaeduae.ae/laravel-app/tools/snapshots/20250821_164551/public_.htaccess.bak:73:# Header unset Cache-Control
+/home3/vminingc/swaeduae.ae/laravel-app/tools/snapshots/20250821_164551/public_.htaccess.bak:74:    Header setifempty Cache-Control "no-cache, no-store, must-revalidate"
+/home3/vminingc/swaeduae.ae/laravel-app/tools/snapshots/20250821_164551/public_.htaccess.bak:99:# Header unset Cache-Control
+/home3/vminingc/swaeduae.ae/laravel-app/tools/snapshots/20250821_164551/public_.htaccess.bak:100:  Header setifempty Cache-Control "no-cache, no-store, must-revalidate"
+/home3/vminingc/swaeduae.ae/laravel-app/tools/snapshots/20250821_164551/app_Http_Middleware_MicroCache.php.bak:32:            $resp->headers->set('Cache-Control', 'public, max-age=0, s-maxage=60, must-revalidate');
+/home3/vminingc/swaeduae.ae/laravel-app/tools/snapshots/20250821_164551/app_Http_Middleware_MicroCache.php.bak:44:            $resp->headers->set('Cache-Control','public, max-age=0, s-maxage=60, must-revalidate');
+/home3/vminingc/swaeduae.ae/laravel-app/tools/snapshots/20250821_162600/tools_reports_master_check_20250821_162116_99_summary_todo.txt.bak:4:- Headers (Content-Language, Vary, Cache-Control) sane? (10_/11_)
+/home3/vminingc/swaeduae.ae/laravel-app/tools/snapshots/20250821_162600/tools_reports_master_check_20250821_162116_10_headers_en_swaeduae.ae-.txt.bak:2:Cache-Control: max-age=0, must-revalidate, public, s-maxage=60
+/home3/vminingc/swaeduae.ae/laravel-app/tools/snapshots/20250821_162600/tools_reports_master_check_20250821_162116_10_headers_en_swaeduae.ae-.txt.bak:8:Cache-Control: no-cache, no-store, must-revalidate
+/home3/vminingc/swaeduae.ae/laravel-app/tools/snapshots/20250821_162600/tools_reports_master_check_20250821_162116_12_microcache_probe_3.txt.bak:2:Cache-Control: max-age=0, must-revalidate, public, s-maxage=60
+/home3/vminingc/swaeduae.ae/laravel-app/tools/snapshots/20250821_162600/tools_reports_master_check_20250821_162116_12_microcache_probe_3.txt.bak:6:Cache-Control: no-cache, no-store, must-revalidate
+/home3/vminingc/swaeduae.ae/laravel-app/tools/snapshots/20250821_162600/tools_reports_master_check_20250821_162116_11_headers_ar_swaeduae.ae-about.txt.bak:2:Cache-Control: max-age=0, must-revalidate, public, s-maxage=60
+/home3/vminingc/swaeduae.ae/laravel-app/tools/snapshots/20250821_162600/tools_reports_master_check_20250821_162116_11_headers_ar_swaeduae.ae-about.txt.bak:8:Cache-Control: no-cache, no-store, must-revalidate
+/home3/vminingc/swaeduae.ae/laravel-app/tools/snapshots/20250821_162600/tools_reports_master_check_20250821_162116_10_headers_en_swaeduae.ae-contact.txt.bak:2:Cache-Control: no-cache, private
+/home3/vminingc/swaeduae.ae/laravel-app/tools/snapshots/20250821_162600/tools_reports_master_check_20250821_162116_10_headers_en_swaeduae.ae-contact.txt.bak:7:Cache-Control: no-cache, no-store, must-revalidate
+/home3/vminingc/swaeduae.ae/laravel-app/tools/snapshots/20250821_162600/tools_reports_master_check_20250821_162116_12_microcache_probe_1.txt.bak:2:Cache-Control: max-age=0, must-revalidate, public, s-maxage=60
+/home3/vminingc/swaeduae.ae/laravel-app/tools/snapshots/20250821_162600/tools_reports_master_check_20250821_162116_12_microcache_probe_1.txt.bak:6:Cache-Control: no-cache, no-store, must-revalidate
+/home3/vminingc/swaeduae.ae/laravel-app/tools/snapshots/20250821_162600/tools_reports_master_check_20250821_162116_10_headers_en_swaeduae.ae-healthz.txt.bak:2:Cache-Control: max-age=0, must-revalidate, public, s-maxage=60
+/home3/vminingc/swaeduae.ae/laravel-app/tools/snapshots/20250821_162600/tools_reports_master_check_20250821_162116_10_headers_en_swaeduae.ae-healthz.txt.bak:8:Cache-Control: no-cache, no-store, must-revalidate
+/home3/vminingc/swaeduae.ae/laravel-app/tools/snapshots/20250821_162600/tools_reports_master_check_20250821_162116_11_headers_ar_swaeduae.ae-contact.txt.bak:2:Cache-Control: no-cache, private
+/home3/vminingc/swaeduae.ae/laravel-app/tools/snapshots/20250821_162600/tools_reports_master_check_20250821_162116_11_headers_ar_swaeduae.ae-contact.txt.bak:7:Cache-Control: no-cache, no-store, must-revalidate
+/home3/vminingc/swaeduae.ae/laravel-app/tools/snapshots/20250821_162600/tools_reports_master_check_20250821_162116_12_microcache_probe_2.txt.bak:2:Cache-Control: max-age=0, must-revalidate, public, s-maxage=60
+/home3/vminingc/swaeduae.ae/laravel-app/tools/snapshots/20250821_162600/tools_reports_master_check_20250821_162116_12_microcache_probe_2.txt.bak:6:Cache-Control: no-cache, no-store, must-revalidate
+/home3/vminingc/swaeduae.ae/laravel-app/tools/snapshots/20250821_162600/app_Http_Middleware_MicroCache.php.bak:32:            $resp->headers->set('Cache-Control', 'public, max-age=0, s-maxage=60, must-revalidate');
+/home3/vminingc/swaeduae.ae/laravel-app/tools/snapshots/20250821_162600/app_Http_Middleware_MicroCache.php.bak:44:            $resp->headers->set('Cache-Control','public, max-age=0, s-maxage=60, must-revalidate');
+/home3/vminingc/swaeduae.ae/laravel-app/tools/snapshots/20250821_162600/tools_reports_master_check_20250821_162116_11_headers_ar_swaeduae.ae-healthz.txt.bak:2:Cache-Control: max-age=0, must-revalidate, public, s-maxage=60
+/home3/vminingc/swaeduae.ae/laravel-app/tools/snapshots/20250821_162600/tools_reports_master_check_20250821_162116_11_headers_ar_swaeduae.ae-healthz.txt.bak:8:Cache-Control: no-cache, no-store, must-revalidate
+/home3/vminingc/swaeduae.ae/laravel-app/tools/snapshots/20250821_162600/tools_reports_master_check_20250821_162116_11_headers_ar_swaeduae.ae-.txt.bak:2:Cache-Control: max-age=0, must-revalidate, public, s-maxage=60
+/home3/vminingc/swaeduae.ae/laravel-app/tools/snapshots/20250821_162600/tools_reports_master_check_20250821_162116_11_headers_ar_swaeduae.ae-.txt.bak:8:Cache-Control: no-cache, no-store, must-revalidate
+/home3/vminingc/swaeduae.ae/laravel-app/tools/snapshots/20250821_162600/tools_reports_master_check_20250821_162116_10_headers_en_swaeduae.ae-about.txt.bak:2:Cache-Control: max-age=0, must-revalidate, public, s-maxage=60
+/home3/vminingc/swaeduae.ae/laravel-app/tools/snapshots/20250821_162600/tools_reports_master_check_20250821_162116_10_headers_en_swaeduae.ae-about.txt.bak:8:Cache-Control: no-cache, no-store, must-revalidate
+/home3/vminingc/swaeduae.ae/laravel-app/tools/snapshots/20250821_170227/app_Http_Middleware_NormalizeHeaders.php.bak:25:        // Collapse duplicate Cache-Control into a single, canonical value
+/home3/vminingc/swaeduae.ae/laravel-app/tools/snapshots/20250821_170227/app_Http_Middleware_NormalizeHeaders.php.bak:26:        $response->headers->remove('Cache-Control');
+/home3/vminingc/swaeduae.ae/laravel-app/tools/snapshots/20250821_170227/app_Http_Middleware_NormalizeHeaders.php.bak:29:            $response->headers->set('Cache-Control', 'no-cache, no-store, must-revalidate');
+/home3/vminingc/swaeduae.ae/laravel-app/tools/snapshots/20250821_170227/app_Http_Middleware_NormalizeHeaders.php.bak:31:            $response->headers->set('Cache-Control', 'public, max-age=0, s-maxage=120, must-revalidate');
+/home3/vminingc/swaeduae.ae/laravel-app/tools/snapshots/20250821_170227/app_Http_Middleware_MicroCache.php.bak:32:            $resp->headers->set('Cache-Control', 'public, max-age=0, s-maxage=60, must-revalidate');
+/home3/vminingc/swaeduae.ae/laravel-app/tools/snapshots/20250821_170227/app_Http_Middleware_MicroCache.php.bak:44:            $resp->headers->set('Cache-Control','public, max-age=0, s-maxage=60, must-revalidate');
+/home3/vminingc/swaeduae.ae/laravel-app/tools/snapshots/20250821_165943/app_Http_Middleware_MicroCache.php.bak:32:            $resp->headers->set('Cache-Control', 'public, max-age=0, s-maxage=60, must-revalidate');
+/home3/vminingc/swaeduae.ae/laravel-app/tools/snapshots/20250821_165943/app_Http_Middleware_MicroCache.php.bak:44:            $resp->headers->set('Cache-Control','public, max-age=0, s-maxage=60, must-revalidate');
+/home3/vminingc/swaeduae.ae/laravel-app/tools/snapshots/20250821_163107/app_Http_Middleware_MicroCache.php.bak:32:            $resp->headers->set('Cache-Control', 'public, max-age=0, s-maxage=60, must-revalidate');
+/home3/vminingc/swaeduae.ae/laravel-app/tools/snapshots/20250821_163107/app_Http_Middleware_MicroCache.php.bak:44:            $resp->headers->set('Cache-Control','public, max-age=0, s-maxage=60, must-revalidate');
+/home3/vminingc/swaeduae.ae/laravel-app/tools/snapshots/20250821_163350/app_Http_Middleware_MicroCache.php.bak:32:            $resp->headers->set('Cache-Control', 'public, max-age=0, s-maxage=60, must-revalidate');
+/home3/vminingc/swaeduae.ae/laravel-app/tools/snapshots/20250821_163350/app_Http_Middleware_MicroCache.php.bak:44:            $resp->headers->set('Cache-Control','public, max-age=0, s-maxage=60, must-revalidate');
+/home3/vminingc/swaeduae.ae/laravel-app/tools/phase10_fix_microcache_csrf.php:44:                    ->header('Cache-Control', "public, max-age=$ttl, s-maxage=$ttl")
+/home3/vminingc/swaeduae.ae/laravel-app/tools/phase10_fix_microcache_csrf.php:50:                ->header('Cache-Control', "public, max-age=$ttl, s-maxage=$ttl")
+/home3/vminingc/swaeduae.ae/laravel-app/tools/phase10_fix_microcache_csrf.php:80:            $resp->headers->set('Cache-Control', "public, max-age=$ttl, s-maxage=$ttl");
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/healthcheck_20250819-061452.txt:281:  1st: Cache-Control: no-cache, private
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/healthcheck_20250819-061452.txt:283:  2nd: Cache-Control: no-cache, private
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_162753/10_headers_en_swaeduae.ae-about.txt:2:Cache-Control: max-age=0, must-revalidate, public, s-maxage=60
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_162753/10_headers_en_swaeduae.ae-about.txt:8:Cache-Control: no-cache, no-store, must-revalidate
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_162753/10_headers_en_swaeduae.ae-contact.txt:2:Cache-Control: no-cache, private
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_162753/10_headers_en_swaeduae.ae-contact.txt:7:Cache-Control: no-cache, no-store, must-revalidate
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_162753/50_security_headers_root.txt:2:Cache-Control: no-cache, private
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_162753/50_security_headers_root.txt:5:Cache-Control: no-cache, no-store, must-revalidate
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_162753/10_headers_ar_swaeduae.ae-.txt:2:Cache-Control: max-age=0, must-revalidate, public, s-maxage=60
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_162753/10_headers_ar_swaeduae.ae-.txt:8:Cache-Control: no-cache, no-store, must-revalidate
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_162753/10_headers_ar_swaeduae.ae-about.txt:2:Cache-Control: max-age=0, must-revalidate, public, s-maxage=60
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_162753/10_headers_ar_swaeduae.ae-about.txt:8:Cache-Control: no-cache, no-store, must-revalidate
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_162753/12_microcache_probe_3.txt:2:Cache-Control: max-age=0, must-revalidate, public, s-maxage=60
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_162753/12_microcache_probe_3.txt:6:Cache-Control: no-cache, no-store, must-revalidate
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_162753/10_headers_ar_swaeduae.ae-contact.txt:2:Cache-Control: no-cache, private
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_162753/10_headers_ar_swaeduae.ae-contact.txt:7:Cache-Control: no-cache, no-store, must-revalidate
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_162753/10_headers_en_swaeduae.ae-healthz.txt:2:Cache-Control: max-age=0, must-revalidate, public, s-maxage=60
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_162753/10_headers_en_swaeduae.ae-healthz.txt:8:Cache-Control: no-cache, no-store, must-revalidate
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_162753/12_microcache_probe_1.txt:2:Cache-Control: max-age=0, must-revalidate, public, s-maxage=60
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_162753/12_microcache_probe_1.txt:6:Cache-Control: no-cache, no-store, must-revalidate
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_162753/10_headers_ar_swaeduae.ae-healthz.txt:2:Cache-Control: max-age=0, must-revalidate, public, s-maxage=60
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_162753/10_headers_ar_swaeduae.ae-healthz.txt:8:Cache-Control: no-cache, no-store, must-revalidate
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_162753/12_microcache_probe_2.txt:2:Cache-Control: max-age=0, must-revalidate, public, s-maxage=60
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_162753/12_microcache_probe_2.txt:6:Cache-Control: no-cache, no-store, must-revalidate
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_162753/10_headers_en_swaeduae.ae-.txt:2:Cache-Control: max-age=0, must-revalidate, public, s-maxage=60
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_162753/10_headers_en_swaeduae.ae-.txt:8:Cache-Control: no-cache, no-store, must-revalidate
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_163113/10_headers_en_swaeduae.ae-about.txt:2:Cache-Control: max-age=0, must-revalidate, public, s-maxage=60
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_163113/10_headers_en_swaeduae.ae-about.txt:8:Cache-Control: no-cache, no-store, must-revalidate
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_163113/10_headers_en_swaeduae.ae-contact.txt:2:Cache-Control: no-cache, private
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_163113/10_headers_en_swaeduae.ae-contact.txt:7:Cache-Control: no-cache, no-store, must-revalidate
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_163113/50_security_headers_root.txt:2:Cache-Control: no-cache, private
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_163113/50_security_headers_root.txt:7:Cache-Control: no-cache, no-store, must-revalidate
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_163113/10_headers_ar_swaeduae.ae-.txt:2:Cache-Control: max-age=0, must-revalidate, public, s-maxage=60
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_163113/10_headers_ar_swaeduae.ae-.txt:8:Cache-Control: no-cache, no-store, must-revalidate
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_163113/10_headers_ar_swaeduae.ae-about.txt:2:Cache-Control: max-age=0, must-revalidate, public, s-maxage=60
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_163113/10_headers_ar_swaeduae.ae-about.txt:8:Cache-Control: no-cache, no-store, must-revalidate
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_163113/12_microcache_probe_3.txt:2:Cache-Control: max-age=0, must-revalidate, public, s-maxage=60
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_163113/12_microcache_probe_3.txt:6:Cache-Control: no-cache, no-store, must-revalidate
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_163113/10_headers_ar_swaeduae.ae-contact.txt:2:Cache-Control: no-cache, private
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_163113/10_headers_ar_swaeduae.ae-contact.txt:7:Cache-Control: no-cache, no-store, must-revalidate
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_163113/10_headers_en_swaeduae.ae-healthz.txt:2:Cache-Control: max-age=0, must-revalidate, public, s-maxage=60
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_163113/10_headers_en_swaeduae.ae-healthz.txt:8:Cache-Control: no-cache, no-store, must-revalidate
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_163113/12_microcache_probe_1.txt:2:Cache-Control: max-age=0, must-revalidate, public, s-maxage=60
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_163113/12_microcache_probe_1.txt:6:Cache-Control: no-cache, no-store, must-revalidate
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_163113/10_headers_ar_swaeduae.ae-healthz.txt:2:Cache-Control: max-age=0, must-revalidate, public, s-maxage=60
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_163113/10_headers_ar_swaeduae.ae-healthz.txt:8:Cache-Control: no-cache, no-store, must-revalidate
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_163113/12_microcache_probe_2.txt:2:Cache-Control: max-age=0, must-revalidate, public, s-maxage=60
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_163113/12_microcache_probe_2.txt:6:Cache-Control: no-cache, no-store, must-revalidate
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_163113/10_headers_en_swaeduae.ae-.txt:2:Cache-Control: max-age=0, must-revalidate, public, s-maxage=60
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_163113/10_headers_en_swaeduae.ae-.txt:8:Cache-Control: no-cache, no-store, must-revalidate
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/healthcheck_20250819-063624.txt:282:  1st: Cache-Control: no-cache, private
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/healthcheck_20250819-063624.txt:283:  1st: Cache-Control: max-age=604800
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/healthcheck_20250819-063624.txt:285:  2nd: Cache-Control: no-cache, private
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/healthcheck_20250819-063624.txt:286:  2nd: Cache-Control: max-age=604800
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_165943/50_root_headers_once.txt:5:Cache-Control: no-cache, private
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_165943/50_root_headers_once.txt:21:Cache-Control: no-cache, no-store, must-revalidate
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_164559/10_headers_en_swaeduae.ae-about.txt:2:Cache-Control: max-age=0, must-revalidate, public, s-maxage=60
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_164559/10_headers_en_swaeduae.ae-about.txt:8:Cache-Control: no-cache, no-store, must-revalidate
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_164559/10_headers_en_swaeduae.ae-contact.txt:2:Cache-Control: no-cache, private
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_164559/10_headers_en_swaeduae.ae-contact.txt:7:Cache-Control: no-cache, no-store, must-revalidate
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_164559/50_security_headers_root.txt:2:Cache-Control: no-cache, private
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_164559/50_security_headers_root.txt:7:Cache-Control: no-cache, no-store, must-revalidate
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_164559/10_headers_ar_swaeduae.ae-.txt:2:Cache-Control: max-age=0, must-revalidate, public, s-maxage=60
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_164559/10_headers_ar_swaeduae.ae-.txt:8:Cache-Control: no-cache, no-store, must-revalidate
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_164559/10_headers_ar_swaeduae.ae-about.txt:2:Cache-Control: max-age=0, must-revalidate, public, s-maxage=60
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_164559/10_headers_ar_swaeduae.ae-about.txt:8:Cache-Control: no-cache, no-store, must-revalidate
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_164559/12_microcache_probe_3.txt:2:Cache-Control: max-age=0, must-revalidate, public, s-maxage=60
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_164559/12_microcache_probe_3.txt:6:Cache-Control: no-cache, no-store, must-revalidate
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_164559/10_headers_ar_swaeduae.ae-contact.txt:2:Cache-Control: no-cache, private
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_164559/10_headers_ar_swaeduae.ae-contact.txt:7:Cache-Control: no-cache, no-store, must-revalidate
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_164559/10_headers_en_swaeduae.ae-healthz.txt:2:Cache-Control: max-age=0, must-revalidate, public, s-maxage=60
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_164559/10_headers_en_swaeduae.ae-healthz.txt:8:Cache-Control: no-cache, no-store, must-revalidate
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_164559/12_microcache_probe_1.txt:2:Cache-Control: max-age=0, must-revalidate, public, s-maxage=60
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_164559/12_microcache_probe_1.txt:6:Cache-Control: no-cache, no-store, must-revalidate
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_164559/10_headers_ar_swaeduae.ae-healthz.txt:2:Cache-Control: max-age=0, must-revalidate, public, s-maxage=60
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_164559/10_headers_ar_swaeduae.ae-healthz.txt:8:Cache-Control: no-cache, no-store, must-revalidate
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_164559/12_microcache_probe_2.txt:2:Cache-Control: max-age=0, must-revalidate, public, s-maxage=60
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_164559/12_microcache_probe_2.txt:6:Cache-Control: no-cache, no-store, must-revalidate
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_164559/10_headers_en_swaeduae.ae-.txt:2:Cache-Control: max-age=0, must-revalidate, public, s-maxage=60
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_164559/10_headers_en_swaeduae.ae-.txt:8:Cache-Control: no-cache, no-store, must-revalidate
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/wave2_check_2025-08-20_104820.txt:344:Cache-Control: max-age=0
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/wave2_check_2025-08-20_104820.txt:409:Cache-Control: no-cache, private
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/wave2_check_2025-08-20_104820.txt:417:Cache-Control: max-age=0
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/wave1_master_check_2025-08-20_101703.txt:19:35:    35	    Header set Cache-Control "public, max-age=31536000, immutable"
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/wave1_master_check_2025-08-20_101703.txt:23:Cache-Control: no-cache, private
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/wave1_master_check_2025-08-20_101703.txt:26:Cache-Control: max-age=604800
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/healthcheck_20250819-063204.txt:282:  1st: Cache-Control: no-cache, private
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/healthcheck_20250819-063204.txt:283:  1st: Cache-Control: max-age=604800
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/healthcheck_20250819-063204.txt:285:  2nd: Cache-Control: no-cache, private
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/healthcheck_20250819-063204.txt:286:  2nd: Cache-Control: max-age=604800
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_162116/10_headers_en_swaeduae.ae-about.txt:2:Cache-Control: max-age=0, must-revalidate, public, s-maxage=60
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_162116/10_headers_en_swaeduae.ae-about.txt:8:Cache-Control: no-cache, no-store, must-revalidate
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_162116/10_headers_en_swaeduae.ae-contact.txt:2:Cache-Control: no-cache, private
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_162116/10_headers_en_swaeduae.ae-contact.txt:7:Cache-Control: no-cache, no-store, must-revalidate
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_162116/11_headers_ar_swaeduae.ae-about.txt:2:Cache-Control: max-age=0, must-revalidate, public, s-maxage=60
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_162116/11_headers_ar_swaeduae.ae-about.txt:8:Cache-Control: no-cache, no-store, must-revalidate
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_162116/99_summary_todo.txt:4:- Headers (Content-Language, Vary, Cache-Control) sane? (10_/11_)
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_162116/12_microcache_probe_3.txt:2:Cache-Control: max-age=0, must-revalidate, public, s-maxage=60
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_162116/12_microcache_probe_3.txt:6:Cache-Control: no-cache, no-store, must-revalidate
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_162116/10_headers_en_swaeduae.ae-healthz.txt:2:Cache-Control: max-age=0, must-revalidate, public, s-maxage=60
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_162116/10_headers_en_swaeduae.ae-healthz.txt:8:Cache-Control: no-cache, no-store, must-revalidate
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_162116/12_microcache_probe_1.txt:2:Cache-Control: max-age=0, must-revalidate, public, s-maxage=60
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_162116/12_microcache_probe_1.txt:6:Cache-Control: no-cache, no-store, must-revalidate
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_162116/11_headers_ar_swaeduae.ae-healthz.txt:2:Cache-Control: max-age=0, must-revalidate, public, s-maxage=60
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_162116/11_headers_ar_swaeduae.ae-healthz.txt:8:Cache-Control: no-cache, no-store, must-revalidate
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_162116/11_headers_ar_swaeduae.ae-contact.txt:2:Cache-Control: no-cache, private
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_162116/11_headers_ar_swaeduae.ae-contact.txt:7:Cache-Control: no-cache, no-store, must-revalidate
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_162116/11_headers_ar_swaeduae.ae-.txt:2:Cache-Control: max-age=0, must-revalidate, public, s-maxage=60
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_162116/11_headers_ar_swaeduae.ae-.txt:8:Cache-Control: no-cache, no-store, must-revalidate
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_162116/12_microcache_probe_2.txt:2:Cache-Control: max-age=0, must-revalidate, public, s-maxage=60
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_162116/12_microcache_probe_2.txt:6:Cache-Control: no-cache, no-store, must-revalidate
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_162116/10_headers_en_swaeduae.ae-.txt:2:Cache-Control: max-age=0, must-revalidate, public, s-maxage=60
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_162116/10_headers_en_swaeduae.ae-.txt:8:Cache-Control: no-cache, no-store, must-revalidate
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/inventory_2025-08-20_094817.txt:77:    35	    Header set Cache-Control "public, max-age=31536000, immutable"
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/inventory_2025-08-20_094817.txt:502:   192	    ], 200, ['Cache-Control' => 'no-store']);
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/inventory_2025-08-20_094817.txt:3564:    62	# Cache-Control as a backstop
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/inventory_2025-08-20_094817.txt:3567:    65	    Header set Cache-Control "public, max-age=2592000, immutable"
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/inventory_2025-08-20_094817.txt:3575:    73	    Header unset Cache-Control
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/inventory_2025-08-20_094817.txt:3576:    74	    Header set Cache-Control "no-cache, no-store, must-revalidate"
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/wave1_master_check_2025-08-20_102015.txt:106:35:    35	    Header set Cache-Control "public, max-age=31536000, immutable"
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_163635/10_headers_en_swaeduae.ae-about.txt:2:Cache-Control: max-age=0, must-revalidate, public, s-maxage=60
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_163635/10_headers_en_swaeduae.ae-about.txt:8:Cache-Control: no-cache, no-store, must-revalidate
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_163635/10_headers_en_swaeduae.ae-contact.txt:2:Cache-Control: no-cache, private
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_163635/10_headers_en_swaeduae.ae-contact.txt:7:Cache-Control: no-cache, no-store, must-revalidate
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_163635/50_security_headers_root.txt:2:Cache-Control: no-cache, private
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_163635/50_security_headers_root.txt:7:Cache-Control: no-cache, no-store, must-revalidate
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_163635/10_headers_ar_swaeduae.ae-.txt:2:Cache-Control: max-age=0, must-revalidate, public, s-maxage=60
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_163635/10_headers_ar_swaeduae.ae-.txt:8:Cache-Control: no-cache, no-store, must-revalidate
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_163635/10_headers_ar_swaeduae.ae-about.txt:2:Cache-Control: max-age=0, must-revalidate, public, s-maxage=60
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_163635/10_headers_ar_swaeduae.ae-about.txt:8:Cache-Control: no-cache, no-store, must-revalidate
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_163635/12_microcache_probe_3.txt:2:Cache-Control: max-age=0, must-revalidate, public, s-maxage=60
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_163635/12_microcache_probe_3.txt:6:Cache-Control: no-cache, no-store, must-revalidate
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_163635/10_headers_ar_swaeduae.ae-contact.txt:2:Cache-Control: no-cache, private
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_163635/10_headers_ar_swaeduae.ae-contact.txt:7:Cache-Control: no-cache, no-store, must-revalidate
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_163635/10_headers_en_swaeduae.ae-healthz.txt:2:Cache-Control: max-age=0, must-revalidate, public, s-maxage=60
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_163635/10_headers_en_swaeduae.ae-healthz.txt:8:Cache-Control: no-cache, no-store, must-revalidate
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_163635/12_microcache_probe_1.txt:2:Cache-Control: max-age=0, must-revalidate, public, s-maxage=60
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_163635/12_microcache_probe_1.txt:6:Cache-Control: no-cache, no-store, must-revalidate
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_163635/10_headers_ar_swaeduae.ae-healthz.txt:2:Cache-Control: max-age=0, must-revalidate, public, s-maxage=60
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_163635/10_headers_ar_swaeduae.ae-healthz.txt:8:Cache-Control: no-cache, no-store, must-revalidate
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_163635/12_microcache_probe_2.txt:2:Cache-Control: max-age=0, must-revalidate, public, s-maxage=60
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_163635/12_microcache_probe_2.txt:6:Cache-Control: no-cache, no-store, must-revalidate
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_163635/10_headers_en_swaeduae.ae-.txt:2:Cache-Control: max-age=0, must-revalidate, public, s-maxage=60
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_163635/10_headers_en_swaeduae.ae-.txt:8:Cache-Control: no-cache, no-store, must-revalidate
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_170227/50_root_headers_once.txt:5:Cache-Control: no-cache, private
+/home3/vminingc/swaeduae.ae/laravel-app/tools/reports/master_check_20250821_170227/50_root_headers_once.txt:21:Cache-Control: no-cache, no-store, must-revalidate
+/home3/vminingc/swaeduae.ae/laravel-app/tools/healthcheck_full.sh:45:  curl -sI "$DOMAIN/events" | egrep -i "HTTP/|ETag|Cache-Control|X-MicroCache" | sed "s/^/  1st: /"
+/home3/vminingc/swaeduae.ae/laravel-app/tools/healthcheck_full.sh:47:  curl -sI "$DOMAIN/events" | egrep -i "HTTP/|ETag|Cache-Control|X-MicroCache" | sed "s/^/  2nd: /"
+/home3/vminingc/swaeduae.ae/laravel-app/tools/phase5_apply.sh:54:# Cache-Control as a backstop
+/home3/vminingc/swaeduae.ae/laravel-app/tools/phase5_apply.sh:57:    Header set Cache-Control "public, max-age=2592000, immutable"
+/home3/vminingc/swaeduae.ae/laravel-app/app/Http/Middleware/SetLocaleAndHeaders.php.bak_20250821-124958:23:        // Clean duplicate Cache-Control, but don't touch X-MicroCache
+/home3/vminingc/swaeduae.ae/laravel-app/app/Http/Middleware/SetLocaleAndHeaders.php.bak_20250821-124958:24:        if (!$response->headers->has('Cache-Control')) {
+/home3/vminingc/swaeduae.ae/laravel-app/app/Http/Middleware/SetLocaleAndHeaders.php.bak_20250821-124958:25:            $response->headers->set('Cache-Control', 'no-cache, private');
+/home3/vminingc/swaeduae.ae/laravel-app/app/Http/Middleware/MicroCache.php.bak_20250821_170227:32:            $resp->headers->set('Cache-Control', 'public, max-age=0, s-maxage=60, must-revalidate');
+/home3/vminingc/swaeduae.ae/laravel-app/app/Http/Middleware/MicroCache.php.bak_20250821_170227:44:            $resp->headers->set('Cache-Control','public, max-age=0, s-maxage=60, must-revalidate');
+/home3/vminingc/swaeduae.ae/laravel-app/app/Http/Middleware/SetLocaleAndHeaders.php.bak_20250821-122517:23:        // Normalize Cache-Control (remove dupes, then set once)
+/home3/vminingc/swaeduae.ae/laravel-app/app/Http/Middleware/SetLocaleAndHeaders.php.bak_20250821-122517:24:        $response->headers->remove('Cache-Control');
+/home3/vminingc/swaeduae.ae/laravel-app/app/Http/Middleware/SetLocaleAndHeaders.php.bak_20250821-122517:27:            $response->headers->set('Cache-Control', 'public, max-age=0, s-maxage=60, must-revalidate');
+/home3/vminingc/swaeduae.ae/laravel-app/app/Http/Middleware/SetLocaleAndHeaders.php.bak_20250821-122517:29:            $response->headers->set('Cache-Control', 'no-cache, private');
+/home3/vminingc/swaeduae.ae/laravel-app/app/Http/Middleware/MicroCache.php.bak_20250821-122953:29:            $resp->headers->set('Cache-Control', 'public, max-age=0, s-maxage=60, must-revalidate');
+/home3/vminingc/swaeduae.ae/laravel-app/app/Http/Middleware/MicroCache.php.bak_20250821_164551:32:            $resp->headers->set('Cache-Control', 'public, max-age=0, s-maxage=60, must-revalidate');
+/home3/vminingc/swaeduae.ae/laravel-app/app/Http/Middleware/MicroCache.php.bak_20250821_164551:44:            $resp->headers->set('Cache-Control','public, max-age=0, s-maxage=60, must-revalidate');
+/home3/vminingc/swaeduae.ae/laravel-app/app/Http/Middleware/MicroCache.php.bak_20250821_163107:32:            $resp->headers->set('Cache-Control', 'public, max-age=0, s-maxage=60, must-revalidate');
+/home3/vminingc/swaeduae.ae/laravel-app/app/Http/Middleware/MicroCache.php.bak_20250821_163107:44:            $resp->headers->set('Cache-Control','public, max-age=0, s-maxage=60, must-revalidate');
+/home3/vminingc/swaeduae.ae/laravel-app/app/Http/Middleware/MicroCache.php.debug_20250821-122833:29:            $resp->headers->set('Cache-Control', 'public, max-age=0, s-maxage=60, must-revalidate');
+/home3/vminingc/swaeduae.ae/laravel-app/app/Http/Middleware/MicroCache.php.bak_20250821-124958:29:            $resp->headers->set('Cache-Control', 'public, max-age=0, s-maxage=60, must-revalidate');
+/home3/vminingc/swaeduae.ae/laravel-app/app/Http/Middleware/MicroCache.php.bak_20250821_162747:32:            $resp->headers->set('Cache-Control', 'public, max-age=0, s-maxage=60, must-revalidate');
+/home3/vminingc/swaeduae.ae/laravel-app/app/Http/Middleware/MicroCache.php.bak_20250821_162747:44:            $resp->headers->set('Cache-Control','public, max-age=0, s-maxage=60, must-revalidate');
+/home3/vminingc/swaeduae.ae/laravel-app/app/Http/Middleware/MicroCache.php.bak_20250821_163350:32:            $resp->headers->set('Cache-Control', 'public, max-age=0, s-maxage=60, must-revalidate');
+/home3/vminingc/swaeduae.ae/laravel-app/app/Http/Middleware/MicroCache.php.bak_20250821_163350:44:            $resp->headers->set('Cache-Control','public, max-age=0, s-maxage=60, must-revalidate');
+/home3/vminingc/swaeduae.ae/laravel-app/app/Http/Middleware/MicroCache.php.bak:29:            $resp->headers->set('Cache-Control', 'public, max-age=0, s-maxage=60, must-revalidate');
+/home3/vminingc/swaeduae.ae/laravel-app/app/Http/Middleware/SetLocaleAndHeaders.php.fixbak_20250821-122802:23:        // If MicroCache already set Cache-Control, leave it; otherwise normalize
+/home3/vminingc/swaeduae.ae/laravel-app/app/Http/Middleware/SetLocaleAndHeaders.php.fixbak_20250821-122802:24:        if (!$response->headers->has('Cache-Control')) {
+/home3/vminingc/swaeduae.ae/laravel-app/app/Http/Middleware/SetLocaleAndHeaders.php.fixbak_20250821-122802:25:            $response->headers->set('Cache-Control', 'no-cache, private');
+/home3/vminingc/swaeduae.ae/laravel-app/app/Http/Middleware/NormalizeHeaders.php:25:        // Collapse duplicate Cache-Control into a single, canonical value
+/home3/vminingc/swaeduae.ae/laravel-app/app/Http/Middleware/NormalizeHeaders.php:26:        $response->headers->remove('Cache-Control');
+/home3/vminingc/swaeduae.ae/laravel-app/app/Http/Middleware/NormalizeHeaders.php:29:            $response->headers->set('Cache-Control', 'no-cache, no-store, must-revalidate');
+/home3/vminingc/swaeduae.ae/laravel-app/app/Http/Middleware/NormalizeHeaders.php:31:            $response->headers->set('Cache-Control', 'public, max-age=0, s-maxage=120, must-revalidate');
+/home3/vminingc/swaeduae.ae/laravel-app/app/Http/Middleware/MicroCache.php:32:            $resp->headers->set('Cache-Control', 'public, max-age=0, s-maxage=60, must-revalidate');
+/home3/vminingc/swaeduae.ae/laravel-app/app/Http/Middleware/MicroCache.php:44:            $resp->headers->set('Cache-Control','public, max-age=0, s-maxage=60, must-revalidate');
+/home3/vminingc/swaeduae.ae/laravel-app/app/Http/Middleware/SetLocaleAndHeaders.php.bak_20250821-123031:23:        // Clean duplicate Cache-Control, but don't touch X-MicroCache
+/home3/vminingc/swaeduae.ae/laravel-app/app/Http/Middleware/SetLocaleAndHeaders.php.bak_20250821-123031:24:        $response->headers->remove('Cache-Control');
+/home3/vminingc/swaeduae.ae/laravel-app/app/Http/Middleware/SetLocaleAndHeaders.php.bak_20250821-123031:27:            $response->headers->set('Cache-Control', 'public, max-age=0, s-maxage=60, must-revalidate');
+/home3/vminingc/swaeduae.ae/laravel-app/app/Http/Middleware/SetLocaleAndHeaders.php.bak_20250821-123031:30:            $response->headers->set('Cache-Control', 'no-cache, private');
+/home3/vminingc/swaeduae.ae/laravel-app/app/Http/Middleware/MicroCache.php.bak_20250821-122602:29:            $resp->headers->set('Cache-Control', 'public, max-age=0, s-maxage=60, must-revalidate');
+/home3/vminingc/swaeduae.ae/laravel-app/app/Http/Controllers/HealthController.php:47:            ->header('Cache-Control', 'no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/app/Http/Controllers/Admin/UserExportController.php:17:            "Cache-Control"       => "must-revalidate, post-check=0, pre-check=0",
+/home3/vminingc/swaeduae.ae/laravel-app/_audit_2025-08-20_054735/logs/MicroCache_snippet.txt:41:    41	                    ->header('Cache-Control', "public, max-age=$ttl, s-maxage=$ttl")
+/home3/vminingc/swaeduae.ae/laravel-app/_audit_2025-08-20_054735/logs/MicroCache_snippet.txt:47:    47	                ->header('Cache-Control', "public, max-age=$ttl, s-maxage=$ttl")
+/home3/vminingc/swaeduae.ae/laravel-app/_audit_2025-08-20_054735/logs/MicroCache_snippet.txt:77:    77	            $resp->headers->set('Cache-Control', "public, max-age=$ttl, s-maxage=$ttl");
+/home3/vminingc/swaeduae.ae/laravel-app/public/.htaccess:62:# Cache-Control as a backstop
+/home3/vminingc/swaeduae.ae/laravel-app/public/.htaccess:72:# Header unset Cache-Control
+/home3/vminingc/swaeduae.ae/laravel-app/public/.htaccess:73:    Header setifempty Cache-Control "no-cache, no-store, must-revalidate"
+/home3/vminingc/swaeduae.ae/laravel-app/public/.htaccess:98:# Header unset Cache-Control
+/home3/vminingc/swaeduae.ae/laravel-app/public/.htaccess:99:  Header setifempty Cache-Control "no-cache, no-store, must-revalidate"
+/home3/vminingc/swaeduae.ae/laravel-app/public/.htaccess.bak_20250821_164551:62:# Cache-Control as a backstop
+/home3/vminingc/swaeduae.ae/laravel-app/public/.htaccess.bak_20250821_164551:72:# Header unset Cache-Control
+/home3/vminingc/swaeduae.ae/laravel-app/public/.htaccess.bak_20250821_164551:73:    Header setifempty Cache-Control "no-cache, no-store, must-revalidate"
+/home3/vminingc/swaeduae.ae/laravel-app/public/.htaccess.bak_20250821_164551:98:# Header unset Cache-Control
+/home3/vminingc/swaeduae.ae/laravel-app/public/.htaccess.bak_20250821_164551:99:  Header setifempty Cache-Control "no-cache, no-store, must-revalidate"
+/home3/vminingc/swaeduae.ae/laravel-app/routes.fixrec_2025-08-20_112704/web.php:200:    ], 200, ['Cache-Control' => 'no-store']);
+/home3/vminingc/swaeduae.ae/laravel-app/routes.fixrec_2025-08-20_112704/web.php:236:    return response()->json($data)->header('Cache-Control','no-store');
+/home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/http-foundation/ResponseHeaderBag.php:36:            $this->set('Cache-Control', '');
+/home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/http-foundation/ResponseHeaderBag.php:75:            $this->set('Cache-Control', '');
+/home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/http-foundation/ResponseHeaderBag.php:123:            $this->headerNames['cache-control'] = 'Cache-Control';
+/home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/http-foundation/Session/Storage/Handler/AbstractSessionHandler.php:35:            header(\sprintf('Cache-Control: max-age=%d, private, must-revalidate', 60 * (int) \ini_get('session.cache_expire')));
+/home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/http-foundation/Response.php:89:     * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control
+/home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/http-foundation/Response.php:293:        if ('1.0' == $this->getProtocolVersion() && str_contains($headers->get('Cache-Control', ''), 'no-cache')) {
+/home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/http-foundation/Response.php:526:     * Responses marked "private" with an explicit Cache-Control directive are
+/home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/http-foundation/Response.php:557:     * origin. A response is considered fresh when it includes a Cache-Control/max-age
+/home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/http-foundation/Response.php:782:     * This method sets the Cache-Control max-age directive.
+/home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/http-foundation/Response.php:798:     * This method sets the Cache-Control stale-if-error directive.
+/home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/http-foundation/Response.php:814:     * This method sets the Cache-Control stale-while-revalidate directive.
+/home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/http-foundation/Response.php:830:     * This method sets the Cache-Control s-maxage directive.
+/home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/http-foundation/Response.php:864:     * This method adjusts the Cache-Control/s-maxage directive.
+/home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/http-foundation/Response.php:880:     * This method adjusts the Cache-Control/max-age directive.
+/home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/http-foundation/Response.php:1303:     * Checks if we need to remove Cache-Control for SSL encrypted downloads when using IE < 9.
+/home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/http-foundation/Response.php:1313:                $this->headers->remove('Cache-Control');
+/home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/http-foundation/HeaderBag.php:204:     * Adds a custom Cache-Control directive.
+/home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/http-foundation/HeaderBag.php:210:        $this->set('Cache-Control', $this->getCacheControlHeader());
+/home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/http-foundation/HeaderBag.php:214:     * Returns true if the Cache-Control directive is defined.
+/home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/http-foundation/HeaderBag.php:222:     * Returns a Cache-Control directive value by name.
+/home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/http-foundation/HeaderBag.php:230:     * Removes a Cache-Control directive.
+/home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/http-foundation/HeaderBag.php:236:        $this->set('Cache-Control', $this->getCacheControlHeader());
+/home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/http-foundation/HeaderBag.php:265:     * Parses a Cache-Control HTTP header.
+/home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/http-foundation/EventStreamResponse.php:48:            'Cache-Control' => 'private, no-cache, no-store, must-revalidate, max-age=0',
+/home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/http-kernel/Attribute/Cache.php:89:         * max-stale Cache-Control header
+/home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/http-kernel/Attribute/Cache.php:95:         * stale-while-revalidate Cache-Control header
+/home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/http-kernel/Attribute/Cache.php:101:         * stale-if-error Cache-Control header
+/home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/http-kernel/Attribute/Cache.php:107:         * Add the "no-store" Cache-Control directive when set to true.
+/home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/http-kernel/HttpCache/HttpCache.php:56:     *                            a response. Explicit Cache-Control or Expires headers
+/home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/http-kernel/HttpCache/HttpCache.php:61:     *                            public or private via a Cache-Control directive. (default: Authorization and Cookie)
+/home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/http-kernel/HttpCache/HttpCache.php:67:     *                            Cache-Control "no-cache" directive in the request. Set it to ``true``
+/home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/http-kernel/HttpCache/HttpCache.php:71:     *                            a Cache-Control "max-age=0" directive in the request. Set it to ``true``
+/home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/http-kernel/HttpCache/HttpCache.php:77:     *                            This setting is overridden by the stale-while-revalidate HTTP Cache-Control
+/home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/http-kernel/HttpCache/HttpCache.php:82:     *                            This setting is overridden by the stale-if-error HTTP Cache-Control extension
+/home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/http-kernel/HttpCache/HttpCache.php:207:                If allow_reload is configured and the client requests "Cache-Control: no-cache",
+/home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/http-kernel/HttpCache/HttpCache.php:406:            foreach (['Date', 'Expires', 'Cache-Control', 'ETag', 'Last-Modified'] as $name) {
+/home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/http-kernel/HttpCache/HttpCache.php:471:         * Cache-Control directives) that
+/home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/http-kernel/HttpCache/HttpCache.php:482:         * stale-if-error case even if they have a `s-maxage` Cache-Control directive.
+/home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/http-kernel/HttpCache/ResponseCacheStrategy.php:28:     * Cache-Control headers that are sent to the final response if they appear in ANY of the responses.
+/home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/http-kernel/HttpCache/ResponseCacheStrategy.php:33:     * Cache-Control headers that are sent to the final response if they appear in ALL of the responses.
+/home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/http-kernel/HttpCache/ResponseCacheStrategy.php:131:                $response->headers->set('Cache-Control', 'no-cache, no-store, must-revalidate');
+/home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/http-kernel/HttpCache/ResponseCacheStrategy.php:133:                $response->headers->set('Cache-Control', 'no-cache, must-revalidate');
+/home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/http-kernel/HttpCache/ResponseCacheStrategy.php:147:        $response->headers->set('Cache-Control', implode(', ', array_keys($flags)));
+/home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/http-kernel/EventListener/AbstractSessionListener.php:30: * In addition, if the session has been started it overrides the Cache-Control
+/home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Filesystem/ServeFile.php:35:                'Cache-Control' => 'no-store, no-cache, must-revalidate, max-age=0',
+/home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Routing/ResponseFactory.php:158:            'Cache-Control' => 'no-cache',
+/home3/vminingc/swaeduae.ae/laravel-app/vendor/guzzlehttp/guzzle/CHANGELOG.md:1313:* Bug fix: Guzzle now takes the first found value when grabbing Cache-Control directives
+/home3/vminingc/swaeduae.ae/laravel-app/vendor/guzzlehttp/guzzle/CHANGELOG.md:1601:* Removing the requirement that HTTPS requests needed a Cache-Control: public directive to be cacheable.
+/home3/vminingc/swaeduae.ae/laravel-app/vendor/phenx/php-svg-lib/src/Svg/Surface/CPdf.php:4661:        header("Cache-Control: private");
+/home3/vminingc/swaeduae.ae/laravel-app/vendor/dompdf/dompdf/src/Adapter/PDFLib.php:1306:        header("Cache-Control: private");
+/home3/vminingc/swaeduae.ae/laravel-app/vendor/dompdf/dompdf/src/Adapter/CPDF.php:914:        header("Cache-Control: private");
+/home3/vminingc/swaeduae.ae/laravel-app/vendor/dompdf/dompdf/src/Adapter/GD.php:866:        header("Cache-Control: private");
+/home3/vminingc/swaeduae.ae/laravel-app/vendor/dompdf/dompdf/lib/Cpdf.php:4717:        header("Cache-Control: private");

@@ -1,0 +1,250 @@
+=== FULL HEALTH 2025-09-03_031001 ===
+
+== CACHES REFRESH ==
+caches: refreshed
+
+== ABOUT ==
+
+  Environment ................................................................  
+  Application Name .................................................. SwaedUAE  
+  Laravel Version .................................................... 11.45.2  
+  PHP Version ......................................................... 8.3.24  
+  Composer Version ..................................................... 2.2.6  
+  Environment ..................................................... production  
+  Debug Mode ............................................................. OFF  
+  URL ............................................................ swaeduae.ae  
+  Maintenance Mode ....................................................... OFF  
+  Timezone ........................................................ Asia/Dubai  
+  Locale .................................................................. ar  
+
+  Cache ......................................................................  
+  Config .............................................................. CACHED  
+  Events .......................................................... NOT CACHED  
+  Routes .............................................................. CACHED  
+  Views ............................................................... CACHED  
+
+  Drivers ....................................................................  
+  Broadcasting .......................................................... null  
+  Cache ................................................................. file  
+  Database ............................................................. mysql  
+  Logs ......................................................... stack / daily  
+  Mail .................................................................. smtp  
+  Queue ............................................................. database  
+  Session ............................................................... file  
+
+  Sentry .....................................................................  
+  Enabled ................................................................ YES  
+  Environment ..................................................... production  
+  Laravel SDK Version ................................................. 4.15.1  
+  PHP SDK Version ..................................................... 4.15.1  
+  Release ............................................................ 155d7f1  
+  Sample Rate Errors .................................................... 100%  
+  Sample Rate Performance Monitoring ...................................... 0%  
+  Sample Rate Profiling ................................................... 0%  
+  Send Default PII .................................................. DISABLED  
+
+  Spatie Permissions .........................................................  
+  Features Enabled ................................................... Default  
+  Version ............................................................. 6.21.0  
+
+
+== ROUTES (top) ==
+
+  GET|HEAD        / .............................. generated::oqKL3xSPjO0wi5Fi
+  GET|HEAD        _agent/ping ..................................... agent.ping
+  ANY             _agent{any?} ................... generated::O9Uvl8etkN27CFBY
+  ANY             _alias/{any?} .................. generated::nGeVvQUJmvXlCsDs
+  ANY             _compat/{any?} ................. generated::LgWasprYKbXw7v0q
+  GET|HEAD        about .......................................... pages.about
+  ANY             about-us generated::BrPibpcvuhuENcy0 › Illuminate\Routing  …
+  GET|HEAD        admin .... admin.dashboard › Admin\DashboardController@index
+  GET|HEAD        admin/_whoami ............................ admin.diag.whoami
+  GET|HEAD        admin/applicants admin.applicants.index › Admin\ApplicantsC…
+  POST            admin/applicants/bulk admin.applicants.bulk › Admin\Applica…
+  GET|HEAD        admin/applicants/export admin.applicants.export › Admin\App…
+  POST            admin/applicants/{id}/approve admin.applicants.approve › Ad…
+  POST            admin/applicants/{id}/decline admin.applicants.decline › Ad…
+  GET|HEAD        admin/attendance admin.attendance.index › Admin\AttendanceA…
+  GET|HEAD        admin/certificates admin.certs.index › Admin\CertificateCon…
+  POST            admin/certificates/issue admin.certs.issue › Admin\Certific…
+  POST            admin/certificates/{id}/reissue admin.certs.reissue › Admin…
+  POST            admin/hours/bulk-approve admin.hours.bulkApprove › Admin\Ho…
+  GET|HEAD        admin/hours/export admin.hours.export › Admin\HoursReportCo…
+  GET|HEAD        admin/login .................................... admin.login
+  GET|HEAD        admin/opportunities admin.opportunities.index › Admin\Oppor…
+  GET|HEAD        admin/opportunities/{opportunity} admin.opportunities.show …
+  PUT             admin/opportunities/{opportunity} admin.opportunities.save …
+  PATCH           admin/opportunities/{opportunity} admin.generated::XBuWo3EW…
+  DELETE          admin/opportunities/{opportunity} admin.opportunities.destr…
+  PUT|PATCH       admin/opportunities/{opportunity} admin.opportunities.updat…
+  GET|HEAD        admin/organizations admin.organizations.index › Admin\Organ…
+  POST            admin/organizations/{id}/approve admin.organizations.approv…
+  POST            admin/organizations/{id}/suspend admin.organizations.suspen…
+  GET|HEAD        admin/reports admin.reports.index › Admin\ReportsController…
+  GET|HEAD        admin/reports/export admin.reports.export › Admin\ReportsCo…
+  GET|HEAD        admin/settings admin.settings.index › Admin\SettingsControl…
+  POST            admin/settings/save admin.settings.save › Admin\SettingsCon…
+  GET|HEAD        admin/users . admin.users.index › Admin\UserController@index
+  GET|HEAD        admin/users/{user} admin.users.show › Admin\UserController@…
+  PUT             admin/users/{user} admin.users.save › Admin\UserController@…
+  PATCH           admin/users/{user} .... admin. › Admin\UserController@update
+  DELETE          admin/users/{user} admin.users.destroy › Admin\UserControll…
+  PUT|PATCH       admin/users/{user} admin.users.update › Admin\UserControlle…
+  GET|HEAD        agent/ping ................................ agent.ping.alias
+  GET|HEAD        api/agent/ping ................. generated::D18BxpTohg6U3IE5
+  GET|HEAD        api/user ....................... generated::XpZn4PJgaz7ub9ws
+  GET|HEAD        api/v1/certificates/verify/{code} generated::EgXwiRCPQmjJ8F…
+  GET|HEAD        api/v1/health .................. generated::DBsBgswdGlt7gbY5
+  GET|HEAD        applications ............................ applications.index
+  GET|HEAD        certificates certificates.index › CertificateController@ind…
+  GET|HEAD        certificates/{id}/download certificates.download › Certific…
+  POST            certificates/{id}/resend certificates.resend › CertificateP…
+  POST            certificates/{id}/revoke certificates.revoke › CertificateP…
+  GET|HEAD        confirm-password password.confirm › Auth\ConfirmablePasswor…
+  POST            confirm-password generated::CwKRYtB4sSKIrVPt › Auth\Confirm…
+  POST            contact .............. contact.send › ContactController@send
+  GET|HEAD        contact ................... contact › ContactController@show
+  POST            email/verification-notification verification.send › Auth\Em…
+  GET|HEAD        events ................ events.index › EventController@index
+  GET|HEAD        events/browse ................................ events.browse
+  GET|HEAD        events/{idOrSlug} ....... events.show › EventController@show
+  GET|HEAD        faq .................................................... faq
+  GET|HEAD        forgot-password ........................... password.request
+  POST            forgot-password password.email › Auth\PasswordResetLinkCont…
+  GET|HEAD        healthz-agent ................................ agent.healthz
+  GET|HEAD        ics/{slug} opportunities.ics.alt › PublicOpportunityControl…
+  GET|HEAD        lang/{locale} ................................ locale.switch
+  GET|HEAD        login .............. login › Auth\SimpleLoginController@show
+  POST            login ... login.perform › Auth\SimpleLoginController@perform
+  ANY             login/organization generated::v4nO4kL1oGpeg8vM › Illuminate…
+  POST            logout .. logout.perform › Auth\SimpleLoginController@logout
+  GET|HEAD        my/profile ...................................... my.profile
+  GET|HEAD        opportunities .......................... opportunities.index
+  GET|HEAD        opportunities/{id} ........................ opps.public.show
+  GET|HEAD        org/dashboard org.dashboard › Org\DashboardController@index
+  GET|HEAD        org/login ........................................ org.login
+  POST            org/login ... org.login.perform › Auth\LoginController@login
+  POST            org/opportunities org.opportunities.store › Org\Opportunity…
+  GET|HEAD        org/opportunities/create org.opportunities.create › Org\Opp…
+  POST            org/opportunities/{event} org.opportunities.update › Org\Op…
+  GET|HEAD        org/opportunities/{event}/applicants org.applicants.index  …
+  GET|HEAD        org/opportunities/{event}/applicants.csv org.applicants.exp…
+
+== MIGRATIONS STATUS ==
+
+  Migration name .............................................. Batch / Status  
+  2025_08_29_000001_create_payments_table ............................ [4] Ran  
+  2025_08_29_025402_create_permission_tables ......................... [3] Ran  
+  2025_08_30_044614_create_jobs_table ................................ [5] Ran  
+  2025_08_30_214747_create_failed_jobs_table ......................... [5] Ran  
+  2025_08_30_235134_create_certificates_table ........................ [6] Ran  
+  2025_08_31_001702_create_audits_table .............................. [7] Ran  
+  2025_08_31_001702_create_events_table .............................. [7] Ran  
+  2025_08_31_001836_add_slug_to_events_table ......................... [8] Ran  
+  2025_09_01_002332_create_opportunities_table ....................... [9] Ran  
+  2025_09_01_002333_create_applications_table ........................ [9] Ran  
+  2025_09_02_000000_create_settings_if_missing ...................... [10] Ran  
+  2025_09_02_000000_create_volunteer_profiles_table ................. [11] Ran  
+  2025_09_02_193947_create_org_profiles_table ....................... [12] Ran  
+  2025_09_02_200531_extend_volunteer_profile_and_users .............. [13] Ran  
+  2025_09_02_223146_create_shifts_table ............................. [14] Ran  
+  2025_09_02_223156_create_attendances_table ........................ [14] Ran  
+  2025_09_02_223204_create_hours_table .............................. [15] Ran  
+  2025_09_02_223212_create_qr_tokens_scans .......................... [16] Ran  
+  2025_09_02_225229_add_sv_codes .................................... [17] Ran  
+
+
+== QUEUE & SCHEDULER ==
+active
+● swaed-queue.service - Laravel Queue Worker (SwaedUAE)
+     Loaded: loaded (/etc/systemd/system/swaed-queue.service; enabled; vendor preset: enabled)
+     Active: active (running) since Wed 2025-09-03 02:11:42 +04; 58min ago
+   Main PID: 1367310 (php)
+      Tasks: 1 (limit: 38144)
+     Memory: 34.8M
+        CPU: 973ms
+     CGroup: /system.slice/swaed-queue.service
+             └─1367310 /usr/bin/php artisan queue:work --queue=default --sleep=3 --tries=3 --max-time=3600
+
+Sep 03 02:11:42 swaeduae systemd[1]: Started Laravel Queue Worker (SwaedUAE).
+
+  2025-09-03 03:10:02 Running ['artisan' queue:work --stop-when-empty --queue=default --tries=3 --backoff=10 --timeout=120 --sleep=3]  3s DONE
+  ⇂ queue.tick  
+
+
+== HTTP PROBES ==
+GET / -> 200
+GET /about -> 200
+GET /privacy -> 200
+GET /terms -> 200
+GET /org/login -> 200
+HTTP/2 302 
+date: Tue, 02 Sep 2025 23:10:09 GMT
+content-type: text/html; charset=utf-8
+location: https://swaeduae.ae/admin/login
+cache-control: no-cache, private
+permissions-policy: geolocation=(), microphone=(), camera=()
+
+== QR VERIFY CHECKS ==
+/qr/verify -> 200
+/qr/verify?code=test -> HTTP/2 302  date: Tue, 02 Sep 2025 23:10:10 GMT content-type: text/html; charset=utf-8 
+throttle spray: 200 200 200 200 200 200 200 200 200 200 200 200 200 200 200 200 200 200 200 200 200 200 200 200 200 200 200 429 429 429 429
+
+== CERT PDF sanity ==
+total 4.0K
+-rw-rw-r--+ 1 www-data www-data 1.3K Aug 30 23:49 _test.pdf
+
+== PWA (manifest/SW/icons present & non-zero) ==
+OK -rw-rw-r--+ 1 swaeduae www-data 332 Aug 31 00:02 public/manifest.json
+OK -rw-rw-r--+ 1 swaeduae www-data 775 Aug 31 00:51 public/service-worker.js
+OK -rw-rw-r--+ 1 swaeduae www-data 67 Aug 31 00:04 public/img/icon-192.png
+OK -rw-rw-r--+ 1 swaeduae www-data 67 Aug 31 00:04 public/img/icon-512.png
+
+== ANALYTICS on homepage ==
+    <!-- analytics: plausible -->
+  <script defer data-domain="swaeduae.ae" src="https://plausible.io/js/script.js"></script>
+analytics OK
+
+== MAIL & SESSION SNAPSHOT ==
+MAIL_MAILER=smtp
+MAIL_HOST=smtp.zoho.com
+MAIL_PORT=587
+MAIL_USERNAME=admin@swaeduae.ae
+MAIL_ENCRYPTION=tls
+MAIL_FROM_ADDRESS=admin@swaeduae.ae
+SESSION_DRIVER=file
+SESSION_LIFETIME=120
+SESSION_SECURE_COOKIE=true
+SESSION_SAME_SITE=Lax
+
+== NGINX & CLOUDFLARED ==
+nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /etc/nginx/nginx.conf test is successful
+● cloudflared.service - cloudflared
+     Loaded: loaded (/etc/systemd/system/cloudflared.service; enabled; vendor preset: enabled)
+     Active: active (running) since Tue 2025-09-02 00:00:46 +04; 1 day 3h ago
+   Main PID: 413712 (cloudflared)
+      Tasks: 16 (limit: 38144)
+     Memory: 18.9M
+        CPU: 3min 35.853s
+     CGroup: /system.slice/cloudflared.service
+             └─413712 /usr/local/bin/cloudflared --no-autoupdate --config /etc/cloudflared/config.yml tunnel run
+
+Sep 03 03:10:11 swaeduae cloudflared[413712]: 2025-09-02T23:10:11Z ERR failed to run the datagram handler error="context canceled" connIndex=2 event=0 ip=198.41.192.47
+Sep 03 03:10:11 swaeduae cloudflared[413712]: 2025-09-02T23:10:11Z WRN failed to serve tunnel connection error="control stream encountered a failure while serving" connIndex=2 event=0 ip=198.41.192.47
+Sep 03 03:10:11 swaeduae cloudflared[413712]: 2025-09-02T23:10:11Z WRN Serve tunnel error error="control stream encountered a failure while serving" connIndex=2 event=0 ip=198.41.192.47
+Sep 03 03:10:11 swaeduae cloudflared[413712]: 2025-09-02T23:10:11Z INF Retrying connection in up to 1m4s connIndex=2 event=0 ip=198.41.192.47
+Sep 03 03:10:15 swaeduae cloudflared[413712]: 2025-09-02T23:10:15Z WRN Connection terminated error="control stream encountered a failure while serving" connIndex=2
+
+== BACKUPS ==
+-rw-r--r-- 1 root root 305M Aug 30 21:23 swaeduae_2025-08-30_212254.tar.gz
+-rw-r--r-- 1 root root 305M Aug 30 22:10 swaeduae_2025-08-30_221017.tar.gz
+-rw-r--r-- 1 root root 306M Aug 30 23:59 swaeduae_2025-08-30_235911.tar.gz
+-rw-r--r-- 1 root root 306M Aug 31 00:27 swaeduae_2025-08-31_002730.tar.gz
+-rw-r--r-- 1 root root 2.8K Aug 30 21:22 swaeduae_2025-08-30_212254.sql.gz
+-rw-r--r-- 1 root root 2.8K Aug 30 22:10 swaeduae_2025-08-30_221017.sql.gz
+-rw-r--r-- 1 root root 3.2K Aug 30 23:59 swaeduae_2025-08-30_235911.sql.gz
+-rw-r--r-- 1 root root 3.8K Aug 31 00:27 swaeduae_2025-08-31_002730.sql.gz
+
+== RECENT LOG ERRORS (tail) ==
+latest_log=storage/logs/agent_watch.log

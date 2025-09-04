@@ -1,0 +1,68 @@
+     1	<?php
+     2	
+     3	namespace App\Http\Middleware;
+     4	
+     5	use Closure;
+     6	use Illuminate\Http\Request;
+     7	use Symfony\Component\HttpFoundation\Response;
+     8	
+     9	class SecurityHeaders
+    10	{
+    11	    public function handle(Request $request, Closure $next): Response
+    12	    {
+    13	        /** @var Response $response */
+    14	        $response = $next($request);
+    15	
+    16	        // Extra CDN hosts from .env, e.g. "fonts.googleapis.com fonts.gstatic.com cdn.jsdelivr.net"
+    17	        $extra = preg_split('/[\s,]+/', trim((string) env('CSP_EXTRA', '')), -1, PREG_SPLIT_NO_EMPTY);
+    18	        $extraHosts = array_map(function ($d) {
+    19	            $d = trim($d);
+    20	            if ($d === '') return null;
+    21	            // ensure we prefix with https://
+    22	            if (!str_starts_with($d, 'https://') && !str_starts_with($d, 'http://')) {
+    23	                $d = "https://".$d;
+    24	            }
+    25	            return $d;
+    26	        }, $extra);
+    27	        $extraHosts = array_values(array_filter($extraHosts));
+    28	
+    29	        // Build directive lists (keep 'unsafe-inline' for now to avoid breaking inline scripts/styles)
+    30	        $src = function(array $base) use ($extraHosts) {
+    31	            return implode(' ', array_unique(array_merge($base, $extraHosts)));
+    32	        };
+    33	
+    34	        $cspDirectives = [
+    35	            "default-src ".$src(["'self'"]), // no global https: wildcard
+    36	            "img-src ".$src(["'self'", "data:"]),
+    37	            "style-src ".$src(["'self'", "'unsafe-inline'"]),
+    38	            "script-src ".$src(["'self'", "'unsafe-inline'"]),
+    39	            "font-src ".$src(["'self'", "data:"]),
+    40	            "connect-src ".$src(["'self'"]),
+    41	            "frame-ancestors 'self'",
+    42	            "upgrade-insecure-requests",
+    43	        ];
+    44	
+    45	        $csp = implode('; ', $cspDirectives);
+    46	
+    47	        $headers = [
+    48	            'X-Frame-Options' => 'SAMEORIGIN',
+    49	            'X-Content-Type-Options' => 'nosniff',
+    50	            'Referrer-Policy' => 'strict-origin-when-cross-origin',
+    51	            'Permissions-Policy' => "geolocation=(), camera=(), microphone=()",
+    52	            'Cross-Origin-Opener-Policy' => 'same-origin',
+    53	            'Cross-Origin-Resource-Policy' => 'same-origin',
+    54	            'Content-Security-Policy' => $csp,
+    55	        ];
+    56	
+    57	        foreach ($headers as $k => $v) {
+    58	            $response->headers->set($k, $v, false);
+    59	        }
+    60	
+    61	        // HSTS only when HTTPS
+    62	        if ($request->isSecure()) {
+    63	            $response->headers->set('Strict-Transport-Security', 'max-age=31536000; includeSubDomains; preload', false);
+    64	        }
+    65	
+    66	        return $response;
+    67	    }
+    68	}

@@ -1,0 +1,8 @@
+APP_ENV=production
+APP_DEBUG=false
+APP_URL=https://swaeduae.ae
+APP_KEY=[hidden]
+MAIL_HOST=smtp.zoho.com
+MAIL_USERNAME=[present]
+QUEUE_CONNECTION=database
+SENTRY_LARAVEL_DSN=[present]
