@@ -1,0 +1,38 @@
+<?php
+
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Admin\DashboardController;
+
+/**
+ * Admin login (guest only). We keep this minimal so nothing pre-login can interfere.
+ * If AdminPathEnforcer / VerifiedPathEnforcer exist, we disable them for login endpoints.
+ */
+$skip = array_values(array_filter([
+    class_exists(\App\Http\Middleware\AdminPathEnforcer::class) ? \App\Http\Middleware\AdminPathEnforcer::class : null,
+    class_exists(\App\Http\Middleware\VerifiedPathEnforcer::class) ? \App\Http\Middleware\VerifiedPathEnforcer::class : null,
+]));
+
+$loginGroup = Route::middleware(['web','guest:admin']);
+if (!empty($skip)) {
+    $loginGroup = $loginGroup->withoutMiddleware($skip);
+}
+$loginGroup->group(function () {
+    Route::get('/admin/login',  [AuthController::class, 'showLogin'])->name('admin.login');
+    Route::post('/admin/login', [AuthController::class, 'login'])->name('admin.login.post');
+});
+
+/**
+ * Authenticated admin area. Unauthenticated users will be redirected by the 'auth:admin'
+ * middleware. (Your app's Authenticate middleware already exists and is aliased.)
+ */
+$adminStack = ['web','auth:admin'];
+if (class_exists(\App\Http\Middleware\AdminOnly::class)) {
+    $adminStack[] = \App\Http\Middleware\AdminOnly::class;
+}
+
+Route::prefix('admin')->as('admin.')->middleware($adminStack)->group(function () {
+    Route::get('/', [DashboardController::class, 'index'])->name('root');
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::redirect('/dashboard', '/admin', 302)->name('dashboard.legacy');
+});

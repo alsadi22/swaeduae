@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>My Profile</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+  @php($user = Auth::user())
+  <h1>My Profile</h1>
+
+  @if ($user)
+    <p><strong>Name:</strong> {{ $user->name }}</p>
+    <p><strong>Email:</strong> {{ $user->email }}</p>
+    <p><strong>Roles:</strong> {{ implode(',', $user->getRoleNames()->toArray()) }}</p>
+  @else
+    <p>Not signed in.</p>
+  @endif
+
+  <p><a href="{{ url('/') }}">Back to Home</a></p>
+</body>
+</html>

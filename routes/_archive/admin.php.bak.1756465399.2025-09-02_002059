@@ -1,0 +1,36 @@
+<?php
+
+use Illuminate\Support\Facades\Route;
+
+Route::prefix('admin')->name('admin.')->middleware(['web'])->group(function () {
+    // Guard-aware landing (unauth -> admin login, auth(admin) -> dashboard)
+    Route::get('/', function () {
+        return auth('admin')->check()
+            ? view('admin.dashboard')
+            : redirect()->to('https://swaeduae.ae/admin/login');
+    })->name('root');
+    // Legacy: /admin/dashboard -> /admin (absolute https)
+    Route::redirect('/dashboard', 'https://swaeduae.ae/admin')->name('dashboard');
+    // Guest (admin) routes
+    Route::middleware('guest:admin')->group(function () {
+        // Keep your existing controller if present; otherwise serve the view
+        if (!Route::has('admin.login')) {
+            Route::view('/login','admin/auth/login')->name('login');
+        }
+    });
+
+    // Authenticated admin routes
+    Route::middleware(['auth:admin', \App\Http\Middleware\AdminOnly::class])->group(function () {
+        // other protected admin routes go here
+    });
+
+    // Logout (POST) – preserve intended redirect
+    if (!Route::has('admin.logout')) {
+        Route::post('/logout', function () {
+            auth('admin')->logout();
+            request()->session()->invalidate();
+            request()->session()->regenerateToken();
+            return redirect()->to('https://swaeduae.ae/admin/login');
+        })->name('logout');
+    }
+});

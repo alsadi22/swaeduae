@@ -1,0 +1,57 @@
+@extends("public.layout-travelpro")
+<!doctype html>
+<html lang="{{ str_replace('_','-',app()->getLocale()) }}" dir="{{ app()->isLocale('ar') ? 'rtl' : 'ltr' }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  @includeIf('components.seo.meta')
+  @includeIf('components.seo.schema')
+  @includeIf('components.seo.analytics')
+  <link rel="stylesheet" href="{{ asset('themes/travelpro/css/style.css') }}">
+  <style>
+    :root { --brand:#1976D2; }
+    .skip-link{position:absolute;left:-9999px}
+    .skip-link:focus{left:auto;top:auto;padding:.5rem 1rem;background:#fff;border:2px solid #000;z-index:1000}
+    :focus-visible{outline:2px solid #000;outline-offset:2px}
+    .btn-primary{background:var(--brand);color:#fff;border:0;padding:.5rem 1rem;border-radius:.375rem}
+    a{color:var(--brand);text-decoration:none}
+    a:hover{text-decoration:underline}
+  </style>
+  @yield('head')
+  @stack('head')
+</head>
+<body>
+  <a class="skip-link" href="#main">{{ __('Skip to content') }}</a>
+  <header class="tp-header">
+    <div class="tp-wrap">
+      <a href="{{ route('home') }}" class="brand">
+        <img src="{{ asset('brand/logo.png') }}" alt="{{ config('app.name') }}" height="40">
+      </a>
+      <nav class="nav">
+        <a href="{{ route('home') }}">{{ __('Home') }}</a>
+        <a href="{{ route('about') }}">{{ __('About') }}</a>
+        <a href="{{ route('services') }}">{{ __('Services') }}</a>
+        <a href="{{ route('contact.show') }}">{{ __('Contact') }}</a>
+      </nav>
+      <div class="lang">
+        <a href="{{ route('lang.switch',['locale'=>'en']) }}">EN</a> ·
+        <a href="{{ route('lang.switch',['locale'=>'ar']) }}">AR</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" class="tp-main">
+    @yield('content')
+  </main>
+
+  <footer class="tp-footer">
+    <div class="tp-wrap small">
+      <p>© {{ date('Y') }} {{ config('app.name','SwaedUAE') }}</p>
+    </div>
+  </footer>
+
+  @yield('scripts')
+  @stack('scripts')
+</body>
+</html>
+

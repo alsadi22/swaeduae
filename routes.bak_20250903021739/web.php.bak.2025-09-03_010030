@@ -1,0 +1,21 @@
+<?php
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use Illuminate\Support\Facades\Session;
+use App\Http\Controllers\Public\OpportunityController;
+use App\Http\Controllers\Public\ApplyController;
+use Illuminate\Support\Facades\Route;
+
+
+
+    
+});
+use App\Http\Controllers\Auth\SimplePasswordResetController;
+use App\Http\Middleware\EnforceOrgRegistration;
+use App\Http\Middleware\MicroCache;
+
+Route::middleware(['web','guest'])
+    ->withoutMiddleware([EnforceOrgRegistration::class, MicroCache::class])
+    ->group(function () {
+        Route::get ('/reset-password/{token}', [SimplePasswordResetController::class, 'show'])->name('password.reset');
+        Route::post('/reset-password',        [SimplePasswordResetController::class, 'update'])->name('password.update.simple');
+    });
