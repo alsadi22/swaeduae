@@ -1,0 +1,101 @@
+=== SwaedUAE Preflight (read-only) 2025-08-31_152606 ===
+
+== ENV (mail/session core) ==
+APP_ENV=production
+APP_DEBUG=false
+APP_URL=https://swaeduae.ae
+
+== Caches & route cache compile test ==
+optimize:clear OK
+config:cache   OK
+route:cache    OK
+view:cache     OK
+
+== HTTP probes (public) ==
+/ -> 200
+/about -> 200
+/privacy -> 200
+/terms -> 200
+/contact -> 200
+/qr/verify -> 200
+/opportunities -> 200
+
+== Named route sanity (must exist) ==
+  GET|HEAD  about .................................................................................................................................................................................. about
+  GET|HEAD  contact .............................................................................................................................................................................. contact
+  POST      contact ....................................................................................................................................................................... contact.submit
+  GET|HEAD  lang/{locale} .................................................................................................................................................................... lang.switch
+  GET|HEAD  opportunities ........................................................................................................................ opportunities.index › PublicOpportunityController@index
+  GET|HEAD  opportunities/{slug} ................................................................................................................... opportunities.show › PublicOpportunityController@show
+  GET|HEAD  opportunities/{slug}.ics ................................................................................................................. opportunities.ics › PublicOpportunityController@ics
+  POST      opportunities/{slug}/apply ........................................................................................................... opportunities.apply › PublicOpportunityController@apply
+  GET|HEAD  privacy .............................................................................................................................................................................. privacy
+  GET|HEAD  qr/verify/{code?} .................................................................................................................................................................. qr.verify
+  GET|HEAD  terms .................................................................................................................................................................................. terms
+
+== DB snapshot for opportunities & related ==
+- events counts, nulls, date ranges:
+1	0	0
+2025-09-07 00:18:36	2025-09-07 00:18:36	2025-09-07 03:18:36	2025-09-07 03:18:36
+- distinct cities (top 10):
+Abu Dhabi	1
+- registrations/volunteers counts:
+0	0
+- useful indexes present? (slug,status,starts_at on events):
+events_ends_at_index	ends_at
+events_slug_unique	slug
+events_starts_at_index	starts_at
+events_status_index	status
+PRIMARY	id
+
+== Route duplicates quick scan (name collisions) ==
+
+ANY
+GET|HEAD
+POST
+
+== Public header risk scan (avoid brittle route() calls) ==
+3:  <a href="{{ route('opportunities.index') }}">Opportunities</a>
+
+== Opportunities page syntax safety ==
+/opportunities? -> 200
+/opportunities?q=test -> 200
+/opportunities?q=dubai -> 200
+/opportunities?q=community -> 200
+
+== Sample slug & ICS HEAD ==
+SLUG=community-service-day
+HTTP/2 404 
+date: Sun, 31 Aug 2025 11:26:15 GMT
+content-type: text/html; charset=UTF-8
+cache-control: no-cache, private
+
+== Contact page form check ==
+6:  <form method="POST" action="{{ url('/contact') }}">
+6:  <form method="POST" action="{{ url('/contact') }}">
+
+== Mail reachability (no email sent) ==
+CONNECTED(00000003)
+---
+Certificate chain
+
+== PWA & analytics presence ==
+-rw-rw-r--+ 1 swaeduae www-data  67 Aug 31 00:04 public/img/icon-192.png
+-rw-rw-r--+ 1 swaeduae www-data  67 Aug 31 00:04 public/img/icon-512.png
+-rw-rw-r--+ 1 swaeduae www-data 332 Aug 31 00:02 public/manifest.json
+-rw-rw-r--+ 1 swaeduae www-data 775 Aug 31 00:51 public/service-worker.js
+<link rel="manifest" href="/manifest.json">
+  <script defer data-domain="swaeduae.ae" src="https://plausible.io/js/script.js"></script>
+
+== RTL readiness quick scan (layout/dir/rtl.css) ==
+
+== Sentry / backups (presence only) ==
+SENTRY_LARAVEL_DSN=https://6bf405b967d571dab747d29f3ef15b18@o4509934609563648.ingest.us.sentry.io/4509934616576000
+
+== Recent log tail (errors) ==
+latest=storage/logs/laravel-2025-08-31.log
+#24 /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/View/Middleware/ShareErrorsFromSession.php(49): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#25 /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(209): Illuminate\\View\\Middleware\\ShareErrorsFromSession->handle()
+[2025-08-31 15:16:22] production.ERROR: syntax error, unexpected token "=", expecting variable {"exception":"[object] (ParseError(code: 0): syntax error, unexpected token \"=\", expecting variable at /var/www/swaeduae/app/Models/Event.php:11)
+#21 /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/View/Middleware/ShareErrorsFromSession.php(49): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}()
+#22 /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(209): Illuminate\\View\\Middleware\\ShareErrorsFromSession->handle()

@@ -1,0 +1,47 @@
+:root{--teal:#0fb9b1;--teal-600:#0aa39c;--sand:#f6f5ef;--navy:#0b3b5a;--body:#f3f5f7;}
+body.bg-body{background:var(--body);}
+
+/* Navbar */
+.navbar-soft{background:#fff;}
+.navbar .nav-link{color:#3b4b5b}
+.navbar .nav-link.active,.navbar .nav-link:hover{color:var(--teal)}
+.text-teal{color:var(--teal)!important;}
+.text-navy{color:var(--navy)!important;}
+.navbar .navbar-toggler-icon{background-image: var(--bs-navbar-toggler-icon-bg);}
+
+/* Buttons */
+.btn-teal{--bs-btn-bg:var(--teal);--bs-btn-border-color:var(--teal);--bs-btn-hover-bg:var(--teal-600);--bs-btn-hover-border-color:var(--teal-600);--bs-btn-color:#fff;}
+.btn-outline-teal{--bs-btn-color:var(--teal);--bs-btn-border-color:var(--teal);--bs-btn-hover-bg:var(--teal);--bs-btn-hover-border-color:var(--teal);--bs-btn-hover-color:#fff;}
+
+/* Cards, tables, forms */
+.card{border-radius:1rem; transition:transform .15s ease, box-shadow .15s ease;}
+.card.shadow-sm{box-shadow:0 8px 24px rgba(2,15,29,.06)!important}
+.card:hover{transform:translateY(-1px);}
+.table thead th{background:var(--sand);color:var(--navy);border-bottom:0}
+.table tbody tr:hover{background:#fafafa}
+.form-control:focus,.form-select:focus{border-color:var(--teal);box-shadow:0 0 0 .2rem rgba(15,185,177,.15)}
+.pagination .page-link{color:var(--navy)}
+.pagination .active>.page-link{background:var(--teal);border-color:var(--teal)}
+
+/* Links */
+.link-teal{color:var(--teal);text-decoration:none}
+.link-teal:hover{color:var(--teal-600);text-decoration:underline}
+
+/* Hero / sections */
+.hero{
+  background:linear-gradient(180deg,#ffffff 0%,#f7fafc 60%, var(--sand) 100%);
+  border-radius:1.25rem;
+  padding:2.25rem;
+  margin-top:.75rem;
+  max-width:920px;
+  margin-left:auto;margin-right:auto;
+  text-align:center;
+}
+.hero .title{color:var(--navy);font-weight:800}
+.hero .lead{color:#5b6b7b}
+.section{padding-block:1.25rem}
+.section-lg{padding-block:2rem}
+
+/* Badges & empty states */
+.badge-soft{background:var(--sand);color:var(--navy);border:1px solid #ecebe4;}
+.empty-state{background:#fff;border:1px dashed #e2e8f0;border-radius:1rem;padding:2rem;text-align:center;color:#65758b;}

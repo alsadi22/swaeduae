@@ -1,0 +1,154 @@
+:root { --sidebar-w: 260px; }.admin-sidebar { width: var(--sidebar-w); m
+.admin-nav .nav-link { color:#475569; border-radius:.5re
+.admin-nav .nav-link:hover { background:#f1f5f9; 
+.admin-nav .active { backgr
+
+.c
+.kpi-icon{ font-size:22px; opacity:.75; }.kpi-value{ font-si
+.kpi-sub{ co
+.gallery img{ border-radius:.5rem; }.text-teal-600{ color:#0f766e; }EOF
+cat > resources/views/admin/dashboard.blade.php <<'EOF'@extends('layouts.admin')@section('page-title','Dashboard')@section('content')<div class="row g-4">    <div class="col-12 col-md-6 col-xl-3">        <div class="card card-kpi p-3">            <div class="d-flex justify-content-between align-items-center">                <div>                    <div class="kpi-sub">Opportunities</div>                    <div class="kpi-value">{{ number_format($stat
+
+                <i c
+            </div>        </div>    </div>    
+        <div class="card card-kpi p-3">            <div class="d-flex j
+                <div>                    <div class="kpi-sub">Organ
+   
+
+                <i class="fa-solid fa-building kpi-icon"></i>    
+   
+    </div>    <div
+
+            <div class="d-flex justify-content-between align
+     
+               
+                    <div class="kpi-value">{{ number_f
+      
+                <i cla
+            </div>        </div>    </div>    <div class="col-12 col-md-6 col-xl-3">        <div class="card card-kpi p-3">            <div class="d-flex justify-content-between align-items-center">                <div>                    <div class="kpi-sub">Volunteer Hours</div>                    <div c
+                </div>                <i class="fa-solid f
+            </div>        </div>    </div></div><div class="row g-4 mt-1">    <div class="col-xl-8">        <div c
+            <d
+       
+                <div cl
+            </div>            <can
+        </div>    <
+    <div class="col-xl-4">        <div class="card p
+            <div class="fw-semibold">Project Mix</div>            <canvas id="chartMix" 
+        </div>    </div></div>@endsection@push('scripts')<script>const weeklyLabels = @json($weekly->
+const weeklyCounts = @json($weekly->pluck('c'));new Chart(docume
+    type: 'line',    data
+    options: { plugins:{legend:{display:false}}, scales:{y:{beginAtZero:true}} }});new Chart(document.ge
+    type: 'doughnut',
+    data: { labels:['Opportunities','Events','Organizations'], datasets:[{ data:[   
+        {{ $stats['eve
+        {{ $stats['organizations'] }}    ]}]},    options:{ plugins:{legend:
+});</script>@e
+EOF# === Set
+cat > resources/views/admin/settings/index.blade.ph
+@extends('layouts.admin')@section('page-title','Site Settings')@section('content')<form action="{{ route('admin.settings.sav
+    @csrf    <ul class="nav nav-tabs px-3 pt-3 border-0" role="tabli
+        <li c
+
+        <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#social" role="tab">Social</a></li>        <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#payments" role="tab">Payments</a></li>        <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#s
+    </ul>    <div class="tab-content p-4">        <div class="tab-pane fade show active" id="general" role="tabpanel">            <div class="row g-3">                <div class="col-md-6">                    <label class="form-label">Site Name</label>                    <input type="text" name="site_name" value="{{ $settings['site.name'] }}" class="form-control">                </div>                <div class=
+              
+                    <input type="text" nam
+                </div>           
+        </div>        <div class="tab-pane fade" id="branding" role="tabpane
+            <div c
+                <div class="c
+              
+           
+      
+
+                    @endif                </div>                <div class="col-md-6">           
+                    <input type=
+                 
+       
+       
+   
+
+        </div>        <div class="tab-pane fad
+            <d
+                <div class="col-md-6"><label class="form-label">Facebook URL</label><input name="facebook" value="{{ $settings['social.facebook'] }}" class="form-control"></div>
+                <div class="col-md-6"><label class="form-label">Instagram URL</label><input name="instagram" value="{{ $settings['social.instagram'] }}" class="form-control"></div>
+                <div class="col-md-6"><label class="form-label">Twitter/X URL</label><input name="twitter" value="{{ $settings['social.twitter'] }}" class="form-control"></div>
+                <div class="col-md-6"><label class="form-label">LinkedIn URL</label><input name="linkedin" value="{{ $settings['social.linkedin'] }}" class="form-control"></div>
+                <div class="col-md-6"><label class="form-label">WhatsApp Link</label><input name="whatsapp" value="{{ $settings['social.whatsapp'] }}" class="form-control" placeholder="https://wa.me/..."></div>
+                <div class="col-12"><hr></div>
+                <div class="col-md-6"><label class="form-label">Facebook Token (API)</label><input name="api_facebook_token" value="{{ $settings['api.facebook_token'] }}" class="form-control"></div>
+                <div class="col-md-6"><label class="form-label">Instagram Token (API)</label><input name="api_instagram_token" value="{{ $settings['api.instagram_token'] }}" class="form-control"></div>
+                <div class="col-md-6"><label class="form-label">Twitter Key</label><input name="api_twitter_key" value="{{ $settings['api.twitter_key'] }}" class="form-control"></div>
+                <div class="col-md-6"><label class="form-label">Twitter Secret</label><input name="api_twitter_secret" value="{{ $settings['api.twitter_secret'] }}" class="form-control"></div>
+            </div>
+        </div>
+
+        <div class="tab-pane fade" id="payments" role="tabpanel">
+            <div class="row g-3">
+                <div class="col-md-6"><label class="form-label">Stripe Publishable Key</label><input name="stripe_key" value="{{ $settings['pay.stripe_key'] }}" class="form-control"></div>
+                <div class="col-md-6"><label class="form-label">Stripe Secret Key</label><input name="stripe_secret" value="{{ $settings['pay.stripe_secret'] }}" class="form-control"></div>
+                <div class="col-md-6"><label class="form-label">PayTabs Profile ID</label><input name="paytabs_profile_id" value="{{ $settings['pay.paytabs_profile_id'] }}" class="form-control"></div>
+                <div class="col-md-6"><label class="form-label">PayTabs Server Key</label><input name="paytabs_server_key" value="{{ $settings['pay.paytabs_server_key'] }}" class="form-control"></div>
+                <div class="col-md-6"><label class="form-label">PayTabs Region</label><input name="paytabs_region" value="{{ $settings['pay.paytabs_region'] }}" class="form-control" placeholder="AE, SA, EG, JO ..."></div>
+            </div>
+        </div>
+
+        <div class="tab-pane fade" id="seo" role="tabpanel">
+            <div class="row g-3">
+                <div class="col-md-6"><label class="form-label">Meta Title</label><input name="meta_title" value="{{ $settings['seo.meta_title'] }}" class="form-control"></div>
+                <div class="col-md-6"><label class="form-label">Meta Description</label><input name="meta_description" value="{{ $settings['seo.meta_description'] }}" class="form-control"></div>
+            </div>
+        </div>
+    </div>
+    <div class="p-3 border-top bg-light text-end">
+        <button class="btn btn-success px-4"><i class="fa-solid fa-floppy-disk me-2"></i>Save Settings</button>
+    </div>
+</form>
+@endsection
+EOF
+
+# === Media Library View ===
+cat > resources/views/admin/media/index.blade.php <<'EOF'
+@extends('layouts.admin')
+@section('page-title','Media Library')
+@section('content')
+<div class="card p-3 mb-3">
+    <form action="{{ route('admin.media.upload') }}" method="post" enctype="multipart/form-data" class="row g-2 align-items-center">
+        @csrf
+        <div class="col-auto">
+            <input type="file" name="file" class="form-control" required>
+        </div>
+        <div class="col-auto">
+            <button class="btn btn-primary"><i class="fa-solid fa-upload me-2"></i>Upload</button>
+        </div>
+    </form>
+</div>
+<div class="row g-3 gallery">
+    @foreach($items as $img)
+    <div class="col-6 col-sm-4 col-md-3 col-xl-2">
+        <div class="card p-2">
+            <img src="{{ $img->url() }}" class="img-fluid"/>
+            <div class="d-flex justify-content-between align-items-center mt-2">
+                <small class="text-muted text-truncate">{{ $img->original_name }}</small>
+                <form action="{{ route('admin.media.destroy',$img) }}" method="post" onsubmit="return confirm('Delete image?')">
+                    @csrf @method('DELETE')
+                    <button class="btn btn-sm btn-outline-danger"><i class="fa-solid fa-trash"></i></button>
+                </form>
+            </div>
+        </div>
+    </div>
+    @endforeach
+</div>
+<div class="mt-3">
+    {{ $items->links() }}
+</div>
+@endsection
+EOF
+
+# === Storage symlink (if not already) ===
+php artisan storage:link || true
+
+# === Migrate DB ===
+php artisan migrate --force
+

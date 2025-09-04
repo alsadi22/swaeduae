@@ -1,0 +1,10 @@
+Deprecation Notice: Using ${var} in strings is deprecated, use {$var} instead in /usr/share/php/Symfony/Component/Console/Command/DumpCompletionCommand.php:48
+Deprecation Notice: Using ${var} in strings is deprecated, use {$var} instead in /usr/share/php/Symfony/Component/Console/Command/DumpCompletionCommand.php:56
+Composer 2.2.6 2022-02-04 17:00:38
+Deprecation Notice: Using ${var} in strings is deprecated, use {$var} instead in /usr/share/php/Symfony/Component/Console/Command/DumpCompletionCommand.php:48
+Deprecation Notice: Using ${var} in strings is deprecated, use {$var} instead in /usr/share/php/Symfony/Component/Console/Command/DumpCompletionCommand.php:56
+Deprecation Notice: Using ${var} in strings is deprecated, use {$var} instead in /usr/share/php/Composer/Autoload/AutoloadGenerator.php:879
+Deprecation Notice: Using ${var} in strings is deprecated, use {$var} instead in /usr/share/php/Composer/Autoload/AutoloadGenerator.php:884
+Deprecation Notice: Using ${var} in strings is deprecated, use {$var} instead in /usr/share/php/Composer/Spdx/SpdxLicenses.php:306
+Deprecation Notice: Using ${var} in strings is deprecated, use {$var} instead in /usr/share/php/Composer/Spdx/SpdxLicenses.php:312
+./composer.json is valid

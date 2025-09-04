@@ -1,0 +1,18 @@
+<?php
+use Illuminate\Support\Facades\Route;
+
+Route::middleware('web')->group(function () {
+    // Organization Login (uses the generic login blade with explicit type)
+    Route::get('/org/login', function () {
+        return view('auth.login', ['type' => 'org']);
+    })->name('org.login');
+
+    // Organization Register (uses resources/views/org/register.blade.php)
+    Route::get('/org/register', function () {
+        return view('org.register');
+    })->name('org.register');
+
+    // Convenience aliases (optional)
+    /* DISABLED legacy login/organization */ /* Route::get('/login/organization', fn() => redirect()->route('org.login')); */
+    /* DISABLED legacy register/organization */ /* Route::get('/register/organization', fn() => redirect()->route('org.register')); */
+});

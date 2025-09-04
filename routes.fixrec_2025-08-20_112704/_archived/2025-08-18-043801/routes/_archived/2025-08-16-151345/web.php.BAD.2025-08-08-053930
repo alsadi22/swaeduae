@@ -1,0 +1,54 @@
+<?php
+
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\AdminDashboardController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\CertificateVerifyController;
+use App\Http\Controllers\VolunteerHoursController;
+
+/*
+|--------------------------------------------------------------------------
+| Public Pages
+|--------------------------------------------------------------------------
+*/
+Route::view('/', 'welcome')->name('home');
+Route::view('/about', 'about')->name('about');
+Route::view('/contact', 'contact')->name('contact');
+Route::view('/faq', 'faq')->name('faq');
+Route::get('/__extra_test', fn() => 'ok-extra')->name(~xtra.test');
+require __DIR__.'/swaed_extras.php';
+Route::get('/__ping', fn() => 'ok')->name('ping');
+
+/*
+|--------------------------------------------------------------------------
+| Auth Routes (Laravel UI / built-in)
+|--------------------------------------------------------------------------
+*/
+if (file_exists(__DIR__.'/auth.php')) {
+    require __DIR__.'/auth.php';
+}
+
+/*
+|--------------------------------------------------------------------------
+| Admin Area
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['web','auth','admin'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/', [AdminDashboardController::class, 'index'])->name('dashboard');
+    Route::resource('users', UserController::class);
+    Route::post('users/{user}/toggle', [UserController::class, 'toggle'])->name('users.toggle');
+});
+Route::get('/verify/{id}', [\App\Http\Controllers\CertificateVerifyController::class, 'verify'])->name('cert.verify');
+Route::middleware(['web','auth'])->get('/volunteer/hours', [\App\Http\Controllers\VolunteerHoursController::class, 'index'])->name('volunteer.hours');
+Route::middleware(['web','auth'])->post('/volunteer/hours', [\App\Http\Controllers\VolunteerHoursController::class, 'store'])->name('volunteer.hours.store');
+Route::middleware(['web','auth','admin'])->post('/admin/hours/{id}/approve', [\App\Http\Controllers\Admin\VolunteerHoursAdminController::class, 'approve'])->name('admin.hours.approve');
+Route::get('/verify/{id}', [\App\Http\Controllers\CertificateVerifyController::class, 'verify'])->name('cert.verify');
+Route::middleware(['web','auth'])->get('/volunteer/hours', [\App\Http\Controllers\VolunteerHoursController::class, 'index'])->name('volunteer.hours');
+Route::middleware(['web','auth'])->post('/volunteer/hours', [\App\Http\Controllers\VolunteerHoursController::class, 'store'])->name('volunteer.hours.store');
+Route::get('/verify/{id}', function($id){ return 'ok:'.$id; })->name('cert.verify');
+Route::middleware(['web','auth'])->get('/volunteer/hours', function(){ return 'ok'; })->name('volunteer.hours');
+Route::middleware(['web','auth'])->post('/volunteer/hours', function(){ return 'ok'; })->name('volunteer.hours.store');
+Route::get('/verify-inline/{id}', function($id){ return 'ok-inline:'.$id; })->name('cert.verify.inline');
+Route::middleware(['web','auth'])->get('/volunteer/hours-inline', function(){ return 'ok-inline'; })->name('volunteer.hours.inline');
+Route::get('/verify-inline2/{id}', [CertificateVerifyController::class, 'verify'])->name('cert.verify.inline2');
+Route::middleware(['web','auth'])->get('/volunteer/hours-inline2', [VolunteerHoursController::class, 'index'])->name('volunteer.hours.inline2');

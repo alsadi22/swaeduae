@@ -1,0 +1,68 @@
+SwaedUAE Roadmap Checkup  2025-08-30-044357
+================================================
+
+== Environment ==
+PHP:     PHP 8.3.24 (cli) (built: Aug  3 2025 08:57:38) (NTS)
+Laravel: Laravel Framework 11.45.2
+Node:    v22.19.0
+Composer:Composer 2.2.6 2022-02-04 17:00:38
+memory_limit: 512M
+OK    - memory_limit is 512M
+
+== Phase 0: Baseline ==
+OK    - tools/health.sh present
+OK    - tools/full_health.sh present
+OK    - cron entry for full health found
+OK    - storage writable
+OK    - route name qr.verify exists
+OK    - public/sitemap.xml is a symlink
+OK    - GET /sitemap.xml -> 200
+
+== Phase 1: Public Site ==
+OK    - TravelPro layout includes CSS/JS
+OK    - Header appears to use named routes
+OK    - Footer privacy link present
+OK    - Footer terms link present
+
+== Public endpoints ==
+  /                    -> 200
+  /about               -> 200
+  /faq                 -> 200
+  /contact             -> 200
+  /opportunities       -> 200
+OK    - manifest.json present
+OK    - service-worker.js present
+OK    - icon-192.png present
+OK    - icon-512.png present
+OK    - robots.txt has sitemap
+OK    - lang EN swaed.php present
+OK    - lang AR swaed.php present
+
+== Phase 2: Email & Queues ==
+OK    - Zoho MAIL_HOST set
+OK    - MAIL_MAILER=smtp
+WARN  - QUEUE_CONNECTION is sync (use database/redis)
+WARN  - Honeypot middleware not found in Kernel
+OK    - FormRateLimit middleware referenced
+
+== Routes snapshot ==
+OK    - route home
+OK    - route opportunities.index
+OK    - route pages.about
+OK    - route contact.get
+OK    - route faq
+OK    - route verify.show
+OK    - route qr.verify
+OK    - route volunteer.dashboard
+OK    - route org.dashboard
+OK    - route admin.opportunities.index
+OK    - route admin.opportunities
+
+== Security ==
+OK    - APP_DEBUG=false
+OK    - SENTRY DSN not set (OK if intentionally disabled)
+
+== Summary ==
+Report written to: public/health/roadmap-2025-08-30-044357.txt
+URL: https://swaeduae.ae/health/roadmap-2025-08-30-044357.txt
+

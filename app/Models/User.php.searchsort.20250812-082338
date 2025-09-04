@@ -1,0 +1,43 @@
+<?php
+namespace App\Models;
+use App\Models\Concerns\SearchSort;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Spatie\Permission\Traits\HasRoles;
+
+class User extends Authenticatable implements MustVerifyEmail
+{
+    use HasFactory, Notifiable, HasRoles;
+    protected $fillable = [
+        'name',
+        'email',
+        'password',
+        'phone',
+    ];
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+    ];
+    // Relationships
+    public function events() {
+        return $this->belongsToMany(\App\Models\Event::class)->withPivot('status')->withTimestamps();
+    }
+    public function opportunities() {
+        return $this->belongsToMany(\App\Models\Opportunity::class)->withPivot('status')->withTimestamps();
+    }
+    public function hours() {
+        return $this->hasMany(\App\Models\VolunteerHour::class);
+    }
+    public function certificates() {
+        return $this->hasMany(\App\Models\Certificate::class);
+    }
+    public function organization() {
+        return $this->hasOne(\App\Models\Organization::class);
+    }
+}

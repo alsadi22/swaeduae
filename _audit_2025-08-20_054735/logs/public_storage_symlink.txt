@@ -1,0 +1,1 @@
+lrwxrwxrwx 1 vminingc vminingc 21 Aug 17 14:15 public/storage -> ../storage/app/public

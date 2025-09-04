@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+set -euo pipefail
+cd /var/www/swaeduae
+export AGENT_ENABLED="${AGENT_ENABLED:-true}"
+NOTE="${*:-"Advise changes for the Laravel app."}"
+cat <<TXT | /usr/local/bin/codex
+You are assisting inside a Laravel 11 project at /var/www/swaeduae.
+Give me concrete, minimal diffs or exact file writes (with paths) to achieve:
+$NOTE
+TXT

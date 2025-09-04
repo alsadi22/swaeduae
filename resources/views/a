@@ -1,0 +1,29 @@
+@extends('layouts.admin_theme')
+@section('title
+@section('content')
+<div class="d-flex justify-c
+    <h2>System Activity Logs</h2>
+    <form method="GET" class
+        <input type="text" name="search" class="form-con
+    </form>
+</div
+<div class
+    <table class="table al
+        <thead>
+            <tr><th>#</th><th>Us
+        </t
+        <tbody>
+            @forelse($logs ?? [] as 
+                <tr>
+                    <td>{{ $loop-
+   
+           
+          
+                </tr>
+    
+                <tr><td colspan="4">No logs found.<
+          
+       
+    </table>
+</div>
+@endsection
