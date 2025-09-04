@@ -1,0 +1,273 @@
+<?php
+
+use Illuminate\Support\Facades\Route;
+
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\EventController;
+use App\Http\Controllers\VolunteerController;
+use App\Http\Controllers\NewsController;
+use App\Http\Controllers\DownloadController;
+use App\Http\Controllers\PartnerController;
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\PaymentController;
+
+Route::get('/healthz', fn () => response('ok', 200))->name('health');
+
+/**
+ * Public site
+ */
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
+Route::get('/events', [EventController::class, 'index'])->name('events.index');
+Route::get('/events/{id}', [EventController::class, 'show'])->name('events.show');
+
+Route::get('/news', [NewsController::class, 'index'])->name('news.index');
+Route::get('/news/{id}', [NewsController::class, 'show'])->name('news.show');
+
+Route::get('/downloads', [DownloadController::class, 'index'])->name('downloads.index');
+Route::get('/region/sharjah', [EventController::class, 'sharjah'])->name('region.sharjah');
+Route::get('/partners', [PartnerController::class, 'index'])->name('partners.index');
+
+Route::post('/lang/switch', function (Request $request) {
+    $lang = $request->input('lang');
+    if (in_array($lang, ['en', 'ar'])) {
+        session(['locale' => $lang]);
+        app()->setLocale($lang);
+    }
+    return back();
+})->name('lang.switch');
+
+/**
+ * Authenticated user actions
+ */
+Route::middleware('auth')->group(function () {
+    Route::get('/volunteer/profile', [VolunteerController::class, 'profile'])->name('volunteer.profile');
+    Route::post('/volunteer/events/{eventId}/register', [VolunteerController::class, 'registerEvent'])->name('volunteer.registerEvent');
+    Route::post('/volunteer/kyc/upload', [VolunteerController::class, 'uploadKyc'])->name('volunteer.uploadKyc');
+    Route::get('/volunteer/resume', [VolunteerController::class, 'resume'])->name('volunteer.resume');
+    Route::get('/volunteer/certificate/{certId}', [VolunteerController::class, 'generateCertificate'])->name('volunteer.generateCertificate');
+
+    Route::get('/payment', [PaymentController::class, 'paymentPage'])->name('payments.page');
+    Route::post('/payment/stripe', [PaymentController::class, 'processStripe'])->name('payments.processStripe');
+    Route::post('/payment/paytabs', [PaymentController::class, 'processPayTabs'])->name('payments.processPayTabs');
+    Route::get('/payment/success', [PaymentController::class, 'success'])->name('payments.success');
+});
+
+/**
+ * Admin
+ */
+Route::prefix('admin')->middleware(['auth', 'can:isAdmin'])->group(function () {
+    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+    Route::get('/users', [AdminController::class, 'listUsers'])->name('admin.users');
+    Route::post('/users/toggle/{id}', [AdminController::class, 'toggleUserStatus'])->name('admin.users.toggle');
+    Route::get('/events', [AdminController::class, 'listEvents'])->name('admin.events');
+    Route::get('/certificates', [AdminController::class, 'listCertificates'])->name('admin.certificates');
+    Route::post('/backup', [AdminController::class, 'backup'])->name('admin.backup');
+});
+
+Auth::routes();
+
+/* ======= PUBLIC: opportunities, verify, gallery ======= */
+
+/* Opportunities list (with simple filters) */
+
+/* Opportunity details (lightweight) */
+Route::get('/opportunities/{id}', function ($id) {
+    $row = \Illuminate\Support\Facades\DB::table('opportunities')->where('id',$id)->first();
+    abort_unless($row, 404);
+    return view('public.opportunities.show', compact('row'));
+})->name('opportunities.show');
+
+/* Verify certificate (GET form + POST lookup) */
+Route::match(['get','post'], '/verify', function (Request $r) {
+    $result = null; $code = '';
+    if ($r->isMethod('post')) {
+        $code = trim($r->input('code',''));
+        if ($code !== '') {
+            $result = \Illuminate\Support\Facades\DB::table('certificates')->where('verification_code',$code)->first();
+        }
+    }
+    return view('public.verify', compact('result','code'));
+})->name('verify');
+
+/* Simple gallery placeholder */
+Route::get('/gallery', fn()=>view('public.gallery'))->name('gallery');
+
+/* --- PUBLIC: Verify (safe override of any older /verify closure) --- */
+Route::match(['GET','POST'], '/verify', function (\Illuminate\Http\Request $r) {
+    $code = trim($r->input('code',''));
+    $result = null;
+    if ($code !== '') {
+        $result = \Illuminate\Support\Facades\DB::table('certificates')->where('verification_code',$code)->first();
+    }
+    return view('public.verify', compact('result','code'));
+})->name('verify');
+Route::get('/opportunities', function (\Illuminate\Http\Request $r) {
+    $q = trim($r->get('q',''));
+    $rows = \Illuminate\Support\Facades\DB::table('opportunities')
+        ->select('id','title','city','region','category','date','start_time','end_time','status','description')
+        ->when($q, fn($w)=>$w->where(function($x) use ($q){
+            $x->where('title','like',"%$q%")
+              ->orWhere('description','like',"%$q%");
+        }))
+        ->when($r->filled('category'), fn($w)=>$w->where('category',$r->category))
+        ->when($r->filled('region'), fn($w)=>$w->where('region',$r->region))
+        ->orderByDesc('date')->orderByDesc('id')->paginate(24);
+    $rows->appends($r->query());
+
+    $cats    = \Illuminate\Support\Facades\DB::table('opportunities')->whereNotNull('category')->distinct()->orderBy('category')->pluck('category');
+    $regions = \Illuminate\Support\Facades\DB::table('opportunities')->whereNotNull('region')->distinct()->orderBy('region')->pluck('region');
+
+    // Prefer your existing public blade if present
+    $view = collect([
+        'opportunities.public.index',
+        'opportunities.index',
+        'public.opportunities',
+    ])->first(fn($v) => view()->exists($v));
+
+    return view($view, [
+        'rows' => $rows,                // for minimal list templates
+        'opportunities' => $rows,       // for your public/opportunities index
+        'cats' => $cats,
+        'regions' => $regions,
+        'q' => $q,
+    ]);
+})->name('opportunities.index');
+Route::get('/opportunities/{id}', function ($id) {
+    $o = \Illuminate\Support\Facades\DB::table('opportunities')->where('id', $id)->first();
+    abort_unless($o, 404);
+
+    // Prefer your public show blade if present
+    $view = collect([
+        'opportunities.public.show',
+        'opportunities.show',
+    ])->first(fn($v) => view()->exists($v));
+
+    return view($view, [
+        'o' => $o,
+        'opportunity' => $o,
+    ]);
+})->whereNumber('id')->name('opps.public.show');
+/* ---- Public auth aliases (keep your existing auth intact) ---- */
+
+
+/* Volunteer shortcuts just point to the default Laravel auth */
+Route::get('/volunteer/login', fn() => redirect()->route('login'))->name('volunteer.login');
+Route::get('/volunteer/register', fn() => redirect()->route('register'))->name('volunteer.register');
+/* --- Public volunteer auth pages (safe fallbacks) --- */
+
+/* --- Public organization auth pages (safe fallbacks) --- */
+
+/* -------- Public volunteer auth (GET) -------- */
+
+
+/* -------- Public organization auth (GET) -------- */
+
+
+/* -------- Minimal POST aliases so existing blades with old route names render -------- */
+
+
+/* Optional volunteer POST aliases if any blade references them explicitly */
+/* -------- Public volunteer auth (GET) -------- */
+Route::get('/login', function () {
+    $view = collect(['auth.login','auth/volunteer_login','auth.volunteer_login'])
+        ->first(fn($v)=>view()->exists($v));
+    if ($view) return view($view, ['type'=>'volunteer']);
+    return response('<div style="max-width:520px;margin:4rem auto;font-family:sans-serif">
+        <h2>Volunteer Login</h2>
+        <form method="POST" action="/login">
+          <input type="hidden" name="_token" value="'.csrf_token().'">
+          <div><input name="email" type="email" placeholder="Email" required style="width:100%;padding:.6rem;margin:.4rem 0"></div>
+          <div><input name="password" type="password" placeholder="Password" required style="width:100%;padding:.6rem;margin:.4rem 0"></div>
+          <button style="padding:.6rem 1rem">Login</button>
+        </form>
+    </div>',200)->header('Content-Type','text/html');
+})->name('login');
+
+Route::get('/register', function () {
+    $view = collect(['auth.register','auth/volunteer_register','auth.register'])
+        ->first(fn($v)=>view()->exists($v));
+    if ($view) return view($view, ['type'=>'volunteer']);
+    return response('<div style="max-width:520px;margin:4rem auto;font-family:sans-serif">
+        <h2>Volunteer Register</h2>
+        <form method="POST" action="/register">
+          <input type="hidden" name="_token" value="'.csrf_token().'">
+          <div><input name="name" placeholder="Name" required style="width:100%;padding:.6rem;margin:.4rem 0"></div>
+          <div><input name="email" type="email" placeholder="Email" required style="width:100%;padding:.6rem;margin:.4rem 0"></div>
+          <div><input name="password" type="password" placeholder="Password" required style="width:100%;padding:.6rem;margin:.4rem 0"></div>
+          <button style="padding:.6rem 1rem">Create account</button>
+        </form>
+    </div>',200)->header('Content-Type','text/html');
+})->name('register');
+
+/* -------- Public organization auth (GET) -------- */
+Route::get('/org/login', function () {
+    $view = collect(['auth.organization_login','org.auth.login','auth/organization_login'])
+        ->first(fn($v)=>view()->exists($v));
+    if ($view) return view($view, ['type'=>'organization']);
+    return response('<div style="max-width:520px;margin:4rem auto;font-family:sans-serif">
+        <h2>Organization Login</h2>
+        <form method="POST" action="'.route('org.login.store').'">
+          <input type="hidden" name="_token" value="'.csrf_token().'">
+          <div><input name="email" type="email" placeholder="Email" required style="width:100%;padding:.6rem;margin:.4rem 0"></div>
+          <div><input name="password" type="password" placeholder="Password" required style="width:100%;padding:.6rem;margin:.4rem 0"></div>
+          <button style="padding:.6rem 1rem">Login</button>
+        </form>
+    </div>',200)->header('Content-Type','text/html');
+})->name('org.login');
+
+
+/* -------- POST aliases so legacy blade route() calls resolve -------- */
+
+/* (Optional) volunteer POST aliases if any blade references them */
+/* ---- legacy aliases used in org blades ---- */
+Route::get('/organization/login', fn () => redirect()->route('org.login'))
+    ->name('login.organization');
+
+Route::get('/organization/register', fn () => redirect()->route('org.register'))
+    ->name('register.organization');
+/* Volunteer auth entry points (redirects to existing pages) */
+Route::get('/login', fn() => redirect()->route('volunteer.login'))->name('login');
+Route::get('/register', fn() => redirect()->route('volunteer.register'))->name('register');
+/* --- Volunteer social auth --- */
+Route::get('/auth/google/redirect', [\App\Http\Controllers\Auth\SocialAuthController::class, 'googleRedirect'])->name('oauth.google.redirect');
+Route::get('/auth/google/callback', [\App\Http\Controllers\Auth\SocialAuthController::class, 'googleCallback'])->name('oauth.google.callback');
+
+/* Facebook only if FACEBOOK_* exist in .env */
+Route::get('/auth/facebook/redirect', [\App\Http\Controllers\Auth\SocialAuthController::class, 'facebookRedirect'])->name('oauth.facebook.redirect');
+Route::get('/auth/facebook/callback', [\App\Http\Controllers\Auth\SocialAuthController::class, 'facebookCallback'])->name('oauth.facebook.callback');
+Route::get('/org/register', function () {
+    return view()->exists('org.register')
+        ? view('org.register')                                   // has logo + license
+        : view('auth.organization_register', ['type'=>'organization']);
+})->name('org.register');
+Route::post('/org/register', [\App\Http\Controllers\OrganizationRegisterController::class, 'store'])->name('org.register.submit');
+Route::post('/organization/register', [\App\Http\Controllers\OrganizationRegisterController::class, 'store'])->name('register.organization.store');
+use App\Http\Controllers\Auth\UAEPassController;
+
+Route::get('/auth/uaepass/redirect', [UAEPassController::class, 'redirect'])->name('uaepass.redirect');
+Route::get('/auth/uaepass/callback', [UAEPassController::class, 'callback'])->name('uaepass.callback');
+/* Force volunteer login to render a view (break redirect loop) */
+Route::get('/volunteer/login', function () {
+    $view = collect(['auth.volunteer_login','auth/volunteer_login','auth.login','auth/login'])
+        ->first(fn($v)=>view()->exists($v));
+    return view($view, ['type'=>'volunteer']);
+})->name('volunteer.login');
+
+// --- Certificate Verification (QR/Code) ---
+Route::get('/verify/{code}', [\App\Http\Controllers\VerifyController::class, 'show'])->name('verify.show');
+
+// --- Volunteer Profile / Dashboard (auth) ---
+use App\Http\Controllers\ProfileController;
+\Illuminate\Support\Facades\Route::get('/opportunities/{id}', \App\Http\Controllers\Frontend\OpportunityShowController::class)
+    ->where('id','[0-9]+')
+    ->name('public.opportunity.show');
+
+Route::middleware(['web','auth'])->group(function () {
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+    Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
+
+    // Aliases so old links keep working
+    Route::get('/dashboard', fn() => redirect()->route('profile'))->name('dashboard');
+    Route::get('/volunteer/dashboard', fn() => redirect()->route('profile'))->name('vol.dashboard');
+});

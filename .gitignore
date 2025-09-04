@@ -1,0 +1,22 @@
+/vendor/
+/node_modules/
+/public/storage
+/storage/*.key
+/storage/app/*
+!/storage/app/public
+/storage/framework/cache/*
+/storage/framework/sessions/*
+/storage/framework/views/*
+/storage/logs/*
+/.env
+/.env.*
+/composer.lock
+/npm-debug.log
+yarn.lock
+/node_modules
+/.idea
+/.vscode
+# Stray editor backups
+*.php.save*
+*.php.bak*
+*.save.*

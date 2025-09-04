@@ -1,0 +1,144 @@
+=== Wave1 MASTER CHECK 2025-08-20_102015 ===
+PHP 8.4.7 (cli) (built: May  8 2025 11:28:43) (NTS)
+use Illuminate\Http\Request;
+use Illuminate\Cache\RateLimiting\Limit;
+use Illuminate\Support\Facades\RateLimiter;
+$&
+
+namespace App\Providers;
+use Illuminate\Cache\RateLimiting\Limit;
+use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Support\Facades\URL;
+
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\ServiceProvider;
+use Illuminate\Pagination\Paginator;
+
+class AppServiceProvider extends ServiceProvider
+{
+    public function register(): void
+    {
+        //
+    }
+
+    public function boot(): void
+    {
+                                RateLimiter::for('login', function ($request) {
+            $id = (string) ($request->input('email') ?? 'guest');
+            return [Limit::perMinute(5)->by($id.'|'.$request->ip())];
+        });
+RateLimiter::for('global', fn($request) => [Limit::perMinute(120)->by($request->ip())]);
+if (config('app.env') === 'production') { URL::forceScheme('https'); }
+// Shared vars so any layout/partial/error never crashes
+        View::composer('*', function ($view) {
+            $view->with('assetV', config('app.asset_version', '1'));
+            $view->with('rtl', in_array(app()->getLocale(), ['ar','fa','ur','he']));
+        });
+
+        // If you use Bootstrap/Argon pagination
+        if (class_exists(Paginator::class)) {
+            Paginator::useBootstrapFive();
+        }
+    }
+}
+use Illuminate\Http\Request;
+use Illuminate\Cache\RateLimiting\Limit;
+use Illuminate\Support\Facades\RateLimiter;
+$&
+
+namespace App\Providers;
+use Illuminate\Cache\RateLimiting\Limit;
+use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Support\Facades\URL;
+
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\ServiceProvider;
+use Illuminate\Pagination\Paginator;
+
+class AppServiceProvider extends ServiceProvider
+{
+    public function register(): void
+    {
+        //
+    }
+
+    public function boot(): void
+    {
+                                RateLimiter::for('login', function ($request) {
+            $id = (string) ($request->input('email') ?? 'guest');
+            return [Limit::perMinute(5)->by($id.'|'.$request->ip())];
+        });
+RateLimiter::for('global', fn($request) => [Limit::perMinute(120)->by($request->ip())]);
+if (config('app.env') === 'production') { URL::forceScheme('https'); }
+// Shared vars so any layout/partial/error never crashes
+        View::composer('*', function ($view) {
+            $view->with('assetV', config('app.asset_version', '1'));
+            $view->with('rtl', in_array(app()->getLocale(), ['ar','fa','ur','he']));
+        });
+
+        // If you use Bootstrap/Argon pagination
+        if (class_exists(Paginator::class)) {
+            Paginator::useBootstrapFive();
+        }
+    }
+}
+
+In ProviderRepository.php line 206:
+                                                      
+  Class "App\Providers\AppServiceProvider" not found  
+                                                      
+
+
+## Routes snapshot (focus):
+
+## Webroot .htaccess (mod_expires lines):
+13:    13	  Header always set X-XSS-Protection "0"
+22:    22	<IfModule mod_expires.c>
+23:    23	  ExpiresActive On
+24:    24	  ExpiresDefault "access plus 7 days"
+25:    25	  ExpiresByType text/css "access plus 1 year"
+26:    26	  ExpiresByType application/javascript "access plus 1 year"
+27:    27	  ExpiresByType image/svg+xml "access plus 1 year"
+28:    28	  ExpiresByType image/webp "access plus 1 year"
+29:    29	  ExpiresByType image/png "access plus 1 year"
+30:    30	  ExpiresByType image/jpeg "access plus 1 year"
+31:    31	  ExpiresByType font/woff2 "access plus 1 year"
+35:    35	    Header set Cache-Control "public, max-age=31536000, immutable"
+
+## Homepage headers (GET):
+HTTP/1.1 500 Internal Server Error
+
+## Contact assets exist?
+app/Http/Controllers/Public/ContactController.php
+(no ContactMessage mailable)
+resources/views/contact.blade.php
+
+## RateLimiter 'forms' present?
+app/Providers/RouteServiceProvider.php:15:        \Illuminate\Support\Facades\RateLimiter::for('forms', function(\Illuminate\Http\Request $request){
+
+## MicroCache middleware present?
+app/Http/Middleware/MicroCache.php:11:class MicroCache {
+
+## Events model/controller present?
+app/Models/Event.php
+app/Http/Controllers/EventQrController.php:7:class EventQrController extends Controller
+app/Http/Controllers/EventController.php:9:class EventController extends Controller
+app/Http/Controllers/EventRegistrationController.php:10:class EventRegistrationController extends Controller
+app/Http/Controllers/Admin/EventPhotoController.php:9:class EventPhotoController extends Controller
+app/Http/Controllers/Admin/EventController.php:10:class EventController extends Controller
+app/Http/Controllers/Admin/EventAttendanceController.php:8:class EventAttendanceController extends Controller
+app/Http/Controllers/Admin/EventManagementController.php:7:class EventManagementController extends Controller
+app/Http/Controllers/Admin/AdminEventController.php:9:class AdminEventController extends Controller
+app/Http/Controllers/Admin/EventInfoFormController.php:9:class EventInfoFormController extends Controller
+app/Http/Controllers/Admin/EventVolunteerController.php:8:class EventVolunteerController extends Controller
+app/Http/Controllers/Org/EventController.php:12:class EventController extends Controller
+app/Http/Controllers/Org/EventVolunteersController.php:10:class EventVolunteersController extends Controller
+app/Http/Controllers/EventEvaluationController.php:9:class EventEvaluationController extends Controller
+app/Http/Controllers/EventShowController.php:7:class EventShowController extends Controller
+app/Http/Controllers/EventApplicationController.php:9:class EventApplicationController extends Controller
+app/Http/Controllers/EventInfoRequestController.php:8:class EventInfoRequestController extends Controller
+app/Http/Controllers/EventCheckinController.php:9:class EventCheckinController extends Controller
+
+## Org portal controllers/routes present?
+(no Organization controllers)
+(no org routes for opps/apps/settings)

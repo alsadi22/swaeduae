@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body { font-family: 'Tajawal', 'Noto Sans Arabic', 'sans-serif'; }
+::-webkit-scrollbar { width: 8px; background: #e5e7eb; }
+::-webkit-scrollbar-thumb { background: #b6d4fa; border-radius: 8px; }
+a:focus, button:focus { outline: 2px solid #1e3a8a !important; outline-offset: 2px; }
+[tabindex="0"]:focus { outline: 2px solid #1e3a8a !important; }

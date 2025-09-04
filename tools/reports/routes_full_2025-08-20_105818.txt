@@ -1,0 +1,6 @@
+
+In EventsBrowseController.php line 10:
+                                                          
+  syntax error, unexpected token ")", expecting variable  
+                                                          
+

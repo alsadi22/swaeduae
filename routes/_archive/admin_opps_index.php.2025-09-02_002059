@@ -1,0 +1,10 @@
+<?php
+
+use Illuminate\Support\Facades\Route;
+
+Route::prefix('admin')->name('admin.')->middleware(['web','auth:admin'])->group(function () {
+    if (!Route::has('admin.opportunities.index') && class_exists(\App\Http\Controllers\Admin\OpportunityController::class)) {
+        Route::get('/opportunities', [\App\Http\Controllers\Admin\OpportunityController::class, 'index'])
+            ->name('opportunities.index');
+    }
+});

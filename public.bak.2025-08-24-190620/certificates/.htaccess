@@ -1,0 +1,5 @@
+Options -Indexes
+# allow direct access to files themselves (PDF/HTML), just no directory listing
+<FilesMatch "\.(pdf|html)$">
+  Require all granted
+</FilesMatch>

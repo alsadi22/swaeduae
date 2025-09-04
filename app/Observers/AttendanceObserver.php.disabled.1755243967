@@ -1,0 +1,19 @@
+<?php
+
+namespace App\Observers;
+
+use App\Models\Attendance;
+use App\Services\VolunteerHoursService;
+
+class AttendanceObserver
+{
+    public function saved(Attendance $attendance): void
+    {
+        (new VolunteerHoursService())->storeOrUpdateFromAttendance($attendance);
+    }
+
+    public function deleted(Attendance $attendance): void
+    {
+        (new VolunteerHoursService())->storeOrUpdateFromAttendance($attendance);
+    }
+}

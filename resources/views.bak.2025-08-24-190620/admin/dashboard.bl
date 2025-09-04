@@ -1,0 +1,94 @@
+@extends('layouts.admin_theme')
+@section('title', 'Admin Dashboard')
+@section('content')
+<div class="row g-4">
+
+        <di
+            <i 
+            <div class="fs-5">T
+            <div class="fs-3">{{ 
+            <div class="text
+        </div>
+    </div>
+    <div
+        <div class="dashboard-card
+            <i class="bi bi-ca
+         
+            <div class="fs-3"
+            <div class="text-muted small">Upcoming: {{ $eventsUpcoming ?? 0 }}</div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="dashboard-card p-4 text-center">
+            <i class="bi bi-award fs-1 brand"></i>
+            <div class="fs-5">Certificates</div>
+            <div class="fs-3">{{ $totalCertificates ?? 0 }}</div>
+            <div class="text-muted small">Issued this month: {{ $certsMonth ?? 0 }}</div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="dashboard-card p-4 text-center">
+            <i class="bi bi-person-check fs-1 brand"></i>
+            <di
+            <div class="fs-3">{{ $pending
+            <div class="t
+        </div>
+    </div>
+</div>
+<div cl
+    <div 
+        <div cl
+            <h5>User & Event Growth (Month
+            <canvas id="mainAnalyticsCha
+        </div>
+    </div>
+    
+        <
+            <h5>Recent Ac
+            <ul class="list-unstyled" st
+                @foreach($recent
+         
+                @endforeach
+            </ul>
+        <
+        <div class="dashboard-card p-4 
+            <h5>Top Volu
+         
+                @foreach($topVolunteers ?? [] as $vol)
+                    <li class="
+                @endforeach
+            </
+        </div>
+    </div>
+</div>
+@endsection
+@section('scri
+<script src="https://c
+<script>
+const ctx = document.getElementById('mainAnalyticsChart');
+if(ctx){
+
+        type: 'line',
+        data: {
+            labels: {!! json_enco
+         
+                {
+                    label: 'Users',
+       
+                    borderColor: '#
+                },
+                {
+          
+                    data: {!! json_encode($chartData['events'] ?? []) !!},
+                    borderColor: '#12b981', backgroundColor: 'rgba(18,185,129,0.07)', tension: .4
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            plugins: { legend: {display: true} }
+        }
+    });
+}
+</script>
+@endsection

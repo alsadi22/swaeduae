@@ -1,0 +1,14 @@
+/* Skip link + focus ring */
+.skip-link{position:absolute;left:-9999px;top:0}
+.skip-link:focus{left:0;padding:.5rem 1rem;box-shadow:0 0 0 3px #fff,0 0 0 6px #1a73e8}
+:focus-visible{outline:3px solid #1a73e8;outline-offset:2px}
+/* Logical props for LTR/RTL */
+.container{padding-inline:1rem}
+.card{margin-block:1rem;padding-inline:1rem}
+.text-start{text-align:start!important}
+.text-end{text-align:end!important}
+/* RTL helpers */
+[dir="rtl"] .rtl-flip{transform:scaleX(-1)}
+[dir="rtl"] .breadcrumbs,[dir="rtl"] .pagination{flex-direction:row-reverse}
+/* Force LTR inside RTL for emails/codes */
+.dir-ltr{direction:ltr;unicode-bidi:bidi-override}
