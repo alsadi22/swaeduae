@@ -31,8 +31,13 @@ jobs:
           coverage: none
 
       - name: Composer install (if Laravel)
+      - name: Prepare Laravel dirs
+        run: |
+          mkdir -p storage/framework/{cache,sessions,views} bootstrap/cache
+      - name: Set VIEW_COMPILED_PATH
+        run: echo "VIEW_COMPILED_PATH=/tmp" >> $GITHUB_ENV
         if: steps.detect.outputs.laravel == 'true'
-        run: composer install --prefer-dist --no-progress --no-interaction
+        run: composer install --no-interaction --prefer-dist --no-scripts --prefer-dist --no-progress --no-interaction
 
   deploy:
     name: deploy
@@ -68,7 +73,7 @@ jobs:
           if [ -f "$REL_DIR/composer.json" ]; then
             cd "$REL_DIR"
             command -v composer || { echo "Composer missing. Installing..."; sudo apt-get update && sudo apt-get install -y composer; }
-            composer install --no-dev --prefer-dist --no-interaction --optimize-autoloader
+            composer install --no-interaction --prefer-dist --no-scripts --no-dev --prefer-dist --no-interaction --optimize-autoloader
             php artisan storage:link || true
             php artisan migrate --force || true
             php artisan optimize:clear || true
