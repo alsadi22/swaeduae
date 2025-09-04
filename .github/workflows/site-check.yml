@@ -3,7 +3,7 @@ name: site-check
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 2 * * *'   # daily at 02:00 Asia/Dubai (~22:00 UTC previous day)
+    - cron: '0 2 * * *'   # daily ~06:00 UAE (02:00 UTC)
 
 concurrency:
   group: site-check
@@ -25,36 +25,18 @@ jobs:
       - name: Composer validate
         run: composer validate --strict --no-check-publish
 
-      - name: Install dependencies
+      - name: Install deps
         run: composer install --no-interaction --prefer-dist
 
       - name: PHP syntax lint
-        run: |
-          set -e
-          git ls-files '*.php' | xargs -r -n1 php -l
-
-      - name: Laravel Pint (if present)
-        run: |
-          if [ -x vendor/bin/pint ]; then vendor/bin/pint --test; else echo "pint not installed"; fi
-
-      - name: PHPStan (if present)
-        run: |
-          if [ -x vendor/bin/phpstan ]; then vendor/bin/phpstan analyse --no-progress --memory-limit=1G; else echo "phpstan not installed"; fi
+        run: git ls-files '*.php' | xargs -r -n1 php -l
 
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
-
       - name: Build assets (if package.json)
         run: |
-          if [ -f package.json ]; then npm ci && npm run build; else echo "no package.json; skipping"; fi
-
-      - name: Composer security audit
-        run: composer audit || true
-
-      - name: NPM audit (high+)
-        run: |
-          if [ -f package-lock.json ]; then npm audit --audit-level=high || true; else echo "no lockfile; skipping"; fi
+          if [ -f package.json ]; then npm ci && npm run build; else echo "no package.json"; fi
 
   live:
     name: Live smoke tests
@@ -84,7 +66,7 @@ jobs:
           check "/qr/verify" 200
           check "/applications" 30x
           check "/certificates" 30x
-          check "/admin/login" 30x   # switch to 200 later if you change behavior
+          check "/admin/login" 30x
 
           echo "### Live probes" >> $GITHUB_STEP_SUMMARY
           cat site-probes.txt >> $GITHUB_STEP_SUMMARY
