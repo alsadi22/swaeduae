@@ -30,6 +30,11 @@ jobs:
           php-version: '8.3'
           coverage: none
 
+      - name: Set VIEW_COMPILED_PATH for package:discover
+        run: echo "VIEW_COMPILED_PATH=/tmp" >> $GITHUB_ENV
+      - name: Prepare Laravel dirs
+        run: |
+          mkdir -p storage/framework/{cache,sessions,views} bootstrap/cache
       - name: Composer install (if Laravel)
         if: steps.detect.outputs.laravel == 'true'
         run: composer install --prefer-dist --no-progress --no-interaction
