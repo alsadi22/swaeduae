@@ -1,0 +1,28 @@
+<?php
+
+// === CLEAN HEADER (single open tag will be added below) ===
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ContactController;
+
+Route::get('/lang/{locale}', function ($locale) {
+    app()->setLocale($locale);
+    session()->put('app_locale', $locale);
+    return back();
+})->name('lang.switch');
+
+Route::get('/', fn () => view('home'))->name('home');
+Route::get('/contact-us', fn () => view('public.contact'))->name('contact.show');
+Route::get('/contact', fn () => redirect('/contact-us', 302));
+
+Route::post('/contact', [ContactController::class, 'send'])
+    ->middleware(['throttle:5,1'])
+    ->name('contact.send');
+// === END HEADER ===
+
+// === include Agent routes (safe) ===
+if (file_exists(__DIR__ . '/agent.php')) { require __DIR__ . '/agent.php'; }
+
+/* Agent routes loader (no web access unless enabled) */
+if (config('agent.enabled') && file_exists(__DIR__.'/agent.php')) {
+    require __DIR__.'/agent.php';
+}

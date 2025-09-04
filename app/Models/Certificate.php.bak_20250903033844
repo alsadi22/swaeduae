@@ -1,0 +1,33 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+
+class Certificate extends Model {
+    protected  = ['uuid','user_id','opportunity_id','event_id','code','signature','pdf_path','hours','issued_at','revoked_at'];
+    protected  = ['issued_at'=>'datetime','revoked_at'=>'datetime','hours'=>'decimal:2'];
+
+    protected $table = 'certificates';
+    protected $casts = [
+        'issued_at' => 'datetime',
+    ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    // Optional: link to events when certificates.event_id exists
+    public function event()
+    {
+        return $this->belongsTo(Event::class, 'event_id');
+    }
+
+    // Optional: some certs may be tied to an opportunity instead
+    public function opportunity()
+    {
+        return $this->belongsTo(Opportunity::class, 'opportunity_id');
+    }
+}

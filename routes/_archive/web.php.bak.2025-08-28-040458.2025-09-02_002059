@@ -1,0 +1,1482 @@
+<?php
+// TEMP: force "/" to a minimal, known-good stub view
+Route::get("/ping", fn () => "pong")->name("ping");
+Route::view("/", "index")->name("home");
+Route::fallback(fn () => redirect()->route("home"));
+use App\Http\Controllers\ContactController;
+Route::view("/contact","contact")->name("contact");
+Route::post("/contact",[ContactController::class,"send"])
+  ->name("contact.send")
+  ->middleware("throttle:5,1");
+/* --- appended: minimal language switcher --- */
+Route::get('/lang/{locale}', function ($locale) {
+    $allowed = ['en','ar'];       // adjust if you support more
+    if (!in_array($locale, $allowed, true)) { abort(404); }
+    session(['locale' => $locale]);
+    app()->setLocale($locale);
+    return back();
+})->name('lang.switch');
+/* --- appended: lang.switch --- */
+Route::get("/lang/{locale}", function ($locale) {
+    $allowed = ["en","ar"]; if (!in_array($locale, $allowed, true)) abort(404);
+    session(["locale" => $locale]); app()->setLocale($locale); return back();
+})->name("lang.switch");
+/* --- appended: locale.switch --- */
+Route::get("/locale/{locale}", function ($locale) {
+    $allowed = ["en","ar"]; if (!in_array($locale, $allowed, true)) abort(404);
+    session(["locale" => $locale]); app()->setLocale($locale); return back();
+})->name("locale.switch");
+/* --- appended: set.locale --- */
+Route::get("/set-locale/{locale}", function ($locale) {
+    $allowed = ["en","ar"]; if (!in_array($locale, $allowed, true)) abort(404);
+    session(["locale" => $locale]); app()->setLocale($locale); return back();
+})->name("set.locale");
+/* --- appended: alias for route('about') -> route('pages.about') --- */
+Route::get('/__alias/about', fn () => redirect()->route('pages.about'))->name('about');
+/* --- appended: stub for route('destinationdetails') --- */
+Route::get('/destination/{any?}', function ($any = null) {
+    // Minimal placeholder; exists so URL generation works on the home page.
+    return response('Destination details (placeholder)', 200);
+})->where('any', '.*')->name('destinationdetails');
+/* --- auto-stub (append-only): about --- */
+Route::get('/about', function ($any = null) {
+    // Placeholder so route('about') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: about', 200);
+})->where('any', '.*')->name('about');
+/* --- auto-stub (append-only): admin.apps.index --- */
+Route::get('/__auto/admin.apps.index/{any?}', function ($any = null) {
+    // Placeholder so route('admin.apps.index') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: admin.apps.index', 200);
+})->where('any', '.*')->name('admin.apps.index');
+/* --- auto-stub (append-only): admin.attendance.finalize --- */
+Route::get('/__auto/admin.attendance.finalize/{any?}', function ($any = null) {
+    // Placeholder so route('admin.attendance.finalize') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: admin.attendance.finalize', 200);
+})->where('any', '.*')->name('admin.attendance.finalize');
+/* --- auto-stub (append-only): admin.attendance.index --- */
+Route::get('/__auto/admin.attendance.index/{any?}', function ($any = null) {
+    // Placeholder so route('admin.attendance.index') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: admin.attendance.index', 200);
+})->where('any', '.*')->name('admin.attendance.index');
+/* --- auto-stub (append-only): admin.audit.export.csv --- */
+Route::get('/__auto/admin.audit.export.csv/{any?}', function ($any = null) {
+    // Placeholder so route('admin.audit.export.csv') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: admin.audit.export.csv', 200);
+})->where('any', '.*')->name('admin.audit.export.csv');
+/* --- auto-stub (append-only): admin.categories.create --- */
+Route::get('/__auto/admin.categories.create/{any?}', function ($any = null) {
+    // Placeholder so route('admin.categories.create') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: admin.categories.create', 200);
+})->where('any', '.*')->name('admin.categories.create');
+/* --- auto-stub (append-only): admin.categories.destroy --- */
+Route::get('/__auto/admin.categories.destroy/{any?}', function ($any = null) {
+    // Placeholder so route('admin.categories.destroy') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: admin.categories.destroy', 200);
+})->where('any', '.*')->name('admin.categories.destroy');
+/* --- auto-stub (append-only): admin.categories.edit --- */
+Route::get('/__auto/admin.categories.edit/{any?}', function ($any = null) {
+    // Placeholder so route('admin.categories.edit') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: admin.categories.edit', 200);
+})->where('any', '.*')->name('admin.categories.edit');
+/* --- auto-stub (append-only): admin.categories.index --- */
+Route::get('/__auto/admin.categories.index/{any?}', function ($any = null) {
+    // Placeholder so route('admin.categories.index') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: admin.categories.index', 200);
+})->where('any', '.*')->name('admin.categories.index');
+/* --- auto-stub (append-only): admin.categories.store --- */
+Route::get('/__auto/admin.categories.store/{any?}', function ($any = null) {
+    // Placeholder so route('admin.categories.store') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: admin.categories.store', 200);
+})->where('any', '.*')->name('admin.categories.store');
+/* --- auto-stub (append-only): admin.categories.update --- */
+Route::get('/__auto/admin.categories.update/{any?}', function ($any = null) {
+    // Placeholder so route('admin.categories.update') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: admin.categories.update', 200);
+})->where('any', '.*')->name('admin.categories.update');
+/* --- auto-stub (append-only): admin.certificates.index --- */
+Route::get('/__auto/admin.certificates.index/{any?}', function ($any = null) {
+    // Placeholder so route('admin.certificates.index') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: admin.certificates.index', 200);
+})->where('any', '.*')->name('admin.certificates.index');
+/* --- auto-stub (append-only): admin.certificates.resend --- */
+Route::get('/__auto/admin.certificates.resend/{any?}', function ($any = null) {
+    // Placeholder so route('admin.certificates.resend') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: admin.certificates.resend', 200);
+})->where('any', '.*')->name('admin.certificates.resend');
+/* --- auto-stub (append-only): admin.certificates.store --- */
+Route::get('/__auto/admin.certificates.store/{any?}', function ($any = null) {
+    // Placeholder so route('admin.certificates.store') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: admin.certificates.store', 200);
+})->where('any', '.*')->name('admin.certificates.store');
+/* --- auto-stub (append-only): admin.dashboard --- */
+Route::get('/__auto/admin.dashboard/{any?}', function ($any = null) {
+    // Placeholder so route('admin.dashboard') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: admin.dashboard', 200);
+})->where('any', '.*')->name('admin.dashboard');
+/* --- auto-stub (append-only): admin.events.create --- */
+Route::get('/events/{any?}', function ($any = null) {
+    // Placeholder so route('admin.events.create') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: admin.events.create', 200);
+})->where('any', '.*')->name('admin.events.create');
+/* --- auto-stub (append-only): admin.events.destroy --- */
+Route::get('/events/{any?}', function ($any = null) {
+    // Placeholder so route('admin.events.destroy') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: admin.events.destroy', 200);
+})->where('any', '.*')->name('admin.events.destroy');
+/* --- auto-stub (append-only): admin.events.edit --- */
+Route::get('/events/{any?}', function ($any = null) {
+    // Placeholder so route('admin.events.edit') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: admin.events.edit', 200);
+})->where('any', '.*')->name('admin.events.edit');
+/* --- auto-stub (append-only): admin.events.index --- */
+Route::get('/events/{any?}', function ($any = null) {
+    // Placeholder so route('admin.events.index') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: admin.events.index', 200);
+})->where('any', '.*')->name('admin.events.index');
+/* --- auto-stub (append-only): admin.events.store --- */
+Route::get('/events/{any?}', function ($any = null) {
+    // Placeholder so route('admin.events.store') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: admin.events.store', 200);
+})->where('any', '.*')->name('admin.events.store');
+/* --- auto-stub (append-only): admin.events.update --- */
+Route::get('/events/{any?}', function ($any = null) {
+    // Placeholder so route('admin.events.update') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: admin.events.update', 200);
+})->where('any', '.*')->name('admin.events.update');
+/* --- auto-stub (append-only): admin.export.applications --- */
+Route::get('/__auto/admin.export.applications/{any?}', function ($any = null) {
+    // Placeholder so route('admin.export.applications') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: admin.export.applications', 200);
+})->where('any', '.*')->name('admin.export.applications');
+/* --- auto-stub (append-only): admin.export.certificates --- */
+Route::get('/__auto/admin.export.certificates/{any?}', function ($any = null) {
+    // Placeholder so route('admin.export.certificates') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: admin.export.certificates', 200);
+})->where('any', '.*')->name('admin.export.certificates');
+/* --- auto-stub (append-only): admin.export.hours --- */
+Route::get('/__auto/admin.export.hours/{any?}', function ($any = null) {
+    // Placeholder so route('admin.export.hours') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: admin.export.hours', 200);
+})->where('any', '.*')->name('admin.export.hours');
+/* --- auto-stub (append-only): admin.export.users --- */
+Route::get('/__auto/admin.export.users/{any?}', function ($any = null) {
+    // Placeholder so route('admin.export.users') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: admin.export.users', 200);
+})->where('any', '.*')->name('admin.export.users');
+/* --- auto-stub (append-only): admin.hours.all --- */
+Route::get('/__auto/admin.hours.all/{any?}', function ($any = null) {
+    // Placeholder so route('admin.hours.all') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: admin.hours.all', 200);
+})->where('any', '.*')->name('admin.hours.all');
+/* --- auto-stub (append-only): admin.kyc.approve --- */
+Route::get('/__auto/admin.kyc.approve/{any?}', function ($any = null) {
+    // Placeholder so route('admin.kyc.approve') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: admin.kyc.approve', 200);
+})->where('any', '.*')->name('admin.kyc.approve');
+/* --- auto-stub (append-only): admin.kyc.decline --- */
+Route::get('/__auto/admin.kyc.decline/{any?}', function ($any = null) {
+    // Placeholder so route('admin.kyc.decline') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: admin.kyc.decline', 200);
+})->where('any', '.*')->name('admin.kyc.decline');
+/* --- auto-stub (append-only): admin.kyc.download --- */
+Route::get('/__auto/admin.kyc.download/{any?}', function ($any = null) {
+    // Placeholder so route('admin.kyc.download') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: admin.kyc.download', 200);
+})->where('any', '.*')->name('admin.kyc.download');
+/* --- auto-stub (append-only): admin.kyc.reject --- */
+Route::get('/__auto/admin.kyc.reject/{any?}', function ($any = null) {
+    // Placeholder so route('admin.kyc.reject') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: admin.kyc.reject', 200);
+})->where('any', '.*')->name('admin.kyc.reject');
+/* --- auto-stub (append-only): admin.learning.index --- */
+Route::get('/__auto/admin.learning.index/{any?}', function ($any = null) {
+    // Placeholder so route('admin.learning.index') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: admin.learning.index', 200);
+})->where('any', '.*')->name('admin.learning.index');
+/* --- auto-stub (append-only): admin.learning.update --- */
+Route::get('/__auto/admin.learning.update/{any?}', function ($any = null) {
+    // Placeholder so route('admin.learning.update') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: admin.learning.update', 200);
+})->where('any', '.*')->name('admin.learning.update');
+/* --- auto-stub (append-only): admin.login.post --- */
+Route::get('/__auto/admin.login.post/{any?}', function ($any = null) {
+    // Placeholder so route('admin.login.post') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: admin.login.post', 200);
+})->where('any', '.*')->name('admin.login.post');
+/* --- auto-stub (append-only): admin.logout --- */
+Route::get('/__auto/admin.logout/{any?}', function ($any = null) {
+    // Placeholder so route('admin.logout') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: admin.logout', 200);
+})->where('any', '.*')->name('admin.logout');
+/* --- auto-stub (append-only): admin.news.store --- */
+Route::get('/__auto/admin.news.store/{any?}', function ($any = null) {
+    // Placeholder so route('admin.news.store') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: admin.news.store', 200);
+})->where('any', '.*')->name('admin.news.store');
+/* --- auto-stub (append-only): admin.opportunities --- */
+Route::get('/__auto/admin.opportunities/{any?}', function ($any = null) {
+    // Placeholder so route('admin.opportunities') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: admin.opportunities', 200);
+})->where('any', '.*')->name('admin.opportunities');
+/* --- auto-stub (append-only): admin.opportunities.attendance.update --- */
+Route::get('/__auto/admin.opportunities.attendance.update/{any?}', function ($any = null) {
+    // Placeholder so route('admin.opportunities.attendance.update') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: admin.opportunities.attendance.update', 200);
+})->where('any', '.*')->name('admin.opportunities.attendance.update');
+/* --- auto-stub (append-only): admin.opportunities.complete --- */
+Route::get('/__auto/admin.opportunities.complete/{any?}', function ($any = null) {
+    // Placeholder so route('admin.opportunities.complete') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: admin.opportunities.complete', 200);
+})->where('any', '.*')->name('admin.opportunities.complete');
+/* --- auto-stub (append-only): admin.opportunities.create --- */
+Route::get('/__auto/admin.opportunities.create/{any?}', function ($any = null) {
+    // Placeholder so route('admin.opportunities.create') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: admin.opportunities.create', 200);
+})->where('any', '.*')->name('admin.opportunities.create');
+/* --- auto-stub (append-only): admin.opportunities.destroy --- */
+Route::get('/__auto/admin.opportunities.destroy/{any?}', function ($any = null) {
+    // Placeholder so route('admin.opportunities.destroy') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: admin.opportunities.destroy', 200);
+})->where('any', '.*')->name('admin.opportunities.destroy');
+/* --- auto-stub (append-only): admin.opportunities.edit --- */
+Route::get('/__auto/admin.opportunities.edit/{any?}', function ($any = null) {
+    // Placeholder so route('admin.opportunities.edit') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: admin.opportunities.edit', 200);
+})->where('any', '.*')->name('admin.opportunities.edit');
+/* --- auto-stub (append-only): admin.opportunities.finalize.issue --- */
+Route::get('/__auto/admin.opportunities.finalize.issue/{any?}', function ($any = null) {
+    // Placeholder so route('admin.opportunities.finalize.issue') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: admin.opportunities.finalize.issue', 200);
+})->where('any', '.*')->name('admin.opportunities.finalize.issue');
+/* --- auto-stub (append-only): admin.opportunities.index --- */
+Route::get('/__auto/admin.opportunities.index/{any?}', function ($any = null) {
+    // Placeholder so route('admin.opportunities.index') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: admin.opportunities.index', 200);
+})->where('any', '.*')->name('admin.opportunities.index');
+/* --- auto-stub (append-only): admin.opportunities.qr.finalize --- */
+Route::get('/__auto/admin.opportunities.qr.finalize/{any?}', function ($any = null) {
+    // Placeholder so route('admin.opportunities.qr.finalize') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: admin.opportunities.qr.finalize', 200);
+})->where('any', '.*')->name('admin.opportunities.qr.finalize');
+/* --- auto-stub (append-only): admin.opportunities.qr.issue --- */
+Route::get('/__auto/admin.opportunities.qr.issue/{any?}', function ($any = null) {
+    // Placeholder so route('admin.opportunities.qr.issue') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: admin.opportunities.qr.issue', 200);
+})->where('any', '.*')->name('admin.opportunities.qr.issue');
+/* --- auto-stub (append-only): admin.opportunities.qr.reset --- */
+Route::get('/__auto/admin.opportunities.qr.reset/{any?}', function ($any = null) {
+    // Placeholder so route('admin.opportunities.qr.reset') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: admin.opportunities.qr.reset', 200);
+})->where('any', '.*')->name('admin.opportunities.qr.reset');
+/* --- auto-stub (append-only): admin.opportunities.store --- */
+Route::get('/__auto/admin.opportunities.store/{any?}', function ($any = null) {
+    // Placeholder so route('admin.opportunities.store') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: admin.opportunities.store', 200);
+})->where('any', '.*')->name('admin.opportunities.store');
+/* --- auto-stub (append-only): admin.opportunities.update --- */
+Route::get('/__auto/admin.opportunities.update/{any?}', function ($any = null) {
+    // Placeholder so route('admin.opportunities.update') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: admin.opportunities.update', 200);
+})->where('any', '.*')->name('admin.opportunities.update');
+/* --- auto-stub (append-only): admin.organizations.approve --- */
+Route::get('/__auto/admin.organizations.approve/{any?}', function ($any = null) {
+    // Placeholder so route('admin.organizations.approve') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: admin.organizations.approve', 200);
+})->where('any', '.*')->name('admin.organizations.approve');
+/* --- auto-stub (append-only): admin.organizations.create --- */
+Route::get('/__auto/admin.organizations.create/{any?}', function ($any = null) {
+    // Placeholder so route('admin.organizations.create') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: admin.organizations.create', 200);
+})->where('any', '.*')->name('admin.organizations.create');
+/* --- auto-stub (append-only): admin.organizations.destroy --- */
+Route::get('/__auto/admin.organizations.destroy/{any?}', function ($any = null) {
+    // Placeholder so route('admin.organizations.destroy') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: admin.organizations.destroy', 200);
+})->where('any', '.*')->name('admin.organizations.destroy');
+/* --- auto-stub (append-only): admin.organizations.edit --- */
+Route::get('/__auto/admin.organizations.edit/{any?}', function ($any = null) {
+    // Placeholder so route('admin.organizations.edit') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: admin.organizations.edit', 200);
+})->where('any', '.*')->name('admin.organizations.edit');
+/* --- auto-stub (append-only): admin.organizations.index --- */
+Route::get('/__auto/admin.organizations.index/{any?}', function ($any = null) {
+    // Placeholder so route('admin.organizations.index') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: admin.organizations.index', 200);
+})->where('any', '.*')->name('admin.organizations.index');
+/* --- auto-stub (append-only): admin.organizations.reject --- */
+Route::get('/__auto/admin.organizations.reject/{any?}', function ($any = null) {
+    // Placeholder so route('admin.organizations.reject') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: admin.organizations.reject', 200);
+})->where('any', '.*')->name('admin.organizations.reject');
+/* --- auto-stub (append-only): admin.organizations.store --- */
+Route::get('/__auto/admin.organizations.store/{any?}', function ($any = null) {
+    // Placeholder so route('admin.organizations.store') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: admin.organizations.store', 200);
+})->where('any', '.*')->name('admin.organizations.store');
+/* --- auto-stub (append-only): admin.organizations.update --- */
+Route::get('/__auto/admin.organizations.update/{any?}', function ($any = null) {
+    // Placeholder so route('admin.organizations.update') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: admin.organizations.update', 200);
+})->where('any', '.*')->name('admin.organizations.update');
+/* --- auto-stub (append-only): admin.partners.create --- */
+Route::get('/__auto/admin.partners.create/{any?}', function ($any = null) {
+    // Placeholder so route('admin.partners.create') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: admin.partners.create', 200);
+})->where('any', '.*')->name('admin.partners.create');
+/* --- auto-stub (append-only): admin.partners.destroy --- */
+Route::get('/__auto/admin.partners.destroy/{any?}', function ($any = null) {
+    // Placeholder so route('admin.partners.destroy') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: admin.partners.destroy', 200);
+})->where('any', '.*')->name('admin.partners.destroy');
+/* --- auto-stub (append-only): admin.partners.edit --- */
+Route::get('/__auto/admin.partners.edit/{any?}', function ($any = null) {
+    // Placeholder so route('admin.partners.edit') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: admin.partners.edit', 200);
+})->where('any', '.*')->name('admin.partners.edit');
+/* --- auto-stub (append-only): admin.partners.index --- */
+Route::get('/__auto/admin.partners.index/{any?}', function ($any = null) {
+    // Placeholder so route('admin.partners.index') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: admin.partners.index', 200);
+})->where('any', '.*')->name('admin.partners.index');
+/* --- auto-stub (append-only): admin.partners.store --- */
+Route::get('/__auto/admin.partners.store/{any?}', function ($any = null) {
+    // Placeholder so route('admin.partners.store') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: admin.partners.store', 200);
+})->where('any', '.*')->name('admin.partners.store');
+/* --- auto-stub (append-only): admin.partners.update --- */
+Route::get('/__auto/admin.partners.update/{any?}', function ($any = null) {
+    // Placeholder so route('admin.partners.update') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: admin.partners.update', 200);
+})->where('any', '.*')->name('admin.partners.update');
+/* --- auto-stub (append-only): admin.perms.store --- */
+Route::get('/__auto/admin.perms.store/{any?}', function ($any = null) {
+    // Placeholder so route('admin.perms.store') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: admin.perms.store', 200);
+})->where('any', '.*')->name('admin.perms.store');
+/* --- auto-stub (append-only): admin.profile.update --- */
+Route::get('/__auto/admin.profile.update/{any?}', function ($any = null) {
+    // Placeholder so route('admin.profile.update') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: admin.profile.update', 200);
+})->where('any', '.*')->name('admin.profile.update');
+/* --- auto-stub (append-only): admin.roles.perms --- */
+Route::get('/__auto/admin.roles.perms/{any?}', function ($any = null) {
+    // Placeholder so route('admin.roles.perms') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: admin.roles.perms', 200);
+})->where('any', '.*')->name('admin.roles.perms');
+/* --- auto-stub (append-only): admin.roles.store --- */
+Route::get('/__auto/admin.roles.store/{any?}', function ($any = null) {
+    // Placeholder so route('admin.roles.store') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: admin.roles.store', 200);
+})->where('any', '.*')->name('admin.roles.store');
+/* --- auto-stub (append-only): admin.root --- */
+Route::get('/__auto/admin.root/{any?}', function ($any = null) {
+    // Placeholder so route('admin.root') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: admin.root', 200);
+})->where('any', '.*')->name('admin.root');
+/* --- auto-stub (append-only): admin.settings.index --- */
+Route::get('/__auto/admin.settings.index/{any?}', function ($any = null) {
+    // Placeholder so route('admin.settings.index') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: admin.settings.index', 200);
+})->where('any', '.*')->name('admin.settings.index');
+/* --- auto-stub (append-only): admin.settings.update --- */
+Route::get('/__auto/admin.settings.update/{any?}', function ($any = null) {
+    // Placeholder so route('admin.settings.update') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: admin.settings.update', 200);
+})->where('any', '.*')->name('admin.settings.update');
+/* --- auto-stub (append-only): admin.tools.finalizeCerts.post --- */
+Route::get('/__auto/admin.tools.finalizeCerts.post/{any?}', function ($any = null) {
+    // Placeholder so route('admin.tools.finalizeCerts.post') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: admin.tools.finalizeCerts.post', 200);
+})->where('any', '.*')->name('admin.tools.finalizeCerts.post');
+/* --- auto-stub (append-only): admin.users --- */
+Route::get('/__auto/admin.users/{any?}', function ($any = null) {
+    // Placeholder so route('admin.users') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: admin.users', 200);
+})->where('any', '.*')->name('admin.users');
+/* --- auto-stub (append-only): admin.users.edit --- */
+Route::get('/__auto/admin.users.edit/{any?}', function ($any = null) {
+    // Placeholder so route('admin.users.edit') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: admin.users.edit', 200);
+})->where('any', '.*')->name('admin.users.edit');
+/* --- auto-stub (append-only): admin.users.index --- */
+Route::get('/__auto/admin.users.index/{any?}', function ($any = null) {
+    // Placeholder so route('admin.users.index') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: admin.users.index', 200);
+})->where('any', '.*')->name('admin.users.index');
+/* --- auto-stub (append-only): admin.users.update --- */
+Route::get('/__auto/admin.users.update/{any?}', function ($any = null) {
+    // Placeholder so route('admin.users.update') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: admin.users.update', 200);
+})->where('any', '.*')->name('admin.users.update');
+/* --- auto-stub (append-only): apply.form --- */
+Route::get('/__auto/apply.form/{any?}', function ($any = null) {
+    // Placeholder so route('apply.form') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: apply.form', 200);
+})->where('any', '.*')->name('apply.form');
+/* --- auto-stub (append-only): apply.store --- */
+Route::get('/__auto/apply.store/{any?}', function ($any = null) {
+    // Placeholder so route('apply.store') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: apply.store', 200);
+})->where('any', '.*')->name('apply.store');
+/* --- auto-stub (append-only): attendance.checkin --- */
+Route::get('/__auto/attendance.checkin/{any?}', function ($any = null) {
+    // Placeholder so route('attendance.checkin') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: attendance.checkin', 200);
+})->where('any', '.*')->name('attendance.checkin');
+/* --- auto-stub (append-only): attendance.checkout --- */
+Route::get('/__auto/attendance.checkout/{any?}', function ($any = null) {
+    // Placeholder so route('attendance.checkout') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: attendance.checkout', 200);
+})->where('any', '.*')->name('attendance.checkout');
+/* --- auto-stub (append-only): blog --- */
+Route::get('/blog/{any?}', function ($any = null) {
+    // Placeholder so route('blog') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: blog', 200);
+})->where('any', '.*')->name('blog');
+/* --- auto-stub (append-only): blogdetails --- */
+Route::get('/blog/{any?}', function ($any = null) {
+    // Placeholder so route('blogdetails') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: blogdetails', 200);
+})->where('any', '.*')->name('blogdetails');
+/* --- auto-stub (append-only): categories.show --- */
+Route::get('/__auto/categories.show/{any?}', function ($any = null) {
+    // Placeholder so route('categories.show') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: categories.show', 200);
+})->where('any', '.*')->name('categories.show');
+/* --- auto-stub (append-only): certificates.issue --- */
+Route::get('/__auto/certificates.issue/{any?}', function ($any = null) {
+    // Placeholder so route('certificates.issue') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: certificates.issue', 200);
+})->where('any', '.*')->name('certificates.issue');
+/* --- auto-stub (append-only): certificates.my --- */
+Route::get('/__auto/certificates.my/{any?}', function ($any = null) {
+    // Placeholder so route('certificates.my') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: certificates.my', 200);
+})->where('any', '.*')->name('certificates.my');
+/* --- auto-stub (append-only): certificates.pdf --- */
+Route::get('/__auto/certificates.pdf/{any?}', function ($any = null) {
+    // Placeholder so route('certificates.pdf') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: certificates.pdf', 200);
+})->where('any', '.*')->name('certificates.pdf');
+/* --- auto-stub (append-only): certificates.show --- */
+Route::get('/__auto/certificates.show/{any?}', function ($any = null) {
+    // Placeholder so route('certificates.show') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: certificates.show', 200);
+})->where('any', '.*')->name('certificates.show');
+/* --- auto-stub (append-only): certificates.verify --- */
+Route::get('/__auto/certificates.verify/{any?}', function ($any = null) {
+    // Placeholder so route('certificates.verify') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: certificates.verify', 200);
+})->where('any', '.*')->name('certificates.verify');
+/* --- auto-stub (append-only): cert.verify --- */
+Route::get('/__auto/cert.verify/{any?}', function ($any = null) {
+    // Placeholder so route('cert.verify') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: cert.verify', 200);
+})->where('any', '.*')->name('cert.verify');
+/* --- auto-stub (append-only): contact --- */
+Route::get('/contact', function ($any = null) {
+    // Placeholder so route('contact') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: contact', 200);
+})->where('any', '.*')->name('contact');
+/* --- auto-stub (append-only): contact.send --- */
+Route::get('/contact', function ($any = null) {
+    // Placeholder so route('contact.send') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: contact.send', 200);
+})->where('any', '.*')->name('contact.send');
+/* --- auto-stub (append-only): contact.show --- */
+Route::get('/contact', function ($any = null) {
+    // Placeholder so route('contact.show') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: contact.show', 200);
+})->where('any', '.*')->name('contact.show');
+/* --- auto-stub (append-only): contact.submit --- */
+Route::get('/contact', function ($any = null) {
+    // Placeholder so route('contact.submit') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: contact.submit', 200);
+})->where('any', '.*')->name('contact.submit');
+/* --- auto-stub (append-only): dashboard --- */
+Route::get('/__auto/dashboard/{any?}', function ($any = null) {
+    // Placeholder so route('dashboard') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: dashboard', 200);
+})->where('any', '.*')->name('dashboard');
+/* --- auto-stub (append-only): destination --- */
+Route::get('/destination/{any?}', function ($any = null) {
+    // Placeholder so route('destination') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: destination', 200);
+})->where('any', '.*')->name('destination');
+/* --- auto-stub (append-only): destinationdetails --- */
+Route::get('/destination/{any?}', function ($any = null) {
+    // Placeholder so route('destinationdetails') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: destinationdetails', 200);
+})->where('any', '.*')->name('destinationdetails');
+/* --- auto-stub (append-only): events.apply --- */
+Route::get('/events/{any?}', function ($any = null) {
+    // Placeholder so route('events.apply') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: events.apply', 200);
+})->where('any', '.*')->name('events.apply');
+/* --- auto-stub (append-only): events.browse --- */
+Route::get('/events/{any?}', function ($any = null) {
+    // Placeholder so route('events.browse') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: events.browse', 200);
+})->where('any', '.*')->name('events.browse');
+/* --- auto-stub (append-only): events.index --- */
+Route::get('/events/{any?}', function ($any = null) {
+    // Placeholder so route('events.index') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: events.index', 200);
+})->where('any', '.*')->name('events.index');
+/* --- auto-stub (append-only): events.show --- */
+Route::get('/events/{any?}', function ($any = null) {
+    // Placeholder so route('events.show') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: events.show', 200);
+})->where('any', '.*')->name('events.show');
+/* --- auto-stub (append-only): faq --- */
+Route::get('/__auto/faq/{any?}', function ($any = null) {
+    // Placeholder so route('faq') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: faq', 200);
+})->where('any', '.*')->name('faq');
+/* --- auto-stub (append-only): home --- */
+Route::get('/__auto/home/{any?}', function ($any = null) {
+    // Placeholder so route('home') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: home', 200);
+})->where('any', '.*')->name('home');
+/* --- auto-stub (append-only): id --- */
+Route::get('/__auto/id/{any?}', function ($any = null) {
+    // Placeholder so route('id') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: id', 200);
+})->where('any', '.*')->name('id');
+/* --- auto-stub (append-only): index --- */
+Route::get('/__auto/index/{any?}', function ($any = null) {
+    // Placeholder so route('index') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: index', 200);
+})->where('any', '.*')->name('index');
+/* --- auto-stub (append-only): index2 --- */
+Route::get('/__auto/index2/{any?}', function ($any = null) {
+    // Placeholder so route('index2') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: index2', 200);
+})->where('any', '.*')->name('index2');
+/* --- auto-stub (append-only): index3 --- */
+Route::get('/__auto/index3/{any?}', function ($any = null) {
+    // Placeholder so route('index3') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: index3', 200);
+})->where('any', '.*')->name('index3');
+/* --- auto-stub (append-only): kyc.upload --- */
+Route::get('/__auto/kyc.upload/{any?}', function ($any = null) {
+    // Placeholder so route('kyc.upload') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: kyc.upload', 200);
+})->where('any', '.*')->name('kyc.upload');
+/* --- auto-stub (append-only): lang.switch --- */
+Route::get('/__auto/lang.switch/{any?}', function ($any = null) {
+    // Placeholder so route('lang.switch') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: lang.switch', 200);
+})->where('any', '.*')->name('lang.switch');
+/* --- auto-stub (append-only): learning.store --- */
+Route::get('/__auto/learning.store/{any?}', function ($any = null) {
+    // Placeholder so route('learning.store') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: learning.store', 200);
+})->where('any', '.*')->name('learning.store');
+/* --- auto-stub (append-only): locale.switch --- */
+Route::get('/__auto/locale.switch/{any?}', function ($any = null) {
+    // Placeholder so route('locale.switch') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: locale.switch', 200);
+})->where('any', '.*')->name('locale.switch');
+/* --- auto-stub (append-only): login --- */
+Route::get('/__auto/login/{any?}', function ($any = null) {
+    // Placeholder so route('login') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: login', 200);
+})->where('any', '.*')->name('login');
+/* --- auto-stub (append-only): login.email --- */
+Route::get('/__auto/login.email/{any?}', function ($any = null) {
+    // Placeholder so route('login.email') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: login.email', 200);
+})->where('any', '.*')->name('login.email');
+/* --- auto-stub (append-only): login.organization --- */
+Route::get('/__auto/login.organization/{any?}', function ($any = null) {
+    // Placeholder so route('login.organization') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: login.organization', 200);
+})->where('any', '.*')->name('login.organization');
+/* --- auto-stub (append-only): login.perform --- */
+Route::get('/__auto/login.perform/{any?}', function ($any = null) {
+    // Placeholder so route('login.perform') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: login.perform', 200);
+})->where('any', '.*')->name('login.perform');
+/* --- auto-stub (append-only): login.volunteer --- */
+Route::get('/__auto/login.volunteer/{any?}', function ($any = null) {
+    // Placeholder so route('login.volunteer') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: login.volunteer', 200);
+})->where('any', '.*')->name('login.volunteer');
+/* --- auto-stub (append-only): logout --- */
+Route::get('/__auto/logout/{any?}', function ($any = null) {
+    // Placeholder so route('logout') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: logout', 200);
+})->where('any', '.*')->name('logout');
+/* --- auto-stub (append-only): my.certificates --- */
+Route::get('/__auto/my.certificates/{any?}', function ($any = null) {
+    // Placeholder so route('my.certificates') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: my.certificates', 200);
+})->where('any', '.*')->name('my.certificates');
+/* --- auto-stub (append-only): my.certificates.download --- */
+Route::get('/__auto/my.certificates.download/{any?}', function ($any = null) {
+    // Placeholder so route('my.certificates.download') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: my.certificates.download', 200);
+})->where('any', '.*')->name('my.certificates.download');
+/* --- auto-stub (append-only): my.hours --- */
+Route::get('/__auto/my.hours/{any?}', function ($any = null) {
+    // Placeholder so route('my.hours') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: my.hours', 200);
+})->where('any', '.*')->name('my.hours');
+/* --- auto-stub (append-only): notifications.read --- */
+Route::get('/__auto/notifications.read/{any?}', function ($any = null) {
+    // Placeholder so route('notifications.read') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: notifications.read', 200);
+})->where('any', '.*')->name('notifications.read');
+/* --- auto-stub (append-only): notifications.readAll --- */
+Route::get('/__auto/notifications.readAll/{any?}', function ($any = null) {
+    // Placeholder so route('notifications.readAll') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: notifications.readAll', 200);
+})->where('any', '.*')->name('notifications.readAll');
+/* --- auto-stub (append-only): notifications.test --- */
+Route::get('/__auto/notifications.test/{any?}', function ($any = null) {
+    // Placeholder so route('notifications.test') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: notifications.test', 200);
+})->where('any', '.*')->name('notifications.test');
+/* --- auto-stub (append-only): opportunities.apply --- */
+Route::get('/__auto/opportunities.apply/{any?}', function ($any = null) {
+    // Placeholder so route('opportunities.apply') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: opportunities.apply', 200);
+})->where('any', '.*')->name('opportunities.apply');
+/* --- auto-stub (append-only): opportunities.attendances.csv --- */
+Route::get('/__auto/opportunities.attendances.csv/{any?}', function ($any = null) {
+    // Placeholder so route('opportunities.attendances.csv') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: opportunities.attendances.csv', 200);
+})->where('any', '.*')->name('opportunities.attendances.csv');
+/* --- auto-stub (append-only): opportunities.index --- */
+Route::get('/__auto/opportunities.index/{any?}', function ($any = null) {
+    // Placeholder so route('opportunities.index') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: opportunities.index', 200);
+})->where('any', '.*')->name('opportunities.index');
+/* --- auto-stub (append-only): opportunities.qr --- */
+Route::get('/__auto/opportunities.qr/{any?}', function ($any = null) {
+    // Placeholder so route('opportunities.qr') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: opportunities.qr', 200);
+})->where('any', '.*')->name('opportunities.qr');
+/* --- auto-stub (append-only): opportunities.show --- */
+Route::get('/__auto/opportunities.show/{any?}', function ($any = null) {
+    // Placeholder so route('opportunities.show') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: opportunities.show', 200);
+})->where('any', '.*')->name('opportunities.show');
+/* --- auto-stub (append-only): opportunities.withdraw --- */
+Route::get('/__auto/opportunities.withdraw/{any?}', function ($any = null) {
+    // Placeholder so route('opportunities.withdraw') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: opportunities.withdraw', 200);
+})->where('any', '.*')->name('opportunities.withdraw');
+/* --- auto-stub (append-only): opps.public.show --- */
+Route::get('/__auto/opps.public.show/{any?}', function ($any = null) {
+    // Placeholder so route('opps.public.show') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: opps.public.show', 200);
+})->where('any', '.*')->name('opps.public.show');
+/* --- auto-stub (append-only): organization.opportunities.create --- */
+Route::get('/__auto/organization.opportunities.create/{any?}', function ($any = null) {
+    // Placeholder so route('organization.opportunities.create') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: organization.opportunities.create', 200);
+})->where('any', '.*')->name('organization.opportunities.create');
+/* --- auto-stub (append-only): organization.register.store --- */
+Route::get('/__auto/organization.register.store/{any?}', function ($any = null) {
+    // Placeholder so route('organization.register.store') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: organization.register.store', 200);
+})->where('any', '.*')->name('organization.register.store');
+/* --- auto-stub (append-only): organizations.register --- */
+Route::get('/__auto/organizations.register/{any?}', function ($any = null) {
+    // Placeholder so route('organizations.register') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: organizations.register', 200);
+})->where('any', '.*')->name('organizations.register');
+/* --- auto-stub (append-only): organizations.register.store --- */
+Route::get('/__auto/organizations.register.store/{any?}', function ($any = null) {
+    // Placeholder so route('organizations.register.store') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: organizations.register.store', 200);
+})->where('any', '.*')->name('organizations.register.store');
+/* --- auto-stub (append-only): org.applicants.decision.bulk --- */
+Route::get('/__auto/org.applicants.decision.bulk/{any?}', function ($any = null) {
+    // Placeholder so route('org.applicants.decision.bulk') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: org.applicants.decision.bulk', 200);
+})->where('any', '.*')->name('org.applicants.decision.bulk');
+/* --- auto-stub (append-only): org.applicants.decision.single --- */
+Route::get('/__auto/org.applicants.decision.single/{any?}', function ($any = null) {
+    // Placeholder so route('org.applicants.decision.single') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: org.applicants.decision.single', 200);
+})->where('any', '.*')->name('org.applicants.decision.single');
+/* --- auto-stub (append-only): org.attendance.finalize --- */
+Route::get('/__auto/org.attendance.finalize/{any?}', function ($any = null) {
+    // Placeholder so route('org.attendance.finalize') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: org.attendance.finalize', 200);
+})->where('any', '.*')->name('org.attendance.finalize');
+/* --- auto-stub (append-only): org.attendance.minutes.update --- */
+Route::get('/__auto/org.attendance.minutes.update/{any?}', function ($any = null) {
+    // Placeholder so route('org.attendance.minutes.update') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: org.attendance.minutes.update', 200);
+})->where('any', '.*')->name('org.attendance.minutes.update');
+/* --- auto-stub (append-only): org.attendance.no_show.toggle --- */
+Route::get('/__auto/org.attendance.no_show.toggle/{any?}', function ($any = null) {
+    // Placeholder so route('org.attendance.no_show.toggle') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: org.attendance.no_show.toggle', 200);
+})->where('any', '.*')->name('org.attendance.no_show.toggle');
+/* --- auto-stub (append-only): org.attendances.cert.resend --- */
+Route::get('/__auto/org.attendances.cert.resend/{any?}', function ($any = null) {
+    // Placeholder so route('org.attendances.cert.resend') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: org.attendances.cert.resend', 200);
+})->where('any', '.*')->name('org.attendances.cert.resend');
+/* --- auto-stub (append-only): org.attendances.check --- */
+Route::get('/__auto/org.attendances.check/{any?}', function ($any = null) {
+    // Placeholder so route('org.attendances.check') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: org.attendances.check', 200);
+})->where('any', '.*')->name('org.attendances.check');
+/* --- auto-stub (append-only): org.attendances.minutes --- */
+Route::get('/__auto/org.attendances.minutes/{any?}', function ($any = null) {
+    // Placeholder so route('org.attendances.minutes') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: org.attendances.minutes', 200);
+})->where('any', '.*')->name('org.attendances.minutes');
+/* --- auto-stub (append-only): org.attendances.minutes.update --- */
+Route::get('/__auto/org.attendances.minutes.update/{any?}', function ($any = null) {
+    // Placeholder so route('org.attendances.minutes.update') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: org.attendances.minutes.update', 200);
+})->where('any', '.*')->name('org.attendances.minutes.update');
+/* --- auto-stub (append-only): org.attendances.no_show --- */
+Route::get('/__auto/org.attendances.no_show/{any?}', function ($any = null) {
+    // Placeholder so route('org.attendances.no_show') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: org.attendances.no_show', 200);
+})->where('any', '.*')->name('org.attendances.no_show');
+/* --- auto-stub (append-only): org.certificates.export.csv --- */
+Route::get('/__auto/org.certificates.export.csv/{any?}', function ($any = null) {
+    // Placeholder so route('org.certificates.export.csv') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: org.certificates.export.csv', 200);
+})->where('any', '.*')->name('org.certificates.export.csv');
+/* --- auto-stub (append-only): org.certificates.index --- */
+Route::get('/__auto/org.certificates.index/{any?}', function ($any = null) {
+    // Placeholder so route('org.certificates.index') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: org.certificates.index', 200);
+})->where('any', '.*')->name('org.certificates.index');
+/* --- auto-stub (append-only): org.certificates.issue --- */
+Route::get('/__auto/org.certificates.issue/{any?}', function ($any = null) {
+    // Placeholder so route('org.certificates.issue') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: org.certificates.issue', 200);
+})->where('any', '.*')->name('org.certificates.issue');
+/* --- auto-stub (append-only): org.certificates.resend --- */
+Route::get('/__auto/org.certificates.resend/{any?}', function ($any = null) {
+    // Placeholder so route('org.certificates.resend') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: org.certificates.resend', 200);
+})->where('any', '.*')->name('org.certificates.resend');
+/* --- auto-stub (append-only): org.dashboard --- */
+Route::get('/__auto/org.dashboard/{any?}', function ($any = null) {
+    // Placeholder so route('org.dashboard') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: org.dashboard', 200);
+})->where('any', '.*')->name('org.dashboard');
+/* --- auto-stub (append-only): org.events.attendance.index --- */
+Route::get('/events/{any?}', function ($any = null) {
+    // Placeholder so route('org.events.attendance.index') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: org.events.attendance.index', 200);
+})->where('any', '.*')->name('org.events.attendance.index');
+/* --- auto-stub (append-only): org.events.export --- */
+Route::get('/events/{any?}', function ($any = null) {
+    // Placeholder so route('org.events.export') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: org.events.export', 200);
+})->where('any', '.*')->name('org.events.export');
+/* --- auto-stub (append-only): org.events.finalize --- */
+Route::get('/events/{any?}', function ($any = null) {
+    // Placeholder so route('org.events.finalize') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: org.events.finalize', 200);
+})->where('any', '.*')->name('org.events.finalize');
+/* --- auto-stub (append-only): org.events.index --- */
+Route::get('/events/{any?}', function ($any = null) {
+    // Placeholder so route('org.events.index') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: org.events.index', 200);
+})->where('any', '.*')->name('org.events.index');
+/* --- auto-stub (append-only): org.events.volunteers --- */
+Route::get('/events/{any?}', function ($any = null) {
+    // Placeholder so route('org.events.volunteers') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: org.events.volunteers', 200);
+})->where('any', '.*')->name('org.events.volunteers');
+/* --- auto-stub (append-only): org.events.volunteers.csv --- */
+Route::get('/events/{any?}', function ($any = null) {
+    // Placeholder so route('org.events.volunteers.csv') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: org.events.volunteers.csv', 200);
+})->where('any', '.*')->name('org.events.volunteers.csv');
+/* --- auto-stub (append-only): org.kyc.update --- */
+Route::get('/__auto/org.kyc.update/{any?}', function ($any = null) {
+    // Placeholder so route('org.kyc.update') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: org.kyc.update', 200);
+})->where('any', '.*')->name('org.kyc.update');
+/* --- auto-stub (append-only): org.license.request --- */
+Route::get('/__auto/org.license.request/{any?}', function ($any = null) {
+    // Placeholder so route('org.license.request') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: org.license.request', 200);
+})->where('any', '.*')->name('org.license.request');
+/* --- auto-stub (append-only): org.login --- */
+Route::get('/__auto/org.login/{any?}', function ($any = null) {
+    // Placeholder so route('org.login') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: org.login', 200);
+})->where('any', '.*')->name('org.login');
+/* --- auto-stub (append-only): org.login.perform --- */
+Route::get('/__auto/org.login.perform/{any?}', function ($any = null) {
+    // Placeholder so route('org.login.perform') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: org.login.perform', 200);
+})->where('any', '.*')->name('org.login.perform');
+/* --- auto-stub (append-only): org.login.submit --- */
+Route::get('/__auto/org.login.submit/{any?}', function ($any = null) {
+    // Placeholder so route('org.login.submit') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: org.login.submit', 200);
+})->where('any', '.*')->name('org.login.submit');
+/* --- auto-stub (append-only): org.opportunities.attendance.index --- */
+Route::get('/__auto/org.opportunities.attendance.index/{any?}', function ($any = null) {
+    // Placeholder so route('org.opportunities.attendance.index') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: org.opportunities.attendance.index', 200);
+})->where('any', '.*')->name('org.opportunities.attendance.index');
+/* --- auto-stub (append-only): org.opportunities.attendance.settings.save --- */
+Route::get('/__auto/org.opportunities.attendance.settings.save/{any?}', function ($any = null) {
+    // Placeholder so route('org.opportunities.attendance.settings.save') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: org.opportunities.attendance.settings.save', 200);
+})->where('any', '.*')->name('org.opportunities.attendance.settings.save');
+/* --- auto-stub (append-only): org.opportunities.create --- */
+Route::get('/__auto/org.opportunities.create/{any?}', function ($any = null) {
+    // Placeholder so route('org.opportunities.create') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: org.opportunities.create', 200);
+})->where('any', '.*')->name('org.opportunities.create');
+/* --- auto-stub (append-only): org.opportunities.slotcap.update --- */
+Route::get('/__auto/org.opportunities.slotcap.update/{any?}', function ($any = null) {
+    // Placeholder so route('org.opportunities.slotcap.update') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: org.opportunities.slotcap.update', 200);
+})->where('any', '.*')->name('org.opportunities.slotcap.update');
+/* --- auto-stub (append-only): org.opps.create --- */
+Route::get('/__auto/org.opps.create/{any?}', function ($any = null) {
+    // Placeholder so route('org.opps.create') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: org.opps.create', 200);
+})->where('any', '.*')->name('org.opps.create');
+/* --- auto-stub (append-only): org.opps.destroy --- */
+Route::get('/__auto/org.opps.destroy/{any?}', function ($any = null) {
+    // Placeholder so route('org.opps.destroy') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: org.opps.destroy', 200);
+})->where('any', '.*')->name('org.opps.destroy');
+/* --- auto-stub (append-only): org.opps.edit --- */
+Route::get('/__auto/org.opps.edit/{any?}', function ($any = null) {
+    // Placeholder so route('org.opps.edit') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: org.opps.edit', 200);
+})->where('any', '.*')->name('org.opps.edit');
+/* --- auto-stub (append-only): org.opps.index --- */
+Route::get('/__auto/org.opps.index/{any?}', function ($any = null) {
+    // Placeholder so route('org.opps.index') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: org.opps.index', 200);
+})->where('any', '.*')->name('org.opps.index');
+/* --- auto-stub (append-only): org.opps.store --- */
+Route::get('/__auto/org.opps.store/{any?}', function ($any = null) {
+    // Placeholder so route('org.opps.store') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: org.opps.store', 200);
+})->where('any', '.*')->name('org.opps.store');
+/* --- auto-stub (append-only): org.opps.update --- */
+Route::get('/__auto/org.opps.update/{any?}', function ($any = null) {
+    // Placeholder so route('org.opps.update') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: org.opps.update', 200);
+})->where('any', '.*')->name('org.opps.update');
+/* --- auto-stub (append-only): org.profile.update --- */
+Route::get('/__auto/org.profile.update/{any?}', function ($any = null) {
+    // Placeholder so route('org.profile.update') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: org.profile.update', 200);
+})->where('any', '.*')->name('org.profile.update');
+/* --- auto-stub (append-only): org.register --- */
+Route::get('/__auto/org.register/{any?}', function ($any = null) {
+    // Placeholder so route('org.register') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: org.register', 200);
+})->where('any', '.*')->name('org.register');
+/* --- auto-stub (append-only): org.register.store --- */
+Route::get('/__auto/org.register.store/{any?}', function ($any = null) {
+    // Placeholder so route('org.register.store') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: org.register.store', 200);
+})->where('any', '.*')->name('org.register.store');
+/* --- auto-stub (append-only): org.register.submit --- */
+Route::get('/__auto/org.register.submit/{any?}', function ($any = null) {
+    // Placeholder so route('org.register.submit') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: org.register.submit', 200);
+})->where('any', '.*')->name('org.register.submit');
+/* --- auto-stub (append-only): org.reports --- */
+Route::get('/__auto/org.reports/{any?}', function ($any = null) {
+    // Placeholder so route('org.reports') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: org.reports', 200);
+})->where('any', '.*')->name('org.reports');
+/* --- auto-stub (append-only): org.reports.hours.csv --- */
+Route::get('/__auto/org.reports.hours.csv/{any?}', function ($any = null) {
+    // Placeholder so route('org.reports.hours.csv') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: org.reports.hours.csv', 200);
+})->where('any', '.*')->name('org.reports.hours.csv');
+/* --- auto-stub (append-only): org.root --- */
+Route::get('/__auto/org.root/{any?}', function ($any = null) {
+    // Placeholder so route('org.root') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: org.root', 200);
+})->where('any', '.*')->name('org.root');
+/* --- auto-stub (append-only): org.settings.edit --- */
+Route::get('/__auto/org.settings.edit/{any?}', function ($any = null) {
+    // Placeholder so route('org.settings.edit') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: org.settings.edit', 200);
+})->where('any', '.*')->name('org.settings.edit');
+/* --- auto-stub (append-only): org.settings.update --- */
+Route::get('/__auto/org.settings.update/{any?}', function ($any = null) {
+    // Placeholder so route('org.settings.update') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: org.settings.update', 200);
+})->where('any', '.*')->name('org.settings.update');
+/* --- auto-stub (append-only): org.setup.store --- */
+Route::get('/__auto/org.setup.store/{any?}', function ($any = null) {
+    // Placeholder so route('org.setup.store') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: org.setup.store', 200);
+})->where('any', '.*')->name('org.setup.store');
+/* --- auto-stub (append-only): org.shortlist.bulk --- */
+Route::get('/__auto/org.shortlist.bulk/{any?}', function ($any = null) {
+    // Placeholder so route('org.shortlist.bulk') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: org.shortlist.bulk', 200);
+})->where('any', '.*')->name('org.shortlist.bulk');
+/* --- auto-stub (append-only): org.shortlist.slot_cap --- */
+Route::get('/__auto/org.shortlist.slot_cap/{any?}', function ($any = null) {
+    // Placeholder so route('org.shortlist.slot_cap') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: org.shortlist.slot_cap', 200);
+})->where('any', '.*')->name('org.shortlist.slot_cap');
+/* --- auto-stub (append-only): orgs.public.index --- */
+Route::get('/__auto/orgs.public.index/{any?}', function ($any = null) {
+    // Placeholder so route('orgs.public.index') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: orgs.public.index', 200);
+})->where('any', '.*')->name('orgs.public.index');
+/* --- auto-stub (append-only): orgs.public.show --- */
+Route::get('/__auto/orgs.public.show/{any?}', function ($any = null) {
+    // Placeholder so route('orgs.public.show') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: orgs.public.show', 200);
+})->where('any', '.*')->name('orgs.public.show');
+/* --- auto-stub (append-only): org.team.invite --- */
+Route::get('/__auto/org.team.invite/{any?}', function ($any = null) {
+    // Placeholder so route('org.team.invite') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: org.team.invite', 200);
+})->where('any', '.*')->name('org.team.invite');
+/* --- auto-stub (append-only): org.team.remove --- */
+Route::get('/__auto/org.team.remove/{any?}', function ($any = null) {
+    // Placeholder so route('org.team.remove') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: org.team.remove', 200);
+})->where('any', '.*')->name('org.team.remove');
+/* --- auto-stub (append-only): pages.about --- */
+Route::get('/__auto/pages.about/{any?}', function ($any = null) {
+    // Placeholder so route('pages.about') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: pages.about', 200);
+})->where('any', '.*')->name('pages.about');
+/* --- auto-stub (append-only): pages.faq --- */
+Route::get('/__auto/pages.faq/{any?}', function ($any = null) {
+    // Placeholder so route('pages.faq') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: pages.faq', 200);
+})->where('any', '.*')->name('pages.faq');
+/* --- auto-stub (append-only): pages.privacy --- */
+Route::get('/__auto/pages.privacy/{any?}', function ($any = null) {
+    // Placeholder so route('pages.privacy') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: pages.privacy', 200);
+})->where('any', '.*')->name('pages.privacy');
+/* --- auto-stub (append-only): pages.terms --- */
+Route::get('/__auto/pages.terms/{any?}', function ($any = null) {
+    // Placeholder so route('pages.terms') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: pages.terms', 200);
+})->where('any', '.*')->name('pages.terms');
+/* --- auto-stub (append-only): partners.apply.submit --- */
+Route::get('/__auto/partners.apply.submit/{any?}', function ($any = null) {
+    // Placeholder so route('partners.apply.submit') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: partners.apply.submit', 200);
+})->where('any', '.*')->name('partners.apply.submit');
+/* --- auto-stub (append-only): password.confirm --- */
+Route::get('/__auto/password.confirm/{any?}', function ($any = null) {
+    // Placeholder so route('password.confirm') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: password.confirm', 200);
+})->where('any', '.*')->name('password.confirm');
+/* --- auto-stub (append-only): password.email --- */
+Route::get('/__auto/password.email/{any?}', function ($any = null) {
+    // Placeholder so route('password.email') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: password.email', 200);
+})->where('any', '.*')->name('password.email');
+/* --- auto-stub (append-only): password.request --- */
+Route::get('/__auto/password.request/{any?}', function ($any = null) {
+    // Placeholder so route('password.request') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: password.request', 200);
+})->where('any', '.*')->name('password.request');
+/* --- auto-stub (append-only): password.store --- */
+Route::get('/__auto/password.store/{any?}', function ($any = null) {
+    // Placeholder so route('password.store') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: password.store', 200);
+})->where('any', '.*')->name('password.store');
+/* --- auto-stub (append-only): password.update --- */
+Route::get('/__auto/password.update/{any?}', function ($any = null) {
+    // Placeholder so route('password.update') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: password.update', 200);
+})->where('any', '.*')->name('password.update');
+/* --- auto-stub (append-only): payments.processPayTabs --- */
+Route::get('/__auto/payments.processPayTabs/{any?}', function ($any = null) {
+    // Placeholder so route('payments.processPayTabs') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: payments.processPayTabs', 200);
+})->where('any', '.*')->name('payments.processPayTabs');
+/* --- auto-stub (append-only): payments.processStripe --- */
+Route::get('/__auto/payments.processStripe/{any?}', function ($any = null) {
+    // Placeholder so route('payments.processStripe') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: payments.processStripe', 200);
+})->where('any', '.*')->name('payments.processStripe');
+/* --- auto-stub (append-only): profile --- */
+Route::get('/__auto/profile/{any?}', function ($any = null) {
+    // Placeholder so route('profile') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: profile', 200);
+})->where('any', '.*')->name('profile');
+/* --- auto-stub (append-only): profile.avatar.destroy --- */
+Route::get('/__auto/profile.avatar.destroy/{any?}', function ($any = null) {
+    // Placeholder so route('profile.avatar.destroy') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: profile.avatar.destroy', 200);
+})->where('any', '.*')->name('profile.avatar.destroy');
+/* --- auto-stub (append-only): profile.avatar.store --- */
+Route::get('/__auto/profile.avatar.store/{any?}', function ($any = null) {
+    // Placeholder so route('profile.avatar.store') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: profile.avatar.store', 200);
+})->where('any', '.*')->name('profile.avatar.store');
+/* --- auto-stub (append-only): profile.destroy --- */
+Route::get('/__auto/profile.destroy/{any?}', function ($any = null) {
+    // Placeholder so route('profile.destroy') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: profile.destroy', 200);
+})->where('any', '.*')->name('profile.destroy');
+/* --- auto-stub (append-only): profile.edit --- */
+Route::get('/__auto/profile.edit/{any?}', function ($any = null) {
+    // Placeholder so route('profile.edit') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: profile.edit', 200);
+})->where('any', '.*')->name('profile.edit');
+/* --- auto-stub (append-only): profile.update --- */
+Route::get('/__auto/profile.update/{any?}', function ($any = null) {
+    // Placeholder so route('profile.update') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: profile.update', 200);
+})->where('any', '.*')->name('profile.update');
+/* --- auto-stub (append-only): public.events --- */
+Route::get('/events/{any?}', function ($any = null) {
+    // Placeholder so route('public.events') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: public.events', 200);
+})->where('any', '.*')->name('public.events');
+/* --- auto-stub (append-only): public.events.show --- */
+Route::get('/events/{any?}', function ($any = null) {
+    // Placeholder so route('public.events.show') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: public.events.show', 200);
+})->where('any', '.*')->name('public.events.show');
+/* --- auto-stub (append-only): public.gallery --- */
+Route::get('/__auto/public.gallery/{any?}', function ($any = null) {
+    // Placeholder so route('public.gallery') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: public.gallery', 200);
+})->where('any', '.*')->name('public.gallery');
+/* --- auto-stub (append-only): public.opportunities --- */
+Route::get('/__auto/public.opportunities/{any?}', function ($any = null) {
+    // Placeholder so route('public.opportunities') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: public.opportunities', 200);
+})->where('any', '.*')->name('public.opportunities');
+/* --- auto-stub (append-only): public.opportunities.show --- */
+Route::get('/__auto/public.opportunities.show/{any?}', function ($any = null) {
+    // Placeholder so route('public.opportunities.show') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: public.opportunities.show', 200);
+})->where('any', '.*')->name('public.opportunities.show');
+/* --- auto-stub (append-only): public.opportunity.show --- */
+Route::get('/__auto/public.opportunity.show/{any?}', function ($any = null) {
+    // Placeholder so route('public.opportunity.show') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: public.opportunity.show', 200);
+})->where('any', '.*')->name('public.opportunity.show');
+/* --- auto-stub (append-only): public.organizations --- */
+Route::get('/__auto/public.organizations/{any?}', function ($any = null) {
+    // Placeholder so route('public.organizations') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: public.organizations', 200);
+})->where('any', '.*')->name('public.organizations');
+/* --- auto-stub (append-only): qr.verify --- */
+Route::get('/__auto/qr.verify/{any?}', function ($any = null) {
+    // Placeholder so route('qr.verify') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: qr.verify', 200);
+})->where('any', '.*')->name('qr.verify');
+/* --- auto-stub (append-only): register --- */
+Route::get('/__auto/register/{any?}', function ($any = null) {
+    // Placeholder so route('register') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: register', 200);
+})->where('any', '.*')->name('register');
+/* --- auto-stub (append-only): register.organization.store --- */
+Route::get('/__auto/register.organization.store/{any?}', function ($any = null) {
+    // Placeholder so route('register.organization.store') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: register.organization.store', 200);
+})->where('any', '.*')->name('register.organization.store');
+/* --- auto-stub (append-only): register.perform --- */
+Route::get('/__auto/register.perform/{any?}', function ($any = null) {
+    // Placeholder so route('register.perform') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: register.perform', 200);
+})->where('any', '.*')->name('register.perform');
+/* --- auto-stub (append-only): scan --- */
+Route::get('/__auto/scan/{any?}', function ($any = null) {
+    // Placeholder so route('scan') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: scan', 200);
+})->where('any', '.*')->name('scan');
+/* --- auto-stub (append-only): scan.checkin --- */
+Route::get('/__auto/scan.checkin/{any?}', function ($any = null) {
+    // Placeholder so route('scan.checkin') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: scan.checkin', 200);
+})->where('any', '.*')->name('scan.checkin');
+/* --- auto-stub (append-only): scan.checkout --- */
+Route::get('/__auto/scan.checkout/{any?}', function ($any = null) {
+    // Placeholder so route('scan.checkout') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: scan.checkout', 200);
+})->where('any', '.*')->name('scan.checkout');
+/* --- auto-stub (append-only): social.redirect --- */
+Route::get('/__auto/social.redirect/{any?}', function ($any = null) {
+    // Placeholder so route('social.redirect') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: social.redirect', 200);
+})->where('any', '.*')->name('social.redirect');
+/* --- auto-stub (append-only): stories.show --- */
+Route::get('/__auto/stories.show/{any?}', function ($any = null) {
+    // Placeholder so route('stories.show') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: stories.show', 200);
+})->where('any', '.*')->name('stories.show');
+/* --- auto-stub (append-only): teams.create --- */
+Route::get('/__auto/teams.create/{any?}', function ($any = null) {
+    // Placeholder so route('teams.create') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: teams.create', 200);
+})->where('any', '.*')->name('teams.create');
+/* --- auto-stub (append-only): teams.show --- */
+Route::get('/__auto/teams.show/{any?}', function ($any = null) {
+    // Placeholder so route('teams.show') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: teams.show', 200);
+})->where('any', '.*')->name('teams.show');
+/* --- auto-stub (append-only): teams.store --- */
+Route::get('/__auto/teams.store/{any?}', function ($any = null) {
+    // Placeholder so route('teams.store') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: teams.store', 200);
+})->where('any', '.*')->name('teams.store');
+/* --- auto-stub (append-only): token --- */
+Route::get('/__auto/token/{any?}', function ($any = null) {
+    // Placeholder so route('token') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: token', 200);
+})->where('any', '.*')->name('token');
+/* --- auto-stub (append-only): tour --- */
+Route::get('/__auto/tour/{any?}', function ($any = null) {
+    // Placeholder so route('tour') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: tour', 200);
+})->where('any', '.*')->name('tour');
+/* --- auto-stub (append-only): tourdetails --- */
+Route::get('/__auto/tourdetails/{any?}', function ($any = null) {
+    // Placeholder so route('tourdetails') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: tourdetails', 200);
+})->where('any', '.*')->name('tourdetails');
+/* --- auto-stub (append-only): transcript.pdf --- */
+Route::get('/__auto/transcript.pdf/{any?}', function ($any = null) {
+    // Placeholder so route('transcript.pdf') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: transcript.pdf', 200);
+})->where('any', '.*')->name('transcript.pdf');
+/* --- auto-stub (append-only): uaepass.redirect --- */
+Route::get('/__auto/uaepass.redirect/{any?}', function ($any = null) {
+    // Placeholder so route('uaepass.redirect') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: uaepass.redirect', 200);
+})->where('any', '.*')->name('uaepass.redirect');
+/* --- auto-stub (append-only): verification.notice --- */
+Route::get('/__auto/verification.notice/{any?}', function ($any = null) {
+    // Placeholder so route('verification.notice') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: verification.notice', 200);
+})->where('any', '.*')->name('verification.notice');
+/* --- auto-stub (append-only): verification.send --- */
+Route::get('/__auto/verification.send/{any?}', function ($any = null) {
+    // Placeholder so route('verification.send') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: verification.send', 200);
+})->where('any', '.*')->name('verification.send');
+/* --- auto-stub (append-only): verify.show --- */
+Route::get('/__auto/verify.show/{any?}', function ($any = null) {
+    // Placeholder so route('verify.show') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: verify.show', 200);
+})->where('any', '.*')->name('verify.show');
+/* --- auto-stub (append-only): vol.profile.update --- */
+Route::get('/__auto/vol.profile.update/{any?}', function ($any = null) {
+    // Placeholder so route('vol.profile.update') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: vol.profile.update', 200);
+})->where('any', '.*')->name('vol.profile.update');
+/* --- auto-stub (append-only): volunteer.dashboard --- */
+Route::get('/__auto/volunteer.dashboard/{any?}', function ($any = null) {
+    // Placeholder so route('volunteer.dashboard') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: volunteer.dashboard', 200);
+})->where('any', '.*')->name('volunteer.dashboard');
+/* --- auto-stub (append-only): volunteer.hours.store --- */
+Route::get('/__auto/volunteer.hours.store/{any?}', function ($any = null) {
+    // Placeholder so route('volunteer.hours.store') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: volunteer.hours.store', 200);
+})->where('any', '.*')->name('volunteer.hours.store');
+/* --- auto-stub (append-only): volunteer.profile.update --- */
+Route::get('/__auto/volunteer.profile.update/{any?}', function ($any = null) {
+    // Placeholder so route('volunteer.profile.update') can generate URLs without 500s.
+    // Replace with your real controller/view later.
+    return response('auto-stub: volunteer.profile.update', 200);
+})->where('any', '.*')->name('volunteer.profile.update');
+/* === Phase-0 helpers & stubs (idempotent) === */
+if (!function_exists('ensure_stub')) {
+  function ensure_stub(string $name, string $method, string $uri, $handler = null, array $opts = []) {
+    if (\Illuminate\Support\Facades\Route::has($name)) return;
+    $handler = $handler ?: function() use ($name) {
+      return response("Stub route: {$name}", 200);
+    };
+    $r = \Illuminate\Support\Facades\Route::$method($uri, $handler)->name($name);
+    if (!empty($opts['mw'])) $r->middleware($opts['mw']);
+  }
+}
+
+/* Canonical language switch + alias */
+ensure_stub('lang.switch', 'get', '/lang/switch/{locale}', function($locale){
+  app()->setLocale($locale); session(['app_locale' => $locale]); return back();
+});
+ensure_stub('locale.switch', 'get', '/locale/{locale}', fn($locale) => redirect()->route('lang.switch', $locale));
+
+/* QR verify alias to keep old links alive */
+if (!\Illuminate\Support\Facades\Route::has('qr.verify')) {
+  \Illuminate\Support\Facades\Route::get('/qr/verify', fn() => redirect('/verify'))->name('qr.verify');
+}
+
+/* Public pages / aliases */
+ensure_stub('blog', 'get', '/blog', fn() => view('public.blog'));
+ensure_stub('public.events', 'get', '/events', fn() => view('public.events.index'));
+
+/* Contact theme compatibility: expose contact.show if templates expect it */
+if (!\Illuminate\Support\Facades\Route::has('contact.show') && \Illuminate\Support\Facades\Route::has('contact')) {
+  \Illuminate\Support\Facades\Route::get('/contact', fn() => view('contact'))->name('contact.show');
+}
+
+/* Destination (theme) */
+ensure_stub('destination', 'get', '/destination', fn() => view('public.destination.index'));
+ensure_stub('destinationdetails', 'get', '/destination/{slug}', fn($slug) => view('public.destination.show', compact('slug')));
+
+/* Events apply (temporary GET stub; we’ll convert to POST later) */
+ensure_stub('events.apply', 'match', '/events/{id}/apply', function($id){
+  return response("Apply stub for event #$id", 200);
+});
+
+/* Org events group (guarded stubs so names resolve, functions to be implemented) */
+\Illuminate\Support\Facades\Route::prefix('org/events')->name('org.events.')->middleware('auth')->group(function(){
+  ensure_stub('org.events.index',            'get',  '/',                          fn() => view('org.events.index'));
+  ensure_stub('org.events.volunteers',       'get',  '/{event}/volunteers',        fn($event) => view('org.events.volunteers', compact('event')));
+  ensure_stub('org.events.volunteers.csv',   'get',  '/{event}/volunteers.csv',    fn($event) => response("id,name,email\n",200,['Content-Type'=>'text/csv']));
+  ensure_stub('org.events.attendance.index', 'get',  '/{event}/attendance',        fn($event) => view('org.events.attendance', compact('event')));
+  ensure_stub('org.events.export',           'get',  '/export',                     fn() => response("TODO export\n",200));
+  ensure_stub('org.events.finalize',         'post', '/{event}/finalize',          fn($event) => response("finalized $event\n",200));
+});

@@ -1,0 +1,32 @@
+<?php
+
+use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
+
+Route::get('_agent/ping', function (Request $request) {
+    // Prefer config; fallback to env; default true so token is the main gate.
+    $enabled = (bool) (config('agent.enabled') ?? env('AGENT_ENABLED', true));
+    if (!$enabled) {
+        // Keep it hidden if explicitly disabled
+        abort(404);
+    }
+
+    $token = config('agent.token') ?? env('AGENT_TOKEN');
+    if (!$token) {
+        // Misconfigured — surface as 403, not 404
+        abort(403, 'Agent token missing');
+    }
+
+    $supplied = $request->header('X-Agent-Token', '');
+    if (!hash_equals((string) $token, (string) $supplied)) {
+        abort(401, 'Bad token');
+    }
+
+    return response()->json([
+        'ok'   => true,
+        'ts'   => now()->toIso8601String(),
+        'app'  => config('app.name'),
+        'env'  => app()->environment(),
+        'via'  => 'agent.ping',
+    ]);
+})->name('agent.ping');
