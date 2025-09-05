@@ -14,16 +14,12 @@ use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\Public\OpportunityController;
 use App\Http\Controllers\Public\ApplyController;
 use App\Http\Controllers\QR\VerifyController;
-
-
 Route::get('/partners', function(){ return view('public.partners'); })->name('partners.index');
 use App\Http\Controllers\CertificatePdfController;
-
 Route::middleware(['web','auth','verified'])->group(function () {
     Route::get('/certificates/{id}/download', [CertificatePdfController::class,'download'])->whereNumber('id')->name('certificates.download');
     Route::post('/certificates/{id}/resend',   [CertificatePdfController::class,'resend'])->whereNumber('id')->name('certificates.resend');
     Route::post('/certificates/{id}/revoke',   [CertificatePdfController::class,'revoke'])->whereNumber('id')->name('certificates.revoke'); // admin-only in controller
-});
 Route::middleware(['web','auth','verified'])->get('/applications', function () {
     return view('applications.index');
 })->name('applications.index');
@@ -31,7 +27,6 @@ Route::middleware(['web','auth','verified'])->get(
   '/certificates',
   [\App\Http\Controllers\CertificateController::class,'index']
 )->name('certificates.index');
-Route::middleware(['web','auth','verified'])->get(
   '/my/profile',
   [\App\Http\Controllers\My\ProfileController::class,'index']
 )->name('my.profile');
@@ -42,18 +37,13 @@ Route::get('/admin/login', function () {
     return redirect()->to('/login');
 })->name('admin.login');
 use App\Http\Controllers\Auth\SimpleLoginController;
-
 Route::middleware(['web','guest','throttle:10,1'])->group(function () {
     Route::get('/login',  [SimpleLoginController::class, 'show'])->name('login');
     Route::post('/login', [SimpleLoginController::class, 'perform'])->name('login.perform');
-});
-
 Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
     ->middleware('auth')
     ->name('logout');
-
 use App\Http\Controllers\Auth\SimplePasswordResetController;
-
 /* == Password reset (guest, skip custom middlewares) == */
 Route::middleware(['web','guest','throttle:10,1'])
     ->withoutMiddleware([\App\Http\Middleware\EnforceOrgRegistration::class, \App\Http\Middleware\MicroCache::class])
@@ -64,63 +54,49 @@ Route::middleware(['web','guest','throttle:10,1'])
 Route::middleware(['web','auth','verified'])->get('/my/profile', function () {
     return view('my.profile');
 })->name('my.profile');
-
-
 /* == Admin: full routes (idempotent) == */
 /* == ADMIN ROUTES (canonical) == */
 Route::middleware(['web','auth','can:admin-access'])
     ->withoutMiddleware([\App\Http\Middleware\EnforceOrgRegistration::class])
     ->prefix('admin')->name('admin.')
-    ->group(function () {
         // Dashboard
         Route::get('/', [\App\Http\Controllers\Admin\DashboardController::class,'index'])->name('dashboard');
-
         // Users
         Route::get('/users',               [\App\Http\Controllers\Admin\UserController::class,'index'])->name('users.index');
         Route::get('/users/{user}',        [\App\Http\Controllers\Admin\UserController::class,'show'])->name('users.show');
         Route::put('/users/{user}',        [\App\Http\Controllers\Admin\UserController::class,'update'])->name('users.save');
         Route::patch('/users/{user}',      [\App\Http\Controllers\Admin\UserController::class,'update']);
         Route::delete('/users/{user}',     [\App\Http\Controllers\Admin\UserController::class,'destroy'])->name('users.destroy');
-
         // Organizations
         Route::get('/organizations',               [\App\Http\Controllers\Admin\OrganizationsController::class,'index'])->name('organizations.index');
         Route::post('/organizations/{id}/approve', [\App\Http\Controllers\Admin\OrganizationsController::class,'approve'])->name('organizations.approve');
         Route::post('/organizations/{id}/suspend', [\App\Http\Controllers\Admin\OrganizationsController::class,'suspend'])->name('organizations.suspend');
-
         // Opportunities
         Route::get('/opportunities',                  [\App\Http\Controllers\Admin\OpportunityController::class,'index'])->name('opportunities.index');
         Route::get('/opportunities/{opportunity}',    [\App\Http\Controllers\Admin\OpportunityController::class,'show'])->name('opportunities.show');
         Route::put('/opportunities/{opportunity}',    [\App\Http\Controllers\Admin\OpportunityController::class,'update'])->name('opportunities.save');
         Route::patch('/opportunities/{opportunity}',  [\App\Http\Controllers\Admin\OpportunityController::class,'update']);
         Route::delete('/opportunities/{opportunity}', [\App\Http\Controllers\Admin\OpportunityController::class,'destroy'])->name('opportunities.destroy');
-
         // Applicants
         Route::get('/applicants',               [\App\Http\Controllers\Admin\ApplicantsController::class,'index'])->name('applicants.index');
         Route::post('/applicants/bulk',         [\App\Http\Controllers\Admin\ApplicantsController::class,'bulk'])->name('applicants.bulk');
         Route::get('/applicants/export',        [\App\Http\Controllers\Admin\ApplicantsController::class,'exportCsv'])->name('applicants.export');
         Route::post('/applicants/{id}/approve', [\App\Http\Controllers\Admin\ApplicantsController::class,'approve'])->name('applicants.approve');
         Route::post('/applicants/{id}/decline', [\App\Http\Controllers\Admin\ApplicantsController::class,'decline'])->name('applicants.decline');
-
         // Certificates (Admin area)
         Route::get('/certificates',              [\App\Http\Controllers\Admin\CertificateController::class,'index'])->name('certs.index');
         Route::post('/certificates/issue',       [\App\Http\Controllers\Admin\CertificateController::class,'issue'])->name('certs.issue');
         Route::post('/certificates/{id}/reissue',[\App\Http\Controllers\Admin\CertificateController::class,'reissue'])->name('certs.reissue');
-
         // Attendance / Hours / Reports / Settings
         Route::get('/attendance',          [\App\Http\Controllers\Admin\AttendanceAdminController::class,'index'])->name('attendance.index');
         Route::get('/hours/export',        [\App\Http\Controllers\Admin\HoursReportController::class,'exportCsv'])->name('hours.export');
         Route::post('/hours/bulk-approve', [\App\Http\Controllers\Admin\HoursReportController::class,'bulkApprove'])->name('hours.bulkApprove');
-
         Route::get('/reports',             [\App\Http\Controllers\Admin\ReportsController::class,'index'])->name('reports.index');
         Route::get('/reports/export',      [\App\Http\Controllers\Admin\ReportsController::class,'export'])->name('reports.export');
-
         Route::get('/settings',            [\App\Http\Controllers\Admin\SettingsController::class,'index'])->name('settings.index');
         Route::post('/settings/save',      [\App\Http\Controllers\Admin\SettingsController::class,'save'])->name('settings.save');
-    });
-
 // Include agent ping health route if present
 if (file_exists(base_path('routes/_agent_ping.php'))) { require base_path('routes/_agent_ping.php'); }
-
 // Temporary safe stub for contact form POST to avoid 500s.
 // Replace with your real controller when ready.
 use Illuminate\Http\Request;
@@ -133,16 +109,12 @@ Route::middleware(['web'])->group(function () {
     Route::post('/contact', [ContactController::class, 'send'])
         ->middleware('throttle:6,1')
         ->name('contact.send');
-});
-
 // Include agent healthz route if present
 if (file_exists(base_path('routes/_agent_healthz_web.php'))) { require base_path('routes/_agent_healthz_web.php'); }
 Route::middleware(['web'])->get('/healthz-agent', function () {
     return response()->json(['ok'=>true,'ts'=>now()->toISOString()], 200);
 })->name('healthz.agent');
-
 Route::get('/theme/demo', fn() => view('public.home_travelpro'))->name('theme.demo');
-
 // == Admin Approvals Console ==
 use App\Http\Controllers\Admin\ApprovalsController;
 Route::middleware(['web','auth','can:admin-access'])->prefix('admin')->name('admin.')->group(function () {
@@ -151,11 +123,8 @@ Route::middleware(['web','auth','can:admin-access'])->prefix('admin')->name('adm
   Route::post('/approvals/orgs/{id}/deny',    [ApprovalsController::class, 'denyOrg'])->name('approvals.orgs.deny');
   Route::post('/approvals/apps/{id}/approve', [ApprovalsController::class, 'approveApp'])->name('approvals.apps.approve');
   Route::post('/approvals/apps/{id}/deny',    [ApprovalsController::class, 'denyApp'])->name('approvals.apps.deny');
-});
-
 // --- Admin host root redirect (added by script) ---
 Route::domain('admin.swaeduae.ae')->group(function () {
     Route::get('/', function () {
         return auth()->check() ? redirect('/admin') : redirect('/login');
     })->name('admin.root.redirect');
-});
