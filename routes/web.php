@@ -13,6 +13,7 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\Public\OpportunityController;
 use App\Http\Controllers\Public\ApplyController;
+use App\Http\Controllers\QR\VerifyController;
 
 
 Route::get('/partners', function(){ return view('public.partners'); })->name('partners.index');
@@ -36,6 +37,7 @@ Route::middleware(['web','auth','verified'])->get(
 )->name('my.profile');
 Route::match(['GET','POST'],'/qr/checkin',  [\App\Http\Controllers\QR\CheckinController::class,'checkin'])->name('qr.checkin.getpost');
 Route::match(['GET','POST'],'/qr/checkout', [\App\Http\Controllers\QR\CheckinController::class,'checkout'])->name('qr.checkout.getpost');
+Route::get('/qr/verify/{serial?}', [VerifyController::class,'show'])->name('qr.verify');
 Route::get('/admin/login', function () {
     return redirect()->to('/login');
 })->name('admin.login');
@@ -62,7 +64,7 @@ Route::middleware(['web','auth','verified'])->get('/my/profile', function () {
 
 /* == Admin: full routes (idempotent) == */
 /* == ADMIN ROUTES (canonical) == */
-Route::middleware(['web','auth','role:admin'])
+Route::middleware(['web','auth','can:admin-access'])
     ->withoutMiddleware([\App\Http\Middleware\EnforceOrgRegistration::class])
     ->prefix('admin')->name('admin.')
     ->group(function () {
@@ -134,25 +136,8 @@ if (file_exists(base_path('routes/_agent_healthz_web.php'))) { require base_path
 Route::middleware(['web'])->get('/healthz-agent', function () {
     return response()->json(['ok'=>true,'ts'=>now()->toISOString()], 200);
 })->name('healthz.agent');
-// SwaedUAE: minimal logout route for account menu
-Route::post('/logout', function (\Illuminate\Http\Request $request) {
-    \Illuminate\Support\Facades\Auth::logout();
-    $request->session()->invalidate();
-    $request->session()->regenerateToken();
-    return redirect('/');
-})->name('logout');
-// SwaedUAE: minimal logout route
-Route::post('/logout', function (\Illuminate\Http\Request $request) {
-    \Illuminate\Support\Facades\Auth::logout();
-    $request->session()->invalidate();
-    $request->session()->regenerateToken();
-    return redirect('/');
-})->name('logout');
 
 Route::get('/theme/demo', fn() => view('public.home_travelpro'))->name('theme.demo');
-
-Route::get('/theme/demo', fn() => view('public.home_travelpro'))->name('theme.demo');
-
 
 // == Admin Approvals Console ==
 use App\Http\Controllers\Admin\ApprovalsController;

@@ -7,7 +7,7 @@ use App\Http\Controllers\Org\OpportunityController;
 use App\Http\Controllers\Org\ApplicantsController;
 use App\Http\Controllers\Org\SettingsController;
 
-Route::middleware(['auth','role:org'])->prefix('org')->as('org.')->group(function () {
+Route::middleware(['web','auth','verified','can:org-access'])->prefix('org')->as('org.')->group(function () {
     Route::get('/setup', [SetupController::class, 'form'])->name('setup.form');
     Route::post('/setup', [SetupController::class, 'store'])->name('setup.store');
 

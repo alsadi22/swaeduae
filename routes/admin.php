@@ -5,7 +5,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\OpportunityController;
 
-Route::middleware(['web','auth','verified','can:admin'])
+Route::middleware(['web','auth','can:admin-access'])
     ->prefix('admin')->as('admin.')
     ->group(function () {
     Route::get('/_whoami', function(){ $u=auth()->user(); return response()->json(['id'=>$u?->id,'role'=>$u->role??null]); })->name('diag.whoami');

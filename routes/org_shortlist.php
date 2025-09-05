@@ -1,7 +1,7 @@
 <?php
 use Illuminate\Support\Facades\Route;
 
-Route::middleware(['web','auth','role:org'])
+Route::middleware(['web','auth','verified','can:org-access'])
     ->prefix('org')->as('org.')
     ->group(function () {
         Route::get('/opportunities/{opportunity}/shortlist', [\App\Http\Controllers\Org\ShortlistController::class, 'index'])->name('shortlist.index');
