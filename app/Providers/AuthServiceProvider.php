@@ -9,19 +9,32 @@ class AuthServiceProvider extends ServiceProvider
 {
     /**
      * The policy mappings for the application.
-     * Add mappings here if/when you use them, e.g.:
-     *  \App\Models\Opportunity::class => \App\Policies\OpportunityPolicy::class,
+     *
+     * @var array<class-string, class-string>
      */
     protected $policies = [
-        // \App\Models\Model::class => \App\Policies\ModelPolicy::class,
+        // 'App\Models\Model' => 'App\Policies\ModelPolicy',
     ];
 
+    /**
+     * Register any authentication / authorization services.
+     */
     public function boot(): void
     {
         $this->registerPolicies();
 
-        Gate::define("admin-access", function () { return method_exists(,"hasRole") ? ("admin") : (( ?? null) === "admin"); });
+        Gate::define('admin-access', function ($user) {
+            if (method_exists($user, 'hasRole')) {
+                return $user->hasRole('admin');
+            }
+            return (($user->role ?? null) === 'admin');
+        });
 
-        Gate::define("org-access",   function () { return method_exists(,"hasRole") ? ("org")   : (( ?? null) === "org"); });
+        Gate::define('org-access', function ($user) {
+            if (method_exists($user, 'hasRole')) {
+                return $user->hasRole('org');
+            }
+            return (($user->role ?? null) === 'org');
+        });
     }
 }
