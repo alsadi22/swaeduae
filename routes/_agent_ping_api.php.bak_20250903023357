@@ -1,0 +1,22 @@
+<?php
+
+use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
+
+Route::get('agent/ping', function (Request $request) {
+    $token = env('AGENT_TOKEN') ?: (config('agent.token') ?? null);
+    if (!$token) {
+        return response('Agent token missing', 403);
+    }
+    $supplied = (string) $request->header('X-Agent-Token', '');
+    if (!hash_equals((string) $token, $supplied)) {
+        return response('Unauthorized', 401);
+    }
+    return response()->json([
+        'ok'  => true,
+        'ts'  => now()->toIso8601String(),
+        'app' => config('app.name'),
+        'env' => app()->environment(),
+        'via' => 'agent.ping.api',
+    ]);
+});

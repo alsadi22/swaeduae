@@ -1,0 +1,173 @@
+@exte
+@
+<di
+
+    <div class="row g
+     
+
+                <div class="card h-100">    
+                        <h5 class="card-t
+                        <p class="card
+
+                            @if($e->
+                            @if(
+                            <span class="badge bg-success">{{ 
+                        <
+                    </div>         
+                        <a class="btn btn-primar
+                    </div>                </div> 
+        @empty            <p class="text-muted">
+        @endforelse    </div>    <div clas
+        {{ $events->links() }}    </div></div>@e
+EOFcat > resources/views/events/show.blade.php 
+@extends('layouts.app')@section('content')<div class="con
+    <a href="{{ route('events.index') }}" class="btn b
+    <div class="card mt-2">     
+           
+     
+            <ul class="list-unsty
+                @if($event->region)<li>
+     
+  
+   
+                <li>🔖 <strong>{{ __('messages.status') }}:</strong> {{ $event->status }}</li>            </ul>        </div>    </div></div>@endsectionEOFcat > resources/views/volunteer/profile.blade.php << 'EOF'@extends('layouts.app')@section('content')<div class="container my-4">    <h1 class="mb-3">{{ __('messages.my_profile') }}</h1>    @if(session('status'))      <div class="alert alert-success">{{ session('status') }}</div>    @endif    <div class="row g-3">        <div class="col-md-4">            <div class="card h-100">                <div class="card-body">                    <h5>{{ $user->name }}</h5>                    <p class="mb-1"><strong>{{ __
+
+                </div
+     
+
+            <div class="card mt-3">                <div class="card-body">                    <h5 class="mb-3">{{ __('messages.log_hours') }}</h5>                    <form method="POST" action="{{ route('volunteer.hours.store') }}">                        @csrf                        <div class="mb-2">                            <label class="form-label">{{ __('messages.date') }}</label>                            <input type="date" class="form-control" name="date" required>                        </div>                        <div class="mb-2">                            <
+                            <inpu
+           
+     
+                            <label
+                            <input type="text
+     
+  
+   
+
+            </d
+        </div>        <div class="col-md-8">            <div class="card h-100">        
+
+                    <div class="table-responsive">                        <table class="table table-striped align-middle">                            <thead>                                <tr>                                    <th>{{ __('messages.date') }}</th>                                    <th>{{ __('messages.hours') }}</th>                                    <th>{{ __('messages.description') }}</th>                                </tr>                            </thead>                            <tbody>                                @forelse($hours as $h)                                    <tr>                                        <td>{{ $h->date->format('Y-m-d') }}</td>                                        <td>{{ number_format($h->hours, 2) }}</td>                                        <td>{{ $h->description }}</td>                                    </tr>                                @empty                                    <tr><td colspan="3" class="text-muted">{{ __('messages.no_hours') }}</td></tr>                                @endforelse                            </tbody>                        </table>
+
+                    <hr class="my-4">           
+                    <ul class="list-unstyled">  
+                            <li class="mb-2">           
+                                — {{ __('messages.i
+                 
+
+                                <a href="{{
+                 
+                        @empty  
+           
+     
+              
+          
+      
+ 
+</d
+
+EOFcat > resources/views/verify.blade.p
+@extends('layouts.app')
+
+@section('content')
+<div class="container my-4">
+    <h1 class="mb-3">{{ __('messages.certificate_verification') }}</h1>
+    @if($certificate)
+        <div class="alert alert-success">
+            ✅ {{ __('messages.certificate_valid') }}
+        </div>
+        <ul class="list-unstyled">
+            <li><strong>{{ __('messages.code') }}:</strong> {{ $certificate->code }}</li>
+            <li><strong>{{ __('messages.title') }}:</strong> {{ $certificate->title }}</li>
+            <li><strong>{{ __('messages.hours') }}:</strong> {{ number_format($certificate->hours, 2) }}</li>
+            <li><strong>{{ __('messages.issued') }}:</strong> {{ optional($certificate->issued_at)->format('Y-m-d') ?? '-' }}</li>
+        </ul>
+    @else
+        <div class="alert alert-danger">
+            ❌ {{ __('messages.certificate_not_found') }}: {{ $code }}
+        </div>
+    @endif
+</div>
+@endsection
+EOF
+
+# --- LOCALIZATION (EN + AR minimal keys) ---
+mkdir -p resources/lang/en resources/lang/ar
+
+cat > resources/lang/en/messages.php << 'EOF'
+<?php
+return [
+    'opportunities' => 'Opportunities',
+    'events' => 'Events',
+    'view_details' => 'View Details',
+    'no_opportunities' => 'No opportunities available.',
+    'no_events' => 'No events available.',
+    'status' => 'Status',
+    'region' => 'Region',
+    'location' => 'Location',
+    'date' => 'Date',
+    'capacity' => 'Capacity',
+    'slots' => 'Slots',
+    'requirements' => 'Requirements',
+    'back' => 'Back',
+    'my_profile' => 'My Profile',
+    'email' => 'Email',
+    'total_hours' => 'Total Hours',
+    'log_hours' => 'Log Hours',
+    'hours' => 'Hours',
+    'description' => 'Description',
+    'save' => 'Save',
+    'my_hours' => 'My Hours',
+    'no_hours' => 'No hours logged yet.',
+    'my_certificates' => 'My Certificates',
+    'issued' => 'Issued',
+    'no_certificates' => 'No certificates yet.',
+    'certificate_verification' => 'Certificate Verification',
+    'certificate_valid' => 'Certificate is valid.',
+    'certificate_not_found' => 'Certificate not found',
+    'code' => 'Code',
+    'hours_saved' => 'Hours saved successfully.',
+];
+EOF
+
+cat > resources/lang/ar/messages.php << 'EOF'
+<?php
+return [
+    'opportunities' => 'فرص التطوع',
+    'events' => 'الفعاليات',
+    'view_details' => 'عرض التفاصيل',
+    'no_opportunities' => 'لا توجد فرص متاحة.',
+    'no_events' => 'لا توجد فعاليات متاحة.',
+    'status' => 'الحالة',
+    'region' => 'المنطقة',
+    'location' => 'الموقع',
+    'date' => 'التاريخ',
+    'capacity' => 'السعة',
+    'slots' => 'المقاعد',
+    'requirements' => 'المتطلبات',
+    'back' => 'رجوع',
+    'my_profile' => 'ملفي الشخصي',
+    'email' => 'البريد الإلكتروني',
+    'total_hours' => 'إجمالي الساعات',
+    'log_hours' => 'تسجيل الساعات',
+    'hours' => 'الساعات',
+    'description' => 'الوصف',
+    'save' => 'حفظ',
+    'my_hours' => 'ساعاتي',
+    'no_hours' => 'لا توجد ساعات مسجلة.',
+    'my_certificates' => 'شهاداتي',
+    'issued' => 'تاريخ الإصدار',
+    'no_certificates' => 'لا توجد شهادات بعد.',
+    'certificate_verification' => 'التحقق من الشهادة',
+    'certificate_valid' => 'الشهادة صحيحة.',
+    'certificate_not_found' => 'الشهادة غير موجودة',
+    'code' => 'الرمز',
+    'hours_saved' => 'تم حفظ الساعات بنجاح.',
+];
+EOF
+
+echo "✅ Files written. Next steps:"
+echo "1) php artisan migrate"
+echo "2) Visit /opportunities, /events, /volunteer/profile (after login), and /verify/TESTCODE"
+

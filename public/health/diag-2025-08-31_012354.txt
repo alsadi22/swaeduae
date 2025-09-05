@@ -1,0 +1,266 @@
+=== SwaedUAE Deep Diagnose 2025-08-31_012354 ===
+
+== ENV / ABOUT (short) ==
+
+   ParseError 
+
+  syntax error, unexpected identifier "Route", expecting ")"
+
+  at routes/web.php:329
+    325▕         return back()->with('status', 'Applied (WIP)');
+    326▕ }
+    327▕ 
+    328▕ // Teams (basic)
+  ➜ 329▕ Route::prefix('teams')->middleware('auth')->group(function () {
+    330▕     if (!Route::has('teams.create')) {
+    331▕         Route::get('/create', fn () => response('Teams create (WIP)', 200))->name('teams.create');
+    332▕     }
+    333▕     if (!Route::has('teams.store')) {
+
+      [2m+3 vendor frames [22m
+
+  4   app/Providers/RouteServiceProvider.php:16
+      Illuminate\Routing\RouteRegistrar::group()
+      [2m+7 vendor frames [22m
+
+  12  [internal]:0
+      Illuminate\Foundation\Application::Illuminate\Foundation\{closure}()
+
+
+== CACHES STATUS (route/config/view) ==
+config:cache FAIL
+route:clear FAIL
+view:cache FAIL
+
+== PHP LINT: routes ==
+Errors parsing routes/web.php
+No syntax errors detected in routes/_admin_attendance.php
+No syntax errors detected in routes/_admin_dashboard_compat.php
+No syntax errors detected in routes/_admin_diag.php
+No syntax errors detected in routes/_admin_hours.php
+No syntax errors detected in routes/admin.php
+No syntax errors detected in routes/_admin_route_aliases.php
+No syntax errors detected in routes/_admin_users_fix.php
+No syntax errors detected in routes/agent.php
+No syntax errors detected in routes/api.php
+No syntax errors detected in routes/_auth_aliases.php
+No syntax errors detected in routes/_auth_overrides.php
+No syntax errors detected in routes/auth.php
+No syntax errors detected in routes/console.php
+No syntax errors detected in routes/_deny_dev_routes.php
+No syntax errors detected in routes/_early_auth_overrides.php
+No syntax errors detected in routes/events.php
+No syntax errors detected in routes/_i18n.php
+No syntax errors detected in routes/_opportunities.php
+No syntax errors detected in routes/org.php
+No syntax errors detected in routes/_org_register_fix.php
+No syntax errors detected in routes/org_shortlist.php
+No syntax errors detected in routes/_phase0_helpers.php
+No syntax errors detected in routes/_public_pages.php
+No syntax errors detected in routes/_public.php
+No syntax errors detected in routes/_public_static.php
+No syntax errors detected in routes/_qr_public.php
+No syntax errors detected in routes/_qr_verify_entry.php
+No syntax errors detected in routes/_redirects.php
+No syntax errors detected in routes/_scan.php
+
+== ROUTE CACHE COMPILE TEST ==
+route:cache FAILED (see below)
+
+== If route:cache failed, show the error ==
+
+   ParseError 
+
+  syntax error, unexpected identifier "Route", expecting ")"
+
+  at routes/web.php:329
+    325▕         return back()->with('status', 'Applied (WIP)');
+    326▕ }
+    327▕ 
+    328▕ // Teams (basic)
+  ➜ 329▕ Route::prefix('teams')->middleware('auth')->group(function () {
+    330▕     if (!Route::has('teams.create')) {
+    331▕         Route::get('/create', fn () => response('Teams create (WIP)', 200))->name('teams.create');
+    332▕     }
+    333▕     if (!Route::has('teams.store')) {
+
+      [2m+3 vendor frames [22m
+
+  4   app/Providers/RouteServiceProvider.php:16
+      Illuminate\Routing\RouteRegistrar::group()
+      [2m+7 vendor frames [22m
+
+  12  [internal]:0
+      Illuminate\Foundation\Application::Illuminate\Foundation\{closure}()
+
+
+== QUICK GREPS (duplicates / problems) ==
+- opportunities.apply named routes:
+  none
+- public._schema stray literals:
+resources/views/public/layout-travelpro.blade.php:15:  ('public._schema')
+- Old static Route::view('/opportunities', 'opportunities.index'):
+  none
+- Home route name usage:
+  (no direct usage or none found)
+
+== CONTROLLER/VIEW PRESENCE ==
+- PublicOpportunityController:
+No syntax errors detected in app/Http/Controllers/PublicOpportunityController.php
+- opportunities index view:
+  present
+- opportunities show view:
+  present
+
+== DB SNAPSHOT (tables & domain columns) ==
+acl_model_has_permissions
+acl_model_has_roles
+acl_permissions
+acl_role_has_permissions
+acl_roles
+audits
+cache
+cache_locks
+certificates
+events
+failed_jobs
+hours
+job_batches
+jobs
+migrations
+news
+password_reset_tokens
+payments
+registrations
+sessions
+users
+volunteers
+— columns —
+audits	action
+audits	created_at
+audits	entity
+audits	entity_id
+audits	id
+audits	meta
+audits	user_id
+certificates	code
+certificates	created_at
+certificates	event_id
+certificates	hours
+certificates	id
+certificates	issued_at
+certificates	opportunity_id
+certificates	pdf_path
+certificates	revoked_at
+certificates	signature
+certificates	updated_at
+certificates	user_id
+certificates	uuid
+events	created_at
+events	description
+events	ends_at
+events	id
+events	location
+events	slug
+events	starts_at
+events	status
+events	title
+events	updated_at
+hours	event_id
+hours	hours
+hours	id
+hours	occurred_at
+hours	user_id
+payments	status
+registrations	created_at
+registrations	event_id
+registrations	id
+registrations	status
+registrations	updated_at
+registrations	volunteer_id
+volunteers	address
+volunteers	created_at
+volunteers	date_of_birth
+volunteers	id
+volunteers	interests
+volunteers	phone
+volunteers	skills
+volunteers	updated_at
+volunteers	user_id
+
+== ROUTE LIST (top) ==
+
+   ParseError 
+
+  syntax error, unexpected identifier "Route", expecting ")"
+
+  at routes/web.php:329
+    325▕         return back()->with('status', 'Applied (WIP)');
+    326▕ }
+    327▕ 
+    328▕ // Teams (basic)
+  ➜ 329▕ Route::prefix('teams')->middleware('auth')->group(function () {
+    330▕     if (!Route::has('teams.create')) {
+    331▕         Route::get('/create', fn () => response('Teams create (WIP)', 200))->name('teams.create');
+    332▕     }
+    333▕     if (!Route::has('teams.store')) {
+
+      [2m+3 vendor frames [22m
+
+  4   app/Providers/RouteServiceProvider.php:16
+      Illuminate\Routing\RouteRegistrar::group()
+      [2m+7 vendor frames [22m
+
+  12  [internal]:0
+      Illuminate\Foundation\Application::Illuminate\Foundation\{closure}()
+
+
+== HTTP PROBES (public) ==
+/ -> 500
+/opportunities -> 500
+/about -> 500
+/contact -> 500
+/privacy -> 500
+/terms -> 500
+/qr/verify -> 500
+HTTP/2 500 
+date: Sat, 30 Aug 2025 21:24:01 GMT
+content-type: text/html; charset=UTF-8
+cache-control: no-cache, private
+
+== LOG TAIL (errors/warnings) ==
+latest=storage/logs/laravel-2025-08-31.log
+#19 /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(894): Illuminate\\Routing\\ResponseFactory->view()
+#20 /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(815): Illuminate\\Foundation\\Exceptions\\Handler->renderHttpException()
+#21 /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(706): Illuminate\\Foundation\\Exceptions\\Handler->prepareResponse()
+#22 /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(594): Illuminate\\Foundation\\Exceptions\\Handler->renderExceptionResponse()
+#23 /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(575): Illuminate\\Foundation\\Exceptions\\Handler->render()
+#24 /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(149): Illuminate\\Foundation\\Http\\Kernel->renderException()
+[previous exception] [object] (Illuminate\\View\\ViewException(code: 0): Route [home] not defined. (View: /var/www/swaeduae/resources/views/partials/header-public.blade.php) at /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/Routing/UrlGenerator.php:517)
+#0 /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php(60): Illuminate\\View\\Engines\\CompilerEngine->handleViewException()
+#29 /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(894): Illuminate\\Routing\\ResponseFactory->view()
+#30 /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(815): Illuminate\\Foundation\\Exceptions\\Handler->renderHttpException()
+#31 /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(706): Illuminate\\Foundation\\Exceptions\\Handler->prepareResponse()
+#32 /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(594): Illuminate\\Foundation\\Exceptions\\Handler->renderExceptionResponse()
+#33 /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(575): Illuminate\\Foundation\\Exceptions\\Handler->render()
+#34 /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(149): Illuminate\\Foundation\\Http\\Kernel->renderException()
+[previous exception] [object] (Symfony\\Component\\Routing\\Exception\\RouteNotFoundException(code: 0): Route [home] not defined. at /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/Routing/UrlGenerator.php:517)
+#33 /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(894): Illuminate\\Routing\\ResponseFactory->view()
+#34 /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(815): Illuminate\\Foundation\\Exceptions\\Handler->renderHttpException()
+#35 /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(706): Illuminate\\Foundation\\Exceptions\\Handler->prepareResponse()
+#36 /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(594): Illuminate\\Foundation\\Exceptions\\Handler->renderExceptionResponse()
+#37 /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(575): Illuminate\\Foundation\\Exceptions\\Handler->render()
+#38 /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(149): Illuminate\\Foundation\\Http\\Kernel->renderException()
+[2025-08-31 01:24:01] production.ERROR: syntax error, unexpected identifier "Route", expecting ")" {"exception":"[object] (ParseError(code: 0): syntax error, unexpected identifier \"Route\", expecting \")\" at /var/www/swaeduae/routes/web.php:329)
+
+== PWA / Analytics presence ==
+-rw-rw-r--+ 1 swaeduae www-data  67 Aug 31 00:04 public/img/icon-192.png
+-rw-rw-r--+ 1 swaeduae www-data  67 Aug 31 00:04 public/img/icon-512.png
+-rw-rw-r--+ 1 swaeduae www-data 332 Aug 31 00:02 public/manifest.json
+-rw-rw-r--+ 1 swaeduae www-data 775 Aug 31 00:51 public/service-worker.js
+
+== SUMMARY HINTS ==
+- If you see route:cache FAILED: fix syntax in routes/web.php at the line reported.
+- If duplicates for opportunities.apply appear: keep only one Route::post('/opportunities/{slug}/apply')->name('opportunities.apply')
+- If 'Route [home] not defined' appears: either name your home route ->name('home') or update the header to use url('/') .
+- If /opportunities returns 500 and route:cache compiles: ensure PublicOpportunityController@index exists and returns the view with $q set.

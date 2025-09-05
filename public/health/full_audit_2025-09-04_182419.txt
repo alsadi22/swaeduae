@@ -1,0 +1,159 @@
+SwaedUAE – Full Audit v3
+App root: /var/www/swaeduae/current
+Report: public/health/full_audit_2025-09-04_182419.txt
+Base: https://swaeduae.ae | Admin: https://admin.swaeduae.ae
+When: Thu, 04 Sep 2025 18:24:19 +0400
+
+===== 0) OS & Services =====
+-- Ubuntu 22.04.5 LTS
+-- Kernel: 6.8.0-79-generic
+[PASS] Service nginx is active
+[PASS] Service php8.3-fpm is active
+
+===== 1) PHP & Composer =====
+-- PHP 8.3.25 (cli) (built: Aug 29 2025 00:32:53) (NTS)
+[PASS] memory_limit=512M
+[PASS] Composer files present
+
+===== 2) Laravel Basics =====
+-- Laravel Framework 11.45.2
+[PASS] APP_ENV=production
+[PASS] APP_DEBUG=false
+[PASS] storage/ & bootstrap/cache writable
+
+===== 3) Routes & syntax =====
+[PASS] routes/web.php syntax OK
+[PASS] Single PHP open tag in routes/web.php
+[WARN] Missing/incorrect require for partials/disable_internal.php
+    
+      GET|HEAD        / .......................................................................................................................................................... generated::nTRG4HdrA0HqK8d6
+      ANY             _agent{any?} ............................................................................................................................................... generated::7MlDAsTbYpj5VZxv
+      ANY             _alias/{any?} .............................................................................................................................................. generated::USKCHYxa0tzzL66F
+      ANY             _compat/{any?} ............................................................................................................................................. generated::GPnWbdVDWwrvQro1
+      GET|HEAD        about ...................................................................................................................................................................... pages.about
+      ANY             about-us ......................................................................................................... generated::XvRFC4ztrRmRPrfz › Illuminate\Routing › RedirectController
+      GET|HEAD        admin ................................................................................................................................ admin.dashboard › Admin\DashboardController@index
+      GET|HEAD        admin/_whoami ........................................................................................................................................................ admin.diag.whoami
+      GET|HEAD        admin/applicants ............................................................................................................. admin.applicants.index › Admin\ApplicantsController@index
+      POST            admin/applicants/bulk .......................................................................................................... admin.applicants.bulk › Admin\ApplicantsController@bulk
+      GET|HEAD        admin/applicants/export ................................................................................................. admin.applicants.export › Admin\ApplicantsController@exportCsv
+[PASS] Admin named routes present
+[PASS] Org named routes present
+[PASS] QR/verify routes present
+[PASS] Certificate routes present
+[WARN] Found legacy logout.perform references
+
+===== 4) Views & Layouts =====
+[PASS] Admin views do NOT extend public layout
+[PASS] TravelPro assets referenced in public layer
+
+===== 5) HTTP Probes (guest) =====
+[PASS] / -> 200
+[PASS] /qr/verify -> 200
+[PASS] /admin/login -> 301
+[PASS] /org/login -> 200
+[PASS] /applications -> 302 (guest protected)
+[PASS] Admin login has CSRF token
+
+===== 6) PWA & SEO =====
+[PASS] manifest.json present
+[PASS] service-worker.js present
+[PASS] PWA icons present
+[PASS] sitemap symlink -> index OK
+
+===== 7) Mail & Queue =====
+[PASS] MAIL_MAILER=smtp
+[PASS] MAIL_HOST=smtp.zoho.com
+[PASS] swaed-queue-worker active
+[PASS] No failed jobs
+
+===== 8) Security baseline =====
+[PASS] reCAPTCHA keys present in .env
+[WARN] SENTRY_DSN not set
+
+===== 9) Recent errors (logs) =====
+-- Log file: laravel-2025-09-04.log — recent error-like lines: 5934
+    #10 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1132): Illuminate\\Foundation\\Application->bootProvider()
+    #11 [internal function]: Illuminate\\Foundation\\Application->Illuminate\\Foundation\\{closure}()
+    #12 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1131): array_walk()
+    #13 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/BootProviders.php(17): Illuminate\\Foundation\\Application->boot()
+    #14 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(342): Illuminate\\Foundation\\Bootstrap\\BootProviders->bootstrap()
+    #15 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(187): Illuminate\\Foundation\\Application->bootstrapWith()
+    #16 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(171): Illuminate\\Foundation\\Http\\Kernel->bootstrap()
+    #17 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(145): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter()
+    #18 /var/www/swaeduae/releases/20250904032446-localimport/public/index.php(11): Illuminate\\Foundation\\Http\\Kernel->handle()
+    #19 {main}
+    "} 
+    [2025-09-04 18:12:04] production.ERROR: syntax error, unexpected double-quoted string "/partials/disable_internal.php" {"exception":"[object] (ParseError(code: 0): syntax error, unexpected double-quoted string \"/partials/disable_internal.php\" at /var/www/swaeduae/releases/20250904032446-localimport/routes/web.php:2)
+    [stacktrace]
+    #0 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Routing/Router.php(513): Illuminate\\Routing\\RouteFileRegistrar->register()
+    #1 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Routing/Router.php(467): Illuminate\\Routing\\Router->loadRoutes()
+    #2 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Routing/RouteRegistrar.php(207): Illuminate\\Routing\\Router->group()
+    #3 /var/www/swaeduae/releases/20250904032446-localimport/app/Providers/RouteServiceProvider.php(18): Illuminate\\Routing\\RouteRegistrar->group()
+    #4 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(36): App\\Providers\\RouteServiceProvider->boot()
+    #5 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Container/Util.php(43): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+    #6 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(95): Illuminate\\Container\\Util::unwrapIfClosure()
+    #7 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(35): Illuminate\\Container\\BoundMethod::callBoundMethod()
+    #8 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Container/Container.php(696): Illuminate\\Container\\BoundMethod::call()
+    #9 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1151): Illuminate\\Container\\Container->call()
+    #10 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1132): Illuminate\\Foundation\\Application->bootProvider()
+    #11 [internal function]: Illuminate\\Foundation\\Application->Illuminate\\Foundation\\{closure}()
+    #12 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1131): array_walk()
+    #13 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/BootProviders.php(17): Illuminate\\Foundation\\Application->boot()
+    #14 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(342): Illuminate\\Foundation\\Bootstrap\\BootProviders->bootstrap()
+    #15 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(187): Illuminate\\Foundation\\Application->bootstrapWith()
+    #16 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(171): Illuminate\\Foundation\\Http\\Kernel->bootstrap()
+    #17 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(145): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter()
+    #18 /var/www/swaeduae/releases/20250904032446-localimport/public/index.php(11): Illuminate\\Foundation\\Http\\Kernel->handle()
+    #19 {main}
+    "} 
+    [2025-09-04 18:12:06] production.ERROR: syntax error, unexpected double-quoted string "/partials/disable_internal.php" {"exception":"[object] (ParseError(code: 0): syntax error, unexpected double-quoted string \"/partials/disable_internal.php\" at /var/www/swaeduae/releases/20250904032446-localimport/routes/web.php:2)
+    [stacktrace]
+    #0 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Routing/Router.php(513): Illuminate\\Routing\\RouteFileRegistrar->register()
+    #1 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Routing/Router.php(467): Illuminate\\Routing\\Router->loadRoutes()
+    #2 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Routing/RouteRegistrar.php(207): Illuminate\\Routing\\Router->group()
+    #3 /var/www/swaeduae/releases/20250904032446-localimport/app/Providers/RouteServiceProvider.php(18): Illuminate\\Routing\\RouteRegistrar->group()
+    #4 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(36): App\\Providers\\RouteServiceProvider->boot()
+    #5 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Container/Util.php(43): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+    #6 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(95): Illuminate\\Container\\Util::unwrapIfClosure()
+    #7 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(35): Illuminate\\Container\\BoundMethod::callBoundMethod()
+    #8 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Container/Container.php(696): Illuminate\\Container\\BoundMethod::call()
+    #9 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1151): Illuminate\\Container\\Container->call()
+    #10 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1132): Illuminate\\Foundation\\Application->bootProvider()
+    #11 [internal function]: Illuminate\\Foundation\\Application->Illuminate\\Foundation\\{closure}()
+    #12 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1131): array_walk()
+    #13 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/BootProviders.php(17): Illuminate\\Foundation\\Application->boot()
+    #14 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(342): Illuminate\\Foundation\\Bootstrap\\BootProviders->bootstrap()
+    #15 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(187): Illuminate\\Foundation\\Application->bootstrapWith()
+    #16 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(171): Illuminate\\Foundation\\Http\\Kernel->bootstrap()
+    #17 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(145): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter()
+    #18 /var/www/swaeduae/releases/20250904032446-localimport/public/index.php(11): Illuminate\\Foundation\\Http\\Kernel->handle()
+    #19 {main}
+    "} 
+    [2025-09-04 18:12:06] production.ERROR: syntax error, unexpected double-quoted string "/partials/disable_internal.php" {"exception":"[object] (ParseError(code: 0): syntax error, unexpected double-quoted string \"/partials/disable_internal.php\" at /var/www/swaeduae/releases/20250904032446-localimport/routes/web.php:2)
+    [stacktrace]
+    #0 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Routing/Router.php(513): Illuminate\\Routing\\RouteFileRegistrar->register()
+    #1 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Routing/Router.php(467): Illuminate\\Routing\\Router->loadRoutes()
+    #2 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Routing/RouteRegistrar.php(207): Illuminate\\Routing\\Router->group()
+    #3 /var/www/swaeduae/releases/20250904032446-localimport/app/Providers/RouteServiceProvider.php(18): Illuminate\\Routing\\RouteRegistrar->group()
+    #4 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(36): App\\Providers\\RouteServiceProvider->boot()
+    #5 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Container/Util.php(43): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+    #6 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(95): Illuminate\\Container\\Util::unwrapIfClosure()
+    #7 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(35): Illuminate\\Container\\BoundMethod::callBoundMethod()
+    #8 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Container/Container.php(696): Illuminate\\Container\\BoundMethod::call()
+    #9 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1151): Illuminate\\Container\\Container->call()
+    #10 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1132): Illuminate\\Foundation\\Application->bootProvider()
+    #11 [internal function]: Illuminate\\Foundation\\Application->Illuminate\\Foundation\\{closure}()
+    #12 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1131): array_walk()
+    #13 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/BootProviders.php(17): Illuminate\\Foundation\\Application->boot()
+    #14 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(342): Illuminate\\Foundation\\Bootstrap\\BootProviders->bootstrap()
+    #15 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(474): Illuminate\\Foundation\\Application->bootstrapWith()
+    #16 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(196): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+    #17 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1235): Illuminate\\Foundation\\Console\\Kernel->handle()
+    #18 /var/www/swaeduae/releases/20250904032446-localimport/artisan(13): Illuminate\\Foundation\\Application->handleCommand()
+    #19 {main}
+    "} 
+[WARN] See tail above for recent issues
+
+===== 10) Summary =====
+Passed: 30  |  Warnings: 4  |  Failures: 0

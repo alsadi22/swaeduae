@@ -1,0 +1,12 @@
+<?php
+
+use Illuminate\Support\Facades\Route;
+
+Route::prefix('admin')->name('admin.')->middleware(['web','auth:admin'])->group(function () {
+    // If some blades call route('admin.opportunities'), provide a safe alias
+    if (!Route::has('admin.opportunities')) {
+        // Use a different URI (/admin/opps) to avoid conflicting with the real index.
+        Route::get('/opps', fn() => redirect()->route('admin.opportunities.index'))
+            ->name('opportunities');
+    }
+});

@@ -1,0 +1,4 @@
+HTTP/1.1 200 OK
+X-Frame-Options: SAMEORIGIN
+Referrer-Policy: strict-origin-when-cross-origin
+Last-Modified: Wed, 20 Aug 2025 09:11:28 GMT

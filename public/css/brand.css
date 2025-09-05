@@ -1,0 +1,9 @@
+:root{--bg:#f6efe0;--ink:#101828;--muted:#64748b;--brand:#1e66f5;--card:#fff;--border:#e5e7eb;--radius:14px;--shadow:0 10px 24px rgba(0,0,0,.06)}
+body{background:var(--bg);color:var(--ink)}
+a,.btn-link{color:var(--brand)}
+.btn-primary{background:var(--brand);border-color:var(--brand)}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow)}
+input,select,textarea{border-radius:10px;border:1px solid var(--border)}
+@media (prefers-color-scheme: dark){
+  :root{--bg:#0b1220;--ink:#e5e7eb;--card:#0f172a;--border:#1f2937;--shadow:none}
+}

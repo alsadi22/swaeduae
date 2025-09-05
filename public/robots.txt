@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /account/
+Disallow: /org/
+Disallow: /admin/
+Sitemap: https://swaeduae.ae/sitemap.xml

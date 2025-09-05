@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+set -euo pipefail
+cd /var/www/swaeduae
+export PHP=php HOST=swaeduae.ae
+TOK="$(sed -n 's/^AGENT_TOKEN=\(.*\)$/\1/p' .env | tr -d '\r\n')"
+
+echo "== Agent quick check =="
+echo "Token: ${TOK:0:6}********"
+
+echo "-- audit --"
+$PHP artisan agent:audit || true
+
+echo "-- scan --"
+$PHP artisan agent:scan || true
+
+REP="storage/app/agent/report.json"
+# Robust counters (no false 1s)
+PAGES="$($PHP -r 'echo (int) ((@json_decode(@file_get_contents("storage/app/agent/report.json"), true)["crawler_pages"] ?? 0));' 2>/dev/null || echo 0)"
+ISSUES="$($PHP -r 'echo (int) ((@json_decode(@file_get_contents("storage/app/agent/report.json"), true)["issues"] ?? 0));' 2>/dev/null || echo 0)"
+echo "scan: pages=$PAGES issues=$ISSUES"
+
+echo "-- health (token) --"
+for u in /healthz-agent /api/agent/ping; do
+  code=$(curl -s -o /dev/null -w "%{http_code}" -H "Host: $HOST" -H "X-Agent-Token: $TOK" "http://127.0.0.1$u")
+  echo "$u -> $code"
+done
+
+echo "-- public pages --"
+for u in / /contact /about-us /qr/verify /api/v1/health; do
+  code=$(curl -s -o /dev/null -w "%{http_code}" -H "Host: $HOST" "http://127.0.0.1$u")
+  echo "$u -> $code"
+done
+
+echo "-- key flows --"
+for u in /organizations/register /admin/login; do
+  code=$(curl -s -o /dev/null -w "%{http_code}" -H "Host: $HOST" "http://127.0.0.1$u")
+  echo "$u -> $code"
+done
+
+if [ "${PAGES:-0}" -gt 0 ] && [ "${ISSUES:-0}" -gt 0 ]; then
+  echo "RESULT: FAIL (scan found issues)"
+else
+  echo "RESULT: OK"
+fi

@@ -1,0 +1,7 @@
+@extends('layouts.app')
+@section('content')
+  <div class="container py-4">
+    <h1>Organization Dashboard</h1>
+    <p>Logged in as: {{ auth()->user()->email }}</p>
+  </div>
+@endsection

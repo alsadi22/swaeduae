@@ -1,0 +1,45 @@
+=== AUTH MENU AUDIT @ 2025-09-04_193940 ===
+BASE_URL=https://swaeduae.ae | ADMIN_URL=https://admin.swaeduae.ae
+APP_ROOT=/var/www/swaeduae/current
+
+--- 1) HTTP checks (status + CSRF) ---
+/           -> 200
+/login      -> 200
+/register   -> 200
+/org/login  -> 200
+/admin/login-> 301
+admin host  -> 200
+[PASS] Volunteer login CSRF present
+[PASS] Admin login CSRF present
+
+--- 2) Home page content (Sign In / menu markers) ---
+[WARN] No 'Sign In' text on home
+[WARN] No 'dropdown-menu' in home HTML
+[WARN] No 'data-bs-toggle="dropdown"' in home HTML
+[PASS] Auth links detected in home HTML
+
+--- 3) Blade partials presence ---
+[PASS] partials/auth_menu.blade.php exists
+[PASS] partials/account_menu.blade.php exists
+[PASS] auth_menu has dropdown toggler
+[PASS] auth_menu has /login
+[PASS] auth_menu has /register
+[PASS] auth_menu has /org/login
+
+--- 4) Header includes (is the menu inserted into navbar?) ---
+Header candidates:
+  - resources/views/partials/header.blade.php
+  - resources/views/components/header.blade.php
+  * includes found in: resources/views/partials/header.blade.php
+  * includes found in: resources/views/components/header.blade.php
+[PASS] Header includes auth/account menu partials
+
+--- 5) Layout JS needed for dropdowns ---
+[PASS] Bootstrap JS markers found in views
+
+--- 6) Route sanity (login/register available to guests) ---
+[PASS] Route 'login' registered
+[PASS] Route 'register' registered
+[PASS] Org login route present
+
+--- DONE ---

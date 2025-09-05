@@ -1,0 +1,7 @@
+HTTP/1.1 200 OK
+Cache-Control: no-cache, private
+Content-Language: ar
+Vary: Accept-Language
+X-Frame-Options: SAMEORIGIN
+Referrer-Policy: strict-origin-when-cross-origin
+Cache-Control: no-cache, no-store, must-revalidate

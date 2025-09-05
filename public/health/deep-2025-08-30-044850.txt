@@ -1,0 +1,181 @@
+SwaedUAE Deep Check  2025-08-30-044850
+================================================
+
+== Environment ==
+PHP: PHP 8.3.24 (cli) (built: Aug  3 2025 08:57:38) (NTS)
+Laravel: Laravel Framework 11.45.2
+Node: v22.19.0
+Composer: Composer 2.2.6 2022-02-04 17:00:38
+memory_limit: 512M
+
+== Routes JSON snapshot ==
+OK    - Fetched route list JSON
+
+== Public GET endpoints (200 expected; 302 resolved) ==
+  //                                       -> 200
+  /__stub/dashboard                        -> 200
+  /_agent                                  -> 500
+WARN  - Public GET _agent returned 500
+  /_agent/report.json                      -> 500
+WARN  - Public GET _agent/report.json returned 500
+  /_agent/scan                             -> 500
+WARN  - Public GET _agent/scan returned 500
+  /_alias/about                            -> 200
+  /_alias/contact                          -> 200
+  /_alias/faq                              -> 200
+  /_alias/login-volunteer                  -> 200
+  /_alias/privacy                          -> 200
+  /_alias/public-events                    -> 200
+  /_alias/public-opps                      -> 200
+  /_alias/public-orgs                      -> 403
+WARN  - Public GET _alias/public-orgs returned 403
+  /_alias/terms                            -> 200
+  /_compat/id                              -> 404
+WARN  - Public GET _compat/id returned 404
+  /_compat/token                           -> 404
+WARN  - Public GET _compat/token returned 404
+  /about                                   -> 200
+  /about-us                                -> 200
+  /attendance/checkin                      -> 200
+  /attendance/checkout                     -> 200
+  /auth/facebook/callback                  -> 200
+  /auth/facebook/redirect                  -> 200
+  /auth/google/callback                    -> 200
+  /auth/google/redirect                    -> 200
+  /auth/uaepass/callback                   -> 404
+WARN  - Public GET auth/uaepass/callback returned 404
+  /auth/uaepass/redirect                   -> 404
+WARN  - Public GET auth/uaepass/redirect returned 404
+  /certificates/issue                      -> 200
+  /confirm-password                        -> 200
+  /contact                                 -> 200
+  /contact-us                              -> 200
+  /dashboard                               -> 200
+  /destination                             -> 200
+  /donate                                  -> 500
+WARN  - Public GET donate returned 500
+  /events                                  -> 200
+  /events/browse                           -> 200
+  /faq                                     -> 200
+  /forgot-password                         -> 200
+  /login                                   -> 200
+  /login/email                             -> 200
+  /login/organization                      -> 500
+WARN  - Public GET login/organization returned 500
+  /me/certificates                         -> 200
+  /me/hours                                -> 200
+  /my/certificates                         -> 200
+  /notifications/test                      -> 200
+  /opportunities                           -> 200
+  /opportunities/attendances.csv           -> 200
+  /opportunities/qr                        -> 500
+WARN  - Public GET opportunities/qr returned 500
+  /partners                                -> 403
+WARN  - Public GET partners returned 403
+  /payment/cancel                          -> 500
+WARN  - Public GET payment/cancel returned 500
+  /payment/success                         -> 500
+WARN  - Public GET payment/success returned 500
+  /privacy                                 -> 200
+  /privacy-policy                          -> 200
+  /profile                                 -> 200
+  /profile/edit                            -> 200
+  /register                                -> 200
+  /robots.txt                              -> 200
+  /sanctum/csrf-cookie                     -> 204
+WARN  - Public GET sanctum/csrf-cookie returned 204
+  /scan                                    -> 200
+  /scan/checkin                            -> 200
+  /scan/checkout                           -> 200
+  /services                                -> 200
+  /sitemap.xml                             -> 200
+  /teams/create                            -> 200
+  /terms                                   -> 200
+  /terms-of-service                        -> 200
+  /transcript.pdf                          -> 200
+  /up                                      -> 200
+  /verify-email                            -> 200
+  /volunteer/dashboard                     -> 200
+  /volunteer/login                         -> 200
+  /volunteer/profile                       -> 200
+  /volunteer/register                      -> 200
+
+== Admin/Org protections & logins ==
+  /admin               -> 200 (expect 302)
+WARN  - /admin not redirecting to login
+  /org/dashboard       -> 500 (expect 302)
+WARN  - /org/dashboard not redirecting to login
+  /admin/login         -> 200 (expect 200)
+OK    - /admin/login loads
+  /org/login           -> 500 (expect 200)
+WARN  - /org/login not 200
+
+== QR / Verify / Scan endpoints ==
+  /_agent/scan                             -> 500
+WARN  - QR/scan route _agent/scan returned 500
+  /admin/attendance                        -> 200
+  /attendance/checkin                      -> 200
+  /attendance/checkout                     -> 200
+  /opportunities/attendances.csv           -> 200
+  /opportunities/qr                        -> 500
+WARN  - QR/scan route opportunities/qr returned 500
+  /org/attendances/minutes                 -> 500
+WARN  - QR/scan route org/attendances/minutes returned 500
+  /scan                                    -> 200
+  /scan/checkin                            -> 200
+  /scan/checkout                           -> 200
+  /verify-email                            -> 200
+  /qr/verify/TEST123                       -> 404
+  /verify/TEST123                          -> 404
+  /scan                                    -> 200
+  /scan/checkin                            -> 200
+
+== API health endpoints ==
+  /api/v1/health       -> 200
+  /api/user            -> 200
+
+== Named routes required (features) ==
+OK    - route attendance.checkin
+OK    - route attendance.checkout
+OK    - route scan.index
+OK    - route scan.submit
+OK    - route admin.attendance.index
+OK    - route admin.attendance.qr
+OK    - route admin.opportunities.index
+OK    - route org.dashboard
+OK    - route org.opportunities.index
+OK    - route org.applicants.index
+OK    - route certificates.verify
+OK    - route verify.show
+OK    - route qr.verify
+OK    - route volunteer.dashboard
+
+== Code checks (geo/QR/cert/SSO) ==
+- geofence/radius references (looking for 150m or radius hints)
+app/Services/AnomalyService.php:15:            elseif ($distanceMeters > 150) { $score -= 15; $flags[] = 'gps_borderline'; }
+app/Http/Controllers/ScanController.php:75:        $geofenceMeters = (int) Config::get('hours.geofence_meters', 150);
+resources/views/org/attendance/settings.blade.php:34:    if (!document.getElementById('radius').value) document.getElementById('radius').value = 150;
+resources/views.bak.2025-08-24-190620/org/attendance/settings.blade.php:34:    if (!document.getElementById('radius').value) document.getElementById('radius').value = 150;
+OK    - GenerateCertificatePdf job present
+OK    - dompdf config present
+OK    - CertificateVerifyController present
+OK    - UAE Pass controller present
+OK    - Social login controllers present
+
+== PWA & Sitemap ==
+OK    - manifest.json present
+OK    - service-worker.js present
+OK    - icon-192.png present
+OK    - icon-512.png present
+OK    - public/sitemap.xml symlink
+OK    - GET /sitemap.xml -> 200
+
+== Org/Admin key pages (spot unauthenticated checks) ==
+  /org/login           -> 500
+  /org/register        -> 500
+  /admin/login         -> 200
+  /admin               -> 200
+
+== Summary ==
+Report written: public/health/deep-2025-08-30-044850.txt
+URL: https://swaeduae.ae/health/deep-2025-08-30-044850.txt

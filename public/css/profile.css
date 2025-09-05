@@ -1,0 +1,15 @@
+.profile-wrap{display:grid;grid-template-columns:300px 1fr;gap:1rem}
+@media(max-width:992px){.profile-wrap{grid-template-columns:1fr}}
+.p-card{background:#fff;border:1px solid #e9ecef;border-radius:14px}
+.p-pad{padding:1rem 1.25rem}
+.p-hero{background:#ffd000;color:#0d1b2a;border-radius:14px 14px 0 0;padding:1.25rem}
+.p-row{display:grid;grid-template-columns:repeat(5,minmax(120px,1fr));gap:.75rem}
+@media(max-width:1200px){.p-row{grid-template-columns:repeat(3,1fr)}}
+.p-kpi{background:#fff;border:1px solid #e9ecef;border-radius:12px;padding:0.9rem}
+.p-kpi .v{font-weight:700;font-size:1.15rem}
+.p-sec-h{background:#ffd000;padding:.5rem .9rem;border-radius:8px;margin:.75rem 0}
+.list-slim{max-height:280px;overflow:auto}
+.meta-grid{display:grid;grid-template-columns:110px 1fr;gap:.25rem .75rem}
+.small-muted{font-size:.85rem;color:#6c757d}
+.photo{width:80px;height:80px;border-radius:50%;object-fit:cover;border:3px solid #fff;box-shadow:0 0 0 3px #ffd000}
+.badge-ok{display:inline-block;background:#16a34a;color:#fff;border-radius:999px;padding:.15rem .5rem;font-size:.75rem}

@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<psalm errorLevel="6" cacheDirectory=".psalm-cache">
+  <projectFiles>
+    <directory name="app"/>
+    <directory name="routes"/>
+    <ignoreFiles>
+      <directory name="vendor"/>
+      <directory name="storage"/>
+      <directory name="bootstrap/cache"/>
+    </ignoreFiles>
+  </projectFiles>
+</psalm>

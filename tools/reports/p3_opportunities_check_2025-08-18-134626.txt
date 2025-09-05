@@ -1,0 +1,30 @@
+Route name events.index present              PASS
+Route name events.show present               PASS
+Legacy name opportunities.index also exists  WARN
+Show route uses {id} (no slug)               WARN
+Sitemap path /opportunities seems valid      PASS
+Controller exists: EventController.php       PASS
+Index uses pagination                        PASS
+Published filter not detected                WARN
+Explicit ordering present                    PASS
+Eager loading not detected (risk of N+1)     WARN
+Model exists: Opportunity.php                PASS
+scopePublished() missing                     WARN
+Model has no slug reference                  WARN
+No relationships detected                    WARN
+Migration found: 2025_08_17_150510_create_opportunity_applications_table.php PASS
+title column                                 WARN
+description column                           WARN
+slug column                                  WARN
+start date/time                              WARN
+end date/time                                WARN
+org/owner FK                                 WARN
+indexes present                              PASS
+Index view: events/index.blade.php           PASS
+Show view: events/show.blade.php             PASS
+Pagination links missing in index view       WARN
+Index view uses i18n __()                    PASS
+Show view uses i18n __()                     PASS
+Apply route volunteer.registerEvent present  PASS
+Apply POST path not found                    WARN
+— end —

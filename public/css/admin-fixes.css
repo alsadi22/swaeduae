@@ -1,0 +1,9 @@
+/* Hide the public site's navbar if it ever leaks into /admin pages */
+nav.navbar.navbar-expand-md,
+.navbar.navbar-light.shadow-sm {
+  display: none !important;
+}
+
+/* Ensure the admin sidenav and its navbar sit above anything */
+#sidenav-main { z-index: 1080 !important; }
+.navbar.navbar-main { z-index: 1070 !important; }
