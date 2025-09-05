@@ -48,6 +48,10 @@ Route::middleware(['web','guest','throttle:10,1'])->group(function () {
     Route::post('/login', [SimpleLoginController::class, 'perform'])->name('login.perform');
 });
 
+Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
+    ->middleware('auth')
+    ->name('logout');
+
 use App\Http\Controllers\Auth\SimplePasswordResetController;
 
 /* == Password reset (guest, skip custom middlewares) == */
