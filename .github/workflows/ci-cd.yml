@@ -6,7 +6,7 @@ on:
     branches: [ main ]
 
 jobs:
-  build:  # required check: "ci-cd / build"
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -19,12 +19,10 @@ jobs:
           tools: composer:v2
           ini-file: production
 
-      # Prepare dirs in an idempotent way (handle 'storage' being a file)
       - name: Prepare Laravel dirs
         shell: bash
         run: |
           if [ -f storage ]; then rm -f storage; fi
-          mkdir -p storage
           mkdir -p storage/framework/cache storage/framework/sessions storage/framework/views
           mkdir -p bootstrap/cache
 
