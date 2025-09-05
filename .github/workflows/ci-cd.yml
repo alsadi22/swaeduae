@@ -19,12 +19,11 @@ jobs:
           tools: composer:v2
           ini-file: production
 
-      - name: Prepare Laravel dirs
+      - name: Prepare Laravel dirs (idempotent)
         shell: bash
         run: |
-          if [ -f storage ]; then rm -f storage; fi
-          mkdir -p storage/framework/cache storage/framework/sessions storage/framework/views
-          mkdir -p bootstrap/cache
+          rm -rf storage bootstrap/cache
+          mkdir -p storage/framework/{cache,sessions,views} bootstrap/cache
 
       - name: Composer install (no-dev, no-scripts)
         run: composer install --no-interaction --no-progress --prefer-dist --no-dev --no-scripts
