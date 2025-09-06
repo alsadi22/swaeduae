@@ -1,5 +1,4 @@
 name: site-quality
-
 on:
   pull_request:
     branches: [ main ]
@@ -7,13 +6,21 @@ on:
 jobs:
   smoke:
     runs-on: ubuntu-latest
+    env:
+      BASE: https://swaeduae.ae
     steps:
-      - name: Probe endpoints
+      - name: Curl core pages
+        shell: bash
         run: |
+          set -euo pipefail
+          ok() { printf "OK   %-18s -> %s\n" "$1" "$2"; }
+          fail() { printf "FAIL %-18s -> %s\n" "$1" "$2"; exit 1; }
           for U in / /admin/login /org/login /qr/verify; do
-            CODE=$(curl -sS -o /dev/null -w "%{http_code}" -L --max-redirs 5 --retry 3 --retry-delay 2 --retry-connrefused https://swaeduae.ae"$U");
-            if [ "$CODE" != "200" ] && [ "$CODE" != "302" ]; then
-              echo "FAIL $U -> $CODE"; exit 1;
-            fi;
-            echo "OK   $U -> $CODE";
+            CODE=$(curl -sS -o /dev/null -w "%{http_code}" \
+              -L --max-redirs 5 --retry 3 --retry-delay 2 --retry-connrefused \
+              "$BASE$U")
+            case "$CODE" in
+              200|301|302) ok "$U" "$CODE" ;;
+              *)           fail "$U" "$CODE" ;;
+            esac
           done

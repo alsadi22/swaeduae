@@ -1,91 +1,50 @@
 name: ci-cd
-
 on:
-  workflow_dispatch:
   pull_request:
+    branches: [ main ]
   push:
     branches: [ main ]
 
 jobs:
-  build:
-    name: build
-    runs-on: self-hosted
+  build:  # required check key: "ci-cd / build"
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up PHP
+      - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.3'
           extensions: mbstring, intl, pdo_mysql, bcmath, gd, zip
-          coverage: none
+          tools: composer:v2
+          ini-file: production
 
-      - name: Prepare Laravel dirs
-        run: |
-          rm -rf storage bootstrap/cache
-          mkdir -p storage/framework/{cache,sessions,views} bootstrap/cache
-
-      - name: Composer install
-        run: composer install --no-interaction --no-progress --prefer-dist --no-dev --no-scripts
-
-      - name: Build assets
-        run: |
-          if [ -f package.json ]; then
-            (npm ci || npm install)
-            npm run build || echo "no build script"
-          fi
-
-      - name: Build OK
-        run: echo "Build OK"
-
-  deploy:
-    name: deploy
-    needs: build
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-    runs-on: self-hosted
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-    env:
-      DEPLOY_PATH: /var/www/swaeduae
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Release & activate locally (no SSH)
+      - name: Prepare Laravel dirs (idempotent)
         shell: bash
         run: |
           set -euo pipefail
-          RELEASE=$(date +%Y%m%d%H%M%S)-${GITHUB_SHA}
-          REL_DIR="$DEPLOY_PATH/releases/$RELEASE"
-          CURRENT="$DEPLOY_PATH/current"
+          rm -rf storage bootstrap/cache
+          mkdir -p storage/framework/{cache,sessions,views} bootstrap/cache
 
-          mkdir -p "$REL_DIR"
-          rsync -az --delete \
-            --exclude='.git' --exclude='.github' \
-            --exclude='node_modules' --exclude='tests' \
-            --exclude='.env' ./ "$REL_DIR/"
+      - name: Composer install (no-dev, no-scripts)
+        run: composer install --no-interaction --no-progress --prefer-dist --no-dev --no-scripts
 
-          # shared artifacts
-          mkdir -p "$DEPLOY_PATH/shared/storage" "$DEPLOY_PATH/shared/bootstrap/cache" "$REL_DIR/bootstrap"
-          ln -sfn "$DEPLOY_PATH/shared/.env" "$REL_DIR/.env" || true
-          rm -rf "$REL_DIR/storage" && ln -sfn "$DEPLOY_PATH/shared/storage" "$REL_DIR/storage"
-          rm -rf "$REL_DIR/bootstrap/cache" && ln -sfn "$DEPLOY_PATH/shared/bootstrap/cache" "$REL_DIR/bootstrap/cache"
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
 
-          # Laravel ops if applicable
-          if [ -f "$REL_DIR/composer.json" ]; then
-            cd "$REL_DIR"
-            command -v composer || { echo "Composer missing. Installing..."; sudo apt-get update && sudo apt-get install -y composer; }
-            composer install --no-dev --prefer-dist --no-interaction --optimize-autoloader
-            php artisan storage:link || true
-            php artisan migrate --force || true
-            php artisan optimize:clear || true
-            php artisan config:cache || true
-            php artisan route:cache || true
-            php artisan view:cache || true
+      - name: Frontend build (if package.json)
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -f package.json ]; then
+            ( [ -f package-lock.json ] && npm ci ) || npm install --no-audit --no-fund
+            npm run build || echo "no build script, skipping"
+          else
+            echo "No package.json; skip frontend build"
           fi
 
-          # atomic switch
-          rm -rf "$CURRENT" && ln -sfnT "$REL_DIR" "$CURRENT"
-
-          # perms & reloads
-          sudo chown -h www-data:www-data "$CURRENT" || true
-          sudo chown -R www-data:www-data "$DEPLOY_PATH/shared/storage" "$DEPLOY_PATH/shared/bootstrap" || true
-          command -v systemctl >/dev/null && { sudo systemctl reload php*-fpm || true; sudo systemctl reload nginx || true; }
+      - name: Finish
+        run: echo "Build OK"
