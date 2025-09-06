@@ -13,7 +13,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          ok() { printf "OK   %-18s -> %s\n" "$1" "$2"; }
+          ok()   { printf "OK   %-18s -> %s\n" "$1" "$2"; }
           fail() { printf "FAIL %-18s -> %s\n" "$1" "$2"; exit 1; }
           for U in / /admin/login /org/login /qr/verify; do
             CODE=$(curl -sS -o /dev/null -w "%{http_code}" \
