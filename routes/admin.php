@@ -5,7 +5,8 @@ use App\Http\Controllers\Admin\OpportunityController;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware(['auth', 'can:admin-access'])
+Route::domain(env('ADMIN_DOMAIN', 'admin.swaeduae.ae'))
+    ->middleware(['auth', 'can:admin-access'])
     ->prefix('admin')->as('admin.')
     ->group(function () {
         Route::get('/_whoami', function () {
