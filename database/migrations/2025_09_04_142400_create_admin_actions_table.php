@@ -13,12 +13,14 @@ return new class extends Migration {
 
         Schema::create('admin_actions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('admin_id')->constrained('users')->cascadeOnDelete();
+            $table->unsignedBigInteger('admin_id');
             $table->string('action');
             $table->string('subject_type');
             $table->unsignedBigInteger('subject_id');
             $table->json('meta')->nullable();
             $table->timestamps();
+
+            $table->foreign('admin_id')->references('id')->on('users');
         });
     }
 
