@@ -9,6 +9,11 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Setup PHP
+
+      - name: Prepare filesystem
+        run: |
+          mkdir -p storage/logs bootstrap/cache
+          mkdir -p storage/framework/{cache,sessions,views}
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.3'
