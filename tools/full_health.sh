@@ -16,6 +16,9 @@ hit(){ curl -s -o /dev/null -w "%{http_code}" "$1"; }
   phpc config:cache >/dev/null || true; phpc route:cache >/dev/null || true; phpc view:cache >/dev/null || true
   echo "caches: refreshed"
 
+  echo; echo "== CONFIG SNAPSHOT =="
+  php -r 'require "vendor/autoload.php"; $app=require "bootstrap/app.php"; $app->make(\Illuminate\Contracts\Console\Kernel::class)->bootstrap(); echo "Queue: ".config("queue.default").PHP_EOL; echo "DB:    ".config("database.default").PHP_EOL; echo "Log:   ".config("logging.default").PHP_EOL;'
+
   echo; echo "== ABOUT =="; phpc about
 
   echo; echo "== ROUTES (top) =="; phpc route:list | sed -n '1,80p'
