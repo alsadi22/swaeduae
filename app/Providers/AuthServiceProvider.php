@@ -7,29 +7,26 @@ use Illuminate\Support\Facades\Gate;
 
 class AuthServiceProvider extends ServiceProvider
 {
-    /**
-     * The policy mappings for the application.
-     * Add mappings here if/when you use them, e.g.:
-     *  \App\Models\Opportunity::class => \App\Policies\OpportunityPolicy::class,
-     */
     protected $policies = [
-        // \App\Models\Model::class => \App\Policies\ModelPolicy::class,
+        // 'App\Models\Model' => 'App\Policies\ModelPolicy',
     ];
 
     public function boot(): void
     {
         $this->registerPolicies();
 
-        Gate::define('admin-access', fn ($user) =>
-            method_exists($user, 'hasRole')
-                ? $user->hasRole('admin')
-                : (($user->role ?? null) === 'admin')
-        );
+        Gate::define('admin-access', function ($user) {
+            if (method_exists($user, 'hasRole')) {
+                return $user->hasRole('admin');
+            }
+            return (($user->role ?? null) === 'admin');
+        });
 
-        Gate::define('org-access', fn ($user) =>
-            method_exists($user, 'hasRole')
-                ? $user->hasRole('org')
-                : (($user->role ?? null) === 'org')
-        );
+        Gate::define('org-access', function ($user) {
+            if (method_exists($user, 'hasRole')) {
+                return $user->hasRole('org');
+            }
+            return (($user->role ?? null) === 'org');
+        });
     }
 }
