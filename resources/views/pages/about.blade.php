@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('public.layout')
 @section('title', __('About'))
 @section('content')
 <div class="container py-4">
