@@ -38,7 +38,7 @@ class Kernel extends HttpKernel
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
 
             \App\Http\Middleware\FormRateLimit::class,
-            /* App\Http\Middleware\MicroCache::class, */
+            // /* App\Http\Middleware\MicroCache::class, */
             \App\Http\Middleware\AdminGate::class,
         ],
 
