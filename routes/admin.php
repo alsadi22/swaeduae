@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\OpportunityController;
+use App\Http\Controllers\Admin\QrVerifyController;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -32,6 +33,7 @@ Route::domain(env('ADMIN_DOMAIN', 'admin.swaeduae.ae'))
         Route::get('/certificates', [\App\Http\Controllers\Admin\CertificateController::class, 'index'])->name('certificates.index');
         Route::get('/attendance', [\App\Http\Controllers\Admin\AttendanceAdminController::class, 'index'])->name('attendance.index');
         Route::get('/applicants', [\App\Http\Controllers\Admin\ApplicantsController::class, 'index'])->name('applicants.index');
+        Route::get('/qr/verify', [QrVerifyController::class, 'index'])->name('qr.verify');
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
         Route::resource('users', UserController::class)->only(['index', 'show', 'update', 'destroy']);
