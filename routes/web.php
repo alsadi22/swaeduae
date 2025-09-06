@@ -1,4 +1,5 @@
 <?php
+Route::view('/', 'public.home')->name('home.public');
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\SimpleLoginController;
