@@ -13,6 +13,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         \App\Console\Commands\BuildSitemaps::class,
+        \App\Console\Commands\RunFullHealth::class,
     ];
 
     /**
@@ -22,6 +23,8 @@ class Kernel extends ConsoleKernel
     {
         // Nightly sitemap rebuild at 03:20
         $schedule->command('swaed:build-sitemaps')->dailyAt('03:20');
+        // Nightly full health check at 03:20
+        $schedule->command('swaed:full-health')->dailyAt('03:20');
     }
 
     /**

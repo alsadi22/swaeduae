@@ -26,8 +26,14 @@ jobs:
           rm -rf storage bootstrap/cache
           mkdir -p storage/framework/{cache,sessions,views} bootstrap/cache
 
-      - name: Composer install (no-dev, no-scripts)
-        run: composer install --no-interaction --no-progress --prefer-dist --no-dev --no-scripts
+      - name: PHP version
+        run: php -v
+
+      - name: Composer validate
+        run: composer validate --no-check-lock
+
+      - name: Composer install
+        run: composer install --no-interaction --no-progress --prefer-dist
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -45,6 +51,15 @@ jobs:
           else
             echo "No package.json; skip frontend build"
           fi
+
+      - name: PHPStan
+        run: vendor/bin/phpstan analyse --no-progress
+
+      - name: Pint
+        run: vendor/bin/pint --test
+
+      - name: PHPUnit
+        run: php artisan test --no-interaction
 
       - name: Finish
         run: echo "Build OK"

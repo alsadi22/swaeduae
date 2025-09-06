@@ -24,3 +24,6 @@ jobs:
               *)           fail "$U" "$CODE" ;;
             esac
           done
+
+      - name: Lighthouse CI
+        run: npx -y @lhci/cli@0.12.x collect --url "$BASE" --quiet

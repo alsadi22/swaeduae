@@ -21,7 +21,9 @@
         <li class="nav-item"><a class="nav-link {{ request()->is('gallery') ? 'active' : '' }}" href="{{ url('/gallery') }}">Gallery</a></li>
         {{-- AUTH-MENU-INJECT START --}}
         @auth
-            @includeIf('partials.account_menu')
+            @if($isPublic ?? false)
+                @includeIf('partials.account_menu')
+            @endif
         @else
             @includeIf('partials.auth_menu')
         @endauth
