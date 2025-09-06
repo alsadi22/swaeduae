@@ -1,4 +1,4 @@
-@extends('public.layout-travelpro')
+@extends('org.layout')
 @section('title','Organization Pending Approval')
 @section('content')
 <section class="container py-5">

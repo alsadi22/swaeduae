@@ -1,13 +1,13 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Org\SetupController;
+use App\Http\Controllers\Org\ApplicantsController;
 use App\Http\Controllers\Org\DashboardController;
 use App\Http\Controllers\Org\OpportunityController;
-use App\Http\Controllers\Org\ApplicantsController;
 use App\Http\Controllers\Org\SettingsController;
+use App\Http\Controllers\Org\SetupController;
+use Illuminate\Support\Facades\Route;
 
-Route::middleware(['web','auth','verified','can:org-access'])->prefix('org')->as('org.')->group(function () {
+Route::middleware(['auth', 'can:org-access'])->prefix('org')->as('org.')->group(function () {
     Route::get('/setup', [SetupController::class, 'form'])->name('setup.form');
     Route::post('/setup', [SetupController::class, 'store'])->name('setup.store');
 
@@ -23,8 +23,8 @@ Route::middleware(['web','auth','verified','can:org-access'])->prefix('org')->as
     Route::post('/opportunities/{event}/applicants/{app}/decision', [ApplicantsController::class, 'decision'])->name('applicants.decision');
     Route::get('/opportunities/{event}/applicants.csv', [ApplicantsController::class, 'exportCsv'])->name('applicants.export');
 
-    Route::get('/settings', [SettingsController::class,'edit'])->name('settings.edit');
-    Route::post('/settings', [SettingsController::class,'update'])->name('settings.update');
+    Route::get('/settings', [SettingsController::class, 'edit'])->name('settings.edit');
+    Route::post('/settings', [SettingsController::class, 'update'])->name('settings.update');
 });
 
 // Org login routes (GET view + POST auth)
