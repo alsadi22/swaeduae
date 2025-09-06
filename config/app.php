@@ -8,9 +8,11 @@ return [
 
     'debug' => (bool) env('APP_DEBUG', false),
 
-    'url' => env('APP_URL', 'http://localhost'),
+    'url' => env('APP_URL', 'https://swaeduae.ae'),
 
     'asset_url' => env('ASSET_URL', null),
+
+    'microcache_enabled' => env('MICROCACHE_ENABLED', false),
 
     // Set Arabic as default locale
     'locale' => 'ar',

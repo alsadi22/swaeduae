@@ -17,6 +17,8 @@ class MiddlewareAliasesServiceProvider extends ServiceProvider
 
         // Ensure setlocaleheaders runs before microcache
         $router->pushMiddlewareToGroup('web', 'setlocaleheaders');
-        $router->pushMiddlewareToGroup('web', 'microcache');
+        if (config('app.microcache_enabled')) {
+            $router->pushMiddlewareToGroup('web', 'microcache');
+        }
     }
 }
