@@ -14,6 +14,13 @@ say(){ echo -e "$@" | tee -a "$LOG"; }
 
 say "== deploy start $(date -Iseconds) =="
 
+# Link shared environment and refresh config cache
+ln -sf /var/www/swaeduae/shared/.env /var/www/swaeduae/current/.env
+ENV_LINKED=$(readlink -f /var/www/swaeduae/current/.env)
+say "ENV_LINKED=$ENV_LINKED"
+$PHP_BIN artisan config:clear >/dev/null
+$PHP_BIN artisan config:cache >/dev/null
+
 # 3a) Pull latest if repo/remote exists (safe if not)
 if [ -d .git ] && command -v git >/dev/null 2>&1; then
   say "\n-- git status --"

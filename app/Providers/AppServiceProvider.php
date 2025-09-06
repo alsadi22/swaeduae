@@ -15,7 +15,9 @@ class AppServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
-        //
+        if (config('sentry.dsn')) {
+            $this->app->register(\Sentry\Laravel\ServiceProvider::class);
+        }
     }
 
     public function boot(): void {

@@ -9,16 +9,16 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Setup PHP
-
-      - name: Prepare filesystem
-        run: |
-          mkdir -p storage/logs bootstrap/cache
-          mkdir -p storage/framework/{cache,sessions,views}
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.3'
           extensions: mbstring, intl, dom, sqlite3
           coverage: none
+
+      - name: Prepare filesystem
+        run: |
+          mkdir -p storage/logs bootstrap/cache
+          mkdir -p storage/framework/{cache,sessions,views}
 
       - name: Composer validate & install
         run: |
@@ -34,7 +34,10 @@ jobs:
           php artisan key:generate --env=testing
           echo "DB_CONNECTION=sqlite" >> .env.testing
           echo "DB_DATABASE=$(pwd)/database/testing.sqlite" >> .env.testing
-          php artisan migrate --env=testing --force
+          echo "CACHE_STORE=array" >> .env.testing
+
+      - name: Run migrations
+        run: php artisan migrate --env=testing --force
 
       - name: Static analysis & code style
         run: |

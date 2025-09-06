@@ -7,26 +7,27 @@ Deploys use `/usr/local/bin/swaed_deploy_pr.sh <PR#>` for pull requests or `/usr
 
 ### Deploy
 
-After the `current` symlink is updated, link in the shared environment and rebuild the configuration cache:
+`tools/deploy.sh` runs during each release and handles the environment link and cache refresh automatically:
 
-```bash
-ln -sf /var/www/swaeduae/shared/.env /var/www/swaeduae/current/.env
-cd /var/www/swaeduae/current && php artisan config:clear && php artisan config:cache
+```
+ENV_LINKED=/var/www/swaeduae/shared/.env
 ```
 
-The `.env` resides in `shared` so all releases use identical settings. Refreshing the config cache ensures Laravel picks up those values instead of falling back to framework defaults.
+It symlinks `current/.env` to `shared/.env` and rebuilds the config cache so Laravel reads the shared settings.
 
 ## Environment
 
 - `APP_DEBUG=false`
 - `LOG_LEVEL=info`
 - `QUEUE_CONNECTION=database`
-- Queue worker: `swaed-queue.service`
+- Queue worker service: `swaed-queue.service`
 - SQLite is the default database. A MySQL connection is scaffolded in `config/database.php` for future migration.
 
 ## Health Checks
 
 Nightly at 03:20 UTC the scheduler runs `swaed:full-health` from `/var/www/swaeduae/current` and writes reports to `public/health/`.
+
+Backups for code and DB live under `/root/backups/{code,db}`.
 
 To run health scripts locally:
 
