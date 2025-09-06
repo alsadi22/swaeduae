@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\SimpleLoginController;
 use App\Http\Controllers\Auth\SimplePasswordResetController;
 use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\CertificatePdfController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\My\ProfileController;
 use App\Http\Controllers\QR\VerifyController;
 use Illuminate\Support\Facades\Route;
@@ -22,6 +23,11 @@ Route::domain(env('MAIN_DOMAIN', 'swaeduae.ae'))->middleware(['web'])->group(fun
 });
 
 // Public
+Route::view('/about', 'pages.about')->name('about');
+Route::view('/privacy', 'pages.privacy')->name('privacy');
+Route::view('/terms', 'pages.terms')->name('terms');
+Route::get('/contact', [ContactController::class, 'show'])->name('contact.get');
+Route::post('/contact', [ContactController::class, 'send'])->middleware('throttle:20,1')->name('contact.send');
 Route::get('/partners', fn () => view('public.partners'))->name('partners.index');
 
 // Auth + verified area
