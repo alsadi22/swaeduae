@@ -2,11 +2,8 @@ name: ci-cd
 on:
   pull_request:
     branches: [ main ]
-  push:
-    branches: [ main ]
-
 jobs:
-  build:  # required check key: "ci-cd / build"
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -15,58 +12,29 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.3'
-          extensions: mbstring, intl, pdo_mysql, bcmath, gd, zip
-          tools: composer:v2
-          ini-file: production
+          extensions: mbstring, intl, dom, sqlite3
+          coverage: none
 
-      - name: Prepare Laravel dirs (idempotent)
-        shell: bash
+      - name: Composer validate & install
         run: |
-          set -euo pipefail
-          rm -rf storage bootstrap/cache
-          mkdir -p storage/framework/{cache,sessions,views} bootstrap/cache
+          composer validate --no-check-lock
+          composer install --no-interaction --no-progress --prefer-dist
 
-      - name: PHP version
-        run: php -v
-
-      - name: Composer validate
-        run: composer validate --no-check-lock
-
-      - name: Composer install
-        run: composer install --no-interaction --no-progress --prefer-dist
-
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          cache: 'npm'
-
-      - name: Frontend build (if package.json)
-        shell: bash
+      - name: Generate APP_KEY and sqlite testing DB
         run: |
-          set -euo pipefail
-          if [ -f package.json ]; then
-            ( [ -f package-lock.json ] && npm ci ) || npm install --no-audit --no-fund
-            npm run build || echo "no build script, skipping"
-          else
-            echo "No package.json; skip frontend build"
-          fi
+          cp .env.example .env.testing
+          php -r "file_exists('database') || mkdir('database'); touch('database/testing.sqlite');"
+          echo "APP_ENV=testing" >> .env.testing
+          echo "APP_KEY=" >> .env.testing
+          php artisan key:generate --env=testing
+          echo "DB_CONNECTION=sqlite" >> .env.testing
+          echo "DB_DATABASE=$(pwd)/database/testing.sqlite" >> .env.testing
+          php artisan migrate --env=testing --force
 
-      - name: PHPStan
-        run: >-
-          vendor/bin/phpstan analyse
-          app/Console/Commands/RunFullHealth.php
-          routes/admin.php routes/org.php routes/web.php
-          tests/Feature/Routes/RouteGuardsTest.php
-          tests/Feature/Smoke/PagesRenderTest.php
-          tests/Feature/Queue/DatabaseQueueTest.php
-          --no-progress --memory-limit=1G
+      - name: Static analysis & code style
+        run: |
+          vendor/bin/phpstan analyse app tests --no-progress --memory-limit=1G
+          vendor/bin/pint --test
 
-      - name: Pint
-        run: vendor/bin/pint --test
-
-      - name: PHPUnit
-        run: php artisan test --no-interaction
-
-      - name: Finish
-        run: echo "Build OK"
+      - name: Run tests
+        run: php artisan test --env=testing --no-interaction --verbose
