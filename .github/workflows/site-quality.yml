@@ -1,0 +1,19 @@
+name: site-quality
+
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Probe endpoints
+        run: |
+          for U in / /admin/login /org/login /qr/verify; do
+            CODE=$(curl -sS -o /dev/null -w "%{http_code}" -L --max-redirs 5 --retry 3 --retry-delay 2 --retry-connrefused https://swaeduae.ae"$U");
+            if [ "$CODE" != "200" ] && [ "$CODE" != "302" ]; then
+              echo "FAIL $U -> $CODE"; exit 1;
+            fi;
+            echo "OK   $U -> $CODE";
+          done

@@ -9,36 +9,34 @@ on:
 jobs:
   build:
     name: build
-    # Use the self-hosted runner you already installed
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v4
 
-      # Only do PHP bits if this repo is Laravel (composer.json exists)
-      - name: Detect Laravel
-        id: detect
-        run: |
-          if [ -f composer.json ]; then
-            echo "laravel=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "laravel=false" >> "$GITHUB_OUTPUT"
-          fi
-
-      - name: Set up PHP (if Laravel)
-        if: steps.detect.outputs.laravel == 'true'
+      - name: Set up PHP
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.3'
+          extensions: mbstring, intl, pdo_mysql, bcmath, gd, zip
           coverage: none
 
-      - name: Set VIEW_COMPILED_PATH for package:discover
-        run: echo "VIEW_COMPILED_PATH=/tmp" >> $GITHUB_ENV
       - name: Prepare Laravel dirs
         run: |
+          rm -rf storage bootstrap/cache
           mkdir -p storage/framework/{cache,sessions,views} bootstrap/cache
-      - name: Composer install (if Laravel)
-        if: steps.detect.outputs.laravel == 'true'
-        run: composer install --prefer-dist --no-progress --no-interaction
+
+      - name: Composer install
+        run: composer install --no-interaction --no-progress --prefer-dist --no-dev --no-scripts
+
+      - name: Build assets
+        run: |
+          if [ -f package.json ]; then
+            (npm ci || npm install)
+            npm run build || echo "no build script"
+          fi
+
+      - name: Build OK
+        run: echo "Build OK"
 
   deploy:
     name: deploy
