@@ -14,13 +14,14 @@ class RunFullHealth extends Command
     public function handle(): int
     {
         $script = base_path('tools/full_health.sh');
-        if (!is_file($script)) {
+        if (! is_file($script)) {
             $this->error('tools/full_health.sh not found');
+
             return 1;
         }
 
         $outputDir = public_path('health');
-        if (!is_dir($outputDir)) {
+        if (! is_dir($outputDir)) {
             mkdir($outputDir, 0755, true);
         }
 
@@ -30,10 +31,12 @@ class RunFullHealth extends Command
 
         if ($process->successful()) {
             $this->info('Health check written to '.$log);
+
             return 0;
         }
 
         $this->error('Health check failed');
+
         return 1;
     }
 }

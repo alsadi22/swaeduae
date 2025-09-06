@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
+APP_BASE="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "$APP_BASE"
+
 echo "== QUICK HEALTH =="
 php artisan about || true
 php artisan route:list --path=admin | head -n 60 || true

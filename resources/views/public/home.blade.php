@@ -1,4 +1,4 @@
-@extends('public.layout')
+@extends('public.layout-travelpro')
 @section('content')
 @php
   $stats = [

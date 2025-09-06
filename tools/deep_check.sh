@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
-cd /var/www/swaeduae
+APP_BASE="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "$APP_BASE"
 TS=$(date +%F_%H%M%S); LOGDIR="public/health"; OUT="$LOGDIR/deep-$TS.txt"; mkdir -p "$LOGDIR"
 php artisan optimize:clear >/dev/null 2>&1 || true
 php artisan config:cache >/dev/null 2>&1 || true

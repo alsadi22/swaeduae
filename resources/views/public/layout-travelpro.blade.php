@@ -12,7 +12,9 @@
             });
         }
     </script>
-    @vite(['resources/css/app.css','resources/js/app.js'])
+    @unless(app()->runningUnitTests())
+        @vite(['resources/css/app.css','resources/js/app.js'])
+    @endunless
 </head>
 <body>
     @include('partials.header', ['isPublic' => true])

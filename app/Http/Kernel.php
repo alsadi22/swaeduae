@@ -1,8 +1,8 @@
 <?php
 
 namespace App\Http;
-use App\Http\Middleware\EnforceAdminGuard;
 
+use App\Http\Middleware\EnforceAdminGuard;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -21,7 +21,7 @@ class Kernel extends HttpKernel
      * Route middleware groups.
      */
     protected $middlewareGroups = [
-         'web' => [
+        'web' => [
             \App\Http\Middleware\NoCacheLoginResponses::class,
             \App\Http\Middleware\VerifiedPathEnforcer::class,
             \App\Http\Middleware\AdminPathEnforcer::class,
@@ -38,7 +38,7 @@ class Kernel extends HttpKernel
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
 
             \App\Http\Middleware\FormRateLimit::class,
-            \/* App\Http\Middleware\MicroCache::class, */
+            /* App\Http\Middleware\MicroCache::class, */
             \App\Http\Middleware\AdminGate::class,
         ],
 
@@ -57,16 +57,16 @@ class Kernel extends HttpKernel
         'auth' => \App\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'cache.headers' => \Illuminate\Http\Middleware\SetCacheHeaders::class,
-        'can'        => \Illuminate\Auth\Middleware\Authorize::class,
-        'guest'      => \App\Http\Middleware\RedirectIfAuthenticated::class,
+        'can' => \Illuminate\Auth\Middleware\Authorize::class,
+        'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'password.confirm' => \Illuminate\Auth\Middleware\RequirePassword::class,
-        'signed'     => \Illuminate\Routing\Middleware\ValidateSignature::class,
-        'throttle'   => \Illuminate\Routing\Middleware\ThrottleRequests::class,
-        'verified'   => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
+        'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+        'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
 
         // App-specific
         'form.ratelimit' => \App\Http\Middleware\FormRateLimit::class,
-        'readonly'       => \App\Http\Middleware\ReadOnlyMode::class,
-        'org'            => \Spatie\Permission\Middlewares\RoleMiddleware::class,
+        'readonly' => \App\Http\Middleware\ReadOnlyMode::class,
+        'org' => \Spatie\Permission\Middlewares\RoleMiddleware::class,
     ];
 }

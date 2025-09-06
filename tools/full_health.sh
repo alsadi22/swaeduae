@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 set -u
+APP_BASE="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "$APP_BASE"
 TS=$(date +%F_%H%M%S)
 OUT="public/health/full-$TS.txt"; mkdir -p public/health
 

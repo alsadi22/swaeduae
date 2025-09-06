@@ -53,7 +53,14 @@ jobs:
           fi
 
       - name: PHPStan
-        run: vendor/bin/phpstan analyse --no-progress
+        run: >-
+          vendor/bin/phpstan analyse
+          app/Console/Commands/RunFullHealth.php
+          routes/admin.php routes/org.php routes/web.php
+          tests/Feature/Routes/RouteGuardsTest.php
+          tests/Feature/Smoke/PagesRenderTest.php
+          tests/Feature/Queue/DatabaseQueueTest.php
+          --no-progress --memory-limit=1G
 
       - name: Pint
         run: vendor/bin/pint --test

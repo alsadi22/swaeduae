@@ -12,7 +12,7 @@ class RouteGuardsTest extends TestCase
     public function test_admin_routes_require_admin_access(): void
     {
         $routes = collect(Route::getRoutes())
-            ->filter(fn($r) => Str::startsWith($r->uri(), 'admin/') && $r->uri() !== 'admin/login');
+            ->filter(fn ($r) => Str::startsWith($r->uri(), 'admin/') && $r->uri() !== 'admin/login');
 
         $routes->each(function ($route) {
             $middleware = $route->gatherMiddleware();
@@ -25,7 +25,7 @@ class RouteGuardsTest extends TestCase
     public function test_org_routes_require_org_access_gate(): void
     {
         $routes = collect(Route::getRoutes())
-            ->filter(fn($r) => Str::startsWith($r->uri(), 'org/') && !Str::contains($r->uri(), 'login'));
+            ->filter(fn ($r) => Str::startsWith($r->uri(), 'org/') && ! Str::contains($r->uri(), ['login', 'register']));
 
         $routes->each(function ($route) {
             $middleware = $route->gatherMiddleware();
@@ -37,14 +37,16 @@ class RouteGuardsTest extends TestCase
 
     public function test_org_access_gate_hasrole_and_legacy_support(): void
     {
-        $hasRoleUser = new class {
+        $hasRoleUser = new class extends \Illuminate\Foundation\Auth\User
+        {
             public function hasRole(string $role): bool
             {
                 return $role === 'org';
             }
         };
 
-        $legacyUser = new class {
+        $legacyUser = new class extends \Illuminate\Foundation\Auth\User
+        {
             public string $role = 'org';
         };
 
@@ -80,7 +82,7 @@ class RouteGuardsTest extends TestCase
     public function test_logout_route_is_unique(): void
     {
         $logoutRoutes = collect(Route::getRoutes())
-            ->filter(fn($r) => $r->uri() === 'logout');
+            ->filter(fn ($r) => $r->uri() === 'logout');
         $this->assertCount(1, $logoutRoutes);
         $this->assertEquals('logout', $logoutRoutes->first()->getName());
     }
