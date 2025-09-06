@@ -36,3 +36,21 @@ bash tools/full_health.sh
 bash tools/roadmap_check.sh
 bash tools/deep_check.sh
 ```
+
+## Admin Panel Quickstart
+
+The admin site lives on the `admin.swaeduae.ae` subdomain and uses the Argon layout.
+Only users granted the `admin-access` ability can sign in. Common tasks:
+
+- **Dashboard** – summarizes total users, organizations, pending approvals and
+  hours. Cards link to Approvals, Certificates, Reports and Settings.
+- **Approvals** – review organization sign‑ups and approve or suspend them.
+- **Applicants** – browse opportunity applicants and export CSV lists.
+- **Certificates** – search issued certificates, download the PDF, resend by
+  email or revoke.
+- **QR Verify** – manual lookup form that redirects to the public
+  `/qr/verify/{code}` page.
+
+From the main domain any request to `/admin/*` is redirected to the admin
+subdomain. This separation keeps the public TravelPro pages free of admin
+assets and avoids accidental Vite usage.
