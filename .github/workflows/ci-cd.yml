@@ -6,7 +6,7 @@ on:
     branches: [ main ]
 
 jobs:
-  build:
+  build:  # required check key: "ci-cd / build"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -22,17 +22,28 @@ jobs:
       - name: Prepare Laravel dirs (idempotent)
         shell: bash
         run: |
+          set -euo pipefail
           rm -rf storage bootstrap/cache
           mkdir -p storage/framework/{cache,sessions,views} bootstrap/cache
 
       - name: Composer install (no-dev, no-scripts)
         run: composer install --no-interaction --no-progress --prefer-dist --no-dev --no-scripts
 
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
       - name: Frontend build (if package.json)
+        shell: bash
         run: |
+          set -euo pipefail
           if [ -f package.json ]; then
-            npm ci || npm install --no-audit --no-fund
+            ( [ -f package-lock.json ] && npm ci ) || npm install --no-audit --no-fund
             npm run build || echo "no build script, skipping"
+          else
+            echo "No package.json; skip frontend build"
           fi
 
       - name: Finish
