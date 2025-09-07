@@ -16,9 +16,15 @@ jobs:
           coverage: none
 
       - name: Prepare filesystem
+        shell: bash
         run: |
-          mkdir -p storage/logs bootstrap/cache
-          mkdir -p storage/framework/{cache,sessions,views}
+          # if a previous step created files named 'storage' or 'bootstrap', remove them
+          [ -f storage ] && rm -f storage
+          [ -f bootstrap ] && rm -f bootstrap
+          # ensure directories exist
+          mkdir -p storage/logs storage/framework/{cache,sessions,views} bootstrap/cache
+          # optional: loosen perms for runner
+          chmod -R 0777 storage bootstrap/cache
 
       - name: Composer validate & install
         run: |

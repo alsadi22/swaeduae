@@ -23,6 +23,11 @@ It symlinks `current/.env` to `shared/.env` and rebuilds the config cache so Lar
 - Queue worker service: `swaed-queue.service`
 - SQLite is the default database. A MySQL connection is scaffolded in `config/database.php` for future migration.
 
+## Database Migrations
+
+All migrations are idempotent and can be re-run safely. Each migration checks for existing tables or columns before applying
+changes. Continuous integration verifies this by running `php artisan migrate --env=testing --force` against a sqlite database.
+
 ## Health Checks
 
 Nightly at 03:20 UTC the scheduler runs `swaed:full-health` from `/var/www/swaeduae/current` and writes reports to `public/health/`.
