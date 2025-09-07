@@ -1,3 +1,6 @@
+@extends('public.layout')
+
+@section('content')
 <script type="application/ld+json">
 {
  "@context":"https://schema.org",
@@ -17,3 +20,5 @@
  "potentialAction":{"@type":"SearchAction","target":"https://swaeduae.ae/opportunities?q={search_term_string}","query-input":"required name=search_term_string"}
 }
 </script>
+
+@endsection

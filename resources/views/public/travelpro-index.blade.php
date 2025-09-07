@@ -1,3 +1,6 @@
+@extends('public.layout')
+
+@section('content')
 @extends("public.layout-travelpro")
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
@@ -325,3 +328,4 @@
 </body>
 
 </html>
+@endsection

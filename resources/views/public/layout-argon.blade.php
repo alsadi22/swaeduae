@@ -1,3 +1,6 @@
+@extends('public.layout')
+
+@section('content')
 @extends("public.layout-travelpro")
 <!doctype html>
 <html lang="{{ str_replace('_','-',app()->getLocale()) }}" dir="{{ app()->isLocale('ar') ? 'rtl' : 'ltr' }}">
@@ -52,3 +55,5 @@
 </body>
 </html>
 
+
+@endsection

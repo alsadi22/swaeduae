@@ -1,13 +1,21 @@
+@extends('public.layout')
+
+@section('content')
 <!doctype html>
-<html lang="{{ str_replace('_','-', app()->getLocale()) }}">
-  @includeWhen(View::exists('partials.meta'), 'partials.meta')
-  @includeWhen(View::exists('partials.assets-public'), 'partials.assets-public')
-  <body class="public">
-    @includeWhen(View::exists('partials.header-public'), 'partials.header-public')
-    @yield('content')
-    @includeWhen(View::exists('partials.footer-public'), 'partials.footer-public')
-    @stack('scripts')
-    <script>if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('/service-worker.js').catch(()=>{}));}</script>
-  @include('public._analytics')
+<html lang="{{ str_replace('_','-',app()->getLocale()) }}" dir="{{ app()->getLocale()==='ar'?'rtl':'ltr' }}">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>@yield('title','SwaedUAE')</title>
+  <link rel="stylesheet" href="{{ asset('themes/travelpro/css/style.css') }}">
+  @stack('head')
+</head>
+<body>
+  @includeIf('public.partials.header')
+  <main class="container">@yield('content')</main>
+  @includeIf('public.partials.footer')
+  <script src="{{ asset('themes/travelpro/js/app.js') }}"></script>
+  @stack('scripts')
 </body>
 </html>
+
+@endsection
