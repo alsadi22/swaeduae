@@ -3,28 +3,33 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\LocationPing;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Log;
+use App\Models\LocationPing;
 
 class AttendanceHeartbeatController extends Controller
 {
-    public function store(Request $request): Response
+    public function __invoke(Request $request)
     {
         $data = $request->validate([
-            'lat' => ['required','numeric','between:-90,90'],
-            'lng' => ['required','numeric','between:-180,180'],
-            'accuracy' => ['nullable','numeric','min:0','max:1000'],
+            'lat'      => ['required','numeric'],
+            'lng'      => ['required','numeric'],
+            'accuracy' => ['nullable','numeric'],
         ]);
 
-        LocationPing::create([
-            'user_id' => $request->user()->id,
-            'lat' => $data['lat'],
-            'lng' => $data['lng'],
-            'accuracy' => $data['accuracy'] ?? null,
-            'captured_at' => now(),
-        ]);
+        try {
+            LocationPing::create([
+                'user_id'  => (int) $request->user()->id,
+                'lat'      => $data['lat'],
+                'lng'      => $data['lng'],
+                'accuracy' => $data['accuracy'] ?? null,
+            ]);
+        } catch (\Throwable $e) {
+            Log::error('Heartbeat insert failed', ['e' => $e->getMessage()]);
+            // Don't surface internal issues to the client:
+            return response()->noContent(); // 204
+        }
 
-        return response()->noContent();
+        return response()->noContent(); // 204
     }
 }
