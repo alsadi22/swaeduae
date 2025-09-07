@@ -1,7 +1,9 @@
 {
-  "Home": "الرئيسية",
   "About": "معلومات عنا",
   "Contact": "اتصل بنا",
   "FAQ": "الأسئلة الشائعة",
-  "HowItWorks": "كيف يعمل"
+  "Home": "الرئيسية",
+  "HowItWorks": "كيف يعمل",
+  "Privacy Policy": "سياسة الخصوصية",
+  "Terms of Service": "شروط الخدمة"
 }
