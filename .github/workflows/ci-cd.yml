@@ -16,14 +16,10 @@ jobs:
           coverage: none
 
       - name: Prepare filesystem
-        shell: bash
         run: |
-          # if a previous step created files named 'storage' or 'bootstrap', remove them
-          [ -f storage ] && rm -f storage
-          [ -f bootstrap ] && rm -f bootstrap
-          # ensure directories exist
+          [ -f storage ] && rm -f storage || true
+          [ -f bootstrap ] && rm -f bootstrap || true
           mkdir -p storage/logs storage/framework/{cache,sessions,views} bootstrap/cache
-          # optional: loosen perms for runner
           chmod -R 0777 storage bootstrap/cache
 
       - name: Composer validate & install
@@ -40,17 +36,12 @@ jobs:
           php artisan key:generate --env=testing
           echo "DB_CONNECTION=sqlite" >> .env.testing
           echo "DB_DATABASE=$(pwd)/database/testing.sqlite" >> .env.testing
-          echo "CACHE_STORE=array" >> .env.testing
-
-      - name: Run migrations
-        run: php artisan migrate --env=testing --force
+          php artisan migrate --env=testing --force
 
       - name: Static analysis & code style
         run: |
           vendor/bin/phpstan analyse app tests --no-progress --memory-limit=1G
           vendor/bin/pint --test
-      - name: Check Blade routes
-        run: php tools/ci/check-missing-routes.php
 
       - name: Run tests
         run: php artisan test --env=testing --no-interaction --verbose

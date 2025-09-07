@@ -7,14 +7,16 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void
     {
-        Schema::create('absences', function (Blueprint $t) {
-            $t->id();
-            $t->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $t->unsignedBigInteger('event_id')->index();
-            $t->timestamp('started_at');
-            $t->timestamp('ended_at')->nullable();
-            $t->timestamp('notified_at')->nullable();
-            $t->timestamps();
+        if (Schema::hasTable('absences')) return;
+
+        Schema::create('absences', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('user_id')->index();
+            $table->timestamp('started_at')->index();
+            $table->timestamp('ended_at')->nullable();
+            $table->unsignedInteger('minutes')->nullable();
+            $table->json('meta')->nullable();
+            $table->timestamps();
         });
     }
 
