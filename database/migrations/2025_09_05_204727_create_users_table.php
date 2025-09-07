@@ -8,7 +8,7 @@ return new class extends Migration {
     public function up(): void
     {
         if (Schema::hasTable('users')) {
-            return;
+            return; // already exists
         }
 
         Schema::create('users', function (Blueprint $table) {

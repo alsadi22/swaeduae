@@ -8,7 +8,7 @@ return new class extends Migration {
     public function up(): void
     {
         if (Schema::hasTable('admin_actions')) {
-            return;
+            return; // already created by a later migration
         }
 
         Schema::create('admin_actions', function (Blueprint $table) {
