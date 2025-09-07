@@ -17,7 +17,7 @@ jobs:
 
       - name: Prepare filesystem
         run: |
-          mkdir -p storage/framework/{cache,sessions,views} storage/logs bootstrap/cache
+          mkdir -p storage/framework/{cache,sessions,views} storage/logs bootstrap/cache || true
           chmod -R 0777 storage bootstrap/cache
 
       - name: Composer validate & install
@@ -28,7 +28,7 @@ jobs:
       - name: Generate APP_KEY and sqlite testing DB
         run: |
           cp .env.example .env.testing
-          php -r "file_exists('database') || mkdir('database'); touch('database/testing.sqlite');"
+          php -r "file_exists('database') || mkdir -p('database'); touch('database/testing.sqlite');"
           echo "APP_ENV=testing" >> .env.testing
           echo "APP_KEY=" >> .env.testing
           php artisan key:generate --env=testing
