@@ -17,7 +17,6 @@ jobs:
 
       - name: Prepare filesystem
         run: |
-      [ -L storage ] && rm -f storage || true
-      [ -L bootstrap/cache ] && rm -f bootstrap/cache || true
+      rm -rf storage bootstrap/cache || true
       mkdir -p storage/framework/{cache,sessions,views} storage/logs bootstrap/cache
       chmod -R 0777 storage bootstrap/cache || true
