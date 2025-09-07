@@ -1,3 +1,6 @@
+@extends('public.layout')
+
+@section('content')
 @extends('public.layout-travelpro')
 @section('title', __('Privacy Policy'))
 @section('meta_description','Our commitment to protecting your personal information.')

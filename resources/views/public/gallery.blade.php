@@ -1,3 +1,6 @@
+@extends('public.layout')
+
+@section('content')
 @extends('layouts.app')
 @section('title', __('Gallery'))
 @section('content')

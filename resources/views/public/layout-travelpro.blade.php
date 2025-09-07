@@ -1,3 +1,6 @@
+@extends('public.layout')
+
+@section('content')
 <!doctype html>
 <html lang="{{ str_replace('_','-',app()->getLocale()) }}">
 <head>
@@ -25,3 +28,5 @@
     @includeIf('partials.footer-public')
 </body>
 </html>
+
+@endsection

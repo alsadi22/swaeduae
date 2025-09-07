@@ -1,3 +1,6 @@
+@extends('public.layout')
+
+@section('content')
 @extends("public.layout-travelpro")
 <section class="text-center" style="padding:6rem 1rem;background:linear-gradient(180deg,#f8fafc,#eef2f7)">
   <div class="container">
@@ -7,3 +10,5 @@
     <a href="/events" class="btn btn-outline-secondary btn-lg">{{ __("Browse Events") }}</a>
   </div>
 </section>
+
+@endsection

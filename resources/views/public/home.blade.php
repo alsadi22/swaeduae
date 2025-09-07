@@ -1,3 +1,6 @@
+@extends('public.layout')
+
+@section('content')
 @extends('public.layout-travelpro')
 @section('title', __('Home'))
 @section('meta_description','Connecting volunteers with opportunities across the UAE.')
