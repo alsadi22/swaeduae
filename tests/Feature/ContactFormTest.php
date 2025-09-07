@@ -41,7 +41,16 @@ class ContactFormTest extends TestCase
             'message' => 'Hello',
         ]);
 
-        $res->assertStatus(302)->assertSessionHasNoErrors();
+        $res->assertRedirect('/contact#thanks');
+        $res->assertSessionHasNoErrors();
+        $res->assertSessionHas('status');
+        $res->assertSessionHas('clear', true);
+
+        $html = $this->followRedirects($res);
+        $html->assertSee('id="thanks"', false);
+        $html->assertDontSee('value="Jane Tester"', false);
+        $html->assertDontSee('value="jane@example.com"', false);
+        $html->assertDontSee('Hello');
         // Mail::assertSent(...); // add if you assert specific mailable
     }
 }
