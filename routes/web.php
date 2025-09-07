@@ -62,3 +62,5 @@ Route::middleware(['web', 'guest', 'throttle:10,1'])
         Route::get('/reset-password/{token}', [SimplePasswordResetController::class, 'show'])->name('password.reset');
         Route::post('/reset-password', [SimplePasswordResetController::class, 'update'])->name('password.update.simple');
     });
+/* Legacy alias for old links (kept for backward compatibility) */
+Route::get('/profile', fn () => redirect()->route('my.profile'))->name('profile');
