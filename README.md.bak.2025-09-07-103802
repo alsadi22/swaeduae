@@ -33,7 +33,7 @@ GEOFENCE_EMAIL_THROTTLE_MINUTES=120
 
 Volunteers must consent to location sharing; see the privacy policy for details.
 
-The heartbeat endpoint `/api/v1/attendance/heartbeat` requires a logged-in session and is rate limited to five requests per minute.
+The heartbeat endpoint `/api/v1/attendance/heartbeat` requires Sanctum authentication and is rate limited to 30 requests per minute.
 
 ## Contributing
 

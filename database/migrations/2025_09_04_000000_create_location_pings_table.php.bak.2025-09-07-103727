@@ -11,18 +11,13 @@ return new class extends Migration {
             return;
         }
 
-        $hasUsers = Schema::hasTable('users');
-
-        Schema::create('location_pings', function (Blueprint $table) use ($hasUsers) {
+        Schema::create('location_pings', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id')->index();
-            if ($hasUsers) {
-                $table->foreign('user_id')->references('id')->on('users');
-            }
-            $table->decimal('lat', 10, 7);
-            $table->decimal('lng', 10, 7);
-            $table->float('accuracy')->nullable();
-            $table->timestamps();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->decimal('lat', 10, 7)->nullable();
+            $table->decimal('lng', 10, 7)->nullable();
+            $table->decimal('accuracy', 6, 2)->nullable();
+            $table->timestamp('created_at')->useCurrent();
             $table->index(['user_id', 'created_at']);
         });
     }

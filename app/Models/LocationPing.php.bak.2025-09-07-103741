@@ -16,4 +16,5 @@ class LocationPing extends Model
         'accuracy',
     ];
 
+    public $timestamps = false;
 }
