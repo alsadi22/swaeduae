@@ -33,9 +33,9 @@ Route::prefix('v1')->group(function () {
         ]);
     });
 
-    // Geofence heartbeat: GET /api/v1/attendance/heartbeat
-    Route::middleware(['auth:sanctum', 'throttle:30,1'])
-        ->get('/attendance/heartbeat', AttendanceHeartbeatController::class)
+    // Geofence heartbeat: POST /api/v1/attendance/heartbeat
+    Route::middleware(['auth:sanctum','throttle:ping'])
+        ->post('/attendance/heartbeat', [AttendanceHeartbeatController::class, 'store'])
         ->name('attendance.heartbeat');
 });
 
