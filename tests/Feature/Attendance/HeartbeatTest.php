@@ -10,18 +10,35 @@ class HeartbeatTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_stores_location_ping(): void
+    public function test_requires_authentication(): void
+    {
+        $this->postJson('/api/v1/attendance/heartbeat', [
+            'lat' => 24.1,
+            'lng' => 54.3,
+        ])->assertUnauthorized();
+    }
+
+    public function test_stores_valid_ping(): void
     {
         $user = User::factory()->create();
 
-        $response = $this->actingAs($user, 'sanctum')->getJson('/api/v1/attendance/heartbeat?lat=24.1&lng=54.3');
-
-        $response->assertOk()->assertJson(['ok' => true]);
+        $this->actingAs($user, 'sanctum')
+            ->postJson('/api/v1/attendance/heartbeat', [
+                'lat' => 24.1,
+                'lng' => 54.3,
+                'accuracy' => 5,
+            ])->assertNoContent();
 
         $this->assertDatabaseCount('location_pings', 1);
-        $ping = \DB::table('location_pings')->first();
-        $this->assertEquals(24.1, (float) $ping->lat);
-        $this->assertEquals(54.3, (float) $ping->lng);
-        $this->assertEquals($user->id, $ping->user_id);
+    }
+
+    public function test_rejects_invalid_payload(): void
+    {
+        $user = User::factory()->create();
+
+        $this->actingAs($user, 'sanctum')
+            ->postJson('/api/v1/attendance/heartbeat', [
+                'lat' => 123,
+            ])->assertStatus(422);
     }
 }

@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Models;
+
+use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 
@@ -14,6 +16,8 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
+    use HasApiTokens;
+
     
 use HasFactory, Notifiable, HasRoles;
     protected string $guard_name = 'web';

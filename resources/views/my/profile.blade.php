@@ -19,7 +19,7 @@
     .err{background:#fff2f0;color:#b02121;padding:.6rem .8rem;border-radius:10px;margin:.5rem 0}
   </style>
 </head>
-<body>
+<body data-page="my-profile">
   <div class="wrap">
     <h1>My Profile</h1>
 
@@ -106,5 +106,13 @@
       </form>
     @endif
   </div>
+
+  {{-- Heartbeat JS --}}
+  <script
+    type="module"
+    src="{{ asset('js/heartbeat.js') }}"
+    defer
+    data-geo-radius="{{ (int) env('GEOFENCE_RADIUS_METERS', 150) }}"
+  ></script>
 </body>
 </html>

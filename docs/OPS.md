@@ -22,6 +22,9 @@ It symlinks `current/.env` to `shared/.env` and rebuilds the config cache so Lar
 - `QUEUE_CONNECTION=database`
 - Queue worker service: `swaed-queue.service`
 - SQLite is the default database. A MySQL connection is scaffolded in `config/database.php` for future migration.
+- `GEOFENCE_RADIUS_METERS` (default 150)
+- `GEOFENCE_ABSENCE_MINUTES` (default 30)
+- `GEOFENCE_EMAIL_THROTTLE_MINUTES` (default 120)
 
 ### Observability
 
@@ -50,6 +53,18 @@ bash tools/full_health.sh
 bash tools/roadmap_check.sh
 bash tools/deep_check.sh
 ```
+
+## Scheduler
+
+- `scan:volunteer-absences` runs every 5 minutes (crontab already invokes `schedule:run`).
+
+## Rate Limits
+
+- Heartbeat API (`/api/v1/attendance/heartbeat`) limited to 6 requests per minute per user.
+
+## Data Retention
+
+- Location pings retained for approximately 90 days; older pings may be purged.
 
 ## Admin Panel Quickstart
 
