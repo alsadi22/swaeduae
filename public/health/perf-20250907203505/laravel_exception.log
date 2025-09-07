@@ -1,0 +1,50 @@
+#7 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Mail/Mailer.php(332): Illuminate\Mail\Mailer->sendSymfonyMessage()
+#8 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Notifications/Channels/MailChannel.php(67): Illuminate\Mail\Mailer->send()
+#9 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Notifications/NotificationSender.php(148): Illuminate\Notifications\Channels\MailChannel->send()
+#10 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Notifications/NotificationSender.php(106): Illuminate\Notifications\NotificationSender->sendToNotifiable()
+#11 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Support/Traits/Localizable.php(19): Illuminate\Notifications\NotificationSender->{closure:Illuminate\Notifications\NotificationSender::sendNow():101}()
+#12 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Notifications/NotificationSender.php(101): Illuminate\Notifications\NotificationSender->withLocale()
+#13 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Notifications/NotificationSender.php(79): Illuminate\Notifications\NotificationSender->sendNow()
+#14 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Notifications/ChannelManager.php(39): Illuminate\Notifications\NotificationSender->send()
+#15 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Notifications/RoutesNotifications.php(18): Illuminate\Notifications\ChannelManager->send()
+#16 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Auth/Passwords/CanResetPassword.php(27): App\Models\User->notify()
+#17 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Auth/Passwords/PasswordBroker.php(108): Illuminate\Foundation\Auth\User->sendPasswordResetNotification()
+#18 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Support/Timebox.php(34): Illuminate\Auth\Passwords\PasswordBroker->{closure:Illuminate\Auth\Passwords\PasswordBroker::sendResetLink():85}()
+#19 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Auth/Passwords/PasswordBroker.php(85): Illuminate\Support\Timebox->call()
+#20 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Auth/Passwords/PasswordBrokerManager.php(154): Illuminate\Auth\Passwords\PasswordBroker->sendResetLink()
+#21 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(361): Illuminate\Auth\Passwords\PasswordBrokerManager->__call()
+#22 Command line code(4): Illuminate\Support\Facades\Facade::__callStatic()
+#23 {main}
+  thrown in /home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/mailer/Transport/Smtp/Stream/SocketStream.php on line 154
+[23-Aug-2025 20:44:58 Asia/Dubai] PHP Fatal error:  Uncaught Symfony\Component\Mailer\Exception\TransportException: Failed to authenticate on SMTP server with username "admin@swaeduae.ae" using the following authenticators: "LOGIN", "PLAIN". Authenticator "LOGIN" returned "Expected response code "235" but got code "535", with message "535 Incorrect authentication data".". Authenticator "PLAIN" returned "Expected response code "235" but got code "535", with message "535 Incorrect authentication data".". in /home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/mailer/Transport/Smtp/EsmtpTransport.php:269
+Stack trace:
+#0 /home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/mailer/Transport/Smtp/EsmtpTransport.php(199): Symfony\Component\Mailer\Transport\Smtp\EsmtpTransport->handleAuth()
+#1 /home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/mailer/Transport/Smtp/EsmtpTransport.php(150): Symfony\Component\Mailer\Transport\Smtp\EsmtpTransport->doEhloCommand()
+#2 /home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/mailer/Transport/Smtp/SmtpTransport.php(255): Symfony\Component\Mailer\Transport\Smtp\EsmtpTransport->executeCommand()
+#3 /home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/mailer/Transport/Smtp/SmtpTransport.php(281): Symfony\Component\Mailer\Transport\Smtp\SmtpTransport->doHeloCommand()
+#4 /home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/mailer/Transport/Smtp/SmtpTransport.php(211): Symfony\Component\Mailer\Transport\Smtp\SmtpTransport->start()
+#5 /home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/mailer/Transport/AbstractTransport.php(69): Symfony\Component\Mailer\Transport\Smtp\SmtpTransport->doSend()
+#6 /home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/mailer/Transport/Smtp/SmtpTransport.php(138): Symfony\Component\Mailer\Transport\AbstractTransport->send()
+#7 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Mail/Mailer.php(585): Symfony\Component\Mailer\Transport\Smtp\SmtpTransport->send()
+#8 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Mail/Mailer.php(332): Illuminate\Mail\Mailer->sendSymfonyMessage()
+#9 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Mail/Mailer.php(224): Illuminate\Mail\Mailer->send()
+#10 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Mail/MailManager.php(622): Illuminate\Mail\Mailer->raw()
+#11 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(361): Illuminate\Mail\MailManager->__call()
+#12 Command line code(3): Illuminate\Support\Facades\Facade::__callStatic()
+#13 {main}
+  thrown in /home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/mailer/Transport/Smtp/EsmtpTransport.php on line 269
+[23-Aug-2025 17:04:04 UTC] PHP Parse error:  syntax error, unexpected token "=", expecting ")" in Command line code on line 7
+[23-Aug-2025 17:06:58 UTC] PHP Parse error:  syntax error, unexpected token "=", expecting ")" in Command line code on line 10
+[23-Aug-2025 17:40:35 UTC] PHP Parse error:  syntax error, unexpected token "^", expecting "]" in Command line code on line 8
+[23-Aug-2025 17:40:49 UTC] PHP Parse error:  syntax error, unexpected token "^", expecting "]" in Command line code on line 8
+[23-Aug-2025 17:56:54 UTC] PHP Parse error:  syntax error, unexpected token "^", expecting "]" in Command line code on line 6
+[23-Aug-2025 17:59:22 UTC] PHP Parse error:  syntax error, unexpected token "^", expecting "]" in Command line code on line 6
+[23-Aug-2025 18:03:15 UTC] PHP Parse error:  syntax error, unexpected token "^", expecting "]" in Command line code on line 6
+[23-Aug-2025 18:06:23 UTC] PHP Parse error:  syntax error, unexpected token "^", expecting "]" in Command line code on line 6
+[24-Aug-2025 06:22:58 UTC] PHP Parse error:  syntax error, unexpected token "^", expecting "-" or identifier or variable or number in Standard input code on line 44
+[24-Aug-2025 06:22:58 UTC] PHP Parse error:  syntax error, unexpected token "^", expecting "-" or identifier or variable or number in Standard input code on line 44
+[24-Aug-2025 06:22:58 UTC] PHP Parse error:  syntax error, unexpected token "^", expecting "-" or identifier or variable or number in Standard input code on line 44
+[24-Aug-2025 06:45:32 UTC] PHP Parse error:  syntax error, unexpected double-quote mark, expecting "-" or identifier or variable or number in Command line code on line 19
+[24-Aug-2025 06:45:32 UTC] PHP Parse error:  syntax error, unexpected double-quote mark, expecting "-" or identifier or variable or number in Command line code on line 20
+[24-Aug-2025 07:06:20 UTC] PHP Parse error:  syntax error, unexpected double-quote mark, expecting "-" or identifier or variable or number in Command line code on line 19
+[24-Aug-2025 07:06:20 UTC] PHP Parse error:  syntax error, unexpected double-quote mark, expecting "-" or identifier or variable or number in Command line code on line 20

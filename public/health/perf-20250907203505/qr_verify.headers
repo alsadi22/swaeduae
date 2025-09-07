@@ -1,0 +1,24 @@
+HTTP/1.1 200 OK
+date: Sun, 07 Sep 2025 20:39:52 GMT
+server: envoy
+
+HTTP/1.1 200 OK
+date: Sun, 07 Sep 2025 20:39:53 GMT
+content-type: text/html; charset=UTF-8
+cache-control: no-cache, private
+report-to: {"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=bIAN3oFsMDcYic5id9Cge%2F9%2FAfU8aQdqVcGIVroFET7w1vW0BFba1fKnRi5fB6sTAW4XayynK7zUGv%2FzLB6fl87re6ncTcO5YMcB"}]}
+permissions-policy: geolocation=(), microphone=(), camera=()
+referrer-policy: strict-origin-when-cross-origin
+server: envoy
+nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}
+x-content-type-options: nosniff
+x-frame-options: SAMEORIGIN
+cf-cache-status: DYNAMIC
+vary: accept-encoding
+set-cookie: XSRF-TOKEN=eyJpdiI6ImQ1SHV6eFhJeW1WSzk4RVdYd0kwL2c9PSIsInZhbHVlIjoiMEdHOWR1NUhpSDNWdkYzYjJKaHJQcFZMNWRCREh3bGIzdHJHZHpCdDZyeUlGWlZpTFMrRVg1SkdvREdwNmt3U2Q5cTc1Q0NkQVdaRUp1TWxiUnpoT0N6ZzRXb2RGL1JXeGQ0N0VGY2h2cTd2N3ZKQnpjVFU3QmE4OXBJeWQvbmsiLCJtYWMiOiJjZTk2MjQ5NWUzMzQwMzY5MjI1NWY4YTFlNmUwNmI4NDlhZWVjMTVkYzQwOGU1YjkwNjk2MTRkOTdkYzU5MzZmIiwidGFnIjoiIn0%3D; SameSite=Lax; Secure; Path=/; Domain=swaeduae.ae; Max-Age=7200; Expires=Sun, 07 Sep 2025 22:39:53 GMT
+set-cookie: swaeduae_session=eyJpdiI6ImJubzRoektmalBJN25raXBaRHVTYUE9PSIsInZhbHVlIjoiNHBsQ3FySUw3ZE1MV2JQTjVXaDd5K012WFhYeXArY0F2WHRlWVVmWlYza25xamFRbDVqMUJjSEk3ZWc2Q1VtUmtXMFMvSXdoaVBmYXAzODBPNVdIU29UczZQTTNVUmlhU0FPR0l5Z0l0MFpGcXZlNlNta3lXZzJrSmZHRU43d3AiLCJtYWMiOiI0M2I5NWJjMGVkOWUyNTNmN2M2ZGIwZTE1Y2Y0MGU0NGEyZTk0ZTA3OGRlMzM1M2M5M2FkYWY4YWM1NmJiMTQ2IiwidGFnIjoiIn0%3D; HttpOnly; SameSite=Lax; Secure; Path=/; Domain=swaeduae.ae; Max-Age=7200; Expires=Sun, 07 Sep 2025 22:39:53 GMT
+cf-ray: 97b904996b400248-CDG
+alt-svc: h3=":443"; ma=86400
+x-envoy-upstream-service-time: 904
+transfer-encoding: chunked
+

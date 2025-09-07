@@ -1,0 +1,11 @@
+PHP Version:
+PHP 8.4.12 (cli) (built: Aug 28 2025 22:15:05) (NTS)
+Copyright (c) The PHP Group
+Zend Engine v4.4.12, Copyright (c) Zend Technologies
+\nOPcache:
+\nPHP-FPM process list:
+root        5327  100  0.0   8896  6404 ?        S+   20:43   0:00 rg php-fpm
+\nQueue worker process:
+root        5329  0.0  0.0   8900  6092 ?        R+   20:43   0:00 rg queue
+\nDB connection test:
+ERROR: SQLSTATE[HY000] [2002] Connection refused

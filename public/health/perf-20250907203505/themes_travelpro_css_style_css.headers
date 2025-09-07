@@ -1,0 +1,25 @@
+HTTP/1.1 200 OK
+date: Sun, 07 Sep 2025 20:41:36 GMT
+server: envoy
+
+HTTP/1.1 200 OK
+date: Sun, 07 Sep 2025 20:41:37 GMT
+content-type: text/css
+content-encoding: gzip
+etag: W/"68bdea7b-3db"
+last-modified: Sun, 07 Sep 2025 20:26:35 GMT
+permissions-policy: geolocation=(), microphone=(), camera=()
+referrer-policy: strict-origin-when-cross-origin
+server: envoy
+x-content-type-options: nosniff
+x-frame-options: SAMEORIGIN
+cache-control: max-age=14400
+cf-cache-status: MISS
+vary: accept-encoding
+nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}
+report-to: {"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=jnZLwDehjAXl5DgQDEeKOaX%2B1RvvcyRGFh%2B1X1JSZMClLQkD1jRY6S%2Bx8NZQ5Bzgv4abG33%2BfY6y2uZ9sxujOSpRU1mto42bgjpY"}]}
+cf-ray: 97b90724792f6f0b-CDG
+alt-svc: h3=":443"; ma=86400
+x-envoy-upstream-service-time: 854
+transfer-encoding: chunked
+
