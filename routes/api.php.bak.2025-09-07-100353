@@ -2,7 +2,6 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\AttendanceHeartbeatController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,11 +31,6 @@ Route::prefix('v1')->group(function () {
             'certificate' => $c,
         ]);
     });
-
-      // Geofence heartbeat: POST /api/v1/attendance/heartbeat
-      Route::middleware(['auth:sanctum', 'throttle:30,1'])
-          ->post('/attendance/heartbeat', [AttendanceHeartbeatController::class, 'store'])
-          ->name('api.attendance.heartbeat');
 });
 
 // Include agent ping health route if present
