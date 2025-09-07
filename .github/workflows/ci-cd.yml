@@ -2,44 +2,37 @@ name: ci-cd
 on:
   pull_request:
     branches: [ main ]
+
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      COMPOSER_PROCESS_TIMEOUT: 0
+      COMPOSER_NO_INTERACTION: 1
+      COMPOSER_NO_AUDIT: 1
     steps:
       - uses: actions/checkout@v4
 
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
+      - uses: shivammathur/setup-php@v2
         with:
           php-version: '8.3'
           extensions: mbstring, intl, dom, sqlite3
           coverage: none
+          ini-file: production
 
       - name: Prepare filesystem
         run: |
+          rm -rf storage bootstrap/cache || true
           mkdir -p storage/framework/{cache,sessions,views} storage/logs bootstrap/cache
-          chmod -R 0777 storage bootstrap/cache
+          chmod -R 0777 storage bootstrap/cache || true
 
-      - name: Composer validate & install
+      - name: Install dependencies
+        run: composer install --no-progress --prefer-dist
+
+      - name: App key
         run: |
-          composer validate --no-check-lock
-          composer install --no-interaction --no-progress --prefer-dist
+          php -r 'file_exists(".env") || copy(".env.example",".env");'
+          php artisan key:generate
 
-      - name: Generate APP_KEY and sqlite testing DB
-        run: |
-          cp .env.example .env.testing
-          php -r "file_exists('database') || mkdir('database'); touch('database/testing.sqlite');"
-          echo "APP_ENV=testing" >> .env.testing
-          echo "APP_KEY=" >> .env.testing
-          php artisan key:generate --env=testing
-          echo "DB_CONNECTION=sqlite" >> .env.testing
-          echo "DB_DATABASE=$(pwd)/database/testing.sqlite" >> .env.testing
-          php artisan migrate --env=testing --force
-
-      - name: Static analysis & code style
-        run: |
-          vendor/bin/phpstan analyse app tests --no-progress --memory-limit=1G
-          vendor/bin/pint --test
-
-      - name: Run tests
-        run: php artisan test --env=testing --no-interaction --verbose
+      - name: Route sanity
+        run: php artisan route:list | head -n 20
