@@ -23,6 +23,14 @@ It symlinks `current/.env` to `shared/.env` and rebuilds the config cache so Lar
 - Queue worker service: `swaed-queue.service`
 - SQLite is the default database. A MySQL connection is scaffolded in `config/database.php` for future migration.
 
+### Observability
+
+- Health scripts: `tools/health.sh`, `tools/full_health.sh` and `tools/deep_check.sh` verify queues, logs and headers.
+- Logging: daily log files under `storage/logs/`.
+- Queues: database driver; run `php artisan queue:work` or the `swaed-queue.service` unit.
+- Sentry: enable by setting `SENTRY_LARAVEL_DSN` (and optional sample rates).
+- Analytics: set `ANALYTICS_DRIVER=plausible` and `PLAUSIBLE_DOMAIN=swaeduae.ae` to enable Plausible script.
+
 ## Database Migrations
 
 All migrations are idempotent and can be re-run safely. Each migration checks for existing tables or columns before applying

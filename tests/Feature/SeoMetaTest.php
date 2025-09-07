@@ -17,5 +17,6 @@ class SeoMetaTest extends TestCase
         $res->assertOk();
         $res->assertSee('rel="canonical"', false);
         $res->assertSee('property="og:title"', false);
+        $res->assertSee('property="og:description"', false);
     }
 }

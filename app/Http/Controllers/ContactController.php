@@ -23,6 +23,7 @@ class ContactController extends Controller
             $m->replyTo($data['email'], $data['name']);
         });
 
-        return back()->with('status','Message sent. Thank you!');
+        return redirect()->to(route('contact.get').'#thanks')
+            ->with(['status' => 'Message sent. Thank you!','clear' => true]);
     }
 }
