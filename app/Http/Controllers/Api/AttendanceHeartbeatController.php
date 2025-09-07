@@ -11,6 +11,17 @@ class AttendanceHeartbeatController extends Controller
 {
     public function __invoke(Request $request)
     {
+        return $this->handle($request);
+    }
+
+    // Keep compatibility with existing route definition
+    public function store(Request $request)
+    {
+        return $this->handle($request);
+    }
+
+    private function handle(Request $request)
+    {
         $data = $request->validate([
             'lat'      => ['required','numeric'],
             'lng'      => ['required','numeric'],
@@ -25,11 +36,10 @@ class AttendanceHeartbeatController extends Controller
                 'accuracy' => $data['accuracy'] ?? null,
             ]);
         } catch (\Throwable $e) {
-            Log::error('Heartbeat insert failed', ['e' => $e->getMessage()]);
-            // Don't surface internal issues to the client:
-            return response()->noContent(); // 204
+            Log::error('Heartbeat insert failed', ['error' => $e->getMessage()]);
         }
 
-        return response()->noContent(); // 204
+        // Always return a clean 204
+        return response()->noContent();
     }
 }

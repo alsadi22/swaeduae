@@ -2,23 +2,18 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class LocationPing extends Model
 {
-    use HasFactory;
-
     protected $fillable = [
-        'user_id',
-        'shift_id',
-        'lat',
-        'lng',
-        'accuracy',
-        'captured_at',
+        'user_id', 'lat', 'lng', 'accuracy',
     ];
 
     protected $casts = [
-        'captured_at' => 'datetime',
+        'user_id'  => 'integer',
+        'lat'      => 'float',
+        'lng'      => 'float',
+        'accuracy' => 'float',
     ];
 }
