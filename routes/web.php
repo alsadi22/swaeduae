@@ -23,11 +23,11 @@ Route::domain(env('MAIN_DOMAIN', 'swaeduae.ae'))->middleware(['web'])->group(fun
 });
 
 // Public
-Route::view('/about', 'pages.about')->name('about');
-Route::view('/privacy', 'pages.privacy')->name('privacy');
-Route::view('/terms', 'pages.terms')->name('terms');
+Route::view('/about', 'public.about')->name('about');
+Route::view('/privacy', 'public.privacy')->name('privacy');
+Route::view('/terms', 'public.terms')->name('terms');
 Route::get('/contact', [ContactController::class, 'show'])->name('contact.get');
-Route::post('/contact', [ContactController::class, 'send'])->middleware('throttle:20,1')->name('contact.send');
+Route::post('/contact', [ContactController::class, 'send'])->middleware('throttle:5,1')->name('contact.send');
 Route::get('/partners', fn () => view('public.partners'))->name('partners.index');
 
 // Auth + verified area
