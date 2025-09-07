@@ -19,8 +19,6 @@ return new class extends Migration {
             $table->unsignedBigInteger('subject_id');
             $table->json('meta')->nullable();
             $table->timestamps();
-
-            $table->foreign('admin_id')->references('id')->on('users');
         });
     }
 
