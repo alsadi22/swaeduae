@@ -26,7 +26,7 @@ class AbsenceDetector
                 continue;
             }
             $ping = LocationPing::where('user_id', $att->user_id)
-                ->latest('captured_at')->first();
+                ->orderByRaw('COALESCE(captured_at, created_at) DESC')->first();
             if (!$ping) {
                 continue;
             }
