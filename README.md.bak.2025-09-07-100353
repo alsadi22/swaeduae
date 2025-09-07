@@ -1,3 +1,6 @@
+<<<<<<< HEAD
+# boot
+=======
 # SawaedUAE
 
 Volunteer management platform built with Laravel.
@@ -21,18 +24,6 @@ Volunteer management platform built with Laravel.
 6. Run `npm install && npm run build` for frontend assets
 7. Serve: `php artisan serve`
 
-## Geofence Settings
-
-Location heartbeat features use the following environment variables (defaults shown):
-
-```
-GEOFENCE_RADIUS_METERS=150
-GEOFENCE_ABSENCE_MINUTES=30
-GEOFENCE_EMAIL_THROTTLE_MINUTES=120
-```
-
-Volunteers must consent to location sharing; see the privacy policy for details.
-
 ## Contributing
 
 Pull requests welcome! Please open issues for bugs or feature requests.
@@ -40,3 +31,4 @@ Pull requests welcome! Please open issues for bugs or feature requests.
 ## License
 
 MIT
+>>>>>>> dc7cd89 (Initial commit from server (swaeduae current release))
