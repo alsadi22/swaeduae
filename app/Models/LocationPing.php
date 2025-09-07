@@ -21,4 +21,8 @@ class LocationPing extends Model
     protected $casts = [
         'captured_at' => 'datetime',
     ];
+    public function getCapturedAtAttribute()
+    {
+        return  ? \Illuminate\Support\Carbon::parse() : ->created_at;
+    }
 }
