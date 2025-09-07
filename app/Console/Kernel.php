@@ -14,6 +14,7 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         \App\Console\Commands\BuildSitemaps::class,
         \App\Console\Commands\RunFullHealth::class,
+        \App\Console\Commands\ScanVolunteerAbsences::class,
     ];
 
     /**
@@ -25,6 +26,8 @@ class Kernel extends ConsoleKernel
         $schedule->command('swaed:build-sitemaps')->dailyAt('03:20');
         // Nightly full health check at 03:20
         $schedule->command('swaed:full-health')->dailyAt('03:20');
+
+        $schedule->command('scan:volunteer-absences')->everyFiveMinutes();
     }
 
     /**

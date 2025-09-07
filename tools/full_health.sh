@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
-set -u
+set -euo pipefail
 APP_BASE="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$APP_BASE"
 TS=$(date +%F_%H%M%S)
 OUT="public/health/full-$TS.txt"; mkdir -p public/health
+FAIL=0
 
 # small helpers
 phpc(){ php artisan "$@" 2>&1; }
@@ -16,6 +17,15 @@ hit(){ curl -s -o /dev/null -w "%{http_code}" "$1"; }
   phpc config:cache >/dev/null || true; phpc route:cache >/dev/null || true; phpc view:cache >/dev/null || true
   echo "caches: refreshed"
 
+  echo; echo "== CONFIG SNAPSHOT =="
+  read QUEUE DB LOG <<<$(php -r 'require "vendor/autoload.php"; $app=require "bootstrap/app.php"; $app->make(\Illuminate\Contracts\Console\Kernel::class)->bootstrap(); echo config("queue.default")." ".config("database.default")." ".config("logging.default");')
+  echo "Queue: $QUEUE"
+  echo "DB:    $DB"
+  echo "Log:   $LOG"
+  [[ "$QUEUE" == "database" ]] || FAIL=1
+  [[ "$DB" == "mysql" ]] || FAIL=1
+  [[ "$LOG" == "daily" ]] || FAIL=1
+
   echo; echo "== ABOUT =="; phpc about
 
   echo; echo "== ROUTES (top) =="; phpc route:list | sed -n '1,80p'
@@ -23,18 +33,26 @@ hit(){ curl -s -o /dev/null -w "%{http_code}" "$1"; }
   echo; echo "== MIGRATIONS STATUS =="; phpc migrate:status
 
   echo; echo "== QUEUE & SCHEDULER ==";
-  systemctl is-active swaed-queue.service 2>/dev/null || true
+  qstatus=$(systemctl is-active swaed-queue.service 2>/dev/null || echo "unknown")
+  echo "queue_service=$qstatus"
+  [[ "$qstatus" == "active" ]] || FAIL=1
   sudo systemctl status swaed-queue.service --no-pager --lines 6 2>/dev/null || true
   phpc schedule:run -vvv | sed -n '1,60p'
 
   echo; echo "== HTTP PROBES ==";
-  for u in / /about /privacy /terms /org/login; do echo "GET $u -> $(hit https://swaeduae.ae$u)"; done
+  for u in / /about /privacy /terms /org/login; do
+    code=$(hit https://swaeduae.ae$u)
+    echo "GET $u -> $code"
+    [[ "$code" == "200" ]] || FAIL=1
+  done
   curl -s -I -L https://swaeduae.ae/admin | sed -n '1,6p'
 
-  echo; echo "== QR VERIFY CHECKS ==";
-  echo "/qr/verify -> $(hit https://swaeduae.ae/qr/verify)"
-  echo "/qr/verify?code=test -> $(curl -s -I -L https://swaeduae.ae/qr/verify?code=test | sed -n '1,3p' | tr '\n' ' ' )"
-  echo -n "throttle spray: "; c=(); for i in $(seq 1 31); do c+=("$(hit https://swaeduae.ae/qr/verify)"); done; printf "%s\n" "${c[*]}"
+    echo; echo "== QR VERIFY CHECKS ==";
+    qr=$(hit https://swaeduae.ae/qr/verify)
+    echo "/qr/verify -> $qr"
+    [[ "$qr" == "200" ]] || FAIL=1
+    echo "/qr/verify?code=test -> $(curl -s -I -L https://swaeduae.ae/qr/verify?code=test | sed -n '1,3p' | tr '\n' ' ' )"
+    echo -n "throttle spray: "; c=(); for i in $(seq 1 31); do c+=("$(hit https://swaeduae.ae/qr/verify)"); done; printf "%s\n" "${c[*]}"
 
   echo; echo "== CERT PDF sanity =="; ls -lh storage/app/certificates | tail -n 3 || true
 
@@ -64,3 +82,4 @@ hit(){ curl -s -o /dev/null -w "%{http_code}" "$1"; }
 
 } | tee "$OUT"
 echo "Full health saved to: $OUT"
+[ "$FAIL" -eq 0 ] || exit 1

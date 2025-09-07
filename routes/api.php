@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\AttendanceHeartbeatController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +32,9 @@ Route::prefix('v1')->group(function () {
             'certificate' => $c,
         ]);
     });
+
+    Route::middleware(['auth:sanctum','throttle:ping'])
+        ->name('attendance.heartbeat');
 });
 
 // Include agent ping health route if present
@@ -45,3 +49,9 @@ Route::get('/agent/ping', function (\Illuminate\Http\Request $r) {
 })->name('agent.ping');
 
 if (file_exists(base_path('routes/_agent_diag_api.php'))) require base_path('routes/_agent_diag_api.php');
+
+// --- Swaed: Volunteer heartbeat (Sanctum) ---
+Route::middleware('auth:sanctum')->post(
+    'v1/attendance/heartbeat',
+    [\App\Http\Controllers\Api\AttendanceHeartbeatController::class, 'store']
+)->name('attendance.heartbeat');

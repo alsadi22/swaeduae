@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@yield('title', config('app.name'))</title>
+    @include('components.seo.meta')
     <link rel="manifest" href="{{ asset('manifest.json') }}">
     <script>
         if ('serviceWorker' in navigator) {

@@ -25,5 +25,9 @@ class RouteServiceProvider extends ServiceProvider
             $key = strtolower((string) $request->input('email')).'|'.$request->ip();
             return [ Limit::perMinute(5)->by($key) ];
         });
+
+        RateLimiter::for('ping', function (Request $request) {
+            return Limit::perMinute(6)->by(optional($request->user())->id ?: $request->ip());
+        });
     }
 }

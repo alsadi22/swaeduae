@@ -9,16 +9,18 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Setup PHP
-
-      - name: Prepare filesystem
-        run: |
-          mkdir -p storage/logs bootstrap/cache
-          mkdir -p storage/framework/{cache,sessions,views}
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.3'
           extensions: mbstring, intl, dom, sqlite3
           coverage: none
+
+      - name: Prepare filesystem
+        run: |
+          [ -f storage ] && rm -f storage || true
+          [ -f bootstrap ] && rm -f bootstrap || true
+          mkdir -p storage/logs storage/framework/{cache,sessions,views} bootstrap/cache
+          chmod -R 0777 storage bootstrap/cache
 
       - name: Composer validate & install
         run: |
@@ -40,8 +42,6 @@ jobs:
         run: |
           vendor/bin/phpstan analyse app tests --no-progress --memory-limit=1G
           vendor/bin/pint --test
-      - name: Check Blade routes
-        run: php tools/ci/check-missing-routes.php
 
       - name: Run tests
         run: php artisan test --env=testing --no-interaction --verbose

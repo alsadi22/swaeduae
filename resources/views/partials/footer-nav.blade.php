@@ -4,6 +4,12 @@
   <a href="{{ route('faq') }}">{{ __('FAQ') }}</a> ·
   <a href="{{ url('/privacy') }}">{{ __('Privacy') }}</a> ·
   <a href="{{ url('/terms') }}">{{ __('Terms') }}</a> ·
+<<<<<<< HEAD
   <a href="{{ route('contact.show') }}">{{ __('Contact') }}</a>
+=======
+  @if (Route::has('contact.get'))
+    <a href="{{ route('contact.get') }}">{{ __('Contact') }}</a>
+  @endif
+>>>>>>> origin/main
 </footer>
 @endif {{-- ORG_AUTH_GUARD --}}

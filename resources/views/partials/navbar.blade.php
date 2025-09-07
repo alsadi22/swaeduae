@@ -2,7 +2,9 @@
   <a href="{{ route('home') }}">Home</a>
   <a href="{{ route('about') }}">About</a>
   <a href="{{ route('faq') }}">FAQ</a>
-  <a href="{{ route('contact.show') }}">Contact</a>
+  @if (Route::has('contact.get'))
+    <a href="{{ route('contact.get') }}">Contact</a>
+  @endif
   <a href="{{ route('opportunities.index') }}">Opportunities</a>
   <a href="{{ route('scan.index') }}">Verify</a>
   <a href="{{ route('lang.switch', app()->getLocale()==='ar'?'en':'ar') }}">@lang('Switch')</a>

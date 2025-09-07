@@ -13,9 +13,9 @@ class ContactController extends Controller
             'name'    => ['required','string','max:120'],
             'email'   => ['required','email','max:190'],
             'message' => ['required','string','max:5000'],
-            'website' => ['nullable','max:0'], // honeypot
+            '__website' => ['nullable','max:0'], // honeypot
         ]);
-        if ($r->filled('website')) { return back()->with('status','Thanks!'); }
+        if ($r->filled('__website')) { return back()->with('status','Thanks!'); }
 
         $to = config('mail.from.address', 'admin@swaeduae.ae');
         Mail::send('mail.contact', ['data'=>$data], function($m) use ($to, $data) {
@@ -23,6 +23,7 @@ class ContactController extends Controller
             $m->replyTo($data['email'], $data['name']);
         });
 
-        return back()->with('status','Message sent. Thank you!');
+        return redirect()->to(route('contact.get').'#thanks')
+            ->with(['status' => 'Message sent. Thank you!','clear' => true]);
     }
 }

@@ -26,7 +26,9 @@
           <li class="nav-item"><a class="nav-link" href="{{ route('home') }}">{{ __('Home') }}</a></li>
           <li class="nav-item"><a class="nav-link" href="{{ route('about') }}">{{ __('About') }}</a></li>
           <li class="nav-item"><a class="nav-link" href="{{ url('/services') }}">{{ __('Services') }}</a></li>
-          <li class="nav-item"><a class="nav-link" href="{{ route('contact.show') }}">{{ __('Contact') }}</a></li>
+          @if (Route::has('contact.get'))
+          <li class="nav-item"><a class="nav-link" href="{{ route('contact.get') }}">{{ __('Contact') }}</a></li>
+          @endif
         </ul>
       </div>
     </div>

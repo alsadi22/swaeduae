@@ -7,6 +7,10 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void
     {
+        if (Schema::hasTable('users')) {
+            return; // already present (prod or later canonical migration)
+        }
+
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable();
@@ -14,12 +18,13 @@ return new class extends Migration {
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
             $table->rememberToken();
-            $table->json('meta')->nullable();
             $table->timestamps();
         });
     }
+
     public function down(): void
     {
+        // Safe rollback; only drops if present
         Schema::dropIfExists('users');
     }
 };
