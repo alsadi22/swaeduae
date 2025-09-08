@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\SimplePasswordResetController;
 use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\CertificatePdfController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\Admin\ApprovalsController;
 use App\Http\Controllers\My\ProfileController;
 use App\Http\Controllers\QR\VerifyController;
 use Illuminate\Support\Facades\Route;
@@ -49,6 +50,12 @@ Route::get('/qr/verify/{serial?}', [VerifyController::class, 'show'])->name('qr.
 
 // Admin login alias → /login
 Route::get('/admin/login', fn () => redirect()->to('/login'))->name('admin.login');
+
+Route::middleware(['web','auth','can:admin-access'])->prefix('admin')->name('admin.')->group(function(){
+    Route::get('/approvals',[ApprovalsController::class,'index'])->name('approvals.index');
+    Route::post('/approvals/orgs/{id}/approve',[ApprovalsController::class,'approveOrg'])->whereNumber('id')->name('approvals.orgs.approve');
+    Route::post('/approvals/orgs/{id}/decline',[ApprovalsController::class,'declineOrg'])->whereNumber('id')->name('approvals.orgs.decline');
+});
 
 // Guest auth
 Route::middleware(['web', 'guest', 'throttle:10,1'])->group(function () {
