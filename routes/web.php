@@ -1,4 +1,9 @@
 <?php
+
+// Public home on main domain
+Route::domain("swaeduae.ae")->group(function () {
+    Route::view("/", "public.home")->name("public.home");
+});
 Route::view('/', 'public.home')->name('home.public');
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
