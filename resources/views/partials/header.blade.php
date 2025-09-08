@@ -2,7 +2,7 @@
   <div class="container">
     <!-- Brand (left) -->
     <a class="navbar-brand d-flex align-items-center gap-2" href="{{ url('/') }}">
-      @php $logo = $appSettings['logo'] ?? null; @endphp
+        @php $appSettings = $appSettings ?? []; $logo = $appSettings['logo'] ?? null; @endphp
       @if($logo)<img src="{{ asset('storage/'.$logo) }}" alt="Logo" style="height:28px" class="rounded">@endif
       <span>{{ $appSettings['site_name'] ?? 'SawaedUAE' }}</span>
     </a>
