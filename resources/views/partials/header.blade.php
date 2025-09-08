@@ -1,10 +1,14 @@
 <nav class="navbar navbar-expand-lg navbar-light glass-nav">
   <div class="container">
     <!-- Brand (left) -->
+    @php
+      $logo     = $appSettings['logo'] ?? null;
+      $siteName = $appSettings['site_name'] ?? config('app.name', 'SawaedUAE');
+      $user     = auth()->user();
+    @endphp
     <a class="navbar-brand d-flex align-items-center gap-2" href="{{ url('/') }}">
-      @php $logo = $appSettings['logo'] ?? null; @endphp
       @if($logo)<img src="{{ asset('storage/'.$logo) }}" alt="Logo" style="height:28px" class="rounded">@endif
-      <span>{{ $appSettings['site_name'] ?? 'SawaedUAE' }}</span>
+      <span>{{ $siteName }}</span>
     </a>
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false">
@@ -20,20 +24,19 @@
         <li class="nav-item"><a class="nav-link {{ request()->is('organizations*') ? 'active' : '' }}" href="{{ url('/organizations') }}">Organizations</a></li>
         <li class="nav-item"><a class="nav-link {{ request()->is('gallery') ? 'active' : '' }}" href="{{ url('/gallery') }}">Gallery</a></li>
         {{-- AUTH-MENU-INJECT START --}}
-        @auth
-            @if($isPublic ?? false)
-                @includeIf('partials.account_menu')
-            @endif
+        @if($user)
+          @if($isPublic ?? false)
+            @includeIf('partials.account_menu')
+          @endif
         @else
-            @includeIf('partials.auth_menu')
-        @endauth
+          @includeIf('partials.auth_menu')
+        @endif
         {{-- AUTH-MENU-INJECT END --}}
       </ul>
 
       <div class="d-flex align-items-center gap-2">
-        @if(auth()->check())
+        @if($user)
           <a class="btn btn-outline-secondary btn-sm" href="{{ route('profile') }}">Dashboard</a>
-          
         @else
           <a class="btn btn-outline-primary btn-sm" href="{{ route('login',['type'=>'volunteer']) }}">Login</a>
           <a class="btn btn-primary btn-sm" href="{{ url('/register') }}">Register</a>
