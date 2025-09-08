@@ -1,62 +1,67 @@
 <?php
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Models\OrgProfile;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\View\View;
 
 class ApprovalsController extends Controller
 {
-    public function index(Request $request)
+    public function index(): View
     {
-        $type   = $request->string('type')->toString() ?: 'all';
-        $status = $request->string('status')->toString() ?: 'pending';
+        $orgs = OrgProfile::where('status', 'pending')
+            ->with('user:id,email')
+            ->orderBy('created_at')
+            ->get();
 
-        $orgs = collect(); $apps = collect();
-
-        if ($type==='all' || $type==='orgs') {
-            $orgs = DB::table('org_profiles')->select('id','org_name','org_code','status','created_at')
-                ->when($status, fn($q)=>$q->where('status',$status))
-                ->orderByDesc('created_at')->limit(50)->get();
-        }
-
-        if ($type==='all' || $type==='apps') {
-            $apps = DB::table('applications')->select('id','user_id','opportunity_id','status','created_at')
-                ->when($status, fn($q)=>$q->where('status',$status))
-                ->orderByDesc('created_at')->limit(50)->get();
-        }
-
-        return view('admin.approvals.index', compact('type','status','orgs','apps'));
+        return view('admin.approvals.index', compact('orgs'));
     }
 
-    public function approveOrg(Request $r,int $id){ return $this->org($r,$id,'approved'); }
-    public function denyOrg(Request $r,int $id){    return $this->org($r,$id,'denied'); }
-    public function approveApp(Request $r,int $id){ return $this->app($r,$id,'approved'); }
-    public function denyApp(Request $r,int $id){    return $this->app($r,$id,'denied'); }
-
-    protected function org(Request $r,int $id,string $new){
-        $reason=(string)$r->input('reason','');
-        DB::transaction(function() use($id,$new,$reason,$r){
-            $row=DB::table('org_profiles')->where('id',$id)->lockForUpdate()->first(); abort_unless($row,404);
-            DB::table('org_profiles')->where('id',$id)->update(['status'=>$new,'updated_at'=>now()]);
-            DB::table('admin_actions')->insert([
-                'admin_id'=>$r->user()->id,'action'=>$new,'subject_type'=>'org','subject_id'=>$id,
-                'meta'=>json_encode(['reason'=>$reason]),'created_at'=>now(),'updated_at'=>now()
-            ]);
-        });
-        return back()->with('status',"Organization #$id {$new}.");
+    public function approveOrg(int $id): RedirectResponse
+    {
+        return $this->updateOrg($id, 'approved');
     }
 
-    protected function app(Request $r,int $id,string $new){
-        $reason=(string)$r->input('reason','');
-        DB::transaction(function() use($id,$new,$reason,$r){
-            $row=DB::table('applications')->where('id',$id)->lockForUpdate()->first(); abort_unless($row,404);
-            DB::table('applications')->where('id',$id)->update(['status'=>$new,'updated_at'=>now()]);
-            DB::table('admin_actions')->insert([
-                'admin_id'=>$r->user()->id,'action'=>$new,'subject_type'=>'application','subject_id'=>$id,
-                'meta'=>json_encode(['reason'=>$reason]),'created_at'=>now(),'updated_at'=>now()
-            ]);
+    public function declineOrg(int $id): RedirectResponse
+    {
+        return $this->updateOrg($id, 'rejected');
+    }
+
+    protected function updateOrg(int $id, string $status): RedirectResponse
+    {
+        DB::transaction(function () use ($id, $status) {
+            $profile = OrgProfile::lockForUpdate()->findOrFail($id);
+            $profile->update(['status' => $status]);
+
+            $user = $profile->user;
+            if ($user) {
+                if ($status === 'approved') {
+                    if (Schema::hasColumn('users', 'role')) {
+                        $user->role = 'org';
+                        $user->save();
+                    }
+                    if (method_exists($user, 'assignRole')) {
+                        try { $user->assignRole('org'); } catch (\Throwable $e) {}
+                    }
+                } else {
+                    if (Schema::hasColumn('users', 'role') && ($user->role ?? null) === 'org') {
+                        $user->role = null;
+                        $user->save();
+                    }
+                    if (method_exists($user, 'removeRole')) {
+                        try { $user->removeRole('org'); } catch (\Throwable $e) {}
+                    }
+                }
+            }
         });
-        return back()->with('status',"Application #$id {$new}.");
+
+        $msg = $status === 'approved' ? 'Organization approved.' : 'Organization declined.';
+
+        return redirect()->back()->with('status', $msg);
     }
 }
