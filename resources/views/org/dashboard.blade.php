@@ -1,8 +1,12 @@
-@extends('layouts.org')
+@extends('org.layout')
+@section('title', __('Org Dashboard'))
 @section('content')
-  @include('partials.nav.org')
-  <div class="container py-4">
-    <h1 class="h4 mb-3">Organization Dashboard</h1>
-    <p class="text-muted mb-0">Welcome, {{ auth()->user()?->name ?? 'Org' }}.</p>
+  <h1 style="margin:0 0 12px">{{ __('Organization Dashboard') }}</h1>
+  @php($org = $org ?? \DB::table('org_profiles')->where('user_id', auth()->id())->first())
+  <p>{{ $org->org_name ?? $org->name ?? __('Welcome!') }}</p>
+
+  <div style="margin-top:16px">
+    <a class="btn" href="{{ url('/org/opportunities/create') }}">{{ __('Create Opportunity') }}</a>
+    <a class="btn" href="{{ url('/org/settings') }}" style="margin-left:8px">{{ __('Settings') }}</a>
   </div>
 @endsection

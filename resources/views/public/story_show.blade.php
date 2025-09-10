@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('public.layout')
 @section('content')
 <div class="container">
   <h1>{{ $story->title }}</h1>
