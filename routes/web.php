@@ -28,7 +28,7 @@ Route::view('/about', 'public.about')->name('about');
 Route::view('/privacy', 'public.privacy')->name('privacy');
 Route::view('/terms', 'public.terms')->name('terms');
 Route::get('/contact', [ContactController::class, 'show'])->name('contact.get');
-Route::post('/contact', [ContactController::class, 'send'])->middleware('throttle:5,1')->name('contact.send');
+Route::post('/contact', [ContactController::class, 'send'])->middleware('throttle:5,1')->name('contact.submit');
 Route::get('/partners', fn () => view('public.partners'))->name('partners.index');
 
 // Auth + verified area
