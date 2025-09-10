@@ -1,6 +1,6 @@
-@extends(public.layout)
-@section(title,SwaedUAE)
-@section(content)
+@extends('public.layout')
+@section('title','SwaedUAE')
+@section('content')
 <section class="hero">
   <div class="container">
     <div>
