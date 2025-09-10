@@ -32,7 +32,7 @@
 
       <div class="d-flex align-items-center gap-2">
         @if(auth()->check())
-          <a class="btn btn-outline-secondary btn-sm" href="{{ route('profile') }}">Dashboard</a>
+          <a class="btn btn-outline-secondary btn-sm" href="{{ Route::has('profile.show') ? route('profile.show') : url('/my/profile') }}">Dashboard</a>
           
         @else
           <a class="btn btn-outline-primary btn-sm" href="{{ route('login',['type'=>'volunteer']) }}">Login</a>
