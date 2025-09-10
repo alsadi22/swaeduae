@@ -5,7 +5,7 @@
     <div class="alert alert-success">Thanks — we received your message.</div>
   @endif
   <h1 class="mb-3">{{ __('Contact') }}</h1>
-  <form method="POST" action="{{ route('contact.send') }}">
+  <form method="POST" action="{{ route('contact.submit') }}">
     @csrf
     <input type="hidden" name="website" value="">
     <div class="mb-3">

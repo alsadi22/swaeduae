@@ -15,7 +15,7 @@
   @endif
   @if ($errors->any()) <div class="alert alert-danger">@foreach($errors->all() as $e)<div>{{ $e }}</div>@endforeach</div> @endif
 
-  <form method="POST" action="{{ route('contact.send') }}" class="mt-3">
+  <form method="POST" action="{{ route('contact.submit') }}" class="mt-3">
     @csrf
     <input type="text" name="__website" style="display:none" autocomplete="off">
     <div class="mb-3">
