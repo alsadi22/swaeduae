@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('public.layout')
 @section('title', __('QR Attendance'))
 
 @section('content')

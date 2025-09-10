@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('public.layout')
 
 @section('title', 'Events – Browse')
 

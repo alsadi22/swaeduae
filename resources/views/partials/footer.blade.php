@@ -1,44 +1,14 @@
-@php $__orgAuth = request()->is('org/login') || request()->is('org/register'); @endphp
-<footer class="py-5 mt-auto border-top bg-light">
+<footer class="footer">
   <div class="container">
-    <div class="row g-4">
-      <div class="col-12 col-md-4">
-        <h6 class="text-uppercase text-muted">{{ __('About') }}</h6>
-        <p class="mb-2">{{ __('SawaedUAE helps volunteers discover opportunities, track hours, and earn verified certificates.') }}</p>
-        <div class="small text-muted">&copy; {{ date('Y') }} SawaedUAE</div>
-      </div>
-
-      <div class="col-6 col-md-2">
-        <h6 class="text-uppercase text-muted">{{ __('Explore') }}</h6>
-        <ul class="list-unstyled mb-0">
-          <li><a class="link-dark text-decoration-none" href="{{ url('/opportunities') }}">{{ __('Opportunities') }}</a></li>
-          <li><a class="link-dark text-decoration-none" href="{{ url('/events') }}">{{ __('Events') }}</a></li>
-          <li><a class="link-dark text-decoration-none" href="{{ url('/gallery') }}">{{ __('Gallery') }}</a></li>
-          <li><a class="link-dark text-decoration-none" href="{{ url('/verify/EXAMPLE') }}">{{ __('Verify a certificate') }}</a></li>
-        </ul>
-      </div>
-
-      <div class="col-6 col-md-3">
-        <h6 class="text-uppercase text-muted">{{ __('For volunteers') }}</h6>
-        <ul class="list-unstyled mb-0">
-          <li><a class="link-dark text-decoration-none" href="{{ route('my.certificates') }}">{{ __('My Certificates') }}</a></li>
-          <li><a class="link-dark text-decoration-none" href="{{ request()->is('org*') ? route('org.dashboard.guard.wrap') : route('profile') }}">{{ __('My Dashboard') }}</a></li>
-        </ul>
-      </div>
-
-      <div class="col-12 col-md-3">
-        <h6 class="text-uppercase text-muted">{{ __('Contact') }}</h6>
-        <ul class="list-unstyled small mb-2">
-          <li><a class="link-dark text-decoration-none" href="mailto:info@swaeduae.ae">info@swaeduae.ae</a></li>
-          <li><span class="text-muted">{{ __('United Arab Emirates') }}</span></li>
-        </ul>
-        <div class="d-flex gap-2">
-          <a class="btn btn-sm btn-outline-secondary" href="#" aria-label="X/Twitter">X</a>
-          <a class="btn btn-sm btn-outline-secondary" href="#" aria-label="Facebook">Fb</a>
-          <a class="btn btn-sm btn-outline-secondary" href="#" aria-label="Instagram">Ig</a>
-        </div>
-      </div>
-    </div>
+    <ul class="footer-nav">
+      <li><a href="{{ url('/') }}">Home</a></li>
+      <li><a href="{{ url('/about') }}">About</a></li>
+      <li><a href="{{ url('/privacy') }}">Privacy</a></li>
+      <li><a href="{{ url('/terms') }}">Terms</a></li>
+      <li><a href="{{ url('/contact') }}">Contact</a></li>
+      <li><a href="{{ url('/qr/verify') }}">QR Verify</a></li>
+      <li><a href="{{ url('/certificates/verify') }}">Certificate Verify</a></li>
+    </ul>
+    <p>© {{ date('Y') }} SwaedUAE</p>
   </div>
 </footer>
-@endif {{-- ORG_AUTH_GUARD --}}

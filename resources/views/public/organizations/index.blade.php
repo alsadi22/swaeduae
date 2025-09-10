@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('public.layout')
 
 @section('content')@include('partials.page_header', ['title'=>__('Organizations')])
 @include('partials.page_header', ['title'=>__('Organizations')])
