@@ -1,4 +1,5 @@
 <?php
+if (file_exists(__DIR__.'/z_overrides.php')) require __DIR__.'/z_overrides.php';
 Route::view('/', 'public.home')->name('home.public');
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
@@ -75,3 +76,4 @@ Route::middleware(['web', 'guest', 'throttle:10,1'])
         Route::get('/reset-password/{token}', [SimplePasswordResetController::class, 'show'])->name('password.reset');
         Route::post('/reset-password', [SimplePasswordResetController::class, 'update'])->name('password.update.simple');
     });
+

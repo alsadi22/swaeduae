@@ -1,9 +1,9 @@
 <!doctype html>
 <html lang="{{ str_replace('_','-',app()->getLocale()) }}" dir="{{ app()->getLocale()==='ar'?'rtl':'ltr' }}">
 <head>
+  @includeIf(partials.theme-public)
   <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
   <title>@yield('title','Org | SwaedUAE')</title>
-  <link rel="stylesheet" href="{{ asset('themes/travelpro/css/style.css') }}?v={{ @filemtime(public_path('themes/travelpro/css/style.css')) }}">
   @stack('head')
 </head>
 <body>
@@ -29,7 +29,6 @@
     @yield('content')
   </main>
 
-  <script src="{{ asset('themes/travelpro/js/app.js') }}?v={{ @filemtime(public_path('themes/travelpro/js/app.js')) }}"></script>
   @stack('scripts')
 </body>
 </html>

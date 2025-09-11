@@ -1,0 +1,31 @@
+:root{
+  --maxw:1100px; --pad:1rem; --pad-lg:2rem;
+  --brand:#0a66c2; --brand-600:#0b5ab0; --text:#111827; --muted:#6b7280; --border:#e5e7eb; --bg:#fff;
+}
+*{box-sizing:border-box} html,body{margin:0;padding:0}
+body{font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Tajawal","Cairo","Noto Sans Arabic",Arial,sans-serif;color:var(--text);background:var(--bg)}
+.container{max-width:var(--maxw);margin:0 auto;padding:0 var(--pad)}
+.container.wrap{display:flex;align-items:center;gap:1rem;min-height:56px}
+a{color:inherit}
+.navbar{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid var(--border)}
+.brand{font-weight:700;text-decoration:none}
+.menu-btn{display:none;border:1px solid var(--border);background:#fff;padding:.5rem .75rem;border-radius:.5rem;cursor:pointer}
+.nav{list-style:none;display:flex;gap:1rem;margin:0;padding:0}
+.nav a{text-decoration:none;color:var(--text);padding:.25rem .25rem;border-radius:.375rem}
+.nav a:hover{background:#f3f4f6} .ml-auto{margin-left:auto}
+.section{padding:var(--pad-lg) 0} .hero{padding:calc(var(--pad-lg)*1.5) 0}
+.btn{display:inline-block;padding:.625rem 1rem;border-radius:.5rem;text-decoration:none;border:1px solid var(--border)}
+.btn.primary{background:var(--brand);color:#fff;border-color:var(--brand)} .btn.primary:hover{background:var(--brand-600)}
+.btn.secondary{background:#fff;color:var(--text)} .btn.secondary:hover{background:#f9fafb}
+.footer{border-top:1px solid var(--border);background:#fff;margin-top:var(--pad-lg)}
+.footer .footer-nav{list-style:none;display:flex;flex-wrap:wrap;gap:.75rem 1rem;padding:var(--pad) 0;margin:0}
+.footer .footer-nav a{text-decoration:none;color:var(--muted)} .footer p{color:var(--muted);margin:0 0 var(--pad)}
+.stat .n{font-weight:700} .muted{color:var(--muted)} hr.sep{border:0;border-top:1px solid var(--border);margin:1rem 0}
+.grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}
+@media (max-width:768px){
+  .container.wrap{justify-content:space-between}
+  .menu-btn{display:inline-block}
+  .nav{display:none;flex-direction:column;gap:.75rem;padding:1rem 0}
+  .nav.open{display:flex}
+  .grid-2{grid-template-columns:1fr}
+}
