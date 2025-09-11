@@ -1,4 +1,4 @@
-@extends('public.layout-travelpro')
+@extends(public.layout)
 @section('content')
 <section class="container py-5">
   <h1>Verify Certificate</h1>

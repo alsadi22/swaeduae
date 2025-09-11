@@ -1,4 +1,4 @@
-@extends('public.layout-travelpro')
+@extends(public.layout)
 @section('title', __('Terms of Service'))
 @section('meta_description','The rules for using our platform.')
 @section('content')

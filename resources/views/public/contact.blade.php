@@ -1,4 +1,4 @@
-@extends('public.layout-travelpro')
+@extends(public.layout)
 @section('title', __('Contact'))
 @section('meta_description','Get in touch with the SwaedUAE team.')
 @section('content')

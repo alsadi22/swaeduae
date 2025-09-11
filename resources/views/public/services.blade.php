@@ -1,4 +1,4 @@
-@extends('public.layout-travelpro')
+@extends(public.layout)
 @section('title', 'Our Services')
 @section('meta_description', 'Tools for volunteers and organizations: opportunities, attendance, certificates.')
 @section('content')
