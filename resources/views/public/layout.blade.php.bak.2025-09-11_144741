@@ -3,14 +3,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>@yield("title","SwaedUAE")</title>
-  <link rel="stylesheet" href="{{ asset("assets/app.css") }}">
+  <link rel="stylesheet" href="{{ asset("assets/travelpro.min.css") }}">
   @yield("head")
 </head>
 <body>
   @includeFirst(["partials.header_public","partials.header"])
   <div class="container">@yield("content")</div>
   @includeIf("partials.footer")
-  <script>document.addEventListener("DOMContentLoaded",function(){var b=document.querySelector("[data-menu]");var m=document.querySelector("#nav-menu");if(b&&m){b.addEventListener("click",function(){var o=m.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");});}});</script>
   @yield("scripts")
 </body>
 </html>

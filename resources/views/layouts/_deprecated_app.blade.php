@@ -7,7 +7,6 @@
     <title>@yield('title', config('app.name'))</title>
     <link rel="stylesheet" href="{{ asset('vendor/argon/assets/css/nucleo-icons.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/argon/assets/css/nucleo-svg.css') }}">
-    <link id="pagestyle" rel="stylesheet" href="{{ asset('vendor/argon/assets/css/argon-dashboard.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/brand.css') }}">
     @stack('head')
   </head>

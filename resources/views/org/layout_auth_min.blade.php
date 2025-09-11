@@ -5,7 +5,6 @@
   <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
   <link rel="stylesheet" href="{{ asset('vendor/argon/assets/css/nucleo-icons.css') }}">
   <link rel="stylesheet" href="{{ asset('vendor/argon/assets/css/nucleo-svg.css') }}">
-  <link id="pagestyle" rel="stylesheet" href="{{ asset('vendor/argon/assets/css/argon-dashboard.min.css') }}">
   <link rel="stylesheet" href="{{ asset('css/brand.css') }}">
   @stack('styles')
 </head>
