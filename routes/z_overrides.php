@@ -1,14 +1,15 @@
 <?php
+
 use Illuminate\Support\Facades\Route;
 
-Route::domain(admin.swaeduae.ae)->group(function () {
-    // Primary admin login page (Argon view)
-    Route::get(/login, function () {
-        return view(view()->exists(auth.admin_login) ? auth.admin_login : auth.login);
-    })->name(admin.login);
+Route::domain(env(ADMIN_DOMAIN, admin.swaeduae.ae))->group(function () {
+    // Admin login (Argon)
+    Route::get(/login, fn() =>
+        view(view()->exists(auth.admin_login) ? auth.admin_login : auth.login)
+    )->name(admin.login);
 
-    // Also serve /admin/login on the admin host, in case templates link there
-    Route::get(/admin/login, function () {
-        return view(view()->exists(auth.admin_login) ? auth.admin_login : auth.login);
-    });
+    // In case anything links to /admin/login on the admin host
+    Route::get(/admin/login, fn() =>
+        view(view()->exists(auth.admin_login) ? auth.admin_login : auth.login)
+    );
 });
