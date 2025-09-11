@@ -1,3 +1,8 @@
 <?php
-// Minimal safe overrides. No 'use' statements.
-Route::get('/login', function () { return redirect()->away('https://admin.swaeduae.ae/login'); })->name('login');
+use Illuminate\Support\Facades\Route;
+
+Route::domain(admin.swaeduae.ae)->group(function () {
+    Route::get(/login, function () {
+        return view(view()->exists(auth.admin_login) ? auth.admin_login : auth.login);
+    })->name(admin.login);
+});
