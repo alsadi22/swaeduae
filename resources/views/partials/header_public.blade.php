@@ -1,13 +1,13 @@
-<nav class="navbar">
-  <div class="container wrap">
-    <a class="brand" href="{{ url('/') }}">SwaedUAE</a>
-    <button class="menu-btn" data-menu aria-label="Menu">☰ Menu</button>
-    <ul id="nav-menu" class="nav ml-auto">
-      <li><a href="{{ url('/opportunities') }}">Opportunities</a></li>
-      <li><a href="{{ url('/events') }}">Events</a></li>
-      <li><a href="{{ url('/contact') }}">Contact</a></li>
-      <li><a href="{{ url('/login') }}">Login</a></li>
-      <li><a href="{{ url('/register') }}">Register</a></li>
-    </ul>
+<header class="site-header">
+  <div class="container nav-row">
+    <a href="{{ url('/') }}" class="brand">SwaedUAE</a>
+    <button class="nav-toggle" aria-label="Menu" data-nav-toggle>☰</button>
+    <nav class="nav" data-nav>
+      <a href="{{ url('/opportunities') }}">Opportunities</a>
+      <a href="{{ url('/events') }}">Events</a>
+      <a href="{{ url('/contact') }}">Contact</a>
+      <a href="{{ url('/login') }}">Login</a>
+      <a href="{{ url('/register') }}" class="btn btn-primary">Register</a>
+    </nav>
   </div>
-</nav>
+</header>

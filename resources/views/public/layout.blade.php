@@ -1,16 +1,19 @@
-<html lang="{{ str_replace("_","-",app()->getLocale()) }}">
+<!doctype html>
+<html lang="{{ str_replace('_','-',app()->getLocale()) }}" dir="{{ app()->getLocale()==='ar' ? 'rtl' : 'ltr' }}">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>@yield("title","SwaedUAE")</title>
-  <link rel="stylesheet" href="{{ asset("assets/app.css") }}">
-  @yield("head")
+  <title>@yield('title','SwaedUAE')</title>
+  <link rel="stylesheet" href="{{ asset('assets/app.css') }}?v={{ @filemtime(public_path('assets/app.css')) }}">
 </head>
-<body>
-  @includeFirst(["partials.header_public","partials.header"])
-  <div class="container">@yield("content")</div>
-  @includeIf("partials.footer")
-  <script>document.addEventListener("DOMContentLoaded",function(){var b=document.querySelector("[data-menu]");var m=document.querySelector("#nav-menu");if(b&&m){b.addEventListener("click",function(){var o=m.classList.toggle("open");b.setAttribute("aria-expanded",o?"true":"false");});}});</script>
-  @yield("scripts")
+<body class="public">
+  @includeIf('partials.header_public')
+
+  <main class="container py-4">
+    @yield('content')
+  </main>
+
+  @includeIf('partials.footer_public')
+  <script defer src="{{ asset('assets/app.js') }}?v={{ @filemtime(public_path('assets/app.js')) }}"></script>
 </body>
 </html>
