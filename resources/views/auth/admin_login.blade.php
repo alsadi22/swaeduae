@@ -1,19 +1,28 @@
-@extends("layouts.admin-argon")
-@section("title","Admin Login")
-@section("content")
+@extends('layouts.admin-argon')
+
+@section('title','Admin Login')
+
+@section('content')
   <div class="row justify-content-center">
     <div class="col-md-5">
       <div class="card shadow">
         <div class="card-header"><h4 class="mb-0">Admin Login</h4></div>
         <div class="card-body">
-          @if (->any())
-            <div class="alert alert-danger"><ul class="mb-0">@foreach (->all() as )<li>{{  }}</li>@endforeach</ul></div>
+          @if ($errors && $errors->any())
+            <div class="alert alert-danger">
+              <ul class="mb-0">
+                @foreach ($errors->all() as $message)
+                  <li>{{ $message }}</li>
+                @endforeach
+              </ul>
+            </div>
           @endif
-          <form method="POST" action="{{ route("login") }}">
+
+          <form method="POST" action="{{ route('login') }}">
             @csrf
             <div class="mb-3">
               <label for="email" class="form-label">Email</label>
-              <input id="email" type="email" name="email" class="form-control" required autofocus value="{{ old("email") }}">
+              <input id="email" type="email" name="email" class="form-control" required autofocus value="{{ old('email') }}">
             </div>
             <div class="mb-3">
               <label for="password" class="form-label">Password</label>
