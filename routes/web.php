@@ -50,7 +50,7 @@ Route::match(['GET', 'POST'], '/qr/checkout', [\App\Http\Controllers\QR\CheckinC
 Route::get('/qr/verify/{serial?}', [VerifyController::class, 'show'])->name('qr.verify');
 
 // Admin login alias → /login
-Route::get('/admin/login', fn () => redirect()->to('/login'))->name('admin.login');
+Route::get('/admin/login', fn () => redirect()->to('/login'))->name('admin.login.alt');
 
 Route::middleware(['web','auth','can:admin-access'])->prefix('admin')->name('admin.')->group(function(){
     Route::get('/approvals',[ApprovalsController::class,'index'])->name('approvals.index');
@@ -88,3 +88,21 @@ Route::get("/opportunities", fn() => view("public.opportunities"))->name("opport
 Route::get("/about", fn() => view("public.about"))->name("about");
 // Contact (GET form page; POST handled by contact.submit)
 Route::get("/contact", fn() => view("public.contact"))->name("contact");
+/* Admin: Hours & Certificates (closure fallbacks if views missing) */
+Route::domain("admin.swaeduae.ae")->middleware(["web","auth","can:admin-access"])->prefix("admin")->name("admin.")->group(function () {
+    Route::get("/hours", fn() => view()->exists("admin.hours.index") ? view("admin.hours.index") : response("Admin Hours", 200))->name("hours.index");
+    Route::get("/certificates", fn() => view()->exists("admin.certificates.index") ? view("admin.certificates.index") : response("Admin Certificates", 200))->name("certificates.index");
+});
+/* Fallback POST /logout */
+Route::post("/logout", function () {
+    \Illuminate\Support\Facades\Auth::logout();
+    request()->session()->invalidate();
+    request()->session()->regenerateToken();
+    return redirect("/");
+})->name("logout");
+
+/* Admin: Hours & Certificates (fallbacks if views missing) */
+Route::domain('admin.swaeduae.ae')->middleware(['web','auth','can:admin-access'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/hours', fn() => view()->exists('admin.hours.index') ? view('admin.hours.index') : response('Admin Hours', 200))->name('hours.index');
+    Route::get('/certificates', fn() => view()->exists('admin.certificates.index') ? view('admin.certificates.index') : response('Admin Certificates', 200))->name('certificates.index');
+});
