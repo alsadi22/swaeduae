@@ -1,38 +1,53 @@
 name: ci-cd
+
 on:
+  push:
+    branches: [ main, ci-boot ]
   pull_request:
     branches: [ main ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      COMPOSER_PROCESS_TIMEOUT: 0
-      COMPOSER_NO_INTERACTION: 1
-      COMPOSER_NO_AUDIT: 1
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - uses: shivammathur/setup-php@v2
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
         with:
           php-version: '8.3'
-          extensions: mbstring, intl, dom, sqlite3
+          extensions: mbstring, intl, pdo_mysql
           coverage: none
-          ini-file: production
-
-      - name: Prepare filesystem
-        run: |
-          rm -rf storage bootstrap/cache || true
-          mkdir -p storage/framework/{cache,sessions,views} storage/logs bootstrap/cache
-          chmod -R 0777 storage bootstrap/cache || true
 
       - name: Install dependencies
-        run: composer install --no-progress --prefer-dist
+        run: composer install --no-interaction --prefer-dist --no-progress
 
-      - name: App key
+      - name: Ensure app key (for cache sanity)
         run: |
-          php -r 'file_exists(".env") || copy(".env.example",".env");'
-          php artisan key:generate
+          [ -f .env ] || cp .env.example .env
+          php artisan key:generate --ansi || true
 
-      - name: Route sanity
-        run: php artisan route:list | head -n 20
+      - name: PHP Lint
+        run: |
+          find app routes -type f -name "*.php" -print0 | xargs -0 -n 20 -P 4 php -l
+
+      - name: Route cache sanity
+        run: php artisan optimize:clear && php artisan route:cache
+
+      - name: Admin layout audit
+        run: |
+          if grep -RInE "@extends\((\"|')public\.layout(\1)\)" resources/views/admin; then
+            echo "ERROR: admin views must not extend public.layout"; exit 1
+          else
+            echo "OK: all admin views use admin.layout"
+          fi
+
+      # Optional: signed-out probes (skip failures from restricted runners)
+      - name: Probes (signed out) — optional
+        if: ${{ false }}   # flip to true when you want to run them
+        run: |
+          echo -n "/ (admin host) : ";  curl -s -o /dev/null -w "%{http_code} %{redirect_url}\n" https://admin.swaeduae.ae/ || true
+          echo -n "/admin         : ";  curl -s -o /dev/null -w "%{http_code} %{redirect_url}\n" https://admin.swaeduae.ae/admin || true
+          echo -n "/admin/login   : ";  curl -s -o /dev/null -w "%{http_code} %{redirect_url}\n" https://admin.swaeduae.ae/admin/login || true
+          echo -n "/login         : ";  curl -s -o /dev/null -w "%{http_code}\n"          https://admin.swaeduae.ae/login || true
