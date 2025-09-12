@@ -8,4 +8,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: echo "CI skeleton OK"
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+      - name: PHP Lint
+        run: |
+          find app routes -type f -name "*.php" -print0 | xargs -0 -n 20 -P 4 php -l
