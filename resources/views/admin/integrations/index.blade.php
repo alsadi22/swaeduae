@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('admin.layout')
 @section('title','Integrations')
 @section('content')
   <h1 class="mb-3">Integrations</h1>

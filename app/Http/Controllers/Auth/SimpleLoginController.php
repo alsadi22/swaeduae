@@ -22,11 +22,7 @@ class SimpleLoginController extends Controller
 
         if (Auth::attempt($credentials, $remember)) {
             $request->session()->regenerate();
-            // If admin, send to /admin; else home
-            if (method_exists(Auth::user(),'hasRole') && Auth::user()->hasRole('admin')) {
-                return redirect()->intended('/admin');
-            }
-            return redirect()->intended('/');
+            return redirect()->intended('/admin');
         }
 
         return back()->withErrors(['email' => 'Invalid credentials'])->onlyInput('email');
