@@ -1,4 +1,4 @@
-@extends("public.layout")
+@extends("admin.layout")
 @section("title","Admin · Hours")
 @section("content")
 @includeIf("admin._topbar")
