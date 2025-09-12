@@ -1,4 +1,4 @@
-@extends('public.layout-travelpro')
+@extends(public.layout)
 @section('title','Volunteer Profile')
 @section('content')
 <link rel="stylesheet" href="/css/profile.css?v={{ filemtime(public_path('css/profile.css')) }}">
