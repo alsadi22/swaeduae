@@ -9,6 +9,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -19,6 +20,12 @@ jobs:
           php-version: '8.3'
           extensions: mbstring, intl, pdo_mysql
           coverage: none
+
+      # Create Laravel dirs so composer post-scripts (package:discover) don't fail
+      - name: Prepare Laravel dirs
+        run: |
+          mkdir -p storage/framework/cache storage/framework/sessions storage/framework/views
+          mkdir -p storage/logs bootstrap/cache
 
       - name: Install dependencies
         run: composer install --no-interaction --prefer-dist --no-progress
@@ -43,9 +50,9 @@ jobs:
             echo "OK: all admin views use admin.layout"
           fi
 
-      # Optional: signed-out probes (skip failures from restricted runners)
-      - name: Probes (signed out) — optional
-        if: ${{ false }}   # flip to true when you want to run them
+      # Optional: signed-out probes (skip on shared runners)
+      - name: Probes (signed out) - optional
+        if: ${{ false }} # set to true to run these
         run: |
           echo -n "/ (admin host) : ";  curl -s -o /dev/null -w "%{http_code} %{redirect_url}\n" https://admin.swaeduae.ae/ || true
           echo -n "/admin         : ";  curl -s -o /dev/null -w "%{http_code} %{redirect_url}\n" https://admin.swaeduae.ae/admin || true
