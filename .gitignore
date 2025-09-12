@@ -1,0 +1,33 @@
+/vendor/
+/node_modules/
+/public/storage/
+/public/health/
+/public/sitemaps/
+/public/*.map
+/.env
+/.env.*
+/storage/*.key
+/storage/app/*
+/storage/framework/*
+/storage/logs/*
+/bootstrap/cache/*.php
+.idea/
+.vscode/
+*.bak
+*.log
+
+# Ignore all env backups
+.env*
+
+
+# Secrets and backups
+.env*
+tools/snapshots/**/.env.bak
+scripts/smoke.env
+
+# Dependencies
+/vendor/
+# Local backups
+routes/*.bak*
+routes/web.php.*.bak*
+public/assets/app.js.bak.*

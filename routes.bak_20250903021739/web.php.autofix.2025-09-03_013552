@@ -1,0 +1,58 @@
+<?php
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use Illuminate\Support\Facades\Session;
+use App\Http\Controllers\Public\OpportunityController;
+use App\Http\Controllers\Public\ApplyController;
+use Illuminate\Support\Facades\Route;
+
+
+Route::get('/partners', function(){ return view('public.partners'); })->name('partners.index');
+use App\Http\Controllers\CertificatePdfController;
+
+Route::middleware(['web','auth','verified'])->group(function () {
+    Route::get('/certificates/{id}/download', [CertificatePdfController::class,'download'])->whereNumber('id')->name('certificates.download');
+    Route::post('/certificates/{id}/resend',   [CertificatePdfController::class,'resend'])->whereNumber('id')->name('certificates.resend');
+    Route::post('/certificates/{id}/revoke',   [CertificatePdfController::class,'revoke'])->whereNumber('id')->name('certificates.revoke'); // admin-only in controller
+});
+Route::middleware(['web','auth','verified'])->get('/applications', function () {
+    return view('applications.index');
+})->name('applications.index');
+Route::middleware(['web','auth','verified'])->get(
+  '/certificates',
+  [\App\Http\Controllers\CertificateController::class,'index']
+)->name('certificates.index');
+Route::middleware(['web','auth','verified'])->get(
+  '/my/profile',
+  [\App\Http\Controllers\My\ProfileController::class,'index']
+)->name('my.profile');
+Route::match(['GET','POST'],'/qr/checkin',  [\App\Http\Controllers\QR\CheckinController::class,'checkin'])->name('qr.checkin.getpost');
+Route::match(['GET','POST'],'/qr/checkout', [\App\Http\Controllers\QR\CheckinController::class,'checkout'])->name('qr.checkout.getpost');
+Route::get('/admin/login', function () {
+    return redirect()->to('/login');
+})->name('admin.login');
+use App\Http\Controllers\Auth\SimpleLoginController;
+
+Route::middleware(['web','guest'])->group(function () {
+    Route::get('/login',  [SimpleLoginController::class, 'show'])->name('login');
+    Route::post('/login', [SimpleLoginController::class, 'perform'])->name('login.perform');
+});
+
+Route::middleware(['web','auth'])->post('/logout', [SimpleLoginController::class, 'logout'])->name('logout');
+use App\Http\Controllers\Auth\SimplePasswordResetController;
+
+/* == Password reset (guest, skip custom middlewares) == */
+Route::middleware(['web','guest'])
+    ->withoutMiddleware([\App\Http\Middleware\EnforceOrgRegistration::class, \App\Http\Middleware\MicroCache::class])
+    ->group(function () {
+        Route::get('/reset-password/{token}', [\App\Http\Controllers\Auth\SimplePasswordResetController::class, 'show'])->name('password.reset');
+        Route::post('/reset-password', [\App\Http\Controllers\Auth\SimplePasswordResetController::class, 'update'])->name('password.update.simple');
+    });
+Route::middleware(['web','auth','verified'])->get('/my/profile', function () {
+    return view('my.profile');
+})->name('my.profile');
+Route::middleware(['web','auth','role:admin'])
+    ->withoutMiddleware([\App\Http\Middleware\EnforceOrgRegistration::class])
+    ->prefix('admin')->name('admin.')
+    ->group(function () {
+        Route::get('/', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
+    });

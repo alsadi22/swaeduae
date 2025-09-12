@@ -1,0 +1,10 @@
+20:MicroCache.php
+21:MicroCache.php.bak
+22:MicroCache.php.bak_20250818_112443
+23:MicroCache.php.bak_langskip_2025-08-18-130700
+24:MicroCache.php.bak_locale_skip_2025-08-18-130938
+25:MicroCache.php.bak_mc
+27:SecurityHeaders.php
+4:use App\Http\Middleware\SetLocale;
+35:            \App\Http\Middleware\SetLocale::class,
+60:      'setlocale' => SetLocale::class,

@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+set -euo pipefail
+cd /var/www/swaeduae
+export AGENT_ENABLED="${AGENT_ENABLED:-true}"
+if [ $# -lt 1 ]; then
+  echo "Usage: cx-file <file> [question...]" >&2; exit 2
+fi
+FILE="$1"; shift || true
+[ -f "$FILE" ] || { echo "No such file: $FILE" >&2; exit 2; }
+QUESTION="${*:-"Review and suggest improvements"}"
+echo "Context: Laravel 11 app at /var/www/swaeduae. File: $FILE" \
+ && echo "----- BEGIN $FILE -----" \
+ && awk 'NR<=40000{print} NR==40000{print "...(truncated)"}' "$FILE" \
+ && echo "----- END $FILE -----" \
+ && echo "Question: $QUESTION" \
+ | /usr/local/bin/codex

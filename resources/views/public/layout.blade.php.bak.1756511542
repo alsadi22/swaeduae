@@ -1,0 +1,13 @@
+<!doctype html>
+<html lang="{{ str_replace('_','-', app()->getLocale()) }}">
+  @include('partials.header-public')
+  <body class="public">
+    @includeWhen(View::exists('partials.header'), 'partials.header')
+
+    {{-- page content --}}
+    @yield('content')
+
+    @includeWhen(View::exists('partials.footer-public'), 'partials.footer-public')
+    @stack('scripts')
+  </body>
+</html>

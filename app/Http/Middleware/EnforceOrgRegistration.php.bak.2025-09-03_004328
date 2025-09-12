@@ -1,0 +1,33 @@
+<?php
+namespace App\Http\Middleware;
+
+use Closure;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
+use App\Rules\CompanyEmailDomain;
+
+class EnforceOrgRegistration
+{
+    public function handle(Request $request, Closure $next)
+        // Skip admin + auth pages
+        if ($request->is('admin*') || $request->is('login') || $request->is('logout') || $request->is('register') || $request->is('password/*')) { return $next($request); }
+    {
+        if ($request->isMethod('post') && $request->is('org/register')) {
+            $v = Validator::make($request->all(), [
+                'name' => ['required','string','min:3'],
+                'email' => ['required','email', new CompanyEmailDomain()],
+                'logo' => ['required','image','mimes:jpg,jpeg,png','max:5120'],
+                'trade_license_number' => ['required','string','min:3'],
+                'trade_license_file' => ['required','file','mimes:pdf,jpg,jpeg,png','max:10240'],
+                'password' => ['required','string','min:8','confirmed'],
+            ]);
+
+            if ($v->fails()) {
+                throw new ValidationException($v);
+            }
+        }
+
+        return $next($request);
+    }
+}

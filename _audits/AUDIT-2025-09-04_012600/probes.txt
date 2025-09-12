@@ -1,0 +1,9 @@
+URL CODE
+/                    200
+/login               200
+/register            200
+/forgot-password     200
+/qr/verify           200
+/applications        302
+/certificates        302
+/admin/login         302

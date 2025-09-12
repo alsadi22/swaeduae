@@ -1,0 +1,244 @@
+=== FULL HEALTH 2025-09-01_031001 ===
+
+== CACHES REFRESH ==
+caches: refreshed
+
+== ABOUT ==
+
+  Environment ................................................................  
+  Application Name .................................................. SwaedUAE  
+  Laravel Version .................................................... 11.45.2  
+  PHP Version ......................................................... 8.3.24  
+  Composer Version ..................................................... 2.2.6  
+  Environment ..................................................... production  
+  Debug Mode ............................................................. OFF  
+  URL ............................................................ swaeduae.ae  
+  Maintenance Mode ....................................................... OFF  
+  Timezone ........................................................ Asia/Dubai  
+  Locale .................................................................. ar  
+
+  Cache ......................................................................  
+  Config .............................................................. CACHED  
+  Events .......................................................... NOT CACHED  
+  Routes .............................................................. CACHED  
+  Views ............................................................... CACHED  
+
+  Drivers ....................................................................  
+  Broadcasting .......................................................... null  
+  Cache ................................................................. file  
+  Database ............................................................. mysql  
+  Logs ......................................................... stack / daily  
+  Mail .................................................................. smtp  
+  Queue ............................................................. database  
+  Session ............................................................... file  
+
+  Sentry .....................................................................  
+  Enabled ................................................................ YES  
+  Environment ..................................................... production  
+  Laravel SDK Version ................................................. 4.15.1  
+  PHP SDK Version ..................................................... 4.15.1  
+  Release ............................................................ 155d7f1  
+  Sample Rate Errors .................................................... 100%  
+  Sample Rate Performance Monitoring ...................................... 0%  
+  Sample Rate Profiling ................................................... 0%  
+  Send Default PII .................................................. DISABLED  
+
+  Spatie Permissions .........................................................  
+  Features Enabled ................................................... Default  
+  Version ............................................................. 6.21.0  
+
+
+== ROUTES (top) ==
+
+  GET|HEAD  / ........................................................... home
+  ANY       _agent{any?} ......................... generated::O68slDGkVxyUkWfL
+  ANY       _alias/{any?} ........................ generated::lNHIygT10gOJPE4J
+  ANY       _compat/{any?} ....................... generated::hiddCkwWDiyWQyaD
+  GET|HEAD  about ...................................................... about
+  ANY       about-us generated::RmApsuTIKc22gMd7 › Illuminate\Routing › Redir…
+  GET|HEAD  account/applications ........................ account.applications
+  GET|HEAD  account/certificates ........................ account.certificates
+  GET|HEAD  account/profile .................................. account.profile
+  GET|HEAD  admin ............... admin.root › Admin\DashboardController@index
+  GET|HEAD  admin/_diag ........................................... admin.diag
+  GET|HEAD  admin/attendance admin.attendance.index › Admin\AttendanceAdminCo…
+  GET|HEAD  admin/attendance/qr/{opportunityId} admin.attendance.qr › Admin\A…
+  ANY       admin/dashboard admin.dashboard.legacy › Illuminate\Routing › Red…
+  GET|HEAD  admin/hours admin.hours.all › Admin\HoursReportController@showAll
+  GET|HEAD  admin/login .............. admin.login › Admin\AuthController@show
+  POST      admin/login ........ admin.login.post › Admin\AuthController@login
+  POST      admin/logout .......... admin.logout › Admin\AuthController@logout
+  GET|HEAD  admin/opportunities .................... admin.opportunities.index
+  POST      admin/opportunities/{opportunityId}/attendance/complete admin.att…
+  POST      admin/opportunities/{opportunityId}/attendance/finalize admin.att…
+  POST      admin/opportunities/{opportunityId}/attendance/manual admin.atten…
+  GET|HEAD  admin/opportunities/{opportunityId}/hours admin.hours.show › Admi…
+  GET|HEAD  admin/users .. admin.users.index › Admin\UserAdminController@index
+  GET|HEAD  admin/users/index .. admin.users › Admin\UserAdminController@index
+  POST      admin/users/toggle/{id} admin.users.toggle › Admin\AdminControlle…
+  GET|HEAD  api/user ............................. generated::wV8JDCPH7X6c2ess
+  GET|HEAD  api/v1/certificates/verify/{code} .... generated::Zjxxg2TdVdjeEVKu
+  GET|HEAD  api/v1/health ........................ generated::biGmtCXd8AsIywyo
+  GET|HEAD  confirm-password password.confirm › Auth\ConfirmablePasswordContr…
+  POST      confirm-password generated::DUlf1shTZlZIIhwB › Auth\ConfirmablePa…
+  GET|HEAD  contact .................................................. contact
+  POST      contact ........................................... contact.submit
+  POST      email/verification-notification verification.send › Auth\EmailVer…
+  GET|HEAD  events ...................... events.index › EventController@index
+  GET|HEAD  events/browse ...................................... events.browse
+  GET|HEAD  events/{idOrSlug} ............. events.show › EventController@show
+  GET|HEAD  faq .................................................... pages.faq
+  GET|HEAD  forgot-password password.request › Auth\PasswordResetLinkControll…
+  POST      forgot-password password.email › Auth\PasswordResetLinkController…
+  GET|HEAD  ics/{slug} .................. ics.show › Public\IcsController@show
+  GET|HEAD  lang/{locale} ........................................ lang.switch
+  GET|HEAD  login ................ login › Auth\PublicAuthController@showLogin
+  POST      login ............ login.perform › Auth\PublicAuthController@login
+  ANY       login/organization generated::41ig2hvTfpyY3S6S › Illuminate\Routi…
+  POST      logout ................. logout › Auth\PublicAuthController@logout
+  GET|HEAD  my/profile ............................................ my.profile
+  GET|HEAD  my/profile/demo .................................. my.profile.demo
+  GET|HEAD  my/profile/rich .................................. my.profile.rich
+  GET|HEAD  opportunities opportunities.index › PublicOpportunityController@i…
+  GET|HEAD  opportunities/{id} .............................. opps.public.show
+  GET|HEAD  opportunities/{slug} opportunities.show › PublicOpportunityContro…
+  GET|HEAD  opportunities/{slug}.ics opportunities.ics › PublicOpportunityCon…
+  POST      opportunities/{slug}/apply opportunities.apply › PublicOpportunit…
+  POST      opportunities/{slug}/apply-cli opportunities.apply.cli › Public\A…
+  POST      opportunities/{slug}/cancel opportunities.cancel › PublicOpportun…
+  GET|HEAD  org/dashboard ...... org.dashboard › Org\DashboardController@index
+  GET|HEAD  org/login .............................................. org.login
+  POST      org/login ......... org.login.perform › Auth\LoginController@login
+  POST      org/opportunities org.opportunities.store › Org\OpportunityContro…
+  GET|HEAD  org/opportunities/create org.opportunities.create › Org\Opportuni…
+  POST      org/opportunities/{event} org.opportunities.update › Org\Opportun…
+  GET|HEAD  org/opportunities/{event}/applicants org.applicants.index › Org\A…
+  GET|HEAD  org/opportunities/{event}/applicants.csv org.applicants.export › …
+  POST      org/opportunities/{event}/applicants/{app}/decision org.applicant…
+  POST      org/opportunities/{event}/close org.opportunities.close › Org\Opp…
+  GET|HEAD  org/opportunities/{event}/edit org.opportunities.edit › Org\Oppor…
+  GET|HEAD  org/opportunities/{opportunity}/shortlist org.shortlist.index › O…
+  POST      org/opportunities/{opportunity}/shortlist/bulk org.shortlist.bulk…
+  POST      org/opportunities/{opportunity}/shortlist/slot-cap org.shortlist.…
+  GET|HEAD  org/register ........................................ org.register
+  POST      org/register ................................. org.register.submit
+  GET|HEAD  org/settings ..... org.settings.edit › Org\SettingsController@edit
+  POST      org/settings . org.settings.update › Org\SettingsController@update
+  GET|HEAD  org/setup .............. org.setup.form › Org\SetupController@form
+  POST      org/setup ............ org.setup.store › Org\SetupController@store
+  ANY       organizations/register generated::mxwHaIRrS4GKt2mE › Illuminate\R…
+  GET|HEAD  partners ................................................ partners
+  PUT       password ........ password.update › Auth\PasswordController@update
+
+== MIGRATIONS STATUS ==
+
+  Migration name .............................................. Batch / Status  
+  2025_08_29_000001_create_payments_table ............................ [4] Ran  
+  2025_08_29_025402_create_permission_tables ......................... [3] Ran  
+  2025_08_30_044614_create_jobs_table ................................ [5] Ran  
+  2025_08_30_214747_create_failed_jobs_table ......................... [5] Ran  
+  2025_08_30_235134_create_certificates_table ........................ [6] Ran  
+  2025_08_31_001702_create_audits_table .............................. [7] Ran  
+  2025_08_31_001702_create_events_table .............................. [7] Ran  
+  2025_08_31_001836_add_slug_to_events_table ......................... [8] Ran  
+  2025_09_01_002332_create_opportunities_table ....................... [9] Ran  
+  2025_09_01_002333_create_applications_table ........................ [9] Ran  
+
+
+== QUEUE & SCHEDULER ==
+active
+● swaed-queue.service - Laravel Queue Worker (SwaedUAE)
+     Loaded: loaded (/etc/systemd/system/swaed-queue.service; enabled; vendor preset: enabled)
+     Active: active (running) since Mon 2025-09-01 03:05:17 +04; 4min 45s ago
+   Main PID: 604228 (php)
+      Tasks: 1 (limit: 38144)
+     Memory: 35.8M
+        CPU: 211ms
+     CGroup: /system.slice/swaed-queue.service
+             └─604228 /usr/bin/php artisan queue:work --queue=default --sleep=3 --tries=3 --max-time=3600
+
+Sep 01 03:05:17 swaeduae systemd[1]: Started Laravel Queue Worker (SwaedUAE).
+
+  2025-09-01 03:10:02 Running ['artisan' queue:work --stop-when-empty --queue=default --tries=3 --backoff=10 --timeout=120 --sleep=3]  3s DONE
+  ⇂ queue.tick  
+
+
+== HTTP PROBES ==
+GET / -> 200
+GET /about -> 200
+GET /privacy -> 200
+GET /terms -> 200
+GET /org/login -> 200
+HTTP/2 302 
+date: Sun, 31 Aug 2025 23:10:09 GMT
+content-type: text/html; charset=utf-8
+location: https://swaeduae.ae/admin/login
+cache-control: no-cache, private
+server: cloudflare
+
+== QR VERIFY CHECKS ==
+/qr/verify -> 200
+/qr/verify?code=test -> HTTP/2 302  date: Sun, 31 Aug 2025 23:10:10 GMT content-type: text/html; charset=utf-8 
+throttle spray: 200 200 200 200 200 200 200 200 200 200 200 200 200 200 200 200 200 200 200 200 200 200 200 200 200 200 200 200 429 429 429
+
+== CERT PDF sanity ==
+total 4.0K
+-rw-rwxr--+ 1 swaeduae swaeduae 1.3K Aug 30 23:49 _test.pdf
+
+== PWA (manifest/SW/icons present & non-zero) ==
+OK -rw-rw-r--+ 1 swaeduae www-data 332 Aug 31 00:02 public/manifest.json
+OK -rw-rw-r--+ 1 swaeduae www-data 775 Aug 31 00:51 public/service-worker.js
+OK -rw-rw-r--+ 1 swaeduae www-data 67 Aug 31 00:04 public/img/icon-192.png
+OK -rw-rw-r--+ 1 swaeduae www-data 67 Aug 31 00:04 public/img/icon-512.png
+
+== ANALYTICS on homepage ==
+    <!-- analytics: plausible -->
+  <script defer data-domain="swaeduae.ae" src="https://plausible.io/js/script.js"></script>
+analytics OK
+
+== MAIL & SESSION SNAPSHOT ==
+MAIL_FROM_ADDRESS=admin@swaeduae.ae
+MAIL_MAILER=smtp
+MAIL_HOST=smtppro.zoho.com
+MAIL_PORT=587
+MAIL_ENCRYPTION=tls
+MAIL_USERNAME=admin@swaeduae.ae
+SESSION_DRIVER=file
+SESSION_LIFETIME=120
+SESSION_SECURE_COOKIE=true
+SESSION_SAME_SITE=Lax
+
+== NGINX & CLOUDFLARED ==
+nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /etc/nginx/nginx.conf test is successful
+● cloudflared.service - cloudflared
+     Loaded: loaded (/etc/systemd/system/cloudflared.service; enabled; vendor preset: enabled)
+     Active: active (running) since Sat 2025-08-30 21:17:12 +04; 1 day 5h ago
+   Main PID: 3722456 (cloudflared)
+      Tasks: 16 (limit: 38144)
+     Memory: 19.8M
+        CPU: 5min 40.502s
+     CGroup: /system.slice/cloudflared.service
+             └─3722456 /usr/local/bin/cloudflared --no-autoupdate --config /etc/cloudflared/config.yml tunnel run
+
+Sep 01 00:07:17 swaeduae cloudflared[3722456]: 2025-08-31T20:07:17Z ERR Request failed error="Unable to reach the origin service. The service may be down or it may not be responding to traffic from cloudflared: dial tcp 127.0.0.1:443: connect: connection refused" connIndex=1 dest=https://swaeduae.ae/sitemaps/sitemap-en.xml event=0 ip=198.41.192.67 type=http
+Sep 01 00:08:18 swaeduae cloudflared[3722456]: 2025-08-31T20:08:18Z ERR  error="Unable to reach the origin service. The service may be down or it may not be responding to traffic from cloudflared: dial tcp 127.0.0.1:443: connect: connection refused" connIndex=2 event=1 ingressRule=0 originService=https://127.0.0.1:443
+Sep 01 00:08:18 swaeduae cloudflared[3722456]: 2025-08-31T20:08:18Z ERR Request failed error="Unable to reach the origin service. The service may be down or it may not be responding to traffic from cloudflared: dial tcp 127.0.0.1:443: connect: connection refused" connIndex=2 dest=https://swaeduae.ae/sitemaps/sitemap-en.xml event=0 ip=198.41.200.13 type=http
+Sep 01 00:09:19 swaeduae cloudflared[3722456]: 2025-08-31T20:09:19Z ERR  error="Unable to reach the origin service. The service may be down or it may not be responding to traffic from cloudflared: dial tcp 127.0.0.1:443: connect: connection refused" connIndex=1 event=1 ingressRule=0 originService=https://127.0.0.1:443
+Sep 01 00:09:19 swaeduae cloudflared[3722456]: 2025-08-31T20:09:19Z ERR Request failed error="Unable to reach the origin service. The service may be down or it may not be responding to traffic from cloudflared: dial tcp 127.0.0.1:443: connect: connection refused" connIndex=1 dest=https://swaeduae.ae/sitemaps/sitemap-en.xml event=0 ip=198.41.192.67 type=http
+
+== BACKUPS ==
+-rw-r--r-- 1 root root 305M Aug 30 21:23 swaeduae_2025-08-30_212254.tar.gz
+-rw-r--r-- 1 root root 305M Aug 30 22:10 swaeduae_2025-08-30_221017.tar.gz
+-rw-r--r-- 1 root root 306M Aug 30 23:59 swaeduae_2025-08-30_235911.tar.gz
+-rw-r--r-- 1 root root 306M Aug 31 00:27 swaeduae_2025-08-31_002730.tar.gz
+-rw-r--r-- 1 root root 2.8K Aug 30 21:22 swaeduae_2025-08-30_212254.sql.gz
+-rw-r--r-- 1 root root 2.8K Aug 30 22:10 swaeduae_2025-08-30_221017.sql.gz
+-rw-r--r-- 1 root root 3.2K Aug 30 23:59 swaeduae_2025-08-30_235911.sql.gz
+-rw-r--r-- 1 root root 3.8K Aug 31 00:27 swaeduae_2025-08-31_002730.sql.gz
+
+== RECENT LOG ERRORS (tail) ==
+latest_log=storage/logs/laravel-2025-09-01.log
+[2025-09-01 02:20:04] production.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'swaeduae.volunteer_hours' doesn't exist (Connection: mysql, SQL: select `user_id`, `opportunity_id`, `minutes` from `volunteer_hours` order by `user_id` asc, `opportunity_id` asc) {"exception":"[object] (Illuminate\\Database\\QueryException(code: 42S02): SQLSTATE[42S02]: Base table or view not found: 1146 Table 'swaeduae.volunteer_hours' doesn't exist (Connection: mysql, SQL: select `user_id`, `opportunity_id`, `minutes` from `volunteer_hours` order by `user_id` asc, `opportunity_id` asc) at /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825)
+[previous exception] [object] (PDOException(code: 42S02): SQLSTATE[42S02]: Base table or view not found: 1146 Table 'swaeduae.volunteer_hours' doesn't exist at /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/Database/Connection.php:470)
+[2025-09-01 02:30:04] production.ERROR: There are no commands defined in the "sitemap" namespace. {"exception":"[object] (Symfony\\Component\\Console\\Exception\\NamespaceNotFoundException(code: 0): There are no commands defined in the \"sitemap\" namespace. at /var/www/swaeduae/vendor/symfony/console/Application.php:659)

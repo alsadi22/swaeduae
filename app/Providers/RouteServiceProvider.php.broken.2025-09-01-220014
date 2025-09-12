@@ -1,0 +1,35 @@
+<?php
+namespace App\Providers;
+
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\ServiceProvider;
+use Illuminate\Cache\RateLimiting\Limit;
+use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Http\Request;
+
+class RouteServiceProvider extends ServiceProvider
+{
+    public function register(): void {}
+
+    public function boot(): void {
+    parent::boot();
+    \Illuminate\Support\Facades\Route::matched(function(){
+        // Ensure POST /login uses our controller without editing routes/web.php
+        try {
+            foreach (\Illuminate\Support\Facades\Route::getRoutes() as ) {
+                if (in_array("POST", ()) && trim((),"/")=="login") {
+                    ["controller"] = \App\Http\Controllers\Auth\AuthenticatedSessionController::class."@store";
+                    ["uses"] = [\App\Http\Controllers\Auth\AuthenticatedSessionController::class, "store"];
+                }
+            }
+        } catch(\Throwable ) {}
+    });
+}
+);
+        // 5 attempts/minute keyed by email + IP
+        RateLimiter::for('login', function (Request $request) {
+            $key = strtolower((string) $request->input('email')).'|'.$request->ip();
+            return [ Limit::perMinute(5)->by($key) ];
+        });
+    }
+}

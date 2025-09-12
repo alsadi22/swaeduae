@@ -1,0 +1,31 @@
+SwaedUAE Full Health Report  2025-08-30-235944
+================================================
+
+[health.sh --fix]
+
+[1m== Environment ==(B[m
+PHP:     PHP 8.3.24 (cli) (built: Aug  3 2025 08:57:38) (NTS)
+Laravel: Laravel Framework 11.45.2
+Node:    v22.19.0
+Composer:Composer 2.2.6 2022-02-04 17:00:38
+PHP memory_limit: 512M
+[32m✅(B[m Env read
+
+[1m== Permissions & ACL ==(B[m
+[32m✅(B[m Applied ACLs for www-data and swaeduae on storage/ & bootstrap/cache/
+[32m✅(B[m Current user can write storage/logs
+
+[1m== Caches ==(B[m
+[32m✅(B[m optimize:clear
+[32m✅(B[m config:cache
+[32m✅(B[m route:cache
+[32m✅(B[m view:cache
+
+[1m== Blade route() names vs. defined route names ==(B[m
+[32m✅(B[m No missing route() names in Blade
+
+[1m== Blade layout cycle check (public/) ==(B[m
+[32m✅(B[m No @extends() 2-cycles in public/
+[32m✅(B[m public/layout.blade.php is a base (no @extends) ✔
+
+[1m== Theme usage (TravelPro for public, Argon for admin/org) ==(B[m

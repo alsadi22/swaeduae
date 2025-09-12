@@ -1,0 +1,17 @@
+@extends('layouts.admin_theme')
+@sect
+@section('content')
+<h2>{{ $event-
+<form method="POST" action
+    @csrf
+    <input type="file" nam
+
+</form>
+<div class="row mt-4">
+    @foreach($event->photos ?? [] as $i
+     
+            <img src="{{ asset('stora
+        </div>
+    @endforeach
+</div
+@endsection

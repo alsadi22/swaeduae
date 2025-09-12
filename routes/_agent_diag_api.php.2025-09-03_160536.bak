@@ -1,0 +1,19 @@
+<?php
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+
+Route::match(['GET','HEAD'],'dev/agent/echo', function (Request $r) {
+    return response()->json([
+        'saw' => [
+            'x_agent_token' => $r->header('X-Agent-Token'),
+            'authorization' => $r->header('Authorization'),
+            'user_agent'    => $r->userAgent(),
+        ],
+        'middleware' => app('router')->getCurrentRoute()->gatherMiddleware(),
+    ]);
+})->withoutMiddleware([
+    'auth', 'auth:api', 'auth:sanctum', 'throttle', 'throttle:api',
+    \App\Http\Middleware\EnforceOrgRegistration::class ?? null,
+    \App\Http\Middleware\MicroCache::class ?? null,
+    \App\Http\Middleware\SetLocaleAndHeaders::class ?? null,
+])->name('agent.diag.echo.dev');

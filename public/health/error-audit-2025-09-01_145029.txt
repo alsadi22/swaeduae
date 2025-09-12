@@ -1,0 +1,374 @@
+=== FULL ERROR AUDIT (2025-09-01 10:50:29 UTC) ===
+BASE=https://swaeduae.ae
+PHP 8.3.24 (cli) (built: Aug  3 2025 08:57:38) (NTS)
+
+-- PHP lint: routes/web.php --
+PHP Parse error:  Unmatched '}' in routes/web.php on line 297
+Errors parsing routes/web.php
+
+-- Suspicious regions in routes/web.php --
+[Head 1..120]
+     1	<?php
+     2	use App\Http\Controllers\Public\OpportunityController;
+     3	use App\Http\Controllers\Public\ApplyController;
+     4	use Illuminate\Support\Facades\Route;
+     5	
+     6	Route::get('/opportunities', [OpportunityController::class,'index'])->name('opportunities.index');
+     7	Route::get('/opportunities/{slug}', [OpportunityController::class,'show'])->name('opportunities.show');
+     8	Route::post('/opportunities/{slug}/apply', [ApplyController::class,'store'])->middleware(['auth','verified'])->name('opportunities.apply');
+     9	
+    10	Route::get('/account/applications', function () {
+    11	    $user = \Illuminate\Support\Facades\Auth::user();
+    12	    abort_unless($user, 403);
+    13	    $rows = \Illuminate\Support\Facades\DB::table('applications as a')
+    14	        ->join('opportunities as o','o.id','=','a.opportunity_id')
+    15	        ->where('a.user_id',$user->id)
+    16	        ->orderByDesc('a.created_at')
+    17	        ->select('o.slug','o.title','o.location','o.starts_at','o.ends_at','a.status')
+    18	        ->get()
+    19	        ->map(function($r){
+    20	            return (object)[
+    21	                'slug'=>$r->slug,
+    22	                'title'=>$r->title ?: 'Untitled',
+    23	                'location'=>$r->location,
+    24	                'starts_at'=>$r->starts_at ? \Illuminate\Support\Carbon::parse($r->starts_at) : null,
+    25	                'ends_at'=>$r->ends_at ? \Illuminate\Support\Carbon::parse($r->ends_at) : null,
+    26	                'status'=>$r->status ?: 'submitted',
+    27	            ];
+    28	        });
+    29	    return view('account.applications', ['apps'=>$rows]);
+    30	})->middleware(['auth','verified'])->name('account.applications');
+    31	
+    32	
+    33	
+    34	
+    35	
+    36	$load = function(string $file) {
+    37	    $p = __DIR__ . '/' . $file;
+    38	    if (file_exists($p)) require $p;
+    39	};
+    40	
+    41	/* --- SAFE PARTIALS (linted) --- */
+    42	$load('_deny_dev_routes.php');
+    43	$load('_early_auth_overrides.php');
+    44	$load('_auth_overrides.php');
+    45	$load('_auth_aliases.php');
+    46	
+    47	/* Public / Static / QR */
+    48	$load('_public_static.php');
+    49	$load('_public_pages.php');
+    50	$load('_public.php');
+    51	$load('_qr_verify_entry.php');
+    52	$load('_qr_public.php');
+    53	
+    54	/* Org/Admin packs (stable). IMPORTANT: skip admin alias pack to avoid duplicate names. */
+    55	$load('org.php');
+    56	$load('org_shortlist.php');
+    57	$load('admin.php');
+    58	// $load('_admin_route_aliases.php'); // disabled to avoid duplicates like admin.users.index
+    59	
+    60	/* Redirect helpers */
+    61	$load('_redirects.php');
+    62	
+    63	/* --- FALLBACKS (guarantee critical public routes by name) --- */
+    64	if (!Route::has('home')) { Route::get('/', fn() => view('home'))->name('home'); }
+    65	if (!Route::has('about')) { Route::view('/about','about')->name('about'); }
+    66	if (!Route::has('privacy')) { Route::view('/privacy','privacy')->name('privacy'); }
+    67	if (!Route::has('terms')) { Route::view('/terms','terms')->name('terms'); }
+    68	
+    69	/* Opportunities (public) — only if not already defined in a partial */
+    70	if (!Route::has('opportunities.index')) {
+    71	    $c = \App\Http\Controllers\PublicOpportunityController::class;
+    72	                Route::get('/opportunities/{slug}.ics',    [$c,'ics'])->name('opportunities.ics');
+    73	}
+    74	
+    75	/* --- PUBLIC ROUTE NAME COMPAT (keeps header links from 500ing) --- */
+    76	if (!Route::has('contact.get')) {
+    77	    // Contact page view already exists; map both 'contact.get' and 'contact'
+    78	    Route::view('/contact', 'contact')->name('contact.get');
+    79	    if (!Route::has('contact')) Route::view('/contact', 'contact')->name('contact');
+    80	}
+    81	foreach (['pages.about' => '/about', 'pages.privacy' => '/privacy', 'pages.terms' => '/terms'] as $legacy => $uri) {
+    82	    if (!Route::has($legacy)) {
+    83	        Route::get($uri, fn() => view(trim($uri, '/')))->name($legacy);
+    84	    }
+    85	}
+    86	if (!Route::has('qr.verify')) {
+    87	    // Ensure a named route exists even if a partial already created /qr/verify
+    88	    Route::get('/qr/verify/{code?}', function (?string $code = null) {
+    89	        if ($code) return redirect('/qr/verify/'.rawurlencode($code));
+    90	        // show form if you have it; else a minimal response
+    91	        return view()->exists('qr.verify') ? response()->view('qr.verify', [], 200)
+    92	                                           : response('Verify page', 200);
+    93	    })->name('qr.verify');
+    94	}
+    95	
+    96	/* PUBLIC BASIC PAGES (guarantee) */
+    97	if (!Route::has('about'))   { Route::view('/about', 'about')->name('pages.about'); }
+    98	if (!Route::has('privacy')) { Route::view('/privacy', 'privacy')->name('pages.privacy'); }
+    99	if (!Route::has('terms'))   { Route::view('/terms', 'terms')->name('pages.terms'); }
+   100	if (!Route::has('contact')) { Route::view('/contact','contact')->name('contact'); }
+   101	
+   102	/* PUBLIC BASICS (names guaranteed) */
+   103	if (!Route::has('home'))    { Route::get('/',    fn() => view('home'))->name('home'); }
+   104	if (!Route::has('about'))   { Route::view('/about',   'about')->name('about'); }
+   105	if (!Route::has('privacy')) { Route::view('/privacy', 'privacy')->name('privacy'); }
+   106	if (!Route::has('terms'))   { Route::view('/terms',   'terms')->name('terms'); }
+   107	if (!Route::has('contact')) { Route::view('/contact', 'contact')->name('contact'); }
+   108	
+   109	/* LANG SWITCH (compat for header links) */
+   110	if (!Route::has('lang.switch')) {
+   111	    Route::get('/lang/{locale}', function ($locale) {
+   112	        $supported = ['en','ar'];
+   113	        if (!in_array($locale, $supported, true)) $locale = 'en';
+   114	        session(['locale'=>$locale]);
+   115	        app()->setLocale($locale);
+   116	        return back();
+   117	    })->name('lang.switch');
+   118	}
+   119	
+   120	/* CONTACT FALLBACKS (idempotent) */
+[Block 240..360]
+   240	/* My Applications (auth) */
+   241	if (!Route::has('account.applications')) {
+   242	    Route::middleware('auth')->get('/account/applications', function () {
+   243	        $uid = auth()->id();
+   244	        $volId = DB::table('volunteers')->where('user_id',$uid)->value('id');
+   245	        $apps = collect();
+   246	        if ($volId) {
+   247	            $apps = DB::table('registrations as r')
+   248	                ->join('events as e','e.id','=','r.event_id')
+   249	                ->where('r.volunteer_id',$volId)
+   250	                ->orderByRaw('COALESCE(e.starts_at, e.created_at) DESC')
+   251	                ->limit(100)
+   252	                ->get(['e.title','e.slug','e.location','e.starts_at','e.ends_at','r.status','r.updated_at']);
+   253	        }
+   254	        return view('account.applications', ['apps'=>$apps]);
+   255	    })->name('account.applications');
+   256	}
+   257	
+   258	/* My Certificates (auth) */
+   259	if (!Route::has('account.certificates')) {
+   260	    Route::middleware('auth')->get('/account/certificates', function () {
+   261	        $uid = auth()->id();
+   262	        $certs = DB::table('certificates')
+   263	            ->where('user_id',$uid)
+   264	            ->orderByDesc('issued_at')
+   265	            ->limit(100)
+   266	            ->get(['uuid','issued_at','hours']);
+   267	        return view('account.certificates', ['certs'=>$certs]);
+   268	    })->name('account.certificates');
+   269	}
+   270	Route::get('/ics/{slug}', [\App\Http\Controllers\Public\IcsController::class, 'show'])->name('ics.show');
+   271	use App\Http\Controllers\Public\ApplyController;
+   272	Route::post('/opportunities/{slug}/apply-cli', [ApplyController::class, 'store'])
+   273	    ->middleware(['auth','verified'])
+   274	    ->name('opportunities.apply.cli');
+   275	// === DATA-POWERED My Applications (overrides earlier Route::view) ===
+   276	
+   277	    abort_unless($user, 403);
+   278	
+   279	    $rows = \Illuminate\Support\Facades\DB::table('applications as a')
+   280	        ->join('opportunities as o','o.id','=','a.opportunity_id')
+   281	        ->where('a.user_id',$user->id)
+   282	        ->orderByDesc('a.created_at')
+   283	        ->select('o.slug','o.title','o.location','o.starts_at','o.ends_at','a.status')
+   284	        ->get()
+   285	        ->map(function($r){
+   286	            return (object)[
+   287	                'slug'      => $r->slug,
+   288	                'title'     => $r->title ?: 'Untitled',
+   289	                'location'  => $r->location,
+   290	                'starts_at' => $r->starts_at ? \Illuminate\Support\Carbon::parse($r->starts_at) : null,
+   291	                'ends_at'   => $r->ends_at ? \Illuminate\Support\Carbon::parse($r->ends_at) : null,
+   292	                'status'    => $r->status ?: 'submitted',
+   293	            ];
+   294	        });
+   295	
+   296	    return view('account.applications', ['apps' => $rows]);
+   297	})->middleware(['auth','verified'])->name('account.applications');
+   298	abort_unless($user, 403);
+   299	    $rows = \Illuminate\Support\Facades\DB::table('applications as a')
+   300	        ->join('opportunities as o','o.id','=','a.opportunity_id')
+   301	        ->where('a.user_id',$user->id)
+   302	        ->orderByDesc('a.created_at')
+   303	        ->select('o.slug','o.title','o.location','o.starts_at','o.ends_at','a.status')
+   304	        ->get();
+   305	    return response()->json($rows);
+   306	})->middleware(['auth','verified']);
+   307	// === DATA-POWERED My Applications (final) ===
+   308	\Illuminate\Support\Facades\    abort_unless($user, 403);
+   309	
+   310	    $rows = \Illuminate\Support\Facades\DB::table('applications as a')
+   311	        ->join('opportunities as o','o.id','=','a.opportunity_id')
+   312	        ->where('a.user_id',$user->id)
+   313	        ->orderByDesc('a.created_at')
+   314	        ->select('o.slug','o.title','o.location','o.starts_at','o.ends_at','a.status')
+   315	        ->get()
+   316	        ->map(function($r){
+   317	            return (object)[
+   318	                'slug'      => $r->slug,
+   319	                'title'     => $r->title ?: 'Untitled',
+   320	                'location'  => $r->location,
+   321	                'starts_at' => $r->starts_at ? \Illuminate\Support\Carbon::parse($r->starts_at) : null,
+   322	                'ends_at'   => $r->ends_at ? \Illuminate\Support\Carbon::parse($r->ends_at) : null,
+   323	                'status'    => $r->status ?: 'submitted',
+   324	            ];
+   325	        });
+   326	
+   327	    return view('account.applications', ['apps' => $rows]);
+   328	})->middleware(['auth','verified'])->name('account.applications');
+
+-- Duplicate mid-file facade imports (should appear only once near the top) --
+4:use Illuminate\Support\Facades\Route;
+238:use Illuminate\Support\Facades\DB;
+
+-- Rogue lines that commonly break parsing (leading backslash Facades outside closures) --
+[32m[HIT][0m No rogue leading-backslash Facade lines detected.
+
+-- Account Applications blocks & duplicates --
+10:Route::get('/account/applications', function () {
+242:    Route::middleware('auth')->get('/account/applications', function () {
+29:    return view('account.applications', ['apps'=>$rows]);
+254:        return view('account.applications', ['apps'=>$apps]);
+296:    return view('account.applications', ['apps' => $rows]);
+327:    return view('account.applications', ['apps' => $rows]);
+
+-- artisan route:list (may fail if routes file is broken) --
+[32m[HIT][0m route:list succeeded (showing first 80 lines)
+
+   ParseError 
+
+  Unmatched '}'
+
+  at routes/web.php:297
+    293▕             ];
+    294▕         });
+    295▕ 
+    296▕     return view('account.applications', ['apps' => $rows]);
+  ➜ 297▕ })->middleware(['auth','verified'])->name('account.applications');
+    298▕ abort_unless($user, 403);
+    299▕     $rows = \Illuminate\Support\Facades\DB::table('applications as a')
+    300▕         ->join('opportunities as o','o.id','=','a.opportunity_id')
+    301▕         ->where('a.user_id',$user->id)
+
+      [2m+3 vendor frames [22m
+
+  4   app/Providers/RouteServiceProvider.php:16
+      Illuminate\Routing\RouteRegistrar::group()
+      [2m+7 vendor frames [22m
+
+  12  [internal]:0
+      Illuminate\Foundation\Application::Illuminate\Foundation\{closure}()
+
+
+-- Controllers presence --
+[32m[HIT][0m app/Http/Controllers/Public/OpportunityController.php
+[32m[HIT][0m app/Http/Controllers/Public/ApplyController.php
+
+-- Views presence --
+[32m[HIT][0m resources/views/public/opportunities/index.blade.php
+[32m[HIT][0m resources/views/public/opportunities/show.blade.php
+[32m[HIT][0m resources/views/account/applications.blade.php
+
+-- DB tables --
+
+   ParseError 
+
+  Unmatched '}'
+
+  at routes/web.php:297
+    293▕             ];
+    294▕         });
+    295▕ 
+    296▕     return view('account.applications', ['apps' => $rows]);
+  ➜ 297▕ })->middleware(['auth','verified'])->name('account.applications');
+    298▕ abort_unless($user, 403);
+    299▕     $rows = \Illuminate\Support\Facades\DB::table('applications as a')
+    300▕         ->join('opportunities as o','o.id','=','a.opportunity_id')
+    301▕         ->where('a.user_id',$user->id)
+
+      [2m+3 vendor frames [22m
+
+  4   app/Providers/RouteServiceProvider.php:16
+      Illuminate\Routing\RouteRegistrar::group()
+      [2m+7 vendor frames [22m
+
+  12  [internal]:0
+      Illuminate\Foundation\Application::Illuminate\Foundation\{closure}()
+
+[33m[WARN][0m tinker failed (continuing)
+
+-- Recent Laravel log tail (last 40) --
+Log: storage/logs/laravel-2025-09-01.log
+#4 /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(36): App\\Providers\\RouteServiceProvider->boot()
+#5 /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/Container/Util.php(43): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+#6 /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(95): Illuminate\\Container\\Util::unwrapIfClosure()
+#7 /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(35): Illuminate\\Container\\BoundMethod::callBoundMethod()
+#8 /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/Container/Container.php(696): Illuminate\\Container\\BoundMethod::call()
+#9 /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1151): Illuminate\\Container\\Container->call()
+#10 /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1132): Illuminate\\Foundation\\Application->bootProvider()
+#11 [internal function]: Illuminate\\Foundation\\Application->Illuminate\\Foundation\\{closure}()
+#12 /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1131): array_walk()
+#13 /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/BootProviders.php(17): Illuminate\\Foundation\\Application->boot()
+#14 /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(342): Illuminate\\Foundation\\Bootstrap\\BootProviders->bootstrap()
+#15 /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(474): Illuminate\\Foundation\\Application->bootstrapWith()
+#16 /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(196): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#17 /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1235): Illuminate\\Foundation\\Console\\Kernel->handle()
+#18 /var/www/swaeduae/artisan(13): Illuminate\\Foundation\\Application->handleCommand()
+#19 {main}
+"} 
+[2025-09-01 14:50:29] production.ERROR: Unmatched '}' {"exception":"[object] (ParseError(code: 0): Unmatched '}' at /var/www/swaeduae/routes/web.php:297)
+[stacktrace]
+#0 /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/Routing/Router.php(513): Illuminate\\Routing\\RouteFileRegistrar->register()
+#1 /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/Routing/Router.php(467): Illuminate\\Routing\\Router->loadRoutes()
+#2 /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/Routing/RouteRegistrar.php(207): Illuminate\\Routing\\Router->group()
+#3 /var/www/swaeduae/app/Providers/RouteServiceProvider.php(16): Illuminate\\Routing\\RouteRegistrar->group()
+#4 /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(36): App\\Providers\\RouteServiceProvider->boot()
+#5 /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/Container/Util.php(43): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+#6 /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(95): Illuminate\\Container\\Util::unwrapIfClosure()
+#7 /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(35): Illuminate\\Container\\BoundMethod::callBoundMethod()
+#8 /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/Container/Container.php(696): Illuminate\\Container\\BoundMethod::call()
+#9 /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1151): Illuminate\\Container\\Container->call()
+#10 /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1132): Illuminate\\Foundation\\Application->bootProvider()
+#11 [internal function]: Illuminate\\Foundation\\Application->Illuminate\\Foundation\\{closure}()
+#12 /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1131): array_walk()
+#13 /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/BootProviders.php(17): Illuminate\\Foundation\\Application->boot()
+#14 /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(342): Illuminate\\Foundation\\Bootstrap\\BootProviders->bootstrap()
+#15 /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(474): Illuminate\\Foundation\\Application->bootstrapWith()
+#16 /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(196): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#17 /var/www/swaeduae/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1235): Illuminate\\Foundation\\Console\\Kernel->handle()
+#18 /var/www/swaeduae/artisan(13): Illuminate\\Foundation\\Application->handleCommand()
+#19 {main}
+"} 
+
+-- HTTP probes (public path) --
+/                              -> 500
+/opportunities                 -> 500
+/opportunities/demo-event      -> 500
+/account/applications          -> 500
+/login                         -> 500
+
+-- Suggested FIX commands (NOT RUN) --
+# 1) Remove any rogue lines that start with a leading backslash Facade (these cause parse errors):
+sudo sed -i '/^\s*\\Illuminate\\Support\\Facades\\\\/d' routes/web.php
+
+# 2) If you see a duplicated OUT-OF-CLOSURE chunk for account/apps (you will see two "return view('account.applications'...)" blocks),
+#    delete the stray block by line range (adjust after reading the report):
+#    Example: to delete lines 33..50:
+# sudo sed -i '33,50d' routes/web.php
+
+# 3) Force /opportunities/{slug}/apply to use the working controller:
+sudo sed -i 's#PublicOpportunityController@apply#App\\Http\\Controllers\\Public\\ApplyController@store#g' routes/web.php
+sudo sed -i "s#\\[\\s*PublicOpportunityController::class\\s*,\\s*'apply'\\s*\\]#[App\\\\Http\\\\Controllers\\\\Public\\\\ApplyController::class, 'store']#g" routes/web.php
+
+# 4) Ensure list/show routes exist (append only if missing):
+grep -q "name('opportunities.index')" routes/web.php || \
+  echo "Route::get('/opportunities', [\\App\\Http\\Controllers\\Public\\OpportunityController::class, 'index'])->name('opportunities.index');" | sudo tee -a routes/web.php >/dev/null
+grep -q "name('opportunities.show')" routes/web.php || \
+  echo "Route::get('/opportunities/{slug}', [\\App\\Http\\Controllers\\Public\\OpportunityController::class, 'show'])->name('opportunities.show');" | sudo tee -a routes/web.php >/dev/null
+
+# 5) Rebuild
+php artisan optimize:clear && php artisan route:cache && php artisan view:cache
+
+Saved report: public/health/error-audit-2025-09-01_145029.txt

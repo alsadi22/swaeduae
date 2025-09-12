@@ -1,0 +1,1 @@
+Run to check tables (optional): mysql -u vminingc_admin -p -D vminingc_swaeduae_db < /home3/vminingc/swaeduae.ae/laravel-app/_audit_2025-08-20_054735/logs/mysql_hint.sql

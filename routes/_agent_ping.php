@@ -1,0 +1,30 @@
+<?php
+if (app()->environment('production')) { return; }
+
+use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
+
+$handler = function (Request $request) {
+    $token = config('agent.token');
+    if (!$token) return response('Agent token missing', 403);
+
+    $supplied = (string) $request->header('X-Agent-Token', '');
+    if (!hash_equals((string) $token, $supplied)) {
+        return response('Unauthorized', 401);
+    }
+
+    return response()->json([
+        'ok'  => true,
+        'ts'  => now()->toIso8601String(),
+        'app' => config('app.name'),
+        'env' => app()->environment(),
+        'via' => 'agent.ping',
+    ]);
+};
+
+Route::middleware('api')->group(function () use ($handler) {
+    // Underscore path (original idea)
+    Route::get('_agent/ping', $handler)->name('agent.ping.dev');
+    // Non-underscore alias (in case anything blocks /_*)
+    Route::get('agent/ping', $handler)->name('agent.ping.alias');
+});

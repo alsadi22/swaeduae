@@ -1,0 +1,14 @@
+@auth
+<details class="account-menu" style="display:inline-block; position:relative; margin-left:1rem;">
+  <summary style="list-style:none; cursor:pointer">Account ▾</summary>
+  <div class="dropdown" style="position:absolute; right:0; background:#fff; border:1px solid #e5e7eb; border-radius:12px; padding:10px; min-width:180px; box-shadow:0 10px 24px rgba(0,0,0,.08);">
+    <a class="dropdown-item" href="{{ url('/my/profile') }}" style="display:block; padding:6px 8px; text-decoration:none; color:#111;">My Profile</a>
+    <form method="POST" action="{{ route('logout.perform') }}" class="m-0 p-0" style="margin:0; padding:0;">
+      @csrf
+      <button type="submit" class="dropdown-item" style="display:block; width:100%; text-align:left; background:none; border:0; padding:6px 8px; color:#111; cursor:pointer;">Logout</button>
+    </form>
+  </div>
+</details>
+@else
+  <a href="{{ url('/login') }}">Login</a>
+@endauth

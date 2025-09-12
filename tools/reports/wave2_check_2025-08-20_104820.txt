@@ -1,0 +1,417 @@
+=== WAVE 2 CHECK (2025-08-20_104820) — swaeduae.ae ===
+
+## Versions
+PHP 8.4.7 (cli) (built: May  8 2025 11:28:43) (NTS)
+Laravel Framework 11.45.2
+
+## Routes — Auth & Accounts
+
+## Routes — Applications / Events / Attendance / QR
+
+## Routes — Certificates / Hours / Verification
+
+## Routes — Notifications / Admin / Org
+
+## Migrations snapshot — key domains
+  2025_08_03_000553_create_kyc_table ................................................................................................... [1] Ran  
+  2025_08_03_020000_create_event_applications_table .................................................................................... [1] Ran  
+  2025_08_05_000012_create_kycs_table .................................................................................................. [1] Ran  
+  2025_08_05_100000_add_status_enum_to_kyc_table ....................................................................................... [1] Ran  
+  2025_08_06_050137_add_fields_to_certificates_table ................................................................................... [1] Ran  
+  2025_08_08_114122_alter_opportunities_add_core_columns ............................................................................... [1] Ran  
+  2025_08_08_170000_add_owner_user_id_to_organizations_table ........................................................................... [1] Ran  
+  2025_08_08_211311_add_user_id_to_attendances_table ................................................................................... [1] Ran  
+  2025_08_08_240500_add_owner_and_status_to_opportunities .............................................................................. [1] Ran  
+  2025_08_09_000000_add_owner_user_id_to_organizations ................................................................................. [1] Ran  
+  2025_08_09_061422_create_volunteer_applications_table ................................................................................ [1] Ran  
+  2025_08_09_145221_create_qr_scans_table .............................................................................................. [1] Ran  
+  2025_08_09_160921_create_applications_table_duplicate_guard ......................................................................... [71] Ran  
+  2025_08_09_182657_add_verification_code_to_certificates_table ........................................................................ [2] Ran  
+  2025_08_09_200000_add_checkout_token_to_attendances_table ............................................................................ [2] Ran  
+  2025_08_09_210000_create_certificates_and_volunteer_hours ............................................................................ [2] Ran  
+  2025_08_10_000000_add_category_to_opportunities_table ................................................................................ [4] Ran  
+  2025_08_10_100000_create_volunteer_hours_table ....................................................................................... [6] Ran  
+  2025_08_10_100001_create_volunteer_hours_table_duplicate_guard ...................................................................... [71] Ran  
+  2025_08_11_000002_create_organizations_table ........................................................................................ [11] Ran  
+  2025_08_11_000003_create_organizations_table_duplicate_guard ........................................................................ [71] Ran  
+  2025_08_11_000004_create_opportunities_table ........................................................................................ [11] Ran  
+  2025_08_11_000004_create_opportunity_volunteer_table ................................................................................ [13] Ran  
+  2025_08_11_000006_create_opportunity_user_table ..................................................................................... [11] Ran  
+  2025_08_11_000100_create_kyc_requests_table ......................................................................................... [28] Ran  
+  2025_08_11_112158_add_category_and_city_to_opportunities_table ...................................................................... [22] Ran  
+  2025_08_11_115454_add_org_and_tokens_to_opportunities_table ......................................................................... [24] Ran  
+  2025_08_11_115458_create_attendances_table .......................................................................................... [24] Ran  
+  2025_08_11_115503_create_certificates_table ......................................................................................... [24] Ran  
+  2025_08_11_999999_add_unique_user_opportunity_to_applications ....................................................................... [27] Ran  
+  2025_08_12_000001_add_featured_to_opportunities_table ............................................................................... [10] Ran  
+  2025_08_12_094900_alter_opportunities_status_to_varchar ............................................................................. [33] Ran  
+  2025_08_12_150000_create_saved_opportunities_table .................................................................................. [26] Ran  
+  2025_08_13_000005_add_attendance_hours_and_opportunity_status ....................................................................... [36] Ran  
+  2025_08_13_000006_upsert_certificates_schema ........................................................................................ [37] Ran  
+  2025_08_13_000007_patch_attendances_columns ......................................................................................... [38] Ran  
+  2025_08_13_000008_add_qr_tokens_to_opportunities .................................................................................... [39] Ran  
+  2025_08_13_000009_create_applications_table ......................................................................................... [40] Ran  
+  2025_08_13_000010_add_minutes_to_volunteer_hours .................................................................................... [41] Ran  
+  2025_08_13_090834_sprint2_certificates_and_deliveries ............................................................................... [43] Ran  
+  2025_08_13_165603_enhance_certificates_table_add_columns_issued_at_file_hours ....................................................... [52] Ran  
+  2025_08_14_120200_harden_certificates_schema ........................................................................................ [55] Ran  
+  2025_08_14_130000_add_certificate_code_uniques ...................................................................................... [56] Ran  
+  2025_08_14_130500_add_certificate_lookup_indexes .................................................................................... [57] Ran  
+  2025_08_14_205239_extend_organizations_for_org_portal ............................................................................... [61] Ran  
+  2025_08_14_210844_add_owner_id_to_organizations ..................................................................................... [62] Ran  
+  2025_08_14_220000_add_license_fields_to_organizations ............................................................................... [63] Ran  
+  2025_08_14_220500_add_license_file_to_organizations ................................................................................. [66] Ran  
+  2025_08_15_072230_add_minutes_to_volunteer_hours_table .............................................................................. [68] Ran  
+  2025_08_15_130500_drop_attendance_user_opportunity_unique ........................................................................... [71] Ran  
+  2025_08_16_100000_augment_attendances_for_geo_and_status ............................................................................ [73] Ran  
+  2025_08_16_172807_add_geo_to_attendances_table ...................................................................................... [75] Ran  
+  2025_08_16_172808_add_geofence_to_opportunities_table ............................................................................... [75] Ran  
+  2025_08_16_173500_create_org_kyc_table .............................................................................................. [75] Ran  
+  2025_08_16_190500_add_organization_id_to_opportunities_table ........................................................................ [76] Ran  
+  2025_08_16_193900_add_start_end_at_to_opportunities ................................................................................. [77] Ran  
+  2025_08_17_150500_create_volunteer_hours_table ...................................................................................... [81] Ran  
+  2025_08_17_150510_create_opportunity_applications_table ............................................................................. [81] Ran  
+  2025_08_17_150520_create_qr_scans_table ............................................................................................. [81] Ran  
+  2025_08_17_211500_patch_qr_scans_and_related ........................................................................................ [82] Ran  
+  2025_08_17_211900_make_attendance_nullable_in_qr_scans .............................................................................. [83] Ran  
+  2025_08_19_145036_create_notifications_table ........................................................................................ [85] Ran  
+
+## Scheduled jobs & queues
+
+  0    3 * * *  php artisan ops:alive ................................................................................ Next Due: 12 ساعة من الآن
+  */15 * * * *  scheduler.heartbeat ................................................................................. Next Due: 11 دقيقة من الآن
+  *    * * * *  php artisan queue:work --stop-when-empty --queue=default --tries=3 --backoff=10 --timeout=120 --sleep=3  Next Due: 36 ثانية من الآن
+  5    2 * * *  php artisan queue:restart ............................................................................ Next Due: 11 ساعة من الآن
+  30   3 * * *  /home3/vminingc/swaeduae.ae/laravel-app/tools/db_backup.sh ........................................... Next Due: 12 ساعة من الآن
+  30   2 * * *  php artisan sitemap:generate ......................................................................... Next Due: 11 ساعة من الآن
+  35   2 * * *  php artisan swaed:build-sitemaps ..................................................................... Next Due: 11 ساعة من الآن
+  10   2 * * *  php artisan hours:reconcile .......................................................................... Next Due: 11 ساعة من الآن
+  20   2 * * *  php artisan hours:audit .............................................................................. Next Due: 11 ساعة من الآن
+
+
+   INFO  No failed jobs found.  
+
+
+## Commands available (hours, sitemaps, custom)
+  app:generate-sitemap          Generate sitemap.xml into public/ (uses Spatie Sitemap)
+  cache:clear                   Flush the application cache
+  cache:forget                  Remove an item from the cache
+  cache:prune-stale-tags        Prune stale cache tags from the cache (Redis only)
+ cert
+  cert:normalize-paths          Normalize certificate file_path values and fix storage-prefixed paths
+  cert:rehash-missing           Compute missing SHA-256 checksums for existing certificates
+  hours:audit                   Audit VolunteerHour totals vs Attendance and alert on mismatches
+  hours:recalc                  Recalculate and show minutes for a specific (user, opportunity) pair
+  hours:reconcile               Recompute volunteer hours from attendance and sync volunteer_hours table
+  hours:show                    Show calculated minutes for a specific (user, opportunity) pair and current VolunteerHour value
+  make:cache-table              [cache:table] Create a migration for the cache database table
+  make:queue-batches-table      [queue:batches-table] Create a migration for the batches database table
+  make:queue-failed-table       [queue:failed-table] Create a migration for the failed queue jobs database table
+  make:queue-table              [queue:table] Create a migration for the queue jobs database table
+  queue:clear                   Delete all of the jobs from the specified queue
+  queue:failed                  List all of the failed queue jobs
+  queue:flush                   Flush all of the failed queue jobs
+  queue:forget                  Delete a failed queue job
+  queue:listen                  Listen to a given queue
+  queue:monitor                 Monitor the size of the specified queues
+  queue:prune-batches           Prune stale entries from the batches database
+  queue:prune-failed            Prune stale entries from the failed jobs table
+  queue:restart                 Restart queue worker daemons after their current job
+  queue:retry                   Retry a failed queue job
+  queue:retry-batch             Retry the failed jobs for a batch
+  queue:work                    Start processing jobs on the queue as a daemon
+  route:cache                   Create a route cache file for faster route registration
+  route:clear                   Remove the route cache file
+  route:list                    List all registered routes
+  swaed:backfill-hours          Backfill volunteer hours from existing attendance records
+  swaed:build-sitemaps          Generate localized sitemap index + section sitemaps
+  swaed:finalize-hours          Finalize volunteer hours from attendances (optionally for one opportunity)
+
+## Notifications classes
+CertificateIssued.php
+CertificateIssued.php.bak_20250819105532
+EventRegistrationNotification.php
+EventRegistrationNotification.php.bak.2025-08-19-074303
+EventRegistrationNotification.php.bak.2025-08-19-075707
+EventRegistrationNotification.php.bak.2025-08-19-075924
+EventRegistrationNotification.php.bak.2025-08-19-080159
+EventRegistrationNotification.php.bak.2025-08-19-080450
+SimpleMessage.php
+
+## Controllers touching certificates/hours/attendance
+app/Http/Controllers/VolunteerHoursController.php:9:class VolunteerHoursController extends Controller
+app/Http/Controllers/EventQrController.php:5:use SimpleSoftwareIO\QrCode\Facades\QrCode;
+app/Http/Controllers/EventQrController.php:7:class EventQrController extends Controller
+app/Http/Controllers/EventQrController.php:11:        $qr = QrCode::size(200)->generate(route('events.checkin', $event));
+app/Http/Controllers/VolunteerHourController.php:5:use App\Models\VolunteerHour;
+app/Http/Controllers/VolunteerHourController.php:10:class VolunteerHourController extends Controller
+app/Http/Controllers/VolunteerHourController.php:16:        $hours = VolunteerHour::with('opportunity')
+app/Http/Controllers/VolunteerHourController.php:36:        VolunteerHour::create($data);
+app/Http/Controllers/VolunteerHourController.php:41:    public function setStatus(Request $request, VolunteerHour $hour)
+app/Http/Controllers/VolunteerDashboardController.php:60:        // Certificates
+app/Http/Controllers/VolunteerDashboardController.php:88:        // Attendance
+app/Http/Controllers/Dashboard/DashboardController.php:4:use App\Models\Certificate;
+app/Http/Controllers/Dashboard/DashboardController.php:6:use App\Models\VolunteerHour;
+app/Http/Controllers/Dashboard/DashboardController.php:15:            'certCount' => Certificate::where('user_id', $user->id)->count(),
+app/Http/Controllers/Dashboard/DashboardController.php:16:            'hours' => VolunteerHour::where('user_id', $user->id)->sum('hours'),
+app/Http/Controllers/Organization/PortalController.php:10:use App\Models\VolunteerHour;
+app/Http/Controllers/Organization/PortalController.php:22:        $hours = VolunteerHour::whereIn('event_id', $events->pluck('id'))->get();
+app/Http/Controllers/Organization/HourApprovalController.php:7:use App\Models\VolunteerHour;
+app/Http/Controllers/Organization/HourApprovalController.php:14:        $pending = VolunteerHour::whereHas('event', function($q) use ($user) {
+app/Http/Controllers/Organization/HourApprovalController.php:22:        $vh = VolunteerHour::findOrFail($id);
+app/Http/Controllers/Organization/HourApprovalController.php:29:        $vh = VolunteerHour::findOrFail($id);
+app/Http/Controllers/Public/QrAttendanceController.php:9:use App\Models\QrScan;
+app/Http/Controllers/Public/QrAttendanceController.php:10:use App\Models\VolunteerHour;
+app/Http/Controllers/Public/QrAttendanceController.php:12:class QrAttendanceController extends Controller
+app/Http/Controllers/Public/QrAttendanceController.php:41:            $scan = QrScan::create([
+app/Http/Controllers/Public/QrAttendanceController.php:56:                $checkin = QrScan::query()
+app/Http/Controllers/Public/QrAttendanceController.php:72:                    $vh = VolunteerHour::create([
+app/Http/Controllers/Public/QrAttendanceController.php:76:                        'note'           => 'QR session '.$start->toDateTimeString().' → '.$end->toDateTimeString().' ('.$mins.'m)',
+app/Http/Controllers/Public/QrAttendanceController.php:83:                    return back()->with('status', 'Checkout recorded at '.$end->format('H:i:s').' — '.$mins.' min ('.$hours.' h) saved.');
+app/Http/Controllers/Public/QrAttendanceController.php:87:                return back()->with('status', 'Checkout recorded at '.$scanAt->format('H:i:s').' (no open check-in found).');
+app/Http/Controllers/Public/QrAttendanceController.php:91:            return back()->with('status', 'Checkin recorded at '.$scanAt->format('H:i:s'));
+app/Http/Controllers/Public/AttendanceController.php:9:class AttendanceController
+app/Http/Controllers/Public/AttendanceController.php:21:        $isCheckin  = $opp->checkin_token  === $token;
+app/Http/Controllers/Public/AttendanceController.php:22:        $isCheckout = $opp->checkout_token === $token;
+app/Http/Controllers/Public/AttendanceController.php:26:        if ($isCheckin) {
+app/Http/Controllers/Public/AttendanceController.php:44:        if ($isCheckout) {
+app/Http/Controllers/Public/AttendanceController.php:57:            return redirect()->back()->with('status', __('Checkout recorded (flagged: no prior check-in)'));
+app/Http/Controllers/Public/CertificateVerifyController.php:9:class CertificateVerifyController extends Controller
+app/Http/Controllers/ScanController.php:12:use App\Services\QrTokenService;
+app/Http/Controllers/ScanController.php:19:    public function scan(Request $request, QrTokenService $qr, HoursService $hours, AnomalyService $anomaly)
+app/Http/Controllers/ScanController.php:46:            return view('scan.result', ['status' => 'expired', 'message' => 'QR expired. Please rescan the latest code.']);
+app/Http/Controllers/ScanController.php:105:            return view('scan.result', ['status'=>'error','message'=>'Attendance table missing.']);
+app/Http/Controllers/Volunteer/MyCertificatesController.php:8:class MyCertificatesController extends Controller
+app/Http/Controllers/Volunteer/MyCertificatesController.php:14:        $certs = \App\Models\Certificate::with(['opportunity:id,title'])
+app/Http/Controllers/Volunteer/CertificateController.php:7:use App\Models\Certificate;
+app/Http/Controllers/Volunteer/CertificateController.php:9:class CertificateController extends Controller
+app/Http/Controllers/Volunteer/CertificateController.php:18:    public function show(Certificate $certificate)
+app/Http/Controllers/QrScanController.php:6:use App\Models\Attendance;
+app/Http/Controllers/QrScanController.php:7:use App\Models\QrScan;
+app/Http/Controllers/QrScanController.php:10:class QrScanController extends Controller
+app/Http/Controllers/QrScanController.php:13:     * Handle QR scan via GET request.
+app/Http/Controllers/QrScanController.php:15:    public function scan(Request $request, Attendance $attendance, $action)
+app/Http/Controllers/QrScanController.php:18:        QrScan::create([
+app/Http/Controllers/Admin/ReportController.php:24:        if (class_exists(\App\Models\VolunteerHour::class)) {
+app/Http/Controllers/Admin/ReportController.php:25:            $hours = \App\Models\VolunteerHour::selectRaw("DATE_FORMAT(created_at,'%Y-%m') as m, SUM(hours) s")
+app/Http/Controllers/Admin/OpportunityQRController.php:8:class OpportunityQRController extends Controller
+app/Http/Controllers/Admin/VolunteerHoursController.php:8:class VolunteerHoursController extends Controller
+app/Http/Controllers/Admin/CertificateManagementController.php:4:use App\Models\Certificate;
+app/Http/Controllers/Admin/CertificateManagementController.php:7:class CertificateManagementController extends Controller
+app/Http/Controllers/Admin/CertificateManagementController.php:11:        $certificates = Certificate::all();
+app/Http/Controllers/Admin/CertificateManagementController.php:17:        return back()->with('success', 'Certificate issued!');
+app/Http/Controllers/Admin/QrScanController.php:6:use App\Models\QrScan;
+app/Http/Controllers/Admin/QrScanController.php:8:class QrScanController extends Controller
+app/Http/Controllers/Admin/QrScanController.php:12:        $scans = QrScan::orderBy('scanned_at', 'desc')->paginate(50);
+app/Http/Controllers/Admin/index.blade.php:36:                    <h5>{{ __('Total Attendance') }}</h5>
+app/Http/Controllers/Admin/EventAttendanceController.php:6:use SimpleSoftwareIO\QrCode\Facades\QrCode;
+app/Http/Controllers/Admin/EventAttendanceController.php:8:class EventAttendanceController extends Controller
+app/Http/Controllers/Admin/EventAttendanceController.php:10:    public function showQr($event_id) {
+app/Http/Controllers/Admin/EventAttendanceController.php:12:        $qr = base64_encode(\QrCode::format('png')->size(200)->generate(route('event.attendance', $event->id)));
+app/Http/Controllers/Admin/AdminAttendanceController.php:10:class AdminAttendanceController extends Controller
+app/Http/Controllers/Admin/AttendanceDashboardController.php:5:use App\Models\EventCheckin;
+app/Http/Controllers/Admin/AttendanceDashboardController.php:8:class AttendanceDashboardController extends Controller
+app/Http/Controllers/Admin/AttendanceDashboardController.php:12:        $checkins = EventCheckin::with('user', 'event')->latest()->paginate(20);
+app/Http/Controllers/Admin/CertificateAdminController.php:9:use App\Models\Certificate;
+app/Http/Controllers/Admin/CertificateAdminController.php:11:use App\Services\CertificateService;
+app/Http/Controllers/Admin/CertificateAdminController.php:14:use App\Mail\CertificateIssuedMail;
+app/Http/Controllers/Admin/CertificateAdminController.php:16:class CertificateAdminController extends Controller
+app/Http/Controllers/Admin/CertificateAdminController.php:24:    public function bulkIssue(Request $request, CertificateService $svc)
+app/Http/Controllers/Admin/CertificateAdminController.php:46:                $existing = Certificate::where(['user_id'=>$uid,'opportunity_id'=>$opp->id])->first();
+app/Http/Controllers/Admin/CertificateAdminController.php:81:        $q = Certificate::query()->with(['user','opportunity']);
+app/Http/Controllers/Admin/CertificateAdminController.php:94:            Mail::to($cert->user->email)->send(new \App\Mail\CertificateIssuedMail($cert));
+app/Http/Controllers/Admin/CertificateController.php:13:class CertificateController extends Controller
+app/Http/Controllers/Admin/CertificateController.php:87:            $title = 'Volunteer Certificate';
+app/Http/Controllers/Admin/CertificateController.php:91:            // SVG QR
+app/Http/Controllers/Admin/CertificateController.php:92:            $qrSvg = \SimpleSoftwareIO\QrCode\Facades\QrCode::format('svg')->size(220)->generate($verifyUrl);
+app/Http/Controllers/Admin/CertificateController.php:136:        if (auth()->check()) {            auth()->user()->notify(new AppNotificationsSimpleMessage([                'title' => 'Certificates generated',                'body'  => 'Batch issue completed successfully.',            ]));        }
+app/Http/Controllers/Admin/CertificateController.php:156:        if (!$c) return back()->with('error','Certificate not found.');
+app/Http/Controllers/Admin/CertificateController.php:162:                $m->to($user->email ?? '')->subject('Your Volunteer Certificate');
+app/Http/Controllers/Admin/CertificateController.php:189:        if (!$c) return back()->with('error','Certificate not found.');
+app/Http/Controllers/Admin/CertificateController.php:202:        $user->notify(new AppNotificationsCertificateIssued([
+app/Http/Controllers/Admin/CertificateController.php:204:            'title' => 'Certificate issued',
+app/Http/Controllers/Admin/CertificateController.php:209:        $user->notify(new AppNotificationsCertificateIssued([
+app/Http/Controllers/Admin/CertificateController.php:211:            'title' => 'Certificate issued',
+app/Http/Controllers/Admin/CertificateController.php:223:        return back()->with('success','Certificate revoked.');
+app/Http/Controllers/Admin/CertificateController.php:230:        if (!$old) return back()->with('error','Certificate not found.');
+app/Http/Controllers/Admin/CertificateController.php:238:        $qrSvg = \SimpleSoftwareIO\QrCode\Facades\QrCode::format('svg')->size(220)->generate($verifyUrl);
+app/Http/Controllers/Admin/CertificateController.php:262:            'title'=>$old->title ?? 'Volunteer Certificate',
+app/Http/Controllers/Admin/AttendanceController.php:6:use App\Models\Attendance;
+app/Http/Controllers/Admin/AttendanceController.php:9:use App\Models\Certificate;
+app/Http/Controllers/Admin/AttendanceController.php:10:use App\Services\CertificateService;
+app/Http/Controllers/Admin/AttendanceController.php:16:class AttendanceController extends Controller
+app/Http/Controllers/Admin/AttendanceController.php:21:        $attendances = Attendance::with('user')
+app/Http/Controllers/Admin/AttendanceController.php:29:    public function update(Request $request, Opportunity $opportunity, Attendance $attendance)
+app/Http/Controllers/Admin/AttendanceController.php:50:        $totalMinutes = Attendance::where('user_id', $attendance->user_id)->whereNull('deleted_at')->sum('minutes');
+app/Http/Controllers/Admin/AttendanceController.php:56:    public function finalizeIssue(Opportunity $opportunity, CertificateService $certs)
+app/Http/Controllers/Admin/AttendanceController.php:60:        $attendances = Attendance::with('user')
+app/Http/Controllers/Admin/AttendanceController.php:77:            $found = Certificate::where('user_id', $a->user_id)->where('event_id', $opportunity->id)->first();
+app/Http/Controllers/Admin/AttendanceController.php:88:    public function resendCertificate(Certificate $certificate, CertificateService $certs)
+app/Http/Controllers/Admin/AttendanceAdminController.php:10:use App\Services\CertificateService;
+app/Http/Controllers/Admin/AttendanceAdminController.php:12:class AttendanceAdminController extends Controller
+app/Http/Controllers/Admin/AttendanceAdminController.php:82:        return back()->with('status', __('Attendance updated'));
+app/Http/Controllers/Admin/AttendanceAdminController.php:100:        $c = \App\Services\CertificateService::issueForOpportunity($opportunityId);
+app/Http/Controllers/Admin/AttendanceAdminController.php:102:        return back()->with('status', __("Completed. Finalized hours: :n, Certificates issued: :c", ['n'=>$n,'c'=>$c]));
+app/Http/Controllers/Admin/OpportunityFinalizeController.php:6:use App\Services\CertificateService;
+app/Http/Controllers/Admin/OpportunityFinalizeController.php:20:    public function finalizeByForm(Request $request, CertificateService $svc)
+app/Http/Controllers/Admin/OpportunityFinalizeController.php:26:        return $this->finalizeCertificates($request, $id, $svc);
+app/Http/Controllers/Admin/OpportunityFinalizeController.php:30:    public function finalizeCertificates(Request $request, int $id, CertificateService $svc)
+app/Http/Controllers/Admin/OpportunityFinalizeController.php:34:            return back()->with('error', 'Attendance table missing.');
+app/Http/Controllers/Admin/OpportunityFinalizeController.php:40:        if (!$hasIn) return back()->with('error', 'Attendance check_in column missing.');
+app/Http/Controllers/Admin/OpportunityFinalizeController.php:59:        return back()->with('status', "Certificates generated: {$issued}");
+app/Http/Controllers/Admin/VolunteerHoursAdminController.php:8:class VolunteerHoursAdminController extends Controller
+app/Http/Controllers/Admin/HoursReportController.php:50:            ? ('Attendance • Opportunity #'.$scopeId.($opportunity?(' • '.( $opportunity->title ?? $opportunity->name ?? '')):''))
+app/Http/Controllers/Admin/HoursReportController.php:51:            : 'Attendance • All Opportunities';
+app/Http/Controllers/Admin/AdminCertificateController.php:9:class AdminCertificateController extends Controller
+app/Http/Controllers/Admin/AdminCertificateController.php:72:        $chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+app/Http/Controllers/ProfileHoursController.php:8:class ProfileHoursController extends Controller
+app/Http/Controllers/AdminReportsController.php:6:use App\Models\Attendance;
+app/Http/Controllers/AdminReportsController.php:17:        $hoursByMonth = Attendance::select(
+app/Http/Controllers/AdminReportsController.php:23:        $topVolunteers = Attendance::select('user_id', DB::raw('SUM(hours) as total_hours'))
+app/Http/Controllers/AdminReportsController.php:36:            'hoursByMonth' => Attendance::select(
+app/Http/Controllers/AdminReportsController.php:41:            'topVolunteers' => Attendance::select('user_id', DB::raw('SUM(hours) as total_hours'))
+app/Http/Controllers/PublicSite/OpportunityPublicController.php:106:            'eventAttendanceMode' => 'https://schema.org/OfflineEventAttendanceMode',
+app/Http/Controllers/Org/AttendanceSettingsController.php:9:class AttendanceSettingsController extends Controller
+app/Http/Controllers/Org/AttendanceSettingsController.php:44:        return back()->with('status', __('Attendance settings saved'));
+app/Http/Controllers/Org/EventController.php:163:        abort_unless($a, 404, 'Attendance not found');
+app/Http/Controllers/Org/CertificatesController.php:14:use SimpleSoftwareIO\QrCode\Facades\QrCode;
+app/Http/Controllers/Org/CertificatesController.php:17:class CertificatesController extends Controller
+app/Http/Controllers/Org/CertificatesController.php:63:            $qrSvg = QrCode::format('svg')->size(160)->generate($verifyUrl);
+app/Http/Controllers/Org/AttendanceController.php:12:class AttendanceController extends Controller
+app/Http/Controllers/Org/AttendanceController.php:32:        if ($payload==='') return response()->json(['ok'=>false,'message'=>'QR payload missing'],422);
+app/Http/Controllers/Org/AttendanceController.php:73:        if ($payload==='') return response()->json(['ok'=>false,'message'=>'QR payload missing'],422);
+app/Http/Controllers/Org/AttendanceController.php:104:        if (!$row) return back()->with('status','Attendance not found.');
+app/Http/Controllers/Org/AttendanceController.php:109:            $msg='Checkout undone; session reopened.';
+app/Http/Controllers/Org/AttendanceController.php:139:        if (stripos($p,'SUQR:')===0) {
+app/Http/Controllers/Org/OpportunityAttendanceController.php:13:use App\Models\Attendance;
+app/Http/Controllers/Org/OpportunityAttendanceController.php:15:use App\Models\Certificate;
+app/Http/Controllers/Org/OpportunityAttendanceController.php:16:use App\Services\IssueCertificates;
+app/Http/Controllers/Org/OpportunityAttendanceController.php:18:class OpportunityAttendanceController extends Controller
+app/Http/Controllers/Org/OpportunityAttendanceController.php:50:        $attendances = Attendance::query()
+app/Http/Controllers/Org/OpportunityAttendanceController.php:60:    public function finalize(Opportunity $opportunity, Request $request, IssueCertificates $issuer)
+app/Http/Controllers/Org/OpportunityAttendanceController.php:76:            $attendances = Attendance::query()
+app/Http/Controllers/Org/OpportunityAttendanceController.php:81:                $cert = $issuer->issueForAttendance($att);
+app/Http/Controllers/Org/OpportunityAttendanceController.php:91:        return back()->with('status', "Finalized. Certificates issued: {$countIssued}");
+app/Http/Controllers/Org/OpportunityAttendanceController.php:94:    // Reuse existing AttendanceController endpoints for check/no-show/minutes/resend
+app/Http/Controllers/Org/OpportunityAttendanceController.php:95:    // since they operate on Attendance rows directly
+app/Http/Controllers/Org/DashboardController.php:62:        // ---- KPI 4: Certificates Issued ----
+app/Http/Controllers/Org/DashboardController.php:92:        // ---- Chart B: Applications vs Attendance per event (last 10 opps) ----
+app/Http/Controllers/CertificateController.php:10:class CertificateController extends Controller
+app/Http/Controllers/QRScannerController.php:7:class QRScannerController extends Controller
+app/Http/Controllers/AttendanceController.php:5:class AttendanceController extends Controller
+app/Http/Controllers/VolunteerController.php:6:use App\Models\Attendance;
+app/Http/Controllers/VolunteerController.php:7:use App\Models\Certificate;
+app/Http/Controllers/VolunteerController.php:19:        $totalHours = Attendance::where('volunteer_id',$user->id)->sum('hours');
+app/Http/Controllers/VolunteerController.php:31:        $certificates = Certificate::where('volunteer_id',$user->id)->get();
+app/Http/Controllers/VolunteerController.php:45:        $topVolunteers = Attendance::select('volunteer_id')
+app/Http/Controllers/CertificateVerifyController.php:5:class CertificateVerifyController extends Controller
+app/Http/Controllers/CertificatePdfController.php:6:use App\Models\Certificate;
+app/Http/Controllers/CertificatePdfController.php:8:use SimpleSoftwareIO\QrCode\Facades\QrCode;
+app/Http/Controllers/CertificatePdfController.php:10:class CertificatePdfController extends Controller
+app/Http/Controllers/CertificatePdfController.php:15:        $cert = Certificate::with('user', 'opportunity')->findOrFail($id);
+app/Http/Controllers/CertificatePdfController.php:16:        $qr = base64_encode(QrCode::format('png')->size(120)->generate(route('certificate.verify', $cert->certificate_number)));
+app/Http/Controllers/AnalyticsController.php:9:use App\Models\Certificate;
+app/Http/Controllers/AnalyticsController.php:19:        $certificates = Certificate::count();
+app/Http/Controllers/AnalyticsController.php:20:        $hours = Certificate::sum('hours');
+app/Http/Controllers/NotificationController.php:41:        $user->notify(new \App\Notifications\CertificateIssued([
+app/Http/Controllers/My/CertificatesController.php:10:class CertificatesController extends Controller
+app/Http/Controllers/My/HoursController.php:10:class HoursController extends Controller
+app/Http/Controllers/Api/MobileApiController.php:8:use App\Models\Certificate;
+app/Http/Controllers/Api/MobileApiController.php:91:        $certificates = Certificate::where('user_id', $user->id)->get();
+app/Http/Controllers/PaymentController.php:8:    public function createCheckout(Request $request)
+app/Http/Controllers/EventCheckinController.php:4:use App\Models\EventCheckin;
+app/Http/Controllers/EventCheckinController.php:9:class EventCheckinController extends Controller
+app/Http/Controllers/EventCheckinController.php:13:        $checkin = EventCheckin::updateOrCreate(
+app/Http/Controllers/EventCheckinController.php:23:        $checkin = EventCheckin::where('event_id', $event->id)->where('user_id', Auth::id())->first();
+app/Http/Controllers/CertificateEmailController.php:4:use App\Models\Certificate;
+app/Http/Controllers/CertificateEmailController.php:8:class CertificateEmailController extends Controller
+app/Http/Controllers/CertificateEmailController.php:10:    public function send(Certificate $certificate)
+app/Http/Controllers/CertificateEmailController.php:13:            'subject' => 'Your Participation Certificate',
+app/Http/Controllers/CertificateEmailController.php:17:                    ->subject('Participation Certificate')
+app/Http/Controllers/CertificateEmailController.php:21:        return redirect()->back()->with('success', 'Certificate emailed successfully.');
+
+## Views for events/opportunities/hours/certificates (exist?)
+resources/views/events
+resources/views/opportuniti
+resources/views/opportunities
+resources/views/certificates
+resources/views/hours
+
+## Public endpoints — SEO
+-- /sitemap.xml headers --
+HTTP/1.1 200 OK
+X-Content-Type-Options: nosniff
+Cache-Control: max-age=0
+Content-Type: application/xml
+-- /robots.txt (first 20 lines) --
+User-agent: *
+Disallow:
+Sitemap: https://swaeduae.ae/sitemap.xml
+
+## i18n / RTL readiness
+ar
+ar.json
+en
+en.json
+messages.php
+messages.php.bak_20250813_170420
+messages.php.bak_20250813_170730
+messages.php.bak_20250813_171320
+messages.php.bak_20250813_171544
+messages.php.bak_20250814_041311
+swaed.php
+resources/views/partials/rtl_overrides.blade.php:3:  body { direction: rtl; text-align: right; }
+resources/views/certificates/pdf.blade.php:21:  .rtl { direction: rtl; text-align: right; }
+resources/views/certificates/pdf.blade.php:46:  <p class="rtl">
+resources/views/certificates/template.blade.php:2:<html lang="ar" dir="rtl">
+resources/views/admin/layout.blade.php:1:@php $rtl = app()->getLocale()==='ar'; @endphp
+resources/views/admin/layout.blade.php:3:<html lang="{{ app()->getLocale() }}" dir="{{ $rtl ? 'rtl' : 'ltr' }}">
+resources/views/admin/layout.blade.php:18:<body class="g-sidenav-show bg-gray-100 {{ $rtl ? 'rtl' : '' }}">
+resources/views/admin/layout.blade.php:21:  <main class="main-content position-relative border-radius-lg {{ $rtl ? 'me-3' : 'ms-3' }}">
+resources/views/admin/argon/_sidenav.blade.php:2:  $rtl = app()->getLocale()==='ar';
+resources/views/admin/argon/_sidenav.blade.php:6:  class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 {{ $rtl ? 'fixed-end me-3' : 'fixed-start ms-3' }} bg-white"
+resources/views/public/layout.blade.php:2:<html lang="{{ app()->getLocale() }}" dir="{{ app()->getLocale() === 'ar' ? 'rtl' : 'ltr' }}">
+resources/views/public/events/index.blade.php:6:<html lang="{{ str_replace('_','-',app()->getLocale()) }}" @if(app()->getLocale()==='ar') dir="rtl" @endif>
+resources/views/public/events/show.blade.php:4:<html lang="{{ str_replace('_','-',app()->getLocale()) }}" @if(app()->getLocale()==='ar') dir="rtl" @endif>
+resources/views/_legacy_layouts/public.blade.php:2:<html lang="{{ str_replace('_','-',app()->getLocale()) }}" @if(app()->getLocale()==='ar') dir="rtl" @endif>
+resources/views/_legacy_layouts/_welcome_OLD.blade.php:2:<html lang="{{ str_replace('_','-',app()->getLocale()) }}" @if(app()->getLocale()==='ar') dir="rtl" @endif>
+resources/views/org/layout.blade.php:1:@php $rtl = app()->getLocale()==='ar'; @endphp
+resources/views/org/layout.blade.php:3:<html lang="{{ app()->getLocale() }}" dir="{{ $rtl ? 'rtl' : 'ltr' }}">
+resources/views/org/layout.blade.php:18:<body class="g-sidenav-show bg-gray-100 {{ $rtl ? 'rtl' : '' }}">
+resources/views/org/layout.blade.php:21:  <main class="main-content position-relative border-radius-lg {{ $rtl ? 'me-3' : 'ms-3' }}">
+resources/views/org/register.blade.php:18:      <input type="text" name="name_ar" class="form-control" dir="rtl" value="{{ old('name_ar') }}">
+resources/views/org/auth/register.blade.php:52:              <input type="text" name="name_ar" class="form-control" dir="rtl" value="{{ old('name_ar') }}">
+resources/views/org/profile.blade.php:64:              <input type="text" name="name_ar" class="form-control" dir="rtl" value="{{ old('name_ar', $org?->name_ar) }}">
+resources/views/layouts/app.blade.php:2:  <html lang="{{ str_replace("_","-", app()->getLocale()) }}" dir="{{ in_array(app()->getLocale(), ['ar','he','fa','ur']) ? 'rtl' : 'ltr' }}">
+resources/views/layouts/app.blade.php:20:<body class="bg-gray-100 {{ in_array(app()->getLocale(), ['ar','he','fa','ur']) ? 'rtl' : '' }}">
+resources/views/_from_migrations_2025-08-16-151345/app.blade.php:2:<html lang="{{ app()->getLocale() }}" dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}">
+resources/views/emails/applicant_decision.blade.php:5:<html lang="{{ $isAr ? 'ar' : 'en' }}" dir="{{ $isAr ? 'rtl' : 'ltr' }}">
+resources/views/emails/certificate_issued.blade.php:24:      <p dir="rtl" style="text-align:right">
+
+## Storage / media
+public/storage symlink: OK
+  drwxr-xr-x 17 vminingc vminingc 4096 Aug 20 06:23 app/
+  drwxr-xr-x 14 vminingc vminingc 4096 Aug 20 10:46 public
+  drwxrwxr-x  8 vminingc vminingc 4096 Aug 18 12:01 storage
+-- recent log tail --
+
+## Email / mailer config (from .env)
+22:MAIL_MAILER=sendmail
+23:MAIL_HOST=mail.swaeduae.ae
+24:MAIL_PORT=465
+28:MAIL_FROM_ADDRESS="admin@swaeduae.ae"
+29:MAIL_FROM_NAME="${APP_NAME}"
+
+## PHP extensions (gd/imagick for certificates/images)
+gd
+
+## Security headers (live)
+Cache-Control: no-cache, private
+X-Micro-Cache: MISS
+Content-Security-Policy: default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; font-src 'self' data:; connect-src 'self'; frame-ancestors 'self'; upgrade-insecure-requests
+Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+X-Frame-Options: SAMEORIGIN
+X-Content-Type-Options: nosniff
+Referrer-Policy: strict-origin-when-cross-origin
+Permissions-Policy: geolocation=(), microphone=(), camera=()
+Cache-Control: max-age=0

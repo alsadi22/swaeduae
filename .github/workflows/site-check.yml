@@ -1,0 +1,77 @@
+name: site-check
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 2 * * *'   # daily ~06:00 UAE (02:00 UTC)
+
+concurrency:
+  group: site-check
+  cancel-in-progress: true
+
+jobs:
+  code:
+    name: Code quality & build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          tools: composer:v2
+          extensions: mbstring, intl, pdo_mysql
+
+      - name: Composer validate
+        run: composer validate --strict --no-check-publish
+
+      - name: Install deps
+        run: composer install --no-interaction --prefer-dist
+
+      - name: PHP syntax lint
+        run: git ls-files '*.php' | xargs -r -n1 php -l
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Build assets (if package.json)
+        run: |
+          if [ -f package.json ]; then npm ci && npm run build; else echo "no package.json"; fi
+
+  live:
+    name: Live smoke tests
+    runs-on: ubuntu-latest
+    needs: code
+    steps:
+      - name: Probe endpoints
+        shell: bash
+        run: |
+          set -e
+          BASE="https://swaeduae.ae"
+          expect30x() { case "$1" in 301|302|303|307|308) return 0;; *) return 1;; esac; }
+          check() {
+            url="$1"; want="$2"
+            code=$(curl -s -o /dev/null -w "%{http_code}" "$BASE$url")
+            printf "%-20s %s\n" "$url" "$code" >> site-probes.txt
+            if [ "$want" = "200" ]; then [ "$code" = "200" ] || { echo "FAIL $url => $code (want 200)"; exit 1; }
+            else expect30x "$code" || { echo "FAIL $url => $code (want 30x)"; exit 1; }
+            fi
+          }
+          echo "URL                 CODE" > site-probes.txt
+          check "/" 200
+          check "/about" 200
+          check "/login" 200
+          check "/register" 200
+          check "/forgot-password" 200
+          check "/qr/verify" 200
+          check "/applications" 30x
+          check "/certificates" 30x
+          check "/admin/login" 30x
+
+          echo "### Live probes" >> $GITHUB_STEP_SUMMARY
+          cat site-probes.txt >> $GITHUB_STEP_SUMMARY
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: site-probes
+          path: site-probes.txt

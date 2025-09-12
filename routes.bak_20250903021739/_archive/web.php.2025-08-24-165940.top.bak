@@ -1,0 +1,1 @@
+Route::get('/qr/verify', fn() => redirect()->route('verify'))->name('qr.verify');

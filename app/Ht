@@ -1,0 +1,27 @@
+<?php
+namespace App\Http\Co
+use App\Http\Contro
+
+use App\Models\EventRegistration;
+use Illumi
+
+
+{
+    public function index
+    {
+        $event = Event::with('registrati
+        return view('admin.events.voluntee
+    }
+
+    public function bulkAction(Request $request, $eventId)
+    {
+  
+        $ids = $request->input('ids', []);
+ 
+            EventRegistration::whereIn('id', $ids)->update(['status' => 'ap
+        } elseif($action === 'reject') {
+            Eve
+        }
+        return back()->with('success', 'Bulk action completed!');
+    }
+}

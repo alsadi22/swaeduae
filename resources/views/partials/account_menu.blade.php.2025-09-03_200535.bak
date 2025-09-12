@@ -1,0 +1,27 @@
+@auth
+  <div class="dropdown">
+    <a class="btn btn-outline-primary btn-sm dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+      {{ auth()->user()->name ?? 'Account' }}
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end">
+      @can('access-admin')
+        <li><a class="dropdown-item" href="{{ route('admin.dashboard', [], false) }}">Admin Dashboard</a></li>
+        <li><hr class="dropdown-divider"></li>
+      @endcan
+      <li><a class="dropdown-item" href="{{ url('/my/profile') }}">My Profile</a></li>
+      <li>
+        <form method="POST" action="{{ route('logout', [], false) }}">
+          @csrf
+          <button class="dropdown-item" type="submit">Sign out</button>
+        </form>
+      </li>
+    </ul>
+  </div>
+@endauth
+
+@guest
+  <div class="d-flex align-items-center gap-2">
+    <a href="{{ route('login', [], false) }}" class="btn btn-outline-primary btn-sm">Sign in</a>
+    <a href="{{ route('org.login', [], false) }}" class="btn btn-outline-secondary btn-sm">Organization</a>
+  </div>
+@endguest
