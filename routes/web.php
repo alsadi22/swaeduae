@@ -77,3 +77,6 @@ Route::middleware(['web', 'guest', 'throttle:10,1'])
         Route::post('/reset-password', [SimplePasswordResetController::class, 'update'])->name('password.update.simple');
     });
 
+
+// Public homepage (added automatically)
+Route::get("/", function(){ return view("public.home"); })->name("home");
