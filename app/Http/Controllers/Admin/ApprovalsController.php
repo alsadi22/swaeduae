@@ -4,64 +4,94 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\OrgProfile;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
-use Illuminate\View\View;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class ApprovalsController extends Controller
 {
-    public function index(): View
+    public function index(Request $request): View
     {
-        $orgs = OrgProfile::where('status', 'pending')
-            ->with('user:id,email')
-            ->orderBy('created_at')
-            ->get();
+        try {
+            $pending = DB::table('org_profiles')
+                ->leftJoin('users', 'users.id', '=', 'org_profiles.user_id')
+                ->select('org_profiles.*', 'users.email as user_email')
+                ->where('org_profiles.status', 'pending')
+                ->orderByDesc('org_profiles.created_at')
+                ->limit(500)
+                ->get();
+        } catch (\Throwable $e) {
+            $pending = collect();
+        }
 
-        return view('admin.approvals.index', compact('orgs'));
+        return view('admin.approvals.index', ['pending' => $pending]);
     }
 
-    public function approveOrg(int $id): RedirectResponse
+    public function approveOrg(int $id, Request $request): RedirectResponse
     {
-        return $this->updateOrg($id, 'approved');
+        try {
+            DB::table('org_profiles')->where('id', $id)->update([
+                'status' => 'approved',
+                'approved_at' => now(),
+                'updated_at' => now(),
+            ]);
+            $request->session()->flash('status', 'approved');
+        } catch (\Throwable $e) {
+            $request->session()->flash('error', $e->getMessage());
+        }
+
+        return redirect()->route('admin.approvals.index');
     }
 
-    public function declineOrg(int $id): RedirectResponse
+    public function rejectOrg(int $id, Request $request): RedirectResponse
     {
-        return $this->updateOrg($id, 'rejected');
+        try {
+            DB::table('org_profiles')->where('id', $id)->update([
+                'status' => 'rejected',
+                'updated_at' => now(),
+            ]);
+            $request->session()->flash('status', 'rejected');
+        } catch (\Throwable $e) {
+            $request->session()->flash('error', $e->getMessage());
+        }
+
+        return redirect()->route('admin.approvals.index');
     }
 
-    protected function updateOrg(int $id, string $status): RedirectResponse
+    public function exportCsv(Request $request): StreamedResponse
     {
-        DB::transaction(function () use ($id, $status) {
-            $profile = OrgProfile::lockForUpdate()->findOrFail($id);
-            $profile->update(['status' => $status]);
+        try {
+            $pending = DB::table('org_profiles')
+                ->leftJoin('users', 'users.id', '=', 'org_profiles.user_id')
+                ->select('org_profiles.id', 'org_profiles.org_name', 'users.email as user_email', 'org_profiles.org_code', 'org_profiles.emirate', 'org_profiles.created_at')
+                ->where('org_profiles.status', 'pending')
+                ->orderByDesc('org_profiles.created_at')
+                ->limit(500)
+                ->get();
+        } catch (\Throwable $e) {
+            $pending = collect();
+        }
 
-            $user = $profile->user;
-            if ($user) {
-                if ($status === 'approved') {
-                    if (Schema::hasColumn('users', 'role')) {
-                        $user->role = 'org';
-                        $user->save();
-                    }
-                    if (method_exists($user, 'assignRole')) {
-                        try { $user->assignRole('org'); } catch (\Throwable $e) {}
-                    }
-                } else {
-                    if (Schema::hasColumn('users', 'role') && ($user->role ?? null) === 'org') {
-                        $user->role = null;
-                        $user->save();
-                    }
-                    if (method_exists($user, 'removeRole')) {
-                        try { $user->removeRole('org'); } catch (\Throwable $e) {}
-                    }
-                }
+        $callback = static function () use ($pending): void {
+            $out = fopen('php://output', 'w');
+            fputcsv($out, ['id', 'org_name', 'user_email', 'org_code', 'emirate', 'created_at']);
+            foreach ($pending as $row) {
+                fputcsv($out, [
+                    $row->id,
+                    $row->org_name,
+                    $row->user_email,
+                    $row->org_code,
+                    $row->emirate,
+                    $row->created_at,
+                ]);
             }
-        });
+            fclose($out);
+        };
 
-        $msg = $status === 'approved' ? 'Organization approved.' : 'Organization declined.';
-
-        return redirect()->back()->with('status', $msg);
+        return response()->streamDownload($callback, 'approvals.csv', [
+            'Content-Type' => 'text/csv; charset=UTF-8',
+        ]);
     }
 }

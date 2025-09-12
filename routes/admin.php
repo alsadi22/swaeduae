@@ -35,6 +35,16 @@ Route::domain(env('ADMIN_DOMAIN', 'admin.swaeduae.ae'))
         Route::get('/applicants', [\App\Http\Controllers\Admin\ApplicantsController::class, 'index'])->name('applicants.index');
         Route::get('/qr/verify', [QrVerifyController::class, 'index'])->name('qr.verify');
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+        // Approvals
+        Route::get('/approvals', [\App\Http\Controllers\Admin\ApprovalsController::class, 'index'])
+            ->name('approvals.index');
+        Route::post('/approvals/orgs/{id}/approve', [\App\Http\Controllers\Admin\ApprovalsController::class, 'approveOrg'])
+            ->whereNumber('id')->name('approvals.orgs.approve');
+        Route::post('/approvals/orgs/{id}/reject', [\App\Http\Controllers\Admin\ApprovalsController::class, 'rejectOrg'])
+            ->whereNumber('id')->name('approvals.orgs.reject');
+        Route::get('/approvals.csv', [\App\Http\Controllers\Admin\ApprovalsController::class, 'exportCsv'])
+            ->name('approvals.export');
+
 
         Route::resource('users', UserController::class)->only(['index', 'show', 'update', 'destroy']);
         Route::resource('opportunities', OpportunityController::class)->only(['index', 'show', 'update', 'destroy']);

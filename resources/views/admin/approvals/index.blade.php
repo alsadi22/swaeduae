@@ -1,46 +1,49 @@
-@extends('layouts.admin')
-@section('title','Approvals')
+@extends('admin.layout')
+@section('title', 'Pending Organizations')
 @section('content')
+<h1>Pending Organizations</h1>
 @if(session('status'))
-  <div class="alert alert-success">{{ session('status') }}</div>
+  <div class="alert alert-success">Action: {{ session('status') }}</div>
 @endif
-@if($errors->any())
-  <div class="alert alert-danger">{{ $errors->first() }}</div>
+@if(session('error'))
+  <div class="alert alert-danger">{{ session('error') }}</div>
 @endif
-<div class="card">
-  <div class="card-header">Pending Organizations</div>
-  <div class="table-responsive">
-    <table class="table mb-0">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Email</th>
-          <th>Created</th>
-          <th class="text-end">Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        @forelse($orgs as $org)
-        <tr>
-          <td>{{ $org->org_name }}</td>
-          <td>{{ $org->user->email ?? '' }}</td>
-          <td>{{ $org->created_at?->format('Y-m-d') }}</td>
-          <td class="text-end">
-            <form action="{{ route('admin.approvals.orgs.approve', $org->id) }}" method="post" class="d-inline">
-              @csrf
-              <button class="btn btn-success btn-sm">Approve</button>
-            </form>
-            <form action="{{ route('admin.approvals.orgs.decline', $org->id) }}" method="post" class="d-inline">
-              @csrf
-              <button class="btn btn-danger btn-sm">Decline</button>
-            </form>
-          </td>
-        </tr>
-        @empty
-        <tr><td colspan="4" class="text-center text-muted">No pending organizations.</td></tr>
-        @endforelse
-      </tbody>
-    </table>
-  </div>
+<div class="mb-3">
+  <a href="{{ route('admin.approvals.export') }}" class="btn btn-primary">Export CSV</a>
 </div>
+<table class="table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Org Name</th>
+      <th>Email</th>
+      <th>Org Code</th>
+      <th>Emirate</th>
+      <th>Created</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    @forelse($pending as $row)
+    <tr>
+      <td>{{ $row->id }}</td>
+      <td>{{ $row->org_name }}</td>
+      <td>{{ $row->user_email }}</td>
+      <td>{{ $row->org_code }}</td>
+      <td>{{ $row->emirate }}</td>
+      <td>{{ $row->created_at }}</td>
+      <td>
+        <form method="POST" action="{{ route('admin.approvals.orgs.approve', ['id'=>$row->id]) }}" style="display:inline">@csrf
+          <button class="btn">Approve</button>
+        </form>
+        <form method="POST" action="{{ route('admin.approvals.orgs.reject', ['id'=>$row->id]) }}" style="display:inline">@csrf
+          <button class="btn outline">Reject</button>
+        </form>
+      </td>
+    </tr>
+    @empty
+    <tr><td colspan="7">No pending organizations.</td></tr>
+    @endforelse
+  </tbody>
+</table>
 @endsection
