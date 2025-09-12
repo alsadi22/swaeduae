@@ -17,7 +17,7 @@ class ApprovalsController extends Controller
                     ->where("status","pending")
                     ->orderByDesc("created_at")
                     ->limit(500)
-                    ->get();
+                    ->leftJoin("users","users.id","=","org_profiles.user_id")->select("org_profiles.*","users.email as user_email")->get();
             }
         } catch (\Throwable $e) { /* empty */ }
         return view("admin.approvals.index", ["pending"=>$pending]);

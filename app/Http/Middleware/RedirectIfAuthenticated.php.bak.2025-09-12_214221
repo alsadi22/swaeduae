@@ -21,13 +21,13 @@ class RedirectIfAuthenticated
                 $user = Auth::guard($guard)->user();
                 // Hard redirect by role (ignores "intended")
                 if (($user->role ?? null) === 'admin') {
-                    return redirect("/admin");
+                    return redirect('/admin');
                 }
                 if (($user->role ?? null) === 'org') {
-                    return redirect("/admin");
+                    return redirect('/org');
                 }
                 // volunteers/public
-                return redirect("/admin");
+                return redirect('/profile');
             }
         }
 

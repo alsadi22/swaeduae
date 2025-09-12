@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 
 class RouteServiceProvider extends ServiceProvider
 {
-    public const HOME = "/admin";
+    public const HOME = '/my/profile';
 
     public function register(): void {}
 
