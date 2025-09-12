@@ -17,7 +17,6 @@ class ApprovalsTest extends TestCase
     {
         parent::setUp();
         Role::create(['name' => 'admin']);
-        Role::create(['name' => 'org']);
     }
 
     public function test_admin_can_approve_org_profile(): void
@@ -37,16 +36,16 @@ class ApprovalsTest extends TestCase
             ->post(route('admin.approvals.orgs.approve', $profile->id));
 
         $response->assertRedirect('/admin/approvals');
-        $response->assertSessionHas('status');
+        $response->assertSessionHas('status', 'approved');
 
         $this->assertDatabaseHas('org_profiles', [
             'id' => $profile->id,
             'status' => 'approved',
         ]);
-        $this->assertTrue($orgUser->fresh()->hasRole('org'));
+        $this->assertNotNull($profile->fresh()->approved_at);
     }
 
-    public function test_admin_can_decline_org_profile(): void
+    public function test_admin_can_reject_org_profile(): void
     {
         $admin = User::factory()->create();
         $admin->assignRole('admin');
@@ -60,9 +59,11 @@ class ApprovalsTest extends TestCase
 
         $response = $this->actingAs($admin)
             ->from('/admin/approvals')
-            ->post(route('admin.approvals.orgs.decline', $profile->id));
+            ->post(route('admin.approvals.orgs.reject', $profile->id));
 
         $response->assertRedirect('/admin/approvals');
+        $response->assertSessionHas('status', 'rejected');
+
         $this->assertDatabaseHas('org_profiles', [
             'id' => $profile->id,
             'status' => 'rejected',
