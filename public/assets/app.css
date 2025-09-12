@@ -1,3 +1,4 @@
+body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif} [dir=rtl] body{font-family:"Noto Naskh Arabic",system-ui,sans-serif}
 :root{--brand:#0d6efd;--text:#101214;--muted:#6b7280;--bg:#fff;--line:#e5e7eb} body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif} [dir=rtl] body{font-family:"Noto Naskh Arabic",system-ui,sans-serif}
 :root{
   --maxw:1100px; --pad:1rem; --pad-lg:2rem;
@@ -106,6 +107,36 @@ body{margin:0;font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-s
 
 /* RTL tweak */
 [dir="rtl"] .hero-title{letter-spacing:0}
+/* == CARDS == */
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.card{border:1px solid var(--line);border-radius:12px;padding:16px;background:#fff;transition:box-shadow .15s}
+.card:hover{box-shadow:0 8px 24px rgba(0,0,0,.06)}
+@media (max-width:900px){.cards{grid-template-columns:1fr 1fr}}
+@media (max-width:600px){.cards{grid-template-columns:1fr}}
+/* == PUBLIC-FIX-HEADER == */
+.container{max-width:1200px;margin:0 auto;padding:0 16px}
+h1,h2,h3{margin:0 0 12px;letter-spacing:.2px}
+.hero .hero-body{padding:24px 0}
+
+.site-header{background:#0b1220;color:#fff;border:0;position:sticky;top:0;z-index:50}
+.nav-row{display:flex;align-items:center;gap:16px;min-height:64px}
+.brand{font-weight:800;font-size:20px;color:#fff;text-decoration:none}
+.nav ul{display:flex;gap:24px;list-style:none;margin:0;padding:0}
+.nav li{list-style:none}
+.nav a{color:#cbd5e1;text-decoration:none;font-weight:600}
+.nav a:hover{color:#fff}
+.nav-toggle{display:none;margin-left:auto;background:#111827;color:#fff;border:1px solid #374151;border-radius:8px;padding:6px 10px;cursor:pointer}
+
+@media (max-width:900px){
+  .nav ul{display:none;flex-direction:column;align-items:flex-start;padding:12px 0}
+  .nav[data-open="1"] ul{display:flex}
+  .nav-toggle{display:inline-block}
+}
+
+/* Scale up hero text a notch */
+.hero-title{font-size:clamp(32px,5.5vw,48px)}
+.hero-sub{font-size:clamp(14px,1.6vw,18px)}
+.actions .btn{font-weight:700}
 /* == CARDS == */
 .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .card{border:1px solid var(--line);border-radius:12px;padding:16px;background:#fff;transition:box-shadow .15s}
