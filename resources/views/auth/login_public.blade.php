@@ -1,4 +1,4 @@
-@extends('public.layout-travelpro')
+@extends(public.layout)
 @section('title','Sign in')
 @section('content')
 <section class="section"><div class="container" style="max-width:560px">

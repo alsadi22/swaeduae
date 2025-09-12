@@ -1,4 +1,5 @@
-@extends('public.layout-travelpro')
+{{-- UI wrapper inserted --}}
+<div class="cards">@extends(public.layout)
 @section('title','Opportunities')
 @section('content')
 <section class="section"><div class="container" style="max-width:960px">
@@ -20,3 +21,4 @@
   @endif
 </div></section>
 @endsection
+</div>

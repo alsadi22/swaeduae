@@ -1,6 +1,5 @@
 <!DOCTYPE html><html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<link rel="stylesheet" href="/vendor/argon/assets/css/argon-dashboard.min.css">
 <style>body{background:#f8fafc}.card{max-width:480px;margin:6rem auto}</style>
 </head><body>
 <form method="POST" action="{{ route('org.login.perform') }}" class="card p-4 shadow">

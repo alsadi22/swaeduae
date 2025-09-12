@@ -1,9 +1,8 @@
-@extends('public.layout-travelpro')
-@section('title', __('Terms of Service'))
-@section('meta_description','The rules for using our platform.')
+@extends('public.layout')
+
+@section('title', 'Terms &amp; Conditions')
+
 @section('content')
-<div class="container py-5">
-  <h1 class="h3 text-primary mb-3">{{ __('Terms of Service') }}</h1>
-  <p>{{ __('By using SwaedUAE you agree to our terms and guidelines for volunteers and organizations.') }}</p>
-</div>
+  <h1 class="mb-3">Terms &amp; Conditions</h1>
+  <p>These are the basic terms for using SwaedUAE. The full terms document will be published here.</p>
 @endsection
