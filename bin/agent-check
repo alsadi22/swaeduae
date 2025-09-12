@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+set -e
+cd /var/www/swaeduae
+STAMP="$(date +%F-%H%M%S)"
+LOG="tmp/agent-$STAMP.log"
+mkdir -p tmp
+echo "== Agent run $STAMP ==" | tee "$LOG"
+if php artisan list | grep -q '^  agent:scan'; then
+  echo "[agent] php artisan agent:scan" | tee -a "$LOG"
+  php artisan agent:scan 2>&1 | tee -a "$LOG" || true
+  echo "== Agent (artisan) PASS ==" | tee -a "$LOG"
+else
+  echo "[agent] artisan command not found" | tee -a "$LOG"
+fi
+echo "[agent] running deep fallback checks" | tee -a "$LOG"
+_tools/agent_check.sh 2>&1 | tee -a "$LOG"

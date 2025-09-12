@@ -1,0 +1,68 @@
+@extends('layouts.admin')
+@section('page-title','New Opportunity')
+@section('content')
+<form method="post" action="{{ route('admin.opportunities.store') }}" class="card">
+@csrf
+<div class="card-body">
+  @if($errors->any())<div class="alert alert-danger">{{ $errors->first() }}</div>@endif
+  <div class="row g-3">
+    <div class="col-md-6"><label class="form-label">Title</label>
+      <input name="title" value="{{ old('title') }}" class="form-control" required></div>
+    <div class="col-md-3"><label class="form-label">Organization</label>
+      <select name="organizer_id" class="form-select">
+        <option value="">—</option>
+        @foreach($orgs as $o)<option value="{{ $o->id }}" @selected(old('organizer_id')==$o->id)>{{ $o->name }}</option>@endforeach
+      </select></div>
+    <div class="col-md-3"><label class="form-label">Status</label>
+      <select name="status" class="form-select">
+        <option value="">—</option>
+        (['open','closed','draft','archived'] as )
+          <option value="{{  }}" (old('status')==)>{{ ucfirst() }}</option>
+        
+      </select></div>
+
+    <div class="col-md-6"><label class="form-label">Summary</label>
+      <input name="summary" value="{{ old('summary') }}" class="form-control"></div>
+    <div class="col-md-6"><label class="form-label">City</label>
+      <input name="city" value="{{ old('city') }}" class="form-control"></div>
+
+    <div class="col-md-4"><label class="form-label">Date</label>
+      <input type="date" name="date" value="{{ old('date') }}" class="form-control"></div>
+    <div class="col-md-4"><label class="form-label">Start Time</label>
+      <input type="text" name="start_time" value="{{ old('start_time') }}" class="form-control js-time" placeholder="HH:MM"></div>
+    <div class="col-md-4"><label class="form-label">End Time</label>
+      <input type="text" name="end_time" value="{{ old('end_time') }}" class="form-control js-time" placeholder="HH:MM"></div>
+
+    <div class="col-md-6"><label class="form-label">Location</label>
+      <input name="location" value="{{ old('location') }}" class="form-control"></div>
+    <div class="col-md-3"><label class="form-label">Slots</label>
+      <input type="number" name="slots" value="{{ old('slots') }}" class="form-control"></div>
+    <div class="col-md-3"><label class="form-label">Featured</label><br>
+      <input type="checkbox" class="form-check-input" name="featured" value="1" @checked(old('featured'))> <span class="ms-2">Mark as featured</span>
+    </div>
+
+    <div class="col-md-4"><label class="form-label">Category</label>
+      <input name="category" value="{{ old('category') }}" class="form-control"></div>
+    <div class="col-md-4"><label class="form-label">Region</label>
+      <input name="region" value="{{ old('region') }}" class="form-control"></div>
+    <div class="col-md-4"><label class="form-label">Badge</label>
+      <input name="badge" value="{{ old('badge') }}" class="form-control" placeholder="Optional label"></div>
+
+    <div class="col-12"><label class="form-label">Description</label>
+      <textarea name="description" rows="6" class="form-control">{{ old('description') }}</textarea></div>
+  </div>
+</div>
+<div class="card-footer text-end">
+  <a href="{{ route('admin.opportunities') }}" class="btn btn-outline-secondary">Cancel</a>
+  <button class="btn btn-success">Create</button>
+</div>
+</form>
+@endsection
+
+@push('head')
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+@endpush
+@push('scripts')
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script>flatpickr('.js-time',{enableTime:true,noCalendar:true,dateFormat:'H:i',time_24hr:true,minuteIncrement:15});</script>
+@endpush

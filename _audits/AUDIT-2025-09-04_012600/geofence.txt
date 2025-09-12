@@ -1,0 +1,1 @@
+5:    'geofence_meters'     => (int) env('HOURS_GEOFENCE_METERS', 150),

@@ -1,0 +1,139 @@
+<?php
+use App\Http\Controllers\Admin\AuditController;
+use App\Http\Controllers\Admin\KycController as AdminKycController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Org\ApplicantsDecisionController;
+use App\Http\Controllers\Org\ApplicantsExportController;
+use App\Http\Controllers\Org\AttendanceSettingsController;
+use App\Http\Controllers\Org\CertificatesController;
+use App\Http\Controllers\Org\EmailPreviewController;
+use App\Http\Controllers\Org\KycController as OrgKycController;
+use App\Http\Controllers\Org\OpportunityCapController;
+use App\Http\Controllers\Org\SettingsController as OrgSettingsController;
+use App\Http\Controllers\VerifyController;
+use Illuminate\Support\Facades\Route;
+// alias: /org/login -> /login?type=org
+Route::get('/org/login', function () {
+    return redirect('/login?type=org');
+})->middleware(['web','guest'])->name('org.login');
+
+// alias: /org/login -> /login?type=org
+Route::get('/org/login', function () {
+    return redirect('/login?type=org');
+
+// alias: /org/login -> /login?type=org
+
+/* AUTH CANONICAL START */
+Route::middleware(["web","guest"])->group(function(){
+    // Canonical login/register
+    Route::get("/login", [AuthController::class, "showLogin"])  ->name("login");
+    Route::post("/login",[AuthController::class, "login"]);
+    Route::get("/register",[AuthController::class, "showRegister"]) ->name("register");
+    Route::post("/register",[AuthController::class, "register"]);
+
+    // One-way aliases (no loops):
+    
+/* AUTH CANONICAL END */
+
+/* Fallback logout route (safe if auth scaffolding not present) */
+if (!Route::has('logout')) {
+    Route::middleware(['web'])->match(['GET','POST'], '/logout', function (\Illuminate\Http\Request $request) {
+        if (auth()->check()) { \Illuminate\Support\Facades\Auth::logout(); }
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect('/login');
+    })->name('logout');
+}
+/* Org login landing (redirects to regular /login UI) */
+Route::middleware(['web','guest'])
+    ->get('/org/login', function () {
+    })
+/* Org login entry -> forward to canonical /login */
+
+
+// --- Org Settings routes (safe append) ---
+
+Route::middleware(['web','auth','org:org'])->prefix('org')->as('org.')->group(function () {
+    Route::get('/settings',  [OrgSettingsController::class, 'edit'])->name('settings.edit');
+    Route::post('/settings', [OrgSettingsController::class, 'update'])->name('settings.update');
+});
+
+// --- Org Opportunity Slot Cap (safe append) ---
+
+Route::middleware(['web','auth','org:org'])->prefix('org')->as('org.')->group(function () {
+    Route::post('/opportunities/{opportunity}/slot-cap', [OpportunityCapController::class, 'update'])
+        ->name('opportunities.slotcap.update'); // updates opportunities.slot_cap or settings key
+});
+
+// --- Org Applicants: bulk/single decisions (safe append) ---
+
+Route::middleware(['web','auth','org:org'])->prefix('org')->as('org.')->group(function () {
+    Route::post('/applicants/decision', [ApplicantsDecisionController::class, 'bulk'])->name('applicants.decision.bulk');
+    Route::post('/applicants/{application}/decision', [ApplicantsDecisionController::class, 'single'])->name('applicants.decision.single');
+});
+
+// --- Org Applicants CSV export with filters (safe append) ---
+
+Route::middleware(['web','auth','org:org'])->prefix('org')->as('org.')->group(function () {
+    Route::get('/applicants/export.csv', [ApplicantsExportController::class, 'csv'])->name('applicants.csv');
+});
+
+// --- Org Certificates per Opportunity (safe append) ---
+
+Route::middleware(['web','auth','org:org'])->prefix('org')->as('org.')->group(function () {
+    Route::get('/opportunities/{opportunity}/certificates', [CertificatesController::class, 'index'])->name('certificates.index');
+    Route::post('/opportunities/{opportunity}/certificates/issue', [CertificatesController::class, 'issue'])->name('certificates.issue');
+    Route::post('/opportunities/{opportunity}/certificates/resend', [CertificatesController::class, 'resend'])->name('certificates.resend');
+    Route::get('/opportunities/{opportunity}/certificates/export.csv', [CertificatesController::class, 'exportCsv'])->name('certificates.export.csv');
+});
+
+// --- Admin Audit Viewer (safe append) ---
+
+Route::middleware(['web','auth','admin'])->prefix('admin')->as('admin.')->group(function () {
+    Route::get('/audit', [AuditController::class, 'index'])->name('audit.index');
+    Route::get('/audit/export.csv', [AuditController::class, 'export'])->name('audit.export.csv');
+});
+
+// --- Public certificate verify ---
+Route::get('/verify/{code}', [VerifyController::class, 'show'])->name('verify.code');
+
+Route::middleware(['web','auth','org:org'])->prefix('org')->as('org.')->group(function () {
+  Route::get('/opportunities/{opportunity}/attendance-settings', [AttendanceSettingsController::class,'edit'])->name('opportunities.attendance.settings');
+  Route::post('/opportunities/{opportunity}/attendance-settings', [AttendanceSettingsController::class,'update'])->name('opportunities.attendance.settings.save');
+});
+Route::middleware(['web','auth','org:org'])->prefix('org')->as('org.')->group(function () {
+  Route::get('/emails/preview', [EmailPreviewController::class,'show'])->name('emails.preview');
+});
+Route::middleware(['web','auth','org:org'])->prefix('org')->as('org.')->group(function () {
+  Route::get('/team', [\App\Http\Controllers\Org\TeamController::class,'index'])->name('team.index');
+  Route::post('/team/invite', [\App\Http\Controllers\Org\TeamController::class,'invite'])->name('team.invite');
+  Route::post('/team/{user}/remove', [\App\Http\Controllers\Org\TeamController::class,'remove'])->name('team.remove');
+});
+Route::middleware(['web','auth','org:org'])->prefix('org')->as('org.')->group(function () {
+  Route::get('/team', [\App\Http\Controllers\Org\TeamController::class,'index'])->name('team.index');
+  Route::post('/team/invite', [\App\Http\Controllers\Org\TeamController::class,'invite'])->name('team.invite');
+  Route::post('/team/{user}/remove', [\App\Http\Controllers\Org\TeamController::class,'remove'])->name('team.remove');
+});
+Route::middleware(['web','auth','org:org'])->prefix('org')->as('org.')->group(function () {
+  Route::get('/kyc', [OrgKycController::class,'edit'])->name('kyc.edit');
+  Route::post('/kyc', [OrgKycController::class,'update'])->name('kyc.update');
+});
+Route::middleware(['web','auth','admin'])->prefix('admin')->as('admin.')->group(function () {
+  Route::get('/kyc', [AdminKycController::class,'index'])->name('kyc.index');
+  Route::post('/kyc/{org}/approve', [AdminKycController::class,'approve'])->name('kyc.approve');
+  Route::post('/kyc/{org}/decline', [AdminKycController::class,'decline'])->name('kyc.decline');
+});
+
+// --- TEMP DEBUG: simple org health probe ---
+Route::middleware(['web','auth','org:org'])->prefix('org')->as('org.')->group(function () {
+    Route::get('/health', function () {
+        return response()->json(['ok'=>true,'user'=>auth()->id()]);
+    })->name('health');
+});
+
+// --- TEMP DEBUG: simple org health probe ---
+Route::middleware(['web','auth','org:org'])->prefix('org')->as('org.')->group(function () {
+    Route::get('/health', function () {
+        return response()->json(['ok'=>true,'user'=>auth()->id()]);
+    })->name('health');
+});

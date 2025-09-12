@@ -1,0 +1,40 @@
+
+OK   : PHP 8.3 detected
+OK   : storage and bootstrap/cache are writable
+OK   : Laravel 11 detected
+OK   : config:cache built
+OK   : route:cache built
+OK   : view:cache built
+FAIL : QR verify route missing
+OK   : Fallback POST /logout route present
+OK   : No legacy logout.perform references
+OK   : No partners shadow detected
+WARN : Migrations check inconclusive (DB creds or connection). See migrate_status.txt
+OK   : No failed queued jobs
+OK   : swaed-queue-worker is active
+OK   : php8.3-fpm is active
+OK   : cloudflared is active
+OK   : Found tools/health.sh
+OK   : Found tools/full_health.sh
+OK   : Found tools/roadmap_check.sh
+OK   : Found tools/deep_check.sh
+OK   : Found tools/route_shadow_guard.sh
+OK   : APP_DEBUG=false
+OK   : Queue driver = database
+OK   : Zoho SMTP configured
+OK   : Sentry DSN present
+OK   : PWA assets present
+OK   : sitemap.xml symlink looks correct
+OK   : Geofence default ~150m confirmed
+OK   : / returns 200
+OK   : /login 200
+OK   : /register 200
+OK   : /forgot-password 200
+OK   : /applications redirects (guarded)
+OK   : /certificates redirects (guarded)
+WARN : Admin login not 200
+OK   : Exists: resources/views/public/layout.blade.php
+OK   : Exists: resources/views/admin
+OK   : Exists: resources/views/org
+OK   : Exists: app/Http/Controllers/QR/VerifyController.php
+WARN : Missing: app/Http/Controllers/QR/CompletionController.php

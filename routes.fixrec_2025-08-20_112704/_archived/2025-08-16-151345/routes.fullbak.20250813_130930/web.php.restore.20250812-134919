@@ -1,0 +1,100 @@
+<?php
+use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\HomeController;
+
+
+
+// --- Auth routes (simple) ---
+Route::get('/login', [\App\Http\Controllers\AuthController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [\App\Http\Controllers\AuthController::class, 'login']);
+Route::get('/logout', [\App\Http\Controllers\AuthController::class, 'logout'])->name('logout');
+
+// Throttle login attempts
+Route::post('/login', [\App\Http\Controllers\AuthController::class, 'login'])
+    ->name('login.post')
+    ->middleware('throttle:5,1');
+
+
+// Route::get('/opportunities', function (\Illuminate\Http\Request $r) {
+//     $q = trim((string)$r->get('q'));
+//     $city = $r->get('city');
+//     $items = DB::table('opportunities')
+//         ->when($q !== '', fn($b)=>$b->where(fn($w)=>$w->where('title','like',"%$q%")->orWhere('city','like',"%$q%")))
+//         ->when($city, fn($b)=>$b->where('city','like',"%$city%"))
+//         ->where(function($w){ $w->where('status','published')->orWhereNull('status'); })
+//         ->orderByDesc('date')->orderByDesc('id')
+//         ->paginate(12)->withQueryString();
+//     return view('public.opportunities.index', compact('items','q','city'));
+// })->name('public.opportunities');
+// 
+// Route::get('/gallery', function () {
+//     $photos = json_decode(\App\Models\Setting::get('home.gallery','[]'), true) ?: [];
+//     return view('public.gallery', compact('photos'));
+// })->name('public.gallery');
+// 
+// 
+// Opportunity details
+// Route::get('/opportunities/{id}', function ($id) {
+//     $it = DB::table('opportunities')->where('id',$id)->first();
+//     abort_unless($it, 404);
+//     return view('public.opportunities.show', compact('it'));
+// })->name('public.opportunities.show');
+// 
+// Event details
+// Route::get('/events/{id}', function ($id) {
+//     $ev = DB::table('events')->where('id',$id)->first();
+//     abort_unless($ev, 404);
+//     return view('public.events.show', compact('ev'));
+// })->name('public.events.show');
+// 
+// 
+// PUBLIC: events list
+// Route::get('/events', function (Request $r) {
+//     $q = trim((string)$r->get('q'));
+//     $city = $r->get('city');
+//     $items = \Illuminate\Support\Facades\DB::table('events')
+//         ->when($q !== '', fn($b)=>$b->where(fn($w)=>$w->where('title','like',"%$q%")->orWhere('description','like',"%$q%")))
+//         ->when($city, fn($b)=>$b->where('city','like',"%$city%"))
+//         ->orderByDesc('date')->orderByDesc('id')
+//         ->paginate(12)->withQueryString();
+//     return view('public.events.index', compact('items','q','city'));
+// })->name('public.events');
+// 
+// PUBLIC: organizations list
+// Route::get('/organizations', function (Request $r) {
+//     $q = trim((string)$r->get('q'));
+//     $items = \Illuminate\Support\Facades\DB::table('organizations')
+//         ->when($q !== '', fn($b)=>$b->where(fn($w)=>$w->where('name','like',"%$q%")->orWhere('email','like',"%$q%")))
+//         ->orderBy('name')
+//         ->paginate(12)->withQueryString();
+//     return view('public.organizations.index', compact('items','q'));
+// })->name('public.organizations');
+// 
+// Route::get('/', [\App\Http\Controllers\HomeController::class, 'index']);
+// 
+// require __DIR__.'/admin.php';
+/*
+ |----------------------------------------------------------------------
+ | ### SAWAED CONTROLLER ROUTES 2025-08
+ | Replaces commented closures with controllers.
+ |----------------------------------------------------------------------
+*/
+use Illuminate\Support\Facades\Route;
+
+// Use FQCN to avoid extra use-lines:
+Route::get('/opportunities', [\App\Http\Controllers\OpportunityController::class, 'index'])
+    ->name('public.opportunities');
+
+Route::get('/opportunities/{id}', [\App\Http\Controllers\OpportunityController::class, 'show'])
+    ->name('public.opportunities.show');
+
+/*
+ | Events currently reuse Opportunity model (see EventController PHPDoc)
+*/
+Route::get('/events', [\App\Http\Controllers\EventController::class, 'index'])
+    ->name('public.events');
+
+Route::get('/events/{event}', [\App\Http\Controllers\EventController::class, 'show'])
+    ->name('public.events.show');

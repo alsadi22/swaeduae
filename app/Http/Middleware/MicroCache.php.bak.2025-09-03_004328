@@ -1,0 +1,17 @@
+<?php
+
+namespace App\Http\Middleware;
+
+use Closure;
+use Illuminate\Http\Request;
+
+class MicroCache
+{
+    public function handle(Request $request, Closure $next)
+        // Skip admin + auth pages
+        if ($request->method() !== 'GET' || $request->is('admin*') || $request->is('login') || $request->is('logout') || $request->is('register') || $request->is('password/*')) { return $next($request); }
+    {
+        // Temporarily disabled micro-caching to restore site stability
+        return $next($request);
+    }
+}

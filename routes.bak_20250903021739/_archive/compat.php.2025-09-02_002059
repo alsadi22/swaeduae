@@ -1,0 +1,41 @@
+<?php
+
+use Illuminate\Support\Facades\Route;
+
+// Admin (Argon) resources & common aliases expected by Blade
+Route::prefix('admin')->name('admin.')->middleware(['web','auth:admin'])->group(function () {
+    Route::get('/dashboard', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
+
+    Route::resource('categories',    \App\Http\Controllers\Admin\CategoryController::class)->names('categories');
+    Route::resource('events',        \App\Http\Controllers\Admin\EventController::class)->names('events');
+    Route::resource('partners',      \App\Http\Controllers\Admin\PartnerController::class)->names('partners');
+    Route::resource('organizations', \App\Http\Controllers\Admin\OrganizationController::class)->names('organizations');
+
+    // Users: add missing CRUD names without duplicating index
+    Route::resource('users', \App\Http\Controllers\Admin\UserAdminController::class)
+        ->only(['create','store','edit','update','destroy'])->names('users');
+
+    // Exports (temporary safe targets so links don’t 500)
+    Route::get('export/users',        fn() => redirect()->route('admin.users.index'))->name('export.users');
+    Route::get('export/applications', fn() => redirect()->route('admin.users.index'))->name('export.applications');
+    Route::get('export/hours',        fn() => redirect()->route('admin.hours.all'))->name('export.hours');
+    Route::get('export/certificates', fn() => redirect()->route('admin.certificates.index'))->name('export.certificates');
+
+    // Learning & News (common in views)
+    Route::get('learning', [\App\Http\Controllers\Admin\LearningAdminController::class, 'index'])->name('learning.index');
+    Route::match(['POST','PUT','PATCH'],'learning', [\App\Http\Controllers\Admin\LearningAdminController::class, 'update'])->name('learning.update');
+    Route::post('news', [\App\Http\Controllers\Admin\NewsController::class, 'store'])->name('news.store');
+});
+
+// Public/admin-agnostic helper names
+Route::get('/organizations/register', [\App\Http\Controllers\Public\PartnerIntakeController::class, 'create'])->name('organizations.register');
+
+// Certificates short aliases
+Route::get('/cert/verify/{code}', fn(string $code) => redirect()->route('certificates.verify', ['code'=>$code]))->name('cert.verify');
+Route::get('/certificates/issue', fn() => redirect()->route('admin.certificates.index'))
+    ->middleware('auth:admin')->name('certificates.issue');
+
+// Opportunities QR helper (if controller exists)
+if (class_exists(\App\Http\Controllers\EventQrController::class)) {
+    Route::get('/opportunities/qr', [\App\Http\Controllers\EventQrController::class, 'index'])->name('opportunities.qr');
+}

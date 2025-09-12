@@ -1,0 +1,8 @@
+<ruleset name="codex-md">
+  <rule ref="cleancode"/>
+  <rule ref="codesize"/>
+  <rule ref="controversial"/>
+  <rule ref="design"/>
+  <rule ref="naming"/>
+  <rule ref="unusedcode"/>
+</ruleset>

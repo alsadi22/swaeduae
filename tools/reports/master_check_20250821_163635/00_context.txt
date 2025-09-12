@@ -1,0 +1,4 @@
+Timestamp: 20250821_163635
+Host: majlis.tasjeel.ae
+PHP: PHP 8.4.7 (cli) (built: May  8 2025 11:28:43) (NTS)
+Paths: WWW=/home3/vminingc/swaeduae.ae ; APP=/home3/vminingc/swaeduae.ae/laravel-app

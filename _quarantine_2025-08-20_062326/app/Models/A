@@ -1,0 +1,828 @@
+<?phpnamespace App\Models;use Illuminate\Database\Eloquent\Model;use I
+class Application extends Model{    protected $fillable = ['user_id','opportuni
+    protected $casts = ['answers' => 'array'];    public function user(): BelongsTo { return $this->belo
+    public function opportunity(): BelongsTo { r
+}EOFcat > app/Models/VolunteerHour.php << 'EOF'<?php
+use Illuminate\Database\Eloquent
+use Illuminate\Database\Eloquent\Relations\BelongsTo;cl
+{    prote
+    p
+    public function user(): BelongsTo { return $this->belongsTo(User::cla
+  
+   
+
+EOFcat > app/Models/Attendance.php << 'EOF'<?phpnamespace App\Models;use 
+use Illuminate\Database\Eloquent\Relations\BelongsTo;class Attendance exten
+{    protected $fillable = ['user_id','opportunity_id','token','checked_in_at','checked_out_at','supervisor_user_id','hours'];    protected $casts = ['checked_in_at'=>'datetime','checked_out_at'=>'datetime'];    public function user(): BelongsTo { return $this->belongsTo(User::class); }    public function opportunity(): BelongsTo { return $this->belongsTo(Opportunity::class); }    public function supervisor(): BelongsTo { return $this->belongsTo(User::class, 'supervisor_user_id'); }}EOFcat > app/Models/Certificate.php << 'EOF'<?phpnamespace App\Models;use Illuminate\Database\Eloquent\Model;use Illuminate\Database\Eloquent\Relations\BelongsTo;class Certificate extends Model{    protected $fillable = ['user_id','opportunity_id','serial','hash','pdf_path','issued_at','verified_at','status'];    protected $casts = ['issued_at'=>'datetime','verified_at'=>'datetime'];    public function user(): BelongsTo { return $this->belong
+    public function opportunity(): BelongsTo { return $this->belongsTo(Op
+}EOF# --- 5) CONTROLLERS (full, no Gate calls; rely on Admin middlewar
+mkdir -p app/Http/Controllers/Admincat > app/Http/Controllers/OpportunityController.php << 'EOF'<?phpnamespace App\Http\Controllers;use App\Models\Opportunity;use Illuminate\Http\Request;use Illuminate\Support\Str;class OpportunityController extends Controller{    public function index(Request $request)    {        $q = $request->input('q');        $region = $request->input('region');        $cause = $request->input('cause');        $skills = $request->input('skills');        $opps = Opportunity::query()->where('is_published', true)            ->when($q, fn($qq)=>$qq->where(function($w) use($q){                $w->where('title','like',"%$q%")->orWhere('summary','like',"%$q%");            }))            ->when($region, fn($qq)=>$qq->where('region',$region))            ->when($cause,
+            ->when($skills, fn($qq)=>$qq->where('skills','like',"%$skills%"
+            ->orderByDesc('id')            ->paginate(12)            ->w
+        return view
+    }
+
+    public function show($slug)    {       
+        return view('opportunities.show',
+    }    // Minimal admin create end
+
+    {        $data = $request->vali
+            'title'=>'required|s
+            'summary'=>'nullable|string|max:255',            'descr
+            'region'=>'nu
+            'cause'=>'nullable|string|max:120',            'skills'=>'null
+            'start_date'=>'nullable|date',            'end_dat
+            'capacity'=>'nullable|integer|min:0
+ 
+            'is_published'=>'nullable|b
+        ]);
+        $opp = Opportunity::create($data);        
+    }}EOFcat > app/Http/Controllers/ApplicationController.php << 
+<?phpnamespace App\Http\Control
+use App\Mo
+use A
+use Illuminate\Http\Request;use Illuminate\Support\Facades\Auth;class A
+
+  
+
+  
+
+
+        ]);        $opp = Opportunity::
+     
+
+        $path = $req
+
+ 
+        $exists = Application::where('user_id',$us
+
+        Application::
+ 
+            'opportunity_id
+            'status'=>'pending',            'answers'=>$request->input('
+            'attachment_path'=>$path        ]);        return bac
+    }
+
+cat > app/H
+<?phpnamespace App\Http\Contro
+use App\Http\Controllers\Controller;use App\Models\Application;us
+
+{ 
+
+        $apps = Ap
+        return view('admin.applications.index', compact('apps'));
+    }
+
+    public function updateStatus(Request $request, Application $application)
+    {
+        $request->validate(['status'=>'required|in:pending,approved,rejected,waitlisted']);
+        $application->update(['status'=>$request->status]);
+        return back()->with('success','Status updated.');
+    }
+}
+EOF
+
+cat > app/Http/Controllers/AttendanceController.php << 'EOF'
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Attendance;
+use App\Models\Opportunity;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
+use App\Models\VolunteerHour;
+
+class AttendanceController extends Controller
+{
+    public function qr($opportunityId)
+    {
+        $user = Auth::user();
+        if (!$user) return redirect()->route('login');
+
+        $opp = Opportunity::findOrFail($opportunityId);
+        $attendance = Attendance::firstOrCreate(
+            ['user_id'=>$user->id, 'opportunity_id'=>$opp->id],
+            ['token'=>Str::random(24)]
+        );
+
+        $checkInUrl = route('attendance.checkin', $attendance->token);
+        $checkOutUrl = route('attendance.checkout', $attendance->token);
+
+        return view('attendance.qr', compact('opp','attendance','checkInUrl','checkOutUrl'));
+    }
+
+    public function checkIn($token)
+    {
+        $attendance = Attendance::where('token',$token)->firstOrFail();
+        $attendance->checked_in_at = now();
+        $attendance->save();
+        return view('attendance.status', ['attendance'=>$attendance, 'message'=>'Checked in']);
+    }
+
+    public function checkOut($token)
+    {
+        $attendance = Attendance::where('token',$token)->firstOrFail();
+        $attendance->checked_out_at = now();
+
+        if ($attendance->checked_in_at) {
+            $diff = $attendance->checked_in_at->diffInMinutes($attendance->checked_out_at);
+            $attendance->hours = round($diff / 60, 2);
+            $attendance->save();
+
+            VolunteerHour::create([
+                'user_id' => $attendance->user_id,
+                'opportunity_id' => $attendance->opportunity_id,
+                'hours' => $attendance->hours,
+                'date' => now()->toDateString(),
+                'status' => 'pending',
+            ]);
+        }
+        return view('attendance.status', ['attendance'=>$attendance, 'message'=>'Checked out']);
+    }
+}
+EOF
+
+cat > app/Http/Controllers/VolunteerHourController.php << 'EOF'
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\VolunteerHour;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
+class VolunteerHourController extends Controller
+{
+    public function index()
+    {
+        $user = Auth::user();
+        if (!$user) return redirect()->route('login');
+
+        $hours = VolunteerHour::with('opportunity','verifier')
+            ->where('user_id',$user->id)
+            ->orderByDesc('date')
+            ->paginate(20);
+
+        return view('hours.index', compact('hours'));
+    }
+
+    public function store(Request $request)
+    {
+        $user = Auth::user();
+        if (!$user) return redirect()->route('login');
+
+        $data = $request->validate([
+            'opportunity_id'=>'nullable|exists:opportunities,id',
+            'hours'=>'required|numeric|min:0.1|max:24',
+            'date'=>'required|date',
+            'notes'=>'nullable|string|max:2000'
+        ]);
+        $data['user_id'] = $user->id;
+        $data['status'] = 'pending';
+
+        VolunteerHour::create($data);
+        return back()->with('success','Hours logged and pending verification.');
+    }
+
+    public function verify(VolunteerHour $hour, Request $request)
+    {
+        $status = $request->validate(['status'=>'required|in:verified,rejected'])['status'];
+        $hour->status = $status;
+        $hour->verified_by = auth()->id();
+        $hour->save();
+        return back()->with('success','Hour status updated.');
+    }
+}
+EOF
+
+cat > app/Http/Controllers/CertificateController.php << 'EOF'
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Certificate;
+use App\Models\Opportunity;
+use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+use Barryvdh\DomPDF\Facade\Pdf; // dompdf wrapper
+use Illuminate\Support\Facades\Mail;
+use App\Mail\CertificateIssued;
+
+class CertificateController extends Controller
+{
+    public function generate(Request $request)
+    {
+        $data = $request->validate([
+            'user_id'=>'required|exists:users,id',
+            'opportunity_id'=>'nullable|exists:opportunities,id'
+        ]);
+        $user = User::findOrFail($data['user_id']);
+        $opp = isset($data['opportunity_id']) ? Opportunity::find($data['opportunity_id']) : null;
+
+        $serial = 'SWD-'.date('Ymd').'-'.Str::upper(Str::random(6));
+        $hash = hash_hmac('sha256', $serial.$user->id.now(), config('app.key'));
+        $verifyUrl = route('certificates.verify', $serial);
+
+        $pdf = Pdf::loadView('certificates.pdf', [
+            'user'=>$user, 'opp'=>$opp, 'serial'=>$serial, 'verifyUrl'=>$verifyUrl,
+        ])->setPaper('a4','landscape');
+
+        $path = "certificates/{$serial}.pdf";
+        Storage::disk('public')->put($path, $pdf->output());
+
+        $cert = Certificate::create([
+            'user_id'=>$user->id,
+            'opportunity_id'=>$opp?->id,
+            'serial'=>$serial,
+            'hash'=>$hash,
+            'pdf_path'=>$path,
+            'issued_at'=>now(),
+            'status'=>'issued'
+        ]);
+
+        try { Mail::to($user->email)->send(new CertificateIssued($cert)); } catch (\Throwable $e) { \Log::warning($e->getMessage()); }
+        \Log::info("WhatsApp delivery stub for {$serial} (implement provider later)");
+
+        return redirect()->route('certificates.show', $serial)->with('success','Certificate issued.');
+    }
+
+    public function show($serial)
+    {
+        $cert = Certificate::where('serial',$serial)->with(['user','opportunity'])->firstOrFail();
+        return view('certificates.show', compact('cert'));
+    }
+
+    public function download($serial)
+    {
+        $cert = Certificate::where('serial',$serial)->firstOrFail();
+        return response()->download(storage_path('app/public/'.$cert->pdf_path));
+    }
+
+    public function verify($serial)
+    {
+        $cert = Certificate::where('serial',$serial)->firstOrFail();
+        if (!$cert->verified_at) { $cert->verified_at = now(); $cert->save(); }
+        return view('certificates.verify', compact('cert'));
+    }
+}
+EOF
+
+cat > app/Http/Controllers/Admin/DashboardController.php << 'EOF'
+<?php
+
+namespace App\Http\Controllers\Admin;
+
+use App\Http\Controllers\Controller;
+use App\Models\User;
+use App\Models\Opportunity;
+use App\Models\Application;
+use App\Models\VolunteerHour;
+use App\Models\Certificate;
+use Symfony\Component\HttpFoundation\StreamedResponse;
+
+class DashboardController extends Controller
+{
+    public function index()
+    {
+        $kpi = [
+            'users' => User::count(),
+            'opportunities' => Opportunity::count(),
+            'applications_pending' => Application::where('status','pending')->count(),
+            'hours_pending' => VolunteerHour::where('status','pending')->count(),
+            'certificates' => Certificate::count(),
+        ];
+        $latestApps = Application::with(['user','opportunity'])->orderByDesc('id')->limit(8)->get();
+        $latestHours = VolunteerHour::with(['user','opportunity'])->orderByDesc('id')->limit(8)->get();
+
+        return view('admin.dashboard', compact('kpi','latestApps','latestHours'));
+    }
+
+    public function exportApplicationsCsv(): StreamedResponse
+    {
+        $fileName = 'applications.csv';
+        $headers = ['Content-Type' => 'text/csv'];
+        return response()->streamDownload(function() {
+            $out = fopen('php://output','w');
+            fputcsv($out, ['ID','User','Opportunity','Status','Created']);
+            Application::with(['user','opportunity'])->chunk(500, function($chunk) use ($out){
+                foreach ($chunk as $a) {
+                    fputcsv($out, [$a->id, $a->user->email ?? '', $a->opportunity->title ?? '', $a->status, $a->created_at]);
+                }
+            });
+            fclose($out);
+        }, $fileName, $headers);
+    }
+
+    public function exportHoursCsv(): StreamedResponse
+    {
+        $fileName = 'volunteer_hours.csv';
+        $headers = ['Content-Type' => 'text/csv'];
+        return response()->streamDownload(function() {
+            $out = fopen('php://output','w');
+            fputcsv($out, ['ID','User','Opportunity','Hours','Date','Status']);
+            VolunteerHour::with(['user','opportunity'])->chunk(500, function($chunk) use ($out){
+                foreach ($chunk as $h) {
+                    fputcsv($out, [$h->id, $h->user->email ?? '', $h->opportunity->title ?? '', $h->hours, $h->date, $h->status]);
+                }
+            });
+            fclose($out);
+        }, $fileName, $headers);
+    }
+}
+EOF
+
+cat > app/Http/Controllers/SeoController.php << 'EOF'
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Opportunity;
+use Illuminate\Support\Facades\Response;
+
+class SeoController extends Controller
+{
+    public function sitemap()
+    {
+        $items = Opportunity::where('is_published', true)->orderByDesc('updated_at')->limit(1000)->get();
+        return response()->view('seo.sitemap', compact('items'))->header('Content-Type','application/xml');
+    }
+
+    public function robots()
+    {
+        return Response::make("User-agent: *\nAllow: /\nSitemap: ".route('sitemap'), 200, ['Content-Type'=>'text/plain']);
+    }
+}
+EOF
+
+# --- 6) MAIL ---
+mkdir -p app/Mail resources/views/emails
+cat > app/Mail/CertificateIssued.php << 'EOF'
+<?php
+
+namespace App\Mail;
+
+use App\Models\Certificate;
+use Illuminate\Bus\Queueable;
+use Illuminate\Mail\Mailable;
+use Illuminate\Queue\SerializesModels;
+
+class CertificateIssued extends Mailable
+{
+    use Queueable, SerializesModels;
+
+    public Certificate $cert;
+
+    public function __construct(Certificate $cert) { $this->cert = $cert; }
+
+    public function build()
+    {
+        $verifyUrl = route('certificates.verify', $this->cert->serial);
+        $subject = 'Your Volunteer Certificate - '.$this->cert->serial;
+
+        $mail = $this->subject($subject)->view('emails.certificate_issued', [
+            'cert'=>$this->cert, 'verifyUrl'=>$verifyUrl
+        ]);
+
+        $path = storage_path('app/public/'.$this->cert->pdf_path);
+        if (is_file($path)) $mail->attach($path, ['as'=>$this->cert->serial.'.pdf','mime'=>'application/pdf']);
+
+        return $mail;
+    }
+}
+EOF
+
+cat > resources/views/emails/certificate_issued.blade.php << 'EOF'
+<p>Dear {{ $cert->user->name ?? 'Volunteer' }},</p>
+<p>Congratulations! Your certificate <strong>{{ $cert->serial }}</strong> has been issued.</p>
+<p>You can verify it here: <a href="{{ $verifyUrl }}">{{ $verifyUrl }}</a></p>
+<p>Thank you for your contribution.<br>— SawaedUAE</p>
+EOF
+
+# --- 7) VIEWS ---
+mkdir -p resources/views/opportunities resources/views/admin resources/views/admin/applications resources/views/certificates resources/views/attendance resources/views/hours resources/views/seo
+
+cat > resources/views/opportunities/index.blade.php << 'EOF'
+@extends('layouts.app')
+@section('content')
+<div class="container py-4">
+  <h1 class="mb-3">{{ __('Volunteer Opportunities') }}</h1>
+  <form class="row g-2 mb-3" method="GET" action="{{ route('opportunities.index') }}">
+    <div class="col-md-3"><input name="q" value="{{ $q }}" class="form-control" placeholder="{{ __('Search by title') }}"></div>
+    <div class="col-md-2"><input name="region" value="{{ $region }}" class="form-control" placeholder="{{ __('Region') }}"></div>
+    <div class="col-md-2"><input name="cause" value="{{ $cause }}" class="form-control" placeholder="{{ __('Cause') }}"></div>
+    <div class="col-md-2"><input name="skills" value="{{ $skills }}" class="form-control" placeholder="{{ __('Skills') }}"></div>
+    <div class="col-md-2"><button class="btn btn-primary w-100">{{ __('Filter') }}</button></div>
+  </form>
+  <div class="row">
+    @forelse($opps as $opp)
+      <div class="col-md-4 mb-3">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title">{{ $opp->title }}</h5>
+            <p class="card-text">{{ $opp->summary }}</p>
+            <div class="small text-muted">{{ $opp->region }} • {{ $opp->cause }} • {{ $opp->skills }}</div>
+          </div>
+          <div class="card-footer bg-transparent">
+            <a class="btn btn-outline-primary btn-sm" href="{{ route('opportunities.show', $opp->slug) }}">{{ __('View') }}</a>
+          </div>
+        </div>
+      </div>
+    @empty
+      <p>{{ __('No opportunities found.') }}</p>
+    @endforelse
+  </div>
+  <div class="mt-3">{{ $opps->links() }}</div>
+</div>
+@endsection
+EOF
+
+cat > resources/views/opportunities/show.blade.php << 'EOF'
+@extends('layouts.app')
+@section('content')
+<div class="container py-4">
+  <a href="{{ route('opportunities.index') }}" class="btn btn-link">&larr; {{ __('Back') }}</a>
+  <div class="row">
+    <div class="col-md-8">
+      <h1>{{ $opp->title }}</h1>
+      <p class="text-muted">{{ $opp->region }} • {{ $opp->cause }} • {{ $opp->skills }}</p>
+      <p>{{ $opp->summary }}</p>
+      <div class="mb-3">{!! nl2br(e($opp->description)) !!}</div>
+      <p><strong>{{ __('Dates') }}:</strong> {{ $opp->start_date }} → {{ $opp->end_date }}</p>
+      <p><strong>{{ __('Location') }}:</strong> {{ $opp->location }}</p>
+    </div>
+    <div class="col-md-4">
+      @auth
+      <div class="card mb-3">
+        <div class="card-header">{{ __('Apply') }}</div>
+        <div class="card-body">
+          <form method="POST" action="{{ route('applications.store', $opp->id) }}" enctype="multipart/form-data">
+            @csrf
+            <div class="mb-2">
+              <label class="form-label">{{ __('Why are you a good fit?') }}</label>
+              <textarea class="form-control" name="answers[motivation]" rows="3"></textarea>
+            </div>
+            <div class="mb-2">
+              <label class="form-label">{{ __('Attachment (optional)') }}</label>
+              <input type="file" class="form-control" name="attachment">
+            </div>
+            <button class="btn btn-primary w-100">{{ __('Submit Application') }}</button>
+          </form>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">{{ __('Attendance QR') }}</div>
+        <div class="card-body">
+          <a class="btn btn-outline-secondary w-100" href="{{ route('attendance.qr', $opp->id) }}">{{ __('Show My QR') }}</a>
+        </div>
+      </div>
+      @else
+      <div class="alert alert-info">{{ __('Please login to apply and access your attendance QR.') }}</div>
+      @endauth
+    </div>
+  </div>
+</div>
+@endsection
+EOF
+
+cat > resources/views/admin/applications/index.blade.php << 'EOF'
+@extends('layouts.app')
+@section('content')
+<div class="container py-4">
+  <h1 class="mb-3">{{ __('Applications') }}</h1>
+  <table class="table table-striped">
+    <thead>
+      <tr><th>#</th><th>{{ __('User') }}</th><th>{{ __('Opportunity') }}</th><th>{{ __('Status') }}</th><th>{{ __('Actions') }}</th></tr>
+    </thead>
+    <tbody>
+      @foreach($apps as $a)
+        <tr>
+          <td>{{ $a->id }}</td>
+          <td>{{ $a->user->email }}</td>
+          <td>{{ $a->opportunity->title }}</td>
+          <td><span class="badge bg-secondary">{{ $a->status }}</span></td>
+          <td>
+            <form method="POST" action="{{ route('admin.applications.update', $a) }}" class="d-inline">@csrf @method('PUT')
+              <select name="status" class="form-select form-select-sm d-inline w-auto">
+                @foreach(['pending','approved','rejected','waitlisted'] as $s)
+                  <option value="{{ $s }}" @selected($a->status===$s)>{{ $s }}</option>
+                @endforeach
+              </select>
+              <button class="btn btn-sm btn-primary">{{ __('Update') }}</button>
+            </form>
+          </td>
+        </tr>
+      @endforeach
+    </tbody>
+  </table>
+  {{ $apps->links() }}
+</div>
+@endsection
+EOF
+
+cat > resources/views/attendance/qr.blade.php << 'EOF'
+@extends('layouts.app')
+@section('content')
+<div class="container py-4 text-center">
+  <h1 class="mb-3">{{ __('Attendance for') }} {{ $opp->title }}</h1>
+  <p class="text-muted">{{ __('Scan to check-in / check-out') }}</p>
+  <div class="row">
+    <div class="col-md-6">
+      <h5>{{ __('Check-in') }}</h5>
+      @if (class_exists(\SimpleSoftwareIO\QrCode\Facades\QrCode::class))
+        {!! \SimpleSoftwareIO\QrCode\Facades\QrCode::size(220)->generate($checkInUrl) !!}
+      @else
+        <p><a class="btn btn-outline-primary" href="{{ $checkInUrl }}">{{ __('Open Check-in') }}</a></p>
+        <small class="text-muted">{{ __('(Install simplesoftwareio/simple-qrcode to render QR)') }}</small>
+      @endif
+    </div>
+    <div class="col-md-6">
+      <h5>{{ __('Check-out') }}</h5>
+      @if (class_exists(\SimpleSoftwareIO\QrCode\Facades\QrCode::class))
+        {!! \SimpleSoftwareIO\QrCode\Facades\QrCode::size(220)->generate($checkOutUrl) !!}
+      @else
+        <p><a class="btn btn-outline-primary" href="{{ $checkOutUrl }}">{{ __('Open Check-out') }}</a></p>
+      @endif
+    </div>
+  </div>
+</div>
+@endsection
+EOF
+
+cat > resources/views/attendance/status.blade.php << 'EOF'
+@extends('layouts.app')
+@section('content')
+<div class="container py-5 text-center">
+  <h1>{{ $message }}</h1>
+  <p class="text-muted">{{ __('Token') }}: {{ $attendance->token }}</p>
+  <p>{{ __('Checked in at') }}: {{ $attendance->checked_in_at }}</p>
+  <p>{{ __('Checked out at') }}: {{ $attendance->checked_out_at }}</p>
+  <p>{{ __('Hours') }}: {{ $attendance->hours }}</p>
+</div>
+@endsection
+EOF
+
+cat > resources/views/hours/index.blade.php << 'EOF'
+@extends('layouts.app')
+@section('content')
+<div class="container py-4">
+  <h1 class="mb-3">{{ __('My Volunteer Hours') }}</h1>
+  <form method="POST" class="card card-body mb-3" action="{{ route('hours.store') }}">
+    @csrf
+    <div class="row g-2">
+      <div class="col-md-3">
+        <label class="form-label">{{ __('Opportunity ID (optional)') }}</label>
+        <input class="form-control" name="opportunity_id" type="number" min="1">
+      </div>
+      <div class="col-md-2">
+        <label class="form-label">{{ __('Hours') }}</label>
+        <input class="form-control" name="hours" type="number" step="0.25" min="0.25" max="24" required>
+      </div>
+      <div class="col-md-3">
+        <label class="form-label">{{ __('Date') }}</label>
+        <input class="form-control" name="date" type="date" required>
+      </div>
+      <div class="col-md-4">
+        <label class="form-label">{{ __('Notes') }}</label>
+        <input class="form-control" name="notes">
+      </div>
+    </div>
+    <div class="mt-2">
+      <button class="btn btn-primary">{{ __('Log Hours') }}</button>
+    </div>
+  </form>
+
+  <table class="table table-striped">
+    <thead><tr><th>#</th><th>{{ __('Opportunity') }}</th><th>{{ __('Hours') }}</th><th>{{ __('Date') }}</th><th>{{ __('Status') }}</th></tr></thead>
+    <tbody>
+      @foreach($hours as $h)
+        <tr>
+          <td>{{ $h->id }}</td>
+          <td>{{ $h->opportunity->title ?? '-' }}</td>
+          <td>{{ $h->hours }}</td>
+          <td>{{ $h->date->format('Y-m-d') }}</td>
+          <td><span class="badge bg-secondary">{{ $h->status }}</span></td>
+        </tr>
+      @endforeach
+    </tbody>
+  </table>
+  {{ $hours->links() }}
+</div>
+@endsection
+EOF
+
+cat > resources/views/certificates/pdf.blade.php << 'EOF'
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  body { font-family: DejaVu Sans, sans-serif; text-align:center; padding:40px; }
+  .card { border:6px solid #0d9488; padding:40px; border-radius:16px; }
+  h1 { margin-top:0; color:#0d9488; }
+  .serial { font-size:14px; color:#666; margin-top:20px }
+</style>
+</head>
+<body>
+  <div class="card">
+    <h1>SawaedUAE Certificate of Appreciation</h1>
+    <p>This certificate is awarded to</p>
+    <h2>{{ $user->name ?? $user->email }}</h2>
+    @if($opp)
+      <p>for volunteering with <strong>{{ $opp->title }}</strong></p>
+    @endif
+    <p>Date: {{ now()->format('Y-m-d') }}</p>
+    <div class="serial">Serial: {{ $serial }}</div>
+    <p>Verify: {{ $verifyUrl }}</p>
+  </div>
+</body>
+</html>
+EOF
+
+cat > resources/views/certificates/show.blade.php << 'EOF'
+@extends('layouts.app')
+@section('content')
+<div class="container py-4">
+  <h1 class="mb-3">{{ __('Certificate') }} {{ $cert->serial }}</h1>
+  <p>{{ __('Volunteer') }}: {{ $cert->user->name ?? $cert->user->email }}</p>
+  <p>{{ __('Status') }}: <span class="badge bg-success">{{ $cert->status }}</span></p>
+  <a class="btn btn-primary" href="{{ route('certificates.download', $cert->serial) }}">{{ __('Download PDF') }}</a>
+  <a class="btn btn-outline-secondary" href="{{ route('certificates.verify', $cert->serial) }}">{{ __('Open Verify Page') }}</a>
+</div>
+@endsection
+EOF
+
+cat > resources/views/certificates/verify.blade.php << 'EOF'
+@extends('layouts.app')
+@section('content')
+<div class="container py-5 text-center">
+  <h1>{{ __('Certificate Verification') }}</h1>
+  <p>{{ __('Serial') }}: {{ $cert->serial }}</p>
+  <p>{{ __('Volunteer') }}: {{ $cert->user->name ?? $cert->user->email }}</p>
+  <p>{{ __('Issued At') }}: {{ $cert->issued_at }}</p>
+  @if($cert->verified_at)
+    <p class="text-success">{{ __('Verified At') }}: {{ $cert->verified_at }}</p>
+  @endif
+</div>
+@endsection
+EOF
+
+cat > resources/views/admin/dashboard.blade.php << 'EOF'
+@extends('layouts.app')
+@section('content')
+<div class="container py-4">
+  <h1 class="mb-4">{{ __('Admin Dashboard') }}</h1>
+  <div class="row g-3">
+    <div class="col-md-2"><div class="card text-center shadow-sm"><div class="card-body"><div class="h4">{{ $kpi['users'] }}</div><div class="text-muted">{{ __('Users') }}</div></div></div></div>
+    <div class="col-md-2"><div class="card text-center shadow-sm"><div class="card-body"><div class="h4">{{ $kpi['opportunities'] }}</div><div class="text-muted">{{ __('Opportunities') }}</div></div></div></div>
+    <div class="col-md-3"><div class="card text-center shadow-sm"><div class="card-body"><div class="h4">{{ $kpi['applications_pending'] }}</div><div class="text-muted">{{ __('Pending Applications') }}</div></div></div></div>
+    <div class="col-md-3"><div class="card text-center shadow-sm"><div class="card-body"><div class="h4">{{ $kpi['hours_pending'] }}</div><div class="text-muted">{{ __('Pending Hours') }}</div></div></div></div>
+    <div class="col-md-2"><div class="card text-center shadow-sm"><div class="card-body"><div class="h4">{{ $kpi['certificates'] }}</div><div class="text-muted">{{ __('Certificates') }}</div></div></div></div>
+  </div>
+  <div class="mt-4 row">
+    <div class="col-md-6">
+      <div class="card shadow-sm">
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <span>{{ __('Latest Applications') }}</span>
+          <a class="btn btn-sm btn-outline-secondary" href="{{ route('admin.export.applications') }}">{{ __('Export CSV') }}</a>
+        </div>
+        <div class="card-body p-0">
+          <table class="table mb-0">
+            <thead><tr><th>#</th><th>{{ __('User') }}</th><th>{{ __('Opportunity') }}</th><th>{{ __('Status') }}</th></tr></thead>
+            <tbody>
+              @foreach($latestApps as $a)
+                <tr><td>{{ $a->id }}</td><td>{{ $a->user->email }}</td><td>{{ $a->opportunity->title }}</td><td>{{ $a->status }}</td></tr>
+              @endforeach
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card shadow-sm">
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <span>{{ __('Latest Hours') }}</span>
+          <a class="btn btn-sm btn-outline-secondary" href="{{ route('admin.export.hours') }}">{{ __('Export CSV') }}</a>
+        </div>
+        <div class="card-body p-0">
+          <table class="table mb-0">
+            <thead><tr><th>#</th><th>{{ __('User') }}</th><th>{{ __('Opportunity') }}</th><th>{{ __('Hours') }}</th></tr></thead>
+            <tbody>
+              @foreach($latestHours as $h)
+                <tr><td>{{ $h->id }}</td><td>{{ $h->user->email }}</td><td>{{ $h->opportunity->title ?? '-' }}</td><td>{{ $h->hours }}</td></tr>
+              @endforeach
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+@endsection
+EOF
+
+cat > resources/views/seo/sitemap.blade.php << 'EOF'
+<?php echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>{{ url('/') }}</loc><changefreq>daily</changefreq></url>
+  <url><loc>{{ route('opportunities.index') }}</loc><changefreq>daily</changefreq></url>
+  @foreach($items as $o)
+    <url>
+      <loc>{{ route('opportunities.show', $o->slug) }}</loc>
+      <lastmod>{{ $o->updated_at->toAtomString() }}</lastmod>
+      <changefreq>weekly</changefreq>
+    </url>
+  @endforeach
+</urlset>
+EOF
+
+# --- 8) ROUTES (full, merged: keeps admin users + adds our new ones) ---
+cat > routes/web.php << 'EOF'
+<?php
+
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\OpportunityController;
+use App\Http\Controllers\ApplicationController;
+use App\Http\Controllers\AttendanceController;
+use App\Http\Controllers\VolunteerHourController;
+use App\Http\Controllers\CertificateController;
+use App\Http\Controllers\Admin\ApplicationAdminController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\SeoController;
+
+// If you already had auth & admin user routes, keep them here:
+if (file_exists(base_path('routes/web_admin_users.php'))) {
+    require base_path('routes/web_admin_users.php');
+}
+
+// Redirect / -> /dashboard (per requirement)
+Route::get('/', fn()=>redirect('/dashboard'))->name('home');
+
+// Public SEO
+Route::get('/sitemap.xml', [SeoController::class, 'sitemap'])->name('sitemap');
+Route::get('/robots.txt', [SeoController::class, 'robots'])->name('robots');
+
+// Opportunities
+Route::get('/opportunities', [OpportunityController::class, 'index'])->name('opportunities.index');
+Route::get('/opportunities/{slug}', [OpportunityController::class, 'show'])->name('opportunities.show');
+
+// Applications & hours (auth)
+Route::middleware('auth')->group(function(){
+    Route::post('/opportunities/{opportunity}/apply', [ApplicationController::class, 'store'])->name('applications.store');
+
+    // Attendance + Hours
+    Route::get('/attendance/{opportunity}/qr', [AttendanceController::class, 'qr'])->name('attendance.qr');
+    Route::get('/hours', [VolunteerHourController::class, 'index'])->name('hours.index');
+    Route::post('/hours', [VolunteerHourController::class, 'store'])->name('hours.store');
+
+    // Admin cert generation (guarded by admin middleware in admin group below if you prefer)
+    Route::post('/admin/certificates/generate', [CertificateController::class, 'generate'])->name('certificates.generate');
+});
+
+// Check-in/out (token URLs)
+Route::get('/a/{token}/in', [AttendanceController::class, 'checkIn'])->name('attendance.checkin');
+Route::get('/a/{token}/out', [AttendanceController::class, 'checkOut'])->name('attendance.checkout');
+
+// Certificates public
+Route::get('/certificates/{serial}', [CertificateController::class, 'show'])->name('certificates.show');
+Route::get('/certificates/{serial}/download', [CertificateController::class, 'download'])->name('certificates.download');
+Route::get('/verify/{serial}', [CertificateController::class, 'verify'])->name('certificates.verify');
+
+// Admin area (AdminMiddleware should be registered as 'admin')
+Route::middleware(['auth','admin'])->prefix('admin')->name('admin.')->group(function(){
+    // If you have Admin\UserController, keep these:
+    if (class_exists(\App\Http\Controllers\Admin\UserController::class)) {
+        Route::resource('users', \App\Http\Controllers\Admin\UserController::class);
+        Route::post('users/{user}/toggle', [\App\Http\Controllers\Admin\UserController::class,'toggle'])->name('users.toggle');
+    }
+
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/applications', [ApplicationAdminController::class, 'index'])->name('applications.index');
+    Route::put('/applications/{application}', [ApplicationAdminController::class, 'updateStatus'])->name('applications.update');
+
+    Route::get('/export/applications.csv', [DashboardController::class, 'exportApplicationsCsv'])->name('export.applications');
+    Route::get('/export/hours.csv', [DashboardController::class, 'exportHoursCsv'])->name('export.hours');
+
+    // Admin create opportunity
+    Route::post('/opportunities', [OpportunityController::class, 'store'])->name('opportunities.store');
+});
+
+// Temporary public dashboard placeholder
+Route::get('/dashboard', fn()=>view('welcome'));
+EOF
+
+# --- 9) STORAGE LINK + CACHE CLEAR ---
+php artisan storage:link || true
+php artisan optimize:clear
+
+# --- 10) MIGRATE ---
+# If this is a fresh module, this should be safe:
+php artisan migrate -n || true
+
+echo "✅ Repair complete. If migrate complains about old/bad tables, run: php artisan migrate:fresh -n (WARNING: wipes data)"
+
+
+
