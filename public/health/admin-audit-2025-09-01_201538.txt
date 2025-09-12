@@ -1,0 +1,198 @@
+=== ADMIN FEATURE AUDIT 2025-09-01_201538 ===
+== Route names (volunteer/org/admin) ==
+login: YES
+register: YES
+my.profile: NO
+org.login: YES
+org.register: YES
+org.dashboard: YES
+admin.login: YES
+admin.dashboard: YES
+admin.users.index: YES
+admin.opportunities.index: YES
+admin.applicants.index: YES
+admin.attendance.index: YES
+admin.hours.all: YES
+admin.certificates.index: YES
+admin.reports.index: YES
+admin.settings.index: YES
+admin.logout: YES
+
+== Admin routes + middleware ==
+admin.login | admin/login | web,guest
+admin.organizations.index | admin/organizations | web,auth,verified,can:admin
+admin.settings.index | admin/settings | web,auth,verified,can:admin
+admin.reports.index | admin/reports | web,auth,verified,can:admin
+admin.certificates.index | admin/certificates | web,auth,verified,can:admin
+admin.attendance.index | admin/attendance | web,auth,verified,can:admin
+admin.applicants.index | admin/applicants | web,auth,verified,can:admin
+admin.dashboard | admin | web,auth,verified,can:admin
+admin.users.index | admin/users | web,auth,verified,can:admin
+admin.users.show | admin/users/{user} | web,auth,verified,can:admin
+admin.users.update | admin/users/{user} | web,auth,verified,can:admin
+admin.users.destroy | admin/users/{user} | web,auth,verified,can:admin
+admin.opportunities.index | admin/opportunities | web,auth,verified,can:admin
+admin.opportunities.show | admin/opportunities/{opportunity} | web,auth,verified,can:admin
+admin.opportunities.update | admin/opportunities/{opportunity} | web,auth,verified,can:admin
+admin.opportunities.destroy | admin/opportunities/{opportunity} | web,auth,verified,can:admin
+[!] Aliasing 'DashboardController' to 'App\Http\Controllers\Admin\DashboardController' for this Tinker session.
+admin.dashboard.page | admin/dashboard | web,auth,verified,can:admin
+admin.logout | admin/logout | web,auth,verified,can:admin
+admin.attendance.qr | admin/attendance/qr/{opportunityId} | web,auth,verified,can:isAdmin
+admin.attendance.manual | admin/opportunities/{opportunityId}/attendance/manual | web,auth,verified,can:isAdmin
+admin.attendance.finalize | admin/opportunities/{opportunityId}/attendance/finalize | web,auth,verified,can:isAdmin
+admin.attendance.complete | admin/opportunities/{opportunityId}/attendance/complete | web,auth,verified,can:isAdmin
+admin.diag | admin/_diag | web,auth,verified,can:isAdmin
+admin.hours.show | admin/opportunities/{opportunityId}/hours | web,auth,verified,can:isAdmin
+admin.hours.all | admin/hours | web,auth,verified,can:isAdmin
+admin.users | admin/users/index | web,auth,verified,can:isAdmin
+admin.users.toggle | admin/users/toggle/{id} | web,auth,verified,can:isAdmin
+
+== Argon theme presence (views/assets) ==
+drwxrwsr-x+ 32 swaeduae www-data 4096 Sep  1 19:52 resources/views/admin
+drwxrwsr-x+  2 swaeduae www-data 4096 Aug 30 18:33 resources/views/admin/analytics
+drwxrwsr-x+  2 swaeduae www-data 4096 Sep  1 19:52 resources/views/admin/applicants
+drwxrwsr-x+  2 swaeduae www-data 4096 Aug 30 18:33 resources/views/admin/applications
+drwxrwsr-x+  2 swaeduae www-data 4096 Sep  1 20:12 resources/views/admin/argon
+drwxrwsr-x+  2 swaeduae www-data 4096 Aug 30 18:33 resources/views/admin/attendance
+drwxrwsr-x+  2 swaeduae www-data 4096 Aug 30 18:33 resources/views/admin/audit
+drwxrwsr-x+  2 swaeduae www-data 4096 Aug 30 18:33 resources/views/admin/auth
+drwxrwsr-x+  2 swaeduae www-data 4096 Aug 30 18:33 resources/views/admin/categories
+drwxrwsr-x+  2 swaeduae www-data 4096 Aug 30 18:33 resources/views/admin/certificates
+drwxrwsr-x+  2 swaeduae www-data 4096 Aug 14 16:12 resources/views/admin/dashboard
+-rw-rw-r--+  1 swaeduae www-data 2379 Aug  4 16:08 resources/views/admin/dashboard.bl
+-rw-rw-r--+  1 swaeduae www-data  999 Aug 30 18:33 resources/views/admin/dashboard.blade.php
+-rw-rw-r--+  1 swaeduae www-data 1226 Aug 30 18:33 resources/views/admin/dashboard_compat_fallback.blade.php
+-rw-rw-r--+  1 swaeduae www-data 1274 Aug 30 18:33 resources/views/admin/dashboard_safe.blade.php
+-rw-rw-r--+  1 swaeduae www-data  765 Aug 30 18:33 resources/views/admin/_diag_dashboard.blade.php
+drwxrwsr-x+  2 swaeduae www-data 4096 Aug 30 18:33 resources/views/admin/events
+drwxrwsr-x+  2 swaeduae www-data 4096 Sep  1 20:14 resources/views/admin/hours
+-rw-rw-r--+  1 swaeduae www-data 5483 Aug 30 18:33 resources/views/admin/index.blade.php
+drwxrwsr-x+  2 swaeduae www-data 4096 Aug 30 18:33 resources/views/admin/kyc
+-rw-rw-r--+  1 swaeduae www-data  133 Aug 30 18:33 resources/views/admin/kyc.blade.php
+-rw-rw-r--+  1 swaeduae www-data 1811 Aug 30 18:33 resources/views/admin/layout.blade.php
+-rw-rw-r--+  1 swaeduae www-data 1849 Aug 13 19:52 resources/views/admin/layout.blade.php.20250813_133122
+-rw-rw-r--+  1 swaeduae www-data 2263 Aug 13 19:52 resources/views/admin/layout.blade.php.20250813_143405
+-rw-rw-r--+  1 swaeduae www-data 1776 Aug 16 10:41 resources/views/admin/layout.blade.php.broken.2025-08-16_064122
+drwxrwsr-x+  2 swaeduae www-data 4096 Sep  1 19:51 resources/views/admin/layouts
+drwxrwsr-x+  2 swaeduae www-data 4096 Aug 30 18:33 resources/views/admin/learning
+-rw-rw-r--+  1 swaeduae www-data  101 Aug 30 18:33 resources/views/admin/login.blade.php
+drwxrwsr-x+  2 swaeduae www-data 4096 Aug 30 18:33 resources/views/admin/media
+drwxrwsr-x+  2 swaeduae www-data 4096 Aug 30 18:33 resources/views/admin/news
+drwxrwsr-x+  2 swaeduae www-data 4096 Aug 30 21:54 resources/views/admin/opportunities
+drwxrwsr-x+  2 swaeduae www-data 4096 Aug 30 18:33 resources/views/admin/organizations
+drwxrwsr-x+  2 swaeduae www-data 4096 Aug 30 18:33 resources/views/admin/orgs_plain
+-rw-rw-r--+  1 swaeduae www-data 2971 Aug 30 18:33 resources/views/admin/overview.blade.php
+drwxrwsr-x+  2 swaeduae www-data 4096 Sep  1 20:08 resources/views/admin/partials
+drwxrwsr-x+  2 swaeduae www-data 4096 Aug 30 18:33 resources/views/admin/partners
+-rw-rw-r--+  1 swaeduae www-data  265 Aug 30 18:33 resources/views/admin/placeholder.blade.php
+-rw-rw-r--+  1 swaeduae www-data  143 Aug 30 18:33 resources/views/admin/placeholders.blade.php
+drwxrwsr-x+  2 swaeduae www-data 4096 Aug 30 18:33 resources/views/admin/profile
+drwxrwsr-x+  2 swaeduae www-data 4096 Aug 30 18:33 resources/views/admin/reports
+drwxrwsr-x+  2 swaeduae www-data 4096 Aug 30 18:33 resources/views/admin/roles
+drwxrwsr-x+  2 swaeduae www-data 4096 Aug 30 18:33 resources/views/admin/settings
+-rw-rw-r--+  1 swaeduae www-data  799 Aug 30 18:33 resources/views/admin/settings.blade.php
+drwxrwsr-x+  2 swaeduae www-data 4096 Aug 30 18:33 resources/views/admin/settings_plain
+drwxrwsr-x+  2 swaeduae www-data 4096 Aug 30 18:33 resources/views/admin/task_monitor
+drwxrwsr-x+  2 swaeduae www-data 4096 Aug 30 18:33 resources/views/admin/translations
+drwxrwsr-x+  2 swaeduae www-data 4096 Aug 30 18:33 resources/views/admin/users
+drwxrwsr-x+ 2 swaeduae www-data 4096 Sep  1 19:51 resources/views/admin/layouts
+drwxrwsr-x+ 2 swaeduae www-data 4096 Aug 30 18:33 resources/views/admin/auth
+resources/views/layouts/admin-argon.blade.php:6:    <link rel="stylesheet" href="{{ asset('vendor/argon/css/argon.css') }}">
+resources/views/layouts/admin.blade.php:2:@extends('layouts.argon')
+resources/views/layouts/public.blade.php.2025-08-24-191138.bak:8:  <link rel="stylesheet" href="{{ asset('vendor/argon/assets/css/argon-dashboard.min.css') }}">
+resources/views/layouts/_deprecated_app.blade.php:8:    <link rel="stylesheet" href="{{ asset('vendor/argon/assets/css/nucleo-icons.css') }}">
+resources/views/layouts/argon.blade.php.2025-08-24-191138.bak:4:<link rel="stylesheet" href="{{ asset('vendor/argon/assets/css/argon.css') }}">
+resources/views/layouts/argon.blade.php:4:<link rel="stylesheet" href="{{ asset('vendor/argon/assets/css/argon.css') }}">
+resources/views/layouts/org.blade.php:1:@extends('layouts.argon')
+resources/views/layouts/org.blade.php.2025-08-24-191138.bak:1:@extends('layouts.argon')
+resources/views/partials/assets-dashboard.blade.php:1:<link rel="stylesheet" href="{{ asset('vendor/argon/assets/css/argon.css') }}?v={{ @filemtime(public_path('vendor/argon/assets/css/argon.css')) }}">
+resources/views/partials/org_menu_hotfix.blade.php.disabled_2025-08-24_080241:49:  // Bootstrap events (works with Argon/Bootstrap)
+resources/views/partials/theme-admin.blade.php:1:<link rel="stylesheet" href="/vendor/argon/assets/css/argon.css">
+resources/views/org/login.blade.php:4:<link rel="stylesheet" href="/vendor/argon/assets/css/argon-dashboard.min.css">
+resources/views/org/layout.blade.php.bak.2025-08-30-183639:10:  <!-- Argon Dashboard CSS -->
+resources/views/org/login.blade.php.bak.1756571373:4:<link rel="stylesheet" href="/vendor/argon/assets/css/argon-dashboard.min.css">
+resources/views/org/layout_auth_min.blade.php:7:  <link rel="stylesheet" href="{{ asset('vendor/argon/assets/css/nucleo-icons.css') }}">
+resources/views/org/dashboard.blade.php.MIN_2025-08-23_183121:2:@extends('org.layout') {{-- We reuse the Argon admin layout for consistency --}}
+resources/views/org/layout_auth.blade.php:9:  <link rel="stylesheet" href="{{ asset('vendor/argon/assets/css/nucleo-icons.css') }}">
+resources/views/org/layout.blade.php:9:  <!-- Argon Dashboard CSS -->
+resources/views/org/layout.blade.php.bak.2025-08-30-185046:9:  <!-- Argon Dashboard CSS -->
+resources/views/org/layout.blade.php.bak.2025-08-30-184318:9:  <!-- Argon Dashboard CSS -->
+resources/views/org/layout.blade.php.bak.2025-08-30-184008:9:  <!-- Argon Dashboard CSS -->
+resources/views/admin/layout.blade.php.broken.2025-08-16_064122:9:  <!-- Argon Dashboard CSS -->
+resources/views/admin/orgs_plain/pending.blade.php:1:@extends("layouts.admin-argon")
+resources/views/admin/login.blade.php:1:@extends("layouts.admin-argon")
+resources/views/admin/auth/login.blade.php.bak.1756468173:1:@extends('admin.layouts.argon')
+resources/views/admin/auth/login.blade.php.bak.1756466463:1:@extends('admin.layouts.argon')
+resources/views/admin/auth/login_min.blade.php:1:@extends("layouts.admin-argon")
+resources/views/admin/auth/login.blade.php.bak.1756465399:1:@extends('admin.layouts.argon')
+resources/views/admin/auth/login.blade.php.bak.20250829_173611:1:@extends('admin.layouts.argon')
+resources/views/admin/layouts/mini.blade.php:1:@extends("layouts.admin-argon")
+resources/views/admin/layouts/base.blade.php:1:@extends("layouts.admin-argon")
+resources/views/admin/layouts/argon.blade.php:1:@extends("layouts.admin-argon")
+resources/views/admin/layouts/guest.blade.php:4:<link href="/assets/argon/css/argon.min.css" rel="stylesheet">
+resources/views/admin/certificates/pdf.blade.php:1:@extends("layouts.admin-argon")
+resources/views/admin/argon/_footer.blade.php:1:@extends("layouts.admin-argon")
+resources/views/admin/argon/_navbar.blade.php:1:@extends("layouts.admin-argon")
+resources/views/admin/argon/_sidenav.blade.php:2:@extends("layouts.admin-argon")
+resources/views/admin/opportunities/_form.blade.php:1:@extends("layouts.admin-argon")
+resources/views/admin/settings_plain/api.blade.php:1:@extends("layouts.admin-argon")
+resources/views/admin/partials/topbar.blade.php:1:@extends("layouts.admin-argon")
+resources/views/admin/partials/table_search.blade.php:1:@extends("layouts.admin-argon")
+resources/views/admin/partials/index_toolbar.blade.php:1:@extends("layouts.admin-argon")
+resources/views/admin/partials/sidebar.blade.php:1:@extends("layouts.admin-argon")
+resources/views/admin/partials/admin_guard.blade.php:1:@extends("layouts.admin-argon")
+resources/views/admin/partials/sidebar.blade.php.bak.2025-09-01-200811:1:@extends("layouts.admin-argon")
+resources/views/admin/partials/nav.blade.php:1:@extends("layouts.admin-argon")
+resources/views/admin/partials/flash.blade.php:1:@extends("layouts.admin-argon")
+resources/views/admin/partials/footer.blade.php:1:@extends("layouts.admin-argon")
+resources/views/admin/layout.blade.php:1:@extends("layouts.admin-argon")
+resources/views/public/layout-argon.blade.php:10:  <link rel="stylesheet" href="{{ asset('vendor/argon/css/argon.css') }}">
+drwxrwsr-x+ 7 swaeduae www-data 4096 Aug 14  2024 public/assets
+
+== Admin controllers (exist/missing) ==
+[OK]  app/Http/Controllers/Admin/DashboardController.php
+[OK]  app/Http/Controllers/Admin/UserController.php
+[OK]  app/Http/Controllers/Admin/OpportunityController.php
+[OK]  app/Http/Controllers/Admin/ApplicantsController.php
+[OK]  app/Http/Controllers/Admin/AttendanceAdminController.php
+[OK]  app/Http/Controllers/Admin/HoursReportController.php
+[OK]  app/Http/Controllers/Admin/CertificateController.php
+[OK]  app/Http/Controllers/Admin/ReportsController.php
+[OK]  app/Http/Controllers/Admin/SettingsController.php
+
+== Key admin views (exist/missing) ==
+[OK]  resources/views/admin/dashboard.blade.php
+[OK]  resources/views/admin/users/index.blade.php
+[OK]  resources/views/admin/opportunities/index.blade.php
+[OK]  resources/views/admin/applicants/index.blade.php
+[OK]  resources/views/admin/attendance/index.blade.php
+[OK]  resources/views/admin/hours/index.blade.php
+[OK]  resources/views/admin/certificates/index.blade.php
+[OK]  resources/views/admin/reports/index.blade.php
+[OK]  resources/views/admin/settings/index.blade.php
+[OK]  resources/views/admin/auth/login.blade.php
+[OK]  resources/views/admin/layout.blade.php
+[OK]  resources/views/admin/layouts/guest.blade.php
+
+== DB schema (tables) ==
+users: YES
+organizations: NO
+opportunities: YES
+applicants: NO
+attendances: NO
+hours: NO
+certificates: YES
+
+== HTTP probes (status + Location) ==
+/login             -> HTTP/2 200 
+/register          -> HTTP/2 200 
+/profile           -> HTTP/2 302 
+/org/login         -> HTTP/2 200 
+/org/register      -> HTTP/2 200 
+/org/dashboard     -> HTTP/2 302 
+/admin             -> HTTP/2 302 
+/admin/login       -> HTTP/2 200 
+/admin/dashboard   -> HTTP/2 302 
+
+Report saved: public/health/admin-audit-2025-09-01_201538.txt

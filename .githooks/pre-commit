@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+set -eo pipefail
+bad=$(git diff --cached --name-only | grep -E '[<>:"\\|?*]' || true)
+if [ -n "$bad" ]; then
+  echo "[ERROR] These filenames are not allowed on Windows:"
+  echo "$bad"
+  echo "Rename or git rm --cached them, then commit again."
+  exit 1
+fi

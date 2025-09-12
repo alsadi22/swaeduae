@@ -1,0 +1,9 @@
+:root {
+  --brand-primary:#2a7de1;
+  --brand-accent:#e7f2ff;
+}
+.admin-sidebar { position: sticky; top:0; }
+.nav-link.active{ background:var(--brand-primary); color:#fff!important; }
+.nav-link:hover{ background:var(--brand-accent); }
+.card-metric .value{ font-size:1.6rem; font-weight:700; }
+.card-metric .label{ color:#6c757d; text-transform:uppercase; font-size:.75rem; letter-spacing:.04em; }

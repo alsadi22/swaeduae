@@ -1,0 +1,24 @@
+<?php
+namespace App\Http\Controllers\Dashbo
+use App\Http\Controllers\Controller;
+use App\Models\Certif
+use App\Models\Event;
+use Ap
+
+
+class DashboardController extends Controller
+{
+  
+ 
+        $user = Auth::user(
+     
+            'certCount' => Cert
+            'hours' => VolunteerHour::where('user_id', $user-
+     
+                $q->where('us
+     
+            'badges' => ['Top Volunteer'
+            'volChart' => ['labels' => [], 'data' => []]
+  
+    }
+}

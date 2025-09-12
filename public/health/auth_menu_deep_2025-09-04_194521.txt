@@ -1,0 +1,78 @@
+\n==================== A) HTTP + LIVE HTML (home header snippet) ====================
+/ -> 200
+-- tokens present? --
+-- navbar snippet --
+<nav class="container py-3 d-flex gap-3">   
+<a href="https://swaeduae.ae" class="fw-bold">SwaedUAE
+</a>   
+<a href="https://swaeduae.ae/opportunities">Opportunities
+</a>   
+<a href="https://swaeduae.ae/about">About
+</a>   
+<a href="https://swaeduae.ae/contact">Contact
+</a>   
+<span class="ms-auto">
+<div style="display:none">
+</div> 
+</span>   
+</nav>   
+\n==================== B) Which route handles '/' (Action column) ====================
+\n==================== C) Guess homepage view (search for hero text + extends) ====================
+Candidate view(s):
+  - resources/views/_home.stub.blade.php
+  - resources/views/static/home.blade.php
+  - resources/views/home.blade.php
+-- extends/layout lines in resources/views/_home.stub.blade.php:
+1:@extends('layout.layout')
+-- extends/layout lines in resources/views/static/home.blade.php:
+1:@extends('layout.layout')
+-- extends/layout lines in resources/views/home.blade.php:
+1:@extends('public.layout-travelpro')
+\n==================== D) Which layout includes which header ====================
+Layouts that include a header partial:
+-- header include lines in resources/views/_legacy_layouts/_welcome_OLD.blade.php:
+11:  @include('partials.header')
+\n==================== E) Do header partials actually include auth menus? ====================
+Header: resources/views/partials/header.blade.php
+24:            @includeIf('partials.account_menu')
+26:            @includeIf('partials.auth_menu')
+  -- first navbar <ul> block --
+      <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link {{ request()->is('/') ? 'active' : '' }}" href="{{ url('/') }}">Home</a></li>
+        <li class="nav-item"><a class="nav-link {{ request()->is('opportunities*') ? 'active' : '' }}" href="{{ url('/opportunities') }}">Opportunities</a></li>
+        <li class="nav-item"><a class="nav-link {{ request()->is('events*') ? 'active' : '' }}" href="{{ url('/events') }}">Events</a></li>
+        <li class="nav-item"><a class="nav-link {{ request()->is('organizations*') ? 'active' : '' }}" href="{{ url('/organizations') }}">Organizations</a></li>
+        <li class="nav-item"><a class="nav-link {{ request()->is('gallery') ? 'active' : '' }}" href="{{ url('/gallery') }}">Gallery</a></li>
+        {{-- AUTH-MENU-INJECT START --}}
+        @auth
+            @includeIf('partials.account_menu')
+        @else
+            @includeIf('partials.auth_menu')
+        @endauth
+        {{-- AUTH-MENU-INJECT END --}}
+      </ul>
+Header: resources/views/components/header.blade.php
+  (no auth/account includes found)
+  -- first navbar <ul> block --
+  <ul class="navbar-nav ms-auto">@include('partials.auth_menu')</ul>
+</nav>
+\n==================== F) Do the auth partials contain the expected markup? ====================
+Partial: resources/views/partials/auth_menu.blade.php
+2:  <a class="nav-link dropdown-toggle" href="#" id="authMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+6:    <li><a class="dropdown-item" href="{{ url('/login') }}">Volunteer Sign In</a></li>
+7:    <li><a class="dropdown-item" href="{{ url('/register') }}">Volunteer Register</a></li>
+9:    <li><a class="dropdown-item" href="{{ url('/org/login') }}">Organization Sign In</a></li>
+Partial: resources/views/partials/account_menu.blade.php
+3:  <a class="nav-link dropdown-toggle" href="#" id="accountMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+  (no /login|/register|/org/login)
+\n==================== G) Is Bootstrap JS referenced (dropdowns need it)? ====================
+  resources/views/layouts/auth.blade.php:12:  <script src="{{ asset('vendor/travelpro/assets/js/bootstrap.min.js') }}"></script>
+  resources/views/layouts/admin.blade.php:93:  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  resources/views/layouts/_deprecated_app.blade.php:22:    <script src="{{ asset('vendor/argon/assets/js/core/bootstrap.min.js') }}"></script>
+  resources/views/org/layout_auth_min.blade.php:14:  <script src="{{ asset('vendor/argon/assets/js/core/bootstrap.bundle.min.js') }}"></script>
+  resources/views/org/layout_auth.blade.php:20:  <script src="{{ asset('vendor/argon/assets/js/core/bootstrap.bundle.min.js') }}"></script>
+  resources/views/org/layout.blade.php:49:  <script src="{{ asset('vendor/argon/assets/js/core/bootstrap.bundle.min.js') }}"></script>
+  resources/views/admin/layouts/base.blade.php:32:<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  resources/views/admin/layouts/argon.blade.php:46:  <script src="{{ asset('vendor/bootstrap/bootstrap.bundle.min.js') }}" crossorigin="anonymous"></script>
+  resources/views/public/layout-travelpro.blade.php:22:  <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
+\n==================== H) Final: show the <ul class='navbar-nav'> from LIVE HOME HTML ====================

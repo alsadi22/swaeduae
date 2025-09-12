@@ -1,0 +1,20 @@
+<?php
+
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Admin\DashboardController;
+
+# Guest (admin) – show/login
+Route::middleware(['web','guest:admin'])->group(function () {
+    Route::get('/admin/login', [AuthController::class, 'show'])->name('admin.login');
+    Route::post('/admin/login', [AuthController::class, 'login'])->name('admin.login.post');
+});
+
+# Authenticated (admin) – dashboard + logout
+Route::middleware(['web','auth:admin'])->group(function () {
+    Route::get('/admin', [DashboardController::class, 'index'])->name('admin.root');
+    Route::post('/admin/logout', [AuthController::class, 'logout'])->name('admin.logout');
+});
+Route::middleware(['web'])->group(function () {
+    Route::redirect('/admin/dashboard', '/admin', 302)->name('admin.dashboard.legacy');
+});

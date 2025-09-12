@@ -1,0 +1,74 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
+
+class EventController extends Controller
+{
+    public function index(Request $request)
+    {
+        $q         = trim((string)$request->get('q', ''));
+        $category  = $request->get('category');
+        $region    = $request->get('region');
+        $dateFrom  = $request->get('date_from');
+        $dateTo    = $request->get('date_to');
+        $sort      = $request->get('sort', 'newest');
+
+        $table = 'events';
+        $has   = fn($col) => Schema::hasColumn($table, $col);
+
+        $builder = DB::table($table)->select("$table.*");
+
+        if ($q !== '') {
+            $builder->where(function ($w) use ($q, $table, $has) {
+                $w->when($has('title'), fn($x) => $x->orWhere("$table.title", 'LIKE', "%{$q}%"))
+                  ->when($has('description'), fn($x) => $x->orWhere("$table.description", 'LIKE', "%{$q}%"));
+            });
+        }
+
+        if (!empty($category) && $has('category')) {
+            $builder->where("$table.category", $category);
+        }
+        if (!empty($region) && $has('region')) {
+            $builder->where("$table.region", $region);
+        }
+        if (!empty($dateFrom) && $has('start_date')) {
+            $builder->whereDate("$table.start_date", '>=', $dateFrom);
+        }
+        if (!empty($dateTo) && $has('end_date')) {
+            $builder->whereDate("$table.end_date", '<=', $dateTo);
+        }
+
+        $closingExpr = DB::raw("COALESCE($table.deadline, $table.end_date, $table.start_date, $table.created_at)");
+        if ($sort === 'closing_soon') {
+            $builder->orderBy($closingExpr, 'asc');
+        } else {
+            $builder->orderBy("$table.created_at", 'desc');
+        }
+
+        $events = $builder->paginate(12)->appends($request->query());
+        return view('events.index', compact('events', 'q', 'category', 'region', 'dateFrom', 'dateTo', 'sort'));
+    }
+
+    public function show($idOrSlug)
+    {
+        $table = 'events';
+        $has = fn($col) => Schema::hasColumn($table, $col);
+
+        $query = DB::table($table)->select("$table.*");
+        if ($has('slug') && !is_numeric($idOrSlug)) {
+            $query->where("$table.slug", $idOrSlug);
+        } else {
+            $query->where("$table.id", (int)$idOrSlug);
+        }
+
+        $event = $query->first();
+        abort_if(!$event, 404);
+
+        return view('events.show', compact('event'));
+    }
+}

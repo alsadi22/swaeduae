@@ -1,0 +1,200 @@
+=== FULL HEALTH 2025-09-02_031001 ===
+
+== CACHES REFRESH ==
+caches: refreshed
+
+== ABOUT ==
+
+   ParseError 
+
+  syntax error, unexpected token "__DIR__"
+
+  at routes/web.php:355
+    351▕ /* === Canonical Forgot Password (GET -> Blade with CSRF) === */
+    352▕ Route::middleware(['web','guest'])->get('/forgot-password', function () {
+    353▕     return view('auth.forgot-password');
+    354▕ })->name('password.request');
+  ➜ 355▕ \nrequire __DIR__.'/z_overrides.php';
+    356▕ 
+    357▕ require __DIR__.'/z_overrides.php';
+    358▕
+
+      [2m+3 vendor frames [22m
+
+  4   app/Providers/RouteServiceProvider.php:16
+      Illuminate\Routing\RouteRegistrar::group()
+      [2m+7 vendor frames [22m
+
+  12  [internal]:0
+      Illuminate\Foundation\Application::Illuminate\Foundation\{closure}()
+
+
+== ROUTES (top) ==
+
+   ParseError 
+
+  syntax error, unexpected token "__DIR__"
+
+  at routes/web.php:355
+    351▕ /* === Canonical Forgot Password (GET -> Blade with CSRF) === */
+    352▕ Route::middleware(['web','guest'])->get('/forgot-password', function () {
+    353▕     return view('auth.forgot-password');
+    354▕ })->name('password.request');
+  ➜ 355▕ \nrequire __DIR__.'/z_overrides.php';
+    356▕ 
+    357▕ require __DIR__.'/z_overrides.php';
+    358▕
+
+      [2m+3 vendor frames [22m
+
+  4   app/Providers/RouteServiceProvider.php:16
+      Illuminate\Routing\RouteRegistrar::group()
+      [2m+7 vendor frames [22m
+
+  12  [internal]:0
+      Illuminate\Foundation\Application::Illuminate\Foundation\{closure}()
+
+
+== MIGRATIONS STATUS ==
+
+   ParseError 
+
+  syntax error, unexpected token "__DIR__"
+
+  at routes/web.php:355
+    351▕ /* === Canonical Forgot Password (GET -> Blade with CSRF) === */
+    352▕ Route::middleware(['web','guest'])->get('/forgot-password', function () {
+    353▕     return view('auth.forgot-password');
+    354▕ })->name('password.request');
+  ➜ 355▕ \nrequire __DIR__.'/z_overrides.php';
+    356▕ 
+    357▕ require __DIR__.'/z_overrides.php';
+    358▕
+
+      [2m+3 vendor frames [22m
+
+  4   app/Providers/RouteServiceProvider.php:16
+      Illuminate\Routing\RouteRegistrar::group()
+      [2m+7 vendor frames [22m
+
+  12  [internal]:0
+      Illuminate\Foundation\Application::Illuminate\Foundation\{closure}()
+
+
+== QUEUE & SCHEDULER ==
+active
+● swaed-queue.service - Laravel Queue Worker (SwaedUAE)
+     Loaded: loaded (/etc/systemd/system/swaed-queue.service; enabled; vendor preset: enabled)
+     Active: active (running) since Tue 2025-09-02 02:11:04 +04; 58min ago
+   Main PID: 497305 (php)
+      Tasks: 1 (limit: 38144)
+     Memory: 38.9M
+        CPU: 1.020s
+     CGroup: /system.slice/swaed-queue.service
+             └─497305 /usr/bin/php artisan queue:work --queue=default --sleep=3 --tries=3 --max-time=3600
+
+Sep 02 02:11:04 swaeduae systemd[1]: Started Laravel Queue Worker (SwaedUAE).
+
+   ParseError 
+
+  syntax error, unexpected token "__DIR__"
+
+  at routes/web.php:355
+    351▕ /* === Canonical Forgot Password (GET -> Blade with CSRF) === */
+    352▕ Route::middleware(['web','guest'])->get('/forgot-password', function () {
+    353▕     return view('auth.forgot-password');
+    354▕ })->name('password.request');
+  ➜ 355▕ \nrequire __DIR__.'/z_overrides.php';
+    356▕ 
+    357▕ require __DIR__.'/z_overrides.php';
+    358▕
+
+      [2m+3 vendor frames [22m
+
+  4   app/Providers/RouteServiceProvider.php:16
+      Illuminate\Routing\RouteRegistrar::group()
+      [2m+7 vendor frames [22m
+
+  12  [internal]:0
+      Illuminate\Foundation\Application::Illuminate\Foundation\{closure}()
+
+
+== HTTP PROBES ==
+GET / -> 500
+GET /about -> 500
+GET /privacy -> 500
+GET /terms -> 500
+GET /org/login -> 500
+HTTP/2 500 
+date: Mon, 01 Sep 2025 23:10:04 GMT
+content-type: text/html; charset=UTF-8
+cache-control: no-cache, private
+server: cloudflare
+cf-cache-status: DYNAMIC
+
+== QR VERIFY CHECKS ==
+/qr/verify -> 500
+/qr/verify?code=test -> HTTP/2 500  date: Mon, 01 Sep 2025 23:10:05 GMT content-type: text/html; charset=UTF-8 
+throttle spray: 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500 500
+
+== CERT PDF sanity ==
+total 4.0K
+-rw-rwxr--+ 1 swaeduae swaeduae 1.3K Aug 30 23:49 _test.pdf
+
+== PWA (manifest/SW/icons present & non-zero) ==
+OK -rw-rw-r--+ 1 swaeduae www-data 332 Aug 31 00:02 public/manifest.json
+OK -rw-rw-r--+ 1 swaeduae www-data 775 Aug 31 00:51 public/service-worker.js
+OK -rw-rw-r--+ 1 swaeduae www-data 67 Aug 31 00:04 public/img/icon-192.png
+OK -rw-rw-r--+ 1 swaeduae www-data 67 Aug 31 00:04 public/img/icon-512.png
+
+== ANALYTICS on homepage ==
+analytics MISSING
+
+== MAIL & SESSION SNAPSHOT ==
+MAIL_FROM_ADDRESS=admin@swaeduae.ae
+MAIL_MAILER=smtp
+MAIL_HOST=smtppro.zoho.com
+MAIL_PORT=587
+MAIL_ENCRYPTION=tls
+MAIL_USERNAME=admin@swaeduae.ae
+SESSION_DRIVER=file
+SESSION_LIFETIME=120
+SESSION_SECURE_COOKIE=true
+SESSION_SAME_SITE=Lax
+
+== NGINX & CLOUDFLARED ==
+nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /etc/nginx/nginx.conf test is successful
+● cloudflared.service - cloudflared
+     Loaded: loaded (/etc/systemd/system/cloudflared.service; enabled; vendor preset: enabled)
+     Active: active (running) since Tue 2025-09-02 00:00:46 +04; 3h 9min ago
+   Main PID: 413712 (cloudflared)
+      Tasks: 16 (limit: 38144)
+     Memory: 17.9M
+        CPU: 24.496s
+     CGroup: /system.slice/cloudflared.service
+             └─413712 /usr/local/bin/cloudflared --no-autoupdate --config /etc/cloudflared/config.yml tunnel run
+
+Sep 02 03:10:10 swaeduae cloudflared[413712]: 2025-09-01T23:10:10Z ERR failed to run the datagram handler error="context canceled" connIndex=2 event=0 ip=198.41.192.47
+Sep 02 03:10:10 swaeduae cloudflared[413712]: 2025-09-01T23:10:10Z WRN failed to serve tunnel connection error="control stream encountered a failure while serving" connIndex=2 event=0 ip=198.41.192.47
+Sep 02 03:10:10 swaeduae cloudflared[413712]: 2025-09-01T23:10:10Z WRN Serve tunnel error error="control stream encountered a failure while serving" connIndex=2 event=0 ip=198.41.192.47
+Sep 02 03:10:10 swaeduae cloudflared[413712]: 2025-09-01T23:10:10Z INF Retrying connection in up to 1m4s connIndex=2 event=0 ip=198.41.192.47
+Sep 02 03:10:24 swaeduae cloudflared[413712]: 2025-09-01T23:10:24Z WRN Connection terminated error="control stream encountered a failure while serving" connIndex=2
+
+== BACKUPS ==
+-rw-r--r-- 1 root root 305M Aug 30 21:23 swaeduae_2025-08-30_212254.tar.gz
+-rw-r--r-- 1 root root 305M Aug 30 22:10 swaeduae_2025-08-30_221017.tar.gz
+-rw-r--r-- 1 root root 306M Aug 30 23:59 swaeduae_2025-08-30_235911.tar.gz
+-rw-r--r-- 1 root root 306M Aug 31 00:27 swaeduae_2025-08-31_002730.tar.gz
+-rw-r--r-- 1 root root 2.8K Aug 30 21:22 swaeduae_2025-08-30_212254.sql.gz
+-rw-r--r-- 1 root root 2.8K Aug 30 22:10 swaeduae_2025-08-30_221017.sql.gz
+-rw-r--r-- 1 root root 3.2K Aug 30 23:59 swaeduae_2025-08-30_235911.sql.gz
+-rw-r--r-- 1 root root 3.8K Aug 31 00:27 swaeduae_2025-08-31_002730.sql.gz
+
+== RECENT LOG ERRORS (tail) ==
+latest_log=storage/logs/laravel-2025-09-02.log
+[2025-09-02 03:10:23] production.ERROR: syntax error, unexpected token "__DIR__" {"exception":"[object] (ParseError(code: 0): syntax error, unexpected token \"__DIR__\" at /var/www/swaeduae/routes/web.php:355)
+[2025-09-02 03:10:23] production.ERROR: syntax error, unexpected token "__DIR__" {"exception":"[object] (ParseError(code: 0): syntax error, unexpected token \"__DIR__\" at /var/www/swaeduae/routes/web.php:355)
+[2025-09-02 03:10:24] production.ERROR: syntax error, unexpected token "__DIR__" {"exception":"[object] (ParseError(code: 0): syntax error, unexpected token \"__DIR__\" at /var/www/swaeduae/routes/web.php:355)
+[2025-09-02 03:10:25] production.ERROR: syntax error, unexpected token "__DIR__" {"exception":"[object] (ParseError(code: 0): syntax error, unexpected token \"__DIR__\" at /var/www/swaeduae/routes/web.php:355)
+[2025-09-02 03:10:25] production.ERROR: syntax error, unexpected token "__DIR__" {"exception":"[object] (ParseError(code: 0): syntax error, unexpected token \"__DIR__\" at /var/www/swaeduae/routes/web.php:355)

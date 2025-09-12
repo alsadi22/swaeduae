@@ -1,0 +1,16 @@
+storage: total 136
+storage: drwxrwxr-x  8 vminingc vminingc  4096 Aug 18 12:01 .
+storage: drwxr-xr-x 43 vminingc vminingc 12288 Aug 20 05:47 ..
+storage: -rw-rw-r--  1 vminingc vminingc    14 Aug  4 12:08 .gitignore
+storage: drwxrwxr-x  4 vminingc vminingc  4096 Aug  7 16:08 app
+storage: drwxrwxr-x  2 vminingc vminingc  4096 Aug 19 23:30 backups
+storage: drwxrwxr-x  2 vminingc vminingc  4096 Aug  4 12:08 certificates
+storage: -rw-rw-r--  1 vminingc vminingc     2 Aug 18 12:01 db_index_audit.json
+storage: -rw-rw-r--  1 vminingc vminingc     0 Aug 18 12:01 db_index_suggestions.sql
+storage: drwxrwxr-x  6 vminingc vminingc  4096 Aug 17 10:14 framework
+storage: -rw-rw-r--  1 vminingc vminingc 11872 Aug 18 10:07 i18n_gaps.csv
+storage: -rw-rw-r--  1 vminingc vminingc  6326 Aug 18 12:01 index_apply_2025-08-18-120124.log
+storage: drwxrwxr-x  2 vminingc vminingc  4096 Aug  4 12:08 kyc_docs
+storage: drwxrwxr-x  3 vminingc vminingc  4096 Aug 20 02:55 logs
+storage: -rw-rw-r--  1 vminingc vminingc  4786 Aug 18 12:15 route_post_csrf_audit.csv
+storage: -rw-rw-r--  1 vminingc vminingc 31987 Aug 13 12:24 routes.json

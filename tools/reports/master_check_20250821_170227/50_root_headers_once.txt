@@ -1,0 +1,23 @@
+HTTP/1.1 200 OK
+Date: Thu, 21 Aug 2025 17:02:29 GMT
+Server: Apache
+X-Powered-By: PHP/8.4.7
+Cache-Control: no-cache, private
+Content-Language: ar
+Vary: Accept-Language
+Content-Security-Policy: default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; font-src 'self' data:; connect-src 'self'; frame-ancestors 'self'; upgrade-insecure-requests
+Set-Cookie: XSRF-TOKEN=eyJpdiI6IlRoa212emtFdWFXQk5sdk1lVjlwRkE9PSIsInZhbHVlIjoienZ6S1BhWU1BclNjdlZsaFJlVSt1L1Q5VzhKMkFwWVRJNWNPbTgzV1lHQzRsUVMwN29tWkRLelNSb2E5QlJuUE1LOVlLM0hmT2QvUS9sYTBHd0RYcWpka0hVMEhVVjRkdGdYTXpNRk11VVBkbklGVFE1SU1PY3JqMUl4QVZKOHciLCJtYWMiOiI2ZjdiMDc5OTU3ZDYwNzVjYmQ3MDgxM2VmMDUxMzNjZTFjN2U4YjI0N2NhYjI2NDk3NDNjODRmNGI3NzBiZTQxIiwidGFnIjoiIn0%3D; expires=Thu, 21 Aug 2025 19:02:29 GMT; Max-Age=7200; path=/; domain=swaeduae.ae; secure; samesite=lax
+Set-Cookie: swaeduae_session=eyJpdiI6ImJZSVI0WHhvN2VCYWxRb1RrdEUyTUE9PSIsInZhbHVlIjoiYmRCaUpKMGFuR0ZsMHJqRTM4RU9jbFF3MHpNM1lBdFBKZDJSZ25oeHpDMG5rOFlUMFlOOGJKWVlCeWNxNnc0bXpDSFNNYXZpMlYvMGxjdnRhNHQzcEQ3ZTZsNFVaVGg1TEdJSkZ2dktFSVQ1VFN3OGFDM3VRUDY2VEF3M0xha0siLCJtYWMiOiI0MWZiYjBkMDFhMDZhY2RiNjVmNjA1ZjViMTQ2Y2E4YTM1NDExNDkyMzk0MTk1YWIxOWU4YWJjNzY0MGE0NmM1IiwidGFnIjoiIn0%3D; expires=Thu, 21 Aug 2025 19:02:29 GMT; Max-Age=7200; path=/; domain=swaeduae.ae; secure; httponly; samesite=lax
+X-XSS-Protection: 0
+Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+X-Frame-Options: SAMEORIGIN
+X-Content-Type-Options: nosniff
+Referrer-Policy: strict-origin-when-cross-origin
+Permissions-Policy: geolocation=(), microphone=(), camera=()
+Upgrade: h2,h2c
+Connection: Upgrade
+Cross-Origin-Opener-Policy: same-origin
+Cross-Origin-Resource-Policy: same-origin
+Cache-Control: no-cache, no-store, must-revalidate
+Content-Type: text/html; charset=UTF-8
+

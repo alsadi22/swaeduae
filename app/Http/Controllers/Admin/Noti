@@ -1,0 +1,14 @@
+<?php
+namespace App\Http\Controller
+use A
+use Illuminate\Http\Request;
+use App\M
+
+class NotificationController extends Controller
+{
+    pu
+    {
+        $count = Kyc::where('status', 'pending')->c
+ 
+   
+
