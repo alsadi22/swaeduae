@@ -10,18 +10,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    # Environment for a hermetic boot (no MySQL, no queue, no mail)
     env:
+      # solid defaults for hermetic boot
       APP_ENV: testing
-      APP_KEY: base64:AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=   # static key is fine for CI
+      APP_KEY: base64:AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=  # static key is fine for CI
       APP_DEBUG: false
-      CACHE_DRIVER: array
-      SESSION_DRIVER: array
-      QUEUE_CONNECTION: sync
-      MAIL_MAILER: log
       LOG_CHANNEL: stack
-      DB_CONNECTION: sqlite
-      DB_DATABASE: ':memory:'
 
     steps:
       - name: Checkout
@@ -34,23 +28,30 @@ jobs:
           extensions: mbstring, intl, pdo_mysql
           coverage: none
 
-      # Force-clean and recreate Laravel dirs (idempotent)
+      # Nuke any odd symlink/file and recreate expected dirs
       - name: Prepare Laravel dirs
         shell: bash
         run: |
           rm -rf storage bootstrap/cache
           mkdir -p storage/framework/{cache,sessions,views} storage/logs bootstrap/cache
 
+      # Write a minimal, CI-safe .env so composer/Artisan read the right drivers
+      - name: Write CI .env
+        run: |
+          cat > .env <<'ENV'
+          APP_ENV=testing
+          APP_DEBUG=false
+          APP_KEY=base64:AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=
+          LOG_CHANNEL=stack
+          CACHE_DRIVER=array
+          SESSION_DRIVER=array
+          QUEUE_CONNECTION=sync
+          DB_CONNECTION=sqlite
+          DB_DATABASE=:memory:
+          ENV
+
       - name: Install dependencies
         run: composer install --no-interaction --prefer-dist --no-progress
-
-      # No need to write APP_KEY to .env — it's provided via env above
-      # Keep step only if you want a local .env for other steps (harmless with APP_KEY in env)
-      - name: Ensure baseline .env (optional)
-        run: |
-          [ -f .env ] || cp .env.example .env || echo "" > .env
-          # If the repo's .env.example lacks APP_KEY, this avoids key:generate noise
-          grep -q '^APP_KEY=' .env || echo 'APP_KEY=' >> .env || true
 
       - name: PHP Lint
         run: |
@@ -67,7 +68,7 @@ jobs:
             echo "OK: all admin views use admin.layout"
           fi
 
-      # Optional network probes (kept off on shared runners)
+      # Optional external probes (kept off for shared runners)
       - name: Probes (signed out) - optional
         if: ${{ false }}
         run: |
@@ -75,4 +76,3 @@ jobs:
           echo -n "/admin         : ";  curl -s -o /dev/null -w "%{http_code} %{redirect_url}\n" https://admin.swaeduae.ae/admin || true
           echo -n "/admin/login   : ";  curl -s -o /dev/null -w "%{http_code} %{redirect_url}\n" https://admin.swaeduae.ae/admin/login || true
           echo -n "/login         : ";  curl -s -o /dev/null -w "%{http_code}\n"          https://admin.swaeduae.ae/login || true
-
