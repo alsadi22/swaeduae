@@ -21,19 +21,12 @@ jobs:
           extensions: mbstring, intl, pdo_mysql
           coverage: none
 
-      # Make Laravel dirs idempotently; force "storage" to be a directory
+      # Force-clean and recreate Laravel dirs (idempotent)
       - name: Prepare Laravel dirs
         shell: bash
         run: |
-          if [ -e storage ] && [ ! -d storage ]; then
-            rm -f storage
-          fi
-          mkdir -p storage
-          mkdir -p storage/framework/cache || true
-          mkdir -p storage/framework/sessions || true
-          mkdir -p storage/framework/views || true
-          mkdir -p storage/logs || true
-          mkdir -p bootstrap/cache || true
+          rm -rf storage bootstrap/cache
+          mkdir -p storage/framework/{cache,sessions,views} storage/logs bootstrap/cache
 
       - name: Install dependencies
         run: composer install --no-interaction --prefer-dist --no-progress
@@ -60,10 +53,9 @@ jobs:
 
       # Optional network probes (kept off on shared runners)
       - name: Probes (signed out) - optional
-        if: ${{ false }}   # set to true to run these
+        if: ${{ false }}
         run: |
           echo -n "/ (admin host) : ";  curl -s -o /dev/null -w "%{http_code} %{redirect_url}\n" https://admin.swaeduae.ae/ || true
           echo -n "/admin         : ";  curl -s -o /dev/null -w "%{http_code} %{redirect_url}\n" https://admin.swaeduae.ae/admin || true
           echo -n "/admin/login   : ";  curl -s -o /dev/null -w "%{http_code} %{redirect_url}\n" https://admin.swaeduae.ae/admin/login || true
           echo -n "/login         : ";  curl -s -o /dev/null -w "%{http_code}\n"          https://admin.swaeduae.ae/login || true
-
