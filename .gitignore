@@ -27,3 +27,10 @@ scripts/smoke.env
 
 # Dependencies
 /vendor/
+
+# ignore accidental workflow backups
+.github/workflows/*.bak*
+
+# editor/backup artifacts
+*.bak
+*.bak.*

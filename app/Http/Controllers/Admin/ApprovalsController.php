@@ -1,67 +1,51 @@
 <?php
-declare(strict_types=1);
-
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\OrgProfile;
-use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
-use Illuminate\View\View;
+use Illuminate\Support\Facades\Redirect;
 
 class ApprovalsController extends Controller
 {
-    public function index(): View
+    public function index(Request $request)
     {
-        $orgs = OrgProfile::where('status', 'pending')
-            ->with('user:id,email')
-            ->orderBy('created_at')
-            ->get();
-
-        return view('admin.approvals.index', compact('orgs'));
-    }
-
-    public function approveOrg(int $id): RedirectResponse
-    {
-        return $this->updateOrg($id, 'approved');
-    }
-
-    public function declineOrg(int $id): RedirectResponse
-    {
-        return $this->updateOrg($id, 'rejected');
-    }
-
-    protected function updateOrg(int $id, string $status): RedirectResponse
-    {
-        DB::transaction(function () use ($id, $status) {
-            $profile = OrgProfile::lockForUpdate()->findOrFail($id);
-            $profile->update(['status' => $status]);
-
-            $user = $profile->user;
-            if ($user) {
-                if ($status === 'approved') {
-                    if (Schema::hasColumn('users', 'role')) {
-                        $user->role = 'org';
-                        $user->save();
-                    }
-                    if (method_exists($user, 'assignRole')) {
-                        try { $user->assignRole('org'); } catch (\Throwable $e) {}
-                    }
-                } else {
-                    if (Schema::hasColumn('users', 'role') && ($user->role ?? null) === 'org') {
-                        $user->role = null;
-                        $user->save();
-                    }
-                    if (method_exists($user, 'removeRole')) {
-                        try { $user->removeRole('org'); } catch (\Throwable $e) {}
-                    }
-                }
+        $pending = collect();
+        try {
+            if (DB::getSchemaBuilder()->hasTable("org_profiles")) {
+                $pending = DB::table("org_profiles")
+                    ->where("status","pending")
+                    ->orderByDesc("created_at")
+                    ->limit(500)
+                    ->leftJoin("users","users.id","=","org_profiles.user_id")->select("org_profiles.*","users.email as user_email")->get();
             }
-        });
+        } catch (\Throwable $e) { /* empty */ }
+        return view("admin.approvals.index", ["pending"=>$pending]);
+    }
 
-        $msg = $status === 'approved' ? 'Organization approved.' : 'Organization declined.';
+    public function approveOrg($id, Request $request)
+    {
+        try {
+            $updated = DB::table("org_profiles")->where("id", $id)->update([
+                "status"=>"approved",
+                "updated_at"=>now(),
+            ]);
+        } catch (\Throwable $e) {
+            return Redirect::route("admin.approvals.index")->with("error","DB error: ".$e->getMessage());
+        }
+        return Redirect::route("admin.approvals.index")->with("status", !empty($updated) ? "approved" : "nochange");
+    }
 
-        return redirect()->back()->with('status', $msg);
+    public function rejectOrg($id, Request $request)
+    {
+        try {
+            $updated = DB::table("org_profiles")->where("id", $id)->update([
+                "status"=>"rejected",
+                "updated_at"=>now(),
+            ]);
+        } catch (\Throwable $e) {
+            return Redirect::route("admin.approvals.index")->with("error","DB error: ".$e->getMessage());
+        }
+        return Redirect::route("admin.approvals.index")->with("status", !empty($updated) ? "rejected" : "nochange");
     }
 }

@@ -1,8 +1,0 @@
-<nav class="container py-3 d-flex gap-3">
-  <a href="{{ route('home') }}" class="fw-bold">SwaedUAE</a>
-  <a href="{{ route('opportunities.index') }}">Opportunities</a>
-  <a href="{{ route('about') }}">About</a>
-  <a href="{{ route('contact.get') }}">Contact</a>
-  <span class="ms-auto">@includeWhen(View::exists('components.lang-toggle'),'components.lang-toggle')</span>
-  <a href="{{ route('login') }}">Sign In</a>
-</nav>

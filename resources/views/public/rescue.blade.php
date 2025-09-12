@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
   <title>SwaedUAE</title>
-  <link rel="stylesheet" href="{{ asset("assets/travelpro.min.css") }}">
+  <link rel="stylesheet" href="{{ asset("assets/app.css") }}">
 </head>
 <body>
   <div class="container" style="max-width:1100px;margin:0 auto;padding:1rem">

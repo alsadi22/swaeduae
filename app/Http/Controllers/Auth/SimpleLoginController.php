@@ -24,9 +24,9 @@ class SimpleLoginController extends Controller
             $request->session()->regenerate();
             // If admin, send to /admin; else home
             if (method_exists(Auth::user(),'hasRole') && Auth::user()->hasRole('admin')) {
-                return redirect()->intended('/admin');
+                return redirect()->intended("/admin");
             }
-            return redirect()->intended('/');
+            return redirect()->intended("/admin");
         }
 
         return back()->withErrors(['email' => 'Invalid credentials'])->onlyInput('email');
@@ -37,6 +37,6 @@ class SimpleLoginController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect('/login');
+        return redirect("/admin");
     }
 }

@@ -1,32 +1,41 @@
-@extends('layouts.app')
+@extends('layouts.admin-argon')
+
+@section('title','Admin Login')
 
 @section('content')
-<div class="container py-5">
   <div class="row justify-content-center">
-    <div class="col-md-6 col-lg-5">
-      <div class="card shadow-sm border-0">
-        <div class="card-body p-4">
-          @if (session('status')) <div class="alert alert-success">{{ session('status') }}</div> @endif
-          @if ($errors->any())
-            <div class="alert alert-danger"><ul class="mb-0">@foreach ($errors->all() as $e)<li>{{ $e }}</li>@endforeach</ul></div>
+    <div class="col-md-5">
+      <div class="card shadow">
+        <div class="card-header"><h4 class="mb-0">Admin Login</h4></div>
+        <div class="card-body">
+          @if ($errors && $errors->any())
+            <div class="alert alert-danger">
+              <ul class="mb-0">
+                @foreach ($errors->all() as $message)
+                  <li>{{ $message }}</li>
+                @endforeach
+              </ul>
+            </div>
           @endif
-          <form method="POST" action="{{ url('/login') }}">
+
+          <form method="POST" action="{{ route('login') }}">
             @csrf
             <div class="mb-3">
-              <label class="form-label">{{ __('Email') }}</label>
-              <input type="email" name="email" class="form-control" required autocomplete="email">
+              <label for="email" class="form-label">Email</label>
+              <input id="email" type="email" name="email" class="form-control" required autofocus value="{{ old('email') }}">
             </div>
             <div class="mb-3">
-              <label class="form-label">{{ __('Password') }}</label>
-              <input type="password" name="password" class="form-control" required autocomplete="current-password">
+              <label for="password" class="form-label">Password</label>
+              <input id="password" type="password" name="password" class="form-control" required>
             </div>
-            <button type="submit" class="btn btn-primary w-100">{{ __('Login') }}</button>
-            <div class="small text-primary fw-semibold mt-2">{{ __('Note: Only admin accounts can access /admin.') }}</div>
-<div class="text-center text-sm mt-2">@if(\Illuminate\Support\Facades\Route::has('password.request'))<a href="{{ route('password.request') }}">Forgot your password?</a>@else<a href="/forgot-password">Forgot your password?</a>@endif</div>
-</form>
+            <div class="form-check mb-3">
+              <input class="form-check-input" type="checkbox" name="remember" id="remember">
+              <label class="form-check-label" for="remember">Remember me</label>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Sign in</button>
+          </form>
         </div>
       </div>
     </div>
   </div>
-</div>
 @endsection

@@ -1,5 +1,0 @@
-<?php
-use Illuminate\Support\Facades\Route;
-Route::get('/', function () { return view('home'); });          // no ->name('home') to avoid conflicts
-Route::view('/privacy', 'privacy');                              // no name
-Route::view('/terms', 'terms');                                  // no name

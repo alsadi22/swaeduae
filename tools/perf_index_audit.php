@@ -1,4 +1,7 @@
 <?php
+ = getenv("DB_CONNECTION") ?: "mysql";
+if ( !== "mysql") { fwrite(STDOUT, basename(__FILE__).": skipped for driver=".."
+"); exit(0); }
 require __DIR__.'/../vendor/autoload.php';
 $app = require __DIR__.'/../bootstrap/app.php';
 $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap();

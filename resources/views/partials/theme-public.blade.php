@@ -1,2 +1,1 @@
-<link rel="stylesheet" href="/vendor/travelpro/assets/css/style.css">
-<script defer src="/vendor/travelpro/assets/js/main.js"></script>
+<link rel="stylesheet" href="{{ asset(assets/app.css) }}?v={{ @filemtime(public_path(assets/app.css)) }}">

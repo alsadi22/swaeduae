@@ -1,14 +1,17 @@
-<footer class="footer">
-  <div class="container">
-    <ul class="footer-nav">
-      <li><a href="{{ url('/') }}">Home</a></li>
-      <li><a href="{{ url('/about') }}">About</a></li>
-      <li><a href="{{ url('/privacy') }}">Privacy</a></li>
-      <li><a href="{{ url('/terms') }}">Terms</a></li>
-      <li><a href="{{ url('/contact') }}">Contact</a></li>
-      <li><a href="{{ url('/qr/verify') }}">QR Verify</a></li>
-      <li><a href="{{ url('/certificates/verify') }}">Certificate Verify</a></li>
-    </ul>
-    <p>© {{ date('Y') }} SwaedUAE</p>
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div>
+      <div class="foot-brand">SwaedUAE</div>
+      <div class="muted">Volunteer Platform · UAE</div>
+    </div>
+    <nav class="foot-links">
+      <a href="/qr/verify">Certificate Verify</a>
+      <a href="/contact">Contact</a>
+      <a href="/terms">Terms</a>
+      <a href="/privacy">Privacy</a>
+      <a href="/about">About</a>
+      <a href="/">Home</a>
+    </nav>
+    <div class="muted">© {{ date("Y") }} SwaedUAE</div>
   </div>
 </footer>

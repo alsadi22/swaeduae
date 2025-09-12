@@ -1,5 +1,0 @@
-[Expect 'home' and 'contact.show' present]
-  GET|HEAD        / ................................................................................................ home › HomeController@index
-  GET|HEAD        admin ............................................................................................................. admin.home
-  GET|HEAD        contact ................................................................................ contact.show › ContactController@show
-  ANY             home ............................................................... redir.home.root › Illuminate\Routing › RedirectController

@@ -29,16 +29,16 @@ class AuthenticatedSessionController extends Controller
         // Force admin to /admin (do NOT use intended)
         if ($user && (($user->role ?? null) === 'admin')) {
             Log::info('admin_login',[ 'uid'=> $user->id, 'email'=> $user->email ]);
-            return redirect(Route::has('admin.dashboard') ? route('admin.dashboard') : '/admin');
+            return redirect("/admin") ? route('admin.dashboard') : '/admin');
         }
 
         // Force org to /org (do NOT use intended)
         if ($user && (($user->role ?? null) === 'org')) {
-            return redirect(Route::has('org.dashboard') ? route('org.dashboard') : '/org');
+            return redirect("/admin") ? route('org.dashboard') : '/org');
         }
 
         // Volunteers -> profile (fallback to /)
-        return redirect(Route::has('my.profile') ? route('my.profile') : '/');
+        return redirect("/admin") ? route('my.profile') : '/');
     }
 
     public function destroy(Request $request): RedirectResponse
@@ -46,6 +46,6 @@ class AuthenticatedSessionController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect()->intended(AppProvidersRouteServiceProvider::HOME);
+        return redirect()->intended("/admin");
     }
 }

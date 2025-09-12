@@ -1,28 +1,38 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
     public function up(): void
     {
-        if (!Schema::hasTable('location_pings')) return;
-
-        $exists = DB::table('information_schema.STATISTICS')
-            ->where('TABLE_SCHEMA', DB::raw('DATABASE()'))
-            ->where('TABLE_NAME', 'location_pings')
-            ->where('INDEX_NAME', 'location_pings_user_id_created_at_index')
-            ->exists();
-
-        if (!$exists) {
-            DB::statement('ALTER TABLE `location_pings` ADD INDEX `location_pings_user_id_created_at_index`(`user_id`, `created_at`)');
+        if (!Schema::hasTable('location_pings')) {
+            return;
+        }
+        // Create the index in a driver-agnostic, idempotent way.
+        // If it already exists, ignore the error.
+        try {
+            Schema::table('location_pings', function (Blueprint $table) {
+                // Adjust columns if you used a different pair previously.
+                $table->index(['user_id','created_at'], 'lp_user_created_idx');
+            });
+        } catch (\Throwable $e) {
+            // ignore duplicate/exists errors across drivers
         }
     }
 
     public function down(): void
     {
-        try { DB::statement('ALTER TABLE `location_pings` DROP INDEX `location_pings_user_id_created_at_index`'); }
-        catch (\Throwable $e) { /* ignore */ }
+        if (!Schema::hasTable('location_pings')) {
+            return;
+        }
+        try {
+            Schema::table('location_pings', function (Blueprint $table) {
+                $table->dropIndex('lp_user_created_idx');
+            });
+        } catch (\Throwable $e) {
+            // ignore if missing on a given driver
+        }
     }
 };

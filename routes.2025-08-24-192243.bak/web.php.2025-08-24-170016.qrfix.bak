@@ -1,8 +1,0 @@
-Route::get('/qr/verify', fn() => redirect()->route('verify'))->name('qr.verify');
-// === TOP-LEVEL SANITY (no prefix) ===
-Route::get("/__sanity/{id}", function ($id) {
-    $opportunity = (object)["id"=>$id, "title"=>"Opportunity ".$id, "summary"=>"Details coming soon"]; 
-    return view("opportunities.show", compact("opportunity"));
-})->where("id","[0-9A-Za-z\-]+")->name("sanity.opportunity.show.top");
-// === /TOP-LEVEL SANITY ===
-

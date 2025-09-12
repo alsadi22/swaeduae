@@ -1,1 +1,0 @@
-(function(){ /* public UI hook */ })();

@@ -1,9 +1,8 @@
-@extends('public.layout-travelpro')
-@section('title', __('Privacy Policy'))
-@section('meta_description','Our commitment to protecting your personal information.')
+@extends('public.layout')
+
+@section('title', 'Privacy Policy')
+
 @section('content')
-<div class="container py-5">
-  <h1 class="h3 text-primary mb-3">{{ __('Privacy Policy') }}</h1>
-  <p>{{ __('We respect your privacy and only use your data to support volunteering services.') }}</p>
-</div>
+  <h1 class="mb-3">Privacy Policy</h1>
+  <p>Our detailed privacy policy will be published here. We collect only the information needed to operate SwaedUAE and never sell personal data.</p>
 @endsection
