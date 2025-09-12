@@ -31,3 +31,6 @@ scripts/smoke.env
 # ignore accidental workflow backups
 .github/workflows/*.bak*
 
+# editor/backup artifacts
+*.bak
+*.bak.*

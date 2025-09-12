@@ -1,4 +1,0 @@
-@section('content_org_auth')
-@include('org.login')
-
-@endsection
