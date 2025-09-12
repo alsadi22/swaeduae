@@ -80,3 +80,11 @@ Route::middleware(['web', 'guest', 'throttle:10,1'])
 
 // Public homepage (added automatically)
 Route::get("/", function(){ return view("public.home"); })->name("home");
+// Public homepage
+Route::get("/", fn() => view("public.home"))->name("home");
+// Public opportunities (UI stub)
+Route::get("/opportunities", fn() => view("public.opportunities"))->name("opportunities.index");
+// About (static)
+Route::get("/about", fn() => view("public.about"))->name("about");
+// Contact (GET form page; POST handled by contact.submit)
+Route::get("/contact", fn() => view("public.contact"))->name("contact");
