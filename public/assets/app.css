@@ -143,3 +143,4 @@ h1,h2,h3{margin:0 0 12px;letter-spacing:.2px}
 .card:hover{box-shadow:0 8px 24px rgba(0,0,0,.06)}
 @media (max-width:900px){.cards{grid-template-columns:1fr 1fr}}
 @media (max-width:600px){.cards{grid-template-columns:1fr}}
+.nav a.active{color:#fff;border-bottom:2px solid #fff;padding-bottom:2px}
