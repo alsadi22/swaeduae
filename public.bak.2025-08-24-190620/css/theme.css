@@ -1,0 +1,67 @@
+/* SawaedUAE Theme — single source of truth
+   - Bootstrap 5 compatible
+   - RTL-aware (we rely on bootstrap.rtl when locale=ar)
+------------------------------------------------------- */
+:root{
+  --brand:#0ea5a6;           /* primary teal */
+  --brand-ink:#0b6d6e;
+  --bg:#FFF7D6;              /* warm backdrop */
+  --ink:#0f172a;
+  --muted:#6b7280;
+  --card-radius:1rem;
+}
+html,body{height:100%}
+body{background:var(--bg);color:var(--ink)}
+
+.navbar{background:#fff}
+.navbar-brand{color:var(--brand)!important;font-weight:800;letter-spacing:.2px}
+.navbar .nav-link{font-weight:500}
+.navbar .nav-link.active,.navbar .nav-link:hover{color:var(--brand)}
+
+.btn-brand{background:var(--brand);border-color:var(--brand);color:#fff}
+.btn-brand:hover{background:var(--brand-ink);border-color:var(--brand-ink);color:#fff}
+.btn-outline-brand{border-color:var(--brand);color:var(--brand)}
+.btn-outline-brand:hover{background:var(--brand);color:#fff}
+
+.card{border-radius:var(--card-radius)}
+.shadow-soft{box-shadow:0 1px 2px rgba(0,0,0,.06),0 8px 32px rgba(0,0,0,.04)}
+
+.hero{
+  padding:3rem 0
+}
+.hero-card{
+  border-radius:var(--card-radius);
+  padding:3rem 2rem;
+  background:linear-gradient(135deg, rgba(14,165,166,.16), rgba(14,165,166,.05));
+  box-shadow:0 12px 50px rgba(14,165,166,.08);
+}
+.hero h1{font-weight:800; letter-spacing:.3px}
+.hero .lead{color:var(--muted)}
+
+.chips-bar{
+  background:#fff; border-radius:999px;
+  box-shadow:0 1px 2px rgba(0,0,0,.04),0 10px 30px rgba(0,0,0,.04)
+}
+
+.filters .form-select,.filters .form-control,.filters .btn{border-radius:.75rem}
+
+nav[role="navigation"] .pagination{justify-content:center}
+.pagination .page-link{border-radius:.75rem}
+
+/* Kill any legacy large arrow pagers if present */
+.page-arrows,.legacy-pager{display:none!important}
+
+/* Admin tweaks (reuse the same theme) */
+.admin-bar{background:#fff7; backdrop-filter:saturate(150%) blur(6px)}
+.admin-bar a{color:var(--ink)}
+
+/* === Home page additions === */
+.home-hero .hero-fallback{
+  width:100%; height:360px;
+  background:
+    radial-gradient(900px 300px at 15% -10%, rgba(14,165,166,.18), transparent 60%),
+    linear-gradient(180deg, rgba(14,165,166,.06), rgba(14,165,166,.02));
+}
+.placeholder-tile{
+  background:linear-gradient(135deg, rgba(14,165,166,.15), rgba(14,165,166,.05));
+}

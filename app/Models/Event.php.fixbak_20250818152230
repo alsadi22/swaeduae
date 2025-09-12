@@ -1,0 +1,27 @@
+<?php
+use Illuminate\Support\Facades\Schema;
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Event extends Model
+{
+    use HasFactory;
+    protected $fillable = [
+        'title','description','date','time','location_id','organization_id',
+        'category_id','volunteers_needed','image'
+    ];
+    protected $dates = ['date','time'];
+    public function location() { return $this->belongsTo(Location::class); }
+    public function organization() { return $this->belongsTo(Organization::class); }
+    public function category() { return $this->belongsTo(Category::class); }
+    public function volunteers() { return $this->belongsToMany(User::class)->withPivot('status')->withTimestamps(); 
+    /** Only published rows if columns exist */
+    public function scopePublished($q){
+        $t = $q->getModel()->getTable();
+        if (Schema::hasColumn($t, "is_published")) return $q->where("is_published", 1);
+        if (Schema::hasColumn($t, "published_at")) return $q->whereNotNull("published_at");
+        return $q;
+    }
+}

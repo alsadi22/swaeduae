@@ -1,0 +1,29 @@
+@extends('layouts.master')
+@section('no_nav', true)
+@section('no_nav', true)
+
+@section('content')
+<div class="container">
+  <div class="row">
+    <div class="col-lg-9">
+      @yield('admin_content')
+    </div>
+    <div class="col-lg-3">
+      <aside class="sidebar">
+        <div class="card p-2">
+          <a href="{{ route('admin.dashboard') }}" class="{{ request()->routeIs('admin.dashboard')?'active':'' }}">{{ __('Dashboard') }}</a>
+          <a href="{{ route('admin.users.index') }}" class="{{ request()->routeIs('admin.users.*')?'active':'' }}">{{ __('Users') }}</a>
+          <a href="{{ route('admin.organizations.index') }}" class="{{ request()->routeIs('admin.organizations.*')?'active':'' }}">{{ __('Organizations') }}</a>
+          <a href="{{ route('admin.opportunities.index') }}" class="{{ request()->routeIs('admin.opportunities.*')?'active':'' }}">{{ __('Opportunities') }}</a>
+          <a href="{{ route('admin.events.index') }}" class="{{ request()->routeIs('admin.events.*')?'active':'' }}">{{ __('Events') }}</a>
+          <a href="{{ route('admin.certificates.index') }}" class="{{ request()->routeIs('admin.certificates.*')?'active':'' }}">{{ __('Certificates') }}</a>
+        <a href="{{ route('admin.apps.index') }}" class="{{ request()->routeIs('admin.apps.*')?'active':'' }}">{{ __('Applications') }}</a>
+          <a href="{{ route('admin.categories.index') }}" class="{{ request()->routeIs('admin.categories.*')?'active':'' }}">{{ __('Categories') }}</a>
+          <a href="{{ route('admin.partners.index') }}" class="{{ request()->routeIs('admin.partners.*')?'active':'' }}">{{ __('Partners') }}</a>
+          <a href="{{ route('admin.settings.index') }}" class="{{ request()->routeIs('admin.settings.*')?'active':'' }}">{{ __('Settings') }}</a>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
+@endsection

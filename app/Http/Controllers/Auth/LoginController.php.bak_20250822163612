@@ -1,0 +1,78 @@
+<?php
+
+namespace App\Http\Controllers\Auth;
+
+use Illuminate\Http\Request;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Auth;
+
+class LoginController extends Controller
+{
+    use AuthenticatesUsers;
+
+    /**
+     * After successful login, route by role.
+     * Org => /org/dashboard, Admin => /admin, Everyone else => /profile
+     */
+    protected function redirectTo()
+    {
+        $user = Auth::user();
+
+        if ($user && method_exists($user, 'hasRole')) {
+            if ($user->hasRole('admin')) {
+                return '/admin';
+            }
+            if ($user->hasRole('org')) {
+                return '/org/dashboard';
+            }
+        }
+
+        if ($user) {
+            if (property_exists($user, 'is_admin') && $user->is_admin) {
+                return '/admin';
+            }
+            if (property_exists($user, 'role') && $user->role === 'organization') {
+                return '/org/dashboard';
+            }
+        }
+
+        return '/profile';
+    }
+
+    public function __construct()
+    {
+        $this->middleware([\App\Http\Middleware\Honeypot::class, 'throttle:login'])->only('login');
+        $this->middleware('guest')->except('logout');
+    }
+    /**
+     * After successful authentication, send user to the correct home
+     * and ignore any stale/unsafe 'intended' url (like /admin for non-admins).
+     */
+    protected function authenticated(Request , )
+    {
+        // Drop any previous intended target (e.g. /admin from a 302 to login)
+        $request->session()->forget('url.intended');
+
+        // Decide role-based target
+        $target = '/profile'; // volunteers & everyone else by default
+
+        if ($user && method_exists($user, 'hasRole')) {
+            if ($user->hasRole('admin')) {
+                $target = '/admin';
+            } elseif ($user->hasRole('org')) {
+                $target = '/org/dashboard';
+            }
+        } else {
+            // Fallbacks if roles are stored as flags/props
+            if ($user && property_exists($user, 'is_admin') && $user->is_admin) {
+                $target = '/admin';
+            } elseif ($user && property_exists($user, 'role') && $user->role === 'organization') {
+                $target = '/org/dashboard';
+            }
+        }
+
+        return redirect()->to($target);
+    }
+}

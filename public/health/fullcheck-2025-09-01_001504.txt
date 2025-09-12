@@ -1,0 +1,43 @@
+=== FULL CHECK (2025-08-31 20:15:04 UTC) ===
+HOST=swaeduae.ae
+
+-- Artisan sanity --
+PHP 8.3.24 (cli) (built: Aug  3 2025 08:57:38) (NTS)
+No syntax errors detected in routes/web.php
+
+-- Cloudflare path --
+CF /                    -> 200
+CF /opportunities       -> 200
+CF /about               -> 200
+CF /contact             -> 200
+CF /privacy             -> 200
+CF /terms               -> 200
+CF /qr/verify           -> 200
+CF /account/applications -> 302 (Location: https://swaeduae.ae/login)
+CF /account/certificates -> 302 (Location: https://swaeduae.ae/login)
+
+-- Origin HTTP (port 80, with Host header) --
+ORIGIN80 /                -> 200
+ORIGIN80 /opportunities   -> 200
+ORIGIN80 /about           -> 200
+ORIGIN80 /contact         -> 200
+ORIGIN80 /privacy         -> 200
+ORIGIN80 /terms           -> 200
+ORIGIN80 /qr/verify       -> 200
+ORIGIN80 /account/applications -> 302 (Location: https://swaeduae.ae/login)
+ORIGIN80 /account/certificates -> 302 (Location: https://swaeduae.ae/login)
+
+-- Origin HTTPS (port 443 via loopback, ignores self-signed) --
+ORIGIN443 /                -> 200
+ORIGIN443 /opportunities   -> 200
+
+-- nginx listen(443) --
+LISTEN 0      511          0.0.0.0:443        0.0.0.0:*    users:(("nginx",pid=501485,fd=7),("nginx",pid=501484,fd=7),("nginx",pid=501483,fd=7),("nginx",pid=501482,fd=7),("nginx",pid=501481,fd=7),("nginx",pid=501480,fd=7),("nginx",pid=501479,fd=7),("nginx",pid=501478,fd=7),("nginx",pid=501477,fd=7),("nginx",pid=501476,fd=7),("nginx",pid=501475,fd=7),("nginx",pid=501474,fd=7),("nginx",pid=501309,fd=7))
+LISTEN 0      511             [::]:443           [::]:*    users:(("nginx",pid=501485,fd=8),("nginx",pid=501484,fd=8),("nginx",pid=501483,fd=8),("nginx",pid=501482,fd=8),("nginx",pid=501481,fd=8),("nginx",pid=501480,fd=8),("nginx",pid=501479,fd=8),("nginx",pid=501478,fd=8),("nginx",pid=501477,fd=8),("nginx",pid=501476,fd=8),("nginx",pid=501475,fd=8),("nginx",pid=501474,fd=8),("nginx",pid=501309,fd=8))
+
+-- Latest Laravel log tail --
+Log: storage/logs/laravel-2025-09-01.log
+[2025-09-01 00:00:01] production.INFO: scheduler.heartbeat {"at":"2025-09-01T00:00:01+04:00"} 
+[2025-09-01 00:15:01] production.INFO: scheduler.heartbeat {"at":"2025-09-01T00:15:01+04:00"} 
+
+Saved report: public/health/fullcheck-2025-09-01_001504.txt

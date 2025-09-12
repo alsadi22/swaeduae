@@ -1,0 +1,31 @@
+<?php
+namespace App\Http\Middleware;
+use Closure;
+use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
+
+class NormalizeHeaders
+{
+    public function handle(Request $request, Closure $next): Response
+    {
+        /** @var \Symfony\Component\HttpFoundation\Response $response */
+        $response = $next($request);
+
+        // Ensure Content-Language + Vary: Accept-Language are present (idempotent)
+        $locale = app()->getLocale() ?: config('app.locale','en');
+        if (!$response->headers->has('Content-Language')) {
+            if (!$response->headers->has("Cache-Control")) { $response->headers->set("Cache-Control", "no-cache, private"); }
+        if ($hasCookie || !$request->isMethodSafe()) {
+            if (!$response->headers->has("Cache-Control")) { $response->headers->set("Cache-Control", "no-cache, private"); }
+        } else {
+            if (!$response->headers->has("Cache-Control")) { $response->headers->set("Cache-Control", "no-cache, private"); }
+        }
+
+        // Always expose an X-MicroCache diagnostic (if upstream middleware didn’t)
+        if (!$response->headers->has('X-MicroCache')) {
+            $response->headers->set('X-MicroCache', $hasCookie ? 'SKIP' : 'MISS');
+        }
+
+        return $response;
+    }
+}

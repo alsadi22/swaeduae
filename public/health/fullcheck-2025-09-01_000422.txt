@@ -1,0 +1,41 @@
+=== FULL CHECK (2025-08-31 20:04:22 UTC) ===
+HOST=swaeduae.ae
+
+-- Artisan sanity --
+PHP 8.3.24 (cli) (built: Aug  3 2025 08:57:38) (NTS)
+No syntax errors detected in routes/web.php
+
+-- Cloudflare path --
+CF /                    -> 502
+CF /opportunities       -> 502
+CF /about               -> 502
+CF /contact             -> 502
+CF /privacy             -> 502
+CF /terms               -> 502
+CF /qr/verify           -> 502
+CF /account/applications -> 502 (Location: '-')
+CF /account/certificates -> 502 (Location: '-')
+
+-- Origin HTTP (port 80, with Host header) --
+ORIGIN80 /                -> 200
+ORIGIN80 /opportunities   -> 404
+ORIGIN80 /about           -> 404
+ORIGIN80 /contact         -> 404
+ORIGIN80 /privacy         -> 404
+ORIGIN80 /terms           -> 404
+ORIGIN80 /qr/verify       -> 404
+ORIGIN80 /account/applications -> 404 (Location: '-')
+ORIGIN80 /account/certificates -> 404 (Location: '-')
+
+-- Origin HTTPS (port 443 via loopback, ignores self-signed) --
+ORIGIN443 /                -> 000
+ORIGIN443 /opportunities   -> 000
+
+-- nginx listen(443) --
+NOT LISTENING on 443
+
+-- Latest Laravel log tail --
+Log: storage/logs/laravel-2025-09-01.log
+[2025-09-01 00:00:01] production.INFO: scheduler.heartbeat {"at":"2025-09-01T00:00:01+04:00"} 
+
+Saved report: public/health/fullcheck-2025-09-01_000422.txt

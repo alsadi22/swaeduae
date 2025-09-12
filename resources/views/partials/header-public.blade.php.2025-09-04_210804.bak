@@ -1,0 +1,13 @@
+<nav class="container py-3 d-flex gap-3">
+  <a href="{{ url('/') }}" class="fw-bold">SwaedUAE</a>
+  <a href="{{ route('opportunities.index') }}">Opportunities</a>
+  <a href="{{ url('/about') }}">About</a>
+  <a href="{{ url('/contact') }}">Contact</a>
+  ${1}
+      <a class="link-secondary me-3" href="{{ url('/login') }}">Volunteer Sign In</a>
+      <a class="link-secondary me-3" href="{{ url('/register') }}">Register</a>
+      <a class="link-secondary me-3" href="{{ url('/org/login') }}">Org Sign In</a>
+      <a class="link-secondary" href="https://admin.swaeduae.ae/login">Admin</a>
+${3}
+  @include('partials.auth_dropdown')
+</nav>

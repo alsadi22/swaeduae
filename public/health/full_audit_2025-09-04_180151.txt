@@ -1,0 +1,159 @@
+SwaedUAE – Full Audit v3
+App root: /var/www/swaeduae/current
+Report: public/health/full_audit_2025-09-04_180151.txt
+Base: https://swaeduae.ae | Admin: https://admin.swaeduae.ae
+When: Thu, 04 Sep 2025 18:01:51 +0400
+
+[2m===== 0) OS & Services =====(B[m
+[36m-- Ubuntu 22.04.5 LTS(B[m
+[36m-- Kernel: 6.8.0-79-generic(B[m
+[32m[PASS](B[m Service nginx is active
+[32m[PASS](B[m Service php8.3-fpm is active
+
+[2m===== 1) PHP & Composer =====(B[m
+[36m-- PHP 8.3.25 (cli) (built: Aug 29 2025 00:32:53) (NTS)(B[m
+[33m[WARN](B[m memory_limit=-1 (expected >=512M)
+[32m[PASS](B[m Composer files present
+
+[2m===== 2) Laravel Basics =====(B[m
+[36m-- Laravel Framework 11.45.2(B[m
+[33m[WARN](B[m APP_ENV=?
+[33m[WARN](B[m APP_DEBUG=? (should be false)
+[31m[FAIL](B[m Fix permissions for storage/ and bootstrap/cache
+
+[2m===== 3) Routes & syntax =====(B[m
+[32m[PASS](B[m routes/web.php syntax OK
+[32m[PASS](B[m Single PHP open tag in routes/web.php
+[33m[WARN](B[m Missing/incorrect require for partials/disable_internal.php
+    
+      GET|HEAD        / .......................................................................................................................................................... generated::CohB3vWA49lVvg9D
+      ANY             _agent{any?} ............................................................................................................................................... generated::yYm3BUp3L5TaSUF5
+      ANY             _alias/{any?} .............................................................................................................................................. generated::MZlB3c7EgIGf0dHm
+      ANY             _compat/{any?} ............................................................................................................................................. generated::vXtHLaVS7NLum7Fo
+      GET|HEAD        about ...................................................................................................................................................................... pages.about
+      ANY             about-us ......................................................................................................... generated::w76ADWs4akSpPXQ1 › Illuminate\Routing › RedirectController
+      GET|HEAD        admin ................................................................................................................................ admin.dashboard › Admin\DashboardController@index
+      GET|HEAD        admin/_whoami ........................................................................................................................................................ admin.diag.whoami
+      GET|HEAD        admin/applicants ............................................................................................................. admin.applicants.index › Admin\ApplicantsController@index
+      POST            admin/applicants/bulk .......................................................................................................... admin.applicants.bulk › Admin\ApplicantsController@bulk
+      GET|HEAD        admin/applicants/export ................................................................................................. admin.applicants.export › Admin\ApplicantsController@exportCsv
+[32m[PASS](B[m Admin named routes present
+[32m[PASS](B[m Org named routes present
+[32m[PASS](B[m QR/verify routes present
+[32m[PASS](B[m Certificate routes present
+[33m[WARN](B[m Found legacy logout.perform references
+
+[2m===== 4) Views & Layouts =====(B[m
+[32m[PASS](B[m Admin views do NOT extend public layout
+[32m[PASS](B[m TravelPro assets referenced in public layer
+
+[2m===== 5) HTTP Probes (guest) =====(B[m
+[32m[PASS](B[m / -> 200
+[32m[PASS](B[m /qr/verify -> 200
+[31m[FAIL](B[m /admin/login -> 301
+[32m[PASS](B[m /org/login -> 200
+[32m[PASS](B[m /applications -> 302 (guest protected)
+[32m[PASS](B[m Admin login has CSRF token
+
+[2m===== 6) PWA & SEO =====(B[m
+[32m[PASS](B[m manifest.json present
+[32m[PASS](B[m service-worker.js present
+[33m[WARN](B[m PWA icons missing
+[32m[PASS](B[m sitemap symlink -> index OK
+
+[2m===== 7) Mail & Queue =====(B[m
+[32m[PASS](B[m MAIL_MAILER=smtp
+[32m[PASS](B[m MAIL_HOST=smtp.zoho.com
+[32m[PASS](B[m swaed-queue-worker active
+[32m[PASS](B[m No failed jobs
+
+[2m===== 8) Security baseline =====(B[m
+[32m[PASS](B[m reCAPTCHA keys present in .env
+[33m[WARN](B[m SENTRY_DSN not set
+
+[2m===== 9) Recent errors (logs) =====(B[m
+[36m-- Log file: laravel-2025-09-04.log — recent error-like lines: 5610(B[m
+    #9 {main}
+    "} 
+    [2025-09-04 16:33:27] production.ERROR: Class "Laravel\Pail\PailServiceProvider" not found {"exception":"[object] (Error(code: 0): Class \"Laravel\\Pail\\PailServiceProvider\" not found at /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Foundation/Application.php:961)
+    [stacktrace]
+    #0 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(893): Illuminate\\Foundation\\Application->resolveProvider()
+    #1 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(75): Illuminate\\Foundation\\Application->register()
+    #2 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(871): Illuminate\\Foundation\\ProviderRepository->load()
+    #3 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/RegisterProviders.php(37): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+    #4 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(342): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap()
+    #5 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(187): Illuminate\\Foundation\\Application->bootstrapWith()
+    #6 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(171): Illuminate\\Foundation\\Http\\Kernel->bootstrap()
+    #7 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(145): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter()
+    #8 /var/www/swaeduae/releases/20250904032446-localimport/public/index.php(11): Illuminate\\Foundation\\Http\\Kernel->handle()
+    #9 {main}
+    "} 
+    [2025-09-04 16:33:27] production.ERROR: Class "Laravel\Pail\PailServiceProvider" not found {"exception":"[object] (Error(code: 0): Class \"Laravel\\Pail\\PailServiceProvider\" not found at /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Foundation/Application.php:961)
+    [stacktrace]
+    #0 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(893): Illuminate\\Foundation\\Application->resolveProvider()
+    #1 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(75): Illuminate\\Foundation\\Application->register()
+    #2 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(871): Illuminate\\Foundation\\ProviderRepository->load()
+    #3 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/RegisterProviders.php(37): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+    #4 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(342): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap()
+    #5 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(187): Illuminate\\Foundation\\Application->bootstrapWith()
+    #6 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(171): Illuminate\\Foundation\\Http\\Kernel->bootstrap()
+    #7 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(145): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter()
+    #8 /var/www/swaeduae/releases/20250904032446-localimport/public/index.php(11): Illuminate\\Foundation\\Http\\Kernel->handle()
+    #9 {main}
+    "} 
+    [2025-09-04 16:33:52] production.ERROR: Class "Laravel\Pail\PailServiceProvider" not found {"exception":"[object] (Error(code: 0): Class \"Laravel\\Pail\\PailServiceProvider\" not found at /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Foundation/Application.php:961)
+    [stacktrace]
+    #0 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(893): Illuminate\\Foundation\\Application->resolveProvider()
+    #1 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(75): Illuminate\\Foundation\\Application->register()
+    #2 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(871): Illuminate\\Foundation\\ProviderRepository->load()
+    #3 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/RegisterProviders.php(37): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+    #4 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(342): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap()
+    #5 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(187): Illuminate\\Foundation\\Application->bootstrapWith()
+    #6 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(171): Illuminate\\Foundation\\Http\\Kernel->bootstrap()
+    #7 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(145): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter()
+    #8 /var/www/swaeduae/releases/20250904032446-localimport/public/index.php(11): Illuminate\\Foundation\\Http\\Kernel->handle()
+    #9 {main}
+    "} 
+    [2025-09-04 16:33:52] production.ERROR: Class "Laravel\Pail\PailServiceProvider" not found {"exception":"[object] (Error(code: 0): Class \"Laravel\\Pail\\PailServiceProvider\" not found at /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Foundation/Application.php:961)
+    [stacktrace]
+    #0 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(893): Illuminate\\Foundation\\Application->resolveProvider()
+    #1 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(75): Illuminate\\Foundation\\Application->register()
+    #2 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(871): Illuminate\\Foundation\\ProviderRepository->load()
+    #3 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/RegisterProviders.php(37): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+    #4 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(342): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap()
+    #5 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(187): Illuminate\\Foundation\\Application->bootstrapWith()
+    #6 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(171): Illuminate\\Foundation\\Http\\Kernel->bootstrap()
+    #7 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(145): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter()
+    #8 /var/www/swaeduae/releases/20250904032446-localimport/public/index.php(11): Illuminate\\Foundation\\Http\\Kernel->handle()
+    #9 {main}
+    "} 
+    [2025-09-04 16:36:49] production.ERROR: Class "Laravel\Pail\PailServiceProvider" not found {"exception":"[object] (Error(code: 0): Class \"Laravel\\Pail\\PailServiceProvider\" not found at /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Foundation/Application.php:961)
+    [stacktrace]
+    #0 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(893): Illuminate\\Foundation\\Application->resolveProvider()
+    #1 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(75): Illuminate\\Foundation\\Application->register()
+    #2 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(871): Illuminate\\Foundation\\ProviderRepository->load()
+    #3 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/RegisterProviders.php(37): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+    #4 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(342): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap()
+    #5 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(187): Illuminate\\Foundation\\Application->bootstrapWith()
+    #6 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(171): Illuminate\\Foundation\\Http\\Kernel->bootstrap()
+    #7 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(145): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter()
+    #8 /var/www/swaeduae/releases/20250904032446-localimport/public/index.php(11): Illuminate\\Foundation\\Http\\Kernel->handle()
+    #9 {main}
+    "} 
+    [2025-09-04 16:36:49] production.ERROR: Class "Laravel\Pail\PailServiceProvider" not found {"exception":"[object] (Error(code: 0): Class \"Laravel\\Pail\\PailServiceProvider\" not found at /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Foundation/Application.php:961)
+    [stacktrace]
+    #0 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(893): Illuminate\\Foundation\\Application->resolveProvider()
+    #1 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(75): Illuminate\\Foundation\\Application->register()
+    #2 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(871): Illuminate\\Foundation\\ProviderRepository->load()
+    #3 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/RegisterProviders.php(37): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+    #4 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(342): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap()
+    #5 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(187): Illuminate\\Foundation\\Application->bootstrapWith()
+    #6 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(171): Illuminate\\Foundation\\Http\\Kernel->bootstrap()
+    #7 /var/www/swaeduae/releases/20250904032446-localimport/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(145): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter()
+    #8 /var/www/swaeduae/releases/20250904032446-localimport/public/index.php(11): Illuminate\\Foundation\\Http\\Kernel->handle()
+    #9 {main}
+    "} 
+[33m[WARN](B[m See tail above for recent issues
+
+[2m===== 10) Summary =====(B[m
+Passed: 24  |  Warnings: 8  |  Failures: 2

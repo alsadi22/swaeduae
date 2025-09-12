@@ -1,0 +1,3 @@
+resources/views/categories/index.blade.php:11:      @php($cats = \App\Models\Opportunity::query()->whereNotNull('category')->select('category')->distinct()->pluck('category'))
+resources/views/partials/opps_filter_bar.blade.php:2:  $cats = \App\Models\Opportunity::query()->whereNotNull('category')->select('category')->distinct()->orderBy('category')->pluck('category');
+resources/views/partials/opps_filter_bar.blade.php:3:  $regions = \App\Models\Opportunity::query()->whereNotNull('region')->select('region')->distinct()->orderBy('region')->pluck('region');

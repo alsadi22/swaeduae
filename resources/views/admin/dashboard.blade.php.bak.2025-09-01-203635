@@ -1,0 +1,66 @@
+@extends('admin.layout')
+
+@section('admin')
+<!-- ADMIN_KPI_OK -->
+<div class="container py-3">
+  <h1 class="h4 mb-4">Admin Dashboard</h1>
+
+  <div class="row g-3">
+    <div class="col-sm-6 col-lg-3">
+      <div class="card shadow-sm"><div class="card-body">
+        <div class="text-secondary small">Opportunities</div>
+        <div class="fs-3 fw-semibold">{{ $kpis['opportunities'] ?? 0 }}</div>
+        <a class="stretched-link text-decoration-none" href="{{ url('/admin/opportunities') }}">Manage</a>
+      </div></div>
+    </div>
+
+    <div class="col-sm-6 col-lg-3">
+      <div class="card shadow-sm"><div class="card-body">
+        <div class="text-secondary small">Events</div>
+        <div class="fs-3 fw-semibold">{{ $kpis['events'] ?? 0 }}</div>
+        <span class="text-muted small">{{ $recent['events'] ?? 0 }} recent</span>
+      </div></div>
+    </div>
+
+    <div class="col-sm-6 col-lg-3">
+      <div class="card shadow-sm"><div class="card-body">
+        <div class="text-secondary small">Applications (pending)</div>
+        <div class="fs-3 fw-semibold">{{ $kpis['applications_pending'] ?? 0 }}</div>
+        <a class="stretched-link text-decoration-none" href="{{ url('/admin/applicants') }}">Review</a>
+      </div></div>
+    </div>
+
+    <div class="col-sm-6 col-lg-3">
+      <div class="card shadow-sm"><div class="card-body">
+        <div class="text-secondary small">Hours (pending)</div>
+        <div class="fs-3 fw-semibold">{{ $kpis['hours_pending'] ?? 0 }}</div>
+        <a class="stretched-link text-decoration-none" href="{{ url('/admin/hours') }}">Approve</a>
+      </div></div>
+    </div>
+
+    <div class="col-sm-6 col-lg-3">
+      <div class="card shadow-sm"><div class="card-body">
+        <div class="text-secondary small">Certificates</div>
+        <div class="fs-3 fw-semibold">{{ $kpis['certificates'] ?? 0 }}</div>
+        <a class="stretched-link text-decoration-none" href="{{ url('/admin/certificates') }}">Open</a>
+      </div></div>
+    </div>
+
+    <div class="col-sm-6 col-lg-3">
+      <div class="card shadow-sm"><div class="card-body">
+        <div class="text-secondary small">Orgs (pending)</div>
+        <div class="fs-3 fw-semibold">{{ $kpis['orgs_pending'] ?? 0 }}</div>
+        <a class="stretched-link text-decoration-none" href="{{ url('/admin/organizations') }}">Approve</a>
+      </div></div>
+    </div>
+  </div>
+
+  <div class="mt-4">
+    <a class="btn btn-primary btn-sm me-2" href="{{ url('/admin/opportunities') }}">Opportunities</a>
+    <a class="btn btn-outline-secondary btn-sm me-2" href="{{ url('/admin/applicants') }}">Applicants</a>
+    <a class="btn btn-outline-secondary btn-sm me-2" href="{{ url('/admin/attendance') }}">QR / Attendance</a>
+    <a class="btn btn-outline-secondary btn-sm me-2" href="{{ url('/admin/reports') }}">Reports</a>
+    <a class="btn btn-outline-secondary btn-sm" href="{{ url('/admin/settings') }}">Settings</a>
+  </div>
+</div>
+@endsection

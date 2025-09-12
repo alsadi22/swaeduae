@@ -1,0 +1,153 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Event;
+use App\Models\Registration;
+use App\Models\Volunteer;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
+class PublicOpportunityController extends Controller
+{
+    public function index(Request $r)
+    {
+        $q        = trim((string)$r->query('q',''));
+        $city     = trim((string)$r->query('city',''));
+        $date     = trim((string)$r->query('date',''));
+        $duration = $r->query('duration');
+
+        $events = Event::query()
+            ->when($q !== '', function ($query) use ($q) {
+                $query->where(function ($w) use ($q) {
+                    $w->where('title','like',"%$q%")
+                      ->orWhere('description','like',"%$q%")
+                      ->orWhere('location','like',"%$q%");
+                });
+            })
+            ->when($city !== '', fn($query) => $query->where('location', $city))
+            ->when($date !== '', fn($query) => $query->whereDate('starts_at', $date))
+            ->when(is_numeric($duration), function($query) use ($duration) {
+                $h = (int) $duration;
+                $query->whereNotNull('starts_at')
+                      ->whereNotNull('ends_at')
+                      ->whereRaw('TIMESTAMPDIFF(HOUR, starts_at, ends_at) >= ?', [$h]);
+            })
+            ->orderByRaw('COALESCE(starts_at, created_at) DESC')
+            ->paginate(12)
+            ->withQueryString();
+
+        $cities = Event::query()->select('location')->whereNotNull('location')->distinct()->orderBy('location')->pluck('location');
+
+        return view('opportunities.index', compact('events','q','city','date','duration','cities'));
+    }
+
+    public function show(string $slug)
+    {
+        $event = Event::where('slug',$slug)->firstOrFail();
+
+        $applied = false;
+        if (auth()->check()) {
+            $uid   = auth()->id();
+            $volId = DB::table('volunteers')->where('user_id',$uid)->value('id');
+            if ($volId) {
+                $applied = DB::table('registrations')
+                    ->where('event_id',$event->id)
+                    ->where('volunteer_id',$volId)
+                    ->whereIn('status',['pending','approved'])
+                    ->exists();
+            }
+        }
+
+        return view('opportunities.show', ['event'=>$event, 'applied'=>$applied]);
+    }
+
+    public function apply(Request $r, string $slug)
+    {
+        $event = Event::where('slug',$slug)->firstOrFail();
+
+        if (auth()->check()) {
+            $uid   = auth()->id();
+            $volId = DB::table('volunteers')->where('user_id',$uid)->value('id');
+            if (!$volId) {
+                $volId = DB::table('volunteers')->insertGetId([
+                    'user_id'=>$uid,'phone'=>'','address'=>'','created_at'=>now(),'updated_at'=>now()
+                ]);
+            }
+            Registration::firstOrCreate(
+                ['event_id'=>$event->id, 'volunteer_id'=>$volId],
+                ['status'=>'pending']
+            );
+            return back()->with('ok','Applied');
+        }
+
+        // guest flow
+        $data = $r->validate([
+            'phone' => 'required|string|max:32',
+            'name'  => 'nullable|string|max:100',
+        ]);
+        $vol = Volunteer::firstOrCreate(['phone'=>$data['phone']], ['user_id'=>null]);
+        Registration::firstOrCreate(
+            ['event_id'=>$event->id, 'volunteer_id'=>$vol->id],
+            ['status'=>'pending']
+        );
+
+        try {
+            DB::table('audits')->insert([
+                'user_id'=>null, 'action'=>'apply', 'entity'=>'event',
+                'entity_id'=>(string)$event->id,
+                'meta'=>json_encode(['volunteer_id'=>$vol->id,'phone'=>$data['phone']]),
+                'created_at'=>now()
+            ]);
+        } catch (\Throwable $e) {}
+
+        return back()->with('ok','Thanks! We received your application.');
+    }
+
+    public function cancel(Request $r, string $slug)
+    {
+        if (!auth()->check()) return redirect(url('/login'));
+        $event = Event::where('slug',$slug)->firstOrFail();
+
+        $uid   = auth()->id();
+        $volId = DB::table('volunteers')->where('user_id',$uid)->value('id');
+        if ($volId) {
+            $q = DB::table('registrations')
+                ->where('event_id',$event->id)
+                ->where('volunteer_id',$volId);
+
+            try {
+                $q->update(['status'=>'cancelled','updated_at'=>now()]);
+            } catch (\Throwable $e) {
+                $ok = false;
+                foreach (['rejected','declined','0'] as $alt) {
+                    try { $q->update(['status'=>$alt,'updated_at'=>now()]); $ok = true; break; } catch (\Throwable $ignore) {}
+                }
+                if (!$ok) { try { $q->delete(); } catch (\Throwable $ignore) {} }
+                \Log::warning('registrations.cancel normalized', ['event_id'=>$event->id,'volunteer_id'=>$volId]);
+            }
+        }
+        return back()->with('ok','Application cancelled');
+    }
+
+    public function ics(string $slug)
+    {
+        $event = Event::where('slug',$slug)->firstOrFail();
+        $fmt = fn($d)=> $d ? $d->timezone('UTC')->format('Ymd\THis\Z') : null;
+        $start = $fmt($event->starts_at); $end = $fmt($event->ends_at);
+        $uid = $event->slug.'@swaeduae.ae';
+        $desc = trim((string)$event->description)."\nMore: ".url('/opportunities/'.$event->slug);
+
+        $ics = "BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//SwaedUAE//EN\r\nBEGIN:VEVENT\r\n".
+               "UID:$uid\r\nSUMMARY:".addcslashes($event->title,"\n,;")."\r\nDTSTAMP:".now('UTC')->format('Ymd\THis\Z')."\r\n".
+               ($start ? "DTSTART:$start\r\n" : "").
+               ($end ? "DTEND:$end\r\n" : "").
+               "LOCATION:".addcslashes($event->location ?? 'UAE',"\n,;")."\r\n".
+               "DESCRIPTION:".str_replace("\n","\\n",$desc)."\r\nEND:VEVENT\r\nEND:VCALENDAR\r\n";
+
+        return response($ics, 200, [
+            'Content-Type' => 'text/calendar; charset=UTF-8',
+            'Content-Disposition' => 'attachment; filename="'.$event->slug.'.ics"',
+        ]);
+    }
+}

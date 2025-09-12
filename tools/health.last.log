@@ -1,0 +1,57 @@
++ set -euo pipefail
++ APP=/var/www/swaeduae
++ PHP_BIN=php
++ ART='php artisan'
++ CURL='curl -sS -L'
++ h System
++ printf '\n== %s ==\n' System
+
+== System ==
++ uname -a
+Linux swaeduae 6.8.0-65-generic #68~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Tue Jul 15 18:06:34 UTC 2 x86_64 x86_64 x86_64 GNU/Linux
+++ uptime -p
++ echo 'Uptime: up 6 days, 8 hours, 15 minutes'
+Uptime: up 6 days, 8 hours, 15 minutes
+++ date -Is
++ echo 'Date:   2025-08-31T23:26:09+04:00'
+Date:   2025-08-31T23:26:09+04:00
+++ whoami
++ echo 'User:   swaeduae'
+User:   swaeduae
+++ pwd
++ echo 'PWD:    /var/www/swaeduae'
+PWD:    /var/www/swaeduae
++ h 'Services & versions'
++ printf '\n== %s ==\n' 'Services & versions'
+
+== Services & versions ==
++ exists nginx
++ command -v nginx
+++ nginx -v
+++ svc nginx
+++ systemctl is-active --quiet nginx
+++ echo active
++ echo 'nginx: nginx version: nginx/1.18.0 (Ubuntu) (active)'
+nginx: nginx version: nginx/1.18.0 (Ubuntu) (active)
++ exists php
++ command -v php
+++ php -v
+++ head -1
++ echo 'php:   PHP 8.3.24 (cli) (built: Aug  3 2025 08:57:38) (NTS)'
+php:   PHP 8.3.24 (cli) (built: Aug  3 2025 08:57:38) (NTS)
++ exists composer
++ command -v composer
+++ composer --version
+Deprecation Notice: Using ${var} in strings is deprecated, use {$var} instead in /usr/share/php/Symfony/Component/Console/Command/DumpCompletionCommand.php:48
+Deprecation Notice: Using ${var} in strings is deprecated, use {$var} instead in /usr/share/php/Symfony/Component/Console/Command/DumpCompletionCommand.php:56
++ echo 'composer: Composer 2.2.6 2022-02-04 17:00:38'
+composer: Composer 2.2.6 2022-02-04 17:00:38
++ systemctl list-units --type=service
++ awk '/php.*fpm\.service/{print $1; exit}'
++ read -r F
+++ svc php8.3-fpm.service
+++ systemctl is-active --quiet php8.3-fpm.service
+++ echo active
++ echo 'php8.3-fpm.service: active'
+php8.3-fpm.service: active
++ read -r F

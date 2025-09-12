@@ -1,0 +1,131 @@
+<?php
+namespace App\Http\Controllers\Admin;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Symfony\Component\HttpFoundation\StreamedResponse;
+
+class OrganizationController extends Controller
+{
+    public function index(Request $r)
+    {
+        $q    = trim((string)$r->get('q',''));
+        $sort = $r->get('sort','-id'); // -id newest, id oldest, name, email
+
+        $items = DB::table('organizations')
+            ->when($q !== '', function($b) use ($q){
+                $b->where(function($w) use ($q){
+                    $w->where('name','like',"%$q%")
+                      ->orWhere('email','like',"%$q%")
+                      ->orWhere('address','like',"%$q%");
+                });
+            });
+
+        // sorting
+        $dir = 'asc'; $col = 'id';
+        if ($sort === '-id') { $dir='desc'; $col='id'; }
+        elseif (in_array($sort,['id','name','email'])) { $col=$sort; }
+        $items = $items->orderBy($col,$dir)->paginate(15)->withQueryString();
+
+        return view('admin.organizations.index', compact('items','q','sort'));
+    }
+
+    public function create()
+    {
+        $org = (object)['name'=>'','email'=>'','address'=>'','owner_user_id'=>null,'password'=>null];
+        return view('admin.organizations.create', compact('org'));
+    }
+
+    public function store(Request $r)
+    {
+        $v = $r->validate([
+            'name'          => 'required|string|max:160',
+            'email'         => 'nullable|email|max:160|unique:organizations,email',
+            'address'       => 'nullable|string|max:255',
+            'owner_user_id' => 'nullable|integer|exists:users,id',
+            'password'      => 'nullable|string|min:6|max:64',
+        ]);
+
+        $id = DB::table('organizations')->insertGetId([
+            'name'          => $v['name'],
+            'email'         => $v['email'] ?? null,
+            'address'       => $v['address'] ?? null,
+            'owner_user_id' => $v['owner_user_id'] ?? null,
+            'password'      => $v['password'] ?? null, // keeping field if present
+            'created_at'    => now(),
+            'updated_at'    => now(),
+        ]);
+
+        return redirect()->route('admin.organizations.edit',$id)->with('status','Organization created.');
+    }
+
+    public function edit($id)
+    {
+        $org = DB::table('organizations')->where('id',$id)->first();
+        abort_unless($org,404);
+        return view('admin.organizations.edit', compact('org'));
+    }
+
+    public function update(Request $r, $id)
+    {
+        $org = DB::table('organizations')->where('id',$id)->first();
+        abort_unless($org,404);
+
+        $v = $r->validate([
+            'name'          => 'required|string|max:160',
+            'email'         => 'nullable|email|max:160|unique:organizations,email,'.$id,
+            'address'       => 'nullable|string|max:255',
+            'owner_user_id' => 'nullable|integer|exists:users,id',
+            'password'      => 'nullable|string|min:6|max:64',
+        ]);
+
+        DB::table('organizations')->where('id',$id)->update([
+            'name'          => $v['name'],
+            'email'         => $v['email'] ?? null,
+            'address'       => $v['address'] ?? null,
+            'owner_user_id' => $v['owner_user_id'] ?? null,
+            'password'      => $v['password'] ?? $org->password,
+            'updated_at'    => now(),
+        ]);
+
+        return back()->with('status','Organization updated.');
+    }
+
+    public function destroy($id)
+    {
+        DB::table('organizations')->where('id',$id)->delete();
+        return redirect()->route('admin.organizations')->with('status','Organization deleted.');
+    }
+
+    public function exportCsv(Request $r): StreamedResponse
+    {
+        $q = trim((string)$r->get('q',''));
+        $file = 'organizations-'.date('Ymd-His').'.csv';
+
+        return response()->streamDownload(function() use ($q){
+            $out = fopen('php://output','w');
+            fputcsv($out, ['ID','Name','Email','Address','Owner User ID','Created','Updated']);
+            DB::table('organizations')
+                ->when($q !== '', function($b) use ($q){
+                    $b->where(function($w) use ($q){
+                        $w->where('name','like',"%$q%")
+                          ->orWhere('email','like',"%$q%")
+                          ->orWhere('address','like',"%$q%");
+                    });
+                })
+                ->orderBy('id','desc')
+                ->chunk(500, function($rows) use ($out){
+                    foreach($rows as $r){
+                        fputcsv($out, [
+                            $r->id, $r->name, $r->email, $r->address, $r->owner_user_id,
+                            $r->created_at, $r->updated_at
+                        ]);
+                    }
+                });
+            fclose($out);
+        }, $file, ['Content-Type'=>'text/csv']);
+    }
+
+
+}

@@ -1,0 +1,536 @@
+<?php
+
+namespace App\Services;
+
+use Illuminate\Support\Facades\{App, Artisan, Blade, Config, DB, File, Http, Log, Route, Schema};
+
+class AgentScanner
+{
+    public function scan(array $opts = []): array
+    {
+        $apply    = (bool)($opts['fix'] ?? false);
+        $webApply = (bool)($opts['web'] ?? false);
+        if ($webApply && $apply && !config('agent.allow_apply')) {
+            $apply = false; // hard block web writes unless allow flag is true
+        }
+
+        $started = now();
+        $issues  = [];
+        $fixes   = [];
+        $notes   = [];
+
+        $notes[] = 'APP_ENV='.(config('app.env') ?? 'n/a');
+        if (config('app.debug')) $issues[] = ['level'=>'warn','code'=>'env.debug','msg'=>'APP_DEBUG is true'];
+        $mailer = config('mail.default') ?? config('mail.mailer');
+        if ($mailer === 'log') $notes[] = 'MAIL_MAILER=log (no real emails)';
+
+        // Routes audit
+        $routes = collect(Route::getRoutes()->getRoutes());
+        $byName = []; $byKey = [];
+        foreach ($routes as $r) {
+            $n = $r->getName(); if ($n) { $byName[$n][] = $r->uri(); }
+            $k = implode('|', $r->methods()).' '.$r->uri();
+            $byKey[$k] = ($byKey[$k] ?? 0) + 1;
+        }
+        $dupNames = array_filter($byName, fn($a)=>count($a)>1);
+        $dupUris  = array_keys(array_filter($byKey, fn($n)=>$n>1));
+        if ($dupNames) $issues[] = ['level'=>'warn','code'=>'routes.dup_names','data'=>$dupNames];
+        if ($dupUris)  $issues[] = ['level'=>'warn','code'=>'routes.dup_uri_method','data'=>$dupUris];
+        if (!Route::has('lang.switch')) $issues[] = ['level'=>'error','code'=>'routes.missing.lang.switch','msg'=>'Route [lang.switch] not defined'];
+
+        // Blade fixes + lint
+        [$bf, $bx] = $this->checkBlades($apply);
+        $issues = array_merge($issues, $bf);
+        $fixes  = array_merge($fixes, $bx);
+
+        [$cf] = $this->compileAllBlades();
+        $issues = array_merge($issues, $cf);
+
+        // Smoke HTTP checks
+        $smoke = $this->httpSmoke();
+        if (!empty($smoke['failures'])) $issues[] = ['level'=>'warn','code'=>'http.smoke','data'=>$smoke['failures']];
+
+        // i18n audit
+        [$i18n] = $this->i18nAudit();
+        $issues = array_merge($issues, $i18n);
+
+        // DB/queues/mail
+        [$dbf] = $this->dbAudit();
+        $issues = array_merge($issues, $dbf);
+
+        [$mqf] = $this->mailQueueAudit();
+        $issues = array_merge($issues, $mqf);
+
+        $qh = $this->queueHealth();
+        if (!empty($qh)) $issues[] = ['level'=>'info','code'=>'queue.health','data'=>$qh];
+
+        // Security + perf + logs
+        [$sec] = $this->securityAudit();  $issues = array_merge($issues, $sec);
+        [$perf]= $this->perfAudit();      $issues = array_merge($issues, $perf);
+        $signals = $this->logSignals();   if($signals) $issues[] = ['level'=>'info','code'=>'logs.signals','data'=>$signals];
+
+        // Git status/diff
+        $git = $this->gitAudit();
+
+        // Crawler (optional)
+        $crawlSummary = null;
+        if (data_get(config('agent'), 'crawler.enabled', true)) {
+            $crawlSummary = $this->crawlSite();
+            if (!empty($crawlSummary['broken'])) {
+                $issues[] = ['level'=>'warn','code'=>'crawl.broken_links','data'=>array_slice($crawlSummary['broken'], 0, 25)];
+            }
+        }
+
+        $report = [
+            'meta'   => [
+                'started_at' => $started->toDateTimeString(),
+                'finished_at'=> now()->toDateTimeString(),
+                'app_env'    => config('app.env'),
+                'app_url'    => config('app.url'),
+                'php'        => PHP_VERSION,
+            ],
+            'notes'  => $notes,
+            'issues' => $issues,
+            'smoke'  => $smoke,
+            'git'    => $git,
+            'crawl'  => $crawlSummary,
+            'fixes'  => $fixes,
+        ];
+
+        $this->writeReport($report);
+        return $report;
+    }
+
+    protected function writeReport(array $r): void
+    {
+        $d = storage_path('app/agent');
+        if (!is_dir($d)) @mkdir($d, 0775, true);
+        File::put($d.'/report.json', json_encode($r, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE));
+        File::put($d.'/index.html',
+            "<!doctype html><meta charset='utf-8'><title>Agent Report</title>".
+            "<style>body{font:14px/1.45 system-ui,Segoe UI,Arial}pre{background:#f6f8fa;padding:12px;border-radius:8px;overflow:auto}</style>".
+            "<h1>Agent Report</h1><pre>".
+            e(json_encode($r, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE)).
+            "</pre>"
+        );
+    }
+
+    /* ----------------------------- Blade audits ---------------------------- */
+    protected function checkBlades(bool $apply): array
+    {
+        $find = []; $fix = [];
+        $all = collect(File::allFiles(resource_path('views')))
+            ->filter(fn($f)=>str_ends_with($f->getFilename(), '.blade.php'));
+        $known = collect(Route::getRoutes()->getRoutes())
+            ->map(fn($r)=>$r->getName())->filter()->unique()->flip();
+
+        $ts = now()->format('Ymd-His');
+        $stage = storage_path("app/agent/patches/{$ts}");
+        @mkdir($stage, 0775, true);
+        $bad = [];
+
+        foreach ($all as $file) {
+            $p = $file->getPathname();
+            $src = File::get($p);
+            $orig = $src;
+
+            preg_match_all("/route\\(\\s*['\"]([a-zA-Z0-9._-]+)['\"]\\s*\\)/", $src, $m);
+            foreach (($m[1] ?? []) as $n) {
+                if (!$known->has($n)) { $find[] = ['level'=>'warn','code'=>'blade.unknown_route','file'=>$p,'route'=>$n]; $bad[] = $p; }
+            }
+
+            // fix weird doubled-quote: route('contact.show'')
+            $src = preg_replace("/route\\(\\s*(['\"])contact\\.show\\1\\s*''\\s*\\)/", "route('contact.show')", $src);
+
+            // fix POST forms that target contact.show -> contact.send
+            $src = preg_replace_callback(
+                "#(<form[^>]*method=['\"]post['\"][^>]*action=\\s*['\"]\\{\\{\\s*route\\(\\s*['\"]contact\\.show['\"]\\s*\\)\\s*\\}\\}['\"][^>]*>)#i",
+                fn($mm)=>str_replace(\"route('contact.show')\", \"route('contact.send')\", $mm[1]),
+                $src
+            );
+
+            // ensure @csrf in POST forms
+            $src = preg_replace("#(<form[^>]*method=['\"]post['\"][^>]*>)#i", "$1\n    @csrf\n", $src, 1);
+
+            if ($src !== $orig) {
+                @mkdir(dirname("$stage$p"), 0775, true);
+                File::put("$stage$p.before", $orig);
+                File::put("$stage$p.after",  $src);
+                $fix[] = ['file'=>$p,'change'=>'blade.sanitize+csrf','staged'=>$stage];
+                if ($apply) { File::put($p, $src); $fix[count($fix)-1]['applied'] = true; }
+            }
+        }
+
+        foreach (config('agent.contact_candidates', []) as $c) {
+            $path = base_path($c);
+            if (!File::exists($path)) continue;
+            $src = File::get($path); $orig = $src;
+            $src = preg_replace("/route\\(\\s*(['\"])contact\\.show\\1\\)/", "route('contact.send')", $src);
+            $src = preg_replace("/route\\(\\s*(['\"])contact\\.show\\1\\s*''\\s*\\)/", "route('contact.send')", $src);
+            if (!str_contains($src, '@csrf')) $src = preg_replace("#(<form[^>]*method=['\"]post['\"][^>]*>)#i", "$1\n    @csrf\n", $src, 1);
+            if ($src !== $orig) {
+                @mkdir(dirname("$stage$path"), 0775, true);
+                File::put("$stage$path.before", $orig);
+                File::put("$stage$path.after",  $src);
+                $fix[] = ['file'=>$path,'change'=>'contact.action+csrf','staged'=>$stage];
+                if ($apply) { File::put($path, $src); $fix[count($fix)-1]['applied'] = true; }
+            }
+        }
+
+        if ($bad) $find[] = ['level'=>'info','code'=>'blade.bad_route_files','data'=>array_values(array_unique($bad))];
+        return [$find, $fix];
+    }
+
+    protected function compileAllBlades(): array
+    {
+        $find = [];
+        $files = collect(File::allFiles(resource_path('views')))
+            ->filter(fn($f)=>str_ends_with($f->getFilename(), '.blade.php'));
+        foreach ($files as $f) {
+            $p = $f->getPathname();
+            try {
+                $compiled = app('blade.compiler')->compileString(File::get($p));
+                if (function_exists('shell_exec')) {
+                    $tmp = storage_path('app/agent/_lint_'.md5($p).'.php');
+                    File::put($tmp, $compiled);
+                    $out = @shell_exec('php -l '.escapeshellarg($tmp).' 2>&1');
+                    @unlink($tmp);
+                    if ($out && !str_contains($out, 'No syntax errors')) {
+                        $find[] = ['level'=>'error','code'=>'blade.lint','file'=>$p,'msg'=>trim($out)];
+                    }
+                }
+            } catch (\Throwable $e) {
+                $find[] = ['level'=>'error','code'=>'blade.compile','file'=>$p,'msg'=>$e->getMessage()];
+            }
+        }
+        return [$find];
+    }
+
+    /* ----------------------------- HTTP smoke ------------------------------ */
+    protected function httpSmoke(): array
+    {
+        $base = rtrim(config('app.url'), '/');
+        $rows = []; $fails=[];
+        foreach (config('agent.smoke_urls', []) as [$m, $u]) {
+            $url = $base.$u; $t0 = microtime(true);
+            try {
+                $r  = Http::withHeaders(['User-Agent'=>'AgentSmoke/1.0'])->timeout(8)->send($m, $url);
+                $ms = (int)round((microtime(true) - $t0) * 1000);
+                $rows[] = [
+                    'method'=>$m,'url'=>$url,'status'=>$r->status(),'time_ms'=>$ms,
+                    'headers'=>[
+                        'csp'  => $r->header('Content-Security-Policy'),
+                        'xfo'  => $r->header('X-Frame-Options'),
+                        'xcto' => $r->header('X-Content-Type-Options'),
+                    ],
+                ];
+                if ($r->status() >= 400) $fails[] = ['url'=>$url, 'status'=>$r->status()];
+            } catch (\Throwable $e) {
+                $fails[] = ['url'=>$url, 'error'=>$e->getMessage()];
+            }
+        }
+        return ['checks'=>$rows, 'failures'=>$fails];
+    }
+
+    /* ------------------------------ i18n audit ---------------------------- */
+    protected function i18nAudit(): array
+    {
+        $find = [];
+        $dir = resource_path('lang');
+        if (!is_dir($dir)) return [[$find]];
+
+        $keys = [];
+        foreach (File::directories($dir) as $loc) {
+            $locale = basename($loc);
+            foreach (File::allFiles($loc) as $f) {
+                /** @var \SplFileInfo $f */
+                $arr = include $f->getPathname();
+                if (!is_array($arr)) continue;
+                $flat = $this->flatten($arr, pathinfo($f->getFilename(), PATHINFO_FILENAME));
+                $keys[$locale] = array_values(array_unique(array_merge($keys[$locale] ?? [], $flat)));
+            }
+        }
+
+        $viewKeys = [];
+        foreach (File::allFiles(resource_path('views')) as $f) {
+            if (!str_ends_with($f->getFilename(), '.blade.php')) continue;
+            $s = File::get($f->getPathname());
+            preg_match_all("/__\\(\\s*['\"]([^'\"]+)['\"]\\s*\\)/", $s, $m1);
+            preg_match_all("/@lang\\(\\s*['\"]([^'\"]+)['\"]\\s*\\)/", $s, $m2);
+            $viewKeys = array_merge($viewKeys, $m1[1] ?? [], $m2[1] ?? []);
+        }
+        $viewKeys = array_values(array_unique($viewKeys));
+        foreach ($keys as $locale => $have) {
+            $missing = array_values(array_diff($viewKeys, $have));
+            if ($missing) $find[] = ['level'=>'warn','code'=>'i18n.missing','locale'=>$locale,'missing'=>$missing];
+        }
+        return [$find];
+    }
+
+    /* ------------------------------- DB audit ----------------------------- */
+    protected function dbAudit(): array
+    {
+        $find = [];
+        try { DB::connection()->getPdo(); }
+        catch (\Throwable $e) { $find[] = ['level'=>'error','code'=>'db.connect','msg'=>$e->getMessage()]; return [$find]; }
+
+        try {
+            Artisan::call('migrate:status', ['--no-interaction'=>true]);
+            $out = Artisan::output();
+            if (str_contains($out, 'Pending')) $find[] = ['level'=>'info','code'=>'db.migrations.pending','msg'=>'There are pending migrations'];
+        } catch (\Throwable $e) { $find[] = ['level'=>'warn','code'=>'db.migrations','msg'=>$e->getMessage()]; }
+
+        foreach (['jobs','failed_jobs'] as $t) {
+            try { if (!Schema::hasTable($t)) $find[] = ['level'=>'info','code'=>'db.missing_table','table'=>$t]; } catch (\Throwable $e) {}
+        }
+        return [$find];
+    }
+
+    /* ---------------------------- Mail/Queue audit ------------------------ */
+    protected function mailQueueAudit(): array
+    {
+        $find = [];
+        $mailer = config('mail.default') ?? config('mail.mailer');
+        if (!$mailer) $find[] = ['level'=>'warn','code'=>'mail.misconfigured','msg'=>'No mailer configured'];
+        $queue = config('queue.default');
+        if ($queue === 'sync') $find[] = ['level'=>'info','code'=>'queue.sync','msg'=>'Queue driver is sync'];
+        return [$find];
+    }
+
+    protected function queueHealth(): array
+    {
+        $info = [];
+        try {
+            if (Schema::hasTable('jobs')) $info['jobs_backlog'] = DB::table('jobs')->count();
+            if (Schema::hasTable('failed_jobs')) $info['failed_jobs'] = DB::table('failed_jobs')->count();
+        } catch (\Throwable $e) {}
+
+        $sup = glob('/etc/supervisor/conf.d/*.conf');
+        if ($sup) $info['supervisor_confs'] = array_values($sup);
+
+        if (function_exists('shell_exec')) {
+            $ps = trim((string)@shell_exec("pgrep -af 'artisan queue:work' 2>/dev/null"));
+            if ($ps !== '') $info['workers_running'] = preg_split('/\r?\n/', $ps);
+            $svc = trim((string)@shell_exec("systemctl is-active supervisor 2>/dev/null"));
+            if ($svc !== '') $info['supervisor_status'] = $svc;
+        }
+        return $info;
+    }
+
+    /* ----------------------------- Security/Perf -------------------------- */
+    protected function securityAudit(): array
+    {
+        $find = [];
+        $pub = public_path();
+        foreach (['.env','.git'] as $f) {
+            if (file_exists("$pub/$f")) $find[] = ['level'=>'error','code'=>'security.exposed','path'=>"$pub/$f"];
+        }
+        return [$find];
+    }
+
+    protected function perfAudit(): array
+    {
+        $find = [];
+        if (!app()->configurationIsCached()) $find[] = ['level'=>'info','code'=>'perf.config_uncached'];
+        if (!app()->routesAreCached())       $find[] = ['level'=>'info','code'=>'perf.routes_uncached'];
+        $vd = base_path('storage/framework/views');
+        if (!is_dir($vd) || count(glob($vd.'/*'))===0) $find[] = ['level'=>'info','code'=>'perf.views_uncached'];
+        return [$find];
+    }
+
+    protected function logSignals(): array
+    {
+        $dir = storage_path('logs'); $sig = [];
+        $latest = collect(glob("$dir/laravel-*.log"))->sortDesc()->first();
+        if ($latest && is_readable($latest)) {
+            $tail = @shell_exec('tail -n 500 '.escapeshellarg($latest).' 2>/dev/null');
+            foreach (['syntax error','CSRF','QueryException','RouteNotFoundException'] as $s) {
+                if ($tail && str_contains(strtolower($tail), strtolower($s))) $sig[] = $s;
+            }
+        }
+        return $sig;
+    }
+
+    /* ------------------------------- Git audit ---------------------------- */
+    protected function gitAudit(): array
+    {
+        $out = ['repo'=>false];
+        if (!is_dir(base_path('.git'))) return $out;
+        $out['repo'] = true;
+
+        $cmd = function(string $c): string {
+            return trim((string)@shell_exec($c.' 2>/dev/null')) ?: '';
+        };
+
+        $cwd = 'cd '.escapeshellarg(base_path()).' && ';
+        $out['branch'] = $cmd($cwd.'git rev-parse --abbrev-ref HEAD');
+        $out['last_commit'] = $cmd($cwd.'git --no-pager log -1 --pretty="%h %s (%cr) <%an>"');
+        $out['status'] = $cmd($cwd.'git status --porcelain=1 -b');
+        $diff = $cmd($cwd.'git --no-pager diff --name-status');
+        $lines = explode("\n", $diff);
+        $max = (int)config('agent.git.max_diff_lines', 4000);
+        $out['diff'] = implode("\n", array_slice($lines, 0, $max));
+        return $out;
+    }
+
+    protected function gitAutoCommit(array $files, bool $newBranch = true, bool $push = false): array
+    {
+        $res = ['done'=>false];
+        if (!is_dir(base_path('.git')) || empty($files)) return $res;
+
+        $cwd = 'cd '.escapeshellarg(base_path()).' && ';
+        $cmd = function(string $c) use ($cwd): string {
+            return trim((string)@shell_exec($cwd.$c.' 2>/dev/null')) ?: '';
+        };
+
+        $branchPrefix = (string)config('agent.git.branch_prefix', 'agent/fix');
+        $branch = $branchPrefix.'/'.now()->format('Ymd-His');
+        $author = escapeshellarg(config('agent.git.author_name','Agent Bot').' <'.(config('agent.git.author_email','agent@local')).'>');
+
+        if ($newBranch && config('agent.git.auto_branch', true)) {
+            $cmd('git checkout -b '.escapeshellarg($branch));
+        }
+
+        $added = [];
+        foreach ($files as $f) {
+            $rel = ltrim(str_replace(base_path(), '', $f), '/');
+            $cmd('git add '.escapeshellarg($rel));
+            $added[] = $rel;
+        }
+
+        $msg = escapeshellarg('Agent patch: '.now()->toDateTimeString());
+        $cmd('git -c user.name='.escapeshellarg(config('agent.git.author_name','Agent Bot')).' -c user.email='.escapeshellarg(config('agent.git.author_email','agent@local')).' commit -m '.$msg.' --author='.$author);
+
+        $res['branch'] = $branch;
+        $res['added']  = $added;
+        $res['done']   = true;
+
+        if ($push && config('agent.git.auto_add_push', false)) {
+            $cmd('git push -u origin '.escapeshellarg($branch));
+            $res['pushed'] = true;
+        }
+        return $res;
+    }
+
+    /* ----------------------------- Crawler -------------------------------- */
+    public function crawlSite(): array
+    {
+        $baseUrl = rtrim((string)config('app.url'), '/');
+        if ($baseUrl === '') return ['pages'=>0,'broken'=>[]];
+
+        $max   = (int)config('agent.crawler.max_pages', 150);
+        $tout  = (int)config('agent.crawler.timeout', 6);
+        $ua    = (string)config('agent.crawler.user_agent', 'AgentCrawler/1.0 (+internal)');
+        $sameHost = parse_url($baseUrl, PHP_URL_HOST);
+
+        $queue = [];
+        $seen  = [];
+        $broken= [];
+        $ok    = [];
+
+        $push = function($u) use (&$queue, &$seen, $sameHost): void {
+            if (!$u) return;
+            $u = preg_replace('##.*$#','',$u); // strip fragments
+            if (isset($seen[$u])) return;
+            $host = parse_url($u, PHP_URL_HOST);
+            if ($host && $host !== $sameHost) return;
+            $seen[$u] = true; $queue[] = $u;
+        };
+
+        // Start URLs
+        $push($baseUrl.'/');
+        if (config('agent.crawler.respect_sitemap', true)) {
+            try {
+                $r = Http::timeout($tout)->withHeaders(['User-Agent'=>$ua])->get($baseUrl.'/sitemap.xml');
+                if ($r->ok() && str_contains($r->header('content-type',''), 'xml')) {
+                    $xml = @simplexml_load_string($r->body());
+                    if ($xml) {
+                        foreach ($xml->url as $n) { $push((string)$n->loc); }
+                    }
+                }
+            } catch (\Throwable $e) {}
+        }
+
+        $n = 0;
+        while (!empty($queue) && $n < $max) {
+            $url = array_shift($queue); $n++;
+            try {
+                $resp = Http::timeout($tout)->withHeaders(['User-Agent'=>$ua])->get($url);
+                $status = $resp->status();
+                if ($status >= 400) { $broken[] = ['url'=>$url,'status'=>$status]; continue; }
+                $ok[] = ['url'=>$url,'status'=>$status];
+
+                $ct = strtolower($resp->header('content-type',''));
+                if (str_contains($ct, 'text/html')) {
+                    $html = $resp->body();
+                    // very light anchor extraction
+                    if (preg_match_all('#<a\s[^>]*href=["\']([^"\']+)#i', $html, $m)) {
+                        foreach ($m[1] as $href) {
+                            if (str_starts_with($href, 'mailto:')) continue;
+                            if (str_starts_with($href, 'tel:')) continue;
+                            if (str_starts_with($href, 'javascript:')) continue;
+                            if (str_starts_with($href, '//')) $href = 'https:'.$href;
+                            if (str_starts_with($href, '/'))  $href = $baseUrl.$href;
+                            if (!preg_match('#^https?://#i', $href)) continue;
+                            $push($href);
+                            if (count($seen) > $max*4) break; // guard
+                        }
+                    }
+                }
+            } catch (\Throwable $e) {
+                $broken[] = ['url'=>$url,'error'=>$e->getMessage()];
+            }
+        }
+
+        $result = ['pages'=>$n, 'ok_count'=>count($ok), 'broken'=>$broken];
+        File::put(storage_path('app/agent/crawl.json'), json_encode($result, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE));
+        return $result;
+    }
+
+    /* -------------------------- Patch apply/revert ------------------------ */
+    public function latestPatchDir(): ?string
+    {
+        $d = collect(glob(storage_path('app/agent/patches/*')))->sortDesc()->values();
+        return $d->first() ?: null;
+    }
+
+    public function applyLatest(array $opts = []): array
+    {
+        $dir = $this->latestPatchDir();
+        if (!$dir) return ['applied'=>0,'msg'=>'No staged patches'];
+
+        $after = collect(File::allFiles($dir))->filter(fn($f)=>str_ends_with($f->getFilename(), '.after'));
+        $n = 0; $appliedFiles = [];
+        foreach ($after as $f) {
+            $t = str_replace(['.after', $dir], ['', ''], $f->getPathname());
+            @mkdir(dirname($t), 0775, true);
+            File::copy($f->getPathname(), $t);
+            $appliedFiles[] = $t;
+            $n++;
+        }
+
+        $res = ['applied'=>$n,'dir'=>$dir,'files'=>$appliedFiles];
+
+        if (!empty($opts['git'])) {
+            $res['git'] = $this->gitAutoCommit($appliedFiles, true, (bool)($opts['push'] ?? false));
+        }
+        return $res;
+    }
+
+    public function revertLatest(): array
+    {
+        $dir = $this->latestPatchDir();
+        if (!$dir) return ['reverted'=>0,'msg'=>'No staged patches'];
+        $before = collect(File::allFiles($dir))->filter(fn($f)=>str_ends_with($f->getFilename(), '.before'));
+        $n = 0; foreach ($before as $f) {
+            $t = str_replace(['.before', $dir], ['', ''], $f->getPathname());
+            @mkdir(dirname($t), 0775, true);
+            File::copy($f->getPathname(), $t);
+            $n++;
+        }
+        return ['reverted'=>$n,'dir'=>$dir];
+    }
+
+    /* ------------------------------ helpers ------------------------------- */
+    protected function flatten($arr, $prefix=''){ $out=[]; foreach((array)$arr as $k=>$v){ $key=$prefix? "$prefix.$k":$k; if(is_array($v)) $out=array_merge($out,$this->flatten($v,$key)); else $out[]=$key; } return $out; }
+}

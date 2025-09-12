@@ -1,0 +1,8 @@
+<?php
+namespace App\Console\Commands;
+use Illuminate\Console\Command; use App\Services\AgentScanner;
+class AgentScan extends Command {
+  protected $signature='agent:scan {--fix : Apply safe fixes (CLI always allowed)}';
+  protected $description='Run full Agent scan';
+  public function handle(AgentScanner $scanner){ $r=$scanner->scan(['fix'=>(bool)$this->option('fix')]); $this->info('Report written to storage/app/agent/report.json'); $this->line(json_encode(['issues'=>count($r['issues']??[]),'fixes'=>count($r['fixes']??[])], JSON_PRETTY_PRINT)); return self::SUCCESS; }
+}

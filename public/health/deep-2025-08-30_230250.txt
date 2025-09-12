@@ -1,0 +1,27 @@
+=== SwaedUAE DEEP CHECK 2025-08-30_230250 ===
+== ABOUT ==
+
+   Symfony\Component\OptionsResolver\Exception\InvalidOptionsException 
+
+  The option "dsn" with value "https://<your_dsn_here>" is invalid.
+
+  at vendor/symfony/options-resolver/OptionsResolver.php:1106
+    1102▕                 if (isset($this->info[$option])) {
+    1103▕                     $message .= \sprintf(' Info: %s.', $this->info[$option]);
+    1104▕                 }
+    1105▕ 
+  ➜ 1106▕                 throw new InvalidOptionsException($message);
+    1107▕             }
+    1108▕         }
+    1109▕ 
+    1110▕         // Check whether the option is deprecated
+
+      [2m+23 vendor frames [22m
+
+  24  [internal]:0
+      Illuminate\Foundation\Application::Illuminate\Foundation\{closure}()
+      [2m+6 vendor frames [22m
+
+  31  artisan:13
+      Illuminate\Foundation\Application::handleCommand()
+

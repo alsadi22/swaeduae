@@ -1,0 +1,49 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
+
+class ContactController extends Controller
+{
+    public function show()
+    {
+        return view('contact');
+    }
+
+    use App\Http\Requests\ContactFormRequest;
+    use App\Mail\ContactMessage;
+    use Illuminate\Support\Facades\Mail;
+
+    use App\Http\Requests\ContactFormRequest;
+    use App\Mail\ContactMessage;
+    use Illuminate\Support\Facades\Mail;
+
+    public function submit(ContactFormRequest $request)
+    {
+        $validated = $request->validated();
+        $to = config('mail.from.address','admin.ae');
+        try {
+            Mail::to($to)->send(new ContactMessage($validated));
+        } catch(\Throwable $e) {
+            \Log::warning('Contact mail failed: '.$e->getMessage());
+        }
+        return redirect()->route('contact.show')->with('status','sent');
+    } catch(\Throwable $e) {
+            \Log::warning('Contact mail failed: '.$e->getMessage());
+        }
+        return redirect()->route('contact.show')->with('status','sent');
+    } <{$validated['email']}>\n\n{$validated['message']}";
+            $to   = config('mail.from.address', 'admin@swaeduae.ae');
+            Mail::raw($body, function ($m) use ($to, $validated) {
+                $m->to($to)->subject('Contact form: '.$validated['name']);
+            });
+        } catch (\Throwable $e) {
+            Log::warning('Contact mail failed: '.$e->getMessage());
+        }
+
+        return redirect()->route('contact.show')->with('status', 'sent');
+    }
+}

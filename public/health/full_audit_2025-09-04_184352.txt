@@ -1,0 +1,79 @@
+SwaedUAE – Full Audit v3
+App root: /var/www/swaeduae/current
+Report: public/health/full_audit_2025-09-04_184352.txt
+Base: https://swaeduae.ae | Admin: https://admin.swaeduae.ae
+When: Thu, 04 Sep 2025 18:43:52 +0400
+
+===== 0) OS & Services =====
+-- Ubuntu 22.04.5 LTS
+-- Kernel: 6.8.0-79-generic
+[PASS] Service nginx is active
+[PASS] Service php8.3-fpm is active
+
+===== 1) PHP & Composer =====
+-- PHP 8.3.25 (cli) (built: Aug 29 2025 00:32:53) (NTS)
+[PASS] memory_limit=512M
+[PASS] Composer files present
+
+===== 2) Laravel Basics =====
+-- Laravel Framework 11.45.2
+[PASS] APP_ENV=production
+[PASS] APP_DEBUG=false
+[PASS] storage/ & bootstrap/cache writable
+
+===== 3) Routes & syntax =====
+[PASS] routes/web.php syntax OK
+[PASS] Single PHP open tag in routes/web.php
+[PASS] disable_internal.php require line OK
+    
+      GET|HEAD        / .......................................................................................................................................................... generated::icm3KG2JTaLkbKBo
+      ANY             _agent{any?} ............................................................................................................................................... generated::Naiq8XMfIKa1tuwt
+      ANY             _alias/{any?} .............................................................................................................................................. generated::8IFTAL3A2TTEVToG
+      ANY             _compat/{any?} ............................................................................................................................................. generated::H4pX5FBiutIEgw34
+      GET|HEAD        about ...................................................................................................................................................................... pages.about
+      ANY             about-us ......................................................................................................... generated::LenjGM6f65cJLPb8 › Illuminate\Routing › RedirectController
+      GET|HEAD        admin ................................................................................................................................ admin.dashboard › Admin\DashboardController@index
+      GET|HEAD        admin/_whoami ........................................................................................................................................................ admin.diag.whoami
+      GET|HEAD        admin/applicants ............................................................................................................. admin.applicants.index › Admin\ApplicantsController@index
+      POST            admin/applicants/bulk .......................................................................................................... admin.applicants.bulk › Admin\ApplicantsController@bulk
+      GET|HEAD        admin/applicants/export ................................................................................................. admin.applicants.export › Admin\ApplicantsController@exportCsv
+[PASS] Admin named routes present
+[PASS] Org named routes present
+[PASS] QR/verify routes present
+[PASS] Certificate routes present
+[WARN] Found legacy logout.perform references
+
+===== 4) Views & Layouts =====
+[PASS] Admin views do NOT extend public layout
+[PASS] TravelPro assets referenced in public layer
+
+===== 5) HTTP Probes (guest) =====
+[PASS] / -> 200
+[PASS] /qr/verify -> 200
+[PASS] /admin/login -> 301
+[PASS] /org/login -> 200
+[PASS] /applications -> 302 (guest protected)
+[PASS] Admin login has CSRF token
+
+===== 6) PWA & SEO =====
+[PASS] manifest.json present
+[PASS] service-worker.js present
+[PASS] PWA icons present
+[PASS] sitemap symlink -> index OK
+
+===== 7) Mail & Queue =====
+[PASS] MAIL_MAILER=smtp
+[PASS] MAIL_HOST=smtp.zoho.com
+[PASS] swaed-queue-worker active
+[PASS] No failed jobs
+
+===== 8) Security baseline =====
+[PASS] reCAPTCHA keys present in .env
+[PASS] SENTRY_DSN set
+
+===== 9) Recent errors (logs) =====
+-- Log file: laravel-2025-09-04.log — recent error-like lines: 0
+[PASS] No recent high-severity log entries
+
+===== 10) Summary =====
+Passed: 33  |  Warnings: 1  |  Failures: 0

@@ -1,0 +1,14 @@
+SwaedUAE Deep Check  2025-08-30-183419
+================================================
+
+== Environment ==
+PHP: PHP 8.3.24 (cli) (built: Aug  3 2025 08:57:38) (NTS)
+Laravel: Laravel Framework 11.45.2
+Node: v22.19.0
+Composer: Composer 2.2.6 2022-02-04 17:00:38
+memory_limit: 512M
+
+== Routes JSON snapshot ==
+OK    - Fetched route list JSON
+
+== Public GET endpoints (200 expected; 302 resolved) ==

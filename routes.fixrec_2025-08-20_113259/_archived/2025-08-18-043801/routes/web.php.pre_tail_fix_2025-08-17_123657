@@ -1,0 +1,249 @@
+<?php
+require __DIR__.'/_early_auth_overrides.php';
+
+
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\EventController;
+use App\Http\Controllers\VolunteerController;
+use App\Http\Controllers\NewsController;
+use App\Http\Controllers\DownloadController;
+use App\Http\Controllers\PartnerController;
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\PaymentController;
+
+Route::get('/healthz', fn () => response('ok', 200))->name('health');
+
+/**
+ * Public site
+ */
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
+Route::get('/events', [EventController::class, 'index'])->name('events.index');
+Route::get('/events/{id}', [EventController::class, 'show'])->name('events.show');
+
+Route::get('/news', [NewsController::class, 'index'])->name('news.index');
+Route::get('/news/{id}', [NewsController::class, 'show'])->name('news.show');
+
+Route::get('/downloads', [DownloadController::class, 'index'])->name('downloads.index');
+Route::get('/region/sharjah', [EventController::class, 'sharjah'])->name('region.sharjah');
+Route::get('/partners', [PartnerController::class, 'index'])->name('partners.index');
+
+Route::post('/lang/switch', function (Request $request) {
+    $lang = $request->input('lang');
+    if (in_array($lang, ['en', 'ar'])) {
+        session(['locale' => $lang]);
+        app()->setLocale($lang);
+    }
+    return back();
+})->name('lang.switch');
+
+/**
+ * Authenticated user actions
+ */
+Route::middleware('auth')->group(function () {
+    Route::get("/volunteer/profile", \App\Http\Controllers\Volunteer\ProfileIndexAction::class)->name("volunteer.profile");
+    Route::post('/volunteer/events/{eventId}/register', [VolunteerController::class, 'registerEvent'])->name('volunteer.registerEvent');
+    Route::post('/volunteer/kyc/upload', [VolunteerController::class, 'uploadKyc'])->name('volunteer.uploadKyc');
+    Route::get('/volunteer/resume', [VolunteerController::class, 'resume'])->name('volunteer.resume');
+    Route::get('/volunteer/certificate/{certId}', [VolunteerController::class, 'generateCertificate'])->name('volunteer.generateCertificate');
+
+    Route::get('/payment', [PaymentController::class, 'paymentPage'])->name('payments.page');
+    Route::post('/payment/stripe', [PaymentController::class, 'processStripe'])->name('payments.processStripe');
+    Route::post('/payment/paytabs', [PaymentController::class, 'processPayTabs'])->name('payments.processPayTabs');
+    Route::get('/payment/success', [PaymentController::class, 'success'])->name('payments.success');
+});
+
+/**
+ * Admin
+ */
+Route::prefix('admin')->middleware(['auth', 'can:isAdmin'])->group(function () {
+    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+    Route::get('/users', [AdminController::class, 'listUsers'])->name('admin.users');
+    Route::post('/users/toggle/{id}', [AdminController::class, 'toggleUserStatus'])->name('admin.users.toggle');
+    Route::get('/events', [AdminController::class, 'listEvents'])->name('admin.events');
+    Route::get('/certificates', [AdminController::class, 'listCertificates'])->name('admin.certificates');
+    Route::post('/backup', [AdminController::class, 'backup'])->name('admin.backup');
+});
+
+Auth::routes();
+
+/* ======= PUBLIC: opportunities, verify, gallery ======= */
+
+/* Opportunities list (with simple filters) */
+
+/* Opportunity details (lightweight) */
+Route::get('/opportunities/{id}', function ($id) {
+    $row = \Illuminate\Support\Facades\DB::table('opportunities')->where('id',$id)->first();
+    abort_unless($row, 404);
+    return view('public.opportunities.show', compact('row'));
+})->name('opportunities.show');
+
+/* Verify certificate (GET form + POST lookup) */
+Route::match(['get','post'], '/verify', function (Request $r) {
+    $result = null; $code = '';
+    if ($r->isMethod('post')) {
+        $code = trim($r->input('code',''));
+        if ($code !== '') {
+            $result = \Illuminate\Support\Facades\DB::table('certificates')->where('verification_code',$code)->first();
+        }
+    }
+    return view('public.verify', compact('result','code'));
+})->name('verify');
+
+/* Simple gallery placeholder */
+Route::get('/gallery', fn()=>view('public.gallery'))->name('gallery');
+
+/* --- PUBLIC: Verify (safe override of any older /verify closure) --- */
+Route::match(['GET','POST'], '/verify', function (\Illuminate\Http\Request $r) {
+    $code = trim($r->input('code',''));
+    $result = null;
+    if ($code !== '') {
+        $result = \Illuminate\Support\Facades\DB::table('certificates')->where('verification_code',$code)->first();
+    }
+    return view('public.verify', compact('result','code'));
+})->name('verify');
+Route::get('/opportunities', function (\Illuminate\Http\Request $r) {
+    $q = trim($r->get('q',''));
+    $rows = \Illuminate\Support\Facades\DB::table('opportunities')
+        ->select('id','title','city','region','category','date','start_time','end_time','status','description')
+        ->when($q, fn($w)=>$w->where(function($x) use ($q){
+            $x->where('title','like',"%$q%")
+              ->orWhere('description','like',"%$q%");
+        }))
+        ->when($r->filled('category'), fn($w)=>$w->where('category',$r->category))
+        ->when($r->filled('region'), fn($w)=>$w->where('region',$r->region))
+        ->orderByDesc('date')->orderByDesc('id')->paginate(24);
+    $rows->appends($r->query());
+
+    $cats    = \Illuminate\Support\Facades\DB::table('opportunities')->whereNotNull('category')->distinct()->orderBy('category')->pluck('category');
+    $regions = \Illuminate\Support\Facades\DB::table('opportunities')->whereNotNull('region')->distinct()->orderBy('region')->pluck('region');
+
+    // Prefer your existing public blade if present
+    $view = collect([
+        'opportunities.public.index',
+        'opportunities.index',
+        'public.opportunities',
+    ])->first(fn($v) => view()->exists($v));
+
+    return view($view, [
+        'rows' => $rows,                // for minimal list templates
+        'opportunities' => $rows,       // for your public/opportunities index
+        'cats' => $cats,
+        'regions' => $regions,
+        'q' => $q,
+    ]);
+})->name('opportunities.index');
+Route::get('/opportunities/{id}', function ($id) {
+    $o = \Illuminate\Support\Facades\DB::table('opportunities')->where('id', $id)->first();
+    abort_unless($o, 404);
+
+    // Prefer your public show blade if present
+    $view = collect([
+        'opportunities.public.show',
+        'opportunities.show',
+    ])->first(fn($v) => view()->exists($v));
+
+    return view($view, [
+        'o' => $o,
+        'opportunity' => $o,
+    ]);
+})->whereNumber('id')->name('opps.public.show');
+/* ---- Public auth aliases (keep your existing auth intact) ---- */
+
+
+/* Volunteer shortcuts just point to the default Laravel auth */
+
+// ---- [Profile routes harden] ----------------------------------------------
+use App\Http\Controllers\Volunteer\ProfileIndexAction;
+
+Route::middleware(['web','auth'])->group(function () {
+    // Prefer these at the bottom so they override any earlier duplicates
+    Route::get('/profile', ProfileIndexAction::class)->name('profile');
+    Route::get('/volunteer/profile', ProfileIndexAction::class)->name('volunteer.profile');
+});
+// ---------------------------------------------------------------------------
+
+/*
+|---------------------------------------------------------------
+| Safe fallback routes for "My Certificates"
+|---------------------------------------------------------------
+| Some blades use route('certificates.my') and others use
+| route('my.certificates'). We define both so links resolve.
+*/
+
+Route::middleware('auth')->group(function () {
+    if (!Route::has('certificates.my')) {
+        Route::get('/my/certificates', function () {
+            $user = auth()->user();
+            // Minimal dataset for the existing blades
+            $rows = \Illuminate\Support\Facades\DB::table('certificates')
+                ->select('id','code','opportunity_id','hours','issued_at','user_id')
+                ->where('user_id', $user->id)
+                ->orderByDesc('issued_at')->orderByDesc('id')
+                ->get();
+
+            // Prefer an existing certificates view if present
+            $view = collect(['certificates.my','my.certificates','me.certificates'])
+                ->first(fn($v) => view()->exists($v));
+
+            // Pass both 'certificates' and 'rows' to satisfy different templates
+            return view($view ?? 'errors.inline-profile-fallback', [
+                'user'         => $user,
+                'certificates' => $rows,
+                'rows'         => $rows,
+            ]);
+        })->name('certificates.my');
+    }
+
+    // If some blades use 'my.certificates', define a redirect alias
+    if (!Route::has('my.certificates')) {
+        Route::get('/me/certificates', fn () => redirect()->route('certificates.my'))
+            ->name('my.certificates');
+    }
+});
+
+/* Safe fallback for "my.hours" used by some views */
+Route::middleware('auth')->group(function () {
+    if (!Route::has('my.hours')) {
+        Route::get('/my/hours', function () {
+            $rows = \Illuminate\Support\Facades\DB::table('volunteer_hours')
+                ->select('id','opportunity_id','hours','date','notes','user_id')
+                ->where('user_id', auth()->id())
+                ->orderByDesc('date')->orderByDesc('id')->get();
+            return response()->view('fallback.my-hours', compact('rows'), 200);
+        })->name('my.hours');
+    }
+});
+
+/* ---------- Safe aliases used by some older blades ---------- */
+Route::middleware('auth')->group(function () {
+    // If a blade calls route('transcript.pdf'), send them to the certificates page.
+    if (!Route::has('transcript.pdf')) {
+        Route::get('/my/transcript', fn() => redirect()->route('certificates.my'))
+            ->name('transcript.pdf');
+    }
+    // Some blades use a download name for certs; point to certificates list for now.
+    if (!Route::has('my.certificates.download')) {
+        Route::get('/my/certificates/download', fn() => redirect()->route('certificates.my'))
+            ->name('my.certificates.download');
+    }
+});
+
+/* === Auth tail (clean, rebuilt) === */
+/* === Volunteer auth (email/password only) === */
+Route::middleware('guest')->group(function () {
+    Route::get('/signin', [\App\Http\Controllers\Auth\LoginController::class, 'showLoginForm'])->name('login');
+    Route::post('/login', [\App\Http\Controllers\Auth\LoginController::class, 'login'])->name('login.perform');
+
+    Route::get('/register', [\App\Http\Controllers\Auth\RegisterController::class, 'showRegistrationForm'])->name('register');
+    Route::post('/register', [\App\Http\Controllers\Auth\RegisterController::class, 'register'])->name('register.perform');
+
+    // Forgot password flow
+    Route::get('/password/reset', [\App\Http\Controllers\Auth\ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
+    Route::post('/password/email', [\App\Http\Controllers\Auth\ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
+    Route::get('/password/reset/{token}', [\App\Http\Controllers\Auth\ResetPasswordController::class, 'showResetForm'])->name('password.reset');
+    Route::post('/password/reset', [\App\Http\Controllers\Auth\ResetPasswordController::class, 'reset'])->name('password.update');
+});
+
+/* Canonical POST-only logout for authenticated users */
+    ->middleware('auth')->name('logout');
