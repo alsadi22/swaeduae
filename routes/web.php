@@ -106,3 +106,20 @@ Route::domain('admin.swaeduae.ae')->middleware(['web','auth','can:admin-access']
     Route::get('/hours', fn() => view()->exists('admin.hours.index') ? view('admin.hours.index') : response('Admin Hours', 200))->name('hours.index');
     Route::get('/certificates', fn() => view()->exists('admin.certificates.index') ? view('admin.certificates.index') : response('Admin Certificates', 200))->name('certificates.index');
 });
+
+
+// Legacy path → new QR verify (301, preserves query and {code})
+Route::get('/certificates/verify/{code?}', function ($code = null) {
+    $qs = request()->query();
+    $target = '/qr/verify' . ($qs ? ('?' . http_build_query($qs)) : '');
+    return redirect()->to($target, 301);
+})->name('certificates.verify.form');
+
+/* Legacy path → new QR verify (301, preserves query and {code}) */
+Route::get('/certificates/verify/{code?}', function ($code = null) {
+    $qs = request()->query();
+    if (!$qs && $code) { $qs = ['code' => $code]; }
+    $target = '/qr/verify' . ($qs ? ('?' . http_build_query($qs)) : '');
+    return redirect()->to($target, 301);
+})->name('certificates.verify.form');
+
