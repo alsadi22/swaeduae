@@ -1,0 +1,14 @@
+[21-Aug-2025 12:53:11 UTC] PHP Parse error:  syntax error, unexpected token "->" in /home3/vminingc/swaeduae.ae/laravel-app/bootstrap/app.php on line 15
+[21-Aug-2025 12:53:13 UTC] PHP Parse error:  syntax error, unexpected token "->" in /home3/vminingc/swaeduae.ae/laravel-app/bootstrap/app.php on line 15
+[21-Aug-2025 12:53:44 UTC] PHP Parse error:  syntax error, unexpected token "->" in /home3/vminingc/swaeduae.ae/laravel-app/bootstrap/app.php on line 14
+[21-Aug-2025 12:53:47 UTC] PHP Parse error:  syntax error, unexpected token "->" in /home3/vminingc/swaeduae.ae/laravel-app/bootstrap/app.php on line 14
+[21-Aug-2025 12:55:53 UTC] PHP Parse error:  syntax error, unexpected token "->" in /home3/vminingc/swaeduae.ae/laravel-app/bootstrap/app.php on line 14
+[21-Aug-2025 12:55:56 UTC] PHP Parse error:  syntax error, unexpected token "->" in /home3/vminingc/swaeduae.ae/laravel-app/bootstrap/app.php on line 14
+[21-Aug-2025 12:56:41 UTC] PHP Parse error:  syntax error, unexpected token "->" in /home3/vminingc/swaeduae.ae/laravel-app/bootstrap/app.php on line 14
+[21-Aug-2025 12:56:43 UTC] PHP Parse error:  syntax error, unexpected token "->" in /home3/vminingc/swaeduae.ae/laravel-app/bootstrap/app.php on line 14
+[21-Aug-2025 12:57:36 UTC] PHP Parse error:  syntax error, unexpected token "->" in /home3/vminingc/swaeduae.ae/laravel-app/bootstrap/app.php on line 14
+[21-Aug-2025 12:57:39 UTC] PHP Parse error:  syntax error, unexpected token "->" in /home3/vminingc/swaeduae.ae/laravel-app/bootstrap/app.php on line 14
+[21-Aug-2025 12:58:00 UTC] PHP Parse error:  syntax error, unexpected token "->" in /home3/vminingc/swaeduae.ae/laravel-app/bootstrap/app.php on line 14
+[21-Aug-2025 12:58:25 UTC] PHP Parse error:  syntax error, unexpected token "->" in /home3/vminingc/swaeduae.ae/laravel-app/bootstrap/app.php on line 14
+[21-Aug-2025 12:58:39 UTC] PHP Parse error:  syntax error, unexpected token "->" in /home3/vminingc/swaeduae.ae/laravel-app/bootstrap/app.php on line 14
+[23-Aug-2025 18:06:29 Asia/Dubai] PHP Fatal error:  Cannot use Illuminate\Support\Facades\Route as Route because the name is already in use in /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php on line 395

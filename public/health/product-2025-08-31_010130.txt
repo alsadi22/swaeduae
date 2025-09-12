@@ -1,0 +1,77 @@
+=== PRODUCT READINESS 2025-08-31_010130 ===
+
+== ENV SNAPSHOT ==
+APP_ENV=production
+APP_DEBUG=false
+APP_URL=https://swaeduae.ae
+HOURS_GEOFENCE_METERS=150
+
+== ROUTES (public + admin domains) ==
+
+== DB TABLES / COLUMNS (domain) ==
+acl_model_has_permissions
+acl_model_has_roles
+acl_permissions
+acl_role_has_permissions
+acl_roles
+audits
+cache
+cache_locks
+certificates
+events
+failed_jobs
+hours
+job_batches
+jobs
+migrations
+news
+password_reset_tokens
+payments
+registrations
+sessions
+users
+volunteers
+— columns —
+audits	action
+audits	created_at
+audits	entity
+audits	entity_id
+audits	id
+audits	meta
+audits	user_id
+certificates	code
+certificates	hours
+certificates	signature
+events	created_at
+events	description
+events	ends_at
+events	id
+events	location
+events	slug
+events	starts_at
+events	status
+events	title
+events	updated_at
+hours	event_id
+hours	hours
+hours	id
+hours	occurred_at
+hours	user_id
+payments	status
+registrations	created_at
+registrations	event_id
+registrations	id
+registrations	status
+registrations	updated_at
+registrations	volunteer_id
+volunteers	address
+volunteers	created_at
+volunteers	date_of_birth
+volunteers	id
+volunteers	interests
+volunteers	phone
+volunteers	skills
+volunteers	updated_at
+volunteers	user_id
+
+== CODE PRESENCE (models/controllers/views)==

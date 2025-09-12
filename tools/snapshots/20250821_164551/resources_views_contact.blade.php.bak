@@ -1,0 +1,43 @@
+@extends('layouts.app')
+
+@section('title', __('Contact'))
+
+@section('content')
+<main id="main" tabindex="-1" class="container py-4">
+  <h1 class="mb-3">{{ __('Contact us') }}</h1>
+
+  @if (session('status') === 'sent')
+    <div class="alert alert-success">{{ __('Thanks! Your message has been sent.') }}</div>
+  @endif
+
+  @if ($errors->any())
+    <div class="alert alert-danger">
+      <ul class="mb-0">
+        @foreach ($errors->all() as $err)<li>{{ $err }}</li>@endforeach
+      </ul>
+    </div>
+  @endif
+
+  <form method="post" action="{{ route('contact.submit') }}">
+    @csrf
+    <!-- Honeypot -->
+    <div style="position:absolute; left:-10000px;">
+      <input type="text" name="website_url" value="">
+    </div>
+
+    <div class="mb-3">
+      <label>{{ __('Your name') }}</label>
+      <input type="text" class="form-control" name="name" value="{{ old('name') }}" required>
+    </div>
+    <div class="mb-3">
+      <label>{{ __('Email') }}</label>
+      <input type="email" class="form-control" name="email" value="{{ old('email') }}" required>
+    </div>
+    <div class="mb-3">
+      <label>{{ __('Message') }}</label>
+      <textarea class="form-control" name="message" rows="6" required>{{ old('message') }}</textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">{{ __('Send') }}</button>
+  </form>
+</main>
+@endsection

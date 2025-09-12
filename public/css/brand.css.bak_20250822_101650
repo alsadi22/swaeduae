@@ -1,0 +1,17 @@
+/* Center the dropdown under its toggle */
+.dropdown-menu-center {
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+}
+
+/* Slightly smaller header height */
+.navbar { min-height: 56px; }
+
+/* Make the rounded bar feel lighter */
+.navbar.rounded-3 { border: 1px solid rgba(0,0,0,.04); }
+
+/* Improve link hover contrast a touch */
+.navbar .nav-link:hover { color: #0f5d66; }
+
+/* Keep dropdown above hero shadows just in case */
+.dropdown-menu { z-index: 1051; }

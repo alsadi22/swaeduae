@@ -1,0 +1,5 @@
+@extends('layouts.app')
+@section('content')
+  @include('auth.partials.login-form')
+  ('auth.partials.social-volunteer-only')
+@endsection

@@ -1,0 +1,68 @@
+SwaedUAE Deep Check  2025-08-30-045343
+================================================
+
+== Environment ==
+PHP: PHP 8.3.24 (cli) (built: Aug  3 2025 08:57:38) (NTS)
+Laravel: Laravel Framework 11.45.2
+Node: v22.19.0
+Composer: Composer 2.2.6 2022-02-04 17:00:38
+memory_limit: 512M
+
+== Routes JSON snapshot ==
+OK    - Fetched route list JSON
+
+== Public GET endpoints (200 expected; 302 resolved) ==
+  //                                       -> 200
+  /_agent                                  -> 500
+WARN  - Public GET _agent returned 500
+  /_agent/report.json                      -> 500
+WARN  - Public GET _agent/report.json returned 500
+  /_agent/scan                             -> 500
+WARN  - Public GET _agent/scan returned 500
+  /_alias/about                            -> 200
+  /_alias/contact                          -> 200
+  /_alias/faq                              -> 200
+  /_alias/login-volunteer                  -> 200
+  /_alias/privacy                          -> 200
+  /_alias/public-events                    -> 200
+  /_alias/public-opps                      -> 200
+  /_alias/public-orgs                      -> 403
+WARN  - Public GET _alias/public-orgs returned 403
+  /_alias/terms                            -> 200
+  /_compat/id                              -> 404
+WARN  - Public GET _compat/id returned 404
+  /_compat/token                           -> 404
+WARN  - Public GET _compat/token returned 404
+  /about                                   -> 200
+  /about-us                                -> 200
+  /attendance/checkin                      -> 200
+  /attendance/checkout                     -> 200
+  /auth/facebook/callback                  -> 200
+  /auth/facebook/redirect                  -> 200
+  /auth/google/callback                    -> 200
+  /auth/google/redirect                    -> 200
+  /auth/uaepass/callback                   -> 404
+WARN  - Public GET auth/uaepass/callback returned 404
+  /auth/uaepass/redirect                   -> 404
+WARN  - Public GET auth/uaepass/redirect returned 404
+  /certificates/issue                      -> 200
+  /confirm-password                        -> 200
+  /contact                                 -> 200
+  /contact-us                              -> 200
+  /dashboard                               -> 200
+  /destination                             -> 200
+  /donate                                  -> 200
+  /events                                  -> 200
+  /events/browse                           -> 200
+  /faq                                     -> 200
+  /forgot-password                         -> 200
+  /login                                   -> 200
+  /login/email                             -> 200
+  /login/organization                      -> 500
+WARN  - Public GET login/organization returned 500
+  /me/certificates                         -> 200
+  /me/hours                                -> 200
+  /my/certificates                         -> 200
+  /notifications/test                      -> 200
+  /opportunities                           -> 200
+  /opportunities/attendances.csv           -> 200

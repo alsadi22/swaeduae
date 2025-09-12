@@ -1,0 +1,27 @@
+=== ADMIN FEATURE AUDIT 2025-09-01_200806 ===
+== Route names (volunteer/org/admin) ==
+
+   ParseError 
+
+  syntax error, unexpected token "/"
+
+  at routes/web.php:298
+    294▕     ->name('my.profile');
+    295▕ 
+    296▕ /* volunteer profile alias (protected) */
+    297▕ Route::middleware(['web','auth','verified'])
+  ➜ 298▕     ->get('/profile', fn() => redirect(/profile))
+    299▕     ->name('profile.alias');
+    300▕ 
+    301▕ /* ==== ADMIN LOGOUT (fix for layout using route('admin.logout')) ==== */
+    302▕ use Illuminate\Support\Facades\Auth;
+
+      [2m+3 vendor frames [22m
+
+  4   app/Providers/RouteServiceProvider.php:16
+      Illuminate\Routing\RouteRegistrar::group()
+      [2m+7 vendor frames [22m
+
+  12  [internal]:0
+      Illuminate\Foundation\Application::Illuminate\Foundation\{closure}()
+

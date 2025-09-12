@@ -1,0 +1,3 @@
+resources/views/public/contact.blade.php
+resources/views/contact.blade.php
+resources/views/pages/contact.blade.php

@@ -1,0 +1,383 @@
+[21-Aug-2025 07:02:40 UTC] PHP Parse error:  syntax error, unexpected token ")", expecting variable in app/Http/Controllers/Org/ApplicationReviewController.php on line 9
+[21-Aug-2025 07:05:28 UTC] PHP Parse error:  syntax error, unexpected token "(", expecting "function" in app/Http/Controllers/Org/ApplicationReviewController.php on line 10
+[21-Aug-2025 07:37:37 UTC] PHP Parse error:  syntax error, unexpected token "\" in database/seeders/RegionSeeder.php on line 12
+[21-Aug-2025 07:50:30 UTC] PHP Parse error:  syntax error, unexpected token "\", expecting "]" in routes/partials/profile_routes.php on line 33
+[21-Aug-2025 07:53:17 UTC] PHP Parse error:  syntax error, unexpected token "<", expecting end of file in routes/_disabled/opportunities.php on line 2
+[21-Aug-2025 07:53:17 UTC] PHP Parse error:  syntax error, unexpected token "<", expecting end of file in routes/_disabled/public_opportunities.php on line 2
+[21-Aug-2025 07:53:17 UTC] PHP Parse error:  syntax error, unexpected token "<", expecting end of file in routes/_disabled/opportunities_public.php on line 2
+[21-Aug-2025 12:22:08 UTC] PHP Parse error:  syntax error, unexpected token "->", expecting ")" in app/Providers/MiddlewareAliasesServiceProvider.php on line 14
+[21-Aug-2025 12:22:44 UTC] PHP Parse error:  syntax error, unexpected token "->", expecting ")" in app/Providers/MiddlewareAliasesServiceProvider.php on line 14
+[21-Aug-2025 12:23:28 UTC] PHP Parse error:  syntax error, unexpected token "->" in app/Providers/MiddlewareAliasesServiceProvider.php on line 14
+[21-Aug-2025 12:53:11 UTC] PHP Parse error:  syntax error, unexpected token "->" in bootstrap/app.php on line 15
+[21-Aug-2025 12:53:11 UTC] PHP Parse error:  syntax error, unexpected token "->" in /home3/vminingc/swaeduae.ae/laravel-app/bootstrap/app.php on line 15
+[21-Aug-2025 12:53:44 UTC] PHP Parse error:  syntax error, unexpected token "->" in bootstrap/app.php on line 14
+[21-Aug-2025 12:53:44 UTC] PHP Parse error:  syntax error, unexpected token "->" in /home3/vminingc/swaeduae.ae/laravel-app/bootstrap/app.php on line 14
+[21-Aug-2025 12:55:53 UTC] PHP Parse error:  syntax error, unexpected token "->" in bootstrap/app.php on line 14
+[21-Aug-2025 12:55:53 UTC] PHP Parse error:  syntax error, unexpected token "->" in /home3/vminingc/swaeduae.ae/laravel-app/bootstrap/app.php on line 14
+[21-Aug-2025 12:56:40 UTC] PHP Parse error:  syntax error, unexpected token "->" in bootstrap/app.php on line 14
+[21-Aug-2025 12:56:40 UTC] PHP Parse error:  syntax error, unexpected token "->" in /home3/vminingc/swaeduae.ae/laravel-app/bootstrap/app.php on line 14
+[21-Aug-2025 12:56:40 UTC] PHP Parse error:  syntax error, unexpected token "->" in /home3/vminingc/swaeduae.ae/laravel-app/bootstrap/app.php on line 14
+[21-Aug-2025 12:57:35 UTC] PHP Parse error:  syntax error, unexpected token "->" in bootstrap/app.php on line 14
+[21-Aug-2025 12:57:36 UTC] PHP Parse error:  syntax error, unexpected token "->" in /home3/vminingc/swaeduae.ae/laravel-app/bootstrap/app.php on line 14
+[21-Aug-2025 12:57:36 UTC] PHP Parse error:  syntax error, unexpected token "->" in /home3/vminingc/swaeduae.ae/laravel-app/bootstrap/app.php on line 14
+[21-Aug-2025 12:58:25 UTC] PHP Parse error:  syntax error, unexpected token "->" in bootstrap/app.php on line 14
+[21-Aug-2025 12:58:25 UTC] PHP Parse error:  syntax error, unexpected token "->" in /home3/vminingc/swaeduae.ae/laravel-app/bootstrap/app.php on line 14
+[21-Aug-2025 12:58:39 UTC] PHP Parse error:  syntax error, unexpected token "->" in bootstrap/app.php on line 14
+[21-Aug-2025 12:58:39 UTC] PHP Parse error:  syntax error, unexpected token "->" in /home3/vminingc/swaeduae.ae/laravel-app/bootstrap/app.php on line 14
+[21-Aug-2025 13:05:49 UTC] PHP Parse error:  syntax error, unexpected token "," in app/Http/Controllers/Admin/AttendanceAdminController.php on line 41
+[21-Aug-2025 13:09:19 UTC] PHP Parse error:  syntax error, unexpected token "," in app/Http/Controllers/Admin/AttendanceAdminController.php on line 41
+[21-Aug-2025 13:10:25 UTC] PHP Parse error:  syntax error, unexpected variable "$oid", expecting ";" or "{" in app/Http/Controllers/Admin/AttendanceAdminController.php on line 35
+[21-Aug-2025 13:12:21 UTC] PHP Parse error:  syntax error, unexpected token "->", expecting "function" in app/Http/Controllers/Admin/AttendanceAdminController.php on line 50
+[21-Aug-2025 13:14:08 UTC] PHP Parse error:  syntax error, unexpected token "->", expecting "function" in app/Http/Controllers/Admin/AttendanceAdminController.php on line 50
+[21-Aug-2025 13:22:58 UTC] PHP Parse error:  syntax error, unexpected token "->", expecting "function" in /home3/vminingc/swaeduae.ae/laravel-app/app/Http/Controllers/Admin/AttendanceAdminController.php on line 50
+[21-Aug-2025 13:30:09 UTC] PHP Parse error:  syntax error, unexpected token "->", expecting "function" in /home3/vminingc/swaeduae.ae/laravel-app/app/Http/Controllers/Admin/AttendanceAdminController.php on line 52
+[21-Aug-2025 13:32:52 UTC] PHP Parse error:  syntax error, unexpected token "->", expecting "function" in /home3/vminingc/swaeduae.ae/laravel-app/app/Http/Controllers/Admin/AttendanceAdminController.php.before_fix_20250821-133009 on line 50
+[21-Aug-2025 13:32:52 UTC] PHP Parse error:  syntax error, unexpected token "->", expecting "function" in /home3/vminingc/swaeduae.ae/laravel-app/app/Http/Controllers/Admin/AttendanceAdminController.php.before_fix_20250821-132756 on line 50
+[21-Aug-2025 13:32:52 UTC] PHP Parse error:  syntax error, unexpected token "->", expecting "function" in /home3/vminingc/swaeduae.ae/laravel-app/app/Http/Controllers/Admin/AttendanceAdminController.php.before_fix_20250821-132523 on line 50
+[21-Aug-2025 13:32:52 UTC] PHP Parse error:  syntax error, unexpected token "->", expecting "function" in /home3/vminingc/swaeduae.ae/laravel-app/app/Http/Controllers/Admin/AttendanceAdminController.php.before_fix_20250821-131719 on line 50
+[21-Aug-2025 13:32:52 UTC] PHP Parse error:  syntax error, unexpected token "->", expecting "function" in /home3/vminingc/swaeduae.ae/laravel-app/app/Http/Controllers/Admin/AttendanceAdminController.php.before_fix_20250821-131947 on line 50
+[21-Aug-2025 13:32:52 UTC] PHP Parse error:  syntax error, unexpected token "->", expecting "function" in /home3/vminingc/swaeduae.ae/laravel-app/app/Http/Controllers/Admin/AttendanceAdminController.php.before_fix_20250821-132258 on line 50
+[21-Aug-2025 13:32:52 UTC] PHP Parse error:  syntax error, unexpected token "->", expecting "function" in /home3/vminingc/swaeduae.ae/laravel-app/app/Http/Controllers/Admin/AttendanceAdminController.php.fixclean_20250821-131408 on line 50
+[21-Aug-2025 13:32:53 UTC] PHP Warning:  Undefined variable $request in Command line code on line 7
+[21-Aug-2025 13:32:53 UTC] PHP Warning:  Undefined variable $oid in Command line code on line 9
+[21-Aug-2025 13:32:53 UTC] PHP Warning:  Undefined variable $request in Command line code on line 9
+[21-Aug-2025 13:32:53 UTC] PHP Warning:  Attempt to read property "query" on null in Command line code on line 9
+[21-Aug-2025 13:32:53 UTC] PHP Warning:  Undefined variable $rows in Command line code on line 11
+[21-Aug-2025 13:32:53 UTC] PHP Warning:  Undefined variable $oid in Command line code on line 13
+[21-Aug-2025 13:32:53 UTC] PHP Warning:  Undefined variable $q in Command line code on line 13
+[21-Aug-2025 13:32:53 UTC] PHP Warning:  Undefined variable $q in Command line code on line 13
+[21-Aug-2025 13:32:53 UTC] PHP Warning:  Attempt to read property "where" on null in Command line code on line 13
+[21-Aug-2025 13:32:53 UTC] PHP Warning:  Undefined variable $oid in Command line code on line 13
+[21-Aug-2025 13:32:53 UTC] PHP Warning:  Undefined variable $join in Command line code on line 14
+[21-Aug-2025 13:32:53 UTC] PHP Warning:  Undefined variable $join in Command line code on line 15
+[21-Aug-2025 13:32:53 UTC] PHP Warning:  Attempt to read property "on" on null in Command line code on line 15
+[21-Aug-2025 13:32:53 UTC] PHP Parse error:  syntax error, unexpected token ")", expecting variable in /home3/vminingc/swaeduae.ae/laravel-app/app/Http/Controllers/Admin/AttendanceAdminController.php on line 34
+[21-Aug-2025 14:14:18 UTC] PHP Parse error:  syntax error, unexpected token "public", expecting "{" in app/Models/Event.php on line 10
+[21-Aug-2025 14:23:22 UTC] PHP Parse error:  syntax error, unexpected single-quoted string "slug", expecting identifier or variable or "{" or "$" in app/Http/Controllers/EventController.php on line 38
+[21-Aug-2025 14:24:09 UTC] PHP Parse error:  Unclosed '{' on line 10 in app/Http/Controllers/EventController.php on line 43
+[21-Aug-2025 14:56:47 UTC] PHP Fatal error:  Cannot use Illuminate\Support\Facades\Route as Route because the name is already in use in routes/_public.php on line 27
+[21-Aug-2025 15:49:47 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function config() in Command line code:1
+Stack trace:
+#0 {main}
+  thrown in Command line code on line 1
+[21-Aug-2025 16:07:47 UTC] PHP Parse error:  syntax error, unexpected token "use", expecting "{" in app/Mail/ContactMessage.php on line 9
+[21-Aug-2025 16:09:32 UTC] PHP Parse error:  syntax error, unexpected token "use", expecting "{" in app/Mail/ContactMessage.php on line 9
+[21-Aug-2025 16:09:32 UTC] PHP Parse error:  syntax error, unexpected token "catch", expecting "function" in app/Http/Controllers/ContactController.php on line 25
+[21-Aug-2025 18:27:14 UTC] PHP Parse error:  Unmatched '}' in routes/web.php on line 178
+[21-Aug-2025 18:29:17 UTC] PHP Warning:  Undefined variable $TS in Standard input code on line 18
+[21-Aug-2025 18:35:11 UTC] PHP Parse error:  syntax error, unexpected token ";" in app/Http/Controllers/HomeController.php on line 40
+[22-Aug-2025 07:06:40 UTC] PHP Parse error:  syntax error, unexpected token "\" in Command line code on line 16
+[22-Aug-2025 11:49:31 UTC] PHP Parse error:  syntax error, unexpected identifier "redirect" in Command line code on line 5
+[22-Aug-2025 14:10:45 UTC] PHP Parse error:  syntax error, unexpected token "->" in app/Http/Middleware/MicroCache.php on line 12
+[22-Aug-2025 14:14:35 UTC] PHP Parse error:  syntax error, unexpected token "->" in app/Http/Middleware/MicroCache.php on line 12
+[22-Aug-2025 14:14:45 UTC] PHP Parse error:  syntax error, unexpected token "->" in app/Http/Middleware/MicroCache.php on line 12
+[22-Aug-2025 14:14:46 UTC] PHP Parse error:  syntax error, unexpected token "->" in app/Http/Middleware/MicroCache.php on line 11
+[22-Aug-2025 15:31:55 UTC] PHP Parse error:  syntax error, unexpected token "=" in app/Http/Middleware/RedirectIfAuthenticated.php on line 11
+[22-Aug-2025 15:53:17 UTC] PHP Parse error:  syntax error, unexpected token "=" in app/Http/Controllers/Auth/AuthenticatedSessionController.php on line 31
+[22-Aug-2025 22:05:20 Asia/Dubai] PHP Parse error:  Unmatched ')' in /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php on line 330
+[23-Aug-2025 07:13:28 UTC] PHP Parse error:  syntax error, unexpected token "->" in app/Http/Controllers/Auth/LoginController.php on line 40
+[23-Aug-2025 11:54:37 Asia/Dubai] PHP Fatal error:  Cannot use Illuminate\Support\Facades\Gate as Gate because the name is already in use in /home3/vminingc/swaeduae.ae/laravel-app/app/Providers/AuthServiceProvider.php on line 9
+[23-Aug-2025 11:54:52 Asia/Dubai] PHP Fatal error:  Cannot use Illuminate\Support\Facades\Gate as Gate because the name is already in use in /home3/vminingc/swaeduae.ae/laravel-app/app/Providers/AuthServiceProvider.php on line 9
+[23-Aug-2025 07:59:36 UTC] PHP Warning:  preg_match(): Compilation failed: missing opening brace after \o at offset 2 in Command line code on line 5
+[23-Aug-2025 07:59:36 UTC] PHP Warning:  Undefined variable $routeMiddleware in Command line code on line 6
+[23-Aug-2025 09:05:01 UTC] PHP Parse error:  syntax error, unexpected token "\", expecting ")" in Command line code on line 3
+[23-Aug-2025 09:09:45 UTC] PHP Warning:  require(/tmp/vendor/autoload.php): Failed to open stream: No such file or directory in /tmp/route_resolved.php on line 2
+[23-Aug-2025 09:09:45 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/tmp/vendor/autoload.php' (include_path='.:/opt/alt/php84/usr/share/pear:/opt/alt/php84/usr/share/php:/usr/share/pear:/usr/share/php') in /tmp/route_resolved.php:2
+Stack trace:
+#0 {main}
+  thrown in /tmp/route_resolved.php on line 2
+[23-Aug-2025 13:13:55 Asia/Dubai] PHP Fatal error:  Cannot redeclare App\Http\Kernel::$routeMiddleware in /home3/vminingc/swaeduae.ae/laravel-app/app/Http/Kernel.php on line 69
+[23-Aug-2025 09:26:42 UTC] PHP Parse error:  Unterminated comment starting line 37 in Command line code on line 37
+[23-Aug-2025 11:12:07 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in Command line code:1
+Stack trace:
+#0 {main}
+  thrown in Command line code on line 1
+[23-Aug-2025 11:12:07 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in Command line code:1
+Stack trace:
+#0 {main}
+  thrown in Command line code on line 1
+[23-Aug-2025 11:12:08 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in Command line code:1
+Stack trace:
+#0 {main}
+  thrown in Command line code on line 1
+[23-Aug-2025 11:44:34 UTC] PHP Parse error:  syntax error, unexpected fully qualified name "\Http", expecting "{" in routes/web.php on line 3
+[23-Aug-2025 11:47:05 UTC] PHP Parse error:  syntax error, unexpected fully qualified name "\Http", expecting "{" in routes/web.php on line 3
+[23-Aug-2025 18:05:20 Asia/Dubai] PHP Fatal error:  Cannot use Illuminate\Support\Facades\Route as Route because the name is already in use in /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php on line 395
+[23-Aug-2025 18:05:21 Asia/Dubai] PHP Fatal error:  Cannot use Illuminate\Support\Facades\Route as Route because the name is already in use in /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php on line 395
+[23-Aug-2025 18:05:21 Asia/Dubai] PHP Fatal error:  Cannot use Illuminate\Support\Facades\Route as Route because the name is already in use in /home3/vminingc/swaeduae.ae/laravel-app/routes/web.php on line 395
+[23-Aug-2025 14:34:02 UTC] PHP Parse error:  syntax error, unexpected token "\", expecting ")" in Command line code on line 4
+[23-Aug-2025 14:34:10 UTC] PHP Parse error:  syntax error, unexpected token "\", expecting ")" in Command line code on line 4
+[23-Aug-2025 18:37:56 Asia/Dubai] PHP Fatal error:  Uncaught ErrorException: Undefined variable $errors in /home3/vminingc/swaeduae.ae/laravel-app/storage/framework/views/73dc263a083a76cfa737a50f18d3dfd6.php:4
+Stack trace:
+#0 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(258): Illuminate\Foundation\Bootstrap\HandleExceptions->handleError()
+#1 /home3/vminingc/swaeduae.ae/laravel-app/storage/framework/views/73dc263a083a76cfa737a50f18d3dfd6.php(4): Illuminate\Foundation\Bootstrap\HandleExceptions->{closure:Illuminate\Foundation\Bootstrap\HandleExceptions::forwardsTo():257}()
+#2 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php(123): require('/home3/vminingc...')
+#3 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php(124): Illuminate\Filesystem\Filesystem::{closure:Illuminate\Filesystem\Filesystem::getRequire():120}()
+#4 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php(58): Illuminate\Filesystem\Filesystem->getRequire()
+#5 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/View/Engines/CompilerEngine.php(75): Illuminate\View\Engines\PhpEngine->evaluatePath()
+#6 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/View/View.php(209): Illuminate\View\Engines\CompilerEngine->get()
+#7 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/View/View.php(192): Illuminate\View\View->getContents()
+#8 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/View/View.php(161): Illuminate\View\View->renderContents()
+#9 /home3/vminingc/swaeduae.ae/laravel-app/storage/framework/views/6779a9395495f8d544b0861cfb981204.php(23): Illuminate\View\View->render()
+#10 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php(123): require('/home3/vminingc...')
+#11 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php(124): Illuminate\Filesystem\Filesystem::{closure:Illuminate\Filesystem\Filesystem::getRequire():120}()
+#12 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php(58): Illuminate\Filesystem\Filesystem->getRequire()
+#13 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/View/Engines/CompilerEngine.php(75): Illuminate\View\Engines\PhpEngine->evaluatePath()
+#14 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/View/View.php(209): Illuminate\View\Engines\CompilerEngine->get()
+#15 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/View/View.php(192): Illuminate\View\View->getContents()
+#16 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/View/View.php(161): Illuminate\View\View->renderContents()
+#17 /home3/vminingc/swaeduae.ae/laravel-app/storage/framework/views/9bb15fa3c036463757bebfb9ed720c39.php(148): Illuminate\View\View->render()
+#18 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php(123): require('/home3/vminingc...')
+#19 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php(124): Illuminate\Filesystem\Filesystem::{closure:Illuminate\Filesystem\Filesystem::getRequire():120}()
+#20 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php(58): Illuminate\Filesystem\Filesystem->getRequire()
+#21 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/View/Engines/CompilerEngine.php(75): Illuminate\View\Engines\PhpEngine->evaluatePath()
+#22 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/View/View.php(209): Illuminate\View\Engines\CompilerEngine->get()
+#23 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/View/View.php(192): Illuminate\View\View->getContents()
+#24 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/View/View.php(161): Illuminate\View\View->renderContents()
+#25 Command line code(1): Illuminate\View\View->render()
+#26 {main}
+
+Next Illuminate\View\ViewException: Undefined variable $errors (View: /home3/vminingc/swaeduae.ae/laravel-app/resources/views/argon_front/_flash.blade.php) in /home3/vminingc/swaeduae.ae/laravel-app/storage/framework/views/73dc263a083a76cfa737a50f18d3dfd6.php:4
+Stack trace:
+#0 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php(60): Illuminate\View\Engines\CompilerEngine->handleViewException()
+#1 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/View/Engines/CompilerEngine.php(75): Illuminate\View\Engines\PhpEngine->evaluatePath()
+#2 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/View/View.php(209): Illuminate\View\Engines\CompilerEngine->get()
+#3 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/View/View.php(192): Illuminate\View\View->getContents()
+#4 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/View/View.php(161): Illuminate\View\View->renderContents()
+#5 /home3/vminingc/swaeduae.ae/laravel-app/storage/framework/views/6779a9395495f8d544b0861cfb981204.php(23): Illuminate\View\View->render()
+#6 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php(123): require('/home3/vminingc...')
+#7 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php(124): Illuminate\Filesystem\Filesystem::{closure:Illuminate\Filesystem\Filesystem::getRequire():120}()
+#8 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php(58): Illuminate\Filesystem\Filesystem->getRequire()
+#9 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/View/Engines/CompilerEngine.php(75): Illuminate\View\Engines\PhpEngine->evaluatePath()
+#10 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/View/View.php(209): Illuminate\View\Engines\CompilerEngine->get()
+#11 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/View/View.php(192): Illuminate\View\View->getContents()
+#12 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/View/View.php(161): Illuminate\View\View->renderContents()
+#13 /home3/vminingc/swaeduae.ae/laravel-app/storage/framework/views/9bb15fa3c036463757bebfb9ed720c39.php(148): Illuminate\View\View->render()
+#14 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php(123): require('/home3/vminingc...')
+#15 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php(124): Illuminate\Filesystem\Filesystem::{closure:Illuminate\Filesystem\Filesystem::getRequire():120}()
+#16 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php(58): Illuminate\Filesystem\Filesystem->getRequire()
+#17 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/View/Engines/CompilerEngine.php(75): Illuminate\View\Engines\PhpEngine->evaluatePath()
+#18 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/View/View.php(209): Illuminate\View\Engines\CompilerEngine->get()
+#19 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/View/View.php(192): Illuminate\View\View->getContents()
+#20 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/View/View.php(161): Illuminate\View\View->renderContents()
+#21 Command line code(1): Illuminate\View\View->render()
+#22 {main}
+
+Next Illuminate\View\ViewException: Undefined variable $errors (View: /home3/vminingc/swaeduae.ae/laravel-app/resources/views/argon_front/_flash.blade.php) (View: /home3/vminingc/swaeduae.ae/laravel-app/resources/views/argon_front/_flash.blade.php) in /home3/vminingc/swaeduae.ae/laravel-app/storage/framework/views/73dc263a083a76cfa737a50f18d3dfd6.php:4
+Stack trace:
+#0 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php(60): Illuminate\View\Engines\CompilerEngine->handleViewException()
+#1 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/View/Engines/CompilerEngine.php(75): Illuminate\View\Engines\PhpEngine->evaluatePath()
+#2 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/View/View.php(209): Illuminate\View\Engines\CompilerEngine->get()
+#3 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/View/View.php(192): Illuminate\View\View->getContents()
+#4 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/View/View.php(161): Illuminate\View\View->renderContents()
+#5 /home3/vminingc/swaeduae.ae/laravel-app/storage/framework/views/9bb15fa3c036463757bebfb9ed720c39.php(148): Illuminate\View\View->render()
+#6 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php(123): require('/home3/vminingc...')
+#7 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php(124): Illuminate\Filesystem\Filesystem::{closure:Illuminate\Filesystem\Filesystem::getRequire():120}()
+#8 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php(58): Illuminate\Filesystem\Filesystem->getRequire()
+#9 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/View/Engines/CompilerEngine.php(75): Illuminate\View\Engines\PhpEngine->evaluatePath()
+#10 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/View/View.php(209): Illuminate\View\Engines\CompilerEngine->get()
+#11 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/View/View.php(192): Illuminate\View\View->getContents()
+#12 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/View/View.php(161): Illuminate\View\View->renderContents()
+#13 Command line code(1): Illuminate\View\View->render()
+#14 {main}
+
+Next Illuminate\View\ViewException: Undefined variable $errors (View: /home3/vminingc/swaeduae.ae/laravel-app/resources/views/argon_front/_flash.blade.php) (View: /home3/vminingc/swaeduae.ae/laravel-app/resources/views/argon_front/_flash.blade.php) (View: /home3/vminingc/swaeduae.ae/laravel-app/resources/views/argon_front/_flash.blade.php) in /home3/vminingc/swaeduae.ae/laravel-app/storage/framework/views/73dc263a083a76cfa737a50f18d3dfd6.php:4
+Stack trace:
+#0 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php(60): Illuminate\View\Engines\CompilerEngine->handleViewException()
+#1 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/View/Engines/CompilerEngine.php(75): Illuminate\View\Engines\PhpEngine->evaluatePath()
+#2 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/View/View.php(209): Illuminate\View\Engines\CompilerEngine->get()
+#3 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/View/View.php(192): Illuminate\View\View->getContents()
+#4 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/View/View.php(161): Illuminate\View\View->renderContents()
+#5 Command line code(1): Illuminate\View\View->render()
+#6 {main}
+  thrown in /home3/vminingc/swaeduae.ae/laravel-app/storage/framework/views/73dc263a083a76cfa737a50f18d3dfd6.php on line 4
+[23-Aug-2025 18:44:40 Asia/Dubai] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1052 Column 'created_at' in order clause is ambiguous in /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Database/Connection.php:407
+Stack trace:
+#0 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Database/Connection.php(407): PDO->prepare()
+#1 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Database/Connection.php(812): Illuminate\Database\Connection->{closure:Illuminate\Database\Connection::select():398}()
+#2 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Database/Connection.php(779): Illuminate\Database\Connection->runQueryCallback()
+#3 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Database/Connection.php(398): Illuminate\Database\Connection->run()
+#4 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php(3106): Illuminate\Database\Connection->select()
+#5 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php(3091): Illuminate\Database\Query\Builder->runSelect()
+#6 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php(3676): Illuminate\Database\Query\Builder->{closure:Illuminate\Database\Query\Builder::get():3090}()
+#7 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php(3090): Illuminate\Database\Query\Builder->onceWithColumns()
+#8 /home3/vminingc/swaeduae.ae/laravel-app/app/Http/Controllers/Volunteer/ProfileIndexAction.php(50): Illuminate\Database\Query\Builder->get()
+#9 Command line code(1): App\Http\Controllers\Volunteer\ProfileIndexAction->__invoke()
+#10 {main}
+
+Next Illuminate\Database\QueryException: SQLSTATE[23000]: Integrity constraint violation: 1052 Column 'created_at' in order clause is ambiguous (Connection: mysql, SQL: select `opportunities`.`id`, `opportunities`.`title`, `opportunities`.`city`, `opportunities`.`region` from `opportunity_applications` inner join `opportunities` on `opportunity_applications`.`opportunity_id` = `opportunities`.`id` where `opportunity_applications`.`user_id` = 1 and date(`opportunities`.`starts_at`) >= 2025-08-23 order by `created_at` desc limit 6) in /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Database/Connection.php:825
+Stack trace:
+#0 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Database/Connection.php(779): Illuminate\Database\Connection->runQueryCallback()
+#1 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Database/Connection.php(398): Illuminate\Database\Connection->run()
+#2 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php(3106): Illuminate\Database\Connection->select()
+#3 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php(3091): Illuminate\Database\Query\Builder->runSelect()
+#4 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php(3676): Illuminate\Database\Query\Builder->{closure:Illuminate\Database\Query\Builder::get():3090}()
+#5 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php(3090): Illuminate\Database\Query\Builder->onceWithColumns()
+#6 /home3/vminingc/swaeduae.ae/laravel-app/app/Http/Controllers/Volunteer/ProfileIndexAction.php(50): Illuminate\Database\Query\Builder->get()
+#7 Command line code(1): App\Http\Controllers\Volunteer\ProfileIndexAction->__invoke()
+#8 {main}
+  thrown in /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Database/Connection.php on line 825
+[23-Aug-2025 14:56:45 UTC] PHP Parse error:  syntax error, unexpected token "\", expecting ")" in Command line code on line 1
+[23-Aug-2025 16:07:26 UTC] PHP Parse error:  syntax error, unexpected token "\", expecting ")" in Command line code on line 1
+[23-Aug-2025 16:07:31 UTC] PHP Parse error:  syntax error, unexpected token "\", expecting ")" in Command line code on line 1
+[23-Aug-2025 16:07:34 UTC] PHP Parse error:  syntax error, unexpected token "\", expecting ")" in Command line code on line 1
+[23-Aug-2025 16:07:38 UTC] PHP Parse error:  syntax error, unexpected token "\", expecting ")" in Command line code on line 1
+[23-Aug-2025 16:08:12 UTC] PHP Parse error:  syntax error, unexpected token "\", expecting ")" in Command line code on line 1
+[23-Aug-2025 16:11:18 UTC] PHP Parse error:  syntax error, unexpected token "\" in Command line code on line 1
+[23-Aug-2025 16:11:23 UTC] PHP Parse error:  syntax error, unexpected token "\", expecting ")" in Command line code on line 1
+[23-Aug-2025 16:11:30 UTC] PHP Parse error:  syntax error, unexpected token "\", expecting ")" in Command line code on line 1
+[23-Aug-2025 16:11:30 UTC] PHP Parse error:  syntax error, unexpected token "\", expecting ")" in Command line code on line 1
+[23-Aug-2025 16:17:03 UTC] PHP Parse error:  syntax error, unexpected token "\", expecting ")" in Command line code on line 4
+[23-Aug-2025 20:39:44 Asia/Dubai] PHP Fatal error:  Uncaught Symfony\Component\Mailer\Exception\TransportException: Failed to authenticate on SMTP server with username "admin@swaeduae.ae" using the following authenticators: "LOGIN", "PLAIN". Authenticator "LOGIN" returned "Expected response code "235" but got code "535", with message "535 Incorrect authentication data".". Authenticator "PLAIN" returned "Expected response code "235" but got code "535", with message "535 Incorrect authentication data".". in /home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/mailer/Transport/Smtp/EsmtpTransport.php:269
+Stack trace:
+#0 /home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/mailer/Transport/Smtp/EsmtpTransport.php(199): Symfony\Component\Mailer\Transport\Smtp\EsmtpTransport->handleAuth()
+#1 /home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/mailer/Transport/Smtp/EsmtpTransport.php(150): Symfony\Component\Mailer\Transport\Smtp\EsmtpTransport->doEhloCommand()
+#2 /home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/mailer/Transport/Smtp/SmtpTransport.php(255): Symfony\Component\Mailer\Transport\Smtp\EsmtpTransport->executeCommand()
+#3 /home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/mailer/Transport/Smtp/SmtpTransport.php(281): Symfony\Component\Mailer\Transport\Smtp\SmtpTransport->doHeloCommand()
+#4 /home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/mailer/Transport/Smtp/SmtpTransport.php(211): Symfony\Component\Mailer\Transport\Smtp\SmtpTransport->start()
+#5 /home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/mailer/Transport/AbstractTransport.php(69): Symfony\Component\Mailer\Transport\Smtp\SmtpTransport->doSend()
+#6 /home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/mailer/Transport/Smtp/SmtpTransport.php(138): Symfony\Component\Mailer\Transport\AbstractTransport->send()
+#7 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Mail/Mailer.php(585): Symfony\Component\Mailer\Transport\Smtp\SmtpTransport->send()
+#8 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Mail/Mailer.php(332): Illuminate\Mail\Mailer->sendSymfonyMessage()
+#9 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Mail/Mailer.php(224): Illuminate\Mail\Mailer->send()
+#10 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Mail/MailManager.php(622): Illuminate\Mail\Mailer->raw()
+#11 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(361): Illuminate\Mail\MailManager->__call()
+#12 Command line code(3): Illuminate\Support\Facades\Facade::__callStatic()
+#13 {main}
+  thrown in /home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/mailer/Transport/Smtp/EsmtpTransport.php on line 269
+[23-Aug-2025 20:39:53 Asia/Dubai] PHP Fatal error:  Uncaught Symfony\Component\Mailer\Exception\TransportException: Failed to authenticate on SMTP server with username "admin@swaeduae.ae" using the following authenticators: "LOGIN", "PLAIN". Authenticator "LOGIN" returned "Expected response code "235" but got code "535", with message "535 Incorrect authentication data".". Authenticator "PLAIN" returned "Expected response code "235" but got code "535", with message "535 Incorrect authentication data".". in /home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/mailer/Transport/Smtp/EsmtpTransport.php:269
+Stack trace:
+#0 /home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/mailer/Transport/Smtp/EsmtpTransport.php(199): Symfony\Component\Mailer\Transport\Smtp\EsmtpTransport->handleAuth()
+#1 /home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/mailer/Transport/Smtp/EsmtpTransport.php(150): Symfony\Component\Mailer\Transport\Smtp\EsmtpTransport->doEhloCommand()
+#2 /home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/mailer/Transport/Smtp/SmtpTransport.php(255): Symfony\Component\Mailer\Transport\Smtp\EsmtpTransport->executeCommand()
+#3 /home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/mailer/Transport/Smtp/SmtpTransport.php(281): Symfony\Component\Mailer\Transport\Smtp\SmtpTransport->doHeloCommand()
+#4 /home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/mailer/Transport/Smtp/SmtpTransport.php(211): Symfony\Component\Mailer\Transport\Smtp\SmtpTransport->start()
+#5 /home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/mailer/Transport/AbstractTransport.php(69): Symfony\Component\Mailer\Transport\Smtp\SmtpTransport->doSend()
+#6 /home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/mailer/Transport/Smtp/SmtpTransport.php(138): Symfony\Component\Mailer\Transport\AbstractTransport->send()
+#7 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Mail/Mailer.php(585): Symfony\Component\Mailer\Transport\Smtp\SmtpTransport->send()
+#8 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Mail/Mailer.php(332): Illuminate\Mail\Mailer->sendSymfonyMessage()
+#9 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Notifications/Channels/MailChannel.php(67): Illuminate\Mail\Mailer->send()
+#10 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Notifications/NotificationSender.php(148): Illuminate\Notifications\Channels\MailChannel->send()
+#11 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Notifications/NotificationSender.php(106): Illuminate\Notifications\NotificationSender->sendToNotifiable()
+#12 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Support/Traits/Localizable.php(19): Illuminate\Notifications\NotificationSender->{closure:Illuminate\Notifications\NotificationSender::sendNow():101}()
+#13 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Notifications/NotificationSender.php(101): Illuminate\Notifications\NotificationSender->withLocale()
+#14 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Notifications/NotificationSender.php(79): Illuminate\Notifications\NotificationSender->sendNow()
+#15 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Notifications/ChannelManager.php(39): Illuminate\Notifications\NotificationSender->send()
+#16 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Notifications/RoutesNotifications.php(18): Illuminate\Notifications\ChannelManager->send()
+#17 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Auth/Passwords/CanResetPassword.php(27): App\Models\User->notify()
+#18 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Auth/Passwords/PasswordBroker.php(108): Illuminate\Foundation\Auth\User->sendPasswordResetNotification()
+#19 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Support/Timebox.php(34): Illuminate\Auth\Passwords\PasswordBroker->{closure:Illuminate\Auth\Passwords\PasswordBroker::sendResetLink():85}()
+#20 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Auth/Passwords/PasswordBroker.php(85): Illuminate\Support\Timebox->call()
+#21 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Auth/Passwords/PasswordBrokerManager.php(154): Illuminate\Auth\Passwords\PasswordBroker->sendResetLink()
+#22 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(361): Illuminate\Auth\Passwords\PasswordBrokerManager->__call()
+#23 Command line code(4): Illuminate\Support\Facades\Facade::__callStatic()
+#24 {main}
+  thrown in /home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/mailer/Transport/Smtp/EsmtpTransport.php on line 269
+[23-Aug-2025 20:42:00 Asia/Dubai] PHP Fatal error:  Uncaught Symfony\Component\Mailer\Exception\TransportException: Failed to authenticate on SMTP server with username "admin@swaeduae.ae" using the following authenticators: "LOGIN", "PLAIN". Authenticator "LOGIN" returned "Expected response code "235" but got code "535", with message "535 Incorrect authentication data".". Authenticator "PLAIN" returned "Expected response code "235" but got code "535", with message "535 Incorrect authentication data".". in /home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/mailer/Transport/Smtp/EsmtpTransport.php:269
+Stack trace:
+#0 /home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/mailer/Transport/Smtp/EsmtpTransport.php(199): Symfony\Component\Mailer\Transport\Smtp\EsmtpTransport->handleAuth()
+#1 /home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/mailer/Transport/Smtp/EsmtpTransport.php(150): Symfony\Component\Mailer\Transport\Smtp\EsmtpTransport->doEhloCommand()
+#2 /home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/mailer/Transport/Smtp/SmtpTransport.php(255): Symfony\Component\Mailer\Transport\Smtp\EsmtpTransport->executeCommand()
+#3 /home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/mailer/Transport/Smtp/SmtpTransport.php(281): Symfony\Component\Mailer\Transport\Smtp\SmtpTransport->doHeloCommand()
+#4 /home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/mailer/Transport/Smtp/SmtpTransport.php(211): Symfony\Component\Mailer\Transport\Smtp\SmtpTransport->start()
+#5 /home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/mailer/Transport/AbstractTransport.php(69): Symfony\Component\Mailer\Transport\Smtp\SmtpTransport->doSend()
+#6 /home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/mailer/Transport/Smtp/SmtpTransport.php(138): Symfony\Component\Mailer\Transport\AbstractTransport->send()
+#7 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Mail/Mailer.php(585): Symfony\Component\Mailer\Transport\Smtp\SmtpTransport->send()
+#8 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Mail/Mailer.php(332): Illuminate\Mail\Mailer->sendSymfonyMessage()
+#9 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Mail/Mailer.php(224): Illuminate\Mail\Mailer->send()
+#10 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Mail/MailManager.php(622): Illuminate\Mail\Mailer->raw()
+#11 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(361): Illuminate\Mail\MailManager->__call()
+#12 Command line code(3): Illuminate\Support\Facades\Facade::__callStatic()
+#13 {main}
+  thrown in /home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/mailer/Transport/Smtp/EsmtpTransport.php on line 269
+[23-Aug-2025 20:42:18 Asia/Dubai] PHP Fatal error:  Uncaught Symfony\Component\Mailer\Exception\TransportException: Connection could not be established with host "<SERVER_HOSTNAME>:587": stream_socket_client(): php_network_getaddresses: getaddrinfo for <SERVER_HOSTNAME> failed: Name or service not known in /home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/mailer/Transport/Smtp/Stream/SocketStream.php:154
+Stack trace:
+#0 [internal function]: Symfony\Component\Mailer\Transport\Smtp\Stream\SocketStream->{closure:Symfony\Component\Mailer\Transport\Smtp\Stream\SocketStream::initialize():153}()
+#1 /home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/mailer/Transport/Smtp/Stream/SocketStream.php(157): stream_socket_client()
+#2 /home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/mailer/Transport/Smtp/SmtpTransport.php(279): Symfony\Component\Mailer\Transport\Smtp\Stream\SocketStream->initialize()
+#3 /home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/mailer/Transport/Smtp/SmtpTransport.php(211): Symfony\Component\Mailer\Transport\Smtp\SmtpTransport->start()
+#4 /home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/mailer/Transport/AbstractTransport.php(69): Symfony\Component\Mailer\Transport\Smtp\SmtpTransport->doSend()
+#5 /home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/mailer/Transport/Smtp/SmtpTransport.php(138): Symfony\Component\Mailer\Transport\AbstractTransport->send()
+#6 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Mail/Mailer.php(585): Symfony\Component\Mailer\Transport\Smtp\SmtpTransport->send()
+#7 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Mail/Mailer.php(332): Illuminate\Mail\Mailer->sendSymfonyMessage()
+#8 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Mail/Mailer.php(224): Illuminate\Mail\Mailer->send()
+#9 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Mail/MailManager.php(622): Illuminate\Mail\Mailer->raw()
+#10 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(361): Illuminate\Mail\MailManager->__call()
+#11 Command line code(3): Illuminate\Support\Facades\Facade::__callStatic()
+#12 {main}
+  thrown in /home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/mailer/Transport/Smtp/Stream/SocketStream.php on line 154
+[23-Aug-2025 20:42:40 Asia/Dubai] PHP Fatal error:  Uncaught Symfony\Component\Mailer\Exception\TransportException: Connection could not be established with host "ssl://<SERVER_HOSTNAME>:465": stream_socket_client(): php_network_getaddresses: getaddrinfo for <SERVER_HOSTNAME> failed: Name or service not known in /home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/mailer/Transport/Smtp/Stream/SocketStream.php:154
+Stack trace:
+#0 [internal function]: Symfony\Component\Mailer\Transport\Smtp\Stream\SocketStream->{closure:Symfony\Component\Mailer\Transport\Smtp\Stream\SocketStream::initialize():153}()
+#1 /home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/mailer/Transport/Smtp/Stream/SocketStream.php(157): stream_socket_client()
+#2 /home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/mailer/Transport/Smtp/SmtpTransport.php(279): Symfony\Component\Mailer\Transport\Smtp\Stream\SocketStream->initialize()
+#3 /home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/mailer/Transport/Smtp/SmtpTransport.php(211): Symfony\Component\Mailer\Transport\Smtp\SmtpTransport->start()
+#4 /home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/mailer/Transport/AbstractTransport.php(69): Symfony\Component\Mailer\Transport\Smtp\SmtpTransport->doSend()
+#5 /home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/mailer/Transport/Smtp/SmtpTransport.php(138): Symfony\Component\Mailer\Transport\AbstractTransport->send()
+#6 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Mail/Mailer.php(585): Symfony\Component\Mailer\Transport\Smtp\SmtpTransport->send()
+#7 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Mail/Mailer.php(332): Illuminate\Mail\Mailer->sendSymfonyMessage()
+#8 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Mail/Mailer.php(224): Illuminate\Mail\Mailer->send()
+#9 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Mail/MailManager.php(622): Illuminate\Mail\Mailer->raw()
+#10 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(361): Illuminate\Mail\MailManager->__call()
+#11 Command line code(3): Illuminate\Support\Facades\Facade::__callStatic()
+#12 {main}
+  thrown in /home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/mailer/Transport/Smtp/Stream/SocketStream.php on line 154
+[23-Aug-2025 20:42:51 Asia/Dubai] PHP Fatal error:  Uncaught Symfony\Component\Mailer\Exception\TransportException: Connection could not be established with host "ssl://<SERVER_HOSTNAME>:465": stream_socket_client(): php_network_getaddresses: getaddrinfo for <SERVER_HOSTNAME> failed: Name or service not known in /home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/mailer/Transport/Smtp/Stream/SocketStream.php:154
+Stack trace:
+#0 [internal function]: Symfony\Component\Mailer\Transport\Smtp\Stream\SocketStream->{closure:Symfony\Component\Mailer\Transport\Smtp\Stream\SocketStream::initialize():153}()
+#1 /home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/mailer/Transport/Smtp/Stream/SocketStream.php(157): stream_socket_client()
+#2 /home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/mailer/Transport/Smtp/SmtpTransport.php(279): Symfony\Component\Mailer\Transport\Smtp\Stream\SocketStream->initialize()
+#3 /home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/mailer/Transport/Smtp/SmtpTransport.php(211): Symfony\Component\Mailer\Transport\Smtp\SmtpTransport->start()
+#4 /home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/mailer/Transport/AbstractTransport.php(69): Symfony\Component\Mailer\Transport\Smtp\SmtpTransport->doSend()
+#5 /home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/mailer/Transport/Smtp/SmtpTransport.php(138): Symfony\Component\Mailer\Transport\AbstractTransport->send()
+#6 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Mail/Mailer.php(585): Symfony\Component\Mailer\Transport\Smtp\SmtpTransport->send()
+#7 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Mail/Mailer.php(332): Illuminate\Mail\Mailer->sendSymfonyMessage()
+#8 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Notifications/Channels/MailChannel.php(67): Illuminate\Mail\Mailer->send()
+#9 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Notifications/NotificationSender.php(148): Illuminate\Notifications\Channels\MailChannel->send()
+#10 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Notifications/NotificationSender.php(106): Illuminate\Notifications\NotificationSender->sendToNotifiable()
+#11 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Support/Traits/Localizable.php(19): Illuminate\Notifications\NotificationSender->{closure:Illuminate\Notifications\NotificationSender::sendNow():101}()
+#12 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Notifications/NotificationSender.php(101): Illuminate\Notifications\NotificationSender->withLocale()
+#13 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Notifications/NotificationSender.php(79): Illuminate\Notifications\NotificationSender->sendNow()
+#14 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Notifications/ChannelManager.php(39): Illuminate\Notifications\NotificationSender->send()
+#15 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Notifications/RoutesNotifications.php(18): Illuminate\Notifications\ChannelManager->send()
+#16 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Auth/Passwords/CanResetPassword.php(27): App\Models\User->notify()
+#17 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Auth/Passwords/PasswordBroker.php(108): Illuminate\Foundation\Auth\User->sendPasswordResetNotification()
+#18 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Support/Timebox.php(34): Illuminate\Auth\Passwords\PasswordBroker->{closure:Illuminate\Auth\Passwords\PasswordBroker::sendResetLink():85}()
+#19 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Auth/Passwords/PasswordBroker.php(85): Illuminate\Support\Timebox->call()
+#20 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Auth/Passwords/PasswordBrokerManager.php(154): Illuminate\Auth\Passwords\PasswordBroker->sendResetLink()
+#21 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(361): Illuminate\Auth\Passwords\PasswordBrokerManager->__call()
+#22 Command line code(4): Illuminate\Support\Facades\Facade::__callStatic()
+#23 {main}
+  thrown in /home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/mailer/Transport/Smtp/Stream/SocketStream.php on line 154
+[23-Aug-2025 20:44:58 Asia/Dubai] PHP Fatal error:  Uncaught Symfony\Component\Mailer\Exception\TransportException: Failed to authenticate on SMTP server with username "admin@swaeduae.ae" using the following authenticators: "LOGIN", "PLAIN". Authenticator "LOGIN" returned "Expected response code "235" but got code "535", with message "535 Incorrect authentication data".". Authenticator "PLAIN" returned "Expected response code "235" but got code "535", with message "535 Incorrect authentication data".". in /home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/mailer/Transport/Smtp/EsmtpTransport.php:269
+Stack trace:
+#0 /home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/mailer/Transport/Smtp/EsmtpTransport.php(199): Symfony\Component\Mailer\Transport\Smtp\EsmtpTransport->handleAuth()
+#1 /home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/mailer/Transport/Smtp/EsmtpTransport.php(150): Symfony\Component\Mailer\Transport\Smtp\EsmtpTransport->doEhloCommand()
+#2 /home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/mailer/Transport/Smtp/SmtpTransport.php(255): Symfony\Component\Mailer\Transport\Smtp\EsmtpTransport->executeCommand()
+#3 /home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/mailer/Transport/Smtp/SmtpTransport.php(281): Symfony\Component\Mailer\Transport\Smtp\SmtpTransport->doHeloCommand()
+#4 /home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/mailer/Transport/Smtp/SmtpTransport.php(211): Symfony\Component\Mailer\Transport\Smtp\SmtpTransport->start()
+#5 /home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/mailer/Transport/AbstractTransport.php(69): Symfony\Component\Mailer\Transport\Smtp\SmtpTransport->doSend()
+#6 /home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/mailer/Transport/Smtp/SmtpTransport.php(138): Symfony\Component\Mailer\Transport\AbstractTransport->send()
+#7 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Mail/Mailer.php(585): Symfony\Component\Mailer\Transport\Smtp\SmtpTransport->send()
+#8 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Mail/Mailer.php(332): Illuminate\Mail\Mailer->sendSymfonyMessage()
+#9 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Mail/Mailer.php(224): Illuminate\Mail\Mailer->send()
+#10 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Mail/MailManager.php(622): Illuminate\Mail\Mailer->raw()
+#11 /home3/vminingc/swaeduae.ae/laravel-app/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(361): Illuminate\Mail\MailManager->__call()
+#12 Command line code(3): Illuminate\Support\Facades\Facade::__callStatic()
+#13 {main}
+  thrown in /home3/vminingc/swaeduae.ae/laravel-app/vendor/symfony/mailer/Transport/Smtp/EsmtpTransport.php on line 269
+[23-Aug-2025 17:04:04 UTC] PHP Parse error:  syntax error, unexpected token "=", expecting ")" in Command line code on line 7
+[23-Aug-2025 17:06:58 UTC] PHP Parse error:  syntax error, unexpected token "=", expecting ")" in Command line code on line 10
+[23-Aug-2025 17:40:35 UTC] PHP Parse error:  syntax error, unexpected token "^", expecting "]" in Command line code on line 8
+[23-Aug-2025 17:40:49 UTC] PHP Parse error:  syntax error, unexpected token "^", expecting "]" in Command line code on line 8
+[23-Aug-2025 17:56:54 UTC] PHP Parse error:  syntax error, unexpected token "^", expecting "]" in Command line code on line 6
+[23-Aug-2025 17:59:22 UTC] PHP Parse error:  syntax error, unexpected token "^", expecting "]" in Command line code on line 6
+[23-Aug-2025 18:03:15 UTC] PHP Parse error:  syntax error, unexpected token "^", expecting "]" in Command line code on line 6
+[23-Aug-2025 18:06:23 UTC] PHP Parse error:  syntax error, unexpected token "^", expecting "]" in Command line code on line 6
+[24-Aug-2025 06:22:58 UTC] PHP Parse error:  syntax error, unexpected token "^", expecting "-" or identifier or variable or number in Standard input code on line 44
+[24-Aug-2025 06:22:58 UTC] PHP Parse error:  syntax error, unexpected token "^", expecting "-" or identifier or variable or number in Standard input code on line 44
+[24-Aug-2025 06:22:58 UTC] PHP Parse error:  syntax error, unexpected token "^", expecting "-" or identifier or variable or number in Standard input code on line 44
+[24-Aug-2025 06:45:32 UTC] PHP Parse error:  syntax error, unexpected double-quote mark, expecting "-" or identifier or variable or number in Command line code on line 19
+[24-Aug-2025 06:45:32 UTC] PHP Parse error:  syntax error, unexpected double-quote mark, expecting "-" or identifier or variable or number in Command line code on line 20
+[24-Aug-2025 07:06:20 UTC] PHP Parse error:  syntax error, unexpected double-quote mark, expecting "-" or identifier or variable or number in Command line code on line 19
+[24-Aug-2025 07:06:20 UTC] PHP Parse error:  syntax error, unexpected double-quote mark, expecting "-" or identifier or variable or number in Command line code on line 20

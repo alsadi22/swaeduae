@@ -1,0 +1,12 @@
+<
+nam
+
+
+class VolunteerProfileController extends Controller
+{
+    public function sh
+    {
+        $user = User::findOrFail($id)
+        return view('volunteer.publi
+    }
+}

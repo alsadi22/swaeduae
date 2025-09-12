@@ -1,0 +1,204 @@
+<?php
+namespace App\Http\Controllers\Admin;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use Symfony\Component\HttpFoundation\StreamedResponse;
+
+class EventController extends Controller
+{
+    public function index(Request $r)
+    {
+        $q      = trim((string)$r->get('q',''));
+        $city   = $r->get('city');
+        $status = $r->get('status'); // Draft/Published/Archived/etc (nullable)
+        $from   = $r->get('from');   // date
+        $to     = $r->get('to');     // date
+        $sort   = $r->get('sort','-date'); // -date newest by date, date oldest, title, city
+
+        $items = DB::table('events')
+            ->when($q !== '', fn($b)=>$b->where(fn($w)=>$w
+                ->where('title','like',"%$q%")
+                ->orWhere('description','like',"%$q%")
+                ->orWhere('summary','like',"%$q%")))
+            ->when($city,   fn($b)=>$b->where('city','like',"%$city%"))
+            ->when($status, fn($b)=>$b->where('status',$status))
+            ->when($from,   fn($b)=>$b->whereDate('date','>=',$from))
+            ->when($to,     fn($b)=>$b->whereDate('date','<=',$to));
+
+        // sorting
+        $dir='desc'; $col='date';
+        if(in_array($sort,['date','title','city'])){ $dir='asc'; $col=$sort; }
+        if($sort==='-date'){ $dir='desc'; $col='date'; }
+        $items = $items->orderBy($col,$dir)->orderByDesc('id')
+            ->paginate(15)->withQueryString();
+
+        return view('admin.events.index', compact('items','q','city','status','from','to','sort'));
+    }
+
+    public function create()
+    {
+        $ev = (object)[
+            'organization_id'=>null,'title'=>'','city'=>'','description'=>'','summary'=>'',
+            'date'=>null,'start_time'=>null,'end_time'=>null,'location'=>'','hours'=>null,
+            'capacity'=>null,'status'=>null,'category'=>null,'region'=>null,'type'=>null,
+            'application_deadline'=>null,'poster_path'=>null
+        ];
+        $orgs = DB::table('organizations')->select('id','name')->orderBy('name')->get();
+        return view('admin.events.create', compact('ev','orgs'));
+    }
+
+    public function store(Request $r)
+    {
+        $v = $r->validate([
+            'organization_id'      => 'nullable|integer|exists:organizations,id',
+            'title'                => 'required|string|max:180',
+            'summary'              => 'nullable|string|max:255',
+            'description'          => 'nullable|string',
+            'city'                 => 'nullable|string|max:120',
+            'location'             => 'nullable|string|max:180',
+            'date'                 => 'nullable|date',
+            'start_time'           => 'nullable',
+            'end_time'             => 'nullable',
+            'hours'                => 'nullable|numeric|min:0|max:1000',
+            'capacity'             => 'nullable|integer|min:0',
+            'status'               => 'nullable|string|max:40',
+            'category'             => 'nullable|string|max:120',
+            'region'               => 'nullable|string|max:120',
+            'type'                 => 'nullable|string|max:120',
+            'application_deadline' => 'nullable|date',
+            'poster'               => 'nullable|image|max:4096',
+        ]);
+
+        $poster = null;
+        if($r->hasFile('poster')){
+            $poster = $r->file('poster')->store('uploads','public');
+        }
+
+        $id = DB::table('events')->insertGetId([
+            'organization_id'      => $v['organization_id'] ?? null,
+            'title'                => $v['title'],
+            'summary'              => $v['summary'] ?? null,
+            'description'          => $v['description'] ?? null,
+            'city'                 => $v['city'] ?? null,
+            'location'             => $v['location'] ?? null,
+            'date'                 => $v['date'] ?? null,
+            'start_time'           => $v['start_time'] ?? null,
+            'end_time'             => $v['end_time'] ?? null,
+            'hours'                => $v['hours'] ?? null,
+            'capacity'             => $v['capacity'] ?? null,
+            'status'               => $v['status'] ?? null,
+            'category'             => $v['category'] ?? null,
+            'region'               => $v['region'] ?? null,
+            'type'                 => $v['type'] ?? null,
+            'application_deadline' => $v['application_deadline'] ?? null,
+            'poster_path'          => $poster,
+            'created_at'           => now(),
+            'updated_at'           => now(),
+        ]);
+
+        return redirect()->route('admin.events.edit',$id)->with('status','Event created.');
+    }
+
+    public function edit($id)
+    {
+        $ev = DB::table('events')->where('id',$id)->first();
+        abort_unless($ev,404);
+        $orgs = DB::table('organizations')->select('id','name')->orderBy('name')->get();
+        return view('admin.events.edit', compact('ev','orgs'));
+    }
+
+    public function update(Request $r, $id)
+    {
+        $ev = DB::table('events')->where('id',$id)->first();
+        abort_unless($ev,404);
+
+        $v = $r->validate([
+            'organization_id'      => 'nullable|integer|exists:organizations,id',
+            'title'                => 'required|string|max:180',
+            'summary'              => 'nullable|string|max:255',
+            'description'          => 'nullable|string',
+            'city'                 => 'nullable|string|max:120',
+            'location'             => 'nullable|string|max:180',
+            'date'                 => 'nullable|date',
+            'start_time'           => 'nullable',
+            'end_time'             => 'nullable',
+            'hours'                => 'nullable|numeric|min:0|max:1000',
+            'capacity'             => 'nullable|integer|min:0',
+            'status'               => 'nullable|string|max:40',
+            'category'             => 'nullable|string|max:120',
+            'region'               => 'nullable|string|max:120',
+            'type'                 => 'nullable|string|max:120',
+            'application_deadline' => 'nullable|date',
+            'poster'               => 'nullable|image|max:4096',
+        ]);
+
+        $poster = $ev->poster_path;
+        if($r->hasFile('poster')){
+            if($poster){ Storage::disk('public')->delete($poster); }
+            $poster = $r->file('poster')->store('uploads','public');
+        }
+
+        DB::table('events')->where('id',$id)->update([
+            'organization_id'      => $v['organization_id'] ?? null,
+            'title'                => $v['title'],
+            'summary'              => $v['summary'] ?? null,
+            'description'          => $v['description'] ?? null,
+            'city'                 => $v['city'] ?? null,
+            'location'             => $v['location'] ?? null,
+            'date'                 => $v['date'] ?? null,
+            'start_time'           => $v['start_time'] ?? null,
+            'end_time'             => $v['end_time'] ?? null,
+            'hours'                => $v['hours'] ?? null,
+            'capacity'             => $v['capacity'] ?? null,
+            'status'               => $v['status'] ?? null,
+            'category'             => $v['category'] ?? null,
+            'region'               => $v['region'] ?? null,
+            'type'                 => $v['type'] ?? null,
+            'application_deadline' => $v['application_deadline'] ?? null,
+            'poster_path'          => $poster,
+            'updated_at'           => now(),
+        ]);
+
+        return back()->with('status','Event updated.');
+    }
+
+    public function destroy($id)
+    {
+        $ev = DB::table('events')->where('id',$id)->first();
+        if($ev && $ev->poster_path){ Storage::disk('public')->delete($ev->poster_path); }
+        DB::table('events')->where('id',$id)->delete();
+        return redirect()->route('admin.events')->with('status','Event deleted.');
+    }
+
+    public function exportCsv(Request $r): StreamedResponse
+    {
+        $q = trim((string)$r->get('q',''));
+        $city = $r->get('city');
+        $status = $r->get('status');
+        $file = 'events-'.date('Ymd-His').'.csv';
+
+        return response()->streamDownload(function() use ($q,$city,$status){
+            $out = fopen('php://output','w');
+            fputcsv($out, ['ID','Title','Date','City','Status','Capacity','OrgID','Created']);
+            DB::table('events')
+                ->when($q !== '', fn($b)=>$b->where(fn($w)=>$w
+                    ->where('title','like',"%$q%")
+                    ->orWhere('description','like',"%$q%")
+                    ->orWhere('summary','like',"%$q%")))
+                ->when($city,   fn($b)=>$b->where('city','like',"%$city%"))
+                ->when($status, fn($b)=>$b->where('status',$status))
+                ->orderByDesc('date')->orderByDesc('id')
+                ->chunk(500, function($rows) use ($out){
+                    foreach($rows as $r){
+                        fputcsv($out, [$r->id,$r->title,$r->date,$r->city,$r->status,$r->capacity,$r->organization_id,$r->created_at]);
+                    }
+                });
+            fclose($out);
+        }, $file, ['Content-Type'=>'text/csv']);
+    }
+
+
+}

@@ -1,0 +1,1902 @@
+Project Structure Audit - 2025-08-22_173431
+Root: /home3/vminingc/swaeduae.ae/laravel-app
+
+------------------------------------------------------------
+GIT STATUS
+------------------------------------------------------------
+main
+ M .user.ini
+ M app/Http/Controllers/Admin/AttendanceAdminController.php
+ M app/Http/Controllers/Auth/AuthenticatedSessionController.php
+ M app/Http/Controllers/Auth/LoginController.php
+ M app/Http/Controllers/EventController.php
+ M app/Http/Controllers/HomeController.php
+ M app/Http/Controllers/Volunteer/ProfileIndexAction.php
+ M app/Http/Kernel.php
+ M app/Http/Middleware/MicroCache.php
+ M app/Http/Middleware/RedirectIfAuthenticated.php
+ M app/Http/Middleware/SecurityHeaders.php
+ M app/Http/Middleware/VerifyCsrfToken.php
+ M app/Mail/ContactMessage.php
+ M app/Models/Event.php
+ M app/Providers/AppServiceProvider.php
+ M app/Providers/MiddlewareAliasesServiceProvider.php
+ M app/Providers/RouteServiceProvider.php
+ M app/Providers/ViewComposerServiceProvider.php
+ M bootstrap/providers.php
+ M config/mail.php
+ M config/queue.php
+ M public/.htaccess
+ M public/.user.ini
+ M public/css/brand.css
+ M public/robots.txt
+ M public/sitemaps/sitemap-index.xml
+ M resources/views/admin/_diag_dashboard.blade.php
+ M resources/views/admin/attendance/index.blade.php
+ M resources/views/admin/auth/login.blade.php
+ M resources/views/admin/dashboard_safe.blade.php
+ M resources/views/admin/hours/show.blade.php
+ M resources/views/admin/index.blade.php
+ M resources/views/admin/settings/index.blade.php.prequick.2025-08-12-121637
+ M resources/views/admin/users/edit.blade.php
+ M resources/views/auth/admin_login.blade.php
+ M resources/views/auth/confirm-password.blade.php
+ M resources/views/auth/login-fallback.blade.php
+ M resources/views/auth/login.blade.php
+ M resources/views/auth/register-fallback.blade.php
+ M resources/views/auth/register.blade.php
+ M resources/views/auth/volunteer_login.blade.php
+ M resources/views/categories/index.blade.php
+ M resources/views/contact.blade.php
+ M resources/views/events/index.blade.php
+ M resources/views/events/show.blade.php
+ D resources/views/faq.blade.php
+ M resources/views/layouts/app.blade.php
+ M resources/views/opportunities/partials/similar.blade.php
+ M resources/views/org/applicants/_filters.blade.php
+ M resources/views/org/auth/login.blade.php
+ M resources/views/org/auth/register.blade.php
+ M resources/views/org/dashboard.blade.php
+ M resources/views/org/layout.blade.php
+ M resources/views/org/partials/branding_styles.blade.php
+ M resources/views/org/partials/certs_quick.blade.php
+ M resources/views/org/partials/dashboard_v1.blade.php
+ M resources/views/org/partials/recent_activity.blade.php
+ M resources/views/org/partials/today_checkins.blade.php
+ M resources/views/org/partials/upcoming_7d.blade.php
+ M resources/views/org/register.blade.php
+ M resources/views/org/settings/_branding_form.blade.php
+ M resources/views/org/shortlist/_counters.blade.php
+ M resources/views/org/shortlist/_slotcap_form.blade.php
+ M resources/views/organization/login.blade.php
+ M resources/views/pages/about.blade.php
+ D resources/views/pages/categories.blade.php
+ M resources/views/pages/contact.blade.php
+ D resources/views/pages/faq.blade.php
+ D resources/views/pages/partners.blade.php
+ M resources/views/pages/privacy.blade.php
+ M resources/views/pages/terms.blade.php
+ M resources/views/partials/footer.blade.php
+ M resources/views/partials/nav.blade.php
+ M resources/views/partials/opps_filter_bar.blade.php
+ M resources/views/profile/partials/delete-user-form.blade.php
+ M resources/views/profile/partials/update-password-form.blade.php
+ M resources/views/profile/partials/update-profile-information-form.blade.php
+ M resources/views/public/events/index.blade.php
+ M resources/views/public/events/show.blade.php
+ M resources/views/public/opportunities/index.blade.php
+ M resources/views/public/opportunities/show.blade.php
+ M resources/views/volunteer/settings/_tabs.blade.php
+ M routes/_admin_route_aliases.php
+ M routes/_auth_canonical.php
+ M routes/_public.php
+ M routes/admin.php
+ M routes/events.php
+ M routes/web.php
+ M routes/web.php.bisect_2025-08-20_114642
+ M tools/form_probe.sh
+?? Allow:
+?? E
+?? EOF
+?? ExpiresByType
+?? ExpiresDefault
+?? Header
+?? Sit
+?? User-agent:
+?? _reports/structure_report_2025-08-22_173431.txt
+?? app/Http/Controllers/Admin/AttendanceAdminController.php.backup_20250821-133528
+?? app/Http/Controllers/Admin/AttendanceAdminController.php.before_fix_20250821-131719
+?? app/Http/Controllers/Admin/AttendanceAdminController.php.before_fix_20250821-131947
+?? app/Http/Controllers/Admin/AttendanceAdminController.php.before_fix_20250821-132258
+?? app/Http/Controllers/Admin/AttendanceAdminController.php.before_fix_20250821-132523
+?? app/Http/Controllers/Admin/AttendanceAdminController.php.before_fix_20250821-132756
+?? app/Http/Controllers/Admin/AttendanceAdminController.php.before_fix_20250821-133009
+?? app/Http/Controllers/Admin/AttendanceAdminController.php.busted_20250821-133252
+?? app/Http/Controllers/Admin/AttendanceAdminController.php.fixbak_20250821-130646
+?? app/Http/Controllers/Admin/AttendanceAdminController.php.fixbak_20250821-130749
+?? app/Http/Controllers/Admin/AttendanceAdminController.php.fixbak_20250821-130838
+?? app/Http/Controllers/Admin/AttendanceAdminController.php.fixbak_20250821-130919
+?? app/Http/Controllers/Admin/AttendanceAdminController.php.fixclean_20250821-131408
+?? app/Http/Controllers/Admin/AttendanceAdminController.php.repair2bak_20250821-131221
+?? app/Http/Controllers/Admin/AttendanceAdminController.php.repairbak_20250821-131025
+?? app/Http/Controllers/Admin/AttendanceAdminController.php.tmp_20250821-131947
+?? app/Http/Controllers/ContactController.php
+?? app/Http/Controllers/EventController.php.broken_20250821-142409
+?? app/Http/Controllers/EventController.php.broken_20250821-142505
+?? app/Http/Controllers/PublicSite/ApplyController.php
+?? app/Http/Middleware/EnforceOrgRegistration.php
+?? app/Http/Middleware/LocaleHeaders.php
+?? app/Http/Middleware/MicroCache.php.busted_20250822_142006
+?? app/Http/Middleware/MicroCache.php.debug_20250821-122833
+?? app/Http/Middleware/NormalizeHeaders.php
+?? app/Http/Middleware/SetLocaleAndHeaders.php
+?? app/Http/Middleware/SetLocaleAndHeaders.php.fixbak_20250821-122802
+?? app/Http/Requests/ContactFormRequest.php
+?? app/Mail/ContactFormMailable.php
+?? app/Models/Event.php.broken_20250821-141521
+?? app/Provid
+?? app/Providers/MiddlewareAliasesServiceProvider.php.backup_20250821-122350
+?? app/Providers/MiddlewareAliasesServiceProvider.php.broken_20250821-122151
+?? app/Providers/MiddlewareAliasesServiceProvider.php.clean_20250821-122328
+?? app/Providers/SwaeEnforceOrgRegisterServiceProvider.php
+?? app/Providers/SwaeMiddlewareServiceProvider.php
+?? app/Rules/
+?? app/View/Composers/
+?? audit.sh
+?? audit_full.sh
+?? audit_readonly.sh
+?? bootstrap/app.php.broken_20250821-125426
+?? bootstrap/app.php.broken_20250821-125825
+?? bootstrap/app.php.broken_20250821-125839
+?? cp
+?? database/migrations/2025_08_21_181418_add_status_to_events_table.php
+?? fix_redirects.sh
+?? lang/
+?? large-images.20250822-172534.txt
+?? public/css/bootstrap.min.css
+?? public/js/bootstrap.bundle.min.js
+?? resources/views/_quarantine_20250821_181449/
+?? resources/views/_quarantine_20250821_182626/
+?? resources/views/admin/login.blade.php
+?? resources/views/auth/_social_logins.blade.php
+?? resources/views/auth/login.blade.php.fixbak_20250822_135224
+?? resources/views/auth/login.blade.php.fixbak_20250822_135636
+?? resources/views/auth/login.blade.php.injectbak_20250822_124448
+?? resources/views/auth/login.blade.php.injectbak_20250822_130018
+?? resources/views/auth/partials/login-form.blade.php
+?? resources/views/auth/partials/register-form.blade.php
+?? resources/views/auth/partials/social-volunteer-only.blade.php
+?? resources/views/auth/partials/social_uaepass_only_for_volunteers.blade.php
+?? resources/views/auth/register.blade.php.fixbak_20250822_135224
+?? resources/views/auth/register.blade.php.fixbak_20250822_135636
+?? resources/views/auth/register.blade.php.injectbak_20250822_124448
+?? resources/views/auth/register.blade.php.injectbak_20250822_130018
+?? resources/views/components/footer.blade.php
+?? resources/views/components/footer.blade.php.restore_20250822_131717
+?? resources/views/emails/contact.blade.php
+?? resources/views/emails/contact/
+?? resources/views/org/auth/_login_form_basic.blade.php
+?? resources/views/org/auth/_register_form_basic.blade.php
+?? resources/views/org/auth/login.blade.php.inject_20250822_132920
+?? resources/views/org/auth/register.blade.php.inject_20250822_132920
+?? resources/views/org/layout_auth.blade.php
+?? resources/views/org/layout_auth_min.blade.php
+?? resources/views/org/login.blade.php
+?? resources/views/partials/footer-nav.blade.php
+?? resources/views/public/apply.blade.php
+?? resources/views/static/
+?? routes/_admin_attendance.php
+?? routes/_public_pages.php
+?? routes/web.php.broken_1755802137
+?? tools/check_cache_headers.sh
+?? tools/composer.phar
+?? tools/deep_theme_check.sh
+?? tools/fix_public_layout_20250822_085539.php
+?? tools/fix_public_layout_plus_bootstrap_20250822_094511.php
+?? tools/normalize_footer_20250822_084608.php
+?? tools/patch_kernel_20250822_065013.php
+?? tools/patch_mc_20250822_064224.php
+?? tools/patch_redirect.php
+?? tools/patch_slh_20250822_064144.php
+?? tools/project_structure_audit.sh
+?? tools/reports/full_checkup_20250821_174201.txt
+?? tools/reports/full_checkup_20250821_175916.txt
+?? tools/reports/full_diag_20250822_133747.txt
+?? tools/reports/full_project_map_20250821_180957.txt
+?? tools/reports/master_check_20250821_162116/
+?? tools/reports/master_check_20250821_162753/
+?? tools/reports/master_check_20250821_163113/
+?? tools/reports/master_check_20250821_163635/
+?? tools/reports/master_check_20250821_164559/
+?? tools/reports/master_check_20250821_165943/
+?? tools/reports/master_check_20250821_170227/
+?? tools/reports/p3_checkup_20250821_174807.txt
+?? tools/reports/routes_20250822_133747.txt
+?? tools/reports/scan_cachecontrol_20250821_171236.txt
+?? tools/theme_audit_20250822_085041.sh
+?? tools/theme_audit_20250822_085229.sh
+?? tools/wire_header_mw_20250822_065511.php
+------------------------------------------------------------
+COMPOSER INFO
+------------------------------------------------------------
+laravel/framework version: v11.45.2
+composer.json require (top lines):
+{
+    "$schema": "https://getcomposer.org/schema.json",
+    "name": "laravel/laravel",
+    "type": "project",
+    "description": "The skeleton application for the Laravel framework.",
+    "keywords": ["laravel", "framework"],
+    "license": "MIT",
+    "require": {
+        "php": "^8.2",
+        "barryvdh/laravel-dompdf": "^2.0",
+        "doctrine/dbal": "^4.3",
+        "dompdf/dompdf": "^2.0",
+        "guzzlehttp/guzzle": "^7.9",
+        "jumbojett/openid-connect-php": "^1.0",
+        "laravel/framework": "^11.31",
+        "laravel/sanctum": "^4.2",
+        "laravel/socialite": "^5.23",
+        "laravel/tinker": "^2.9",
+        "laravel/ui": "^4.6",
+        "simplesoftwareio/simple-qrcode": "^4.2",
+        "spatie/laravel-permission": "^6.7",
+        "spatie/laravel-sitemap": "^7.3"
+    },
+    "require-dev": {
+        "fakerphp/faker": "^1.23",
+        "laravel/breeze": "^2.3",
+        "laravel/pail": "^1.1",
+        "laravel/pint": "^1.13",
+        "laravel/sail": "^1.26",
+        "mockery/mockery": "^1.6",
+        "nunomaduro/collision": "^8.1",
+        "pestphp/pest": "^3.8",
+        "pestphp/pest-plugin-laravel": "^3.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "Database\\Factories\\": "database/factories/",
+            "Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "post-autoload-dump": [
+            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+            "@php artisan package:discover --ansi"
+        ],
+        "post-update-cmd": [
+            "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
+        ],
+        "post-root-package-install": [
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+        ],
+        "post-create-project-cmd": [
+            "@php artisan key:generate --ansi",
+            "@php -r \"file_exists('database/database.sqlite') || touch('database/database.sqlite');\"",
+            "@php artisan migrate --graceful --ansi"
+        ],
+        "dev": [
+            "Composer\\Config::disableProcessTimeout",
+            "npx concurrently -c \"#93c5fd,#c4b5fd,#fb7185,#fdba74\" \"php artisan serve\" \"php artisan queue:listen --tries=1\" \"php artisan pail --timeout=0\" \"npm run dev\" --names=server,queue,logs,vite"
+        ]
+    },
+    "extra": {
+        "laravel": {
+            "dont-discover": []
+        }
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true,
+            "php-http/discovery": true
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
+------------------------------------------------------------
+ROUTES
+------------------------------------------------------------
+routes/ files:
+_admin_aliases.php.off.2025-08-18-043801
+_admin_attendance.php
+_admin_attendance.php.bak_20250821-134435
+_admin_auth.php
+_admin_auth_fix.php
+_admin_dashboard_compat.php
+_admin_dashboard_override.php
+_admin_diag.php
+_admin_hours.php
+_admin_route_aliases.php
+_admin_route_aliases.php.bak_20250821-144033
+_admin_route_aliases.php.bak_20250821-145421
+_admin_users_fix.php
+_auth_aliases.php
+_auth_canonical.php
+_auth_canonical.php.bak_20250822_105342
+_auth_canonical.php.bak_20250822_105815
+_auth_canonical.php.bak_20250822_105844
+_auth_canonical.php.bak_20250822_115516
+_auth_overrides.php
+_early_auth_overrides.php
+_i18n.php
+_opportunities.php
+_org_register_fix.php
+_public.php
+_public.php.bak_20250821-142936
+_public.php.bak_20250821-143217
+_public.php.bak_20250821-144033
+_public.php.bak_20250821-144616
+_public.php.bak_20250821-145421
+_public.php.bak_20250821-150119
+_public.php.bak_20250821-151117
+_public.php.bak_20250821-153129
+_public_pages.php
+_qr_public.php
+_redirects.php
+_scan.php
+admin.php
+admin.php.bak_20250821-134629
+api.php
+console.php
+events.php
+events.php.bak_20250821-150119
+org.php
+org_shortlist.php
+web.php
+web.php.20250822-172534.bak
+web.php.bak2_20250821_180540
+web.php.bak2_20250821_181449
+web.php.bak_20250821-134019
+web.php.bak_20250821-134019.bak_20250821-150119
+web.php.bak_20250821-134019.bak_20250821-150119.bak_20250821-151117
+web.php.bak_20250821-134019.bak_20250821-151117
+web.php.bak_20250821-134435
+web.php.bak_20250821-134435.bak_20250821-150119
+web.php.bak_20250821-134435.bak_20250821-150119.bak_20250821-151117
+web.php.bak_20250821-134435.bak_20250821-151117
+web.php.bak_20250821-140243
+web.php.bak_20250821-140243.bak_20250821-150119
+web.php.bak_20250821-140243.bak_20250821-150119.bak_20250821-151117
+web.php.bak_20250821-140243.bak_20250821-151117
+web.php.bak_20250821-140337
+web.php.bak_20250821-140337.bak_20250821-150119
+web.php.bak_20250821-140337.bak_20250821-150119.bak_20250821-151117
+web.php.bak_20250821-140337.bak_20250821-151117
+web.php.bak_20250821-140523
+web.php.bak_20250821-140523.bak_20250821-150119
+web.php.bak_20250821-140523.bak_20250821-150119.bak_20250821-151117
+web.php.bak_20250821-140523.bak_20250821-151117
+web.php.bak_20250821-140730
+web.php.bak_20250821-140730.bak_20250821-150119
+web.php.bak_20250821-140730.bak_20250821-150119.bak_20250821-151117
+web.php.bak_20250821-140730.bak_20250821-151117
+web.php.bak_20250821-142737
+web.php.bak_20250821-142737.bak_20250821-150119
+web.php.bak_20250821-142737.bak_20250821-150119.bak_20250821-151117
+web.php.bak_20250821-142737.bak_20250821-151117
+web.php.bak_20250821-143031
+web.php.bak_20250821-143031.bak_20250821-150119
+web.php.bak_20250821-143031.bak_20250821-150119.bak_20250821-151117
+web.php.bak_20250821-143031.bak_20250821-151117
+web.php.bak_20250821-144616
+web.php.bak_20250821-144616.bak_20250821-150119
+web.php.bak_20250821-144616.bak_20250821-150119.bak_20250821-151117
+web.php.bak_20250821-144616.bak_20250821-151117
+web.php.bak_20250821-145421
+web.php.bak_20250821-145421.bak_20250821-150119
+web.php.bak_20250821-145421.bak_20250821-150119.bak_20250821-151117
+web.php.bak_20250821-145421.bak_20250821-151117
+web.php.bak_20250821-145829
+web.php.bak_20250821-145829.bak_20250821-150119
+web.php.bak_20250821-145829.bak_20250821-150119.bak_20250821-151117
+web.php.bak_20250821-145829.bak_20250821-151117
+web.php.bak_20250821-150119
+web.php.bak_20250821-150119.bak_20250821-151117
+web.php.bak_20250821-151117
+web.php.bak_20250821-151312
+web.php.bak_20250821181832
+web.php.bak_20250821_174456
+web.php.bak_20250821_174647
+web.php.bak_20250821_180207
+web.php.bak_20250821_180317
+web.php.bak_20250821_180540
+web.php.bak_20250821_181449
+web.php.bak_20250821_181917
+web.php.bak_20250821_182626
+web.php.bak_20250821_182917
+web.php.bak_20250822151846
+web.php.bak_20250822_063557
+web.php.bak_20250822_063815
+web.php.bak_20250822_141445
+web.php.bak_fix_20250821182705
+web.php.bisect_2025-08-20_114642
+web.php.bisect_2025-08-20_114642.bak_20250821-150119
+web.php.bisect_2025-08-20_114642.bak_20250821-150119.bak_20250821-151117
+web.php.bisect_2025-08-20_114642.bak_20250821-151117
+web.php.broken_1755802137
+web.php.dupebak_2025-08-17_0602
+web.php.pre_fix_uae_1
+web.php.pre_fix_uae_2
+web.php.pre_social_placeholders
+web.php.pre_social_placeholders_fix
+web.php.pre_tail_fix_2025-08-17_123657
+
+Web routes (first 200 lines):
+<?php
+use App\Http\Controllers\ContactController;
+Route::pattern('idOrSlug', '^(?!browse$).+');
+// DISABLED: 
+Route::get('/events/browse', [\App\Http\Controllers\Public\EventsBrowseController::class, 'index'])->name('events.browse');
+
+// Ensure static route beats events/{idOrSlug}
+
+// Ensure static route beats events/{idOrSlug}
+
+use App\Http\Controllers\Org\OpportunityController;
+use App\Http\Controllers\Org\ApplicationReviewController;
+// DISABLED: use App\Http\Controllers\Public\EventsBrowseController;
+// DISABLED legacy: use App\Http\Controllers\Public\ContactController;
+if (file_exists(__DIR__.'/_admin_auth.php')) require __DIR__.'/_admin_auth.php';
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
+Route::get('/healthz', fn () => response('ok', 200))->name('health');
+
+/** Public site */
+Route::get('/', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/news', [\App\Http\Controllers\NewsController::class, 'index'])->name('news.index');
+Route::get('/news/{id}', [\App\Http\Controllers\NewsController::class, 'show'])->name('news.show');
+Route::get('/downloads', [\App\Http\Controllers\DownloadController::class, 'index'])->name('downloads.index');
+Route::get('/region/sharjah', [\App\Http\Controllers\EventController::class, 'sharjah'])->name('region.sharjah');
+Route::get('/partners', [\App\Http\Controllers\PartnerController::class, 'index'])->name('partners.index');
+
+Route::post('/lang/switch', function (Request $request) {
+    $lang = $request->input('lang');
+    if (in_array($lang, ['en', 'ar'])) {
+        session(['locale' => $lang]);
+        app()->setLocale($lang);
+    }
+    return back();
+})->name('lang.switch');
+
+/** Authenticated user actions */
+Route::middleware('auth')->group(function () {
+    Route::get('/volunteer/profile', \App\Http\Controllers\Volunteer\ProfileIndexAction::class)->name('volunteer.profile');
+    Route::post('/volunteer/events/{eventId}/register', [\App\Http\Controllers\VolunteerController::class, 'registerEvent'])->middleware(['form.ratelimit'])->name('volunteer.registerEvent');
+    Route::post('/volunteer/kyc/upload', [\App\Http\Controllers\VolunteerController::class, 'uploadKyc'])->middleware(['form.ratelimit'])->name('volunteer.uploadKyc');
+    Route::get('/volunteer/resume', [\App\Http\Controllers\VolunteerController::class, 'resume'])->name('volunteer.resume');
+    Route::get('/volunteer/certificate/{certId}', [\App\Http\Controllers\VolunteerController::class, 'generateCertificate'])->name('volunteer.generateCertificate');
+
+    Route::get('/payment', [\App\Http\Controllers\PaymentController::class, 'paymentPage'])->name('payments.page');
+    Route::post('/payment/stripe', [\App\Http\Controllers\PaymentController::class, 'processStripe'])->name('payments.processStripe');
+    Route::post('/payment/paytabs', [\App\Http\Controllers\PaymentController::class, 'processPayTabs'])->name('payments.processPayTabs');
+    Route::get('/payment/success', [\App\Http\Controllers\PaymentController::class, 'success'])->name('payments.success');
+});
+
+/** Admin */
+Route::prefix('admin')->middleware(['auth', 'can:isAdmin'])->group(function () {
+    Route::get('/dashboard', [\App\Http\Controllers\Admin\UserAdminController::class, 'dashboard'])->name('admin.dashboard');
+    Route::get('/users', [\App\Http\Controllers\Admin\UserAdminController::class, 'listUsers'])->name('admin.users');
+    Route::post('/users/toggle/{id}', [\App\Http\Controllers\Admin\UserAdminController::class, 'toggleUserStatus'])->name('admin.users.toggle');
+    
+    Route::get('/certificates', [\App\Http\Controllers\Admin\UserAdminController::class, 'listCertificates'])->name('admin.certificates');
+    Route::post('/backup', [\App\Http\Controllers\Admin\UserAdminController::class, 'backup'])->name('admin.backup');
+});
+
+Auth::routes();
+
+/** PUBLIC: verify + gallery (single, closed block) */
+Route::match(['GET', 'POST'], '/verify', function (Request $r) {
+    $code = trim($r->input('code', ''));
+    $result = null;
+    if ($code !== '') {
+        $result = DB::table('certificates')->where('verification_code', $code)->first();
+    }
+    return view('public.verify', compact('result', 'code'));
+})->name('verify');
+
+Route::get('/gallery', fn () => view('public.gallery'))->name('gallery');
+
+/** Profile routes (preferred) */
+Route::middleware(['web','auth'])->group(function () {
+    Route::get('/profile', \App\Http\Controllers\Volunteer\ProfileIndexAction::class)->name('profile');
+    Route::get('/volunteer/profile', \App\Http\Controllers\Volunteer\ProfileIndexAction::class)->name('volunteer.profile');
+});
+
+/** Avatar upload/remove */
+Route::middleware(['web','auth'])->group(function () {
+    Route::post('/profile/avatar', [\App\Http\Controllers\Volunteer\AvatarController::class,'store'])->name('profile.avatar.store');
+    Route::delete('/profile/avatar', [\App\Http\Controllers\Volunteer\AvatarController::class,'destroy'])->name('profile.avatar.destroy');
+});
+
+/** Keep public opportunities in a single file (avoids duplication) */
+if (file_exists(__DIR__.'/_opportunities.php')) require __DIR__.'/_opportunities.php';
+if (file_exists(__DIR__.'/_public.php')) require __DIR__.'/_public.php';
+
+/** Friendly /signin router + alias (no controller dependency) */
+Route::get('/signin', function (\Illuminate\Http\Request $r) {
+    $type = strtolower($r->query('type',''));
+    if (in_array($type, ['organization','organisation','org'])) {
+        return redirect()->to('/login?type=organization');
+    }
+    return redirect()->to('/login?type=volunteer');
+})->name('signin');
+
+Route::get('/sign-in', fn() => redirect()->route('signin'));
+
+if (file_exists(__DIR__.'/_scan.php')) require __DIR__.'/_scan.php';
+
+if (file_exists(__DIR__.'/_admin_hours.php')) require __DIR__.'/_admin_hours.php';
+
+if (file_exists(__DIR__.'/_admin_aliases.php')) require __DIR__.'/_admin_aliases.php';
+
+if (file_exists(__DIR__.'/_admin_diag.php')) require __DIR__.'/_admin_diag.php';
+
+if (file_exists(__DIR__.'/_admin_dashboard_override.php')) require __DIR__.'/_admin_dashboard_override.php';
+
+if (file_exists(__DIR__.'/_admin_dashboard_compat.php')) require __DIR__.'/_admin_dashboard_compat.php';
+
+if (file_exists(__DIR__.'/_admin_route_aliases.php')) require __DIR__.'/_admin_route_aliases.php';
+
+if (file_exists(__DIR__.'/_admin_users_fix.php')) require __DIR__.'/_admin_users_fix.php';
+
+if (file_exists(__DIR__.'/_org_register_fix.php')) require __DIR__.'/_org_register_fix.php';
+
+if (file_exists(__DIR__.'/_admin_auth_fix.php')) require __DIR__.'/_admin_auth_fix.php';
+
+if (file_exists(__DIR__.'/_auth_canonical.php')) require __DIR__.'/_auth_canonical.php';
+if (file_exists(__DIR__.'/_auth_aliases.php')) require __DIR__.'/_auth_aliases.php';
+
+// include i18n if present
+if (file_exists(__DIR__.'/_i18n.php')) require __DIR__.'/_i18n.php';
+
+// Injected: auth POST overrides
+// Injected: admin auth POST overrides
+use App\Http\Controllers\SitemapController;
+Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');
+Route::view('/about', 'pages.about')->name('pages.about')->middleware(\App\Http\Middleware\SetLocale::class);
+Route::view('/privacy', 'pages.privacy')->name('pages.privacy')->middleware(\App\Http\Middleware\SetLocale::class);
+Route::view('/terms', 'pages.terms')->name('pages.terms')->middleware(\App\Http\Middleware\SetLocale::class);
+use App\Http\Controllers\LangController;
+/* removed duplicate /locale/{locale} route */
+
+// Fallback org logout (POST only), guarded by auth:org
+use Illuminate\Support\Facades\Auth;
+Route::post('/org/logout', function (Request $request) {
+    Auth::guard('org')->logout();
+    $request->session()->invalidate();
+    $request->session()->regenerateToken();
+    return redirect('/');
+})->middleware(['auth:org'])->name('org.logout');
+if (file_exists(base_path('routes/events.php'))) {
+    // require base_path('routes/events.php');
+}
+
+/* === Notifications (P9) === */
+use App\Http\Controllers\NotificationController;
+
+Route::middleware(['web','auth'])->group(function () {
+    Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
+    Route::post('/notifications/{id}/read', [NotificationController::class, 'markRead'])->name('notifications.read');
+    Route::post('/notifications/read-all', [NotificationController::class, 'markAllRead'])->name('notifications.readAll');
+    Route::get('/notifications/test', [NotificationController::class, 'test'])->name('notifications.test');
+});
+
+/* === P12: Canonical 301 redirects (safe + minimal) === */
+
+Route::permanentRedirect('/dashboard', '/profile')->name('redir.dashboard.profile');
+Route::permanentRedirect('/home', '/')->name('redir.home.root');
+Route::get('/volunteer/profile', fn() => redirect('/profile', 301))->name('redir.volunteer.profile');
+Route::get('/volunteer/dashboard', fn() => redirect('/profile', 301))->name('redir.volunteer.dashboard');
+// LEGACY DISABLED: // LEGACY DISABLED: Route::get('/contact', function
+// LEGACY DISABLED:     foreach (['contact','pages.contact','argon_front.contact','frontend.contact'] as $v) {
+// LEGACY DISABLED:         if (view()->exists($v)) return view($v);
+// LEGACY DISABLED:     }
+// LEGACY DISABLED:     return response('Contact page coming soon.', 200);
+// LEGACY DISABLED: })->name('contact.show');
+
+// ---- compat: organizations.register (keeps old blades working) ----
+/* --- Phase 1: observability healthz --- */
+\Illuminate\Support\Facades\Route::get('/healthz', function () {
+    $okDb = true;
+    try { \Illuminate\Support\Facades\DB::select('select 1'); }
+    catch (\Throwable $e) { $okDb = false; }
+
+    $queuePending = \Illuminate\Support\Facades\Schema::hasTable('jobs')
+        ? \Illuminate\Support\Facades\DB::table('jobs')->count()
+        : null;
+    $queueFailed = \Illuminate\Support\Facades\Schema::hasTable('failed_jobs')
+        ? \Illuminate\Support\Facades\DB::table('failed_jobs')->count()
+        : null;
+
+    return response()->json([
+        'ok'             => $okDb,
+        'time'           => now()->toIso8601String(),
+        'app_env'        => config('app.env'),
+        'cache'          => config('cache.default'),
+        'queue'          => config('queue.default'),
+        'queue_pending'  => $queuePending,
+        'queue_failed'   => $queueFailed,
+    ], 200, ['Cache-Control' => 'no-store']);
+})->name('healthz');
+Route::middleware(['web','auth','throttle:30,1'])->prefix('admin')->group(function () {
+  Route::get('/_diag', function () {
+    $now = now();
+
+API routes (first 200 lines):
+<?php
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+
+/*
+|--------------------------------------------------------------------------
+| API Routes
+| These routes are loaded by RouteServiceProvider within the "api" middleware
+| group and automatically get the "/api" prefix.
+|--------------------------------------------------------------------------
+*/
+
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    return $request->user();
+});
+
+/* API v1 */
+Route::prefix('v1')->group(function () {
+    // Health check: GET /api/v1/health
+    Route::get('/health', fn () => response()->json([
+        'ok' => true,
+        'ts' => now()->toIso8601String(),
+    ]));
+
+    // Certificate verify: GET /api/v1/certificates/verify/{code}
+    Route::get('/certificates/verify/{code}', function (string $code) {
+        $c = \App\Models\Certificate::query()->where('code', $code)->first();
+        return response()->json([
+            'valid' => (bool) $c,
+            'certificate' => $c,
+        ]);
+    });
+});
+
+(!) Found root-level web.php (first 120 lines):
+<?php
+
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\VolunteerController;
+use App\Http\Controllers\EventController;
+
+Route::get('/', function () {
+    return redirect('/dashboard');
+});
+
+Auth::routes();
+
+Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
+    Route::resource('users', UserController::class);
+    Route::get('users/{user}/toggle', [UserController::class, 'toggle'])->name('users.toggle');
+});
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard', [VolunteerController::class, 'index'])->name('dashboard');
+    Route::get('/profile', [VolunteerController::class, 'profile'])->name('profile');
+    Route::get('/events', [EventController::class, 'index'])->name('events.index');
+});
+------------------------------------------------------------
+APP STRUCTURE
+------------------------------------------------------------
+Controllers:
+Http/Controllers/Admin/AdminAttendanceController.php
+Http/Controllers/Admin/AdminCertificateController.php
+Http/Controllers/Admin/AdminController.php
+Http/Controllers/Admin/AdminDashboardController.php
+Http/Controllers/Admin/AdminEventController.php
+Http/Controllers/Admin/AdminPanelController.php
+Http/Controllers/Admin/AdminSettingsController.php
+Http/Controllers/Admin/AdminUserController.php
+Http/Controllers/Admin/AnalyticsController.php
+Http/Controllers/Admin/ApplicationAdminController.php
+Http/Controllers/Admin/ApplicationQueueController.php
+Http/Controllers/Admin/ApplicationReviewController.php
+Http/Controllers/Admin/AttendanceAdminController.php
+Http/Controllers/Admin/AttendanceController.php
+Http/Controllers/Admin/AttendanceDashboardController.php
+Http/Controllers/Admin/AuditController.php
+Http/Controllers/Admin/AuditLogController.php
+Http/Controllers/Admin/Auth/AdminLoginController.php
+Http/Controllers/Admin/CategoryController.php
+Http/Controllers/Admin/CertificateAdminController.php
+Http/Controllers/Admin/CertificateController.php
+Http/Controllers/Admin/CertificateManagementController.php
+Http/Controllers/Admin/DashboardCompatController.php
+Http/Controllers/Admin/DashboardController.php
+Http/Controllers/Admin/EventAttendanceController.php
+Http/Controllers/Admin/EventController.php
+Http/Controllers/Admin/EventInfoFormController.php
+Http/Controllers/Admin/EventManagementController.php
+Http/Controllers/Admin/EventPhotoController.php
+Http/Controllers/Admin/EventVolunteerController.php
+Http/Controllers/Admin/ExportController.php
+Http/Controllers/Admin/HoursReportController.php
+Http/Controllers/Admin/KycAdminController.php
+Http/Controllers/Admin/KycController.php
+Http/Controllers/Admin/KycManagementController.php
+Http/Controllers/Admin/LearningAdminController.php
+Http/Controllers/Admin/LogController.php
+Http/Controllers/Admin/MediaController.php
+Http/Controllers/Admin/NewsController.php
+Http/Controllers/Admin/NotificationController.php
+Http/Controllers/Admin/OpportunityAdminController.php
+Http/Controllers/Admin/OpportunityController.php
+Http/Controllers/Admin/OpportunityFinalizeController.php
+Http/Controllers/Admin/OpportunityQRController.php
+Http/Controllers/Admin/OrgReview.php
+Http/Controllers/Admin/OrganizationController.php
+Http/Controllers/Admin/OrganizationReviewController.php
+Http/Controllers/Admin/PageController.php
+Http/Controllers/Admin/PartnerController.php
+Http/Controllers/Admin/ProfileController.php
+Http/Controllers/Admin/QrScanController.php
+Http/Controllers/Admin/ReportController.php
+Http/Controllers/Admin/RoleAdminController.php
+Http/Controllers/Admin/SettingController.php
+Http/Controllers/Admin/SettingsController.php
+Http/Controllers/Admin/SiteSettingController.php
+Http/Controllers/Admin/SiteSettingsController.php
+Http/Controllers/Admin/TaskMonitorController.php
+Http/Controllers/Admin/TranslationController.php
+Http/Controllers/Admin/UserAdminController.php
+Http/Controllers/Admin/UserController.php
+Http/Controllers/Admin/UserExportController.php
+Http/Controllers/Admin/UserManagementController.php
+Http/Controllers/Admin/VolunteerHoursAdminController.php
+Http/Controllers/Admin/VolunteerHoursController.php
+Http/Controllers/Admin/index.blade.php
+Http/Controllers/Admin/pdf.blade.php
+Http/Controllers/AdminController.php
+Http/Controllers/AdminDashboardController.php
+Http/Controllers/AdminReportsController.php
+Http/Controllers/AnalyticsController.php
+Http/Controllers/Api/MobileApiController.php
+Http/Controllers/ApplicationController.php
+Http/Controllers/AttendanceController.php
+Http/Controllers/Auth/AuthController.php
+Http/Controllers/Auth/AuthenticatedSessionController.php
+Http/Controllers/Auth/ConfirmPasswordController.php
+Http/Controllers/Auth/ConfirmablePasswordController.php
+Http/Controllers/Auth/EmailVerificationNotificationController.php
+Http/Controllers/Auth/EmailVerificationPromptController.php
+Http/Controllers/Auth/ForgotPasswordController.php
+Http/Controllers/Auth/LoginController.php
+Http/Controllers/Auth/LogoutController.php
+Http/Controllers/Auth/NewPasswordController.php
+Http/Controllers/Auth/OrganizationRegisterController.php
+Http/Controllers/Auth/OrganizationRegistrationController.php
+Http/Controllers/Auth/PasswordController.php
+Http/Controllers/Auth/PasswordResetLinkController.php
+Http/Controllers/Auth/PublicAuthController.php
+Http/Controllers/Auth/RegisterController.php
+Http/Controllers/Auth/RegisteredUserController.php
+Http/Controllers/Auth/RegistrationController.php
+Http/Controllers/Auth/ResetPasswordController.php
+Http/Controllers/Auth/SocialAuthController.php
+Http/Controllers/Auth/SocialController.php
+Http/Controllers/Auth/SocialLoginController.php
+Http/Controllers/Auth/UAEPassController.php
+Http/Controllers/Auth/UaePassController.php
+Http/Controllers/Auth/VerificationController.php
+Http/Controllers/Auth/VerifyEmailController.php
+Http/Controllers/AuthController.php
+Http/Controllers/BadgeController.php
+Http/Controllers/Blog/PostController.php
+Http/Controllers/CategoryController.php
+Http/Controllers/CategoryPageController.php
+Http/Controllers/CertificateController.php
+Http/Controllers/CertificateEmailController.php
+Http/Controllers/CertificatePdfController.php
+Http/Controllers/CertificateVerifyController.php
+Http/Controllers/ContactController.php
+Http/Controllers/Controller.php
+Http/Controllers/Dashboard/DashboardController.php
+Http/Controllers/DashboardController.php
+Http/Controllers/DocumentController.php
+Http/Controllers/DownloadController.php
+Http/Controllers/EventApplicationController.php
+Http/Controllers/EventCheckinController.php
+Http/Controllers/EventController.php
+Http/Controllers/EventEvaluationController.php
+Http/Controllers/EventInfoRequestController.php
+Http/Controllers/EventQrController.php
+Http/Controllers/EventRegistrationController.php
+Http/Controllers/EventShowController.php
+Http/Controllers/Frontend/OpportunityIndexController.php
+Http/Controllers/Frontend/OpportunityShowController.php
+Http/Controllers/HealthController.php
+Http/Controllers/HomeController.php
+Http/Controllers/ImageTestController.php
+Http/Controllers/Kyc/KycController.php
+Http/Controllers/KycController.php
+Http/Controllers/LangController.php
+Http/Controllers/LanguageController.php
+Http/Controllers/LeaderboardController.php
+Http/Controllers/LearningRequestController.php
+Http/Controllers/My/ApplicationsController.php
+Http/Controllers/My/CertificatesController.php
+Http/Controllers/My/DashboardController.php
+Http/Controllers/My/HoursController.php
+Http/Controllers/My/ProfileController.php
+Http/Controllers/NewsController.php
+Http/Controllers/NotificationController.php
+Http/Controllers/OpportunitiesController.php
+Http/Controllers/OpportunityBrowseController.php
+Http/Controllers/OpportunityController.php
+Http/Controllers/Org/ApplicantsController.php
+Http/Controllers/Org/ApplicantsDecisionController.php
+Http/Controllers/Org/ApplicantsExportController.php
+Http/Controllers/Org/ApplicationReviewController.php
+Http/Controllers/Org/AttendanceController.php
+Http/Controllers/Org/AttendanceSettingsController.php
+Http/Controllers/Org/CertificatesController.php
+Http/Controllers/Org/DashboardController.php
+Http/Controllers/Org/EmailPreviewController.php
+Http/Controllers/Org/EventController.php
+Http/Controllers/Org/EventVolunteersController.php
+Http/Controllers/Org/KycController.php
+Http/Controllers/Org/OpportunityAttendanceController.php
+Http/Controllers/Org/OpportunityCapController.php
+Http/Controllers/Org/OpportunityController.php
+Http/Controllers/Org/OrgAuthController.php
+Http/Controllers/Org/OrganizationProfileController.php
+Http/Controllers/Org/ReportsController.php
+Http/Controllers/Org/SettingsController.php
+Http/Controllers/Org/SetupController.php
+Http/Controllers/Org/ShortlistController.php
+Http/Controllers/Org/TeamController.php
+Http/Controllers/OrgDashboardController.php
+Http/Controllers/OrgOpportunityController.php
+Http/Controllers/OrgRegistrationController.php
+Http/Controllers/Organization/DashboardController.php
+Http/Controllers/Organization/HourApprovalController.php
+Http/Controllers/Organization/PortalController.php
+Http/Controllers/OrganizationController.php
+Http/Controllers/OrganizationDashboardController.php
+Http/Controllers/OrganizationOpportunityController.php
+Http/Controllers/OrganizationRegisterController.php
+Http/Controllers/PageController.php
+Http/Controllers/PagesController.php
+Http/Controllers/PartnerController.php
+Http/Controllers/PaymentController.php
+Http/Controllers/ProfileController.php
+Http/Controllers/ProfileHoursController.php
+Http/Controllers/Public/AttendanceController.php
+Http/Controllers/Public/CalendarController.php
+Http/Controllers/Public/CertificateVerifyController.php
+Http/Controllers/Public/ContactController.php
+Http/Controllers/Public/EventsBrowseController.php
+Http/Controllers/Public/OrganizationPublicController.php
+Http/Controllers/Public/PageController.php
+Http/Controllers/Public/PartnerIntakeController.php
+Http/Controllers/Public/PublicOpportunityController.php
+Http/Controllers/Public/QrAttendanceController.php
+Http/Controllers/PublicController.php
+Http/Controllers/PublicSite/ApplyController.php
+Http/Controllers/PublicSite/HomeController.php
+Http/Controllers/PublicSite/OpportunityPublicController.php
+Http/Controllers/QRScannerController.php
+Http/Controllers/QrScanController.php
+Http/Controllers/ScanController.php
+Http/Controllers/SeoController.php
+Http/Controllers/SitemapController.php
+Http/Controllers/SocialLoginController.php
+Http/Controllers/StoryController.php
+Http/Controllers/SurveyController.php
+Http/Controllers/Team/TeamController.php
+Http/Controllers/TeamController.php
+Http/Controllers/TranscriptController.php
+Http/Controllers/UserController.php
+Http/Controllers/VerifyController.php
+Http/Controllers/Volunteer/AvatarController.php
+Http/Controllers/Volunteer/CertificateController.php
+Http/Controllers/Volunteer/DashboardController.php
+Http/Controllers/Volunteer/MyCertificatesController.php
+Http/Controllers/Volunteer/OpportunityController.php
+Http/Controllers/Volunteer/ProfileController.php
+Http/Controllers/Volunteer/ProfileIndexAction.php
+Http/Controllers/Volunteer/ProfilePasswordController.php
+Http/Controllers/Volunteer/RegistrationController.php
+Http/Controllers/Volunteer/VolunteerDashboardController.php
+Http/Controllers/VolunteerController.php
+Http/Controllers/VolunteerDashboardController.php
+Http/Controllers/VolunteerHourController.php
+Http/Controllers/VolunteerHoursController.php
+Http/Controllers/VolunteerOpportunityController.php
+Http/Controllers/VolunteerProfileController.php
+Http/Controllers/WishlistController.php
+
+Models:
+Models/Application.php
+Models/Attendance.php
+Models/AuditLog.php
+Models/Badge.php
+Models/Category.php
+Models/Certificate.php
+Models/Concerns/SearchSort.php
+Models/Download.php
+Models/Event.php
+Models/EventApplication.php
+Models/EventCheckin.php
+Models/EventEvaluation.php
+Models/EventInfoRequest.php
+Models/EventRegistration.php
+Models/Kyc.php
+Models/KycRequest.php
+Models/Location.php
+Models/Media.php
+Models/News.php
+Models/Opportunity.php
+Models/Organization.php
+Models/OrganizationRegistration.php
+Models/Partner.php
+Models/QrScan.php
+Models/Registration.php
+Models/Role.php
+Models/Setting.php
+Models/SiteSetting.php
+Models/Story.php
+Models/Team.php
+Models/User.php
+Models/UserDocument.php
+Models/Volunteer.php
+Models/VolunteerHour.php
+Models/VolunteerOpportunity.php
+Models/VolunteerProfile.php
+
+Middleware:
+Http/Middleware/AdminActionLogger.php
+Http/Middleware/AdminAuditMiddleware.php
+Http/Middleware/AdminMiddleware.php
+Http/Middleware/AdminOnly.php
+Http/Middleware/AdminPathEnforcer.php
+Http/Middleware/Authenticate.php
+Http/Middleware/BusinessEmailOnly.php
+Http/Middleware/CanonicalLink.php
+Http/Middleware/EnforceOrgRegistration.php
+Http/Middleware/EnsureOrg.php
+Http/Middleware/EnsureRole.php
+Http/Middleware/FormRateLimit.php
+Http/Middleware/Honeypot.php
+Http/Middleware/IsAdmin.php
+Http/Middleware/LocaleHeaders.php
+Http/Middleware/LocaleMiddleware.php
+Http/Middleware/MicroCache.php
+Http/Middleware/NormalizeHeaders.php
+Http/Middleware/ReadOnlyMode.php
+Http/Middleware/RedirectIfAuthenticated.php
+Http/Middleware/SecurityHeaders.php
+Http/Middleware/SetLocale.php
+Http/Middleware/SetLocaleAndHeaders.php
+Http/Middleware/SetLocaleFromRequest.php
+Http/Middleware/TrustProxies.php
+Http/Middleware/VerifiedPathEnforcer.php
+Http/Middleware/VerifyCsrfToken.php
+
+Form Requests:
+Http/Requests/Auth/LoginRequest.php
+Http/Requests/ContactFormRequest.php
+Http/Requests/ProfileUpdateRequest.php
+Http/Requests/VolunteerRegisterRequest.php
+
+Jobs:
+Jobs/GenerateCertificatePdf.php
+Jobs/SendApplicantDecisionMail.php
+
+Events:
+Events/VolunteerCheckedOut.php
+
+Listeners:
+Listeners/GenerateCertificate.php
+Listeners/LogAuthEvents.php
+
+Policies:
+Policies/OpportunityPolicy.php
+Policies/TeamPolicy.php
+
+Services (if any):
+app/Services
+  IssueCertificates.php
+  HoursService.php
+  VolunteerHoursService.php
+  AnomalyService.php
+  AttendanceService.php
+  Socialite/UaePassProvider.php
+  WhatsAppSender.php
+  SettingStore.php
+  QrTokenService.php
+  CertificateService.php
+------------------------------------------------------------
+VIEWS (Blade)
+------------------------------------------------------------
+resources/views/*:
+_from_migrations_2025-08-16-151345/app.blade.php
+_from_migrations_2025-08-16-151345/index.blade.php
+_from_migrations_2025-08-16-151345/payment.blade.php
+_from_migrations_2025-08-16-151345/success.blade.php
+_home_OLD.blade.php
+_legacy_layouts/_welcome_OLD.blade.php
+_legacy_layouts/master.blade.php
+_legacy_layouts/public.blade.php
+_quarantine_20250821_181449/contact.blade.php
+_quarantine_20250821_181449/faq.blade.php
+_quarantine_20250821_181449/partners.blade.php
+_quarantine_20250821_181449/privacy.blade.php
+_quarantine_20250821_181449/terms.blade.php
+about.blade.php
+admin.dashboard.blade.php
+admin/_diag_dashboard.blade.php
+admin/analytics/index.blade.php
+admin/applications/index.blade.php
+admin/argon/_footer.blade.php
+admin/argon/_navbar.blade.php
+admin/argon/_sidenav.blade.php
+admin/attendance/index.blade.php
+admin/attendance/qr.blade.php
+admin/audit/index.blade.php
+admin/auth/login.blade.php
+admin/categories/create.blade.php
+admin/categories/edit.blade.php
+admin/categories/index.blade.php
+admin/certificates/bulk_issue.blade.php
+admin/certificates/bulk_issue_result.blade.php
+admin/certificates/create.blade.php
+admin/certificates/index.blade.php
+admin/certificates/issue.blade.php
+admin/certificates/pdf.blade.php
+admin/certificates/resend.blade.php
+admin/certificates/show.blade.php
+admin/dashboard.blade.php
+admin/dashboard_compat_fallback.blade.php
+admin/dashboard_safe.blade.php
+admin/events/create.blade.php
+admin/events/edit.blade.php
+admin/events/index.blade.php
+admin/hours/show.blade.php
+admin/index.blade.php
+admin/kyc/index.blade.php
+admin/kyc/show.blade.php
+admin/layout.blade.php
+admin/learning/index.blade.php
+admin/login.blade.php
+admin/media/index.blade.php
+admin/news/create.blade.php
+admin/opportunities/_form.blade.php
+admin/opportunities/attendance.blade.php
+admin/opportunities/create.blade.php
+admin/opportunities/edit.blade.php
+admin/opportunities/finalize_form.blade.php
+admin/opportunities/index.blade.php
+admin/opportunities/qr.blade.php
+admin/opportunities/scan.blade.php
+admin/organizations/create.blade.php
+admin/organizations/edit.blade.php
+admin/organizations/index.blade.php
+admin/organizations/pending.blade.php
+admin/overview.blade.php
+admin/partials/admin_guard.blade.php
+admin/partials/flash.blade.php
+admin/partials/index_toolbar.blade.php
+admin/partials/nav.blade.php
+admin/partials/table_search.blade.php
+admin/partners/create.blade.php
+admin/partners/edit.blade.php
+admin/partners/index.blade.php
+admin/placeholder.blade.php
+admin/placeholders.blade.php
+admin/profile/edit.blade.php
+admin/reports/index.blade.php
+admin/roles/index.blade.php
+admin/settings.blade.php
+admin/settings/edit.blade.php
+admin/settings/index.blade.php
+admin/task_monitor/index.blade.php
+admin/translations/index.blade.php
+admin/users/edit.blade.php
+admin/users/index.blade.php
+applications/my.blade.php
+argon_front/_flash.blade.php
+argon_front/_footer.blade.php
+argon_front/_navbar.blade.php
+attendance/ok.blade.php
+auth.forgot-password.blade.php
+auth.login.blade.php
+auth.register.blade.php
+auth/_social_logins.blade.php
+auth/admin_login.blade.php
+auth/confirm-password.blade.php
+auth/forgot-password.blade.php
+auth/forgot.blade.php
+auth/login-fallback.blade.php
+auth/login.blade.php
+auth/oauth-coming-soon.blade.php
+auth/organization_login.blade.php
+auth/organization_register.blade.php
+auth/partials/login-form.blade.php
+auth/partials/register-form.blade.php
+auth/partials/social-buttons.blade.php
+auth/partials/social-volunteer-only.blade.php
+auth/partials/social_uaepass_only_for_volunteers.blade.php
+auth/partials/vol-social.blade.php
+auth/passwords/email.blade.php
+auth/register-fallback.blade.php
+auth/register.blade.php
+auth/reset.blade.php
+auth/signin-options.blade.php
+auth/verify-email.blade.php
+auth/verify.blade.php
+auth/volunteer_login.blade.php
+categories/index.blade.php
+categories/show.blade.php
+certificates/index.blade.php
+certificates/my.blade.php
+certificates/pdf.blade.php
+certificates/show.blade.php
+certificates/template.blade.php
+certificates/transcript.blade.php
+certificates/verify.blade.php
+components/auth-session-status.blade.php
+components/avatar-controls.blade.php
+components/checkbox.blade.php
+components/confirmation-modal.blade.php
+components/danger-button.blade.php
+components/dialog-modal.blade.php
+components/footer.blade.php
+components/honeypot.blade.php
+components/if-admin.blade.php
+components/input-error.blade.php
+components/input-label.blade.php
+components/lang-switch.blade.php
+components/modal.blade.php
+components/org/attendance_button.blade.php
+components/page-header.blade.php
+components/primary-button.blade.php
+components/secondary-button.blade.php
+components/select.blade.php
+components/seo.blade.php
+components/text-input.blade.php
+components/textarea.blade.php
+components/top-auth-links.blade.php
+contact.blade.php
+dashboard/admin.blade.php
+dashboard/index.blade.php
+dashboard/organization.blade.php
+dashboard/team.blade.php
+dashboard/volunteer.blade.php
+dashboards/org.blade.php
+emails/applicant_decision.blade.php
+emails/application_submitted.blade.php
+emails/certificate.blade.php
+emails/certificate_issued.blade.php
+emails/contact.blade.php
+emails/contact/message.blade.php
+emails/general_notification.blade.php
+emails/volunteer/application.blade.php
+errors/403.blade.php
+errors/404.blade.php
+errors/429.blade.php
+errors/500.blade.php
+errors/503.blade.php
+errors/inline-profile-fallback.blade.php
+errors/readonly.blade.php
+events/calendar.blade.php
+events/index.blade.php
+events/show.blade.php
+fallback/my-hours.blade.php
+home.blade.php
+kyc/upload.blade.php
+layouts/admin.blade.php
+layouts/app.blade.php
+layouts/email.blade.php
+layouts/partials/footer.blade.php
+layouts/partials/nav_links.blade.php
+layouts/partials/security_meta.blade.php
+leaderboard.blade.php
+learning_requests/create.blade.php
+mails/contact_message.blade.php
+me/applications.blade.php
+me/certificates.blade.php
+my/applications.blade.php
+my/certificates.blade.php
+my/dashboard.blade.php
+my/hours.blade.php
+my/profile.blade.php
+news/index.blade.php
+notifications/index.blade.php
+opportunities/apply_redirect.blade.php
+opportunities/index.blade.php
+opportunities/index_public.blade.php
+opportunities/partials/similar.blade.php
+opportunities/public/index.blade.php
+opportunities/public/show.blade.php
+opportunities/public_show.blade.php
+opportunities/qr.blade.php
+opportunities/show.blade.php
+org/_sidenav.blade.php
+org/applicants/_bulk_actions.blade.php
+org/applicants/_filters.blade.php
+org/applicants/_row_actions_init.blade.php
+org/argon/_sidenav.blade.php
+org/attendance/index.blade.php
+org/attendance/qr.blade.php
+org/attendance/scan.blade.php
+org/attendance/settings.blade.php
+org/auth/_login_form_basic.blade.php
+org/auth/_logo_field.blade.php
+org/auth/_register_form_basic.blade.php
+org/auth/login.blade.php
+org/auth/register.blade.php
+org/certificates/_pdf.blade.php
+org/certificates/index.blade.php
+org/dashboard.blade.php
+org/dashboard/_kpis.blade.php
+org/dashboard/index.blade.php
+org/events/_volunteers_table.blade.php
+org/events/index.blade.php
+org/events/volunteers.blade.php
+org/kyc/edit.blade.php
+org/layout.blade.php
+org/layout_auth.blade.php
+org/layout_auth_min.blade.php
+org/login.blade.php
+org/opportunities/_certificates_link.blade.php
+org/opportunities/_row_cert_init.blade.php
+org/opportunities/attendance.blade.php
+org/opportunities/create.blade.php
+org/opportunities/edit.blade.php
+org/opportunities/index.blade.php
+org/opportunities/shortlist.blade.php
+org/opps/_form.blade.php
+org/opps/create.blade.php
+org/opps/edit.blade.php
+org/opps/index.blade.php
+org/partials/branding_styles.blade.php
+org/partials/certs_quick.blade.php
+org/partials/dashboard_v1.blade.php
+org/partials/event_actions.blade.php
+org/partials/hours_chart.blade.php
+org/partials/menu.blade.php
+org/partials/recent_activity.blade.php
+org/partials/today_checkins.blade.php
+org/partials/top_volunteers.blade.php
+org/partials/trends.blade.php
+org/partials/upcoming_7d.blade.php
+org/profile.blade.php
+org/register.blade.php
+org/reports/index.blade.php
+org/review.blade.php
+org/settings/_branding_form.blade.php
+org/settings/_profile_form.blade.php
+org/settings/edit.blade.php
+org/setup.blade.php
+org/shortlist/_counters.blade.php
+org/shortlist/_slotcap_form.blade.php
+org/shortlist/index.blade.php
+org/team/index.blade.php
+org/under_review.blade.php
+organization/dashboard.blade.php
+organization/login.blade.php
+organization/register.blade.php
+organizations/index.blade.php
+organizations/public/index.blade.php
+organizations/public/show.blade.php
+organizations/register.blade.php
+pages/about.blade.php
+pages/app.blade.php
+pages/contact.blade.php
+pages/privacy.blade.php
+pages/regions/index.blade.php
+pages/regions/show.blade.php
+pages/terms.blade.php
+partials/_events_fallback.blade.php
+partials/_opps_fallback.blade.php
+partials/alerts.blade.php
+partials/apply_button.blade.php
+partials/auth_dropdown.blade.php
+partials/flash.blade.php
+partials/footer-nav.blade.php
+partials/footer.blade.php
+partials/header.blade.php
+partials/hero-home.blade.php
+partials/logout.blade.php
+partials/meta.blade.php
+partials/nav.blade.php
+partials/navbar.blade.php
+partials/opps_filter_bar.blade.php
+partials/page_header.blade.php
+partials/rtl_overrides.blade.php
+partials/seo.blade.php
+partials/social.blade.php
+partials/sort_bar.blade.php
+partials/verify_banner.blade.php
+partners/apply.blade.php
+partners/index.blade.php
+payments/cancel.blade.php
+payments/checkout.blade.php
+payments/success.blade.php
+profile/edit.blade.php
+profile/partials/delete-user-form.blade.php
+profile/partials/update-password-form.blade.php
+profile/partials/update-profile-information-form.blade.php
+profile/show.blade.php
+public/about.blade.php
+public/apply.blade.php
+public/categories.blade.php
+public/category_show.blade.php
+public/certificates/verify.blade.php
+public/contact.blade.php
+public/events/browse.blade.php
+public/events/index.blade.php
+public/events/show.blade.php
+public/faq.blade.php
+public/gallery.blade.php
+public/home.blade.php
+public/layout.blade.php
+public/opportunities.blade.php
+public/opportunities/index.blade.php
+public/opportunities/show.blade.php
+public/organizations/index.blade.php
+public/partners.blade.php
+public/scan.blade.php
+public/stories.blade.php
+public/story_show.blade.php
+public/verify.blade.php
+qr/scan.blade.php
+scan/confirm.blade.php
+scan/result.blade.php
+sitemap.blade.php
+static/faq.blade.php
+stories/index.blade.php
+stories/show.blade.php
+teams/create.blade.php
+teams/index.blade.php
+vendor/pagination/argon.blade.php
+verify/index.blade.php
+verify/result.blade.php
+verify/show.blade.php
+volunteer/certificates.blade.php
+volunteer/certificates/index.blade.php
+volunteer/dashboard.blade.php
+volunteer/hours.blade.php
+volunteer/leaderboard.blade.php
+volunteer/my_certificates.blade.php
+volunteer/partials/avatar_form.blade.php
+volunteer/partials/latest_cert.blade.php
+volunteer/partials/sidebar.blade.php
+volunteer/profile.blade.php
+volunteer/profile_edit.blade.php
+volunteer/settings/_tabs.blade.php
+welcome.blade.php
+
+Root-level Blade templates:
+about.blade.php
+app.blade.php
+contact.blade.php
+faq.blade.php
+welcome.blade.php
+------------------------------------------------------------
+DATABASE (Migrations/Seeders/Factories)
+------------------------------------------------------------
+Migrations:
+0001_01_01_000000_create_users_table.php
+0001_01_01_000001_create_cache_table.php
+0001_01_01_000002_create_jobs_table.php
+2024_01_01_100000_add_role_enabled_to_users.php
+2024_08_06_000002_create_news_table.php
+2025_08_02_235249_add_social_fields_to_users_table.php
+2025_08_03_000002_create_registrations_table.php
+2025_08_03_000100_create_volunteer_profiles_table.php
+2025_08_03_000400_create_event_registrations_table.php
+2025_08_03_000553_create_kyc_table.php
+2025_08_03_000553_create_roles_table.php
+2025_08_03_020000_create_event_applications_table.php
+2025_08_03_020100_create_event_info_requests_table.php
+2025_08_03_020200_create_event_checkins_table.php
+2025_08_03_020300_create_event_evaluations_table.php
+2025_08_03_025713_create_personal_access_tokens_table.php
+2025_08_04_200000_create_site_settings_table.php
+2025_08_04_210000_create_badges_table.php
+2025_08_05_000001_add_date_to_events_table.php
+2025_08_05_000003_add_city_and_description_to_events_table.php
+2025_08_05_000010_add_city_description_to_events.php
+2025_08_05_000012_create_kycs_table.php
+2025_08_05_000013_create_payments_table.php
+2025_08_05_100000_add_status_enum_to_kyc_table.php
+2025_08_06_050137_add_fields_to_certificates_table.php
+2025_08_08_114122_alter_opportunities_add_core_columns.php
+2025_08_08_120150_alter_events_add_core_columns.php
+2025_08_08_160000_add_profile_fields_to_users_table.php
+2025_08_08_170000_add_owner_user_id_to_organizations_table.php
+2025_08_08_190000_add_is_admin_to_users_table.php
+2025_08_08_210000_add_is_active_to_users_table.php
+2025_08_08_211311_add_user_id_to_attendances_table.php
+2025_08_08_211500_create_event_volunteer_table.php
+2025_08_08_235900_create_acl_permission_tables.php
+2025_08_08_240500_add_owner_and_status_to_opportunities.php
+2025_08_09_000000_add_owner_user_id_to_organizations.php
+2025_08_09_000100_add_role_to_users.php
+2025_08_09_000300_update_events_for_org_and_meta.php
+2025_08_09_061422_create_volunteer_applications_table.php
+2025_08_09_145221_create_qr_scans_table.php
+2025_08_09_160921_create_applications_table_duplicate_guard.php
+2025_08_09_182657_add_verification_code_to_certificates_table.php
+2025_08_09_200000_add_checkout_token_to_attendances_table.php
+2025_08_09_210000_create_certificates_and_volunteer_hours.php
+2025_08_10_000000_add_category_to_opportunities_table.php
+2025_08_10_000001_add_badge_to_users_table.php
+2025_08_10_082905_add_foreign_keys_to_events_table.php
+2025_08_10_100000_create_volunteer_hours_table.php
+2025_08_10_100001_create_volunteer_hours_table_duplicate_guard.php
+2025_08_10_200000_add_region_and_badge.php
+2025_08_10_210000_add_category_to_events_table.php
+2025_08_11_000001_create_categories_table.php
+2025_08_11_000001_create_locations_table.php
+2025_08_11_000002_create_organizations_table.php
+2025_08_11_000003_create_events_table.php
+2025_08_11_000003_create_organizations_table_duplicate_guard.php
+2025_08_11_000004_create_opportunities_table.php
+2025_08_11_000004_create_opportunity_volunteer_table.php
+2025_08_11_000005_create_event_user_table.php
+2025_08_11_000005_create_volunteers_table.php
+2025_08_11_000006_create_opportunity_user_table.php
+2025_08_11_000006_create_teams_table.php
+2025_08_11_000008_create_partners_table.php
+2025_08_11_000009_create_stories_table.php
+2025_08_11_000011_add_license_and_badges_tables.php
+2025_08_11_000012_add_optional_profile_columns_to_volunteers.php
+2025_08_11_000100_create_kyc_requests_table.php
+2025_08_11_112158_add_category_and_city_to_opportunities_table.php
+2025_08_11_115454_add_org_and_tokens_to_opportunities_table.php
+2025_08_11_115458_create_attendances_table.php
+2025_08_11_115503_create_certificates_table.php
+2025_08_11_221412_create_media_table.php
+2025_08_11_999999_add_unique_user_opportunity_to_applications.php
+2025_08_12_000001_add_featured_to_opportunities_table.php
+2025_08_12_094900_alter_opportunities_status_to_varchar.php
+2025_08_12_120000_create_password_reset_tokens_table.php
+2025_08_12_150000_create_saved_opportunities_table.php
+2025_08_13_000001_add_volunteer_code_and_ids_to_users.php
+2025_08_13_000002_create_profiles_table.php
+2025_08_13_000003_create_learning_requests_table.php
+2025_08_13_000005_add_attendance_hours_and_opportunity_status.php
+2025_08_13_000006_upsert_certificates_schema.php
+2025_08_13_000007_patch_attendances_columns.php
+2025_08_13_000008_add_qr_tokens_to_opportunities.php
+2025_08_13_000009_create_applications_table.php
+2025_08_13_000010_add_minutes_to_volunteer_hours.php
+2025_08_13_085411_sprint1_safe_columns.php
+2025_08_13_090834_sprint2_certificates_and_deliveries.php
+2025_08_13_094708_sprint2_fix_hours_column.php
+2025_08_13_095226_sprint2_event_id_nullable.php
+2025_08_13_110104_sprint3_contact_messages.php
+2025_08_13_111317_sprint4_optional_indexes.php
+2025_08_13_112549_sprint6_partner_intake_submissions.php
+2025_08_13_113728_sprint8_audit_logs.php
+2025_08_13_113920_sprint8_patch_audit_logs_columns.php
+2025_08_13_160816_add_social_columns_to_users_table.php
+2025_08_13_165603_enhance_certificates_table_add_columns_issued_at_file_hours.php
+2025_08_13_165604_enhance_attendance_add_minutes_no_show_notes.php
+2025_08_13_210201_add_primary_color_to_settings_table.php
+2025_08_14_000000_create_user_documents_table.php
+2025_08_14_120100_create_audit_logs_table.php
+2025_08_14_120200_harden_certificates_schema.php
+2025_08_14_130000_add_certificate_code_uniques.php
+2025_08_14_130500_add_certificate_lookup_indexes.php
+2025_08_14_190000_add_profile_fields_to_users.php
+2025_08_14_200000_create_organization_registrations_table.php
+2025_08_14_205239_extend_organizations_for_org_portal.php
+2025_08_14_210844_add_owner_id_to_organizations.php
+2025_08_14_215336_make_org_email_password_nullable.php
+2025_08_14_220000_add_license_fields_to_organizations.php
+2025_08_14_220309_tweak_org_columns_for_license_and_nullable.php
+2025_08_14_220500_add_license_file_to_organizations.php
+2025_08_15_053802_add_hours_engine_columns.php
+2025_08_15_072230_add_minutes_to_volunteer_hours_table.php
+2025_08_15_115847_make_attendance_token_nullable.php
+2025_08_15_123000_add_checkin_columns_if_missing.php
+2025_08_15_130500_drop_attendance_user_opportunity_unique.php
+2025_08_16_100000_augment_attendances_for_geo_and_status.php
+2025_08_16_120000_add_org_attendance_fields.php
+2025_08_16_140000_org_shortlisting_cap_and_status.php
+2025_08_16_172807_add_geo_to_attendances_table.php
+2025_08_16_172808_add_geofence_to_opportunities_table.php
+2025_08_16_172929_create_organization_users_table.php
+2025_08_16_173500_create_org_kyc_table.php
+2025_08_16_190500_add_organization_id_to_opportunities_table.php
+2025_08_16_193900_add_start_end_at_to_opportunities.php
+2025_08_17_000001_add_avatar_to_users_table.php
+2025_08_17_120000_add_avatar_path_to_users_table.php
+2025_08_17_150500_create_volunteer_hours_table.php
+2025_08_17_150510_create_opportunity_applications_table.php
+2025_08_17_150520_create_qr_scans_table.php
+2025_08_17_150530_create_geo_logs_table.php
+2025_08_17_211500_patch_qr_scans_and_related.php
+2025_08_17_211900_make_attendance_nullable_in_qr_scans.php
+2025_08_19_112018_add_slug_to_events_table.php
+2025_08_19_145036_create_notifications_table.php
+2025_08_20_184059_add_unique_attendance_per_day.php
+2025_08_21_181418_add_status_to_events_table.php
+
+Seeders:
+AdminUserSeeder.php
+ApplicationsTableSeeder.php
+BackfillEventSlugsSeeder.php
+CategorySeeder.php
+CreateAdminOrgUsersSeeder.php
+DatabaseSeeder.php
+DemoCategoriesSeeder.php
+DemoCertificateSeeder.php
+DemoContentSeeder.php
+DemoDataSeeder.php
+DemoHomeSeeder.php
+DemoOpportunitiesSeeder.php
+DemoOpportunitySeeder.php
+DemoVolunteerHoursSeeder.php
+DemoVolunteerSeeder.php
+EventSeeder.php
+FakeOrganizationSeeder.php
+InitialDataSeeder.php
+OpportunitySeeder.php
+PartnerSeeder.php
+RbacSeeder.php
+RegionSeeder.php
+RolePermissionSeeder.php
+RoleSeeder.php
+RolesAndPermissionsSeeder.php
+RolesSeeder.php
+StorySeeder.php
+VolunteerOpportunitiesTableSeeder.php
+
+Factories:
+EventFactory.php
+OpportunityFactory.php
+UserFactory.php
+------------------------------------------------------------
+CONFIG FILES
+------------------------------------------------------------
+app.php
+auth.php
+cache.php
+database.php
+dompdf.php
+filesystems.php
+hours.php
+logging.php
+mail.php
+permission.php
+queue.php
+sanctum.php
+seo.php
+services.php
+session.php
+view.php
+------------------------------------------------------------
+LANG FILES
+------------------------------------------------------------
+ar.json
+en.json
+------------------------------------------------------------
+PUBLIC ASSETS (top-level)
+------------------------------------------------------------
+.well-known/
+.well-known/acme-challenge/
+public/
+certificates/
+css/
+icons/
+images/
+images/backup_20250806_062119/
+images/gallery/
+img/
+js/
+partners/
+partners/backup_20250806_062119/
+pdfs/
+sitemaps/
+uploads/
+uploads/profiles/
+vendor/
+vendor/argon/
+vendor/bootstrap-icons/
+vendor/bootstrap/
+------------------------------------------------------------
+FRONTEND DIRECTORY
+------------------------------------------------------------
+frontend/ exists.
+
+frontend/package.json (first 120 lines):
+{
+  "name": "swaeduae-frontend",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "i18next": "^23.16.8",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-i18next": "^13.5.0",
+    "react-icons": "^5.5.0",
+    "react-router-dom": "^6.30.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.0.0",
+    "autoprefixer": "^10.4.14",
+    "postcss": "^8.4.24",
+    "tailwindcss": "^3.3.2",
+    "vite": "^4.3.9"
+  }
+}
+------------------------------------------------------------
+.ENV KEYS (redacted)
+------------------------------------------------------------
+ADMIN_EMAIL
+ALERT_EMAIL
+APP_DEBUG
+APP_ENV
+APP_KEY
+APP_NAME
+APP_READONLY
+APP_TIMEZONE
+APP_URL
+BROADCAST_DRIVER
+CACHE_DRIVER
+CACHE_STORE
+CONTACT_TO_EMAIL
+CSP_EXTRA
+DB_CONNECTION
+DB_DATABASE
+DB_HOST
+DB_PASSWORD
+DB_PORT
+DB_USERNAME
+FB_CLIENT_ID
+FB_CLIENT_SECRET
+FB_REDIRECT_URI
+GOOGLE_CLIENT_ID
+GOOGLE_CLIENT_SECRET
+GOOGLE_REDIRECT_URI
+HOURS_AUTO_BREAK_MIN
+HOURS_CLIP_TO_SHIFT
+HOURS_ENABLE_KIOSK
+HOURS_ENGINE_AUTO
+HOURS_GEOFENCE_METERS
+HOURS_MIN_ELIGIBLE_MIN
+HOURS_ROUND_TO_MIN
+HOURS_TOKEN_TTL_SECONDS
+LOG_CHANNEL
+LOG_DEPRECATIONS_CHANNEL
+LOG_LEVEL
+LOG_SLACK_WEBHOOK_URL
+MAIL_EHLO_DOMAIN
+MAIL_ENCRYPTION
+MAIL_FROM_ADDRESS
+MAIL_FROM_NAME
+MAIL_HOST
+MAIL_MAILER
+MAIL_PASSWORD
+MAIL_PORT
+MAIL_SENDMAIL
+MAIL_USERNAME
+MS_CLIENT_ID
+MS_CLIENT_SECRET
+MS_REDIRECT_URI
+OPS_ALERT_EMAIL
+QUEUE_CONNECTION
+SEO_DEFAULT_DESCRIPTION
+SEO_DEFAULT_TITLE
+SEO_SITE_NAME
+SEO_TWITTER_HANDLE
+SESSION_DOMAIN
+SESSION_DRIVER
+SESSION_HTTP_ONLY
+SESSION_LIFETIME
+SESSION_SAME_SITE
+SESSION_SECURE_COOKIE
+SLACK_WEBHOOK_URL
+STRIPE_SECRET
+UAEPASS_AUTHORIZE_URL
+UAEPASS_AUTH_URL
+UAEPASS_CLIENT_ID
+UAEPASS_CLIENT_SECRET
+UAEPASS_REDIRECT_URI
+UAEPASS_TOKEN_URL
+UAEPASS_USERINFO_URL
+UAE_PASS_ENABLED
+UAE_PASS_ENV
+------------------------------------------------------------
+TOP 50 LARGEST FILES (excluding vendor, storage, node_modules)
+------------------------------------------------------------
+988K	./public/uploads/profiles/5
+992K	./public/uploads/profiles
+996K	./public/uploads
+1.0M	./reports/p3_opportunities_drilldown_2025-08-18-142347.txt
+1.2M	./_audit_2025-08-20_054735/logs/closure_routes.txt
+1.2M	./database/migrations
+1.2M	./public/icons
+1.2M	./reports/p3_opportunities_drilldown_2025-08-18-133115.txt
+1.2M	./reports/p3_opportunities_drilldown_2025-08-18-133350.txt
+1.2M	./reports/p3_opportunities_drilldown_2025-08-18-133525.txt
+1.2M	./routes.pre-orgfix.2025-08-16-0941
+1.4M	./_audit_2025-08-20_054735/logs
+1.4M	./frontend
+1.5M	./_audit_2025-08-20_054735
+1.5M	./database
+1.8M	./_reports/preflight_phase2_20250818-070044.txt
+1.8M	./routes.fixrec_2025-08-20_112704/_archived/2025-08-16-151345
+1.8M	./routes.fixrec_2025-08-20_112704/_archived/2025-08-18-043801/routes/_archived
+1.8M	./routes.fixrec_2025-08-20_112704/_archived/2025-08-18-043801/routes/_archived/2025-08-16-151345
+1.8M	./routes.fixrec_2025-08-20_113259/_archived/2025-08-16-151345
+1.8M	./routes.fixrec_2025-08-20_113259/_archived/2025-08-18-043801/routes/_archived
+1.8M	./routes.fixrec_2025-08-20_113259/_archived/2025-08-18-043801/routes/_archived/2025-08-16-151345
+1.9M	./_reports
+2.0M	./tools/reports
+2.2M	./routes
+2.3M	./app/Http/Controllers
+2.3M	./routes.fixrec_2025-08-20_112704/_archived/2025-08-18-043801/routes
+2.3M	./routes.fixrec_2025-08-20_113259/_archived/2025-08-18-043801/routes
+2.9M	./routes.fixrec_2025-08-20_112704/_archived/2025-08-18-043801
+2.9M	./routes.fixrec_2025-08-20_113259/_archived/2025-08-18-043801
+3.0M	./app/Http
+3.0M	./composer-local.phar
+3.0M	./site-audit-output.txt
+3.0M	./tools/composer.phar
+4.4M	./app
+4.4M	./reports
+4.4M	./resources/views
+4.6M	./resources
+4.6M	./routes.fixrec_2025-08-20_112704/_archived
+4.6M	./routes.fixrec_2025-08-20_113259/_archived
+5.1M	./public/certificates
+5.2M	./routes.fixrec_2025-08-20_112704
+5.2M	./routes.fixrec_2025-08-20_113259
+8.5M	./tools
+9.3M	./public
+39M	./.git/objects
+39M	./.git/objects/pack
+39M	./.git/objects/pack/pack-653d663e80ff27e6919042b0046b7d484cad4c2e.pack
+41M	./.git
+103M	.
+------------------------------------------------------------
+ANOMALIES IN ROOT (suspicious names)
+------------------------------------------------------------
+Found: ,
+Found: -
+Found: [
+Found: 200
+Found: 302
+Found: 500
+Found: Allow:
+Found: E
+Found: EOF
+Found: ExpiresByType
+Found: ExpiresDefault
+Found: Header
+Found: Sit
+Found: User-agent:
+Found: id,
+Found: cp
+
+Files with spaces/punctuation in names (root, depth 1):
+,
+-
+.env
+.env.20250822-172534.bak
+.env.bak_20250821-120415
+.env.bak_20250821_163350
+.env.bak_20250821_164551
+.env.bak_20250821_165943
+.env.bak_20250822_061653
+.env.bak_20250822_061653_queue
+.env.example
+.gitignore
+.user.ini
+200
+302
+500
+AdminOpportunityController@export
+Allow:
+AppServiceProvider.php
+CHANGELOG.md
+E
+EOF
+ExpiresByType
+ExpiresDefault
+Header
+IsAdmin.php
+Kernel.php
+NEXT_STEPS.md
+README.md
+Sit
+TODO-NEXT.md
+User-agent:
+UserController.php
+[
+about.blade.php
+add_missing_features.sh
+an tinker
+app.blade.php
+app.css
+apply_global_theme.sh
+artisan
+audit.sh
+audit_full.sh
+audit_readonly.sh
+blade-backup-20250821-114526.tgz
+build_frontend.sh
+certificate,
+certificate.verify.view,
+certificate_number
+cleanup_deleted_files.log
+code
+composer-local.phar
+composer.json
+composer.lock
+contact.blade.php
+cp
+database.php
+done
+dump_schema_audit.php
+er->password = bcrypt("NewPass123!");
+error_log
+faq.blade.php
+file_list.txt
+fix-images.sh
+fix_admin_middleware.sh
+fix_home_latest.sh
+fix_images.sh
+fix_project_all.sh
+fix_redirects.sh
+fix_routes_cleanup.sh
+fix_swaeduae.sh
+full_site_upgrade.sh
+git-filter-repo
+healthcheck.2025-08-16-0932.log
+healthcheck.2025-08-16-0936.log
+healthcheck.2025-08-16-0939.log
+healthcheck.2025-08-16-0943.log
+healthcheck.2025-08-16-0946.log
+healthcheck.2025-08-16-0948.log
+healthcheck.2025-08-16-1001.log
+healthcheck.sh
+id,
+index.php
+large-images.20250822-172534.txt
+phpunit.xml
+project_tree.txt
+roadmap_audit.txt
+roadmap_audit_2025-08-19_084242.txt
+roadmap_audit_2025-08-19_084247.txt
+site-audit-output.txt
+swaeduae_full_audit.sh
+swaeduae_updates.sh
+update_instructions.sh
+web.php
+welcome.blade.php
+
+Potentially leaked code snippet files:
+er->password = bcrypt("NewPass123!");
+an tinker

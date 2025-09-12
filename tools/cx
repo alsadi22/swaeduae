@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+set -euo pipefail
+APP="/var/www/swaeduae"
+cd "$APP"
+CODEX_NO_EXIT=1 bash tools/codex_guard.sh || true
+tail -n 40 "$(ls -1t storage/logs/codex_guard_*.log | head -n1)" 2>/dev/null || true
+echo "LAST_STATUS: $(cat storage/app/codex/LAST_STATUS 2>/dev/null || echo 'n/a')"

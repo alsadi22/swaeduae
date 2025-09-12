@@ -1,0 +1,113 @@
+=== ADMIN FULL CHECK 2025-09-01_183952 ===
+PWD: /var/www/swaeduae
+USER: swaeduae
+
+== PHP & APP ENV ==
+PHP 8.3.24 (cli) (built: Aug  3 2025 08:57:38) (NTS)
+Copyright (c) The PHP Group
+Zend Engine v4.3.24, Copyright (c) Zend Technologies
+    with Zend OPcache v8.3.24, Copyright (c), by Zend Technologies
+Deprecation Notice: Using ${var} in strings is deprecated, use {$var} instead in /usr/share/php/Symfony/Component/Console/Command/DumpCompletionCommand.php:48
+Deprecation Notice: Using ${var} in strings is deprecated, use {$var} instead in /usr/share/php/Symfony/Component/Console/Command/DumpCompletionCommand.php:56
+Composer 2.2.6 2022-02-04 17:00:38
+APP_ENV=production
+APP_URL=https://swaeduae.ae
+
+== LINT CRITICAL ROUTE FILES ==
+No syntax errors detected in routes/web.php
+No syntax errors detected in routes/admin.php
+[OK] routes/partials/disable_internal.php present
+
+== ADMIN CONTROLLERS EXIST & LINT ==
+No syntax errors detected in app/Http/Controllers/Admin/DashboardController.php
+[OK] app/Http/Controllers/Admin/DashboardController.php
+No syntax errors detected in app/Http/Controllers/Admin/UserController.php
+[OK] app/Http/Controllers/Admin/UserController.php
+No syntax errors detected in app/Http/Controllers/Admin/OpportunityController.php
+[OK] app/Http/Controllers/Admin/OpportunityController.php
+
+== ADMIN VIEWS EXIST & COMPILE ==
+[OK] view exists: resources/views/admin/layout.blade.php
+[OK] view exists: resources/views/admin/dashboard.blade.php
+[OK] view exists: resources/views/admin/users/index.blade.php
+[OK] view exists: resources/views/admin/opportunities/index.blade.php
+
+   INFO  Compiled views cleared successfully.  
+
+
+
+   INFO  Blade templates cached successfully.  
+
+
+== ROUTES OVERVIEW (saving to storage/admin-routes-2025-09-01_183952.txt) ==
+  GET|HEAD        admin/_diag ................................................................................................................................................................. admin.diag
+  GET|HEAD        admin/attendance ........................................................................................................ admin.attendance.index › Admin\AttendanceAdminController@index
+  GET|HEAD        admin/attendance/qr/{opportunityId} ........................................................................................... admin.attendance.qr › Admin\AttendanceAdminController@qr
+  GET|HEAD        admin/hours ...................................................................................................................... admin.hours.all › Admin\HoursReportController@showAll
+  GET|HEAD        admin/login ................................................................................................................................................................ admin.login
+  GET|HEAD        admin/opportunities ...................................................................................................... admin.opportunities.index › Admin\OpportunityController@index
+  POST            admin/opportunities/{opportunityId}/attendance/complete ........................................................... admin.attendance.complete › Admin\AttendanceAdminController@complete
+  POST            admin/opportunities/{opportunityId}/attendance/finalize ........................................................... admin.attendance.finalize › Admin\AttendanceAdminController@finalize
+  POST            admin/opportunities/{opportunityId}/attendance/manual ................................................................. admin.attendance.manual › Admin\AttendanceAdminController@manual
+  GET|HEAD        admin/opportunities/{opportunityId}/hours .......................................................................................... admin.hours.show › Admin\HoursReportController@show
+  GET|HEAD        admin/opportunities/{opportunity} .......................................................................................... admin.opportunities.show › Admin\OpportunityController@show
+  PUT|PATCH       admin/opportunities/{opportunity} ...................................................................................... admin.opportunities.update › Admin\OpportunityController@update
+  DELETE          admin/opportunities/{opportunity} .................................................................................... admin.opportunities.destroy › Admin\OpportunityController@destroy
+  GET|HEAD        admin/users ............................................................................................................................. admin.users.index › Admin\UserController@index
+  GET|HEAD        admin/users/index ........................................................................................................................ admin.users › Admin\UserAdminController@index
+  POST            admin/users/toggle/{id} .................................................................................................... admin.users.toggle › Admin\AdminController@toggleUserStatus
+  GET|HEAD        admin/users/{user} ........................................................................................................................ admin.users.show › Admin\UserController@show
+  PUT|PATCH       admin/users/{user} .................................................................................................................... admin.users.update › Admin\UserController@update
+  DELETE          admin/users/{user} .................................................................................................................. admin.users.destroy › Admin\UserController@destroy
+
+== VERIFY ADMIN ROUTE MIDDLEWARE (storage/admin-mw-2025-09-01_183952.txt) ==
+admin.login|web
+admin.dashboard|web,auth,verified,can:admin
+admin.users.index|web,auth,verified,can:admin
+admin.users.show|web,auth,verified,can:admin
+admin.users.update|web,auth,verified,can:admin
+admin.users.destroy|web,auth,verified,can:admin
+admin.opportunities.index|web,auth,verified,can:admin
+admin.opportunities.show|web,auth,verified,can:admin
+admin.opportunities.update|web,auth,verified,can:admin
+admin.opportunities.destroy|web,auth,verified,can:admin
+admin.attendance.index|web,auth,can:isAdmin
+admin.attendance.qr|web,auth,can:isAdmin
+admin.attendance.manual|web,auth,can:isAdmin
+admin.attendance.finalize|web,auth,can:isAdmin
+admin.attendance.complete|web,auth,can:isAdmin
+admin.diag|web,auth,can:isAdmin
+admin.hours.show|web,auth,can:isAdmin
+admin.hours.all|web,auth,can:isAdmin
+admin.users|web,auth,can:isAdmin
+admin.users.toggle|web,auth,can:isAdmin
+
+== GATE & EMAIL VERIFICATION CHECKS ==
+app/Providers/AuthServiceProvider.php:23:        Gate::define('admin', fn($user) => $user && (($user->role ?? null) === 'admin'));
+[OK] admin gate present
+4:use Illuminate\Contracts\Auth\MustVerifyEmail;
+15:class User extends Authenticatable implements MustVerifyEmail
+[OK] User implements MustVerifyEmail
+
+== SCHEMA & ADMIN USER ROLE ==
+users.role column: YES
+admin@swaeduae.ae role: admin
+
+== NAMED ROUTES EXIST? ==
+admin.dashboard: YES
+admin.users.index: YES
+admin.opportunities.index: YES
+
+== HTTP ENDPOINT SMOKE (CF -> 127.0.0.1, -k) ==
+/admin                     -> 302
+/admin/users               -> 302
+/admin/opportunities       -> 302
+
+== RECENT LOG LINES (admin-related) ==
+no 'admin' mentions in last 2000 lines
+
+== SUMMARY ==
+Routes file dump: storage/admin-routes-2025-09-01_183952.txt
+Admin MW dump:    storage/admin-mw-2025-09-01_183952.txt
+Report saved:     public/health/admin-check-2025-09-01_183952.txt
+=== END ===

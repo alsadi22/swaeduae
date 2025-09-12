@@ -1,0 +1,18 @@
+<?php
+namespace App\Providers;
+
+use Illuminate\Support\ServiceProvider;
+
+class ViewComposerServiceProvider extends ServiceProvider
+{
+    public function register(): void {}
+
+    public function boot(): void
+    {
+        // Attach to the specific views that used to query in Blade
+        view()->composer([
+            'categories.index',
+            'partials.opps_filter_bar',
+        ], \App\View\Composers\OppFiltersComposer::class);
+    }
+}

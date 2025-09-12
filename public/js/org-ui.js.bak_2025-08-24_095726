@@ -1,0 +1,36 @@
+(function(){
+  try{
+    // Persist sidenav pin state
+    var KEY='org_sidenav_pinned';
+    function setPinned(p){
+      document.body.classList.toggle('g-sidenav-pinned', !!p);
+      try{ localStorage.setItem(KEY, p?'1':'0'); }catch(e){}
+    }
+    try{ setPinned(localStorage.getItem(KEY)!=='0'); }catch(e){}
+    document.addEventListener('click', function(ev){
+      var btn = ev.target.closest && ev.target.closest('#org-sidenav-toggle');
+      if(!btn) return;
+      ev.preventDefault();
+      setPinned(!document.body.classList.contains('g-sidenav-pinned'));
+    });
+
+    // Add/remove .org-console-open when a navbar dropdown opens
+    function onOpen(){ document.body.classList.add('org-console-open'); }
+    function onClose(){ document.body.classList.remove('org-console-open'); }
+    if (window.bootstrap && document.addEventListener){
+      document.addEventListener('shown.bs.dropdown', function(e){
+        if (e && e.target && e.target.closest('.navbar')) onOpen();
+      });
+      document.addEventListener('hide.bs.dropdown', function(e){
+        if (e && e.target && e.target.closest('.navbar')) onClose();
+      });
+    } else {
+      // Fallback: watch any .navbar .dropdown-menu show/hide
+      var mo = new MutationObserver(function(muts){
+        var anyOpen = !!document.querySelector('.navbar .dropdown-menu.show');
+        if (anyOpen) onOpen(); else onClose();
+      });
+      mo.observe(document.documentElement, {subtree:true, attributes:true, attributeFilter:['class']});
+    }
+  }catch(e){}
+})();

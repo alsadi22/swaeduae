@@ -1,0 +1,193 @@
+@extends('layouts.app')@section('content')<div class="container my-4">    <h1 class="mb-3">{{ _
+    @if(session('status'))      <div clas
+    @endif    <div class="row g-3">        <div class="col-md-4">            <div class="car
+                <div class="card-body">                    <h5>{{ $user->name }}</h5>                    <p
+                    <p class="mb-1"><strong>{{ __('messages.total_hours') }}:</strong> {{ number_format($totalH
+                </div>       
+            <div class="c
+                <div class="card-body">              
+                    <form method="POST" action="{{ route('volunteer.hours.store') }}">                        @csrf                       
+                          
+                      
+                  
+              
+                            <label class="form-label">{{ __('messages.hours
+                   
+          
+
+               
+                            <input ty
+          
+      
+           
+   
+
+        </div>        <div class="col-md-8">            <div class="card h-100">                <div class="card-body">                    <h5 class="mb-3">{{ __('messages.my_hours') }}</h5>                    <div class="table-respon
+                        <ta
+                            <th
+                                <tr>                            
+                                    <th>{{ __('messages.hours') }}</th>                   
+
+                            </thead>      
+                                @forelse($hours as $h)                                    <tr>                                        <td>{{ $h->date->format('Y-m-d') }}</td>                                        <td>{{ number_format($h->hours, 2) }}</td>                                        <td>{{ $h->description }}</td>                                    </tr>                                @empty                                    <tr><td colspan="3" class="text-muted">{{ __('messages.no_hours') }}</td></tr>                                @endforelse                            </tbody>                        </table>                    </div>                    <hr class="my-4">                    <h5 class="mb-3">{{ __('messages.my_certificates') }}</h5>                    <ul class="list-unstyled">               
+                            <li class="mb-2">                                <strong>{{ $c->title }}</strong>                                — {{ __('messages.issued') }}: {{ optional($c->issued_at)->format('Y-m-d') ?? '-' }},                                {{ __('messages.hours') }}: {{ number_format($c->hours, 2) }}                                <br>                                <a href="{{ route('cert.verify', $c->code) }}">{{ url('/verify/'.$c->code) }}</a>                            </li>                        @empty                            <li class="text-muted">{{ __('messages.no_certificates') }}</li>                        @endforelse                    </ul>                </div>            </div>        </div>    </div></div>@endsectionEOFcat > resources/views/verify.blade.php << 'EOF'@extends('layouts.app')@section('content')<div class="container my-4">    <h1 class="mb-3">{{ __('messages.certificate_verification') }}</h1>    @if($certificate)        <div class="alert alert-success">            ✅ {{ __('messages.certificate_valid') }}        </div>        <ul class="list-unstyled">            <li><strong>{{ __('messages.code') }}:</strong> {{ $certificate->code }}</li>            <li><strong>{{
+            <li><stron
+            <li><strong>{{ __('messages.issued') }}:</strong>
+        </ul>    @else
+
+            ❌ {{ 
+        </div>    @endif</div>@endsec
+
+##########################
+# 6) TRANSLATIONS (EN + AR) — full rewrite
+mkdir -p resources/lang/en resources/lang/arcat > resources/lang/en/messages.php << 'EOF'<?phpreturn [    'site_title' => 'Sawaed UAE',    'site_title_full' => 'Sawaed UAE: 
+   
+    'search' => 'Search',    'search_opport
+    'featured_opportunities' => 'Featured Volunteer Opportunities',
+    'no_featured_opportunities' => 'No featured opportunities available at the moment.',
+    'browse_all_opportunities' => 'Browse All Volunteer Opportunities',
+    'view_details' => 'View Details',
+    'all_regions' => 'All Regions',
+
+    'logout' => 'Logout',
+    'my_profile' => 'My Profile',
+    'contact' => 'Contact Us',
+    'about' => 'About',
+    'faq' => 'FAQ',
+    'opportunities' => 'Opportunities',
+    'home' => 'Home',
+
+    'active_volunteer' => 'Active Volunteer',
+    'member_since' => 'Member Since',
+    'volunteer_hours' => 'Volunteer Hours',
+    'certificates' => 'Certificates',
+    'events' => 'Events',
+    'qr_code' => 'QR Code',
+    'no_qr' => 'No QR code available',
+
+    'profile_management' => 'Profile Management',
+    'full_name' => 'Full Name',
+    'email' => 'Email',
+    'region' => 'Region',
+    'national_id' => 'National ID',
+    'marital_status' => 'Marital Status',
+    'birth_place' => 'Place of Birth',
+    'birth_date' => 'Date of Birth',
+    'education' => 'Education',
+    'level' => 'Level',
+    'edit_profile' => 'Edit Profile',
+
+    'my_certificates' => 'My Certificates',
+    'view' => 'View',
+    'no_certificates' => 'No certificates yet.',
+    'recent_events' => 'Recent Events',
+    'no_events' => 'No recent events.',
+
+    'dashboard_title' => 'Dashboard',
+    'dashboard_welcome' => 'Welcome to your dashboard!',
+
+    // New volunteer profile & certificate verification keys
+    'total_hours' => 'Total Hours',
+    'log_hours' => 'Log Hours',
+    'hours' => 'Hours',
+    'description' => 'Description',
+    'save' => 'Save',
+    'my_hours' => 'My Hours',
+    'no_hours' => 'No hours logged yet.',
+    'issued' => 'Issued',
+    'certificate_verification' => 'Certificate Verification',
+    'certificate_valid' => 'Certificate is valid.',
+    'certificate_not_found' => 'Certificate not found',
+    'code' => 'Code',
+    'hours_saved' => 'Hours saved successfully.',
+    'status' => 'Status',
+    'region_label' => 'Region',
+    'location' => 'Location',
+    'date' => 'Date',
+    'capacity' => 'Capacity',
+    'slots' => 'Slots',
+    'requirements' => 'Requirements',
+    'back' => 'Back',
+    'no_opportunities' => 'No opportunities available.',
+];
+EOF
+
+cat > resources/lang/ar/messages.php << 'EOF'
+<?php
+
+return [
+    'site_title' => 'سواعد الإمارات',
+    'site_title_full' => 'سواعد الإمارات: تطوع في الإمارات',
+    'site_subtitle' => 'انضم لأكبر منصة للمتطوعين في الإمارات وابدأ التغيير اليوم!',
+    'search' => 'بحث',
+    'search_opportunities_placeholder' => 'ابحث عن فرصة تطوع...',
+    'featured_opportunities' => 'أبرز فرص التطوع',
+    'no_featured_opportunities' => 'لا توجد فرص مميزة حاليا.',
+    'browse_all_opportunities' => 'تصفح جميع الفرص التطوعية',
+    'view_details' => 'تفاصيل',
+    'all_regions' => 'كل المناطق',
+
+    'logout' => 'تسجيل الخروج',
+    'my_profile' => 'ملفي الشخصي',
+    'contact' => 'تواصل معنا',
+    'about' => 'عن المنصة',
+    'faq' => 'الأسئلة الشائعة',
+    'opportunities' => 'الفرص',
+    'home' => 'الرئيسية',
+
+    'active_volunteer' => 'متطوع نشط',
+    'member_since' => 'عضو منذ',
+    'volunteer_hours' => 'ساعات التطوع',
+    'certificates' => 'الشهادات',
+    'events' => 'الفعاليات',
+    'qr_code' => 'رمز الاستجابة السريعة',
+    'no_qr' => 'لا يوجد رمز QR',
+
+    'profile_management' => 'إدارة الملف الشخصي',
+    'full_name' => 'الاسم الكامل',
+    'email' => 'البريد الإلكتروني',
+    'region' => 'المنطقة',
+    'national_id' => 'رقم الهوية',
+    'marital_status' => 'الحالة الاجتماعية',
+    'birth_place' => 'مكان الميلاد',
+    'birth_date' => 'تاريخ الميلاد',
+    'education' => 'التعليم',
+    'level' => 'المستوى',
+    'edit_profile' => 'تعديل الملف',
+
+    'my_certificates' => 'شهاداتي',
+    'view' => 'عرض',
+    'no_certificates' => 'لا توجد شهادات حتى الآن.',
+    'recent_events' => 'الفعاليات الأخيرة',
+    'no_events' => 'لا توجد فعاليات حديثة.',
+
+    'dashboard_title' => 'لوحة التحكم',
+    'dashboard_welcome' => 'مرحبًا بك في لوحة التحكم الخاصة بك!',
+
+    // مفاتيح جديدة لملف المتطوع والتحقق من الشهادة
+    'total_hours' => 'إجمالي الساعات',
+    'log_hours' => 'تسجيل الساعات',
+    'hours' => 'الساعات',
+    'description' => 'الوصف',
+    'save' => 'حفظ',
+    'my_hours' => 'ساعاتي',
+    'no_hours' => 'لا توجد ساعات مسجلة.',
+    'issued' => 'تاريخ الإصدار',
+    'certificate_verification' => 'التحقق من الشهادة',
+    'certificate_valid' => 'الشهادة صحيحة.',
+    'certificate_not_found' => 'الشهادة غير موجودة',
+    'code' => 'الرمز',
+    'hours_saved' => 'تم حفظ الساعات بنجاح.',
+    'status' => 'الحالة',
+    'region_label' => 'المنطقة',
+    'location' => 'الموقع',
+    'date' => 'التاريخ',
+    'capacity' => 'السعة',
+    'slots' => 'المقاعد',
+    'requirements' => 'المتطلبات',
+    'back' => 'رجوع',
+    'no_opportunities' => 'لا توجد فرص متاحة.',
+];
+EOF
+
+

@@ -1,0 +1,9 @@
+=== CRITICAL CHECKS SUMMARY ===
+- Routes present? (see 20_route_list_filtered.txt & 21_route_named_checks.txt)
+- HTTP 200 on /, /about, /contact? (see 10_/11_)
+- Headers (Content-Language, Vary, Cache-Control) sane? (10_/11_)
+- MicroCache showing MISS→HIT? (12_microcache_probe_* files)
+- No DB calls in Blade? (40_blade_db_scan.txt should be empty)
+- No pending migrations? (30_migrate_status.txt)
+- No failed jobs? (31_queue_failed.txt)
+- robots.txt and sitemap.xml valid? (60_seo_artifacts_preview.txt)
