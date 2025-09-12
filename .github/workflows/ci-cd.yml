@@ -1,11 +1,16 @@
 name: ci-cd
+
 on:
-  push:    { branches: [ main, ci-boot ] }
-  pull_request: { branches: [ main ] }
+  push:
+    branches: [ main, ci-boot ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
+    # Hermetic Laravel boot (no external DB/cache/network needed)
     env:
       APP_ENV: testing
       APP_KEY: base64:AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=
@@ -19,16 +24,24 @@ jobs:
       DB_DATABASE: ':memory:'
 
     steps:
-      - uses: actions/checkout@v4
-      - uses: shivammathur/setup-php@v2
-        with: { php-version: '8.3', extensions: mbstring, intl, pdo_mysql, coverage: none }
+      - name: Checkout
+        uses: actions/checkout@v4
 
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: mbstring, intl, pdo_mysql
+          coverage: none
+
+      # Force-clean & recreate Laravel dirs (idempotent)
       - name: Prepare Laravel dirs
         shell: bash
         run: |
           rm -rf storage bootstrap/cache
           mkdir -p storage/framework/{cache,sessions,views} storage/logs bootstrap/cache
 
+      # Write a CI-only .env so anything reading .env gets hermetic drivers
       - name: Write CI .env
         run: |
           cat > .env <<'ENV'
@@ -51,19 +64,18 @@ jobs:
         run: |
           find app routes -type f -name "*.php" -print0 | xargs -0 -n 20 -P 4 php -l
 
-      # Use targeted clears (avoid optimize:clear -> cache:clear on DB store)
+      # Use targeted clears; if route:cache fails (e.g., duplicate names), warn but do not fail CI
       - name: Route compile (non-blocking)
         run: |
           php artisan config:clear
           php artisan route:clear
           php artisan view:clear
           if php artisan route:cache; then
-          echo "route:cache OK"
+            echo "route:cache OK"
           else
-          echo "::warning::route:cache failed (likely duplicate route names). Showing route:list for visibility."
-          php artisan route:list > /dev/null || true
-         fi
-
+            echo "::warning::route:cache failed (likely duplicate route names). Showing route:list for visibility."
+            php artisan route:list || true
+          fi
 
       - name: Admin layout audit
         run: |
@@ -73,7 +85,7 @@ jobs:
             echo "OK: all admin views use admin.layout"
           fi
 
-      # Optional external probes (off by default)
+      # Optional external probes (disabled on shared runners)
       - name: Probes (signed out) - optional
         if: ${{ false }}
         run: |
