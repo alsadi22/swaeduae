@@ -7,21 +7,11 @@ use App\Http\Controllers\Auth\SimplePasswordResetController;
 use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\CertificatePdfController;
 use App\Http\Controllers\ContactController;
-use App\Http\Controllers\Admin\ApprovalsController;
 use App\Http\Controllers\My\ProfileController;
 use App\Http\Controllers\QR\VerifyController;
 use Illuminate\Support\Facades\Route;
 
 require __DIR__.'/partials/disable_internal.php';
-
-// ==== FORCE admin paths to admin subdomain (TOP GUARD) ====
-Route::domain(env('MAIN_DOMAIN', 'swaeduae.ae'))->middleware(['web'])->group(function () {
-    Route::any('/admin{any?}', function ($any = null) {
-        $target = 'https://'.env('ADMIN_DOMAIN', 'admin.swaeduae.ae').'/admin'.($any ? '/'.ltrim($any, '/') : '');
-
-        return redirect()->away($target, 301);
-    })->where('any', '.*')->name('main.admin.redirect');
-});
 
 // Public
 Route::view('/about', 'public.about')->name('about');
@@ -48,14 +38,15 @@ Route::match(['GET', 'POST'], '/qr/checkin', [\App\Http\Controllers\QR\CheckinCo
 Route::match(['GET', 'POST'], '/qr/checkout', [\App\Http\Controllers\QR\CheckinController::class, 'checkout'])->name('qr.checkout.getpost');
 Route::get('/qr/verify/{serial?}', [VerifyController::class, 'show'])->name('qr.verify');
 
-// Admin login alias → /login
-Route::get('/admin/login', fn () => redirect()->to('/login'))->name('admin.login');
-
-Route::middleware(['web','auth','can:admin-access'])->prefix('admin')->name('admin.')->group(function(){
-    Route::get('/approvals',[ApprovalsController::class,'index'])->name('approvals.index');
-    Route::post('/approvals/orgs/{id}/approve',[ApprovalsController::class,'approveOrg'])->whereNumber('id')->name('approvals.orgs.approve');
-    Route::post('/approvals/orgs/{id}/decline',[ApprovalsController::class,'declineOrg'])->whereNumber('id')->name('approvals.orgs.decline');
-});
+// Admin domain routes
+Route::domain('admin.swaeduae.ae')
+    ->middleware(['web','auth'])
+    ->prefix('admin')->name('admin.')
+    ->group(function () {
+        Route::get('/', fn () => view('admin.dashboard'))->name('dashboard');
+        Route::get('/hours', fn () => view('admin.hours.index'))->name('hours.index');
+        Route::get('/certificates', fn () => view('admin.certificates.index'))->name('certificates.index');
+    });
 
 // Guest auth
 Route::middleware(['web', 'guest', 'throttle:10,1'])->group(function () {

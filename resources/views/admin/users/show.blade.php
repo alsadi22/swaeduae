@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('admin.layout')
 @section('title','User')
 @section('content')
   <h1 class="mb-3">User #{{ $user->id ?? '' }}</h1>

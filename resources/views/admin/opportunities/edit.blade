@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('admin.layout')
 @section('page-title','Edit Opportunity')
 @section('content')
 <form method="post" action="{{ route('admin.opportunities.update',$op->id) }}" class="card">

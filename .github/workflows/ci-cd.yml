@@ -36,3 +36,17 @@ jobs:
 
       - name: Route sanity
         run: php artisan route:list | head -n 20
+
+      - name: PHP lint
+        run: find app bootstrap config database routes resources -type f -name "*.php" -print0 | xargs -0 -n1 php -l
+
+      - name: Cache routes
+        run: php artisan optimize:clear && php artisan route:cache
+
+      - name: Layout audit
+        run: |
+          if grep -RIn "@extends('public.layout')" resources/views/admin; then
+            echo 'Found admin views extending public layout'; exit 1;
+          else
+            echo 'OK: all admin views use admin.layout';
+          fi
