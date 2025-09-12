@@ -1,0 +1,76 @@
+name: tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  phpunit:
+    runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:8
+        env:
+          MYSQL_DATABASE: laravel
+          MYSQL_USER: laravel
+          MYSQL_PASSWORD: secret
+          MYSQL_ROOT_PASSWORD: root
+        # Health check so we don't run migrations before MySQL is ready
+        options: >-
+          --health-cmd="mysqladmin ping -h localhost -uroot -proot"
+          --health-interval=10s --health-timeout=5s --health-retries=10
+
+    env:
+      APP_ENV: testing
+      APP_KEY: base64:AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=  # any valid key
+      APP_DEBUG: false
+      APP_URL: http://localhost
+      # Use MySQL in CI
+      DB_CONNECTION: mysql
+      DB_HOST: mysql          # service name from above
+      DB_PORT: 3306
+      DB_DATABASE: laravel
+      DB_USERNAME: laravel
+      DB_PASSWORD: secret
+      # Keep tests hermetic
+      CACHE_DRIVER: array
+      QUEUE_CONNECTION: sync
+      SESSION_DRIVER: array
+      MAIL_MAILER: log
+      BROADCAST_DRIVER: log
+      LOG_CHANNEL: stack
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: mbstring, intl, pdo_mysql
+          coverage: none
+
+      - name: Install dependencies
+        run: composer install --no-interaction --prefer-dist --no-progress
+
+      - name: Ensure app key (for config:cache safety)
+        run: |
+          [ -f .env ] || cp .env.example .env
+          php artisan key:generate --ansi
+
+      - name: Wait for MySQL (defensive)
+        run: |
+          for i in {1..30}; do
+            mysqladmin ping -h "${DB_HOST}" -u"${DB_USERNAME}" -p"${DB_PASSWORD}" --silent && break
+            sleep 2
+          done
+
+      - name: Run migrations
+        run: php artisan migrate --force
+
+      - name: Run tests
+        run: php artisan test --colors=always
