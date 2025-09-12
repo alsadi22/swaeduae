@@ -27,3 +27,7 @@ scripts/smoke.env
 
 # Dependencies
 /vendor/
+# Local backups
+routes/*.bak*
+routes/web.php.*.bak*
+public/assets/app.js.bak.*
