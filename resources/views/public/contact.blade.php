@@ -1,36 +1,34 @@
-@extends('public.layout-travelpro')
-@section('title', __('Contact'))
-@section('meta_description','Get in touch with the SwaedUAE team.')
-@section('content')
-<div class="container py-5">
-  <h1 class="h3 mb-3">{{ __('Contact') }}</h1>
-  @if (session('status'))
-    <div id="thanks" class="alert alert-success">{{ session('status') }}</div>
-    <script>
-      document.addEventListener('DOMContentLoaded',function(){
-        const el=document.getElementById('thanks');
-        if(el) el.scrollIntoView({behavior:'smooth'});
-      });
-    </script>
-  @endif
-  @if ($errors->any()) <div class="alert alert-danger">@foreach($errors->all() as $e)<div>{{ $e }}</div>@endforeach</div> @endif
+@extends('public.layout')
 
-  <form method="POST" action="{{ route('contact.submit') }}" class="mt-3">
+@section('title', 'Contact Us')
+
+@section('content')
+  <h1 class="mb-3">Contact Us</h1>
+
+  @if (session('status'))
+    <div class="mb-3" role="status">{{ session('status') }}</div>
+  @endif
+
+  <form method="POST" action="{{ route('contact.submit') }}" class="space-y-3">
     @csrf
-    <input type="text" name="__website" style="display:none" autocomplete="off">
     <div class="mb-3">
-      <label class="form-label">Your Name</label>
-      <input class="form-control" name="name" value="{{ session('clear') ? '' : old('name') }}" required>
+      <label for="name">Name</label>
+      <input id="name" name="name" type="text" value="{{ old('name') }}" required class="w-full">
+      @error('name') <div class="text-danger">{{ $message }}</div> @enderror
     </div>
+
     <div class="mb-3">
-      <label class="form-label">Email</label>
-      <input class="form-control" type="email" name="email" value="{{ session('clear') ? '' : old('email') }}" required>
+      <label for="email">Email</label>
+      <input id="email" name="email" type="email" value="{{ old('email') }}" required class="w-full">
+      @error('email') <div class="text-danger">{{ $message }}</div> @enderror
     </div>
+
     <div class="mb-3">
-      <label class="form-label">Message</label>
-      <textarea class="form-control" name="message" rows="6" required>{{ session('clear') ? '' : old('message') }}</textarea>
+      <label for="message">Message</label>
+      <textarea id="message" name="message" rows="6" required class="w-full">{{ old('message') }}</textarea>
+      @error('message') <div class="text-danger">{{ $message }}</div> @enderror
     </div>
-    <button class="btn btn-primary" type="submit">Send</button>
+
+    <button type="submit" class="btn btn-primary">Send</button>
   </form>
-</div>
 @endsection
