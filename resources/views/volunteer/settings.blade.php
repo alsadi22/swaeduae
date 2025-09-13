@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Settings | SwaEduAE Volunteering Society</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-dark: #4338ca;
+            --primary-light: #6366f1;
+            --secondary: #10b981;
+            --secondary-dark: #059669;
+            --accent: #f59e0b;
+        }
+
+        .settings-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            border: 1px solid #e5e7eb;
+        }
+
+        .settings-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-pill {
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-pill:hover {
+            background: #f8fafc;
+        }
+
+        .nav-pill.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .form-input {
+            border: 1px solid #d1d5db;
+            border-radius: 0.5rem;
+            padding: 0.75rem 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50 border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center space-x-3">
+                        <div class="w-12 h-12 bg-gradient-to-r from-indigo-600 to-emerald-500 rounded-xl flex items-center justify-center shadow-lg">
+                            <i data-feather="heart" class="text-white h-6 w-6"></i>
+                        </div>
+                        <span class="text-2xl font-bold bg-gradient-to-r from-indigo-600 to-emerald-500 bg-clip-text text-transparent">SwaEduAE</span>
+                    </div>
+                </div>
+                <div class="hidden md:ml-6 md:flex md:items-center md:space-x-10">
+                    <a href="/" class="nav-link text-gray-600 hover:text-indigo-600 transition-colors duration-300">Home</a>
+                    <a href="#" class="nav-link text-gray-600 hover:text-indigo-600 transition-colors duration-300">Opportunities</a>
+                    <a href="#" class="nav-link text-gray-600 hover:text-indigo-600 transition-colors duration-300">About</a>
+                    <a href="/my/profile"volunteer.profile') }}" class="nav-link text-gray-600 hover:text-indigo-600 transition-colors duration-300">Volunteers</a>
+                    <a href="/organizations" class="nav-link text-gray-600 hover:text-indigo-600 transition-colors duration-300">Organizations</a>
+                    <a href="/my/settings"volunteer.settings') }}" class="nav-link text-indigo-600 font-medium">Settings</a>
+                    <a href="#" class="nav-link text-gray-600 hover:text-indigo-600 transition-colors duration-300">Contact</a>
+                    <div class="flex items-center space-x-4">
+                        <div class="relative group">
+                            <button class="flex items-center space-x-3 bg-gray-100 rounded-xl px-4 py-2 hover:bg-gray-200 transition-colors">
+                                <img src="http://static.photos/people/40x40/9" alt="Profile" class="w-8 h-8 rounded-full">
+                                <span class="text-gray-800 font-medium">Sarah J.</span>
+                                <i data-feather="chevron-down" class="w-4 h-4"></i>
+                            </button>
+                            <div class="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-xl py-2 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 border border-gray-100">
+                                <a href="/my/profile"volunteer.profile') }}" class="block px-4 py-2 text-gray-700 hover:bg-indigo-50 hover:text-indigo-600">My Profile</a>
+                                <a href="/my/settings"volunteer.settings') }}" class="block px-4 py-2 text-gray-700 hover:bg-indigo-50 hover:text-indigo-600">Settings</a>
+                                <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-indigo-50 hover:text-indigo-600">Sign Out</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Settings Content -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            <!-- Sidebar -->
+            <div class="lg:col-span-1">
+                <div class="settings-card p-6">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-6">Profile Settings</h3>
+                    <nav class="space-y-2">
+                        <a href="#personal-info" class="nav-pill active flex items-center space-x-3">
+                            <i data-feather="user" class="w-5 h-5"></i>
+                            <span>Personal Information</span>
+                        </a>
+                        <a href="#identity-compliance" class="nav-pill flex items-center space-x-3">
+                            <i data-feather="shield" class="w-5 h-5"></i>
+                            <span>Identity & Compliance</span>
+                        </a>
+                        <a href="#skills-education" class="nav-pill flex items-center space-x-3">
+                            <i data-feather="book" class="w-5 h-5"></i>
+                            <span>Skills, Education & Experience</span>
+                        </a>
+                        <a href="#certificates" class="nav-pill flex items-center space-x-3">
+                            <i data-feather="award" class="w-5 h-5"></i>
+                            <span>Certificates</span>
+                        </a>
+                        <a href="#privacy" class="nav-pill flex items-center space-x-3">
+                            <i data-feather="lock" class="w-5 h-5"></i>
+                            <span>Privacy & Security</span>
+                        </a>
+                        <a href="#notifications" class="nav-pill flex items-center space-x-3">
+                            <i data-feather="bell" class="w-5 h-5"></i>
+                            <span>Notifications</span>
+                        </a>
+                    </nav>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="lg:col-span-3">
+                <!-- Personal Information -->
+                <div id="personal-info" class="settings-card p-6 mb-8">
+                    <h2 class="text-xl font-semibold text-gray-900 mb-6">Personal Information</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">First Name</label>
+                            <input type="text" value="Sarah" class="form-input w-full">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Last Name</label>
+                            <input type="text" value="Johnson" class="form-input w-full">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+                            <input type="email" value="sarah.johnson@email.com" class="form-input w-full">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
+                            <input type="tel" value="+971 50 123 4567" class="form-input w-full">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Date of Birth</label>
+                            <input type="date" value="1990-05-15" class="form-input w-full">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Nationality</label>
+                            <select class="form-input w-full">
+                                <option selected>United Arab Emirates</option>
+                                <option>United States</option>
+                                <option>United Kingdom</option>
+                                <option>India</option>
+                                <option>Pakistan</option>
+                                <option>Philippines</option>
+                            </select>
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Address</label>
+                            <textarea class="form-input w-full h-20">Downtown Dubai, Business Bay</textarea>
+                        </div>
+                    </div>
+                    <div class="mt-6 flex justify-end">
+                        <button class="btn-primary px-6 py-2 rounded-lg text-white font-medium">Save Changes</button>
+                    </div>
+                </div>
+
+                <!-- Identity & Compliance -->
+                <div id="identity-compliance" class="settings-card p-6 mb-8">
+                    <h2 class="text-xl font-semibold text-gray-900 mb-6">Identity & Compliance</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Emirates ID Number</label>
+                            <input type="text" value="784-1990-1234567-1" class="form-input w-full">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">ID Expiry Date</label>
+                            <input type="date" value="2025-12-31" class="form-input w-full">
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Upload Emirates ID (Front)</label>
+                            <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
+                                <i data-feather="upload" class="w-12 h-12 text-gray-400 mx-auto mb-3"></i>
+                                <p class="text-sm text-gray-600">Drag and drop file here or click to browse</p>
+                                <p class="text-xs text-gray-500 mt-1">Max file size: 5MB (JPG, PNG, PDF)</p>
+                            </div>
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Upload Emirates ID (Back)</label>
+                            <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
+                                <i data-feather="upload" class="w-12 h-12 text-gray-400 mx-auto mb-3"></i>
+                                <p class="text-sm text-gray-600">Drag and drop file here or click to browse</p>
+                                <p class="text-xs text-gray-500 mt-1">Max file size: 5MB (JPG, PNG, PDF)</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-6 flex justify-end">
+                        <button class="btn-primary px-6 py-2 rounded-lg text-white font-medium">Save Changes</button>
+                    </div>
+                </div>
+
+                <!-- Skills, Education & Experience -->
+                <div id="skills-education" class="settings-card p-6 mb-8">
+                    <h2 class="text-xl font-semibold text-gray-900 mb-6">Skills, Education & Experience</h2>
+                    
+                    <div class="mb-6">
+                        <h3 class="text-lg font-medium text-gray-900 mb-4">Skills</h3>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-sm flex items-center">
+                                Teaching
+                                <button class="ml-1 text-indigo-600 hover:text-indigo-800">
+                                    <i data-feather="x" class="w-3 h-3"></i>
+                                </button>
+                            </span>
+                            <span class="bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full text-sm flex items-center">
+                                Mentoring
+                                <button class="ml-1 text-emerald-600 hover:text-emerald-800">
+                                    <i data-feather="x" class="w-3 h-3"></i>
+                                </button>
+                            </span>
+                            <span class="bg-amber-100 text-amber-800 px-3 py-1 rounded-full text-sm flex items-center">
+                                Event Planning
+                                <button class="ml-1 text-amber-600 hover:text-amber-800">
+                                    <i data-feather="x" class="w-3 h-3"></i>
+                                </button>
+                            </span>
+                        </div>
+                        <div class="flex gap-2">
+                            <input type="text" placeholder="Add a skill" class="form-input flex-1">
+                            <button class="bg-indigo-600 text-white px-4 py-2 rounded-lg">Add</button>
+                        </div>
+                    </div>
+
+                    <div class="mb-6">
+                        <h3 class="text-lg font-medium text-gray-900 mb-4">Education</h3>
+                        <div class="space-y-4">
+                            <div class="border border-gray-200 rounded-lg p-4">
+                                <div class="flex justify-between items-start mb-2">
+                                    <h4 class="font-medium text-gray-900">Bachelor of Education</h4>
+                                    <button class="text-red-600 hover:text-red-800">
+                                        <i data-feather="trash-2" class="w-4 h-4"></i>
+                                    </button>
+                                </div>
+                                <p class="text-sm text-gray-600">University of Dubai • 2012 - 2016</p>
+                            </div>
+                        </div>
+                        <button class="mt-4 text-indigo-600 hover:text-indigo-800 flex items-center">
+                            <i data-feather="plus" class="w-4 h-4 mr-1"></i>
+                            Add Education
+                        </button>
+                    </div>
+
+                    <div>
+                        <h3 class="text-lg font-medium text-gray-900 mb-4">Work Experience</h3>
+                        <div class="space-y-4">
+                            <div class="border border-gray-200 rounded-lg p-4">
+                                <div class="flex justify-between items-start mb-2">
+                                    <h4 class="font-medium text-gray-900">Teacher</h4>
+                                    <button class="text-red-600 hover:text-red-800">
+                                        <i data-feather="trash-2" class="w-4 h-4"></i>
+                                    </button>
+                                </div>
+                                <p class="text-sm text-gray-600">Dubai International School • 2016 - Present</p>
+                            </div>
+                        </div>
+                        <button class="mt-4 text-indigo-600 hover:text-indigo-800 flex items-center">
+                            <i data-feather="plus" class="w-4 h-4 mr-1"></i>
+                            Add Experience
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Certificates -->
+                <div id="certificates" class="settings-card p-6 mb-8">
+                    <h2 class="text-xl font-semibold text-gray-900 mb-6">My Certificates</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                        <div class="border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors">
+                            <div class="flex items-center justify-between mb-3">
+                                <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+                                    <i data-feather="award" class="text-blue-600 w-5 h-5"></i>
+                                </div>
+                                <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs">Verified</span>
+                            </div>
+                            <h4 class="font-medium text-gray-900 mb-2">Volunteer Leadership Certificate</h4>
+                            <p class="text-sm text-gray-600 mb-3">SwaEduAE Volunteering Society</p>
+                            <div class="flex items-center justify-between text-sm text-gray-500">
+                                <span>Issued: Dec 10, 2023</span>
+                                <a href="#" class="text-indigo-600 hover:text-indigo-800">Download</a>
+                            </div>
+                        </div>
+                        <div class="border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors">
+                            <div class="flex items-center justify-between mb-3">
+                                <div class="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
+                                    <i data-feather="award" class="text-green-600 w-5 h-5"></i>
+                                </div>
+                                <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs">Verified</span>
+                            </div>
+                            <h4 class="font-medium text-gray-900 mb-2">First Aid Training Certificate</h4>
+                            <p class="text-sm text-gray-600 mb-3">Red Crescent Authority</p>
+                            <div class="flex items-center justify-between text-sm text-gray-500">
+                                <span>Issued: Nov 15, 2023</span>
+                                <a href="#" class="text-indigo-600 hover:text-indigo-800">Download</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center">
+                        <i data-feather="upload" class="w-12 h-12 text-gray-400 mx-auto mb-3"></i>
+                        <h3 class="text-lg font-medium text-gray-900 mb-2">Upload New Certificate</h3>
+                        <p class="text-sm text-gray-600 mb-4">Upload your certificates to showcase your qualifications</p>
+                        <button class="bg-indigo-600 text-white px-6 py-2 rounded-lg font-medium">Upload Certificate</button>
+                        <p class="text-xs text-gray-500 mt-3">Supported formats: PDF, JPG, PNG (Max 10MB)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        AOS.init();
+        feather.replace();
+    </script>
+</body>
+</html>
