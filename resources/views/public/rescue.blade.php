@@ -12,5 +12,8 @@
     <p><a href="/opportunities">Opportunities</a> · <a href="/events">Events</a> · <a href="/contact">Contact</a></p>
     <p>© {{ date("Y") }} SwaedUAE · <a href="/privacy">Privacy</a> · <a href="/terms">Terms</a></p>
   </div>
+    <script src="/assets/nav-dropdown-fix.js"></script>
 </body>
+    <script src="/assets/feather.min.js"></script>
+    <script>document.addEventListener("DOMContentLoaded",function(){ if(window.feather&&feather.replace) feather.replace();});</script>
 </html>

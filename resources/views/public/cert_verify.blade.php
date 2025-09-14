@@ -13,4 +13,7 @@
       <p>Verification service is being finalized.</p>
     @endif
   </main>
+    <script src="/assets/nav-dropdown-fix.js"></script>
 </body></html>
+    <script src="/assets/feather.min.js"></script>
+    <script>document.addEventListener("DOMContentLoaded",function(){ if(window.feather&&feather.replace) feather.replace();});</script>

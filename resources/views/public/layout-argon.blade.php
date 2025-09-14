@@ -49,6 +49,9 @@
   @yield('scripts')
   @stack('scripts')
   @include('public._analytics')
+    <script src="/assets/nav-dropdown-fix.js"></script>
 </body>
+    <script src="/assets/feather.min.js"></script>
+    <script>document.addEventListener("DOMContentLoaded",function(){ if(window.feather&&feather.replace) feather.replace();});</script>
 </html>
 
