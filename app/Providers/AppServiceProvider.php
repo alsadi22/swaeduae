@@ -1,5 +1,7 @@
 <?php
 namespace App\Providers;
+use App\Models\OrgProfile;
+use App\Observers\OrgProfileObserver;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use App\Models\User;
@@ -21,7 +23,10 @@ class AppServiceProvider extends ServiceProvider
     }
 
     public function boot(): void {
-        // Force Spatie Permission to use acl_* tables if present
+        if (class_exists(AppModelsOrgProfile::class)) {
+            AppModelsOrgProfile::observe(AppObserversOrgProfileObserver::class);
+        }
+// Force Spatie Permission to use acl_* tables if present
         config([
             'permission.table_names.roles' => 'acl_roles',
             'permission.table_names.permissions' => 'acl_permissions',

@@ -1,0 +1,1 @@
+<form method="POST" action="{{ route('register') }}" class="max-w-xl 

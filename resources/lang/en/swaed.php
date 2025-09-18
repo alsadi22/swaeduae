@@ -149,13 +149,11 @@ return array (
   'saved' => 'Saved',
   'edit' => 'Edit',
   'close' => 'Close',
-  'confirm_close' => 'Close this opportunity?',
-);
-<?php return [
-  'brand' => 'SwaedUAE',
+  'confirm_close' => 'Close this opportunity?', 
+'brand' => 'SwaedUAE',
   'opportunities' => 'Opportunities',
   'about' => 'About',
   'contact' => 'Contact',
   'welcome_title' => 'Welcome to SwaedUAE',
   'welcome_blurb' => "We’re now live. Explore the core pages while we keep building.",
-];
+);

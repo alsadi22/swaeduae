@@ -1,0 +1,53 @@
+@php($type = $type ?? (request("type") ?? "volunteer"))
+@extends('layouts.app')
+
+@section('content')
+<div class="container py-5" style="max-width:520px">
+  <h2 class="mb-3">
+    {{ $type === 'org' ? __('Organization Login') : ($type === 'volunteer' ? __('Volunteer Login') : __('Login')) }}
+  </h2>
+
+  @if ($errors->any())
+    <div class="alert alert-danger">
+      <ul class="mb-0">
+        @foreach ($errors->all() as $e)<li>{{ $e }}</li>@endforeach
+      </ul>
+    </div>
+  @endif
+
+  <form method="POST" action="{{ url('/login') }}">
+    @csrf
+    <input type="hidden" name="type" value="{{ $type }}"/>
+
+    <div class="mb-3">
+      <label class="form-label">{{ __('Email') }}</label>
+      <input class="form-control" type="email" name="email" value="{{ old('email') }}" required autofocus>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">{{ __('Password') }}</label>
+      <input class="form-control" type="password" name="password" required>
+    </div>
+
+    <div class="form-check mb-3">
+      <input class="form-check-input" type="checkbox" name="remember" id="remember">
+      <label class="form-check-label" for="remember">{{ __('Remember me') }}</label>
+    </div>
+
+    <button class="btn btn-primary w-100" type="submit">{{ __('Sign in') }}</button>
+   (request()->get('type') === 'volunteer')
+  ('auth.partials.social-buttons')
+
+<div class="text-center text-sm mt-2">@if(\Illuminate\Support\Facades\Route::has('password.request'))<a href="{{ route('password.request') }}">>>Forgot your password?</a>@else<a href="/forgot-password">Forgot your password?</a>@endif</div>
+</form>
+
+  <div class="mt-3 text-center">
+    <a href="{{ route('register', ['type'=>request()->get('type')]) }}">{{ __('Create an account') }}</a>
+  </div>
+</div>
+@endsection
+
+
+@if (config('services.uaepass.client_id'))
+  <a href="{{ route('uaepass.redirect') }}">Continue with UAE PASS</a>
+@endif

@@ -32,7 +32,8 @@
         <div class="col-12">
           <button class="btn btn-primary w-100">@lang('Login')</button>
         </div>
-      </form>
+        @includeIf('auth._social_logins')
+</form>
 
       <hr class="my-4">
       <div class="text-center small">

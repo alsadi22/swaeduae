@@ -1,0 +1,63 @@
+*** Begin Patch
+*** Update File: app/Http/Controllers/Admin/ApprovalsController.php
+@@
+ use App\Models\User;
+ use Spatie\Permission\Models\Role;
++use App\Models\OrgProfile;
+
+@@ public function approveOrg($id, Request $request)
+-        try {
+-            $updated = DB::table('org_profiles')->where('id', $id)->update([
+-                'status'     => 'approved',
+-                'updated_at' => now(),
+-            ]);
+-            $state = !empty($updated) ? 'approved' : 'nochange';
+-            if (!empty($updated)) {
+-                // Assign 'org' role only if Spatie tables exist; never let this block break the redirect.
+-                try {
+-                    if (DB::getSchemaBuilder()->hasTable('roles') && DB::getSchemaBuilder()->hasTable('model_has_roles')) {
+-                        $p = DB::table('org_profiles')->where('id',$id)->select('user_id')->first();
+-                        if ($p && $p->user_id) {
+-                            $user = User::find($p->user_id);
+-                            if ($user && method_exists($user,'assignRole')) {
+-                                $guard = method_exists($user,'getDefaultGuardName')
+-                                    ? $user->getDefaultGuardName()
+-                                    : (config('auth.defaults.guard','web') ?: 'web');
+-                                Role::findOrCreate('org', $guard);
+-                                if (! $user->hasRole('org')) {
+-                                    $user->assignRole('org');
+-                                }
+-                            }
+-                        }
+-                    }
+-                } catch (\Throwable $e) { /* ignore in tests */ }
+-            }
+-            return redirect('/admin/approvals')->with('status', $state);
+-        } catch (\Throwable $e) {
+-            return redirect('/admin/approvals')->with('error', 'DB error: '.$e->getMessage());
+-        }
++        // Load the profile via Eloquent so observers fire and state persists
++        $profile = OrgProfile::find($id);
++        // Default flash state
++        $state = 'nochange';
++        if ($profile) {
++            // Mark as approved and persist
++            $profile->status = 'approved';
++            $profile->updated_at = now();
++            $profile->save();
++            $state = 'approved';
++            // Assign the 'org' role on the default guard ('web'); ignore any assignment errors
++            if ($profile->user_id) {
++                try {
++                    $user = User::find($profile->user_id);
++                    if ($user && method_exists($user,'assignRole')) {
++                        Role::findOrCreate('org', config('auth.defaults.guard','web'));
++                        $user->assignRole('org');
++                    }
++                } catch (\Throwable $e) {
++                    // ignore role assignment errors
++                }
++            }
++        }
++        return redirect('/admin/approvals')->with('status', $state);
+*** End Patch

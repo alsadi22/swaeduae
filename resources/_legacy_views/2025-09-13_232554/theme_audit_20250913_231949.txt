@@ -1,0 +1,591 @@
+=== SwaedUAE Theme Audit @ 20250913_231949 ===
+\n[ENV]
+\n[FRAMEWORK FINGERPRINTS IN VIEWS/PUBLIC]
+resources/views/volunteer/profile.blade.php:7:    <script src="https://cdn.tailwindcss.com"></script>
+resources/views/volunteer/profile.blade.php:8:    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+resources/views/volunteer/settings.blade.php:7:    <script src="https://cdn.tailwindcss.com"></script>
+resources/views/volunteer/settings.blade.php:8:    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+resources/views/blog.blade.php:10:    <div class="cs_height_140 cs_height_lg_80"></div>
+resources/views/blog.blade.php:12:      <div class="row cs_gap_y_50">
+resources/views/blog.blade.php:14:          <article class="cs_post cs_style_5">
+resources/views/blog.blade.php:15:            <a href="{{ route('events.index') }}" class="cs_post_thumb cs_zoom">
+resources/views/blog.blade.php:16:              <img src="assets/images/post_9.jpeg" alt="Post Thumb" class="w-100 h-100 cs_zoom_in">
+resources/views/blog.blade.php:17:              <span class="cs_link_hover"><i class="fas fa-link"></i></span>
+resources/views/blog.blade.php:19:            <ul class="cs_post_meta cs_mp0 cs_primary_color">
+resources/views/blog.blade.php:20:              <li class="cs_accent_color">OCTOBER 01, 2024</li>
+resources/views/blog.blade.php:21:              <li>By <a href="#" class="cs_accent_color">JOHN ALEX</a></li>
+resources/views/blog.blade.php:23:            <h2 class="cs_post_title cs_fs_35 cs_semibold"><a href="{{ route('events.index') }}">EazyPNR is the only Theme you will ever need</a></h2>
+resources/views/blog.blade.php:24:            <div class="cs_post_subtitle">Globally coordinate user friendly interfaces through 24/365 niche markets. Seamlessly supply accurate human capital with corporate e-markets. Efficiently architect enterprise-wide platforms after error-free process are  Completely envisioneer market-driven e-markets through </div>
+resources/views/blog.blade.php:25:            <a href="{{ route('events.index') }}" class="cs_post_btn cs_fs_18 cs_medium cs_primary_color">
+resources/views/blog.blade.php:30:          <article class="cs_post cs_style_5">
+resources/views/blog.blade.php:31:            <a href="{{ route('events.index') }}" class="cs_post_thumb cs_zoom">
+resources/views/blog.blade.php:32:              <img src="assets/images/post_10.jpeg" alt="Post Thumb" class="w-100 h-100 cs_zoom_in">
+resources/views/blog.blade.php:33:              <span class="cs_link_hover"><i class="fas fa-link"></i></span>
+resources/views/blog.blade.php:35:            <ul class="cs_post_meta cs_mp0 cs_primary_color">
+resources/views/blog.blade.php:36:              <li class="cs_accent_color">OCTOBER 01, 2024</li>
+resources/views/blog.blade.php:37:              <li>By <a href="#" class="cs_accent_color">JOHN ALEX</a></li>
+resources/views/blog.blade.php:39:            <h2 class="cs_post_title cs_fs_35 cs_semibold"><a href="{{ route('events.index') }}">How To Get Strangers To Take Epic Travel</a></h2>
+resources/views/blog.blade.php:40:            <div class="cs_post_subtitle">Globally coordinate user friendly interfaces through 24/365 niche markets. Seamlessly supply accurate human capital with corporate e-markets. Efficiently architect enterprise-wide platforms after error-free process are Completely envisioneer market-driven e-markets through </div>
+resources/views/blog.blade.php:41:            <a href="{{ route('events.index') }}" class="cs_post_btn cs_fs_18 cs_medium cs_primary_color">
+resources/views/blog.blade.php:46:          <article class="cs_post cs_style_5">
+resources/views/blog.blade.php:47:            <a href="{{ route('events.index') }}" class="cs_post_thumb cs_zoom">
+resources/views/blog.blade.php:48:              <img src="assets/images/post_11.jpeg" alt="Post Thumb" class="w-100 h-100 cs_zoom_in">
+resources/views/blog.blade.php:49:              <span class="cs_link_hover"><i class="fas fa-link"></i></span>
+resources/views/blog.blade.php:51:            <ul class="cs_post_meta cs_mp0 cs_primary_color">
+resources/views/blog.blade.php:52:              <li class="cs_accent_color">OCTOBER 01, 2024</li>
+resources/views/blog.blade.php:53:              <li>By <a href="#" class="cs_accent_color">JOHN ALEX</a></li>
+resources/views/blog.blade.php:55:            <h2 class="cs_post_title cs_fs_35 cs_semibold"><a href="{{ route('events.index') }}">The Top 10 Destinations You Should Visit In</a></h2>
+resources/views/blog.blade.php:56:            <div class="cs_post_subtitle">Globally coordinate user friendly interfaces through 24/365 niche markets. Seamlessly supply accurate human capital with corporate e-markets. Efficiently architect enterprise-wide platforms after error-free process are  Completely envisioneer market-driven e-markets through </div>
+resources/views/blog.blade.php:57:            <a href="{{ route('events.index') }}" class="cs_post_btn cs_fs_18 cs_medium cs_primary_color">
+resources/views/blog.blade.php:62:          <ul class="cs_pagination_box cs_mp0">
+resources/views/blog.blade.php:64:              <a class="cs_pagination_item cs_center cs_fs_18 cs_medium active" href="#">1</a>
+resources/views/blog.blade.php:67:              <a class="cs_pagination_item cs_center cs_fs_18 cs_medium" href="#">2</a>
+resources/views/blog.blade.php:70:              <a class="cs_pagination_item cs_center cs_fs_18 cs_medium" href="#">3</a>
+resources/views/blog.blade.php:73:              <a href="#" class="cs_pagination_item cs_center cs_fs_18 cs_medium">
+resources/views/blog.blade.php:79:          <div class="cs_sidebar cs_right_sidebar">
+resources/views/blog.blade.php:80:            <div class="cs_sidebar_item cs_gray_bg widget_search">
+resources/views/blog.blade.php:81:              <form class="cs_sidebar_search cs_white_bg" action="#">
+resources/views/blog.blade.php:83:                <button class="cs_sidebar_search_btn cs_accent_bg cs_white_color">
+resources/views/blog.blade.php:87:            <div class="cs_sidebar_item cs_gray_bg widget_categories">
+resources/views/blog.blade.php:88:              <h3 class="cs_sidebar_widget_title cs_fs_24 cs_semibold">Category</h3>
+resources/views/blog.blade.php:90:              <ul class="cs_mp0">
+resources/views/blog.blade.php:91:                <li class="cs_cat_item cs_primary_color">
+resources/views/blog.blade.php:95:                <li class="cs_cat_item cs_primary_color">
+resources/views/blog.blade.php:99:                <li class="cs_cat_item cs_primary_color">
+resources/views/blog.blade.php:103:                <li class="cs_cat_item cs_primary_color">
+resources/views/blog.blade.php:107:                <li class="cs_cat_item cs_primary_color">
+resources/views/blog.blade.php:111:                <li class="cs_cat_item">
+resources/views/blog.blade.php:117:            <div class="cs_sidebar_item cs_gray_bg">
+resources/views/blog.blade.php:118:              <h3 class="cs_sidebar_widget_title cs_fs_24 cs_semibold">Popular Post</h3>
+resources/views/blog.blade.php:120:              <ul class="cs_recent_posts cs_mp0">
+resources/views/blog.blade.php:122:                  <article class="cs_recent_post">
+resources/views/blog.blade.php:123:                    <a href="{{ route('events.index') }}" class="cs_recent_post_thumb cs_zoom">
+resources/views/blog.blade.php:124:                      <img src="assets/images/latest_post_1.jpeg" alt="Post Thumb" class="cs_zoom_in w-100 h-100 object-fit-cover">
+resources/views/blog.blade.php:126:                    <div class="cs_recent_post_info">
+resources/views/blog.blade.php:127:                      <h3 class="cs_recent_post_title cs_fs_16 cs_medium cs_secondary_font">
+resources/views/blog.blade.php:130:                      <div class="cs_recent_post_date cs_fs_14">October 01, 2024</div>
+resources/views/blog.blade.php:135:                  <article class="cs_recent_post">
+resources/views/blog.blade.php:136:                    <a href="{{ route('events.index') }}" class="cs_recent_post_thumb cs_zoom">
+resources/views/blog.blade.php:137:                      <img src="assets/images/latest_post_2.jpeg" alt="Post Thumb" class="cs_zoom_in w-100 h-100 object-fit-cover">
+resources/views/blog.blade.php:139:                    <div class="cs_recent_post_info">
+resources/views/blog.blade.php:140:                      <h3 class="cs_recent_post_title cs_fs_16 cs_medium cs_secondary_font">
+resources/views/blog.blade.php:143:                      <div class="cs_recent_post_date cs_fs_14">October 01, 2024</div>
+resources/views/blog.blade.php:148:                  <article class="cs_recent_post">
+resources/views/blog.blade.php:149:                    <a href="{{ route('events.index') }}" class="cs_recent_post_thumb cs_zoom">
+resources/views/blog.blade.php:150:                      <img src="assets/images/latest_post_3.jpeg" alt="Post Thumb" class="cs_zoom_in w-100 h-100 object-fit-cover">
+resources/views/blog.blade.php:152:                    <div class="cs_recent_post_info">
+resources/views/blog.blade.php:153:                      <h3 class="cs_recent_post_title cs_fs_16 cs_medium cs_secondary_font">
+resources/views/blog.blade.php:156:                      <div class="cs_recent_post_date cs_fs_14">October 01, 2024</div>
+resources/views/blog.blade.php:161:                  <article class="cs_recent_post">
+resources/views/blog.blade.php:162:                    <a href="{{ route('events.index') }}" class="cs_recent_post_thumb cs_zoom">
+resources/views/blog.blade.php:163:                      <img src="assets/images/latest_post_4.jpeg" alt="Post Thumb" class="cs_zoom_in w-100 h-100 object-fit-cover">
+resources/views/blog.blade.php:165:                    <div class="cs_recent_post_info">
+resources/views/blog.blade.php:166:                      <h3 class="cs_recent_post_title cs_fs_16 cs_medium cs_secondary_font">
+resources/views/blog.blade.php:169:                      <div class="cs_recent_post_date cs_fs_14">October 01, 2024</div>
+resources/views/blog.blade.php:175:            <div class="cs_sidebar_item cs_gray_bg widget_tag_cloud">
+resources/views/blog.blade.php:176:              <h3 class="cs_sidebar_widget_title cs_fs_24 cs_semibold">Tag Cloud</h3>
+resources/views/blog.blade.php:178:              <div class="cs_tag_cloud">
+resources/views/blog.blade.php:179:                <a href="#" class="cs_tag_link cs_radius_5 cs_white_bg cs_primary_color">Campaign</a>
+resources/views/blog.blade.php:180:                <a href="#" class="cs_tag_link cs_radius_5 cs_white_bg cs_primary_color">Making</a>
+resources/views/blog.blade.php:181:                <a href="#" class="cs_tag_link cs_radius_5 cs_white_bg cs_primary_color">Life Style</a>
+resources/views/blog.blade.php:182:                <a href="#" class="cs_tag_link cs_radius_5 cs_white_bg cs_primary_color">Traveling</a>
+resources/views/blog.blade.php:183:                <a href="#" class="cs_tag_link cs_radius_5 cs_white_bg cs_primary_color">Trekking</a>
+resources/views/blog.blade.php:184:                <a href="#" class="cs_tag_link cs_radius_5 cs_white_bg cs_primary_color">Travels</a>
+resources/views/blog.blade.php:187:            <div class="cs_sidebar_item cs_gray_bg">
+resources/views/blog.blade.php:188:              <h3 class="cs_sidebar_widget_title cs_fs_24 cs_semibold">Newsletter</h3>
+resources/views/blog.blade.php:190:            <form class="cs_subscribe_form">
+resources/views/blog.blade.php:191:              <div class="cs_input_field">
+resources/views/blog.blade.php:195:              <button type="submit" class="cs_btn cs_style_1 cs_fs_18 cs_medium cs_radius_4">Subscribe Now</button>
+resources/views/blog.blade.php:202:    <div class="cs_height_140 cs_height_lg_80"></div>
+resources/views/index.blade.php:17:    <section class="cs_hero cs_style_1 cs_center cs_ripple_activate cs_primary_bg" data-src="assets/images/hero_bg.jpeg">
+resources/views/index.blade.php:19:        <div class="cs_hero_text text-center">
+resources/views/index.blade.php:20:          <h3 class="cs_hero_subtitle cs_white_color cs_ternary_font cs_fs_25 cs_normal text-uppercase">Let's Travel The World With Us</h3>
+resources/views/index.blade.php:21:          <h1 class="cs_hero_title cs_white_color cs_fs_100 wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.2s">Travel Top Destination <br>of The World</h1>
+resources/views/index.blade.php:23:        <div class="cs_find_form_wrap">
+resources/views/index.blade.php:24:          <form action="#" class="cs_find_form">
+resources/views/index.blade.php:26:              <h2 class="cs_fs_18 cs_normal mb-0">Where to?</h2>
+resources/views/index.blade.php:52:              <button class="cs_find_btn cs_bold cs_primary_font cs_center"><i class="fa-solid fa-magnifying-glass"></i> Find Now</button>
+resources/views/index.blade.php:57:      <div class="cs_hero_shape_1"></div>
+resources/views/index.blade.php:58:      <div class="cs_hero_shape_2"></div>
+resources/views/index.blade.php:59:      <div class="cs_hero_shape_3"></div>
+resources/views/index.blade.php:64:    <section class="cs_about cs_style_1">
+resources/views/index.blade.php:65:      <div class="cs_height_140 cs_height_lg_80"></div>
+resources/views/index.blade.php:67:        <div class="row align-items-center cs_gap_y_40">
+resources/views/index.blade.php:70:            <div class="cs_section_heading cs_style_1">
+resources/views/index.blade.php:71:              <h3 class="cs_section_title_up cs_ternary_font cs_accent_color cs_normal cs_fs_24">About Us</h3>
+resources/views/index.blade.php:72:              <h2 class="cs_section_title cs_semibold cs_fs_56 mb-0 wow fadeInRight" data-wow-duration="0.8s" data-wow-delay="0.2s">We are Professional Planners For your </h2>
+resources/views/index.blade.php:74:            <div class="cs_about_text">
+resources/views/index.blade.php:76:              <p class="mb-0 cs_accent_color cs_medium cs_fs_18">Speak to our Destination Experts at Direct Call +1 546 378 654</p>
+resources/views/index.blade.php:78:            <ul class="cs_list cs_style_1 cs_mp0 cs_fs_18">
+resources/views/index.blade.php:80:                <i class="fa-solid fa-circle-check cs_accent_color"></i>
+resources/views/index.blade.php:84:                <i class="fa-solid fa-circle-check cs_accent_color"></i>
+resources/views/index.blade.php:88:                <i class="fa-solid fa-circle-check cs_accent_color"></i>
+resources/views/index.blade.php:92:                <i class="fa-solid fa-circle-check cs_accent_color"></i>
+resources/views/index.blade.php:96:            <a href="{{ route('about') }}" class="cs_btn cs_style_1 cs_fs_18 cs_medium">
+resources/views/index.blade.php:106:      <div class="cs_height_140 cs_height_lg_80"></div>
+resources/views/index.blade.php:111:    <section class="cs_featured cs_style_1 cs_bg_filed" data-src="assets/images/feature_bg.jpeg">
+resources/views/index.blade.php:112:      <div class="cs_height_140 cs_height_lg_80"></div>
+resources/views/index.blade.php:114:        <div class="row cs_gap_y_40 wow fadeIn" data-wow-duration="0.8s" data-wow-delay="0.2s">
+resources/views/index.blade.php:116:            <div class="cs_iconbox cs_style_1">
+resources/views/index.blade.php:117:              <div class="cs_iconbox_icon cs_radius_15 cs_center">
+resources/views/index.blade.php:120:              <h2 class="cs_iconbox_title cs_fs_24 cs_semibold">Customer Delight</h2>
+resources/views/index.blade.php:121:              <p class="cs_iconbox_subtitle mb-0">We deliver the best service and you to <br>experience for our customer we est <br>service and you to experie</p>
+resources/views/index.blade.php:125:            <div class="cs_iconbox cs_style_1">
+resources/views/index.blade.php:126:              <div class="cs_iconbox_icon cs_radius_15 cs_center">
+resources/views/index.blade.php:129:              <h2 class="cs_iconbox_title cs_fs_24 cs_semibold">Trusted Adventure</h2>
+resources/views/index.blade.php:130:              <p class="cs_iconbox_subtitle mb-0">We deliver the best service and you to <br>experience for our customer we est <br>service and you to experie</p>
+resources/views/index.blade.php:134:            <div class="cs_iconbox cs_style_1">
+resources/views/index.blade.php:135:              <div class="cs_iconbox_icon cs_radius_15 cs_center">
+resources/views/index.blade.php:138:              <h2 class="cs_iconbox_title cs_fs_24 cs_semibold">Expert Guides</h2>
+resources/views/index.blade.php:139:              <p class="cs_iconbox_subtitle mb-0">We deliver the best service and you to <br>experience for our customer we est <br>service and you to experie</p>
+resources/views/index.blade.php:143:            <div class="cs_iconbox cs_style_1">
+resources/views/index.blade.php:144:              <div class="cs_iconbox_icon cs_radius_15 cs_center">
+resources/views/index.blade.php:147:              <h2 class="cs_iconbox_title cs_fs_24 cs_semibold">Time Flexibility</h2>
+resources/views/index.blade.php:148:              <p class="cs_iconbox_subtitle mb-0">We deliver the best service and you to <br>experience for our customer we est <br>service and you to experie</p>
+resources/views/index.blade.php:153:      <div class="cs_height_133 cs_height_lg_80"></div>
+resources/views/index.blade.php:159:      <div class="cs_height_135 cs_height_lg_75"></div>
+resources/views/index.blade.php:161:        <div class="cs_section_heading cs_style_1 text-center">
+resources/views/index.blade.php:162:          <h3 class="cs_section_title_up cs_ternary_font cs_accent_color cs_normal cs_fs_24">CHOOSE YOUR PACKAGE</h3>
+resources/views/index.blade.php:163:          <h2 class="cs_section_title cs_semibold cs_fs_56 mb-0 wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.2s">Popular Tours Packages</h2>
+resources/views/index.blade.php:165:        <div class="cs_height_55 cs_height_lg_40"></div>
+resources/views/index.blade.php:168:        <div class="row cs_gap_y_24">
+resources/views/index.blade.php:170:            <div class="cs_card cs_style_1 cs_bg_filed cs_radius_5 position-relative" data-src="assets/images/package_img_1.jpeg">
+resources/views/index.blade.php:171:              <div class="cs_card_overlay cs_radius_5 position-absolute w-100 h-100"></div>
+resources/views/index.blade.php:172:              <div class="cs_card_content position-absolute">
+resources/views/index.blade.php:173:                <div class="cs_card_meta cs_white_color">
+resources/views/index.blade.php:187:                <h2 class="cs_card_title cs_fs_24 cs_medium cs_white_color"><a href="">Aegean Adventure</a></h2>
+resources/views/index.blade.php:188:                <div class="cs_card_action">
+resources/views/index.blade.php:189:                  <a href="" class="cs_btn cs_style_1 cs_fs_18 cs_medium">
+resources/views/index.blade.php:196:                  <span class="cs_card_price cs_fs_24 cs_medium cs_white_color mb-0">$370</span>
+resources/views/index.blade.php:202:            <div class="cs_card cs_style_1 cs_bg_filed cs_radius_5 position-relative" data-src="assets/images/package_img_2.jpeg">
+resources/views/index.blade.php:203:              <div class="cs_card_overlay cs_radius_5 position-absolute w-100 h-100"></div>
+resources/views/index.blade.php:204:              <div class="cs_card_content position-absolute">
+resources/views/index.blade.php:205:                <div class="cs_card_meta cs_white_color">
+resources/views/index.blade.php:219:                <h2 class="cs_card_title cs_fs_24 cs_medium cs_white_color"><a href="">Aegean Adventure</a></h2>
+resources/views/index.blade.php:220:                <div class="cs_card_action">
+resources/views/index.blade.php:221:                  <a href="" class="cs_btn cs_style_1 cs_fs_18 cs_medium">
+resources/views/index.blade.php:228:                  <span class="cs_card_price cs_fs_24 cs_medium cs_white_color mb-0">$380</span>
+resources/views/index.blade.php:234:            <div class="cs_card cs_style_1 cs_bg_filed cs_radius_5 position-relative" data-src="assets/images/package_img_3.jpeg">
+resources/views/index.blade.php:235:              <div class="cs_card_overlay cs_radius_5 position-absolute w-100 h-100"></div>
+resources/views/index.blade.php:236:              <div class="cs_card_content position-absolute">
+resources/views/index.blade.php:237:                <div class="cs_card_meta cs_white_color">
+resources/views/index.blade.php:251:                <h2 class="cs_card_title cs_fs_24 cs_medium cs_white_color"><a href="">Aegean Adventure</a></h2>
+resources/views/index.blade.php:252:                <div class="cs_card_action">
+resources/views/index.blade.php:253:                  <a href="" class="cs_btn cs_style_1 cs_fs_18 cs_medium">
+resources/views/index.blade.php:260:                  <span class="cs_card_price cs_fs_24 cs_medium cs_white_color mb-0">$390</span>
+resources/views/index.blade.php:266:            <div class="cs_card cs_style_1 cs_bg_filed cs_radius_5 position-relative" data-src="assets/images/package_img_4.jpeg">
+resources/views/index.blade.php:267:              <div class="cs_card_overlay cs_radius_5 position-absolute w-100 h-100"></div>
+resources/views/index.blade.php:268:              <div class="cs_card_content position-absolute">
+resources/views/index.blade.php:269:                <div class="cs_card_meta cs_white_color">
+resources/views/index.blade.php:283:                <h2 class="cs_card_title cs_fs_24 cs_medium cs_white_color"><a href="">Aegean Adventure</a></h2>
+resources/views/index.blade.php:284:                <div class="cs_card_action">
+resources/views/index.blade.php:285:                  <a href="" class="cs_btn cs_style_1 cs_fs_18 cs_medium">
+resources/views/index.blade.php:292:                  <span class="cs_card_price cs_fs_24 cs_medium cs_white_color mb-0">$360</span>
+resources/views/index.blade.php:304:      <div class="cs_height_135 cs_height_lg_80"></div>
+resources/views/index.blade.php:306:        <div class="row cs_gap_y_40">
+resources/views/index.blade.php:308:            <div class="cs_image_box cs_style_1">
+resources/views/index.blade.php:310:              <div class="cs_image_box_shape" data-src="assets/images/funfact_shape.png"></div>
+resources/views/index.blade.php:314:            <div class="cs_section_heading cs_style_1">
+resources/views/index.blade.php:315:              <h3 class="cs_section_title_up cs_ternary_font cs_accent_color cs_normal cs_fs_24">Travel Point</h3>
+resources/views/index.blade.php:316:              <h2 class="cs_section_title cs_semibold cs_fs_56 mb-0">Discover The World With Our Guide</h2>
+resources/views/index.blade.php:317:              <p class="cs_section_subtitle">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC.</p>
+resources/views/index.blade.php:319:            <div class="cs_height_55 cs_height_lg_40"></div>
+resources/views/index.blade.php:320:            <div class="row cs_gap_y_24 position-relative">
+resources/views/index.blade.php:321:              <div class="cs_funfact_1_icon cs_accent_bg cs_center rounded-circle">
+resources/views/index.blade.php:327:                <div class="cs_funfact cs_style_1 text-center">
+resources/views/index.blade.php:328:                  <h3 class="cs_funfact_title cs_fs_40 cs_semibold cs_accent_color"><span class="odometer" data-count-to="502"></span>+</h3>
+resources/views/index.blade.php:329:                  <p class="cs_funfact_subtitle mb-0 cs_fs_18">Holiday Package</p>
+resources/views/index.blade.php:333:                <div class="cs_funfact cs_style_1 text-center">
+resources/views/index.blade.php:334:                  <h3 class="cs_funfact_title cs_fs_40 cs_semibold cs_accent_color"><span class="odometer" data-count-to="100"></span>+</h3>
+resources/views/index.blade.php:335:                  <p class="cs_funfact_subtitle mb-0 cs_fs_18">Luxury Hotel</p>
+resources/views/index.blade.php:339:                <div class="cs_funfact cs_style_1 text-center">
+resources/views/index.blade.php:340:                  <h3 class="cs_funfact_title cs_fs_40 cs_semibold cs_accent_color"><span class="odometer" data-count-to="77"></span>k</h3>
+resources/views/index.blade.php:341:                  <p class="cs_funfact_subtitle mb-0 cs_fs_18">Premium Airlines</p>
+resources/views/index.blade.php:345:                <div class="cs_funfact cs_style_1 text-center">
+resources/views/index.blade.php:346:                  <h3 class="cs_funfact_title cs_fs_40 cs_semibold cs_accent_color"><span class="odometer" data-count-to="2"></span>k+</h3>
+resources/views/index.blade.php:347:                  <p class="cs_funfact_subtitle mb-0 cs_fs_18">Happy Customer</p>
+resources/views/index.blade.php:359:      <div class="cs_height_135 cs_height_lg_80"></div>
+resources/views/index.blade.php:361:        <div class="cs_section_heading cs_style_1 text-center">
+resources/views/index.blade.php:362:          <h3 class="cs_section_title_up cs_ternary_font cs_accent_color cs_normal cs_fs_24">POPULAR DESTINATION</h3>
+resources/views/index.blade.php:363:          <h2 class="cs_section_title cs_semibold cs_fs_56 mb-0 wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.2s">Popular Destinations</h2>
+resources/views/index.blade.php:365:        <div class="cs_height_55 cs_height_lg_40"></div>
+resources/views/index.blade.php:366:        <div class="cs_grid_1">
+resources/views/index.blade.php:367:          <div class="cs_grid_item">
+resources/views/index.blade.php:368:            <a href="{{ route('events.index') }}" class="cs_card cs_style_2 cs_zoom position-relative cs_radius_8">
+resources/views/index.blade.php:369:              <div class="cs_card_thumb w-100 h-100">
+resources/views/index.blade.php:370:                <img src="assets/images/popular_destination_1.jpeg" alt="Card Image" class="w-100 h-100 cs_zoom_in">
+resources/views/index.blade.php:372:              <div class="cs_card_content position-absolute">
+resources/views/index.blade.php:373:                <h2 class="cs_card_title cs_fs_35 cs_medium cs_white_color">Eiffel Tower</h2>
+resources/views/index.blade.php:374:                <p class="cs_card_subtitle cs_fs_18 cs_medium cs_white_color mb-0">Paris, 24 Trips</p>
+resources/views/index.blade.php:378:          <div class="cs_grid_item">
+resources/views/index.blade.php:379:            <a href="{{ route('events.index') }}" class="cs_card cs_style_2 cs_zoom position-relative cs_radius_8">
+resources/views/index.blade.php:380:              <div class="cs_card_thumb w-100 h-100">
+resources/views/index.blade.php:381:                <img src="assets/images/popular_destination_2.jpeg" alt="Card Image" class="w-100 h-100 cs_zoom_in">
+resources/views/index.blade.php:383:              <div class="cs_card_content position-absolute">
+resources/views/index.blade.php:384:                <h2 class="cs_card_title cs_fs_35 cs_medium cs_white_color">
+resources/views/index.blade.php:386:                <p class="cs_card_subtitle cs_fs_18 cs_medium cs_white_color mb-0">
+resources/views/index.blade.php:391:          <div class="cs_grid_item">
+resources/views/index.blade.php:392:            <a href="{{ route('events.index') }}" class="cs_card cs_style_2 cs_zoom position-relative cs_radius_8">
+resources/views/index.blade.php:393:              <div class="cs_card_thumb w-100 h-100">
+resources/views/index.blade.php:394:                <img src="assets/images/popular_destination_3.jpeg" alt="Card Image" class="w-100 h-100 cs_zoom_in">
+resources/views/index.blade.php:396:              <div class="cs_card_content position-absolute">
+resources/views/index.blade.php:397:                <h2 class="cs_card_title cs_fs_35 cs_medium cs_white_color">Lao Lading Island</h2>
+resources/views/index.blade.php:398:                <p class="cs_card_subtitle cs_fs_18 cs_medium cs_white_color mb-0">Krabal, 12 Trips</p>
+resources/views/index.blade.php:402:          <div class="cs_grid_item">
+resources/views/index.blade.php:403:            <a href="{{ route('events.index') }}" class="cs_card cs_style_2 cs_zoom position-relative cs_radius_8">
+resources/views/index.blade.php:404:              <div class="cs_card_thumb w-100 h-100">
+resources/views/index.blade.php:405:                <img src="assets/images/popular_destination_4.jpeg" alt="Card Image" class="w-100 h-100 cs_zoom_in">
+resources/views/index.blade.php:407:              <div class="cs_card_content position-absolute">
+resources/views/index.blade.php:408:                <h2 class="cs_card_title cs_fs_35 cs_medium cs_white_color">Ton Kwen Temple</h2>
+resources/views/index.blade.php:409:                <p class="cs_card_subtitle cs_fs_18 cs_medium cs_white_color mb-0">Thailand, 20 Trips</p>
+resources/views/index.blade.php:413:          <div class="cs_grid_item">
+resources/views/index.blade.php:414:            <a href="{{ route('events.index') }}" class="cs_card cs_style_2 cs_zoom position-relative cs_radius_8">
+resources/views/index.blade.php:415:              <div class="cs_card_thumb w-100 h-100">
+\n[BLADE LAYOUTS NOT EXTENDING public.layout (auth/org/public folders)]
+resources/views/auth/oauth-coming-soon.blade.php:1:@extends('layouts.app')
+resources/views/auth/signin-options.blade.php:1:@extends('layouts.app')
+resources/views/auth/forgot.blade.php:1:@extends('layouts.app')
+resources/views/auth/organization_register.blade.php:1:@extends('layouts.app')
+resources/views/auth/reset.blade.php:1:@extends('layouts.app')
+resources/views/auth/admin_login.blade.php:1:@extends('layouts.admin-argon')
+resources/views/auth/verify.blade.php:1:@extends('layouts.app')
+resources/views/org/dashboard.blade.php:1:@extends('org.layout')
+resources/views/org/settings/_branding_form.blade.php:1:@extends("org.layout")
+resources/views/org/settings/_profile_form.blade.php:1:@extends("org.layout")
+resources/views/org/settings/edit.blade.php:2:@extends('org.layout')
+resources/views/org/shortlist/_counters.blade.php:1:@extends("org.layout")
+resources/views/org/shortlist/index.blade.php:1:@extends(view()->exists('layouts.org') ? 'layouts.org' : (view()->exists('layouts.app') ? 'layouts.app' : null))
+resources/views/org/shortlist/_slotcap_form.blade.php:1:@extends("org.layout")
+resources/views/org/reports/index.blade.php:1:@extends('org.layout')
+resources/views/org/auth/_register_form_basic.blade.php:1:@extends("org.layout")
+resources/views/org/auth/_login_form_basic.blade.php:1:@extends("org.layout")
+resources/views/org/auth/_logo_field.blade.php:1:@extends("org.layout")
+resources/views/org/under_review.blade.php:1:@extends('org.layout')
+resources/views/org/events/_volunteers_table.blade.php:1:@extends("org.layout")
+resources/views/org/events/attendance.blade.php:1:@extends('layout.layout')
+resources/views/org/events/index.blade.php:1:@extends('layout.layout')
+resources/views/org/events/volunteers.blade.php:1:@extends('layout.layout')
+resources/views/org/certificates/_pdf.blade.php:1:@extends("org.layout")
+resources/views/org/certificates/index.blade.php:1:@extends('org.layout')
+resources/views/org/argon/_sidenav.blade.php:1:@extends("org.layout")
+resources/views/org/setup.blade.php:1:@extends('org.layout')
+resources/views/org/opportunities/_row_cert_init.blade.php:1:@extends("org.layout")
+resources/views/org/opportunities/attendance.blade.php:1:@extends('org.layout')
+resources/views/org/opportunities/index.blade.php:1:@extends('org.layout')
+resources/views/org/opportunities/_certificates_link.blade.php:1:@extends("org.layout")
+resources/views/org/opportunities/create.blade.php:1:@extends('org.layout')
+resources/views/org/opportunities/shortlist.blade.php:1:@extends('org.layout')
+resources/views/org/opportunities/edit.blade.php:1:@extends('org.layout')
+resources/views/org/_sidenav.blade.php:1:@extends("org.layout")
+resources/views/org/applicants/_row_actions_init.blade.php:1:@extends("org.layout")
+resources/views/org/applicants/_filters.blade.php:1:@extends("org.layout")
+resources/views/org/applicants/_bulk_actions.blade.php:1:@extends("org.layout")
+resources/views/org/profile.blade.php:1:@extends('org.layout')
+resources/views/org/opps/index.blade.php:1:@extends('org.layout')
+resources/views/org/opps/_form.blade.php:1:@extends("org.layout")
+resources/views/org/opps/create.blade.php:1:@extends('org.layout')
+resources/views/org/opps/edit.blade.php:1:@extends('org.layout')
+resources/views/org/partials/dashboard_v1.blade.php:1:@extends("org.layout")
+resources/views/org/partials/certs_quick.blade.php:1:@extends("org.layout")
+resources/views/org/partials/event_actions.blade.php:1:@extends("org.layout")
+resources/views/org/partials/today_checkins.blade.php:1:@extends("org.layout")
+resources/views/org/partials/apps_vs_attend.blade.php:1:@extends("org.layout")
+resources/views/org/partials/top_volunteers.blade.php:1:@extends("org.layout")
+resources/views/org/partials/hours_chart.blade.php:1:@extends("org.layout")
+resources/views/org/partials/menu.blade.php:1:@extends("org.layout")
+resources/views/org/partials/trends.blade.php:1:@extends("org.layout")
+resources/views/org/partials/branding_styles.blade.php:1:@extends("org.layout")
+resources/views/org/partials/upcoming_7d.blade.php:1:@extends("org.layout")
+resources/views/org/partials/recent_activity.blade.php:1:@extends("org.layout")
+resources/views/org/pending.blade.php:1:@extends('org.layout')
+resources/views/org/attendance/index.blade.php:1:@extends('org.layout')
+resources/views/org/attendance/qr.blade.php:1:@extends('org.layout')
+resources/views/org/attendance/scan.blade.php:1:@extends('org.layout')
+resources/views/org/attendance/settings.blade.php:1:@extends('org.layout')
+resources/views/org/team/index.blade.php:1:@extends('org.layout')
+resources/views/org/dashboard/_kpis.blade.php:1:@extends("org.layout")
+resources/views/org/dashboard/index.blade.php:1:@extends('org.layout')
+resources/views/org/dashboard/_safe_defaults.blade.php:1:@extends("org.layout")
+resources/views/org/review.blade.php:1:@extends('org.layout')
+resources/views/org/kyc/edit.blade.php:1:@extends('org.layout')
+resources/views/public/blog.blade.php:1:@extends('layout.layout')
+resources/views/public/events/index.blade.php:1:@extends('layout.layout')
+resources/views/public/destination/index.blade.php:1:@extends('layout.layout')
+resources/views/public/destination/show.blade.php:1:@extends('layout.layout')
+\n[EXPLICIT OLD/ALT LAYOUTS & ADMIN ARGON]
+resources/views/volunteer/dashboard.blade.php:1:@extends('layouts.app')
+resources/views/volunteer/dashboard.blade.php:10:                    <h3>{{ auth()->user()?->volunteerHours->sum('minutes') / 60 }} hrs</h3>
+resources/views/volunteer/settings/_tabs.blade.php:3:@php($upcoming = $upcoming ?? 0)
+resources/views/volunteer/settings/_tabs.blade.php:4:@extends('layouts.app')
+resources/views/volunteer/settings/_tabs.blade.php:13:    $upcoming= $stats['upcoming'] ?? 0;
+resources/views/volunteer/settings/_tabs.blade.php:16:        if (!isset($stats['certificates']) && \Illuminate\Support\Facades\Schema::hasTable('certificates')) {
+resources/views/volunteer/settings/_tabs.blade.php:18:        if (!isset($stats['hours']) && \Illuminate\Support\Facades\Schema::hasTable('volunteer_hours')) {
+resources/views/volunteer/settings/_tabs.blade.php:20:        if (!isset($stats['upcoming']) && \Illuminate\Support\Facades\Schema::hasTable('opportunity_applications') && \Illuminate\Support\Facades\Schema::hasTable('opportunities')) {
+resources/views/volunteer/settings/_tabs.blade.php:45:               href="{{ \Illuminate\Support\Facades\Route::has('certificates.my') ? route('certificates.my') : url('/my/certificates') }}">
+resources/views/volunteer/settings/_tabs.blade.php:57:          <div class="display-6 fw-semibold">{{ number_format((float)$upcoming, 0) }}</div>
+resources/views/volunteer/settings/_tabs.blade.php:81:        <div class="card-header bg-white"><strong>Upcoming</strong></div>
+resources/views/volunteer/settings/_tabs.blade.php:90:                  <span class="text-muted">— {{ \Illuminate\Support\Carbon::parse($a->start_date ?? $a->date ?? now())->toFormattedDateString() }}</span>
+resources/views/volunteer/settings/_tabs.blade.php:95:            <div class="text-muted">No upcoming items yet.</div>
+resources/views/volunteer/certificates.blade.php:1:@extends('layouts.app')
+resources/views/volunteer/certificates.blade.php:27:                <a class="btn btn-sm btn-primary" href="{{ \Illuminate\Support\Facades\Storage::url($cert->pdf_path) }}" target="_blank">{{ __('View PDF') }}</a>
+resources/views/volunteer/my_certificates.blade.php:1:@extends('layouts.app')
+resources/views/volunteer/my_certificates.blade.php:24:                        <td>{{ $c->issued_date ? \Illuminate\Support\Carbon::parse($c->issued_date)->format('Y-m-d') : ($c->issued_at? $c->issued_at->format('Y-m-d'): '-') }}</td>
+resources/views/volunteer/hours.blade.php:1:@extends('layouts.app')
+resources/views/volunteer/certificates/index.blade.php:1:@extends('layouts.app')
+resources/views/volunteer/leaderboard.blade.php:1:@extends('layouts.app')
+resources/views/volunteer/profile.blade.php:10:    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+resources/views/volunteer/profile.blade.php:157:                <!-- Upcoming Events -->
+resources/views/volunteer/profile.blade.php:160:                        <h2 class="text-xl font-semibold text-gray-900">Upcoming Events</h2>
+resources/views/volunteer/partials/sidebar.blade.php:2:  @media (min-width: 992px){ .v-aside.sticky-lg { position: sticky; top: 88px; } }
+resources/views/volunteer/partials/sidebar.blade.php:9:      <a href="{{ \Illuminate\Support\Facades\Route::has('my.certificates') ? route('my.certificates') : url('/my/certificates') }}" class="list-group-item list-group-item-action">{{ __('My Certificates') }}</a>
+resources/views/volunteer/partials/sidebar.blade.php:10:      @if (\Illuminate\Support\Facades\Route::has('my.hours'))
+resources/views/volunteer/partials/sidebar.blade.php:34:      <a href="{{ \Illuminate\Support\Facades\Route::has('my.certificates') ? route('my.certificates') : url('/my/certificates') }}" class="list-group-item list-group-item-action">{{ __('My Certificates') }}</a>
+resources/views/volunteer/partials/sidebar.blade.php:35:      @if (\Illuminate\Support\Facades\Route::has('my.hours'))
+resources/views/volunteer/applications.blade.php:6:  <div class="rounded-lg border bg-white p-6 text-gray-600">Coming soon — your event applications & statuses will appear here.</div>
+resources/views/volunteer/settings.blade.php:10:    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+resources/views/volunteer/profile_edit.blade.php:1:@extends('layouts.app')
+resources/views/organization/dashboard.blade.php:1:@extends('layouts.app')
+resources/views/organization/register.blade.php:1:@extends('layouts.app')
+resources/views/organization/login.blade.php:1:@extends('layouts.app')
+resources/views/organization/login.blade.php:28:<div class="text-center text-sm mt-2">@if(\Illuminate\Support\Facades\Route::has('password.request'))<a href="{{ route('password.request') }}">Forgot your password?</a>@else<a href="/forgot-password">Forgot your password?</a>@endif</div>
+resources/views/news/index.blade.php:1:@extends('layouts.app')
+resources/views/index.blade.php:75:              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. sed do eiusmod tem por incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam Lorem ipsum dolor sit amet, consectetur adipiscing elit. sed do</p>
+resources/views/index.blade.php:555:                    <div class="cs_avatar_info">By. <br>Admin</div>
+resources/views/index.blade.php:590:                    <div class="cs_avatar_info">By. <br>Admin</div>
+resources/views/profile/partials/update-profile-information-form.blade.php:31:            @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! $user->hasVerifiedEmail())
+resources/views/profile/show.blade.php:1:@extends('layouts.app')
+resources/views/organizations/register.blade.php:1:@extends('layouts.app')
+resources/views/organizations/register.blade.php:6:<p>Submit your organization details. An admin will review and approve your account before you can post opportunities.</p>
+resources/views/organizations/index.blade.php:1:@extends('layouts.app')
+resources/views/organizations/index.blade.php:33:              <p class="text-muted small mb-0">{{ \Illuminate\Support\Str::limit(strip_tags($org->description), 140) }}</p>
+resources/views/organizations/public/index.blade.php:1:@extends('layouts.app')
+resources/views/organizations/public/index.blade.php:38:        $slug  = \Illuminate\Support\Str::slug($title);
+resources/views/organizations/public/show.blade.php:1:@extends('layouts.app')
+resources/views/my/dashboard.blade.php:1:@extends('layouts.app')
+resources/views/my/certificates.blade.php:1:@extends('layouts.app')
+resources/views/my/hours.blade.php:1:@extends('layouts.app')
+resources/views/my/hours.blade.php:16:          <div>{{ (int)($r->minutes ?? 0) }} {{ __('min') }}</div>
+resources/views/my/profile_demo.blade.php:18:          <div class="small-muted">Address:</div><div>1837 S Knightridge Rd, Bloomington, IN</div>
+resources/views/pages/contact.blade.php:1:@extends('layouts.app')
+resources/views/pages/contact.blade.php:28:      <textarea name="message" class="form-control" rows="6" required minlength="10" maxlength="2000">{{ old('message') }}</textarea>
+resources/views/pages/faq.blade.php:1:@extends('layouts.app')
+resources/views/pages/app.blade.php:1:@extends('layouts.app')
+resources/views/pages/partners.blade.php:1:@extends('layouts.app')
+resources/views/pages/terms.blade.php:6:  <p class="text-muted">{{ __('Content coming soon.') }}</p>
+resources/views/pages/regions/index.blade.php:1:@extends('layouts.app')
+resources/views/pages/regions/show.blade.php:1:@extends('layouts.app')
+resources/views/pages/home.blade.php:1:@extends('layouts.app')
+resources/views/pages/privacy.blade.php:6:  <p class="text-muted">{{ __('Content coming soon.') }}</p>
+resources/views/index2.blade.php:89:      <h3 class="cs_hero_mini_title cs_fs_24 cs_semibold cs_accent_color wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.2s">Find Next PlaceTo Visit</h3>
+resources/views/index2.blade.php:200:          <h3 class="cs_cta_title_mini cs_fs_24 cs_medium cs_white_color cs_ternary_font wow fadeInRight" data-wow-duration="0.8s" data-wow-delay="0.2s">27% DISCOUNT OFFER </h3>
+resources/views/index2.blade.php:612:                <span class="cs_primary_color"><i class="fa-regular fa-circle-user"></i></span>By<a href="#">admin</a>
+resources/views/index2.blade.php:638:                <span class="cs_primary_color"><i class="fa-regular fa-circle-user"></i></span>By<a href="#">admin</a>
+resources/views/index2.blade.php:664:                <span class="cs_primary_color"><i class="fa-regular fa-circle-user"></i></span>By<a href="#">admin</a>
+resources/views/auth/oauth-coming-soon.blade.php:1:@extends('layouts.app')
+resources/views/auth/oauth-coming-soon.blade.php:8:          <h1 class="h4 mb-3">{{ $provider ?? 'Social Login' }} – Coming Soon</h1>
+resources/views/auth/signin-options.blade.php:1:@extends('layouts.app')
+resources/views/auth/forgot.blade.php:1:@extends('layouts.app')
+resources/views/auth/organization_register.blade.php:1:@extends('layouts.app')
+resources/views/auth/reset.blade.php:1:@extends('layouts.app')
+resources/views/auth/partials/social-volunteer-only.blade.php:3:  @if(\Illuminate\Support\Facades\Route::has('uaepass.redirect'))
+resources/views/auth/partials/login-form.blade.php:3:  $loginAction = \Illuminate\Support\Facades\Route::has('login.perform')
+resources/views/auth/partials/login-form.blade.php:5:    : ( \Illuminate\Support\Facades\Route::has('login')
+resources/views/auth/partials/social-buttons.blade.php:3:    use Illuminate\Support\Facades\Route;
+resources/views/auth/partials/social-buttons.blade.php:22:                title="UAEPass coming soon">
+resources/views/auth/partials/social-buttons.blade.php:38:                title="Google login coming soon">
+resources/views/auth/partials/register-form.blade.php:2:  $registerAction = \Illuminate\Support\Facades\Route::has('register.perform')
+resources/views/auth/partials/register-form.blade.php:4:    : ( \Illuminate\Support\Facades\Route::has('register')
+resources/views/auth/partials/social_uaepass_only_for_volunteers.blade.php:1:@if(($type ?? request('type','volunteer')) === 'volunteer' && \Illuminate\Support\Facades\Route::has('uaepass.redirect'))
+resources/views/auth/passwords/email.blade.php:2:    : (\Illuminate\Support\Facades\View::exists('public') ? 'public' : 'layouts.app'))
+resources/views/auth/passwords/reset.blade.php:2:    : (\Illuminate\Support\Facades\View::exists('public') ? 'public' : 'layouts.app'))
+resources/views/auth/admin_login.blade.php:1:@extends('layouts.admin-argon')
+resources/views/auth/admin_login.blade.php:3:@section('title','Admin Login')
+resources/views/auth/admin_login.blade.php:9:        <div class="card-header"><h4 class="mb-0">Admin Login</h4></div>
+resources/views/auth/verify.blade.php:1:@extends('layouts.app')
+resources/views/auth/login-fallback.blade.php:10:<div class="text-center text-sm mt-2">@if(\Illuminate\Support\Facades\Route::has('password.request'))<a href="{{ route('password.request') }}">Forgot your password?</a>@else<a href="/forgot-password">Forgot your password?</a>@endif</div>
+resources/views/events/index.blade.php:1:@extends('layouts.app')
+resources/views/events/index.blade.php:18:  @if ($events instanceof \Illuminate\Contracts\Pagination\Paginator && $events->count())
+resources/views/events/index.blade.php:25:          @if(!empty($ev->date)) <small>— {{ \Illuminate\Support\Carbon::parse($ev->date)->toFormattedDateString() }}</small> @endif
+resources/views/events/calendar.blade.php:1:@extends('layouts.app')
+resources/views/events/calendar.blade.php:45:                    <a href="{{ $url }}">{{ \Illuminate\Support\Str::limit($e->title, 42) }}</a>
+resources/views/events/show.blade.php:1:@extends('layouts.app')
+resources/views/events/show.blade.php:10:    <p><strong>{{ __('Date') }}:</strong> {{ \Illuminate\Support\Carbon::parse($event->date)->toFormattedDateString() }}</p>
+resources/views/_home_OLD.blade.php:1:@extends('layouts.app')
+resources/views/categories/index.blade.php:1:@extends('layouts.app')
+resources/views/categories/index.blade.php:18:             href="{{ \Illuminate\Support\Facades\Route::has('public.opportunities') ? IlluminateSupportFacadesRoute::has('public.opportunities') ? route('opportunities.index') : url('/opportunities') : url('/opportunities') }}?category={{ urlencode($cat) }}">
+resources/views/categories/show.blade.php:1:@extends('layouts.app')
+resources/views/stories/index.blade.php:1:@extends('layouts.app')
+resources/views/stories/index.blade.php:5:  <div class="empty-state">{{ __('Coming soon.') }}</div>
+resources/views/stories/show.blade.php:1:@extends('layouts.app')
+resources/views/layouts/admin-argon.blade.php:6:  <title>@yield('title','Admin Login')</title>
+resources/views/layouts/admin-argon.blade.php:7:  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/argon-dashboard@2.0.5/assets/css/argon-dashboard.min.css">
+resources/views/layouts/admin.blade.php:6:  <title>@yield('title','Admin') · SwaedUAE</title>
+resources/views/layouts/admin.blade.php:11:  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+resources/views/layouts/admin.blade.php:25:    .layout{display:flex;min-height:100vh}
+resources/views/layouts/admin.blade.php:69:    @includeIf('admin._sidebar')
+resources/views/layouts/admin.blade.php:74:      @includeIf('admin._topbar')
+resources/views/layouts/admin.blade.php:89:      <footer class="text-center py-4 small">SwaedUAE Admin</footer>
+resources/views/layouts/admin.blade.php:93:  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+resources/views/layouts/admin.blade.php:94:  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+resources/views/layouts/_deprecated_app.blade.php:8:    <link rel="stylesheet" href="{{ asset('vendor/argon/assets/css/nucleo-icons.css') }}">
+resources/views/layouts/_deprecated_app.blade.php:9:    <link rel="stylesheet" href="{{ asset('vendor/argon/assets/css/nucleo-svg.css') }}">
+resources/views/layouts/_deprecated_app.blade.php:14:    @includeIf('argon_front._navbar')
+resources/views/layouts/_deprecated_app.blade.php:20:    <script src="{{ asset('vendor/argon/assets/js/core/popper.min.js') }}"></script>
+resources/views/layouts/_deprecated_app.blade.php:21:    <script src="{{ asset('vendor/argon/assets/js/core/bootstrap.min.js') }}"></script>
+resources/views/layouts/_deprecated_app.blade.php:22:    <script src="{{ asset('vendor/argon/assets/js/argon-dashboard.min.js') }}"></script>
+resources/views/layouts/_deprecated_app.blade.php:23:    @includeIf('argon_front._footer')
+resources/views/layouts/partials/nav_links.blade.php:7:    @if(($u->is_admin ?? false) || (method_exists($u, 'hasRole') && $u->hasRole('admin')))
+resources/views/layouts/partials/nav_links.blade.php:9:            <a class="nav-link" href="{{ url('/admin') }}">{{ __('Admin') }}</a>
+resources/views/layouts/partials/footer.blade.php:11:        <a class="btn btn-sm me-2" href="#" title="App Store (coming soon)"><i class="bi bi-apple me-1"></i> App Store</a>
+resources/views/layouts/partials/footer.blade.php:12:        <a class="btn btn-sm" href="#" title="Google Play (coming soon)"><i class="bi bi-google-play me-1"></i> Google Play</a>
+resources/views/layouts/partials/footer.blade.php:113:    const next = Math.max(87, Math.min(115, cur + (dir>0?5:-5)));
+resources/views/layouts/argon.blade.php:4:<link rel="stylesheet" href="{{ asset('vendor/argon/assets/css/argon.css') }}">
+resources/views/layouts/argon.blade.php:5:<link rel="stylesheet" href="{{ asset('vendor/argon/css/argon.css') }}">
+resources/views/layouts/argon.blade.php:6:</head><body class="min-h-screen antialiased bg-gray-50">
+resources/views/layouts/argon.blade.php:8:<script src="{{ asset('vendor/argon/assets/js/argon.js') }}"></script>
+resources/views/layouts/argon.blade.php:9:<script src="{{ asset('vendor/argon/js/argon.js') }}"></script>
+resources/views/layouts/org.blade.php:1:@extends('layouts.argon')
+resources/views/layouts/guest.blade.php:1:@extends('layouts.app')
+resources/views/admin.dashboard.blade.php:1:@extends('layouts.app')
+resources/views/admin.dashboard.blade.php:6:  <p>This is a placeholder page for admin.dashboard.</p>
+resources/views/certificates/index.blade.php:1:@extends('layouts.app')
+resources/views/certificates/index.blade.php:62:          @role('admin')
+resources/views/certificates/my.blade.php:1:@extends('layouts.app')
+resources/views/certificates/transcript.blade.php:25:          <td>{{ $r->minutes }}</td>
+resources/views/certificates/transcript.blade.php:26:          <td>{{ number_format($r->minutes/60,2) }}</td>
+resources/views/certificates/show.blade.php:1:@extends('layouts.app')
+resources/views/certificates/pdf.blade.php:24:    <div class="box"><strong>Issued</strong><br>{{ \Illuminate\Support\Carbon::parse($c->issued_at ?? now())->format('Y-m-d') }}</div>
+resources/views/errors/500.blade.php:12:<small>If this keeps happening, email <a href="mailto:admin@swaeduae.ae">admin@swaeduae.ae</a>.</small>
+resources/views/qr/scan.blade.php:1:@extends('layouts.app')
+resources/views/qr/scan.blade.php:9:<script src="https://unpkg.com/html5-qrcode/minified/html5-qrcode.min.js"></script>
+resources/views/payments/cancel.blade.php:1:@extends('layouts.app')
+resources/views/payments/checkout.blade.php:1:@extends('layouts.app')
+resources/views/payments/success.blade.php:1:@extends('layouts.app')
+resources/views/verify/result.blade.php:1:@extends('layouts.app')
+resources/views/verify/index.blade.php:1:@extends('layouts.app')
+resources/views/verify/show.blade.php:1:@extends('layouts.app')
+resources/views/verify/show.blade.php:15:    $minutes  = data_get($cert,'minutes');
+resources/views/verify/show.blade.php:16:    if (is_null($hours) && !is_null($minutes)) {
+resources/views/verify/show.blade.php:17:        $hours = round($minutes / 60, 2);
+resources/views/verify/show.blade.php:19:    $issuedAt = data_get($cert,'issued_at') ? \Illuminate\Support\Carbon::parse(data_get($cert,'issued_at'))->format('Y-m-d') : null;
+resources/views/opportunities/index.blade.php:49:          $startText = $e->starts_at ? (\Illuminate\Support\Carbon::parse($e->starts_at)->format('D, d M')) : '';
+resources/views/opportunities/index.blade.php:51:            ? (\Illuminate\Support\Carbon::parse($e->starts_at)->diffInHours(\Illuminate\Support\Carbon::parse($e->ends_at)).'h')
+resources/views/opportunities/qr.blade.php:1:@extends('layouts.app')
+resources/views/opportunities/index_public.blade.php:1:@extends('layouts.app')
+resources/views/opportunities/partials/similar.blade.php:11:          <p class="card-text text-muted">{{ \Illuminate\Support\Str::limit($s->description, 120) }}</p>
+resources/views/opportunities/public_show.blade.php:1:@extends('layouts.app')
+resources/views/opportunities/public/index.blade.php:1:@extends('layouts.app')
+resources/views/opportunities/public/index.blade.php:13:  @if($rows instanceof \Illuminate\Contracts\Pagination\Paginator ? $rows->count() : collect($rows)->count())
+resources/views/opportunities/public/index.blade.php:21:              @if($d)<div class="small text-muted mb-1">{{ \Illuminate\Support\Carbon::parse($d)->toFormattedDateString() }}</div>@endif
+resources/views/opportunities/public/show.blade.php:1:@extends('layouts.app')
+resources/views/teams/index.blade.php:1:@extends('layouts.app')
+resources/views/teams/create.blade.php:1:@extends('layouts.app')
+resources/views/baseline/home.blade.php:1:@extends('layouts.app')
+resources/views/leaderboard.blade.php:1:@extends('layouts.app')
+resources/views/partials/admin_nav.blade.php:1:@role('admin')
+resources/views/partials/admin_nav.blade.php:2:<li class="nav-item"><a class="nav-link" href="/admin/opportunities">Admin: Opportunities</a></li>
+resources/views/partials/_opps_fallback.blade.php:9:                        <p class="card-text text-muted">{{ \Illuminate\Support\Str::limit($o->description ?? '', 120) }}</p>
+resources/views/partials/auth_menu.blade.php:12:    <li><a class="dropdown-item" href="/admin/login">Admin</a></li>
+resources/views/partials/account_menu_inline.blade.php:1:@php $user = Illuminate\Support\Facades\Auth::user(); @endphp
+resources/views/partials/account_menu_inline.blade.php:10:    <li><a class="dropdown-item" href="{{ url('/admin') }}">Admin</a></li>
+resources/views/partials/assets-dashboard.blade.php:1:<link rel="stylesheet" href="{{ asset('vendor/argon/assets/css/argon.css') }}?v={{ @filemtime(public_path('vendor/argon/assets/css/argon.css')) }}">
+resources/views/partials/assets-dashboard.blade.php:2:<script src="{{ asset('vendor/argon/assets/js/argon.js') }}?v={{ @filemtime(public_path('vendor/argon/assets/js/argon.js')) }}" defer></script>
+resources/views/partials/nav/admin.blade.php:2:  <a class="navbar-brand" href="{{ route('admin.root') }}">Swaed Admin</a>
+resources/views/partials/nav/admin.blade.php:4:    <li class="nav-item"><a class="nav-link" href="{{ route('admin.root') }}">Dashboard</a></li>
+resources/views/partials/_events_fallback.blade.php:9:                        <p class="card-text text-muted">{{ \Illuminate\Support\Str::limit($e->description ?? '', 120) }}</p>
+resources/views/partials/account_menu.blade.php:3:    use Illuminate\Support\Str;
+resources/views/partials/account_menu.blade.php:5:    $logoutUrl = \Illuminate\Support\Facades\Route::has('logout') ? route('logout') : url('/logout');
+resources/views/partials/nav.blade.php:16:            @if((isset($navLatestOpportunities) ($navLatestOpportunities ?? collect())->count() > 0($navLatestOpportunities ?? collect())->count() > 0 $navLatestOpportunities instanceof IlluminateSupportCollection ($navLatestOpportunities ?? collect())->count() > 0($navLatestOpportunities ?? collect())->count() > 0 $navLatestOpportunities->count() > 0))
+resources/views/partials/nav.blade.php:20:          @if((isset($navLatestOpportunities) ($navLatestOpportunities ?? collect())->count() > 0($navLatestOpportunities ?? collect())->count() > 0 $navLatestOpportunities instanceof IlluminateSupportCollection ($navLatestOpportunities ?? collect())->count() > 0($navLatestOpportunities ?? collect())->count() > 0 $navLatestOpportunities->count() > 0))
+resources/views/partials/header.blade.php:17:      <button class="btn-link" data-fontminus title="A-">A−</button>
+resources/views/partials/theme-admin.blade.php:1:<link rel="stylesheet" href="/vendor/argon/assets/css/argon.css">
+resources/views/partials/theme-admin.blade.php:2:<script defer src="/vendor/argon/assets/js/argon.js"></script>
+resources/views/notifications/index.blade.php:1:@extends('layouts.app')
+resources/views/org/shortlist/index.blade.php:1:@extends(view()->exists('layouts.org') ? 'layouts.org' : (view()->exists('layouts.app') ? 'layouts.app' : null))
+resources/views/org/shortlist/_slotcap_form.blade.php:10:      <input type="number" min="0" step="1" name="slot_cap" value="{{ old('slot_cap', $capValue) }}" class="form-control" style="max-width:140px">
+resources/views/org/reports/index.blade.php:60:                            @php $hours = round(($r->total_minutes ?? 0)/60,2); @endphp
+resources/views/org/reports/index.blade.php:66:                                <td class="text-end">{{ (int)($r->total_minutes ?? 0) }}</td>
+resources/views/org/auth/_register_form_basic.blade.php:3:  $orgRegisterAction = \Illuminate\Support\Facades\Route::has('org.register.store')
+resources/views/org/auth/_login_form_basic.blade.php:3:  $orgLoginAction = \Illuminate\Support\Facades\Route::has('org.login.perform')
+resources/views/org/events/_volunteers_table.blade.php:25:                            <td class="text-end">{{ (int)($r->minutes ?? 0) }}</td>
+resources/views/org/events/_volunteers_table.blade.php:28:                                      action="{{ route('org.attendances.minutes.update', ['attendance' => $r->attendance_id]) }}"
+resources/views/org/events/_volunteers_table.blade.php:32:                                           name="minutes"
+resources/views/org/events/_volunteers_table.blade.php:33:                                           min="0" step="1"
+resources/views/org/events/_volunteers_table.blade.php:34:                                           value="{{ (int)($r->minutes ?? 0) }}"
+resources/views/org/events/volunteers.blade.php:48:          <td>{{ \Illuminate\Support\Carbon::parse($r->applied_at)->format('Y-m-d H:i') }}</td>
+resources/views/org/certificates/_pdf.blade.php:18:      <p>{{ __('This certifies that') }} <strong>{{ $user->name ?? ('#'.$user->id) }}</strong> {{ __('contributed') }} <strong>{{ $hours }}</strong> {{ __('hours') }} ({{ $minutes }} {{ __('minutes') }}) {{ __('to') }} <strong>{{ $opportunity->title ?? ('#'.$opportunity->id) }}</strong>.</p>
+resources/views/org/opportunities/attendance.blade.php:14:                  onsubmit="return confirm('{{ __('Finalize hours? This will lock attendance and post minutes to volunteer hours.') }}')">
+resources/views/org/opportunities/attendance.blade.php:88:                                    {{ \Illuminate\Support\Carbon::parse($row->checkin_at)->timezone(config('app.timezone'))->format('Y-m-d H:i') }}
+resources/views/org/opportunities/attendance.blade.php:98:                                    {{ \Illuminate\Support\Carbon::parse($row->checkout_at)->timezone(config('app.timezone'))->format('Y-m-d H:i') }}
+resources/views/org/opportunities/attendance.blade.php:108:                                <form method="POST" action="{{ route('org.attendance.minutes.update', $opportunity->id) }}" class="d-flex gap-2">
+resources/views/org/opportunities/attendance.blade.php:111:                                    <input type="number" name="minutes" class="form-control form-control-sm" min="0" max="1440" value="{{ (int)$row->minutes }}">
+resources/views/org/opportunities/attendance.blade.php:115:                                    {{ (int)$row->minutes }}
+resources/views/org/opportunities/shortlist.blade.php:35:                    <input type="number" name="slot_cap" class="form-control form-control-sm" min="0" value="{{ $cap }}" placeholder="{{ __('Unlimited') }}">
+resources/views/org/opportunities/shortlist.blade.php:80:                                <td>{{ \Illuminate\Support\Carbon::parse($a->created_at)->timezone(config('app.timezone'))->format('Y-m-d H:i') }}</td>
+resources/views/org/opportunities/edit.blade.php:9:      <a class="btn btn-outline-teal" href="{{ route('admin.attendance.qr',$opp) }}"><i class="bi bi-qr-code me-1"></i>{{ __('Show QR') }}</a>
+resources/views/org/applicants/_bulk_actions.blade.php:6:    <input type="text" name="note" class="form-control" placeholder="{{ __('Optional note to include in email') }}" style="min-width:240px;max-width:420px">
+resources/views/org/opps/index.blade.php:30:              <p class="card-text line-clamp-3">{{ \Illuminate\Support\Str::limit($op->description, 140) }}</p>
+resources/views/org/partials/dashboard_v1.blade.php:2:@php /*__UPCOMING_DISPLAY__*/ $upcoming_display = isset($upcomingOpps) ? (int)$upcomingOpps : (is_countable($upcoming ?? null) ? count($upcoming) : (int)($upcoming ?? 0)); @endphp
+resources/views/org/partials/top_volunteers.blade.php:9:          <tr><td>{{ $i+1 }}</td><td>{{ $r->name }}</td><td>{{ round(($r->mins ?? 0)/60,2) }}</td></tr>
+resources/views/org/partials/trends.blade.php:13:<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+resources/views/org/partials/upcoming_7d.blade.php:2:@php /*__UPCOMING7D_GUARDS__*/ $upcoming = $upcoming ?? []; $list = $list ?? $upcoming; $list = collect($list); $list_count=$list->count(); @endphp
+resources/views/org/partials/upcoming_7d.blade.php:4:@php $list = $upcoming; @endphp
+resources/views/org/partials/upcoming_7d.blade.php:7:    <h6 class="mb-3">{{ __('Upcoming (7 days)') }}</h6>
+resources/views/org/partials/upcoming_7d.blade.php:15:        <li class="text-muted">{{ __('No upcoming items') }}</li>
+resources/views/org/partials/recent_activity.blade.php:11:            <span class="badge bg-light text-dark">{{ \Illuminate\Support\Str::substr($r['who'] ?? '—',0,3) }}</span>
+resources/views/org/layout.blade.php:11:    <div class="container" style="display:flex;justify-content:space-between;align-items:center;min-height:56px;">
+resources/views/org/attendance/index.blade.php:70:                                <form class="d-flex" method="POST" action="{{ route('org.attendances.minutes', $a) }}">
+resources/views/org/attendance/index.blade.php:72:                                    <input type="number" name="minutes" min="0" step="1" class="form-control form-control-sm me-2"
+resources/views/org/attendance/index.blade.php:73:                                           value="{{ (int)($a->minutes ?? 0) }}">
+resources/views/org/attendance/index.blade.php:78:                                <form method="POST" action="{{ route('org.attendances.minutes', $a) }}">
+resources/views/org/attendance/index.blade.php:80:                                    <input type="hidden" name="minutes" value="{{ (int)($a->minutes ?? 0) }}">
+resources/views/org/attendance/index.blade.php:82:                                           value="{{ $a->minutes_reason ?? '' }}" placeholder="{{ __('Optional reason') }}"
+resources/views/org/attendance/scan.blade.php:25:      <div id="scanner" class="border rounded mb-3" style="width:100%;max-width:480px;min-height:300px;"></div>
+resources/views/org/attendance/settings.blade.php:19:        <input class="form-control" name="radius" id="radius" type="number" min="50" max="2000" value="{{ old('radius',$geo['radius']) }}">
+resources/views/org/complete.blade.php:18:  <p class="muted">Upload CSV with columns: <code>email,event_id,check_in_at,check_out_at,minutes</code> (minutes optional).</p>
+resources/views/org/dashboard/_kpis.blade.php:2:@php /*__KPIS_GUARDS__*/ $kpis = is_array($kpis ?? null) ? $kpis : []; $kpis = array_replace(['volunteers'=>0,'events'=>0,'hours'=>0,'applications'=>0], $kpis); $volunteersHosted   = (int) ($volunteersHosted   ?? ($kpis['volunteers']   ?? 0)); $totalHours         = (float)($totalHours         ?? ($kpis['hours']        ?? 0)); $upcomingOpps       = (int) ($upcomingOpps       ?? 0); $certificatesIssued = (int) ($certificatesIssued ?? 0); @endphp
+resources/views/org/dashboard/_kpis.blade.php:17:        <div><div class="text-muted small">{{ __('UPCOMING OPPORTUNITIES') }}</div><div class="h4 m-0">{{ $upcomingOpps }}</div></div>
+resources/views/org/dashboard/index.blade.php:68:                <td>{{ \Illuminate\Support\Str::of($o->start_date ?? '')->limit(10) }}</td>
+resources/views/org/dashboard/index.blade.php:69:                <td>{{ \Illuminate\Support\Str::of($o->end_date ?? '')->limit(10) }}</td>
+resources/views/org/dashboard/_safe_defaults.blade.php:5:  $upcomingOpps       = (int)($upcomingOpps       ?? 0);
+resources/views/org/dashboard/_safe_defaults.blade.php:20:  $upcoming       = collect($upcoming ?? []);
+resources/views/emails/volunteer/application.blade.php:1:@extends('layouts.app')
+resources/views/_from_migrations_2025-08-16-151345/index.blade.php:1:@extends('layouts.app')
+resources/views/_from_migrations_2025-08-16-151345/payment.blade.php:1:@extends('layouts.app')
+resources/views/_from_migrations_2025-08-16-151345/app.blade.php:13:    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+\n[PUBLIC ASSETS TREE: vendor, css, js] (top levels)
+public
+public/assets
+public/assets/css
+public/assets/fonts
+public/assets/images
+public/assets/js
+public/assets/sass
+public/_certificates_static.2025-09-02_230921
+public/_codex
+public/css
+public/health
+public/icons
+public/images
+public/img
+public/img/icons
+public/js
+public/sitemaps
+public/uploads
+public/uploads/profiles
+public/.well-known
+public/.well-known/acme-challenge
+\n[PUBLIC ASSETS: argon vendors]
+\n[JS CLICK BLOCKERS]
+\n[CSS POINTER-EVENTS NONE]
+\n[ROUTES: AUTH & ORG]
+  GET|HEAD        org/login .................................................................................................................................................................... org.login
+  POST            org/login ............................................................................................................................... org.login.perform › Auth\LoginController@login
+  GET|HEAD        org/register .............................................................................................................................................................. org.register
+  POST            org/register ....................................................................................................................................................... org.register.submit
+\n[LIVE HTML PROBES FOR AUTH PAGES (card present?)]
+https://swaeduae.ae/login : 54:        <div class="card shadow-sm border-0">
+https://swaeduae.ae/register : 54:        <div class="card shadow-sm border-0">
+https://swaeduae.ae/org/login : 54:        <div class="card shadow-sm border-0">
+https://swaeduae.ae/org/register : 54:        <div class="card shadow-sm border-0">
+\n[REPORT SAVED] /home/swaeduae/swaed_scans/reports/theme_audit_20250913_231949.txt
