@@ -38,3 +38,13 @@ Route::redirect('/events/browse','/opportunities',301);
 Route::get('/events/{idOrSlug}', function (string $idOrSlug) {
     return redirect('/opportunities/'.$idOrSlug,301);
 })->where('idOrSlug','[A-Za-z0-9\-_]+');
+
+/** __VOL_PROFILE_SETTINGS__ (added safely by script) */
+use Illuminate\Support\Facades\Route;
+
+Route::middleware(['web','auth','verified'])->get('/my/profile', function () {
+    return view('my.profile');
+})->name('my.profile');
+
+Route::middleware(['web','auth','verified'])->view('/my/settings','my.settings')
+    ->name('my.settings');
