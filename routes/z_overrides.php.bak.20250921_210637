@@ -1,5 +1,6 @@
 <?php
 use Illuminate\Support\Facades\Route;
+
 /**
  * Public overrides (view-only). Loaded last; keep minimal.
  */
@@ -39,9 +40,11 @@ Route::get('/events/{idOrSlug}', function (string $idOrSlug) {
 })->where('idOrSlug','[A-Za-z0-9\-_]+');
 
 /** __VOL_PROFILE_SETTINGS__ (added safely by script) */
+use Illuminate\Support\Facades\Route;
 
 Route::middleware(['web','auth','verified'])->get('/my/profile', function () {
     return view('my.profile');
 })->name('my.profile');
 
-Route::middleware(['web','auth','verified'])->get('/my/settings', function(){ return view('my.settings'); })->name('my.settings');
+Route::middleware(['web','auth','verified'])->view('/my/settings','my.settings')
+    ->name('my.settings');

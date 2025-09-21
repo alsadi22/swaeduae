@@ -40,7 +40,7 @@ Route::middleware(['web', 'auth', 'verified'])->group(function () {
     Route::post('/certificates/{id}/resend', [CertificatePdfController::class, 'resend'])->whereNumber('id')->name('certificates.resend');
     Route::post('/certificates/{id}/revoke', [CertificatePdfController::class, 'revoke'])->whereNumber('id')->name('certificates.revoke');
 
-    Route::middleware(['web','auth','verified'])->get('/my/profile', function(){ return view('my.profile'); });
+    Route::get('/my/profile', [ProfileController::class, 'index'])->name('my.profile');
 });
 
 // QR

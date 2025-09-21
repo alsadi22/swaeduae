@@ -1,5 +1,6 @@
 <?php
 use Illuminate\Support\Facades\Route;
+
 /**
  * Public overrides (view-only). Loaded last; keep minimal.
  */
@@ -37,11 +38,3 @@ Route::redirect('/events/browse','/opportunities',301);
 Route::get('/events/{idOrSlug}', function (string $idOrSlug) {
     return redirect('/opportunities/'.$idOrSlug,301);
 })->where('idOrSlug','[A-Za-z0-9\-_]+');
-
-/** __VOL_PROFILE_SETTINGS__ (added safely by script) */
-
-Route::middleware(['web','auth','verified'])->get('/my/profile', function () {
-    return view('my.profile');
-})->name('my.profile');
-
-Route::middleware(['web','auth','verified'])->get('/my/settings', function(){ return view('my.settings'); })->name('my.settings');
