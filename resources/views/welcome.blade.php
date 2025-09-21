@@ -1,4 +1,4 @@
 @extends('layouts.guest')
 @section('content')
-  @include('public.home-hero')
+  @include('public._home-hero')
 @endsection
