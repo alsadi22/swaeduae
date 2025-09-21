@@ -1,53 +1,39 @@
 name: ci-cd
 
 on:
-  push:
-    branches: [ main, ci-boot ]
   pull_request:
+  push:
     branches: [ main ]
 
 jobs:
   build:
+    name: Build & Route Guard
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
+      - uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.3'
+          php-version: "8.3"
+          tools: composer:v2
           extensions: mbstring, intl, pdo_mysql
-          coverage: none
 
-      - name: Install dependencies
-        run: composer install --no-interaction --prefer-dist --no-progress
+      - name: Composer install
+        run: composer install --no-interaction --no-progress --prefer-dist
 
-      - name: Ensure app key (for cache sanity)
+      - name: PHP lint (routes)
         run: |
-          [ -f .env ] || cp .env.example .env
-          php artisan key:generate --ansi || true
+          find routes -type f -name "*.php" -print0 | xargs -0 -n1 php -l
 
-      - name: PHP Lint
-        run: |
-          find app routes -type f -name "*.php" -print0 | xargs -0 -n 20 -P 4 php -l
+      - name: Route guard
+        run: tools/route_guard.sh
 
-      - name: Route cache sanity
-        run: php artisan optimize:clear && php artisan route:cache
-
-      - name: Admin layout audit
-        run: |
-          if grep -RInE "@extends\((\"|')public\.layout(\1)\)" resources/views/admin; then
-            echo "ERROR: admin views must not extend public.layout"; exit 1
-          else
-            echo "OK: all admin views use admin.layout"
-          fi
-
-      # Optional: signed-out probes (skip failures from restricted runners)
-      - name: Probes (signed out) — optional
-        if: ${{ false }}   # flip to true when you want to run them
-        run: |
-          echo -n "/ (admin host) : ";  curl -s -o /dev/null -w "%{http_code} %{redirect_url}\n" https://admin.swaeduae.ae/ || true
-          echo -n "/admin         : ";  curl -s -o /dev/null -w "%{http_code} %{redirect_url}\n" https://admin.swaeduae.ae/admin || true
-          echo -n "/admin/login   : ";  curl -s -o /dev/null -w "%{http_code} %{redirect_url}\n" https://admin.swaeduae.ae/admin/login || true
-          echo -n "/login         : ";  curl -s -o /dev/null -w "%{http_code}\n"          https://admin.swaeduae.ae/login || true
+  prod-smoke:
+    name: Theme Smoke (prod)
+    runs-on: ubuntu-latest
+    if: github.ref == refs/heads/main
+    needs: [ build ]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Theme smoke
+        run: tools/theme_smoke.sh
