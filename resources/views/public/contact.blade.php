@@ -1,3 +1,7 @@
+@extends('public.layout')
+@section('title','{{ __('Contact') }}')
+@section('content')
+<section class="py-16"><div class="wrap">
 @extends('public.layout-travelpro')
 @section('title', __('Contact'))
 @section('meta_description','Get in touch with the SwaedUAE team.')
@@ -33,4 +37,7 @@
     <button class="btn btn-primary" type="submit">Send</button>
   </form>
 </div>
+@endsection
+
+</div></section>
 @endsection

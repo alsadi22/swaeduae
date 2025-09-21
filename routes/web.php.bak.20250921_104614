@@ -75,9 +75,3 @@ Route::middleware(['web', 'guest', 'throttle:10,1'])
         Route::get('/reset-password/{token}', [SimplePasswordResetController::class, 'show'])->name('password.reset');
         Route::post('/reset-password', [SimplePasswordResetController::class, 'update'])->name('password.update.simple');
     });
-/** Certificates verify canonical */
-Route::get('/certificates/verify/{code?}', function (?string $code = null) {
-    return view('public.certificates.verify', ['code' => $code]);
-})->name('certificates.verify.form');
-
-require __DIR__ . '/z_canonical.php';

@@ -1,3 +1,7 @@
+@extends('public.layout')
+@section('title','Index.Blade')
+@section('content')
+<section class="py-16"><div class="wrap">
 @extends('public.layout-travelpro')
 @section('title','Opportunities')
 @section('content')
@@ -18,5 +22,8 @@
     </div>
     <div class="mt-3">{{ $items->links() }}</div>
   @endif
+</div></section>
+@endsection
+
 </div></section>
 @endsection

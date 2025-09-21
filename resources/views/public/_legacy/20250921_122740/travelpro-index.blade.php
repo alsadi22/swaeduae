@@ -1,3 +1,7 @@
+@extends('public.layout')
+@section('title','Travelpro-Index.Blade')
+@section('content')
+<section class="py-16"><div class="wrap">
 @extends("public.layout-travelpro")
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
@@ -325,3 +329,5 @@
 </body>
 
 </html>
+</div></section>
+@endsection
