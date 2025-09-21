@@ -1,4 +1,4 @@
-@extends('public.layout-travelpro')
+@extends('public.layout')
 @section('title','Opportunities')
 @section('content')
 <section class="section"><div class="container">

@@ -2,7 +2,7 @@
 @section('title','Show.Blade')
 @section('content')
 <section class="py-16"><div class="wrap">
-@extends('public.layout-travelpro')
+@extends('public.layout')
 @section('title', $op->title ?? 'Opportunity')
 @section('content')
 <section class="section"><div class="container" style="max-width:960px">
