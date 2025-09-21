@@ -1,16 +1,18 @@
 <?php
+
 use Illuminate\Support\Facades\Route;
 
-// Redirect /dashboard to home
-Route::redirect('/dashboard', '/')->name('dashboard');
+Route::get('/', fn () => view('public.home'))->name('home');
 
-// Public auth routes (no nesting errors)
-Route::middleware(['web','guest'])->group(function () {
-    // volunteer login & register
-    Route::get('/login', fn() => view('auth.login'))->name('login');
-    Route::get('/register', fn() => view('auth.register'))->name('register');
+Route::view('/about', 'public.home')   // placeholder, swap later
+    ->name('pages.about');
+require __DIR__.'/z_org_login_override.php';
+Route::view('/stories', 'public.stories')->name('pages.stories');
+Route::view('/organizations', 'public.organizations.index')->name('pages.organizations');
+/** Certificates verify (optional {code}) */
+Route::get('/certificates/verify/{code?}', function (?string $code = null) {
+    // Renders resources/views/public/certificates/verify.blade.php
+    return view('public.certificates.verify', ['code' => $code]);
+})->name('certificates.verify.form');
 
-    // organization login & register
-    Route::get('/org/login', fn() => view('org.auth.login'))->name('org.login');
-    Route::get('/org/register', fn() => view('org.auth.register'))->name('org.register');
-});
+/** Certificates verify canonical */

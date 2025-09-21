@@ -1,18 +1,14 @@
 @extends('public.layout')
 @section('title','Verify Certificate')
 @section('content')
-  <h1 class="mb-3">Verify Certificate</h1>
-  <form method="GET" action="{{ route('certificates.verify.form') }}" class="mb-4" style="display:flex;gap:8px;align-items:center">
-    <input type="text" name="code" placeholder="Enter code" value="{{ request('code') }}" required class="btn" style="width:280px">
-    <button class="btn btn-primary">Verify</button>
-  </form>
-  @isset($certificate)
-    <div class="card" style="border:1px solid #e5e7eb;border-radius:8px;padding:12px">
-      <strong>Valid</strong> — {{ $certificate->holder_name }} · {{ $certificate->hours }}h · #{{ $certificate->code }}
-    </div>
-  @elseif(request('code'))
-    <div class="card" style="border:1px solid #e5e7eb;border-radius:8px;padding:12px">
-      <strong>Not found</strong> for code “{{ request('code') }}”
-    </div>
-  @endisset
+<section class="py-16">
+  <div class="max-w-xl mx-auto bg-white text-slate-900 rounded-2xl shadow-xl p-6">
+    <h1 class="text-xl font-semibold mb-4">Verify Certificate</h1>
+    <form method="GET" action="{{ url('/certificates/verify') }}">
+      <label class="block text-sm font-medium text-slate-700 mb-1">Code</label>
+      <input name="code" type="text" class="w-full rounded-lg border border-slate-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500" value="{{ old('code', request('code', $code ?? '')) }}">
+      <button class="mt-4 px-4 py-2 rounded-lg bg-indigo-600 text-white hover:bg-indigo-700">Verify</button>
+    </form>
+  </div>
+</section>
 @endsection
