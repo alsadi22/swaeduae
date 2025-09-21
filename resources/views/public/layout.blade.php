@@ -30,15 +30,15 @@
           </div>
         </div>
         <div class="hidden md:ml-6 md:flex md:items-center md:space-x-10">
-          <a href="{{ url('/) }}"              class="nav-link text-gray-800 font-medium hover:text-indigo-600">Home</a>
-          <a href="{{ url('/opportunities) }}" class="nav-link text-gray-600 hover:text-indigo-600">Opportunities</a>
-          <a href="{{ url('/about) }}"         class="nav-link text-gray-600 hover:text-indigo-600">About</a>
-          <a href="{{ url('/stories) }}"       class="nav-link text-gray-600 hover:text-indigo-600">Stories</a>
-          <a href="{{ url('/organizations) }}" class="nav-link text-gray-600 hover:text-indigo-600">Organizations</a>
-          <a href="{{ url('/contact) }}"       class="nav-link text-gray-600 hover:text-indigo-600">Contact</a>
+          <a href="{{ url('/') }}"              class="nav-link text-gray-800 font-medium hover:text-indigo-600">Home</a>
+          <a href="{{ url('/opportunities') }}" class="nav-link text-gray-600 hover:text-indigo-600">Opportunities</a>
+          <a href="{{ url('/about') }}"         class="nav-link text-gray-600 hover:text-indigo-600">About</a>
+          <a href="{{ url('/stories') }}"       class="nav-link text-gray-600 hover:text-indigo-600">Stories</a>
+          <a href="{{ url('/organizations') }}" class="nav-link text-gray-600 hover:text-indigo-600">Organizations</a>
+          <a href="{{ url('/contact') }}"       class="nav-link text-gray-600 hover:text-indigo-600">Contact</a>
           <div class="flex items-center space-x-4">
-            <a href="{{ url('/login) }}"    class="bg-indigo-600 px-6 py-3 rounded-xl text-white font-medium shadow-lg hover:shadow-xl">Sign In</a>
-            <a href="{{ url('/register) }}" class="border-2 border-indigo-200 px-6 py-3 rounded-xl text-indigo-600 font-medium bg-white hover:bg-gray-50">Sign Up</a>
+            <a href="{{ url('/login') }}"    class="bg-indigo-600 px-6 py-3 rounded-xl text-white font-medium shadow-lg hover:shadow-xl">Sign In</a>
+            <a href="{{ url('/register') }}" class="border-2 border-indigo-200 px-6 py-3 rounded-xl text-indigo-600 font-medium bg-white hover:bg-gray-50">Sign Up</a>
           </div>
         </div>
         <div class="flex items-center md:hidden">
@@ -57,25 +57,25 @@
         <div>
           <h3 class="text-sm font-semibold text-gray-400 tracking-wider uppercase">About</h3>
           <ul class="mt-4 space-y-4">
-            <li><a href="{{ url('/about) }}" class="text-base text-gray-300 hover:text-white">Our Mission</a></li>
-            <li><a href="{{ url('/partners) }}" class="text-base text-gray-300 hover:text-white">Partners</a></li>
-            <li><a href="{{ url('/privacy) }}" class="text-base text-gray-300 hover:text-white">Privacy</a></li>
-            <li><a href="{{ url('/terms) }}" class="text-base text-gray-300 hover:text-white">Terms</a></li>
+            <li><a href="{{ url('/about') }}" class="text-base text-gray-300 hover:text-white">Our Mission</a></li>
+            <li><a href="{{ url('/partners') }}" class="text-base text-gray-300 hover:text-white">Partners</a></li>
+            <li><a href="{{ url('/privacy') }}" class="text-base text-gray-300 hover:text-white">Privacy</a></li>
+            <li><a href="{{ url('/terms') }}" class="text-base text-gray-300 hover:text-white">Terms</a></li>
           </ul>
         </div>
         <div>
           <h3 class="text-sm font-semibold text-gray-400 tracking-wider uppercase">Volunteer</h3>
           <ul class="mt-4 space-y-4">
-            <li><a href="{{ url('/opportunities) }}" class="text-base text-gray-300 hover:text-white">Opportunities</a></li>
-            <li><a href="{{ url('/qr/verify) }}" class="text-base text-gray-300 hover:text-white">QR Verify</a></li>
-            <li><a href="{{ url('/certificates/verify) }}" class="text-base text-gray-300 hover:text-white">Certificate Verify</a></li>
+            <li><a href="{{ url('/opportunities') }}" class="text-base text-gray-300 hover:text-white">Opportunities</a></li>
+            <li><a href="{{ url('/qr/verify') }}" class="text-base text-gray-300 hover:text-white">QR Verify</a></li>
+            <li><a href="{{ url('/certificates/verify') }}" class="text-base text-gray-300 hover:text-white">Certificate Verify</a></li>
           </ul>
         </div>
         <div>
           <h3 class="text-sm font-semibold text-gray-400 tracking-wider uppercase">Resources</h3>
           <ul class="mt-4 space-y-4">
-            <li><a href="{{ url('/stories) }}" class="text-base text-gray-300 hover:text-white">Stories</a></li>
-            <li><a href="{{ url('/contact) }}" class="text-base text-gray-300 hover:text-white">Contact</a></li>
+            <li><a href="{{ url('/stories') }}" class="text-base text-gray-300 hover:text-white">Stories</a></li>
+            <li><a href="{{ url('/contact') }}" class="text-base text-gray-300 hover:text-white">Contact</a></li>
           </ul>
         </div>
         <div>
