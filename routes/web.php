@@ -1,4 +1,5 @@
 <?php
+require __DIR__.'/z_pre_overrides.php';
 Route::view('/', 'public.home')->name('home.public');
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;

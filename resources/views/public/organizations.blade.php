@@ -1,17 +1,21 @@
 @extends('public.layout')
 @section('title','Organizations')
 @section('content')
-<section class="py-16"><div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-  <h1 class="text-3xl sm:text-4xl font-bold">Partner Organizations</h1>
-  <p class="mt-4 text-gray-600">Browse registered organizations on SwaedUAE.</p>
-  <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-    @for($i=1;$i<=6;$i++)
-    <div class="rounded-2xl border p-6 shadow-sm">
-      <h3 class="text-xl font-semibold">Organization {{ $i }}</h3>
-      <p class="mt-2 text-gray-600">Description placeholder.</p>
-      <a href="{{ url('/opportunities') }}" class="mt-4 inline-flex rounded-2xl border px-4 py-2 font-semibold hover:shadow transition">View opportunities</a>
+  <section class="mx-auto max-w-6xl px-4 py-10">
+    <h1 class="text-3xl font-bold mb-6">Organizations</h1>
+    <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      @foreach(($orgs ?? [
+        (object)['name'=>'Red Crescent','desc'=>'Humanitarian aid and volunteer outreach.'],
+        (object)['name'=>'Green UAE','desc'=>'Environmental protection and awareness.'],
+        (object)['name'=>'Health First','desc'=>'Community health initiatives.'],
+      ]) as $o)
+        <div class="card p-5">
+          <h2 class="text-xl font-semibold mb-1">{{ $o->name }}</h2>
+          <p class="text-sm text-slate-700">{{ \Illuminate\Support\Str::limit($o->desc ?? '', 140) }}</p>
+        </div>
+      @foreach ($orgs ?? [] as $o)
+      @endforeach
+      @endforeach
     </div>
-    @endfor
-  </div>
-</div></section>
+  </section>
 @endsection
