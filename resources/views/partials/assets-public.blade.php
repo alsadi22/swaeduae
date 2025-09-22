@@ -1,5 +1,3 @@
-{{-- TravelPro assets for public pages --}}
-@php($tp='vendor/travelpro/assets')
 <link rel="stylesheet" href="{{ asset($tp.'/css/bootstrap.min.css') }}?v={{ @filemtime(public_path($tp.'/css/bootstrap.min.css')) }}">
 <link rel="stylesheet" href="{{ asset($tp.'/css/fontawesome.min.css') }}?v={{ @filemtime(public_path($tp.'/css/fontawesome.min.css')) }}">
 <link rel="stylesheet" href="{{ asset($tp.'/css/animate.css') }}?v={{ @filemtime(public_path($tp.'/css/animate.css')) }}">

@@ -2,7 +2,6 @@
 
 @section('content')
     <!-- Start Hero Section -->
-    <x-hero subTitle='Modern & Beautiful TravelPro Theme' img='assets/images/destination_header_bg.jpeg' title='Single Blog' />
     <!-- End Hero Section -->
     
     <!-- Start Blog Section -->

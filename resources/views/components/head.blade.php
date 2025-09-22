@@ -18,7 +18,6 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="{{ $title }}">
   <meta name="twitter:description" content="{{ $desc }}">
-  @php($tp='vendor/travelpro/assets')
   <link rel="stylesheet" href="{{ asset($tp.'/css/bootstrap.min.css') }}">
   <link rel="stylesheet" href="{{ asset($tp.'/css/fontawesome.min.css') }}">
   <link rel="stylesheet" href="{{ asset($tp.'/css/animate.css') }}">
