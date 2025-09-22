@@ -1,4 +1,4 @@
-@extends('public.layout-travelpro')
+@extends('public.layout')
 @section('title','Welcome to SwaedUAE')
 @section('meta_description','Volunteer opportunities and community projects in the UAE.')
 

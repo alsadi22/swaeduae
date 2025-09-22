@@ -1,3 +1,7 @@
+@extends('public.layout')
+@section('title','Our Partners')
+@section('content')
+<section class="py-16"><div class="wrap">
 <!doctype html><html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Our Partners — SwaedUAE</title>
@@ -29,3 +33,6 @@
   @endif
 </div>
 </body></html>
+
+</div></section>
+@endsection

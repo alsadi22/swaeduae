@@ -1,4 +1,5 @@
 <?php
+require __DIR__.'/z_pre_overrides.php';
 Route::view('/', 'public.home')->name('home.public');
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
@@ -40,7 +41,7 @@ Route::middleware(['web', 'auth', 'verified'])->group(function () {
     Route::post('/certificates/{id}/resend', [CertificatePdfController::class, 'resend'])->whereNumber('id')->name('certificates.resend');
     Route::post('/certificates/{id}/revoke', [CertificatePdfController::class, 'revoke'])->whereNumber('id')->name('certificates.revoke');
 
-    Route::get('/my/profile', [ProfileController::class, 'index'])->name('my.profile');
+    Route::middleware(['web','auth','verified'])->get('/my/profile', function(){ return view('my.profile'); });
 });
 
 // QR
@@ -75,3 +76,9 @@ Route::middleware(['web', 'guest', 'throttle:10,1'])
         Route::get('/reset-password/{token}', [SimplePasswordResetController::class, 'show'])->name('password.reset');
         Route::post('/reset-password', [SimplePasswordResetController::class, 'update'])->name('password.update.simple');
     });
+/** Certificates verify canonical */
+Route::get('/certificates/verify/{code?}', function (?string $code = null) {
+    return view('public.certificates.verify', ['code' => $code]);
+})->name('certificates.verify.form');
+
+require __DIR__ . '/z_canonical.php';

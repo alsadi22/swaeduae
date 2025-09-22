@@ -1,2 +1,8 @@
-@extends("public.layout-travelpro")
-<!doctype html><html><body><h1>FAQ (stub)</h1></body></html>
+@extends('public.layout')
+@section('title','Faq')
+@section('content')
+<section class="py-16"><div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+  <h1 class="text-3xl sm:text-4xl font-bold">Faq</h1>
+  <p class="mt-4 text-gray-600">Placeholder content. Replace with your finalized copy.</p>
+</div></section>
+@endsection

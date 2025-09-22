@@ -1,36 +1,36 @@
-@extends('public.layout-travelpro')
-@section('title', __('Contact'))
-@section('meta_description','Get in touch with the SwaedUAE team.')
-@section('content')
-<div class="container py-5">
-  <h1 class="h3 mb-3">{{ __('Contact') }}</h1>
-  @if (session('status'))
-    <div id="thanks" class="alert alert-success">{{ session('status') }}</div>
-    <script>
-      document.addEventListener('DOMContentLoaded',function(){
-        const el=document.getElementById('thanks');
-        if(el) el.scrollIntoView({behavior:'smooth'});
-      });
-    </script>
-  @endif
-  @if ($errors->any()) <div class="alert alert-danger">@foreach($errors->all() as $e)<div>{{ $e }}</div>@endforeach</div> @endif
+@extends('public.layout')
+@section('title','Contact')
 
-  <form method="POST" action="{{ route('contact.submit') }}" class="mt-3">
-    @csrf
-    <input type="text" name="__website" style="display:none" autocomplete="off">
-    <div class="mb-3">
-      <label class="form-label">Your Name</label>
-      <input class="form-control" name="name" value="{{ session('clear') ? '' : old('name') }}" required>
+@section('content')
+<section class="py-16">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <h1 class="text-3xl sm:text-4xl font-bold tracking-tight">Contact Us</h1>
+    <p class="mt-4 text-lg text-gray-600">Have a question about volunteering or partnerships? Send us a message.</p>
+
+    <div class="mt-8 max-w-2xl">
+      <div class="rounded-2xl border shadow-sm p-6">
+        <form action="{{ route('contact.submit') }}" method="POST" class="space-y-4">
+          @csrf
+          <div>
+            <label class="block text-sm font-medium">Name</label>
+            <input name="name" type="text" required class="mt-1 w-full rounded-xl border px-3 py-2" placeholder="Your name">
+          </div>
+          <div>
+            <label class="block text-sm font-medium">Email</label>
+            <input name="email" type="email" required class="mt-1 w-full rounded-xl border px-3 py-2" placeholder="you@example.com">
+          </div>
+          <div>
+            <label class="block text-sm font-medium">Message</label>
+            <textarea name="message" rows="5" required class="mt-1 w-full rounded-xl border px-3 py-2" placeholder="How can we help?"></textarea>
+          </div>
+          <div class="pt-2">
+            <button type="submit" class="inline-flex items-center rounded-2xl border px-5 py-3 font-semibold shadow-sm hover:shadow transition">
+              Send Message
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
-    <div class="mb-3">
-      <label class="form-label">Email</label>
-      <input class="form-control" type="email" name="email" value="{{ session('clear') ? '' : old('email') }}" required>
-    </div>
-    <div class="mb-3">
-      <label class="form-label">Message</label>
-      <textarea class="form-control" name="message" rows="6" required>{{ session('clear') ? '' : old('message') }}</textarea>
-    </div>
-    <button class="btn btn-primary" type="submit">Send</button>
-  </form>
-</div>
+  </div>
+</section>
 @endsection

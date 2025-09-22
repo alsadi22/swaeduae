@@ -1,3 +1,6 @@
+@extends('public.layout')
+@section('title', $title ?? 'Page')
+@section('content')
 <!doctype html><html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Create account — SwaedUAE</title>
@@ -39,3 +42,4 @@
     <p style="margin-top:1rem">Already have an account? <a href="{{ route('login') }}">Sign in</a></p>
   </div>
 </body></html>
+@endsection

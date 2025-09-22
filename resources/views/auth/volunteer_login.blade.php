@@ -1,4 +1,3 @@
-@extends(\Illuminate\Support\Facades\View::exists('layout-travelpro') ? 'layout-travelpro'
     : (\Illuminate\Support\Facades\View::exists('public') ? 'public' : 'layouts.app'))
 
 @section('content')

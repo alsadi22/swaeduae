@@ -1,4 +1,8 @@
-@extends('public.layout-travelpro')
+@extends('public.layout')
+@section('title','Index.Blade')
+@section('content')
+<section class="py-16"><div class="wrap">
+@extends('public.layout')
 @section('title','Opportunities')
 @section('content')
 <section class="section"><div class="container" style="max-width:960px">
@@ -18,5 +22,8 @@
     </div>
     <div class="mt-3">{{ $items->links() }}</div>
   @endif
+</div></section>
+@endsection
+
 </div></section>
 @endsection

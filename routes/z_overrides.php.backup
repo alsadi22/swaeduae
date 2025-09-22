@@ -1,0 +1,47 @@
+<?php
+use Illuminate\Support\Facades\Route;
+/**
+ * Public overrides (view-only). Loaded last; keep minimal.
+ */
+
+/* Home (unnamed) */
+Route::view('/', 'public.home');
+
+/* Organizations */
+Route::view('/organizations', 'public.organizations')->name('organizations');
+
+/* Opportunities */
+Route::view('/opportunities', 'public.opportunities')->name('opportunities.index');
+Route::get('/opportunities/{idOrSlug}', function (string $idOrSlug) {
+    return view('public.opportunity', ['slug' => $idOrSlug]);
+})->where('idOrSlug','[A-Za-z0-9\-_]+')->name('opportunities.show');
+
+/* Static fallbacks */
+Route::view('/privacy', 'public.privacy')->name('privacy');
+Route::view('/terms',   'public.terms')->name('terms');
+Route::view('/faq',     'public.faq')->name('faq');
+
+/* Certificates verify: canonical form already defined in routes/web.php */
+
+/* Legacy redirects */
+Route::redirect('/about-us','/about',301);
+Route::redirect('/privacy-policy','/privacy',301);
+Route::redirect('/opportunity','/opportunities',301);
+Route::redirect('/verify','/certificates/verify',301);
+Route::redirect('/certificates_verify','/certificates/verify',301);
+Route::redirect('/cert_verify','/certificates/verify',301);
+
+/* Events → Opportunities */
+Route::redirect('/events','/opportunities',301);
+Route::redirect('/events/browse','/opportunities',301);
+Route::get('/events/{idOrSlug}', function (string $idOrSlug) {
+    return redirect('/opportunities/'.$idOrSlug,301);
+})->where('idOrSlug','[A-Za-z0-9\-_]+');
+
+/** __VOL_PROFILE_SETTINGS__ (added safely by script) */
+
+Route::middleware(['web','auth','verified'])->get('/my/profile', function () {
+    return view('my.profile');
+})->name('my.profile');
+
+Route::middleware(['web','auth','verified'])->get('/my/settings', function(){ return view('my.settings'); })->name('my.settings');

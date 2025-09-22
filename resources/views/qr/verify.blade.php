@@ -1,3 +1,6 @@
+@extends('public.layout')
+@section('title', $title ?? 'Page')
+@section('content')
 <!doctype html><html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Certificate Verification — SwaedUAE</title>
@@ -28,3 +31,4 @@
   <a class="btn" href="{{ url('/') }}">Back to Home</a>
 </div>
 </body></html>
+@endsection

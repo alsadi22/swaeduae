@@ -1,3 +1,0 @@
-4:use App\Http\Middleware\SetLocale;
-35:            \App\Http\Middleware\SetLocale::class,
-60:      'setlocale' => SetLocale::class,

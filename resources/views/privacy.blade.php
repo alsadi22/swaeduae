@@ -1,4 +1,4 @@
-@extends('public.layout-travelpro')
+@extends('public.layout')
 @section('title','Privacy')
 @section('content')
 <section class="section"><div class="container"><h2 class="mb-3">Privacy Policy</h2><p>Text coming soon.</p></div></section>

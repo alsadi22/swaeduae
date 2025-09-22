@@ -1,4 +1,8 @@
-@extends('public.layout-travelpro')
+@extends('public.layout')
+@section('title','Show.Blade')
+@section('content')
+<section class="py-16"><div class="wrap">
+@extends('public.layout')
 @section('title', $op->title ?? 'Opportunity')
 @section('content')
 <section class="section"><div class="container" style="max-width:960px">
@@ -19,5 +23,8 @@
   <p><a class="btn btn-outline-primary btn-sm" href="{{ url('/login') }}">Sign in to apply</a></p>
   @endauth
   <div class="card"><div class="card-body"><p>No description yet.</p></div></div>
+</div></section>
+@endsection
+
 </div></section>
 @endsection
