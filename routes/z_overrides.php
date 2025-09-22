@@ -1,47 +1,28 @@
 <?php
 use Illuminate\Support\Facades\Route;
+
 /**
- * Public overrides (view-only). Loaded last; keep minimal.
+ * Public-only overrides (GET) to ensure themed views render.
+ * - We do NOT change POST logic or controller behavior.
+ * - If views are missing, we fall back or redirect.
  */
 
-/* Home (unnamed) */
-Route::view('/', 'public.home');
+// /stories -> themed placeholder view (until real controller/content lands)
+Route::get('/stories', function () {
+    if (view()->exists('public.stories')) {
+        return view('public.stories');
+    }
+    return abort(404);
+});
 
-/* Organizations */
-Route::view('/organizations', 'public.organizations')->name('organizations');
-
-/* Opportunities */
-Route::view('/opportunities', 'public.opportunities')->name('opportunities.index');
-Route::get('/opportunities/{idOrSlug}', function (string $idOrSlug) {
-    return view('public.opportunity', ['slug' => $idOrSlug]);
-})->where('idOrSlug','[A-Za-z0-9\-_]+')->name('opportunities.show');
-
-/* Static fallbacks */
-Route::view('/privacy', 'public.privacy')->name('privacy');
-Route::view('/terms',   'public.terms')->name('terms');
-Route::view('/faq',     'public.faq')->name('faq');
-
-/* Certificates verify: canonical form already defined in routes/web.php */
-
-/* Legacy redirects */
-Route::redirect('/about-us','/about',301);
-Route::redirect('/privacy-policy','/privacy',301);
-Route::redirect('/opportunity','/opportunities',301);
-Route::redirect('/verify','/certificates/verify',301);
-Route::redirect('/certificates_verify','/certificates/verify',301);
-Route::redirect('/cert_verify','/certificates/verify',301);
-
-/* Events → Opportunities */
-Route::redirect('/events','/opportunities',301);
-Route::redirect('/events/browse','/opportunities',301);
-Route::get('/events/{idOrSlug}', function (string $idOrSlug) {
-    return redirect('/opportunities/'.$idOrSlug,301);
-})->where('idOrSlug','[A-Za-z0-9\-_]+');
-
-/** __VOL_PROFILE_SETTINGS__ (added safely by script) */
-
-Route::middleware(['web','auth','verified'])->get('/my/profile', function () {
-    return view('my.profile');
-})->name('my.profile');
-
-Route::middleware(['web','auth','verified'])->get('/my/settings', function(){ return view('my.settings'); })->name('my.settings');
+// /org/login GET -> force themed org login view (POST stays on original route)
+Route::get('/org/login', function () {
+    // Try common org login view locations we created
+    foreach (['org.login','org.auth.login','auth.org_login'] as $v) {
+        if (view()->exists($v)) {
+            return view($v);
+        }
+    }
+    // Fallback: send to /login rather than show an unthemed page
+    return redirect('/login');
+});
