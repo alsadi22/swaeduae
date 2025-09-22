@@ -2,28 +2,26 @@ name: site-quality
 on:
   pull_request:
     branches: [ main ]
-
+  push:
+    branches: [ main ]
 jobs:
   smoke:
     runs-on: ubuntu-latest
-    env:
-      BASE: https://swaeduae.ae
     steps:
-      - name: Curl core pages
-        shell: bash
+      - uses: actions/checkout@v4
+      - name: Quick curl smoke
         run: |
-          set -euo pipefail
-          ok()   { printf "OK   %-18s -> %s\n" "$1" "$2"; }
-          fail() { printf "FAIL %-18s -> %s\n" "$1" "$2"; exit 1; }
-          for U in / /admin/login /org/login /qr/verify; do
-            CODE=$(curl -sS -o /dev/null -w "%{http_code}" \
-              -L --max-redirs 5 --retry 3 --retry-delay 2 --retry-connrefused \
-              "$BASE$U")
-            case "$CODE" in
-              200|301|302) ok "$U" "$CODE" ;;
-              *)           fail "$U" "$CODE" ;;
-            esac
+          PAGES="/ /about /contact /opportunities /organizations /stories /login /register /org/login /org/register /qr/verify /certificates/verify /privacy /terms"
+          FAIL=0
+          for p in $PAGES; do
+            URL="https://www.swaeduae.ae$p"
+            CODE=$(curl -s -o /dev/null -w "%{http_code}" -L "$URL" || echo 000)
+            HTML=$(curl -s -L "$URL" || true)
+            TAILWIND=$(grep -c 'cdn.tailwindcss.com' <<<"$HTML" || true)
+            APPCSS=$(grep -cE '/assets/app\.css' <<<"$HTML" || true)
+            echo "$p -> code=$CODE tailwind=$TAILWIND app.css=$APPCSS"
+            if [ "$CODE" != "200" ] || [ "$TAILWIND" -eq 0 ] || [ "$APPCSS" -eq 0 ]; then
+              FAIL=1
+            fi
           done
-
-      - name: Lighthouse CI
-        run: npx -y @lhci/cli@0.12.x collect --url "$BASE" --quiet
+          exit $FAIL

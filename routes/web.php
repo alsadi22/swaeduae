@@ -1,5 +1,4 @@
 <?php
-require __DIR__.'/z_pre_overrides.php';
 Route::view('/', 'public.home')->name('home.public');
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
@@ -82,3 +81,28 @@ Route::get('/certificates/verify/{code?}', function (?string $code = null) {
 })->name('certificates.verify.form');
 
 require __DIR__ . '/z_canonical.php';
+
+/* ===== BEGIN PUBLIC THEME ROUTES (cleanup) =====
+   Temporary public GET routes promoted to first-class routes.
+   No POST/controller logic altered. Adjust/replace with controllers later. */
+use Illuminate\Support\Facades\Route;
+
+Route::get('/stories', function () {
+    return view()->exists('public.stories') ? view('public.stories') : abort(404);
+});
+
+Route::get('/opportunities', function () {
+    return view()->exists('public.opportunities') ? view('public.opportunities') : abort(404);
+});
+
+Route::get('/organizations', function () {
+    return view()->exists('public.organizations') ? view('public.organizations') : abort(404);
+});
+
+Route::get('/org/login', function () {
+    foreach (['org.login','org.auth.login','auth.org_login'] as $v) {
+        if (view()->exists($v)) return view($v);
+    }
+    return redirect('/login');
+});
+/* ===== END PUBLIC THEME ROUTES (cleanup) ===== */
