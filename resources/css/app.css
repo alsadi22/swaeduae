@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* --- SwaedUAE theme tokens --- */
+:root{ --brand:#1e66f5; --brand-600:#1552c9; --bg:#0b1220; --fg:#0f172a; }
+html{scroll-behavior:smooth}
+body{background:var(--bg)}

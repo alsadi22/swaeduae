@@ -30,7 +30,6 @@
     {{-- PHASE1_JSONLD_ORG --}}    
 @include('components.jsonld-org')
 @include('components.jsonld-org')
-  <link rel="stylesheet" href="/assets/app.css">
 </head>
 
 {{-- theme fallback (append-only) --}}
