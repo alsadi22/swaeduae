@@ -6,7 +6,7 @@
     <nav class="hidden md:flex items-center gap-6 text-[15px]">
       <a href="/about" class="hover:text-sky-600">About</a>
       <a href="/opportunities" class="hover:text-sky-600">Opportunities</a>
-      <!-- Stories link temporarily removed until route exists -->
+      <a href="/stories" class="hover:text-sky-600">Stories</a>
       <a href="/organizations" class="hover:text-sky-600">Organizations</a>
       <a href="/certificates/verify" class="hover:text-sky-600">Verify Certificate</a>
     </nav>
@@ -22,7 +22,7 @@
     <div class="px-4 py-3 grid gap-3">
       <a href="/about">About</a>
       <a href="/opportunities">Opportunities</a>
-      <!-- Stories link temporarily removed until route exists -->
+      <a href="/stories">Stories</a>
       <a href="/organizations">Organizations</a>
       <a href="/certificates/verify">Verify Certificate</a>
       <div class="flex gap-2 pt-2">
