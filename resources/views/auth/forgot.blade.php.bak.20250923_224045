@@ -1,4 +1,4 @@
-@extends('public.layout')
+@extends('layouts.app')
 @section('title', __('Forgot Password').' | '.config('app.name'))
 @section('page_header') <x-page-header :title="__('Forgot Password')" /> @endsection
 @section('content')

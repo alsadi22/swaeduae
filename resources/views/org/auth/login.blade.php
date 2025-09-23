@@ -1,4 +1,4 @@
-@extends('public.layout')
+@extends('org/layout_auth')
 @section('title','Organization Login')
 @section('content')
   <section class="mx-auto max-w-md px-4 py-12">

@@ -1,5 +1,3 @@
-@extends('public.layout')
-@section('content')
     : (\Illuminate\Support\Facades\View::exists('public') ? 'public' : 'layouts.app'))
 @section('title', __('Set New Password'))
 @section('content')
@@ -31,6 +29,4 @@
     </div>
   </div>
 </div>
-@endsection
-
 @endsection

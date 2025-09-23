@@ -1,5 +1,5 @@
-@extends('public.layout')
-@section('content')
+@extends(public.layout)
+(content)
 <!doctype html><meta charset="utf-8"><title>Register</title>
 <style>body{font-family:system-ui;margin:3rem}form{max-width:520px}label{display:block;margin:.6rem 0}</style>
 <h2>Create account</h2>
@@ -14,7 +14,3 @@
 </form>
 
 
-
-
-
-@endsection

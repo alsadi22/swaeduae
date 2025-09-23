@@ -1,4 +1,4 @@
-@extends('public.layout')->exists('layouts.org') ? 'layouts.org' : (view()->exists('layouts.app') ? 'layouts.app' : null))
+@extends(view()->exists('layouts.org') ? 'layouts.org' : (view()->exists('layouts.app') ? 'layouts.app' : null))
 @section('content')
 <div class="container py-4">
   <form method="POST" action="/org/login">
