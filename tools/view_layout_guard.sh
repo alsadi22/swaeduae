@@ -5,14 +5,15 @@ cd "$ROOT"
 OUTLIERS=()
 
 while IFS= read -r f; do
-  # Skip layout itself, components, and underscore-partials
-  case "$f" in
-    */resources/views/public/layout.blade.php) continue ;;
-    */resources/views/public/components/*) continue ;;
-    */resources/views/public/_*.blade.php) continue ;;
+  rel="${f#./}"  # normalize: drop leading ./ if present
+  # Skip the public layout itself, components, and underscore-partials
+  case "$rel" in
+    resources/views/public/layout.blade.php) continue ;;
+    resources/views/public/components/*) continue ;;
+    resources/views/public/_*.blade.php) continue ;;
   esac
   if ! grep -qE "@extends\(['\"]public\.layout" "$f"; then
-    OUTLIERS+=("${f#"$ROOT"/}")
+    OUTLIERS+=("$rel")
   fi
 done < <(find resources/views/public -type f -name "*.blade.php" ! -name "*.bak*")
 
