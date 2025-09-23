@@ -1,21 +1,25 @@
 #!/usr/bin/env bash
 set -euo pipefail
-rc=0
-while IFS= read -r -d '' f; do
-  base="$(basename "$f")"
-  dir="$(dirname "$f")"
-  # skip partials/alt layouts/components
-  [[ "$base" =~ ^_ ]] && continue
-  [[ "$base" =~ ^layout.*\.blade\.php$ ]] && continue
-  [[ "$base" == "rescue.blade.php" ]] && continue
-  [[ "$dir" =~ /(partials|components)(/|$) ]] && continue
-  if ! grep -qE "@extends\(['\"]public\.layout['\"]\)" "$f"; then
-    echo "$f"; rc=1
-  fi
-done < <(find resources/views/public -type f -name '*.blade.php' -print0)
+ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+cd "$ROOT"
+OUTLIERS=()
 
-if (( rc )); then
-  echo "FAIL: Public views not extending public.layout (listed above)"; exit 1
-else
-  echo "view_layout_guard: OK"; exit 0
+while IFS= read -r f; do
+  rel="${f#./}"  # normalize: drop leading ./ if present
+  # Skip the public layout itself, components, and underscore-partials
+  case "$rel" in
+    resources/views/public/layout.blade.php) continue ;;
+    resources/views/public/components/*) continue ;;
+    resources/views/public/_*.blade.php) continue ;;
+  esac
+  if ! grep -qE "@extends\(['\"]public\.layout" "$f"; then
+    OUTLIERS+=("$rel")
+  fi
+done < <(find resources/views/public -type f -name "*.blade.php" ! -name "*.bak*")
+
+if ((${#OUTLIERS[@]})); then
+  printf "Outliers (must extend public.layout):\n"
+  printf ' - %s\n' "${OUTLIERS[@]}"
+  exit 1
 fi
+echo "view_layout_guard: OK"

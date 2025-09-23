@@ -1,0 +1,36 @@
+name: theme-ci
+on:
+  pull_request:
+  push:
+    branches: [ main ]
+
+jobs:
+  theme:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # PHP (Laravel sanity only)
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          coverage: none
+
+      - name: Composer install (no scripts)
+        run: composer install --no-ansi --no-interaction --prefer-dist --no-progress
+
+      - name: App bootstrap (no DB)
+        run: |
+          cp .env.example .env || true
+          php artisan key:generate || true
+
+      # Node (Tailwind compile check)
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Tailwind deps
+        run: |
+          npm ci || npm install
+      - name: Theme guards & compile
+        run: bash tools/theme_ci.sh
