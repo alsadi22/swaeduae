@@ -8,9 +8,22 @@
   <meta name="description" content="@yield('meta_description','Volunteer opportunities across the UAE')">
   <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/app.css?v=9d4ce98f95">
+  <link rel="stylesheet" href="/assets/app.css?v=1b30b260d7">
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob:; connect-src 'self'; form-action 'self'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests">
   <meta name="referrer" content="strict-origin-when-cross-origin">
+  <!-- SEO pack: OG, canonical, Twitter, JSON-LD -->
+  <meta property="og:title" content="{{ trim($__env->yieldContent('og_title', $__env->yieldContent('title','SwaedUAE'))) }}">
+  <meta property="og:description" content="{{ trim($__env->yieldContent('og_description', $__env->yieldContent('meta_description','Volunteer opportunities across the UAE'))) }}">
+  <meta property="og:url" content="{{ url()->current() }}">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="{{ $__env->yieldContent('og_image', asset('assets/og-default.png')) }}">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="{{ $__env->yieldContent('canonical', url()->current()) }}">
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"WebSite","name":"SwaedUAE","url":"{{ url('/') }}"}
+  </script>
+  @stack('head_meta')
+  @stack('jsonld')
   @stack('head')
 </head>
 <body class="bg-[var(--bg)] text-[var(--ink)] font-[Inter] antialiased">
