@@ -82,3 +82,8 @@ Route::get('/certificates/verify/{code?}', function (?string $code = null) {
 })->name('certificates.verify.form');
 
 require __DIR__ . '/z_canonical.php';
+
+// Load public fallback routes (safe if primaries missing)
+
+Route::view('/faq','public.faq')->name('faq');
+Route::view('/events','public.events.index')->name('events.index');
