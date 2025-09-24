@@ -1,4 +1,13 @@
 <?php
+
+// Phase 1: public static pages (must stay above catch-alls)
+Route::view('/about',    'public.about'   )->name('about');
+Route::view('/faq',      'public.faq'     )->name('faq');
+Route::view('/privacy',  'public.privacy' )->name('privacy');
+Route::view('/terms',    'public.terms'   )->name('terms');
+Route::view('/partners', 'public.partners')->name('partners.index');
+Route::view('/contact',  'public.contact' )->name('contact');
+
 require __DIR__.'/z_pre_overrides.php';
 Route::view('/', 'public.home')->name('home.public');
 
