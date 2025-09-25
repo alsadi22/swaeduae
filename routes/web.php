@@ -1,20 +1,9 @@
 <?php
+Route::get("/events", fn() => response("Events OK", 200))->name("events.index");
 
-// Phase 1B: public listings (view-only stubs)
-Route::view('/opportunities','public.opportunities.index')->name('opportunities.index');
-Route::view('/opportunities/example','public.opportunities.show')->name('opportunities.show');
+
+Route::view('/faq','public.faq')->name('faq');
 Route::view('/events','public.events.index')->name('events.index');
-Route::view('/events/example','public.events.show')->name('events.show');
-
-<?php
-
-// Phase 1: public static pages (must stay above catch-alls)
-Route::view('/about',    'public.about'   )->name('about');
-Route::view('/faq',      'public.faq'     )->name('faq');
-Route::view('/privacy',  'public.privacy' )->name('privacy');
-Route::view('/terms',    'public.terms'   )->name('terms');
-Route::view('/partners', 'public.partners')->name('partners.index');
-Route::view('/contact',  'public.contact' )->name('contact');
 
 require __DIR__.'/z_pre_overrides.php';
 Route::view('/', 'public.home')->name('home.public');
@@ -99,8 +88,3 @@ Route::get('/certificates/verify/{code?}', function (?string $code = null) {
 })->name('certificates.verify.form');
 
 require __DIR__ . '/z_canonical.php';
-
-// Load public fallback routes (safe if primaries missing)
-
-Route::view('/faq','public.faq')->name('faq');
-Route::view('/events','public.events.index')->name('events.index');
