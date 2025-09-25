@@ -1,4 +1,3 @@
-<?php
 /**
  * Early auth/gate overrides loaded by routes/web.php
  * Keeps logic out of controllers and avoids provider edits.

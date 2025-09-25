@@ -1,4 +1,3 @@
-<?php
 if (app()->environment('production')) { return; }
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;

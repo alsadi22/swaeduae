@@ -1,4 +1,0 @@
-<?php
-use Illuminate\Support\acades\route;
-
-Route::view('/certificates/verify','public.certificates_verify');

@@ -1,4 +1,3 @@
-<?php
 
 use App\Http\Controllers\Org\ApplicantsController;
 use App\Http\Controllers\Org\DashboardController;

@@ -1,4 +1,3 @@
-<?php
 
 // Phase 1B: public listings (view-only stubs)
 Route::view('/opportunities','public.opportunities.index')->name('opportunities.index');
@@ -6,7 +5,6 @@ Route::view('/opportunities/example','public.opportunities.show')->name('opportu
 Route::view('/events','public.events.index')->name('events.index');
 Route::view('/events/example','public.events.show')->name('events.show');
 
-<?php
 
 // Phase 1: public static pages (must stay above catch-alls)
 Route::view('/about',    'public.about'   )->name('about');

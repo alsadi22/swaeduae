@@ -1,4 +1,3 @@
-<?php
 /* Phase-0 helpers: safe stubs + stub_path (guarded). */
 if (!function_exists('phase0_stub')) {
     function phase0_stub(string $name, string $uri, array $middleware = []) {

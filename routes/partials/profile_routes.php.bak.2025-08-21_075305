@@ -1,4 +1,3 @@
-<?php
 # Quick whole-project lint to be sure nothing else is broken
 find app routes database -type f -name '*.php' -print0 \use Illuminate\Support\Facades\Route; use 
 App\Http\Controllers\Volunteer\ProfileController;
