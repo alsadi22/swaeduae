@@ -12,6 +12,14 @@
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob:; connect-src 'self'; form-action 'self'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   @stack('head')
+  <link rel="canonical" href="{{ url()->current() }}">
+  <meta property="og:title" content="@yield(title,SwaedUAE)">
+  <meta property="og:description" content="@yield('meta_description','Volunteer opportunities across the UAE')">
+  <meta property="og:url" content="{{ url()->current() }}">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="@yield('title','SwaedUAE')">
+  <meta name="twitter:description" content="@yield('meta_description','Volunteer opportunities across the UAE')">
 </head>
 <body class="bg-[var(--bg)] text-[var(--ink)] font-[Inter] antialiased">
   <a href="#main" class="skip-link sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:px-4 focus:py-2 focus:rounded-lg focus:bg-white focus:text-primary focus:shadow">Skip to content</a>
