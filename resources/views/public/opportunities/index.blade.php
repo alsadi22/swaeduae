@@ -1,3 +1,4 @@
+@extends('public.layout')
 @extends(public.layout)
 	@section('title','Opportunities')
 @section('meta_description','Browse volunteering opportunities')
