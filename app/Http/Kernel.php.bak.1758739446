@@ -22,7 +22,7 @@ class Kernel extends HttpKernel
      */
     protected $middlewareGroups = [
         'web' => [
-        \App\Http\Middleware\TightenCsp::class,
+        \\App\\Http\\Middleware\\TightenCsp::class,
             \App\Http\Middleware\NoCacheLoginResponses::class,
             \App\Http\Middleware\VerifiedPathEnforcer::class,
             \App\Http\Middleware\AdminPathEnforcer::class,

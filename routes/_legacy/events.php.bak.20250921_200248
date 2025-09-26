@@ -1,4 +1,3 @@
-<?php
 // DISABLED: use App\Http\Controllers\Public\EventsBrowseController;
 
 

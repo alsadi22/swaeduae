@@ -27,3 +27,10 @@ scripts/smoke.env
 
 # Dependencies
 /vendor/
+# Local backup/legacy artifacts
+routes/_legacy_bak/
+routes/*.bak*
+routes/*.bad.*
+resources/views/public/_legacy_bak/
+resources/views/public/**/*.bak.*
+

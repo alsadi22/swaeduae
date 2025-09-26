@@ -1,4 +1,3 @@
-<?php
 if (app()->environment('production')) { return; }
 
 use Illuminate\Support\Facades\Route;

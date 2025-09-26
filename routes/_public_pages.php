@@ -1,8 +1,7 @@
-<?php
 use Illuminate\Support\Facades\Route;
 
 if (view()->exists('public.faq')) {
-    Route::get('/faq', fn() => view('public.faq'))->name('faq');
+    Route::get('/faq', fn() => view('public.faq'))->name('faq')->middleware('setlocale');
 }
 if (view()->exists('public.contact')) {
     Route::get('/contact', fn() => view('public.contact'))->name('contact.show');
@@ -16,3 +15,4 @@ if (view()->exists('public.privacy')) {
 if (view()->exists('public.partners')) {
     Route::get('/partners', fn() => view('public.partners'))->name('partners');
 }
+Route::get('/events', fn () => view('public.events.index'))->middleware('setlocale')->name('events.index');

@@ -1,7 +1,5 @@
 <?php
-require __DIR__.'/z_pre_overrides.php';
-Route::view('/', 'public.home')->name('home.public');
-
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\SimpleLoginController;
 use App\Http\Controllers\Auth\SimplePasswordResetController;
@@ -11,7 +9,10 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\Admin\ApprovalsController;
 use App\Http\Controllers\My\ProfileController;
 use App\Http\Controllers\QR\VerifyController;
-use Illuminate\Support\Facades\Route;
+Route::get('/certificates/verify/{code?}', function ($code = null) { return view('public.certificates.verify', ['code'=>$code]); })->name('certificates.verify.form');
+if (file_exists(__DIR__.'/z_overrides.php')) require __DIR__.'/z_overrides.php';
+Route::view('/', 'public.home')->name('home.public');
+
 
 require __DIR__.'/partials/disable_internal.php';
 
@@ -41,7 +42,7 @@ Route::middleware(['web', 'auth', 'verified'])->group(function () {
     Route::post('/certificates/{id}/resend', [CertificatePdfController::class, 'resend'])->whereNumber('id')->name('certificates.resend');
     Route::post('/certificates/{id}/revoke', [CertificatePdfController::class, 'revoke'])->whereNumber('id')->name('certificates.revoke');
 
-    Route::middleware(['web','auth','verified'])->get('/my/profile', function(){ return view('my.profile'); });
+    Route::get('/my/profile', [ProfileController::class, 'index'])->name('my.profile');
 });
 
 // QR
@@ -50,7 +51,7 @@ Route::match(['GET', 'POST'], '/qr/checkout', [\App\Http\Controllers\QR\CheckinC
 Route::get('/qr/verify/{serial?}', [VerifyController::class, 'show'])->name('qr.verify');
 
 // Admin login alias → /login
-Route::get('/admin/login', fn () => redirect()->to('/login'))->name('admin.login');
+Route::get('/admin/login', fn () => redirect()->to('/login'))->name('admin.login.alt');
 
 Route::middleware(['web','auth','can:admin-access'])->prefix('admin')->name('admin.')->group(function(){
     Route::get('/approvals',[ApprovalsController::class,'index'])->name('approvals.index');
@@ -76,9 +77,50 @@ Route::middleware(['web', 'guest', 'throttle:10,1'])
         Route::get('/reset-password/{token}', [SimplePasswordResetController::class, 'show'])->name('password.reset');
         Route::post('/reset-password', [SimplePasswordResetController::class, 'update'])->name('password.update.simple');
     });
-/** Certificates verify canonical */
-Route::get('/certificates/verify/{code?}', function (?string $code = null) {
-    return view('public.certificates.verify', ['code' => $code]);
-})->name('certificates.verify.form');
 
-require __DIR__ . '/z_canonical.php';
+
+// Public homepage (added automatically)
+Route::get("/", function(){ return view("public.home"); })->name("home");
+// Public homepage
+Route::get("/", fn() => view("public.home"))->name("home");
+// Public opportunities (UI stub)
+Route::get("/opportunities", fn() => view("public.opportunities"))->name("opportunities.index");
+// About (static)
+Route::get("/about", fn() => view("public.about"))->name("about");
+// Contact (GET form page; POST handled by contact.submit)
+Route::get("/contact", fn() => view("public.contact"))->name("contact");
+/* Admin: Hours & Certificates (closure fallbacks if views missing) */
+Route::domain("admin.swaeduae.ae")->middleware(["web","auth","can:admin-access"])->prefix("admin")->name("admin.")->group(function () {
+    Route::get("/hours", fn() => view()->exists("admin.hours.index") ? view("admin.hours.index") : response("Admin Hours", 200))->name("hours.index");
+    Route::get("/certificates", fn() => view()->exists("admin.certificates.index") ? view("admin.certificates.index") : response("Admin Certificates", 200))->name("certificates.index");
+});
+/* Fallback POST /logout */
+Route::post("/logout", function () {
+    \Illuminate\Support\Facades\Auth::logout();
+    request()->session()->invalidate();
+    request()->session()->regenerateToken();
+    return redirect("/");
+})->name("logout");
+
+/* Admin: Hours & Certificates (fallbacks if views missing) */
+Route::domain('admin.swaeduae.ae')->middleware(['web','auth','can:admin-access'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/hours', fn() => view()->exists('admin.hours.index') ? view('admin.hours.index') : response('Admin Hours', 200))->name('hours.index');
+    Route::get('/certificates', fn() => view()->exists('admin.certificates.index') ? view('admin.certificates.index') : response('Admin Certificates', 200))->name('certificates.index');
+});
+
+
+// Legacy path → new QR verify (301, preserves query and {code})
+// Route::get('/certificates/verify/{code?}', function ($code = null) {
+//     $qs = request()->query();
+//     $target = '/qr/verify' . ($qs ? ('?' . http_build_query($qs)) : '');
+//     return redirect()->to($target, 301);
+// })->name('certificates.verify.form');
+
+/* Legacy path → new QR verify (301, preserves query and {code}) */
+// Route::get('/certificates/verify/{code?}', function ($code = null) {
+//     $qs = request()->query();
+//     if (!$qs && $code) { $qs = ['code' => $code]; }
+//     $target = '/qr/verify' . ($qs ? ('?' . http_build_query($qs)) : '');
+//     return redirect()->to($target, 301);
+// })->name('certificates.verify.form');
+

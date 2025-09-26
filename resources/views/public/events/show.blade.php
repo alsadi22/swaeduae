@@ -1,10 +1,8 @@
-@extends('public.layout')
-
+@extends(public.layout)
+@section('title','Event — Example')
+@section('meta_description','Event details')
 @section('content')
-<div class="container py-4">
-  <h1>{{ $event->title ?? __('Event') }}</h1>
-  <p>{{ $event->description ?? __('No description provided.') }}</p>
-  <p><strong>{{ __('Starts:') }}</strong> {{ $event->start_date ?? '—' }}</p>
-  <p><strong>{{ __('Ends:') }}</strong> {{ $event->end_date ?? '—' }}</p>
-</div>
-@endsection
+<section class="mx-auto max-w-3xl px-4 py-10">
+ <a href="/events" class="text-sm underline">¹ Back to events</a>
+ <h1 class="mt-2 text-3l font-bold">Event Example</h1>
+ <p

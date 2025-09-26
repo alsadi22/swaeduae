@@ -1,30 +1,11 @@
-@extends('public.layout')
-@section('title','Show.Blade')
+@extends(public.layout)
+@section('title','Opportunity — Example')
+@section('meta_description','Opportunity details')
 @section('content')
-<section class="py-16"><div class="wrap">
-@extends('public.layout')
-@section('title', $op->title ?? 'Opportunity')
-@section('content')
-<section class="section"><div class="container" style="max-width:960px">
-  <a class="btn btn-sm btn-outline-secondary mb-3" href="{{ url('/opportunities') }}">&larr; All opportunities</a>
-  <h2 class="mb-2">{{ $op->title ?? 'Opportunity' }}</h2>
-  <p class="text-muted mb-3">
-    <span>{{ $op->location ?? '—' }}</span>
-    @if($op->starts_at) • {{ \Illuminate\Support\Carbon::parse($op->starts_at)->format('Y-m-d H:i') }} @endif
-    @if($op->ends_at) – {{ \Illuminate\Support\Carbon::parse($op->ends_at)->format('Y-m-d H:i') }} @endif
-  </p>
-  @auth
-  <form method="POST" action="{{ url('/opportunities/'.$op->slug.'/apply') }}" class="mt-2 mb-4">
-    @csrf
-    <button class="btn btn-primary btn-sm">Apply</button>
-    <a class="btn btn-outline-secondary btn-sm" href="{{ url('/ics/'.$op->slug) }}">ICS</a>
-  </form>
-  @else
-  <p><a class="btn btn-outline-primary btn-sm" href="{{ url('/login') }}">Sign in to apply</a></p>
-  @endauth
-  <div class="card"><div class="card-body"><p>No description yet.</p></div></div>
-</div></section>
-@endsection
-
-</div></section>
-@endsection
+<section class="mx-auto max-w-3xl px-4 py-10">
+ <a href="/opportunities" class="text-sm underline">© Back to opportunities</a>
+ <h1 class="mt-2 text-3l font-bold">Opportunity Example</h1>
+ <p class="text-muted-foreground mt-2">This is a themed placeholder. Real data will render here later.</p>
+ <div class="mt-6 grid gap-4 sm:grid-cols-2">
+  <div class="rounded-xl border p-4"><div class="text-xs uppercase">Type</div><div class="font-medium">Physical</div></div>
+  <div class="rounded-xl border p
