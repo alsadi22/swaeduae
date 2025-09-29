@@ -27,3 +27,7 @@ scripts/smoke.env
 
 # Dependencies
 /vendor/
+
+# Local Blade backups
+resources/views/public/**/*.bak.*
+resources/views/public/*.bak.*
