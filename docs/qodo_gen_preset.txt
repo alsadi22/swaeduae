@@ -1,0 +1,7 @@
+Project: SwaedUAE (Laravel 11 + Sanctum). Tailwind is compiled (NO CDN).
+Rules:
+- Only edit VIEWS & ASSETS unless I say otherwise.
+- Return a UNIFIED DIFF only (no prose).
+- Minimal changes, keep existing structure.
+- Use our Tailwind tokens; every new public view must extend 'public.layout'.
+- After the diff, list any commands to run (build css, artisan clears).

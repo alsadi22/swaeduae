@@ -1,4 +1,6 @@
-@extends(public.layout)
+@extends('public.layout')
+@section('title', 'Layout Argon')
+@section('content')
 <!doctype html>
 <html lang="{{ str_replace('_','-',app()->getLocale()) }}" dir="{{ app()->isLocale('ar') ? 'rtl' : 'ltr' }}">
 <head>
@@ -51,4 +53,4 @@
   @include('public._analytics')
 </body>
 </html>
-
+@endsection

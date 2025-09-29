@@ -1,4 +1,5 @@
-@extends(public.layout)
+@extends('public.layout')
+@section('title', 'Not Implemented')
 @section('content')
   <div class="container py-5">
     <h1>{{ $title ?? 'Coming soon' }}</h1>

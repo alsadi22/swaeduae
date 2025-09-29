@@ -1,3 +1,6 @@
+@extends('public.layout')
+@section('title', 'Layout')
+@section('content')
 <!doctype html>
 <html lang="{{ str_replace("_","-",app()->getLocale()) }}" dir="{{ app()->getLocale()==="ar" ? "rtl" : "ltr" }}">
 <head>
@@ -25,3 +28,4 @@
   <script src="/assets/app.js?v={{ file_exists(public_path("assets/app.js")) ? substr(md5_file(public_path("assets/app.js")),0,8) : time() }}"></script>
 </body>
 </html>
+@endsection

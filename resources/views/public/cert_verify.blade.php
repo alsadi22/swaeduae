@@ -1,3 +1,6 @@
+@extends('public.layout')
+@section('title', 'Cert Verify')
+@section('content')
 <!doctype html>
 <html lang="en"><head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
@@ -14,3 +17,4 @@
     @endif
   </main>
 </body></html>
+@endsection

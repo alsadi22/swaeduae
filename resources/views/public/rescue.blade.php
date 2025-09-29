@@ -1,3 +1,6 @@
+@extends('public.layout')
+@section('title', 'Rescue')
+@section('content')
 <!doctype html>
 <html lang="{{ str_replace("_","-",app()->getLocale()) }}">
 <head>
@@ -14,3 +17,4 @@
   </div>
 </body>
 </html>
+@endsection
