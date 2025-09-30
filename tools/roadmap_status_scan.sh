@@ -1,5 +1,5 @@
-PHP_BIN=${PHP_BIN:-php}
 #!/usr/bin/env bash
+PHP_BIN=${PHP_BIN:-php}
 set -Eeuo pipefail
 APP="/var/www/swaeduae/current"
 OUT="$APP/tools/reports"; TS="$(date +%Y%m%d_%H%M%S)"; mkdir -p "$OUT"

@@ -1,5 +1,5 @@
-PHP_BIN=${PHP_BIN:-php}
 #!/usr/bin/env bash
+PHP_BIN=${PHP_BIN:-php}
 set -euo pipefail
 if [[ $# -lt 1 ]]; then
   echo "Usage: $0 /full/path/to/backup-YYYY-MM-DD-HHMMSS.tar.gz [DB_NAME]" >&2

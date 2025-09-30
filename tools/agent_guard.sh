@@ -1,5 +1,5 @@
-PHP_BIN=${PHP_BIN:-php}
 #!/usr/bin/env bash
+PHP_BIN=${PHP_BIN:-php}
 set -euo pipefail
 APP="/var/www/swaeduae"             # absolute app path
 PHP_BIN="${PHP:-php}"

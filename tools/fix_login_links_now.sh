@@ -1,5 +1,5 @@
-PHP_BIN=${PHP_BIN:-php}
 #!/usr/bin/env bash
+PHP_BIN=${PHP_BIN:-php}
 # SwaedUAE — Login/Register links on HOME (check first, then minimal safe fix)
 set -u; set -o pipefail
 TS=$(date +%F_%H%M%S)

@@ -1,5 +1,5 @@
-PHP_BIN=${PHP_BIN:-php}
 #!/usr/bin/env bash
+PHP_BIN=${PHP_BIN:-php}
 set -euo pipefail
 MAIN="resources/views/org/dashboard.blade.php"
 PART="resources/views/org/partials/dashboard_v1.blade.php"

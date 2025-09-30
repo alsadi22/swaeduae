@@ -1,5 +1,5 @@
-PHP_BIN=${PHP_BIN:-php}
 #!/usr/bin/env bash
+PHP_BIN=${PHP_BIN:-php}
 set -euo pipefail
 BASE="${BASE:-https://swaeduae.ae}"
 HLOG_DIR="public/health"

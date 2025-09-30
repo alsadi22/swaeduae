@@ -1,5 +1,5 @@
-PHP_BIN=${PHP_BIN:-php}
 #!/usr/bin/env bash
+PHP_BIN=${PHP_BIN:-php}
 set -euo pipefail
 APP="$(cd "$(dirname "$0")/.." && pwd)"
 LAST="$APP/storage/app/agent/guard.last"

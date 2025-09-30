@@ -1,5 +1,5 @@
-PHP_BIN=${PHP_BIN:-php}
 #!/usr/bin/env bash
+PHP_BIN=${PHP_BIN:-php}
 set -u; set -o pipefail
 BASE_URL="${BASE_URL:-https://swaeduae.ae}"
 ADMIN_URL="${ADMIN_URL:-https://admin.swaeduae.ae}"

@@ -1,5 +1,5 @@
-PHP_BIN=${PHP_BIN:-php}
 #!/usr/bin/env bash
+PHP_BIN=${PHP_BIN:-php}
 set -u
 ROOT="/home3/vminingc/swaeduae.ae"
 APP="/home3/vminingc/swaeduae.ae/laravel-app"

@@ -1,5 +1,5 @@
-PHP_BIN=${PHP_BIN:-php}
 #!/usr/bin/env bash
+PHP_BIN=${PHP_BIN:-php}
 set -euo pipefail
 file="resources/views/admin/dashboard.blade.php"
 [ -f "$file" ] || { echo "No $file"; exit 0; }

@@ -1,5 +1,5 @@
-PHP_BIN=${PHP_BIN:-php}
 #!/usr/bin/env bash
+PHP_BIN=${PHP_BIN:-php}
 set -euo pipefail
 echo "== routes =="; php artisan route:list | egrep -i "admin/login|admin/dashboard"
 echo "== gate ==";  php artisan tinker --execute="use Illuminate\Support\Facades\Gate; echo Gate::has('isAdmin')?'OK':'MISSING';"

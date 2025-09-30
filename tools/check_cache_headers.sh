@@ -1,5 +1,5 @@
-PHP_BIN=${PHP_BIN:-php}
 #!/bin/bash
+PHP_BIN=${PHP_BIN:-php}
 URL="https://swaeduae.ae"
 
 echo "==> Dynamic page (/) [1st request]"

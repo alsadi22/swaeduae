@@ -1,5 +1,5 @@
-PHP_BIN=${PHP_BIN:-php}
 set -euo pipefail
+PHP_BIN=${PHP_BIN:-php}
 cd "$(dirname "$0")/.."
 
 echo "[1/5] Strip Honeypot from AdminLoginController"

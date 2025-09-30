@@ -1,5 +1,5 @@
-PHP_BIN=${PHP_BIN:-php}
 #!/usr/bin/env bash
+PHP_BIN=${PHP_BIN:-php}
 set -euo pipefail
 LAY='resources/views/public/layout.blade.php'
 echo "[public/layout.blade.php first 120 lines]"

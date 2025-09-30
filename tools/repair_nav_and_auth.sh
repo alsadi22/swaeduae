@@ -1,5 +1,5 @@
-PHP_BIN=${PHP_BIN:-php}
 #!/usr/bin/env bash
+PHP_BIN=${PHP_BIN:-php}
 set -Eeuo pipefail
 cd /var/www/swaeduae
 TS="$(date +%F_%H%M%S)"

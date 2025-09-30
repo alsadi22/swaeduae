@@ -1,5 +1,5 @@
-PHP_BIN=${PHP_BIN:-php}
 #!/usr/bin/env bash
+PHP_BIN=${PHP_BIN:-php}
 set -u
 HOST="swaeduae.ae"
 CF_BASE="https://swaeduae.ae"

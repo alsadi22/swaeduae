@@ -1,5 +1,5 @@
-PHP_BIN=${PHP_BIN:-php}
 #!/usr/bin/env bash
+PHP_BIN=${PHP_BIN:-php}
 set -euo pipefail
 F="app/Http/Controllers/HomeController.php"
 STAMP="$(date +%F_%H%M%S)"

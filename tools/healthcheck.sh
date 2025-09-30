@@ -1,5 +1,5 @@
-PHP_BIN=${PHP_BIN:-php}
 #!/bin/bash
+PHP_BIN=${PHP_BIN:-php}
 set -euo pipefail
 
 APP_DIR="/home3/vminingc/swaeduae.ae/laravel-app"

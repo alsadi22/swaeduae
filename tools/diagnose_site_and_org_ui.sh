@@ -1,5 +1,5 @@
-PHP_BIN=${PHP_BIN:-php}
 #!/usr/bin/env bash
+PHP_BIN=${PHP_BIN:-php}
 set -euo pipefail
 STAMP="$(date +%F-%H%M%S)"
 OUT="tmp/diag-$STAMP"
