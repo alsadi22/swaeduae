@@ -44,7 +44,7 @@ done < "$OUT/errorlogs.list"
 
 # --- Route that serves "/"
 say "\n[Route for /]"
-php artisan route:list --columns=Method,URI,Name,Action,Middleware 2>/dev/null | tee "$OUT/routes.txt" | egrep -i '^\| *GET *\| */( |$)' || true
+php artisan route:list| tee "$OUT/routes.txt" | egrep -i '^\| *GET *\| */( |$)' || true
 
 # --- Show the first match for Route::get('/') in routes/
 say "\n[routes/web.php → lines around Route::get('/')]"

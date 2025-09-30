@@ -25,7 +25,7 @@ php artisan view:cache >/dev/null && HIT "view:cache compiled"
 
 echo
 echo "-- Routes + middleware --"
-rl(){ php artisan route:list --columns=Method,URI,Name,Middleware 2>/dev/null; }
+rl(){ php artisan route:list
 
 if rl | grep -E "account/(applications|certificates)" >/dev/null; then
   if rl | grep -E "account/(applications|certificates)" | grep -Eiq "auth"; then
@@ -54,7 +54,7 @@ else
 fi
 
 # QR verify presence: route OR HTTP
-if php artisan route:list --columns=URI,Name 2>/dev/null | grep -E "^qr/verify" >/dev/null; then
+if php artisan route:list| grep -E "^qr/verify" >/dev/null; then
   HIT "QR verify endpoint present (route:list)"
 else
   code_verify=$(curl -s -o /dev/null -w "%{http_code}" -I "$BASE/qr/verify")
@@ -62,7 +62,7 @@ else
 fi
 
 # ICS endpoint presence
-if php artisan route:list --columns=URI,Name 2>/dev/null | grep -E "^ics/" >/dev/null; then
+if php artisan route:list| grep -E "^ics/" >/dev/null; then
   HIT "ICS endpoint present"
 else
   WARN "ICS endpoint not found"

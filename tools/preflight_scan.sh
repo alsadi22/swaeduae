@@ -14,7 +14,7 @@ echo "-- Blade extends sanity (no unquoted) --"
 grep -R --line-number "@extends(public\.layout" resources/views/public || echo "Extends OK"
 
 echo "-- Routes (top 50) --"
-php artisan route:list --columns=method,uri,name | sed -n '1,50p' || true
+php artisan route:list | sed -n "1,120p"
 
 echo "-- Cache status --"
 php artisan about --only=environment,cache || true

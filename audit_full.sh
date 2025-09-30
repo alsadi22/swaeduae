@@ -34,18 +34,18 @@ EOF
 } | tee "$OUT/01_http_smoke.txt"
 
 # 02 routes (full)
-"$PHP_BIN" artisan route:list --columns=Method,URI,Name,Action,Middleware \
+"$PHP_BIN" artisan route:list
   | tee "$OUT/02_routes.txt" >/dev/null
 
 # 03 auth-related subset
-"$PHP_BIN" artisan route:list --columns=Method,URI,Name,Action,Middleware \
+"$PHP_BIN" artisan route:list
   | grep -Ei 'login|logout|register|profile|dashboard|(^|/)org(/|$)' \
   | tee "$OUT/03_auth_routes.txt" >/dev/null
 
 # 04 POST handlers for /login and /org/login
-VOL="$("$PHP_BIN" artisan route:list --columns=Method,URI,Action \
+VOL="$("$PHP_BIN" artisan route:list
       | awk '/^POST/ && $2=="login"{for(i=1;i<=NF;i++) if ($i ~ /@/) {print $i; exit}}')"
-ORG="$("$PHP_BIN" artisan route:list --columns=Method,URI,Action \
+ORG="$("$PHP_BIN" artisan route:list
       | awk '/^POST/ && $2 ~ /^org\/login$/{for(i=1;i<=NF;i++) if ($i ~ /@/) {print $i; exit}}')"
 { echo "POST /login      -> ${VOL:-not-found}"; echo "POST /org/login  -> ${ORG:-not-found}"; } \
   | tee "$OUT/04_login_handlers.txt" >/dev/null
@@ -87,7 +87,7 @@ grep -RIn --include='*.php' -E "redirect\(|intended\(|/profile|/org/dashboard|Ro
   | tee "$OUT/08_redirect_grep.txt" >/dev/null || true
 
 # 09 profile routes only
-"$PHP_BIN" artisan route:list --columns=Method,URI,Name,Action,Middleware \
+"$PHP_BIN" artisan route:list
   | grep -E '(^GET|HEAD).*(^|/)profile($|/)' \
   | tee "$OUT/09_profile_route.txt" >/dev/null || true
 

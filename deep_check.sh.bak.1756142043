@@ -33,7 +33,7 @@ done
 
 # --- Route list & middleware audit
 say "\n--- Route middleware audit ---"
-php artisan route:list --columns=Method,URI,Name,Middleware \
+php artisan route:list
   | tee "$OUT_DIR/routes.txt" \
   | grep -E '^(GET|POST|PUT|DELETE|PATCH)' >> "$OUT_DIR/summary.txt"
 
