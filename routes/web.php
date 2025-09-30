@@ -47,7 +47,6 @@ Route::middleware(['web', 'auth', 'verified'])->group(function () {
 // QR
 Route::match(['GET', 'POST'], '/qr/checkin', [\App\Http\Controllers\QR\CheckinController::class, 'checkin'])->name('qr.checkin.getpost');
 Route::match(['GET', 'POST'], '/qr/checkout', [\App\Http\Controllers\QR\CheckinController::class, 'checkout'])->name('qr.checkout.getpost');
-Route::get('/qr/verify/{serial?}', [VerifyController::class, 'show'])->name('qr.verify');
 
 // Admin login alias → /login
 Route::get('/admin/login', fn () => redirect()->to('/login'))->name('admin.login.alt');
@@ -109,17 +108,31 @@ Route::domain('admin.swaeduae.ae')->middleware(['web','auth','can:admin-access']
 
 
 // Legacy path → new QR verify (301, preserves query and {code})
-Route::get('/certificates/verify/{code?}', function ($code = null) {
     $qs = request()->query();
     $target = '/qr/verify' . ($qs ? ('?' . http_build_query($qs)) : '');
     return redirect()->to($target, 301);
-})->name('certificates.verify.form');
 
 /* Legacy path → new QR verify (301, preserves query and {code}) */
-Route::get('/certificates/verify/{code?}', function ($code = null) {
     $qs = request()->query();
     if (!$qs && $code) { $qs = ['code' => $code]; }
     $target = '/qr/verify' . ($qs ? ('?' . http_build_query($qs)) : '');
     return redirect()->to($target, 301);
-})->name('certificates.verify.form');
 
+
+// Canonical certificate verify page
+// Short alias → canonical (301)
+
+// --- Canonical certificate verify page + short alias ---
+
+// --- Force verify pages to the working QR verify ---
+Route::get('/certificates/verify', fn () => redirect('/qr/verify', 302))->name('certificates.verify.form');
+Route::get('/verify', fn () => redirect('/qr/verify', 301));
+
+/* ==== QUICKFIX: verify aliases (safe, no names) ==== */
+Route::get('/certificates/verify', function () {
+    return redirect('/qr/verify', 302);
+});
+Route::get('/verify', function () {
+    return redirect('/qr/verify', 301);
+});
+/* ==== END QUICKFIX ==== */
