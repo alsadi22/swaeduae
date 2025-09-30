@@ -1,0 +1,5 @@
+== SwaedUAE Roadmap Status Scan (20250927_140645) ==
+
+[Phase 0] Ground rules
+[1;32m[PASS][0m Compiled CSS in public/assets
+[1;33m[WARN][0m No compiled CSS in public/assets

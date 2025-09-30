@@ -1,0 +1,1 @@
+{"fpm":{"service":"php8.3-fpm.service","active":"active"},"opcache":{"opcache.enable":"1","opcache.memory_consumption":"256","opcache.max_accelerated_files":"100000","opcache.validate_timestamps":"0","opcache.revalidate_freq":"60"},"pool":[],"nginx":["worker_processes  auto;","    worker_connections  1024;"],"hints":["Tune php-fpm pm/max_children in pool.d to match CPU/RAM"]}

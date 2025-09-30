@@ -1,0 +1,8 @@
+$ whoami
+
+STDOUT:
+swaeduae
+
+STDERR:
+
+RC=0

@@ -1,0 +1,126 @@
+
+  GET|HEAD        / .......................................................................................................................................................................... home.public
+  ANY             _agent{any?} ............................................................................................................................................... generated::4onlM9CW8EYxNdYH
+  ANY             _alias/{any?} .............................................................................................................................................. generated::bJ2igiPok9w9LASQ
+  ANY             _compat/{any?} ............................................................................................................................................. generated::3OdBnuqhaMonmYVa
+  GET|HEAD        about ............................................................................................................................................................................ about
+  ANY             about-us ......................................................................................................... generated::eoLJ1lYJoB1F7gM9 › Illuminate\Routing › RedirectController
+  GET|HEAD        admin.swaeduae.ae/admin .............................................................................................................. admin.dashboard › Admin\DashboardController@index
+  GET|HEAD        admin.swaeduae.ae/admin/_whoami ...................................................................................................................................... admin.diag.whoami
+  GET|HEAD        admin.swaeduae.ae/admin/applicants ........................................................................................... admin.applicants.index › Admin\ApplicantsController@index
+  POST            admin.swaeduae.ae/admin/applicants/bulk ........................................................................................ admin.applicants.bulk › Admin\ApplicantsController@bulk
+  GET|HEAD        admin.swaeduae.ae/admin/applicants/export ............................................................................... admin.applicants.export › Admin\ApplicantsController@exportCsv
+  POST            admin.swaeduae.ae/admin/applicants/{id}/approve .......................................................................... admin.applicants.approve › Admin\ApplicantsController@approve
+  POST            admin.swaeduae.ae/admin/applicants/{id}/decline .......................................................................... admin.applicants.decline › Admin\ApplicantsController@decline
+  GET|HEAD        admin/approvals ................................................................................................................ admin.approvals.index › Admin\ApprovalsController@index
+  POST            admin/approvals/orgs/{id}/approve .................................................................................. admin.approvals.orgs.approve › Admin\ApprovalsController@approveOrg
+  POST            admin/approvals/orgs/{id}/decline .................................................................................. admin.approvals.orgs.decline › Admin\ApprovalsController@declineOrg
+  GET|HEAD        admin.swaeduae.ae/admin/attendance ...................................................................................... admin.attendance.index › Admin\AttendanceAdminController@index
+  GET|HEAD        admin.swaeduae.ae/admin/certificates ...................................................................................... admin.certificates.index › Admin\CertificateController@index
+  POST            admin.swaeduae.ae/admin/certificates/issue ................................................................................ admin.certificates.issue › Admin\CertificateController@issue
+  POST            admin.swaeduae.ae/admin/certificates/{id}/reissue ..................................................................... admin.certificates.reissue › Admin\CertificateController@reissue
+  POST            admin.swaeduae.ae/admin/hours/bulk-approve ........................................................................... admin.hours.bulkApprove › Admin\HoursReportController@bulkApprove
+  GET|HEAD        admin.swaeduae.ae/admin/hours/export ........................................................................................ admin.hours.export › Admin\HoursReportController@exportCsv
+  GET|HEAD        admin/login ................................................................................................................................................................ admin.login
+  GET|HEAD        admin.swaeduae.ae/admin/opportunities .................................................................................... admin.opportunities.index › Admin\OpportunityController@index
+  GET|HEAD        admin.swaeduae.ae/admin/opportunities/{opportunity} ........................................................................ admin.opportunities.show › Admin\OpportunityController@show
+  PUT|PATCH       admin.swaeduae.ae/admin/opportunities/{opportunity} .................................................................... admin.opportunities.update › Admin\OpportunityController@update
+  DELETE          admin.swaeduae.ae/admin/opportunities/{opportunity} .................................................................. admin.opportunities.destroy › Admin\OpportunityController@destroy
+  GET|HEAD        admin.swaeduae.ae/admin/organizations .................................................................................. admin.organizations.index › Admin\OrganizationsController@index
+  POST            admin.swaeduae.ae/admin/organizations/{id}/approve ................................................................. admin.organizations.approve › Admin\OrganizationsController@approve
+  POST            admin.swaeduae.ae/admin/organizations/{id}/suspend ................................................................. admin.organizations.suspend › Admin\OrganizationsController@suspend
+  GET|HEAD        admin.swaeduae.ae/admin/qr/verify ..................................................................................................... admin.qr.verify › Admin\QrVerifyController@index
+  GET|HEAD        admin.swaeduae.ae/admin/reports .................................................................................................... admin.reports.index › Admin\ReportsController@index
+  GET|HEAD        admin.swaeduae.ae/admin/reports/export ........................................................................................... admin.reports.export › Admin\ReportsController@export
+  GET|HEAD        admin.swaeduae.ae/admin/settings ................................................................................................. admin.settings.index › Admin\SettingsController@index
+  POST            admin.swaeduae.ae/admin/settings/save .............................................................................................. admin.settings.save › Admin\SettingsController@save
+  GET|HEAD        admin.swaeduae.ae/admin/users ........................................................................................................... admin.users.index › Admin\UserController@index
+  GET|HEAD        admin.swaeduae.ae/admin/users/{user} ...................................................................................................... admin.users.show › Admin\UserController@show
+  PUT|PATCH       admin.swaeduae.ae/admin/users/{user} .................................................................................................. admin.users.update › Admin\UserController@update
+  DELETE          admin.swaeduae.ae/admin/users/{user} ................................................................................................ admin.users.destroy › Admin\UserController@destroy
+  ANY             swaeduae.ae/admin{any?} ............................................................................................................................................ main.admin.redirect
+  GET|HEAD        agent/ping .............................................................................................................................................................. agent.ping.api
+  GET|HEAD        api/agent/ping .............................................................................................................................................................. agent.ping
+  GET|HEAD        api/user ................................................................................................................................................... generated::2d97GM3jr7FBolMg
+  POST            api/v1/attendance/heartbeat ............................................................................................. attendance.heartbeat › Api\AttendanceHeartbeatController@store
+  GET|HEAD        api/v1/certificates/verify/{code} .......................................................................................................................... generated::eBjklbqyAuPBCaPt
+  GET|HEAD        api/v1/health .............................................................................................................................................. generated::z54FtXrhqGRvDFGH
+  GET|HEAD        applications ........................................................................................................................................................ applications.index
+  GET|HEAD        certificates .......................................................................................................................... certificates.index › CertificateController@index
+  GET|HEAD        certificates/verify/{code?} ................................................................................................................................... certificates.verify.form
+  GET|HEAD        certificates/{id}/download ................................................................................................... certificates.download › CertificatePdfController@download
+  POST            certificates/{id}/resend ......................................................................................................... certificates.resend › CertificatePdfController@resend
+  POST            certificates/{id}/revoke ......................................................................................................... certificates.revoke › CertificatePdfController@revoke
+  GET|HEAD        confirm-password ............................................................................................................ password.confirm › Auth\ConfirmablePasswordController@show
+  POST            confirm-password ................................................................................................ generated::TcPiR5s9JDInyh1p › Auth\ConfirmablePasswordController@store
+  GET|HEAD        contact ........................................................................................................................................... contact.get › ContactController@show
+  POST            contact ........................................................................................................................................ contact.submit › ContactController@send
+  POST            email/verification-notification ................................................................................. verification.send › Auth\EmailVerificationNotificationController@store
+  GET|HEAD        events ............................................................................................................................................ events.index › EventController@index
+  GET|HEAD        events/browse ............................................................................................................................................................ events.browse
+  GET|HEAD        events/{idOrSlug} ................................................................................................................................... events.show › EventController@show
+  GET|HEAD        faq .......................................................................................................................................................................... pages.faq
+  GET|HEAD        forgot-password ............................................................................................................. password.request › Auth\PasswordResetLinkController@create
+  POST            forgot-password ................................................................................................................ password.email › Auth\PasswordResetLinkController@store
+  GET|HEAD        healthz-agent ............................................................................................................................................................ agent.healthz
+  GET|HEAD        ics/{slug} ..................................................................................................................... opportunities.ics.alt › PublicOpportunityController@ics
+  GET|HEAD        lang/{locale} ............................................................................................................................................................ locale.switch
+  GET|HEAD        login .......................................................................................................................................... login › Auth\SimpleLoginController@show
+  POST            login ............................................................................................................................... login.perform › Auth\SimpleLoginController@perform
+  ANY             login/organization ............................................................................................... generated::4erQivIfhMZRHXQ7 › Illuminate\Routing › RedirectController
+  POST            logout ............................................................................................................................ logout › Auth\AuthenticatedSessionController@destroy
+  GET|HEAD        my/profile ................................................................................................................................................. generated::1FqZpfnha5Kp54WI
+  GET|HEAD        opportunities .............................................................................................................................................. generated::qmJhPUee0H37DGP4
+  GET|HEAD        opportunities/{id} .................................................................................................................................................... opps.public.show
+  GET|HEAD        org/dashboard ............................................................................................................................ org.dashboard › Org\DashboardController@index
+  GET|HEAD        org/login .................................................................................................................................................. generated::Zm4JJb5Z9rqA8bXe
+  POST            org/login ............................................................................................................................... org.login.perform › Auth\LoginController@login
+  POST            org/opportunities ............................................................................................................ org.opportunities.store › Org\OpportunityController@store
+  GET|HEAD        org/opportunities/create ................................................................................................... org.opportunities.create › Org\OpportunityController@create
+  POST            org/opportunities/{event} .................................................................................................. org.opportunities.update › Org\OpportunityController@update
+  GET|HEAD        org/opportunities/{event}/applicants ............................................................................................. org.applicants.index › Org\ApplicantsController@index
+  GET|HEAD        org/opportunities/{event}/applicants.csv .................................................................................... org.applicants.export › Org\ApplicantsController@exportCsv
+  POST            org/opportunities/{event}/applicants/{app}/decision ........................................................................ org.applicants.decision › Org\ApplicantsController@decision
+  POST            org/opportunities/{event}/close .............................................................................................. org.opportunities.close › Org\OpportunityController@close
+  GET|HEAD        org/opportunities/{event}/edit ................................................................................................. org.opportunities.edit › Org\OpportunityController@edit
+  GET|HEAD        org/opportunities/{opportunity}/shortlist .......................................................................................... org.shortlist.index › Org\ShortlistController@index
+  POST            org/opportunities/{opportunity}/shortlist/bulk ....................................................................................... org.shortlist.bulk › Org\ShortlistController@bulk
+  POST            org/opportunities/{opportunity}/shortlist/slot-cap ...................................................................... org.shortlist.slot_cap › Org\ShortlistController@updateSlotCap
+  GET|HEAD        org/register .............................................................................................................................................................. org.register
+  POST            org/register ....................................................................................................................................................... org.register.submit
+  GET|HEAD        org/settings ........................................................................................................................... org.settings.edit › Org\SettingsController@edit
+  POST            org/settings ....................................................................................................................... org.settings.update › Org\SettingsController@update
+  GET|HEAD        org/setup .................................................................................................................................... org.setup.form › Org\SetupController@form
+  POST            org/setup .................................................................................................................................. org.setup.store › Org\SetupController@store
+  GET|HEAD        organizations .............................................................................................................................................. generated::vdIiUR4zICZaESiH
+  ANY             organizations/register ........................................................................................... generated::FAiUcoypuhllC6Si › Illuminate\Routing › RedirectController
+  GET|HEAD        partners ................................................................................................................................................................ partners.index
+  PUT             password .............................................................................................................................. password.update › Auth\PasswordController@update
+  GET|HEAD        privacy ........................................................................................................................................................................ privacy
+  ANY             privacy-policy ................................................................................................... generated::9a0sA4w00RifYXQt › Illuminate\Routing › RedirectController
+  GET|POST|HEAD   qr/checkin ........................................................................................................................... qr.checkin.getpost › QR\CheckinController@checkin
+  GET|POST|HEAD   qr/checkout ........................................................................................................................ qr.checkout.getpost › QR\CheckinController@checkout
+  GET|HEAD        qr/verify .................................................................................................................................................. generated::0MhC0vGo0kHGwpob
+  GET|HEAD        qr/verify/{serial?} ............................................................................................................................... qr.verify › QR\VerifyController@show
+  POST            register ............................................................................................................. generated::pDrA3IUwpsn7JLXj › Auth\RegisteredUserController@store
+  GET|HEAD        register ............................................................................................................................... register › Auth\RegisteredUserController@create
+  POST            reset-password ...................................................................................................... password.update.simple › Auth\SimplePasswordResetController@update
+  GET|HEAD        reset-password/{token} ........................................................................................................ password.reset › Auth\SimplePasswordResetController@show
+  GET|HEAD        sanctum/csrf-cookie .................................................................................................. sanctum.csrf-cookie › Laravel\Sanctum › CsrfCookieController@show
+  GET|HEAD        scan .................................................................................................................................. scan.index › Public\QrAttendanceController@index
+  POST            scan ....................................................................................................................................................................... scan.submit
+  POST            scan/checkin ...................................................................................................................... scan.checkin › Public\QrAttendanceController@checkin
+  GET|HEAD        scan/checkin .......................................................................................................................................................... scan.checkin.get
+  POST            scan/checkout ................................................................................................................... scan.checkout › Public\QrAttendanceController@checkout
+  GET|HEAD        scan/checkout ........................................................................................................................................................ scan.checkout.get
+  GET|HEAD        storage/{path} ........................................................................................................................................................... storage.local
+  GET|HEAD        stories .................................................................................................................................................... generated::QsZZ0ayHzIaudz9D
+  GET|HEAD        terms ............................................................................................................................................................................ terms
+  ANY             terms-of-service ................................................................................................. generated::rhwZ06zuHlIddPEG › Illuminate\Routing › RedirectController
+  GET|HEAD        up ......................................................................................................................................................... generated::sfoXhYIbWoltaa8K
+  GET|HEAD        verify-email .............................................................................................................. verification.notice › Auth\EmailVerificationPromptController
+  GET|HEAD        verify-email/{id}/{hash} .............................................................................................................. verification.verify › Auth\VerifyEmailController
+  ANY             swaeduae.ae/{any?} ......................................................................................................................................... generated::6Z9edDZHIX5YMlv1
+
+                                                                                                                                                                                      Showing [122] routes
+

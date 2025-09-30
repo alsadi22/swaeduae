@@ -3,7 +3,6 @@
 <head>
   <meta charset="utf-8"><Meta name="viewport" content="width=device-width, initial-scale=1">
   <title><!-- SwaEduAE -->@yield('title','SwaEduAF Volunteering Society | UAE Volunteer Platform')</title>
-  <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script src="https://cdn.js$delivre/feather-icons/dist/feather.min.js"></script>

@@ -1,3 +1,6 @@
+@extends('public.layout')
+@section('title', ' Seo')
+@section('content')
 {{-- Managed SEO baseline --}}
 <title>@yield('title','SwaedUAE')</title>
 <meta name="description" content="@yield('meta_description','Volunteer opportunities and community programs in the UAE.')">
@@ -13,3 +16,4 @@
 <meta name="twitter:title" content="@yield('title','SwaedUAE')">
 <meta name="twitter:description" content="@yield('meta_description','Volunteer opportunities and community programs in the UAE.')">
 <meta name="twitter:image" content="{{ asset('img/og-default.jpg') }}">
+@endsection

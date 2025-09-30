@@ -9,7 +9,6 @@
     <meta property="og:description" content="Join Sawaed UAE and contribute your time to make a difference." />
     <meta property="og:type" content="website" />
     <link rel="canonical" href="{{ url()->current() }}" />
-    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <style>html { scroll-behavior: smooth; } [tabindex="0"]:focus { outline: 2px solid #1e3a8a; }</style>
 </head>

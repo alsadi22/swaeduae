@@ -1,5 +1,6 @@
 @extends('public.layout')
 
+@section('title', 'Show')
 @section('content')
 <div class="container py-4">
   <h1>{{ $event->title ?? __('Event') }}</h1>

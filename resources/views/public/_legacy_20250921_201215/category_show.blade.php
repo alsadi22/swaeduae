@@ -1,4 +1,5 @@
 @extends('public.layout')
+@section('title', 'Category Show')
 @section('content')
 <div class="container">
   <h1>{{ $category->name }}</h1>

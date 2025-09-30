@@ -1,0 +1,8 @@
+$ systemctl is-active nginx
+
+STDOUT:
+active
+
+STDERR:
+
+RC=0
