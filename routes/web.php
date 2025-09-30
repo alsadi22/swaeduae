@@ -82,3 +82,6 @@ Route::get('/certificates/verify/{code?}', function (?string $code = null) {
 })->name('certificates.verify.form');
 
 require __DIR__ . '/z_canonical.php';
+Route::get(/healthz, function () {
+    return response(OK, 200)->header(Cache-Control, no-store);
+})->name(healthz);
