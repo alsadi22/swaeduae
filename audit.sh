@@ -1,6 +1,8 @@
 #!/bin/bash
+PHP_BIN=${PHP_BIN:-php}
 # --- SwaedUAE: full site audit (routes, redirects, auth flows) — READ ONLY ---
 set -euo pipefail
+PHP_BIN=${PHP_BIN:-php}
 APP="/home3/vminingc/swaeduae.ae/laravel-app"
 PHP_BIN="${PHP:-/opt/alt/php84/usr/bin/php}"
 BASE="${BASE:-https://swaeduae.ae}"
