@@ -1,4 +1,5 @@
 <?php
+require __DIR__ . "/_00_verify_aliases.php";
 if (file_exists(__DIR__.'/z_overrides.php')) require __DIR__.'/z_overrides.php';
 Route::view('/', 'public.home')->name('home.public');
 
