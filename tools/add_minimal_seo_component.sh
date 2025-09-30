@@ -1,3 +1,4 @@
+PHP_BIN=${PHP_BIN:-php}
 #!/usr/bin/env bash
 set -euo pipefail
 SEO="resources/views/components/seo.blade.php"

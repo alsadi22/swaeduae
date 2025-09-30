@@ -1,3 +1,4 @@
+PHP_BIN=${PHP_BIN:-php}
 #!/usr/bin/env bash
 # SwaedUAE FULL BACKUP (DB + app + configs) — robust & verifiable
 set -u

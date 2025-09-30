@@ -1,3 +1,4 @@
+PHP_BIN=${PHP_BIN:-php}
 #!/usr/bin/env bash
 # READ-ONLY DIAGNOSTIC — does not modify your app.
 set -uo pipefail

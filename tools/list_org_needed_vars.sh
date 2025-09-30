@@ -1,3 +1,4 @@
+PHP_BIN=${PHP_BIN:-php}
 #!/usr/bin/env bash
 set -euo pipefail
 files=$(./tools/list_org_includes.sh | awk '{print $2}' | grep '^resources/' || true)

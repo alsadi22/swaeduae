@@ -1,3 +1,4 @@
+PHP_BIN=${PHP_BIN:-php}
 #!/usr/bin/env bash
 # READ-ONLY DEEP PROBE — no app edits, no service restarts.
 set -uo pipefail

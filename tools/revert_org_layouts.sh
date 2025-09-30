@@ -1,3 +1,4 @@
+PHP_BIN=${PHP_BIN:-php}
 #!/usr/bin/env bash
 set -euo pipefail
 # Pick the newest backup timestamp across edited files

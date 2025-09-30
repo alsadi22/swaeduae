@@ -1,3 +1,4 @@
+PHP_BIN=${PHP_BIN:-php}
 set -euo pipefail
 cd "$(dirname "$0")/.."
 

@@ -1,3 +1,4 @@
+PHP_BIN=${PHP_BIN:-php}
 #!/usr/bin/env bash
 set -u
 ROOT="/home3/vminingc/swaeduae.ae"

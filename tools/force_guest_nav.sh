@@ -1,3 +1,4 @@
+PHP_BIN=${PHP_BIN:-php}
 #!/usr/bin/env bash
 set -u; set -o pipefail
 TS=$(date +%F_%H%M%S)

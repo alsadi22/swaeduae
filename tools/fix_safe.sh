@@ -1,3 +1,4 @@
+PHP_BIN=${PHP_BIN:-php}
 #!/usr/bin/env bash
 # Safe fix script: continues on errors, logs to /tmp, never closes your shell.
 set -u

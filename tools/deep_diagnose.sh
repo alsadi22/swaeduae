@@ -1,3 +1,4 @@
+PHP_BIN=${PHP_BIN:-php}
 #!/usr/bin/env bash
 # SwaedUAE Deep Diagnose — safe, read-only checks
 set +e

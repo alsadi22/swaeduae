@@ -1,3 +1,4 @@
+PHP_BIN=${PHP_BIN:-php}
 #!/usr/bin/env bash
 set -u
 TS="$(date +%Y%m%d-%H%M%S)"

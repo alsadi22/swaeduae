@@ -1,3 +1,4 @@
+PHP_BIN=${PHP_BIN:-php}
 #!/usr/bin/env bash
 # SwaedUAE Roadmap Full Checkup
 # - Verifies baseline, Phase 1–2 essentials, and key routes/pages

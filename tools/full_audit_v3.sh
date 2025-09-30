@@ -1,3 +1,4 @@
+PHP_BIN=${PHP_BIN:-php}
 #!/usr/bin/env bash
 # SwaedUAE – Full Audit v3
 # Usage: sudo bash tools/full_audit_v3.sh [/var/www/swaeduae/current]

@@ -1,3 +1,4 @@
+PHP_BIN=${PHP_BIN:-php}
 #!/usr/bin/env bash
 set -euo pipefail
 MENU="$(grep -RIl --include='*.blade.php' -n 'Organization Console' resources/views | head -n1 || true)"

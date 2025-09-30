@@ -1,3 +1,4 @@
+PHP_BIN=${PHP_BIN:-php}
 #!/usr/bin/env bash
 set -euo pipefail
 TS=$(date +%F_%H%M%S); OUT="public/health/product-$TS.txt"; mkdir -p public/health

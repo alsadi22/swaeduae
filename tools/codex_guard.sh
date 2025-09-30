@@ -1,3 +1,4 @@
+PHP_BIN=${PHP_BIN:-php}
 #!/usr/bin/env bash
 set -euo pipefail
 APP="/var/www/swaeduae"; PHP_BIN="${PHP:-php}"; COMPOSER="${COMPOSER:-composer}"

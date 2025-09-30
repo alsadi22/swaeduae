@@ -1,3 +1,4 @@
+PHP_BIN=${PHP_BIN:-php}
 #!/usr/bin/env bash
 # SwaedUAE – Auth Menu Audit (no writes, no restarts)
 set -u; set -o pipefail

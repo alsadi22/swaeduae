@@ -1,3 +1,4 @@
+PHP_BIN=${PHP_BIN:-php}
 #!/usr/bin/env bash
 # swaeduae.ae roadmap audit — PASS/FAIL snapshot (auto-saves to a .txt file)
 # Usage: tools/roadmap_audit.sh [APP_URL]

@@ -1,3 +1,4 @@
+PHP_BIN=${PHP_BIN:-php}
 #!/usr/bin/env bash
 # SwaedUAE — Login/Register links on HOME (check first, then minimal safe fix)
 set -u; set -o pipefail

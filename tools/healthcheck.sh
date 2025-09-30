@@ -1,3 +1,4 @@
+PHP_BIN=${PHP_BIN:-php}
 #!/bin/bash
 set -euo pipefail
 
