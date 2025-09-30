@@ -1,4 +1,4 @@
-@extends(public.layout)
+@extends('public.layout')
 <section style="padding:3rem 1rem;max-width:1100px;margin:4rem auto;">
   <h1 style="font-weight:800;margin-bottom:1rem">{{ __('Find Volunteer Opportunities in the UAE') }}</h1>
   <p style="margin-bottom:1.25rem">{{ __('Join events, track your hours, and earn verified certificates.') }}</p>
