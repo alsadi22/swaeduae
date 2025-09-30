@@ -11,7 +11,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
 
   <!-- Theme CSS -->
-  <link href="/assets/app.css?v=fc1e934ad8"assets/app.css")) ? substr(md5_file(public_path("assets/app.css")),0,8) : time() }}" rel="stylesheet">
+  <link href="/assets/app.fc1e934ad8.css" rel="stylesheet">
 </head>
 <body class="public-site">
   <a class="skip-link" href="#main">Skip to content</a>
