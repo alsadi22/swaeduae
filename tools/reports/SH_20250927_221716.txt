@@ -1,0 +1,11 @@
+$ whoami /sh ls -la /var/www/swaeduae/current | head -n 10 /sudo nginx -t /routes --duplicates
+
+STDOUT:
+
+STDERR:
+head: invalid option -- 't'
+Try 'head --help' for more information.
+whoami: invalid option -- 'l'
+Try 'whoami --help' for more information.
+
+RC=1

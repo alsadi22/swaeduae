@@ -1,0 +1,7 @@
+== CACHE AUDIT 20250928_011608 ==
+/                  Cache-Control: (missing)
+/about             Cache-Control: (missing)
+/login             Cache-Control: (missing)
+/org/login         Cache-Control: (missing)
+/stories           Cache-Control: (missing)
+Hashed assets in layout: NO

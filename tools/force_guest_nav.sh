@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+PHP_BIN=${PHP_BIN:-php}
 set -u; set -o pipefail
 TS=$(date +%F_%H%M%S)
 BASE_URL=${BASE_URL:-https://swaeduae.ae}

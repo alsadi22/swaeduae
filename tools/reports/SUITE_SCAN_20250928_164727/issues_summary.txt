@@ -1,0 +1,5 @@
+== ISSUES SUMMARY ==
+- NGINX warning: conflicting server_name on port 80 (duplicates). Clean up HTTP vhosts.
+- Perf hints: see perf_hints.json (2 hints)
+- Web audit: pages missing title/h1/desc/canonical. See web_audit.json
+- HSTS header missing on some host(s). See edge.json

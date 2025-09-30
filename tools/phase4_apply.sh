@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+PHP_BIN=${PHP_BIN:-php}
 set -euo pipefail
 APP="/home3/vminingc/swaeduae.ae/laravel-app"
 ROOT="/home3/vminingc/swaeduae.ae"

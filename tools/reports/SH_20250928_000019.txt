@@ -1,0 +1,11 @@
+$ local-ai drift-check /sh local-ai drift-diff /etc/nginx/nginx.conf --tag baseline
+
+STDOUT:
+
+STDERR:
+Usage: local_ai.py drift-check [OPTIONS]
+Try 'local_ai.py drift-check --help' for help.
+
+Error: Got unexpected extra arguments (/sh local-ai drift-diff /etc/nginx/nginx.conf)
+
+RC=2

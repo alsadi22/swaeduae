@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+PHP_BIN=${PHP_BIN:-php}
 # READ-ONLY DIAGNOSTIC — does not modify your app.
 set -uo pipefail
 BASE="${BASE:-https://swaeduae.ae}"

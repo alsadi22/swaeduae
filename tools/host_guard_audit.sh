@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+PHP_BIN=${PHP_BIN:-php}
 set +e
 TS=$(date +%F_%H%M%S)
 OUT="audit.host_guard.$TS.txt"

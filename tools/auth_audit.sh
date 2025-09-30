@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+PHP_BIN=${PHP_BIN:-php}
 set -e
 echo "=== AUTH ROUTES ==="
 php artisan route:list | grep -E '\blogin\b|\bregister\b|forgot-password|reset-password|confirm-password|verification|logout|admin/login|org/login' | sed -n '1,200p'

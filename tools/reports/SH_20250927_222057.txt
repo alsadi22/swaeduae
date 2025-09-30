@@ -1,0 +1,9 @@
+$ whoami && ls -la /var/www/swaeduae/current | head -n 10
+
+STDOUT:
+swaeduae
+lrwxrwxrwx 1 root swaeduae 46 Sep 27 00:20 /var/www/swaeduae/current -> /var/www/swaeduae/releases/20250927001953-main
+
+STDERR:
+
+RC=0

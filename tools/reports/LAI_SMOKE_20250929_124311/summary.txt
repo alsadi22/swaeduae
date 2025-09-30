@@ -1,0 +1,15 @@
+== LOCAL-AI SMOKE 20250929_124311 ==
+[OK]  chat responded
+[OK]  scan wrote /var/www/swaeduae/current/tools/reports/LOCAL_AI_SCAN_20250929_124319.txt
+[OK]  api/status
+[OK]  api/metrics
+[OK]  probes OK
+[OK]  no nginx 5xx spike
+[OK]  no nginx duplicate warnings
+[OK]  HSTS apex present
+[OK]  perf hints clean
+[WARN] route list empty
+[OK]  drift clean vs smoke-20250929_124311
+[OK]  backup plan generated
+[OK]  db doctor ran
+[OK]  suite UI reachable

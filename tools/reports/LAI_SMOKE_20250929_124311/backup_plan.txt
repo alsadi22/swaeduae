@@ -1,0 +1,7 @@
+# snapshot -> /var/backups/swaeduae/20250929_124328
+# current -> /var/www/swaeduae/releases/20250927001953-main
+copy /var/www/swaeduae/current/routes/web.php -> /var/backups/swaeduae/20250929_124328/web.php
+copy /var/www/swaeduae/current/composer.lock -> /var/backups/swaeduae/20250929_124328/composer.lock
+copy /var/www/swaeduae/current/.env -> /var/backups/swaeduae/20250929_124328/.env
+copy /etc/nginx/nginx.conf -> /var/backups/swaeduae/20250929_124328/nginx.conf
+# rotate keep=3

@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+PHP_BIN=${PHP_BIN:-php}
 set -euo pipefail
 
 MENU_FILE="${1:-resources/views/admin/argon/_sidenav.blade.php}"

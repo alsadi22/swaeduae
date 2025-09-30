@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+PHP_BIN=${PHP_BIN:-php}
 # Full website audit for public theme/layout + protected flows
 ROOT="https://swaeduae.ae"
 ADMIN="https://admin.swaeduae.ae"

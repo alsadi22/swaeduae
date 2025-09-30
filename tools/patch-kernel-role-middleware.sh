@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+PHP_BIN=${PHP_BIN:-php}
 set -euo pipefail
 K="app/Http/Kernel.php"
 [[ -f "$K" ]] || { echo "❌ $K not found"; exit 1; }

@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+PHP_BIN=${PHP_BIN:-php}
 set -euo pipefail
 TS=$(date +%F_%H%M%S); OUT="public/health/product-$TS.txt"; mkdir -p public/health
 envfile(){ grep -E '^(APP_ENV|APP_DEBUG|APP_URL|MAIL_|SENTRY_|SESSION_|HOURS_GEOFENCE_METERS)=' .env || true; }

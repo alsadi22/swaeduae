@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+PHP_BIN=${PHP_BIN:-php}
 set -euo pipefail
 LAY="resources/views/org/layout.blade.php"
 NAV="resources/views/admin/argon/_navbar.blade.php"

@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+PHP_BIN=${PHP_BIN:-php}
 # SwaedUAE Roadmap Full Checkup
 # - Verifies baseline, Phase 1–2 essentials, and key routes/pages
 # - Writes a timestamped report to /public/health/ and prints a URL

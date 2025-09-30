@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+PHP_BIN=${PHP_BIN:-php}
 set -euo pipefail
 
 UPCOMING="resources/views/org/partials/upcoming_7d.blade.php"

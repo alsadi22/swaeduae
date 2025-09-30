@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+PHP_BIN=${PHP_BIN:-php}
 set -euo pipefail
 
 say(){ printf "%-38s %s\n" "$1" "$2"; }

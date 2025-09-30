@@ -1,9 +1,11 @@
+@extends('public.layout')
+@section('title', 'Layout Travelpro')
+@section('content')
 <!doctype html>
 <html lang="{{ str_replace("_","-",app()->getLocale()) }}">
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
   <title>@yield("title","SwaEduAE Volunteering Society | UAE Volunteer Platform")</title>
-  <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
@@ -98,3 +100,4 @@
   <script>try{AOS.init({duration:800,easing:"ease-in-out",once:true});feather.replace();}catch(e){}</script>
 </body>
 </html>
+@endsection

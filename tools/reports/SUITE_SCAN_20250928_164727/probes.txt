@@ -1,0 +1,5 @@
+== PROBES 20250928_164727 ==
+home         OK code=200 t=1.190552s
+login        OK code=200 t=0.520797s
+org-login    OK code=200 t=0.523318s
+saved -> /var/www/swaeduae/current/tools/reports/PROBES_20250928_164729.txt

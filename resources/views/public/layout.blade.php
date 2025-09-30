@@ -1,33 +1,22 @@
 <!doctype html>
-<html lang="{{ str_replace('_','-', app()->getLocale()) }}" dir="{{ app()->getLocale() === 'ar' ? 'rtl' : 'ltr' }}">
-
+<html lang="{{ str_replace("_","-",app()->getLocale()) }}" dir="{{ app()->getLocale()==="ar" ? "rtl" : "ltr" }}">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>@yield('title','SwaedUAE')</title>
-  <meta name="description" content="@yield('meta_description','Volunteer opportunities across the UAE')">
-  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/app.css?v=9d4ce98f95">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob:; connect-src 'self'; form-action 'self'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests">
-  <meta name="referrer" content="strict-origin-when-cross-origin">
-  @stack('head')
+  <title>@yield("title","SwaedUAE")</title>
+
+  <!-- Theme CSS -->
+  <link href="/assets/app.css?v={{ file_exists(public_path("assets/app.css")) ? substr(md5_file(public_path("assets/app.css")),0,8) : time() }}" rel="stylesheet">
 </head>
-<body class="bg-[var(--bg)] text-[var(--ink)] font-[Inter] antialiased">
-  <a href="#main" class="skip-link sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:px-4 focus:py-2 focus:rounded-lg focus:bg-white focus:text-primary focus:shadow">Skip to content</a>
-  @include('public.components.nav')
-  <main id="main" class="min-h-[70vh]">
-  @if (Request::is('opportunities') || Request::is('opportunities/*'))
-    <div class="hero-gradient text-white">
-      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 md:py-20 text-center">
-        <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight">Explore <span class="gradient-text">Opportunities</span></h1>
-      </div>
-    </div>
-  @endif
-    @yield('content')
-  </main>
-  @include('public.components.footer')
-  @stack('scripts')
-  <script src="/assets/app.js" defer></script>
+<body class="public-site">
+  <a class="skip-link" href="#main">Skip to content</a>
+  @includeIf("partials.header")
+
+  <main id="main">@yield("content")</main>
+
+  @includeIf("partials.footer")
+
+  <!-- Minimal JS (a11y + mobile nav + persist) -->
+  <script src="/assets/app.js?v={{ file_exists(public_path("assets/app.js")) ? substr(md5_file(public_path("assets/app.js")),0,8) : time() }}"></script>
 </body>
 </html>

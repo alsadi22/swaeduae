@@ -1,0 +1,1 @@
+default_model=llama3.1:8b  coder_model=qwen2.5-coder:7b-instruct  host=http://127.0.0.1:11434

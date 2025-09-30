@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+PHP_BIN=${PHP_BIN:-php}
 set -euo pipefail
 LAY='resources/views/public/layout.blade.php'
 STAMP="$(date +%F_%H%M%S)"

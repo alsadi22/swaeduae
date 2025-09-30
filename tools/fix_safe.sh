@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+PHP_BIN=${PHP_BIN:-php}
 # Safe fix script: continues on errors, logs to /tmp, never closes your shell.
 set -u
 set -o pipefail

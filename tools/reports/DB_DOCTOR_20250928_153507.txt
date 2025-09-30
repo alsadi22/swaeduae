@@ -1,0 +1,61 @@
+== DB DOCTOR 20250928_153507 ==
+-- top sizes --
+table_name	engine	data_mb	idx_mb
+users	InnoDB	0.1	0.1
+certificates	InnoDB	0.0	0.1
+acl_model_has_roles	InnoDB	0.1	0.0
+events	InnoDB	0.0	0.1
+volunteers	InnoDB	0.1	0.0
+attendances	InnoDB	0.0	0.0
+location_pings	InnoDB	0.0	0.0
+org_profiles	InnoDB	0.0	0.0
+applications	InnoDB	0.0	0.0
+hours	InnoDB	0.0	0.0
+audits	InnoDB	0.0	0.0
+volunteer_profiles	InnoDB	0.0	0.0
+qr_scans	InnoDB	0.0	0.0
+personal_access_tokens	InnoDB	0.0	0.0
+admin_actions	InnoDB	0.0	0.0
+absences	InnoDB	0.0	0.0
+sessions	InnoDB	0.0	0.0
+payments	InnoDB	0.0	0.0
+qr_tokens	InnoDB	0.0	0.0
+acl_permissions	InnoDB	0.0	0.0
+
+-- migrate status --
+
+  Migration name .............................................. Batch / Status  
+  2000_01_01_000000_create_users_if_missing ......................... [19] Ran  
+  2025_08_29_000001_create_payments_table ............................ [4] Ran  
+  2025_08_29_025402_create_permission_tables ......................... [3] Ran  
+  2025_08_30_044614_create_jobs_table ................................ [5] Ran  
+  2025_08_30_214747_create_failed_jobs_table ......................... [5] Ran  
+  2025_08_30_235134_create_certificates_table ........................ [6] Ran  
+  2025_08_31_001702_create_audits_table .............................. [7] Ran  
+  2025_08_31_001702_create_events_table .............................. [7] Ran  
+  2025_08_31_001836_add_slug_to_events_table ......................... [8] Ran  
+  2025_09_01_002332_create_opportunities_table ....................... [9] Ran  
+  2025_09_01_002333_create_applications_table ........................ [9] Ran  
+  2025_09_02_000000_create_settings_if_missing ...................... [10] Ran  
+  2025_09_02_000000_create_volunteer_profiles_table ................. [11] Ran  
+  2025_09_02_193947_create_org_profiles_table ....................... [12] Ran  
+  2025_09_02_200531_extend_volunteer_profile_and_users .............. [13] Ran  
+  2025_09_02_223146_create_shifts_table ............................. [14] Ran  
+  2025_09_02_223156_create_attendances_table ........................ [14] Ran  
+  2025_09_02_223204_create_hours_table .............................. [15] Ran  
+  2025_09_02_223212_create_qr_tokens_scans .......................... [16] Ran  
+  2025_09_02_225229_add_sv_codes .................................... [17] Ran  
+  2025_09_04_000000_create_location_pings_table ..................... [19] Ran  
+  2025_09_05_000100_add_index_to_location_pings_table ............... [21] Ran  
+  2025_09_05_000200_create_absences_table ........................... [21] Ran  
+  2025_09_07_000001_create_personal_access_tokens_if_missing ........ [20] Ran  
+  2025_09_07_230900_add_captured_at_to_location_pings ............... [22] Ran  
+
+
+-- suspected missing indexes (*_id) --
+PAGER set to stdout
+PAGER set to stdout
+PAGER set to stdout
+PAGER set to stdout
+PAGER set to stdout
+PAGER set to stdout

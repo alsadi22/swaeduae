@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+PHP_BIN=${PHP_BIN:-php}
 set -u; set -o pipefail
 BASE_URL="${BASE_URL:-https://swaeduae.ae}"
 ADMIN_URL="${ADMIN_URL:-https://admin.swaeduae.ae}"
@@ -26,7 +27,7 @@ tr '\n' ' ' < "$TMP" \
 rm -f "$TMP"
 
 sep "B) Which route handles '/' (Action column)"
-php artisan route:list --columns=Method,URI,Name,Action 2>/dev/null | awk '$2=="/"{print}' | tee -a "$OUT"
+php artisan route:list| awk '$2=="/"{print}' | tee -a "$OUT"
 
 sep "C) Guess homepage view (search for hero text + extends)"
 # find view containing the big homepage headline or hero

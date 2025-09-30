@@ -27,3 +27,12 @@ scripts/smoke.env
 
 # Dependencies
 /vendor/
+
+# Compiled CSS (built in CI/server)
+public/assets/app.css
+public/assets/app.*.css
+public/assets/app.*.css.map
+
+# Local Blade backups
+resources/views/public/**/*.bak.*
+resources/views/public/*.bak.*

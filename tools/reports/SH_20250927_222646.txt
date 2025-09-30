@@ -1,0 +1,12 @@
+$ nginx -t
+
+STDOUT:
+
+STDERR:
+nginx: [warn] conflicting server name "swaeduae.ae" on 0.0.0.0:80, ignored
+nginx: [warn] conflicting server name "www.swaeduae.ae" on 0.0.0.0:80, ignored
+nginx: [warn] conflicting server name "swaeduae.ae" on [::]:80, ignored
+nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /etc/nginx/nginx.conf test is successful
+
+RC=0

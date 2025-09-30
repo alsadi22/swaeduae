@@ -1,5 +1,6 @@
 @extends('public.layout')
 
+@section('title', 'Index')
 @section('content')@include('partials.page_header', ['title'=>__('Organizations')])
 @include('partials.page_header', ['title'=>__('Organizations')])
 
@@ -45,3 +46,4 @@
 @push('scripts')
   {{-- page-specific JS if needed --}}
 @endpush
+@endsection

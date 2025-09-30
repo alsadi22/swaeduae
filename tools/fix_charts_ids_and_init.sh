@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+PHP_BIN=${PHP_BIN:-php}
 set -euo pipefail
 
 APPS="resources/views/org/partials/apps_vs_attend.blade.php"

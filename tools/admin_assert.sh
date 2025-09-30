@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+PHP_BIN=${PHP_BIN:-php}
 set -euo pipefail
 fail(){ echo "[FAIL] $*"; exit 1; }
 pass(){ echo "[OK]   $*"; }

@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+PHP_BIN=${PHP_BIN:-php}
 set -euo pipefail
 echo "=== ROUTE SERVING '/' ==="
 php artisan route:list --path=/ --method=GET || true

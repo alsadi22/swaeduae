@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+PHP_BIN=${PHP_BIN:-php}
 set -euo pipefail
 STAMP="$(date '+%F_%H%M%S')"
 OUT="public/health/admin-audit-$STAMP.txt"

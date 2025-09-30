@@ -1,6 +1,8 @@
 #!/bin/bash
+PHP_BIN=${PHP_BIN:-php}
 # --- SwaedUAE: full site audit (routes, redirects, auth flows) — READ ONLY ---
 set -euo pipefail
+PHP_BIN=${PHP_BIN:-php}
 APP="/home3/vminingc/swaeduae.ae/laravel-app"
 PHP_BIN="${PHP:-/opt/alt/php84/usr/bin/php}"
 BASE="${BASE:-https://swaeduae.ae}"
@@ -48,10 +50,10 @@ EOF
 } > "$OUT/01_http_smoke.txt"
 
 # 02) All routes (with middleware)
-"$PHP_BIN" artisan route:list --columns=Method,URI,Name,Action,Middleware > "$OUT/02_routes.txt" 2>&1
+"$PHP_BIN" artisan route:list
 
 # 03) Auth-related routes subset
-"$PHP_BIN" artisan route:list --columns=Method,URI,Name,Action,Middleware \
+"$PHP_BIN" artisan route:list
   | egrep -i 'login|logout|register|profile|dashboard|org' \
   > "$OUT/03_auth_routes.txt" || true
 
@@ -103,7 +105,7 @@ grep -RIn --include='*.php' -E "redirect\(|intended\(|/profile|/org/dashboard|Ro
   > "$OUT/08_redirect_grep.txt" || true
 
 # 09) Profile routes
-"$PHP_BIN" artisan route:list --columns=Method,URI,Name,Action,Middleware | egrep -i '(^GET|HEAD).*profile' \
+"$PHP_BIN" artisan route:list| egrep -i '(^GET|HEAD).*profile' \
   > "$OUT/09_profile_route.txt" || true
 
 # 10) Auth config snapshot

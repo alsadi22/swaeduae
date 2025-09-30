@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+PHP_BIN=${PHP_BIN:-php}
 # SwaedUAE FULL BACKUP (DB + app + configs) — robust & verifiable
 set -u
 set -o pipefail

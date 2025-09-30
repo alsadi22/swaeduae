@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+PHP_BIN=${PHP_BIN:-php}
 # SwaedUAE – Auth Menu Audit (no writes, no restarts)
 set -u; set -o pipefail
 BASE_URL="${BASE_URL:-https://swaeduae.ae}"

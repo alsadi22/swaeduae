@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+PHP_BIN=${PHP_BIN:-php}
 # SwaedUAE deep audit — safe, read-only, idempotent.
 set +e  # don't exit on errors
 TS=$(date +%F_%H%M%S)

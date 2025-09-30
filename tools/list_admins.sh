@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+PHP_BIN=${PHP_BIN:-php}
 set -euo pipefail
 php artisan tinker --execute='
 use Illuminate\Support\Facades\DB;

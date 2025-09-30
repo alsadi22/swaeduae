@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+PHP_BIN=${PHP_BIN:-php}
 set -euo pipefail
 MENU="$(grep -RIl --include='*.blade.php' -n 'Organization Console' resources/views | head -n1 || true)"
 [ -z "$MENU" ] && { echo "Menu not found."; exit 1; }

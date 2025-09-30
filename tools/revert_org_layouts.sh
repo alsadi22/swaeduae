@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+PHP_BIN=${PHP_BIN:-php}
 set -euo pipefail
 # Pick the newest backup timestamp across edited files
 TS=$(ls -1 resources/views/org/**/*.bak_* 2>/dev/null | sed -E 's/.*\.bak_//' | sort -u | tail -n1 || true)

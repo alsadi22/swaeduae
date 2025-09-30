@@ -1,4 +1,5 @@
 @extends('public.layout')
+@section('title', 'Categories')
 @section('content')
 <div class="container">
   <h1>Categories</h1>

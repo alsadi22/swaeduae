@@ -1,0 +1,11 @@
+$ local-ai drift-check /sh local-ai edge-health /sh local-ai bench --url https://www.swaeduae.ae/
+
+STDOUT:
+
+STDERR:
+Usage: local_ai.py drift-check [OPTIONS]
+Try 'local_ai.py drift-check --help' for help.
+
+Error: No such option: --url
+
+RC=2

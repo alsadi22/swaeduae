@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+PHP_BIN=${PHP_BIN:-php}
 set -euo pipefail
 PART="resources/views/org/partials/certs_quick.blade.php"
 [ -f "$PART" ] || { echo "Missing $PART"; exit 1; }

@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+PHP_BIN=${PHP_BIN:-php}
 # READ-ONLY DEEP PROBE — no app edits, no service restarts.
 set -uo pipefail
 BASE="${BASE:-https://swaeduae.ae}"

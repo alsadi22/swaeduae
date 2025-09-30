@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+PHP_BIN=${PHP_BIN:-php}
 set -euo pipefail
 APP="/var/www/swaeduae"; PHP_BIN="${PHP:-php}"; COMPOSER="${COMPOSER:-composer}"
 LOG="$APP/storage/logs/codex_guard_$(date +%Y%m%d-%H%M%S).log"; FAIL=0

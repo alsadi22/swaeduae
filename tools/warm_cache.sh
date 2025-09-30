@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+PHP_BIN=${PHP_BIN:-php}
 set -e
 PHP_BIN="${PHP_BIN:-/opt/alt/php84/usr/bin/php}"; [ -x "$PHP_BIN" ] || PHP_BIN="php"
 

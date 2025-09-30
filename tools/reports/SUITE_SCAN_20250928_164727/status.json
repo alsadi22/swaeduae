@@ -1,0 +1,1 @@
+{"nginx":"active","queue":"active","cloudflared":"active","models":["llama3.1:8b","qwen2.5-coder:7b-instruct"]}

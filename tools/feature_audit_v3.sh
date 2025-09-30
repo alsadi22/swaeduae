@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+PHP_BIN=${PHP_BIN:-php}
 set -Eeuo pipefail
 cd /var/www/swaeduae
 

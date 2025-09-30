@@ -1,0 +1,9 @@
+$ whoami && php -v | head -n 1
+
+STDOUT:
+swaeduae
+PHP 8.3.25 (cli) (built: Aug 29 2025 12:01:18) (NTS)
+
+STDERR:
+
+RC=0

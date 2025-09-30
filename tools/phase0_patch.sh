@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+PHP_BIN=${PHP_BIN:-php}
 set -euo pipefail
 APP_DIR="${APP_DIR:-/var/www/swaeduae}"
 cd "$APP_DIR"

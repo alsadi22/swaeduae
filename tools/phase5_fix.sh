@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+PHP_BIN=${PHP_BIN:-php}
 set -euo pipefail
 APP="/home3/vminingc/swaeduae.ae/laravel-app"
 cd "$APP"
@@ -119,6 +120,6 @@ fi
 echo "---- honeypot includes (views) ----"
 grep -RIn "components.honeypot" resources/views/auth/login.blade.php resources/views/auth/register.blade.php resources/views/public/contact.blade.php 2>/dev/null || true
 echo "---- routes (login/register/contact) ----"
-/usr/local/bin/php artisan route:list --columns=Method,URI,Name,Middleware | egrep -i "login|register|contact" || true
+/usr/local/bin/php artisan route:list| egrep -i "login|register|contact" || true
 
 echo "== Phase 5 fix done =="

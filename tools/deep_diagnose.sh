@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+PHP_BIN=${PHP_BIN:-php}
 # SwaedUAE Deep Diagnose — safe, read-only checks
 set +e
 TS=$(date +%F_%H%M%S)

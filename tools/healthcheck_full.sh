@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+PHP_BIN=${PHP_BIN:-php}
 set -u
 TS="$(date +%Y%m%d-%H%M%S)"
 OUT="tools/reports/healthcheck_${TS}.txt"
