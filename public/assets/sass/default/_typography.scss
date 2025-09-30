@@ -1,7 +1,19 @@
 /*--------------------------------------------------------------
 1. Typography
 ----------------------------------------------------------------*/
-// Google Fonts
+// Font stacks now rely on system defaults to avoid remote dependencies
+
+:root {
+  --primary-font: ui-serif, "Georgia", "Times New Roman", serif;
+  --secondary-font: ui-sans-serif, system-ui, -apple-system, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --ternary-font: ui-cursive, "Segoe Script", "Comic Sans MS", cursive;
+}
+
+html[dir="rtl"] {
+  --primary-font: "Amiri", "Scheherazade New", ui-serif, "Times New Roman", serif;
+  --secondary-font: "Tajawal", "Cairo", "Geeza Pro", system-ui, sans-serif;
+  --ternary-font: "Reem Kufi Ink", "Tajawal", ui-cursive, cursive;
+}
 
 body,
 html {

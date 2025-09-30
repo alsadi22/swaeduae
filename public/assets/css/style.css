@@ -36,9 +36,15 @@
   --accent: #3fd0d4;
   --gray: #f5f5f5;
   --border: #d9d9d9;
-  --primary-font: "Playfair Display", serif;
-  --secondary-font: "Jost", sans-serif;
-  --ternary-font: "Satisfy", cursive;
+  --primary-font: ui-serif, "Georgia", "Times New Roman", serif;
+  --secondary-font: ui-sans-serif, system-ui, -apple-system, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --ternary-font: ui-cursive, "Segoe Script", "Comic Sans MS", cursive;
+}
+
+html[dir="rtl"] {
+  --primary-font: "Amiri", "Scheherazade New", ui-serif, "Times New Roman", serif;
+  --secondary-font: "Tajawal", "Cairo", "Geeza Pro", system-ui, sans-serif;
+  --ternary-font: "Reem Kufi Ink", "Tajawal", ui-cursive, cursive;
 }
 
 /*--------------------------------------------------------------
