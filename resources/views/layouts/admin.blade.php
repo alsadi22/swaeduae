@@ -6,8 +6,6 @@
   <title>@yield('title','Admin') · SwaedUAE</title>
 
   <link rel="icon" href="/img/icon-192.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
   <style>
@@ -18,9 +16,12 @@
       --brand-3:#f5365c; /* danger */
       --brand-4:#2dce89; /* success */
       --bg:#f6f8fb;
+      --font-sans-admin: "Inter", "Segoe UI", "Helvetica Neue", Arial, system-ui, sans-serif;
+      --font-sans-admin-rtl: "Tajawal", "Cairo", "Noto Sans Arabic", "Segoe UI", system-ui, sans-serif;
     }
     html,body{height:100%}
-    body{font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);}
+    body{font-family:var(--font-sans-admin);background:var(--bg);}
+    html[dir="rtl"] body{font-family:var(--font-sans-admin-rtl);}
 
     .layout{display:flex;min-height:100vh}
     .sidebar{

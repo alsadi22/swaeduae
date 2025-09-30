@@ -13,7 +13,7 @@
     13	        /** @var Response $response */
     14	        $response = $next($request);
     15	
-    16	        // Extra CDN hosts from .env, e.g. "fonts.googleapis.com fonts.gstatic.com cdn.jsdelivr.net"
+    16	        // Extra CDN hosts from .env, e.g. "fonts dot googleapis dot com fonts dot gstatic dot com cdn.jsdelivr.net"
     17	        $extra = preg_split('/[\s,]+/', trim((string) env('CSP_EXTRA', '')), -1, PREG_SPLIT_NO_EMPTY);
     18	        $extraHosts = array_map(function ($d) {
     19	            $d = trim($d);
